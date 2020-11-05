@@ -1,0 +1,212 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta content="MSHTML 6.00.2800.1498" name="GENERATOR">
+    <title><#= Subject #></title>
+</head>
+<body bgcolor="#FAFAFA" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100% !important; width: 100% !important; background-color: #FAFAFA; margin: 0; padding: 0;">
+   <center>
+      <div style="font-family: Arial; font-size: 13px;"><#= ExtraMessage #></div>
+      <table width="800">
+         <tr>
+            <td width="50%" style="vertical-align: top;">
+               <table width="100%" style="border: solid 2px #DAF7A6;">
+                  <thead>
+                     <tr>
+                        <th colspan="2" style="background-color: #FFC300; font-family: Arial; font-size: 12px; text-align: center;">
+                           <strong>SALES</strong>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Total:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Sales.Sum(p => p.TotalAmount).ToString("C2") #>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Payment Method:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Sales[0].PaymentMethod #>
+                        </td>
+                     </tr>
+                     <# foreach(var sale in Sales) { #>
+                        <tr>
+                           <td colspan="2">
+                              <table width="100%" style="border: solid 1px #FF5733;">
+                                 <tr>
+                                    <td style="font-family: Arial; font-size: 10px;" width="30%">
+                                       <strong>Sale Id:</strong>
+                                    </td>
+                                    <td style="font-family: Arial; font-size: 10px;" width="70%">
+                                       <#= sale.Id #>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td style="font-family: Arial; font-size: 10px;" width="30%">
+                                       <strong>Products:</strong>
+                                    </td>
+                                    <td style="font-family: Arial; font-size: 10px;" width="70%">
+                                       <# foreach(var item in sale.Items) { #>
+                                          <#= item.Quantity #> item(s) of <#= item.Product.Name #>
+                                       <# } #>
+                                    </td>
+                                 </tr>
+                              </table>
+                              <br>
+                           </td>
+                        </tr>
+                     <# } #>
+                  </tbody>
+               </table>
+               <# if(Sales.Any(p => p.PromotionCodeId > 0)) { #>
+                  <br>
+                  <table width="100%" style="border: solid 2px #DAF7A6;">
+                     <thead>
+                        <tr>
+                           <th colspan="2" style="background-color: #FFC300; font-family: Arial; font-size: 12px; text-align: center;">
+                              <strong>PROMOTION CODE</strong>
+                           </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td style="font-family: Arial; font-size: 12px;">
+                              <strong>Id:</strong>
+                           </td>
+                           <td style="font-family: Arial; font-size: 12px;">
+                              <#= Sales[0].PromotionCode.Id #>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="font-family: Arial; font-size: 12px;">
+                              <strong>Name:</strong>
+                           </td>
+                           <td style="font-family: Arial; font-size: 12px;">
+                              <#= Sales[0].PromotionCode.Name #>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+            <# } #>
+            </td>
+            <td width="50%" style="vertical-align: top;">
+               <table width="100%" style="border: solid 2px #DAF7A6;">
+                  <thead>
+                     <tr>
+                        <th colspan="2" style="background-color: #FFC300; font-family: Arial; font-size: 12px; text-align: center;">
+                           <strong>CLIENT</strong>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Id:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Client.Id #>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Name:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Client.FirstName #> <#= Client.LastName #>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <br>
+               <table width="100%" style="border: solid 2px #DAF7A6;">
+                  <thead>
+                     <tr>
+                        <th colspan="2" style="background-color: #FFC300; font-family: Arial; font-size: 12px; text-align: center;">
+                           <strong>LEAD</strong>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Id:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Lead.Id #>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Name:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Lead.FirstName #> <#= Lead.LastName #>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Email:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Lead.Email #>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Phone:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Lead.Phone #>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <br>
+               <# if(Consultant != null) { #>
+                  <table width="100%" style="border: solid 2px #DAF7A6;">
+                  <thead>
+                     <tr>
+                        <th colspan="2" style="background-color: #FFC300; font-family: Arial; font-size: 12px; text-align: center;">
+                           <strong>CONSULTANT</strong>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Id:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Consultant.Id #>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <strong>Name:</strong>
+                        </td>
+                        <td style="font-family: Arial; font-size: 12px;">
+                           <#= Consultant.Name #>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <# } #>
+            </td>
+         </tr>
+      </table>
+   </center>
+</body>
+</html>

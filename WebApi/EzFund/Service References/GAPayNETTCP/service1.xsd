@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://gacore.ws/" elementFormDefault="qualified" targetNamespace="http://gacore.ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="PaymentRequestType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AUTH" />
+      <xs:enumeration value="DEPOSIT" />
+      <xs:enumeration value="AUTHDEP" />
+      <xs:enumeration value="REFUND" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PaymentRequestType" nillable="true" type="tns:PaymentRequestType" />
+  <xs:element name="TranRequestType" type="tns:PaymentRequestType" />
+  <xs:element name="PresenterId" nillable="true" type="xs:string" />
+  <xs:simpleType name="PaymentClient">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="QSPINC" />
+      <xs:enumeration value="QSPNET" />
+      <xs:enumeration value="QSPEFUND" />
+      <xs:enumeration value="QSPPYLTR" />
+      <xs:enumeration value="QSPCANLD" />
+      <xs:enumeration value="EZFUND" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PaymentClient" nillable="true" type="tns:PaymentClient" />
+  <xs:element name="ClientId" type="tns:PaymentClient" />
+  <xs:element name="RefId" nillable="true" type="xs:string" />
+  <xs:element name="ReferenceSourceId" nillable="true" type="xs:string" />
+  <xs:element name="ReferenceAuthNumber" nillable="true" type="xs:string" />
+  <xs:element name="FirstName" nillable="true" type="xs:string" />
+  <xs:element name="LastName" nillable="true" type="xs:string" />
+  <xs:element name="Address1" nillable="true" type="xs:string" />
+  <xs:element name="Address2" nillable="true" type="xs:string" />
+  <xs:element name="City" nillable="true" type="xs:string" />
+  <xs:element name="State" nillable="true" type="xs:string" />
+  <xs:element name="PostalCode" nillable="true" type="xs:string" />
+  <xs:element name="Plus4Zip" nillable="true" type="xs:string" />
+  <xs:simpleType name="PaymentCountry">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="US" />
+      <xs:enumeration value="CA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PaymentCountry" nillable="true" type="tns:PaymentCountry" />
+  <xs:element name="CountryCode" type="tns:PaymentCountry" />
+  <xs:simpleType name="PaymentCardType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MASTERCARD">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VISA">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AMEX">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DISCOVER">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PaymentCardType" nillable="true" type="tns:PaymentCardType" />
+  <xs:element name="EpvType" type="tns:PaymentCardType" />
+  <xs:element name="AccountNumber" nillable="true" type="xs:string" />
+  <xs:element name="CcExp" nillable="true" type="xs:string" />
+  <xs:element name="CcSecurityCode" nillable="true" type="xs:string" />
+  <xs:element name="BankRoutingNumber" nillable="true" type="xs:string" />
+  <xs:element name="BankAccountType" nillable="true" type="xs:string" />
+  <xs:simpleType name="PaymentCurrency">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="USD" />
+      <xs:enumeration value="CAD" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PaymentCurrency" nillable="true" type="tns:PaymentCurrency" />
+  <xs:element name="CurrencyCode" type="tns:PaymentCurrency" />
+  <xs:element name="TranAmount" nillable="true" type="xs:string" />
+  <xs:element name="SalesTax" nillable="true" type="xs:string" />
+  <xs:element name="Descriptor" nillable="true" type="xs:string" />
+  <xs:element name="DescriptorCityPhone" nillable="true" type="xs:string" />
+  <xs:element name="ClientPassThrough" nillable="true" type="xs:string" />
+  <xs:element name="ClientTranId" nillable="true" type="xs:string" />
+  <xs:element name="RvrslTCSTranId" nillable="true" type="xs:string" />
+  <xs:element name="RvrslTranDate" nillable="true" type="xs:string" />
+  <xs:element name="RvrslAuthCode" nillable="true" type="xs:string" />
+  <xs:element name="EncryptionFlag" nillable="true" type="xs:string" />
+  <xs:complexType name="PaymentTransactionResult">
+    <xs:sequence>
+      <xs:element name="SourceId" nillable="true" type="xs:string" />
+      <xs:element name="PresenterId" nillable="true" type="xs:string" />
+      <xs:element name="ClientId" type="tns:PaymentClient" />
+      <xs:element name="RefId" nillable="true" type="xs:string" />
+      <xs:element name="TranRequestType" type="tns:PaymentRequestType" />
+      <xs:element name="TranDate" nillable="true" type="xs:string" />
+      <xs:element name="AccountNumberLast4" nillable="true" type="xs:string" />
+      <xs:element name="ClientTranId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthNumber" nillable="true" type="xs:string" />
+      <xs:element name="ResponseCode" nillable="true" type="xs:string" />
+      <xs:element name="ResponseMessage" nillable="true" type="xs:string" />
+      <xs:element name="ResponseRaw" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientPassThrough" nillable="true" type="xs:string" />
+      <xs:element name="TranResponseType" type="tns:PaymentResponseType" />
+      <xs:element name="TranAmount" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentTransactionResult" nillable="true" type="tns:PaymentTransactionResult" />
+  <xs:simpleType name="PaymentResponseType">
+    <xs:restriction base="xs:string">
+       <xs:enumeration value="A">
+          <xs:annotation>
+             <xs:documentation>Approved</xs:documentation>
+          </xs:annotation>
+       </xs:enumeration>
+       <xs:enumeration value="H">
+          <xs:annotation>
+             <xs:documentation>Hard Decline</xs:documentation>
+          </xs:annotation>
+       </xs:enumeration>
+       <xs:enumeration value="S">
+          <xs:annotation>
+             <xs:documentation>Soft Decline</xs:documentation>
+          </xs:annotation>
+       </xs:enumeration>
+       <xs:enumeration value="D">
+          <xs:annotation>
+             <xs:documentation>Duplicate Transaction</xs:documentation>
+          </xs:annotation>
+       </xs:enumeration>
+       <xs:enumeration value="E">
+          <xs:annotation>
+             <xs:documentation>Communication Error</xs:documentation>
+          </xs:annotation>
+       </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PaymentResponseType" nillable="true" type="tns:PaymentResponseType" />
+  <xs:element name="Result" nillable="true" type="tns:PaymentTransactionResult" />
+</xs:schema>
