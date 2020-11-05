@@ -1,0 +1,193 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+   <meta content="MSHTML 6.00.2800.1498" name="GENERATOR">
+   <title><#= Subject #></title>
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body bgcolor="#FFFFFF" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100% !important; width: 100% !important; background-color: #FFFFFF; margin: 0; padding: 0;">
+   <div itemscope itemtype="http://schema.org/Order">
+      <div itemprop="merchant" itemscope itemtype="http://schema.org/Organization">
+         <meta itemprop="name" content="Fundraising.com" />
+      </div>
+      <div itemprop="customer" itemscope itemtype="http://schema.org/Person">
+         <meta itemprop="name" content="<#= Sales[0].Client.FirstName #> <#=Sales[0].Client.LastName #>" />
+      </div>
+      <meta itemprop="orderNumber" content="<#=Sales[0].Client.Id #>" />
+      <meta itemprop="priceCurrency" content="USD" />
+      <meta itemprop="price" content="<#=Sales.Sum(p => p.TotalAmount).ToString(CultureInfo.InvariantCulture) #>" />
+      <meta itemprop="orderStatus" content="OrderInTransit" />
+      <meta itemprop="paymentMethod" content="<#=Sales[0].PaymentMethod #>" />
+      <meta itemprop="orderDate" content="<#=DateTime.Today.ToShortDateString() #>" />
+      <# foreach(var item in Sales.SelectMany(p => p.Items)) { #>
+         <div itemprop="acceptedOffer" itemscope itemtype="http://schema.org/Offer">
+            <div itemprop="itemOffered" itemscope itemtype="http://schema.org/Product">
+               <meta itemprop="name" content="item.Product.Name" />
+            </div>
+            <meta itemprop="price" content="item.Product.CalculatedPrice" />
+            <meta itemprop="priceCurrency" content="USD" />
+            <div itemprop="eligibleQuantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+               <meta itemprop="value" content="item.Quantity" />
+            </div>
+         </div>
+      <# } #>
+   </div>
+   <table align="center" border="0" cellpadding="0" cellspacing="0" id="bodyTable" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #FFFFFF; border-collapse: collapse !important; height: 100% !important; margin: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; width: 100% !important; border: 0;" width="100%">
+      <tbody>
+         <tr>
+            <td align="center" id="bodyCell" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; height: 100% !important; width: 100% !important; border: 0; margin: 0; padding: 20px;" valign="top">
+               <!-- BEGIN TEMPLATE // -->
+               <table border="0" cellpadding="0" cellspacing="0" id="templateContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse !important; width: 600px; border: 0;">
+                  <tbody>
+                     <tr>
+                        <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" valign="top">
+                           <!-- BEGIN HEADER // -->
+                           <table border="0" cellpadding="0" cellspacing="0" id="templateHeader" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #e8e8e7; border-collapse: collapse !important; mso-table-lspace: 0pt; mso-table-rspace: 0pt" width="100%">
+                              <tbody>
+                                 <tr>
+                                    <td align="left" class="headerContent" style="color: rgb(80, 80, 80); line-height: 20px; text-align: center; vertical-align: middle; padding: 0px;" valign="top" pardot-region="header_image" pardot-data="">
+                                       <img alt="Fundraising.com" src="https://www.fundraising.com/Content/external/logoOrderConfirmationFundraising.png" style="border-width: 0px; border-style: solid; width: 100%;">
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <div style="font-size: xx-large; text-align: center; color: #808080; font-family: Helvetica;">1.800.443.5353</div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <!-- // END HEADER -->
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" valign="top">
+                           <!-- BEGIN BODY // -->
+                           <table border="0" cellpadding="0" cellspacing="0" id="templateBody" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #FFFFFF; border-collapse: collapse !important; border-top-color: #FFFFFF; border-top-style: solid; border-top-width: 1px; mso-table-lspace: 0pt; mso-table-rspace: 0pt" width="100%">
+                              <tbody>
+                                 <tr>
+                                    <td pardot-region="body_content" align="left" class="bodyContent" style="color: rgb(128, 128, 128); font-size: 14px; line-height: 21px; text-align: left; padding: 20px;" valign="top" pardot-data="">
+                                       <p dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;font-family: Helvetica;">
+                                          <div style="text-align: right; font-size: large; font-family: Helvetica;">
+                                             Order Confirmation Number: <#= Sales[0].Id #><br/>Customer Number: <#= Sales[0].Client.LeadId #><br/><br/>
+                                          </div>
+                                          <center>
+                                             <div style="font-family: Helvetica;">
+                                                <strong>Your order has been processed</strong><br/>
+                                                Thank you for shopping with us <#= Sales[0].Client.FirstName #>!
+                                             </div>
+                                          </center>
+                                          <br/>
+                                          <div style="background-color: #0A7A92; color: #0A7A92; font-weight: bold;">
+                                             <table style="border: 0; width: 100%; font-size: larger;">
+                                                <tr>
+                                                   <td style="width: 50%; background-color: #0A7A92;font-family: Helvetica; color: white; text-transform: uppercase">Estimated Delivery Date</td>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <div style="font-family: Helvetica;">
+                                             <strong><#= DateTime.Today.AddDays(10).ToShortDateString() #></strong>
+                                          </div>
+                                          <br /><br/>
+                                          <table style="width: 100%; font-size: 14px;">
+                                             <thead>
+                                             <tr style="text-transform: uppercase; font-weight: bold; color: white; background-color: #0A7A92;">
+                                                <th style="text-align: left; font-family: Helvetica;" colspan="2">Order Details</th>
+                                                <th style="text-align: left; font-family: Helvetica;">Placed On</th>
+                                                <th style="text-align: left; font-family: Helvetica;">Quantity</th>
+                                                <th style="text-align: left; font-family: Helvetica;">Price</th>
+                                                <th style="text-align: left; font-family: Helvetica;">Total</th>
+                                             </tr>
+                                             </thead>
+                                             <tbody>
+                                             <# foreach(var item in Sales.SelectMany(p => p.Items)) { #>
+                                                <tr>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><img src="https://www.fundraising.com/Content/external/products/<#= item.Product.Image.Url #>" style="width: 150px; height: 150px;" width="150" height="150"></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= item.Product.Name #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= Sales[0].Confirmed.Value.ToString("d") #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= item.Quantity #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= item.Product.CalculatedPrice.ToString("C") #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= (item.Quantity * item.Product.CalculatedPrice).ToString("C") #></td>
+                                                </tr>
+                                             <# } #>
+                                             </tbody>
+                                             <tfoot>
+                                                <tr>
+                                                   <td colspan="5" style="color: rgb(128, 128, 128);font-family: Helvetica;">Subtotal:</td>
+                                                   <td style="font-family: Helvetica;color: rgb(128, 128, 128);"><#= Sales.SelectMany(p => p.Items).Sum(p => p.Quantity * p.Product.CalculatedPrice).ToString("C") #></td>
+                                                </tr>
+                                                <# if(Sales.Sum(p => p.TotalAmount) - Sales.SelectMany(p => p.Items).Sum(p => p.Quantity * p.Product.CalculatedPrice) - Sales.Where(p => p.PromotionCode != null).Sum(p => p.PromotionCode.DiscountedAmount) - Sales.Sum(p => p.Discounts) - Sales.Sum(p => p.Surcharges) > 0) { #>
+                                                   <tr>
+                                                      <td colspan="5" style="color: rgb(128, 128, 128);font-family: Helvetica;">Shipping Fee:</td>
+                                                      <td style="font-family: Helvetica;color: rgb(128, 128, 128);"><#= (Sales.Sum(p => p.TotalAmount) - Sales.SelectMany(p => p.Items).Sum(p => p.Quantity * p.Product.CalculatedPrice) - Sales.Where(p => p.PromotionCode != null).Sum(p => p.PromotionCode.DiscountedAmount) - Sales.Sum(p => p.Discounts) - Sales.Sum(p => p.Surcharges)).ToString("C") #></td>
+                                                   </tr>
+                                                <# } #>
+                                                <# if(Sales.Any(p => p.PromotionCodeId > 0)) { #>
+                                                   <tr>
+                                                      <td colspan="5" style="color: rgb(128, 128, 128);font-family: Helvetica;">Promotion Code:</td>
+                                                      <td style="font-family: Helvetica;color: rgb(128, 128, 128);">- <#= Sales.Where(p => p.PromotionCode != null).Sum(p => p.PromotionCode.DiscountedAmount).ToString("C") #></td>
+                                                   </tr>
+                                                <# } #>
+                                                <# if(Sales.Sum(p => p.Discounts) > 0) { #>
+                                                   <tr>
+                                                      <td colspan="5" style="color: rgb(128, 128, 128);font-family: Helvetica;">Discounts:</td>
+                                                      <td style="font-family: Helvetica;color: rgb(128, 128, 128);">- <#= Sales.Sum(p => p.Discounts).ToString("C") #></td>
+                                                   </tr>
+                                                <# } #>
+                                                <# if(Sales.Sum(p => p.Surcharges) > 0) { #>
+                                                   <tr>
+                                                      <td colspan="5" style="color: rgb(128, 128, 128);font-family: Helvetica;">Surcharges:</td>
+                                                      <td style="font-family: Helvetica;color: rgb(128, 128, 128);"><#= Sales.Sum(p => p.Surcharges).ToString("C") #></td>
+                                                   </tr>
+                                                <# } #>
+                                                <tr style="font-weight: bold;">
+                                                   <td colspan="5" style="color: rgb(128, 128, 128);font-family: Helvetica;">Total:</td>
+                                                   <td style="font-family: Helvetica;color: rgb(128, 128, 128);"><#= Sales.Sum(p => p.TotalAmount).ToString("C") #></td>
+                                                </tr>
+                                             </tfoot>
+                                          </table>
+                                          <br/>
+                                          <a href="http://www.efundraising.com/Home/HowItWorks?utm_source=fundraisingCom&utm_medium=email&utm_campaign=confirmationEmail2">
+                                             <img src="https://www.fundraising.com/Content/external/logoOrderConfirmationFundraising2.png" style="border-width: 0px; border-style: solid; width: 100%;" />
+                                          </a>
+                                          <br/>
+                                          <br/>
+                                          <div style="background-color: white; color: black; font-weight: bold; font-size: larger;">
+                                             <table style="border: 0; width: 100%; font-size: larger;">
+                                                <tr>
+                                                   <td style="width: 100%; text-align: center"><a style="color: black;font-family: Helvetica;" href="https://www.fundraising.com/shopping-cart/order-confirmation/<#= Sales[0].Client.Id #>">View Order Online</a></td>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <link itemprop="url" href="https://www.fundraising.com/shopping-cart/order-confirmation/<#= Sales[0].Client.Id #>" />
+                                          <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ViewAction">
+                                             <link itemprop="target" href="https://www.fundraising.com/shopping-cart/order-confirmation/<#= Sales[0].Client.Id #>" />
+                                          </div>
+                                          <br />
+                                          <span style="font-family: Helvetica;">Best Regards,</span><br />
+                                          <a style="color: black;font-family: Helvetica;" href="https://www.fundraising.com?utm_source=fundraisingcom&utm_medium=email&utm_campaign=OrderConfirmation">Fundraising.com Team</a><br />
+                                          <a style="color: black;font-family: Helvetica;" href="tel:+18004435353">1.800.443.5353</a>
+                                       </p>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <!-- // END BODY -->
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <!-- // END TEMPLATE -->
+            </td>
+         </tr>
+      </tbody>
+   </table>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+   <meta content="MSHTML 6.00.2800.1498" name="GENERATOR">
+   <title><#= Subject #></title>
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body bgcolor="#FFFFFF" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100% !important; width: 100% !important; background-color: #FFFFFF; margin: 0; padding: 0;">
+   <div itemscope itemtype="http://schema.org/Order">
+      <div itemprop="merchant" itemscope itemtype="http://schema.org/Organization">
+         <meta itemprop="name" content="EZund.com" />
+      </div>
+      <div itemprop="customer" itemscope itemtype="http://schema.org/Person">
+         <meta itemprop="name" content="<#=sales.Client.FirstName #> <#=sales.Client.LastName #>" />
+      </div>
+      
+      <meta itemprop="priceCurrency" content="USD" />
+      <meta itemprop="price" content="<#=sales.TotalAmount.ToString(CultureInfo.InvariantCulture) #>" />
+      <meta itemprop="orderStatus" content="OrderInTransit" />
+      <meta itemprop="paymentMethod" content="<#=sales.InternalPaymentMethod #>" />
+      <meta itemprop="orderDate" content="<#=DateTime.Today.ToShortDateString() #>" />
+      <# foreach(var items in sales.SubProducts) { #>
+         <div itemprop="acceptedOffer" itemscope itemtype="http://schema.org/Offer">
+            <div itemprop="itemOffered" itemscope itemtype="http://schema.org/Product">
+               <meta itemprop="name" content="sales.SubProducts.Name" />
+            </div>
+            <meta itemprop="price" content="sales.SubProducts.Price" />
+            <meta itemprop="priceCurrency" content="USD" />
+            <div itemprop="eligibleQuantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+               <meta itemprop="value" content="sales.SubProducts.SelectedQuantity" />
+            </div>
+         </div>
+      <# } #>
+   </div>
+   <table align="center" border="0" cellpadding="0" cellspacing="0" id="bodyTable" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #FFFFFF; border-collapse: collapse !important; height: 100% !important; margin: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; width: 100% !important; border: 0;" width="100%">
+      <tbody>
+         <tr>
+            <td align="center" id="bodyCell" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; height: 100% !important; width: 100% !important; border: 0; margin: 0; padding: 20px;" valign="top">
+               <!-- BEGIN TEMPLATE // -->
+               <table border="0" cellpadding="0" cellspacing="0" id="templateContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse !important; width: 600px; border: 0;">
+                  <tbody>
+                     <tr>
+                        <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" valign="top">
+                           <!-- BEGIN HEADER // -->
+                           <table border="0" cellpadding="0" cellspacing="0" id="templateHeader" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #e8e8e7; border-collapse: collapse !important; mso-table-lspace: 0pt; mso-table-rspace: 0pt" width="100%">
+                              <tbody>
+                                 <tr>
+                                    <td align="left" class="headerContent" style="color: rgb(80, 80, 80); line-height: 20px; text-align: center; vertical-align: middle; padding: 0px;" valign="top" pardot-region="header_image" pardot-data="">
+                                       <img alt="Fundraising.com" src="https://www.fundraising.com/Content/external/logoOrderConfirmationEZF.png" style="border-width: 0px; border-style: solid; width: 100%;">
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <div style="font-size: xx-large; text-align: center; color: #808080; font-family: Helvetica;">1.800.991.8779</div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <!-- // END HEADER -->
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" valign="top">
+                           <!-- BEGIN BODY // -->
+                           <table border="0" cellpadding="0" cellspacing="0" id="templateBody" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #FFFFFF; border-collapse: collapse !important; border-top-color: #FFFFFF; border-top-style: solid; border-top-width: 1px; mso-table-lspace: 0pt; mso-table-rspace: 0pt" width="100%">
+                              <tbody>
+                                 <tr>
+                                    <td pardot-region="body_content" align="left" class="bodyContent" style="color: rgb(128, 128, 128); font-size: 14px; line-height: 21px; text-align: left; padding: 20px;" valign="top" pardot-data="">
+                                       <p dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;font-family: Helvetica;">
+                                          <div style="text-align: right; font-size: large; font-family: Helvetica;">
+                                             Order Confirmation Number: <#= sales.OrderId #><br />
+                                          </div>
+                                          <div style="font-family: Helvetica;">
+                                             <strong>Thank you for shopping with us <#= sales.Client.FirstName #>!</strong><br />
+                                             Please verify all orders upon delivery - all damaged products should be refused at that time. No returns or refunds
+                                             will be accepted after the order is signed for.<br /><br />
+                                          </div>
+                                          <div style="background-color: #e8e8e7; color: black; font-weight: bold;">
+                                             <table style="border: 0; width: 100%; font-size: larger;">
+                                                <tr>
+                                                   <td style="width: 50%; background-color: #e8e8e7;font-family: Helvetica;">Billing Address</td>
+                                                   <td style="width: 50%; background-color: #e8e8e7; font-family: Helvetica;">Shipping Address</td>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <table style="border: 0; width: 100%; font-size: 14px;">
+                                             <tr>
+                                                <td style="width: 50%; color: rgb(128, 128, 128);font-family: Helvetica;"><#= sales.Client.FirstName #> <#= sales.Client.LastName #><br /><#= sales.Client.Addresses[0].Address1 #><br /><#= sales.Client.Addresses[0].City #> (<#= sales.Client.Addresses[0].Region.Code #>) <#= sales.Client.Addresses[0].PostCode #></td>
+                                                <td style="width: 50%; color: rgb(128, 128, 128);font-family: Helvetica;"><#= sales.Client.Addresses[1].Address1 #><br /><#= sales.Client.Addresses[1].City #> (<#= sales.Client.Addresses[1].Region.Code #>) <#= sales.Client.Addresses[1].PostCode #></td>
+                                             </tr>
+                                          </table>
+                                          <br />
+                                          <div style="background-color: #e8e8e7; color: black; font-weight: bold; font-size: larger;">
+                                             <table style="border: 0; width: 100%; font-size: larger;">
+                                                <tr>
+                                                   <td style="width: 100%; background-color: #e8e8e7;font-family: Helvetica;">Order</td>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <table style="width: 100%; font-size: 14px;">
+                                             <thead>
+                                             <tr style="text-transform: uppercase; font-weight: bold; color: rgb(128, 128, 128);">
+                                                <th style="text-align: left;font-family: Helvetica;">Product</th>
+                                                <th style="text-align: left;font-family: Helvetica;">Quantity</th>
+                                                <th style="text-align: left;font-family: Helvetica;">Price</th>
+                                                <th style="text-align: left;font-family: Helvetica;">Total</th>
+                                             </tr>
+                                             </thead>
+                                             <tbody>
+                                                <# foreach(var items in sales.SubProducts) { #>
+                                                <tr>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= items.Name #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= items.SelectedQuantity #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= items.Price.ToString("C") #></td>
+                                                   <td style="color: rgb(128, 128, 128);font-family: Helvetica;"><#= (items.SelectedQuantity * items.Price).ToString("C") #></td>
+                                                </tr>
+                                                <# } #>
+                                             </tbody>
+                                             <tfoot>
+                                                
+                                                <tr style="font-weight: bold;">
+                                                   <td colspan="3" style="color: rgb(128, 128, 128);font-family: Helvetica;">Shipping:</td>
+                                                   <td style="font-family: Helvetica;color: rgb(128, 128, 128);"><#= sales.ShippingCalculatedAmount.ToString("C") #></td>
+                                                </tr>
+                                                <tr style="font-weight: bold;">
+
+                                                   <td colspan="3" style="color: rgb(128, 128, 128);font-family: Helvetica;">Total:</td>
+                                                   <td style="font-family: Helvetica;color: rgb(128, 128, 128);"><#= sales.TotalAmount.ToString("C") #></td>
+                                                </tr>
+                                             </tfoot>
+                                          </table>
+                                          <br />
+                                          <div style="background-color: #e8e8e7; color: black; font-weight: bold; font-size: larger;">
+                                             <table style="border: 0; width: 100%; font-size: larger;">
+                                                <tr>
+                                                   <td style="width: 100%;background-color: #e8e8e7;font-family: Helvetica;">Payment</td>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <div style="font-family: Helvetica;">
+                                             <#= sales.InternalPaymentMethod #>
+                                          </div>
+                                          <br />
+                                          <div style="background-color: #e8e8e7; color: black; font-weight: bold; font-size: larger;">
+                                             <table style="border: 0; width: 100%; font-size: larger;">
+                                                <tr>
+                                                   <td style="width: 100%; background-color: #e8e8e7;font-family: Helvetica;">Estimated Delivery Time</td>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <div style="font-family: Helvetica;">
+                                             <#= DateTime.Today.AddDays(10).ToShortDateString() #> (Please allow 7-15 business days for delivery.)
+                                          </div>
+                                          <br />
+                                          
+                                          <br />
+                                          <span style="font-family: Helvetica;">Best Regards,</span><br />
+                                          <a style="color: black;font-family: Helvetica;" href="https://www.ezfund.com">Ezfund.com Team</a><br />
+                                          <a style="color: black;font-family: Helvetica;" href="tel:+18009918779">1.800.991.8779</a>
+                                       </p>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <!-- // END BODY -->
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <!-- // END TEMPLATE -->
+            </td>
+         </tr>
+      </tbody>
+   </table>
+
+</body>
+</html>

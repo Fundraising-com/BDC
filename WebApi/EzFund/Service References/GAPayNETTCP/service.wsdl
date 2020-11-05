@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://gacore.ws/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gacore.ws/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://gacore.ws/Imports">
+      <xsd:import namespace="http://gacore.ws/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessPaymentTransactionRequest">
+    <wsdl:part name="TranRequestType" element="tns:TranRequestType" />
+    <wsdl:part name="PresenterId" element="tns:PresenterId" />
+    <wsdl:part name="ClientId" element="tns:ClientId" />
+    <wsdl:part name="RefId" element="tns:RefId" />
+    <wsdl:part name="ReferenceSourceId" element="tns:ReferenceSourceId" />
+    <wsdl:part name="ReferenceAuthNumber" element="tns:ReferenceAuthNumber" />
+    <wsdl:part name="FirstName" element="tns:FirstName" />
+    <wsdl:part name="LastName" element="tns:LastName" />
+    <wsdl:part name="Address1" element="tns:Address1" />
+    <wsdl:part name="Address2" element="tns:Address2" />
+    <wsdl:part name="City" element="tns:City" />
+    <wsdl:part name="State" element="tns:State" />
+    <wsdl:part name="PostalCode" element="tns:PostalCode" />
+    <wsdl:part name="Plus4Zip" element="tns:Plus4Zip" />
+    <wsdl:part name="CountryCode" element="tns:CountryCode" />
+    <wsdl:part name="EpvType" element="tns:EpvType" />
+    <wsdl:part name="AccountNumber" element="tns:AccountNumber" />
+    <wsdl:part name="CcExp" element="tns:CcExp" />
+    <wsdl:part name="CcSecurityCode" element="tns:CcSecurityCode" />
+    <wsdl:part name="BankRoutingNumber" element="tns:BankRoutingNumber" />
+    <wsdl:part name="BankAccountType" element="tns:BankAccountType" />
+    <wsdl:part name="CurrencyCode" element="tns:CurrencyCode" />
+    <wsdl:part name="TranAmount" element="tns:TranAmount" />
+    <wsdl:part name="SalesTax" element="tns:SalesTax" />
+    <wsdl:part name="Descriptor" element="tns:Descriptor" />
+    <wsdl:part name="DescriptorCityPhone" element="tns:DescriptorCityPhone" />
+    <wsdl:part name="ClientPassThrough" element="tns:ClientPassThrough" />
+    <wsdl:part name="ClientTranId" element="tns:ClientTranId" />
+    <wsdl:part name="RvrslTCSTranId" element="tns:RvrslTCSTranId" />
+    <wsdl:part name="RvrslTranDate" element="tns:RvrslTranDate" />
+    <wsdl:part name="RvrslAuthCode" element="tns:RvrslAuthCode" />
+    <wsdl:part name="EncryptionFlag" element="tns:EncryptionFlag" />
+  </wsdl:message>
+  <wsdl:message name="ProcessPaymentTransactionResponse">
+    <wsdl:part name="Result" element="tns:Result" />
+  </wsdl:message>
+  <wsdl:portType name="PaymentProcessingService">
+    <wsdl:operation name="ProcessPaymentTransaction">
+      <wsdl:input wsaw:Action="http://gacore.ws/PaymentProcessingService/ProcessPaymentTransaction" name="ProcessPaymentTransactionRequest" message="tns:ProcessPaymentTransactionRequest" />
+      <wsdl:output wsaw:Action="http://gacore.ws/PaymentProcessingService/ProcessPaymentTransactionResponse" name="ProcessPaymentTransactionResponse" message="tns:ProcessPaymentTransactionResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
