@@ -1,0 +1,71 @@
+@using GA.BDC.Web.MGP.Models.Views
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Fundraising Online, Registration - Step 0";
+    ViewBag.Description = "My.Fundraising.com : Register your Fundraising Online Campaign";
+    ViewBag.Keywords = "online fundraising register, sign up EfundraisingOnline.com, start your online fundraising campaign, begin fundraising, register online fundraising campaign, start fundraising campaign online, register, EfundraisingOnline.com, My.Fundraising.com";
+    ViewBag.HideTopMenu = true;
+    Layout = "~/Views/Shared/_public2.cshtml";
+}
+
+<div class="registration-steps" ng-controller="campaignManagerController" ng-init="register = @JsonConvert.SerializeObject(ViewBag.RegisterExternal as RegisterExternal);">
+   <form name="step0form">
+      <div class="row">
+         <div class="col-xs-12 text-center">
+            <h1>Step 0</h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 text-center registration-subtitle">
+            <span>What's your Email?</span>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 text-center">
+            <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 text-center">
+            <span class="small text-muted">In order to continue the Registration process we need a valid Email.</span>
+         </div>
+      </div>
+      <br />
+      <div class="row">
+         <div class="col-xs-12 col-md-offset-2 col-md-8">
+            <div class="panel">
+               <div class="panel-body">
+                  <div class="row">
+                     <div class="col-xs-12 col-sm-7">
+                        <label for="email">
+                           Email Address
+                        </label>
+                     </div>
+                     <div class="col-xs-12 col-sm-5">
+                        <input name="email" id="email" type="email" class="form-control input-lg" ng-model="register.Email" required placeholder="i.e. your.email@gmail.com" />
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 text-center" ng-hide="executingAction">
+            <button type="button" class="btn btn-lg btn-facebook form-control" ng-click="step0();" ng-disabled="!step0form.email.$valid">Next Step</button>
+         </div>
+      </div>
+      <div class="row" ng-show="executingAction" ng-cloak>
+         <div class="col-sm-12 text-center">
+            <span class="text-info"><strong><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</strong></span>
+         </div>
+      </div>
+      <div class="row" ng-show="resultFailed" ng-cloak>
+         <div class="col-sm-12 text-center">
+            <span class="text-danger"><strong>{{responseText}}</strong></span>
+         </div>
+      </div>
+   </form>
+</div>
+<br />
+<br />
+

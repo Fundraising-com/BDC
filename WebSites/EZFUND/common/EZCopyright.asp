@@ -1,0 +1,1 @@
+<p><div align=center class="Copyright">Copyright&nbsp;&copy;<%=Year(Now())%>,&nbsp;EZFund.com,&nbsp;Houston,&nbsp;TX.&nbsp; All&nbsp;Rights&nbsp;Reserved.&nbsp; Unauthorized&nbsp;duplication&nbsp;is&nbsp;expressly&nbsp;prohibited.</div>

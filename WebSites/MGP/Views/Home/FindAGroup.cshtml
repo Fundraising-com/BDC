@@ -1,0 +1,123 @@
+﻿@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+   ViewBag.Title = "Find your Online fundraising group to support!";
+   ViewBag.Description = "online fundraising group, search fundraising group, support group, support my group, fundraise for group, fundraising online, fundraising ideas online, online magazine fundraising groups, fundraising campaign online, magazine fundraisers online";
+   ViewBag.Keywords = "Find your group: support your group's fundraising campaign !!";
+   Layout = "~/Views/Shared/_public2.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("FindAGroup", "Home");
+   var partnerBranding = ViewBag.Partner as Partner;
+}
+<div id="findAGroup">
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <h1>Find a @partnerBranding.GroupDisplay</h1>
+         <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+      </div>
+   </div>
+   <div id="ng-app" ng-controller="homeController">
+      <div class="row">
+         <div class="col-md-12">
+            <form name="find" ng-submit="findAGroup()">
+               <div class="row @(string.IsNullOrEmpty(Context.Request.Params.Get("groupId")) ? string.Empty : "hidden")">
+                  <div class="col-md-4">
+                     <input type="text" class="form-control input-lg" style="width: 100%;" placeholder="Search here" name="name" ng-model="view.Name" required />
+                  </div>
+                  <div class="col-md-3">
+                     <select name="state" class="form-control input-lg" ng-model="view.State">
+                        @foreach (var state in ViewBag.States)
+                        {
+                           <option value="@state.Key">@state.Value</option>
+                        }
+                     </select>
+                  </div>
+                  <div class="col-md-3">
+                     <select name="searchType" class="form-control input-lg" ng-model="view.SearchType">
+                        <option value="ALL">Show All</option>
+                        <option value="G" selected="selected">Filter by @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</option>
+                        <option value="P">Filter by Participant</option>
+                     </select>
+                  </div>
+                  <div class="col-md-2 text-right">
+                     <button type="submit" value="Search" class="btn btn-odnoklassniki btn-lg form-control" ng-disabled="executingAction">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                     </button>
+                  </div>
+               </div>
+               <div class="row @(!string.IsNullOrEmpty(Context.Request.Params.Get("groupId")) ? string.Empty : "hidden")">
+                  <div class="col-md-7" ng-init="view.GroupId = @(!string.IsNullOrEmpty(Context.Request.Params.Get("groupId")) ? Context.Request.Params["groupId"] : "null");">
+                     <input type="text" class="form-control input-lg" style="width: 100%;" placeholder="Search here" name="name" ng-model="view.Name" required />
+                  </div>
+                  <div class="form-group col-md-3">
+                     <select name="searchType" class="form-control input-lg" ng-model="view.SearchType">
+                        <option value="ALL">Show All</option>
+                        <option value="G" selected="selected">Filter by @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</option>
+                        <option value="P">Filter by Participant</option>
+                     </select>
+                  </div>
+                  <div class="col-md-2">
+                     <button type="submit" class="btn btn-odnoklassniki btn-lg form-control" ng-disabled="executingAction">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                     </button>
+                  </div>
+               </div>
+            </form>
+            <div class="row" ng-show="FoundGroups" ng-cloak>  
+               <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="group in Groups | startFrom:currentPage*pageSize | limitTo:pageSize">
+                  <div class="thumbnail text-center box">
+                     <a ng-href="{{group.EventUrl}}">
+                        <img ng-src="{{group.EventImage}}" alt="{{group.EventName}}"/>
+                        <strong>{{group.EventName | limitTo: 40}}</strong>
+                        <br />
+                        <span class="small text-muted">
+                           Raised <strong>{{group.EventAmount | currency : symbol}}</strong> <span ng-show="{{group.EventState != ''}}">from </span> <strong>{{group.EventState}}</strong>
+                        </span>
+                     </a>
+                  </div>
+               </div> 
+            </div>
+            <div class="row" ng-show="executingAction" ng-cloak>
+               <div class="col-md-12 text-center">
+                  <img src="/Content/images/public/content/loading.gif" alt="Loading" />
+               </div>
+            </div>
+            <div class="row" ng-show="resultFailed" ng-cloak>
+               <div class="col-md-12">
+                  <span class="text-danger">{{responseText}}</span>
+               </div>
+            </div>
+            <div class="row" ng-show="NotFoundGroups" ng-cloak>
+               <div class="col-md-12">
+                  <span class="text-info"><strong>0 results found</strong></span>
+               </div>
+            </div>
+            <div class="row" ng-show="FoundGroups" ng-cloak>
+               <div class="col-md-12">
+                  <div class="text-right">
+                     <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn btn-sm">
+                        Back
+                     </button>
+                     Page {{currentPage+1}} of {{numberOfPages()}} | {{Groups.length}} result(s) found
+                     <button ng-disabled="currentPage >= Groups.length/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-sm">
+                        Next
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <br/>
+      <div class="row">
+         <div class="col-md-offset-2 col-md-1 hidden-xs hidden-sm">
+            <img src="/Content/images/public/content/searchtip.jpg" alt="Search Tip" class="img-responsive" />
+         </div>
+         <div class="col-xs-12 col-md-9 small text-muted">
+            <strong>Fundraising.com has a lot of @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()s! Here are some tips for quick, accurate search results</strong>
+            <ul>
+               <li>Specify state only by using the "State" dropdown menu. Do not include it in the 'search' field.</li>
+               <li>When filtering by participant, enter both first and last name. No luck? Enter the last name only for more results.</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>

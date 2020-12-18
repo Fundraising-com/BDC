@@ -1,0 +1,118 @@
+@{
+    ViewBag.Title = "Fundraise Online with magazines, gifts & much more!";
+    ViewBag.Description = "Welcome to the original Online Magazine Fundraiser which now offers thousands of gift items as well! It's 00% free, and requires minimal effort!";
+    ViewBag.Keywords = "online fundraising, magazine fundraising, fundraising, fundraising ideas, online magazine fundraising, online fundraisers, magazine fundraisers online";
+    Layout = "~/Views/Shared/_public2.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("Index", "Home");
+   ViewBag.BackgroundUrl = "/Content/images/public/content/bg-image.jpg";
+   ViewBag.MenuTopBackgroundColor = "rgba(255,255,255,0.2)";
+}
+<br/>
+<br/>
+<div id="index">
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <h2>WELCOME TO</h2>
+         <br />
+         <h1>EFUNDRAISING.COM</h1>
+         <br /><br />
+         <h5>An Innovative, Free and surprisingly Easy way to raise money for your cause<small>Sell popular magazines and other proven fundraising products through your own and personalized online store and keep 40% of the sales.</small></h5>
+      </div>
+   </div>
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <div class="row">
+      <div class="col-xs-12 col-sm-6 text-center" style="margin-bottom: 20px;">
+         <div class="box">
+            <a href="#" data-toggle="modal" data-target="#registrationModal">
+               start your<br/>fundraising campaign
+            </a>
+         </div>
+      </div>
+      <hr class="visible-xs"/>
+      <div class="col-xs-12 col-sm-6 text-center">
+         <div class="box">
+            <a href="@Url.Action("FindAGroup", "Home")" style="padding: 23px 0 22px 0;">
+               find a group
+            </a>
+         </div>
+      </div>
+   </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="modal fade" tabindex="-1" role="dialog" id="registrationModal">
+   <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+         <div class="modal-header text-center">
+            <h4 class="modal-title text-muted">sign up for free</h4>
+         </div>
+         <div class="modal-body">
+            <form id="formLoginExternal" method="POST" action="@Url.Action("LoginExternal", "Security")">
+               <input type="hidden" name="providerName" />
+               <div class="row">
+                  <div class="col-xs-12">
+                     <div class="form-group">
+                        <button class="btn btn-google btn-lg form-control" onclick="loginExternal('google');">
+                  <span class="fa fa-google"></span> Sign up with Google
+               </button>
+                        @*<a href="" onclick="loginExternal('google');">
+                           <img src="~/Content/images/common/btn_google_signin_dark_pressed.png" style="width:95%; height:95%" />
+                        </a>*@
+                     </div>
+                  </div>
+               </div>
+
+
+               <div class="row">
+                  <div class="col-xs-12">
+                     <div class="form-group">
+                        <button class="btn btn-facebook btn-lg form-control" onclick="loginExternal('facebook');">
+                           <span class="fa fa-facebook"></span> Sign up with Facebook
+                        </button>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="row hidden">
+                  <div class="col-xs-12">
+                     <div class="form-group">
+                        <button class="btn btn-twitter btn-lg form-control" onclick="loginExternal('twitter');">
+                           <span class="fa fa-twitter"></span> Sign up with Twitter
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xs-12 text-center">
+                     <span class="small text-muted">NOTHING WILL EVER BE POSTED WITHOUT YOUR PERMISSION.</span>
+                  </div>
+               </div>
+            </form>
+            <hr />
+            <div class="row">
+               <div class="col-xs-12">
+                  <a href="@Url.Action("Register", "Home")" class="btn btn-odnoklassniki btn-lg form-control"><span class="glyphicon glyphicon-envelope"></span> Sign up with Email</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+@section scripts
+{
+   <script type="text/javascript">
+      $("input#password").addClass('dirty');
+      function loginExternal(providerName) {
+         $("input[name=providerName]").val(providerName);
+         ga('send', 'event', 'User', 'Login', providerName);
+         $("#formLoginExternal").submit();
+      }
+   </script>
+}

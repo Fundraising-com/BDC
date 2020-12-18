@@ -1,0 +1,15 @@
+﻿@model IList<GA.BDC.Shared.Entities.BlogPost>
+<div class="panel panel-info" ng-controller="BlogLastPostsController as blogLastPostsCtrl">
+    <div class="panel-heading">
+        <h3 class="panel-title">Recent Posts</h3>
+    </div>
+    <div class="panel-body">
+        @*@foreach (var category in Model.OrderByDescending(p => p.Created))
+        {
+            <p style="border-bottom: solid 1px #EEE;"><a href="/blog/post/@category.Url">@category.Title</a></p>
+        }*@
+        <div ng-repeat="category in blogLastPostsCtrl.lastPosts" ng-cloak>
+            <p style="border-bottom: solid 1px #EEE;"><a ng-href="/blog/post/{{::category.Url}}">{{::category.Title}}</a></p>
+        </div>
+    </div>
+</div>

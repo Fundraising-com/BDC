@@ -1,0 +1,2800 @@
+<?xml version="1.0"?>
+<SQLStatements Completed="0" Version="SF720">
+  <!-- sp_AddDesign -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[sp_AddDesign]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [sp_AddDesign]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROCEDURE [sp_AddDesign]
+	@name		NVARCHAR(100),
+	@path		NVARCHAR(255),
+	@group		NVARCHAR(100),
+	@categories	NVARCHAR(50),
+	@id			INT	OUTPUT
+AS
+BEGIN
+
+	DECLARE @thumbnail	NVARCHAR(255)
+
+	SET @thumbnail = @path + 'thumbnail.jpg'
+
+	-- check for the records existance
+	SELECT	@id = [uid] 
+	FROM	[Designs] 
+	WHERE	UPPER([Name]) = UPPER(@name)
+
+	IF @id IS NULL
+	BEGIN
+
+		-- this record does not exist; insert it and retrieve its identity
+		INSERT INTO	[Designs] ([Name], [IsActive], [Path], [Thumbnail], [Group], [Categories]) 
+		VALUES		(@name, 0, @path, @thumbnail, @group, @categories)
+
+		SET @id = scope_identity()
+
+	END
+	ELSE
+	BEGIN
+
+		-- the record exists; update it
+		UPDATE	[Designs] 
+		SET		[Name] = @name, [Path] = @path, [Thumbnail] = @Thumbnail, [Group] = @group, [Categories] = @categories
+		WHERE	[uid] = @id
+
+	END
+
+END
+]]></SQLServer>
+  <!-- sp_AddCustomDesign -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[sp_AddCustomDesign]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [sp_AddCustomDesign]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROCEDURE [sp_AddCustomDesign] 
+	@name		NVARCHAR(100),
+	@theme		NVARCHAR(50),
+	@subTheme	NVARCHAR(50),
+	@categories NVARCHAR(50),
+	@id			INT OUTPUT
+AS
+BEGIN
+
+	DECLARE @path		NVARCHAR(255)
+
+	IF @theme IS NULL
+	BEGIN
+		SET @subTheme = NULL
+	END
+
+	SET @path = '~/themes/Custom/' + 
+		CASE WHEN @theme IS NULL THEN N'' ELSE @theme + N'/' END + 
+		CASE WHEN @subTheme IS NULL THEN N'' ELSE @subTheme + N'/' END
+
+	EXEC sp_AddDesign @name, @path, @theme, @categories, @id OUT
+
+END
+]]></SQLServer>
+  <!-- sp_AddImage -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[sp_AddImage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [sp_AddImage]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROCEDURE [sp_AddImage]
+		@designId	INT,
+		@name		NVARCHAR(50),
+		@filename	NVARCHAR(50)
+AS
+BEGIN
+
+	DECLARE @id	INT
+
+	-- check for the records existance
+	SELECT	@id = [uid] 
+	FROM	[Images] 
+	WHERE	[DesignId] = @designId AND UPPER([Name]) = UPPER(@name)
+
+	IF @id IS NULL
+	BEGIN
+
+		-- this record does not exist; insert it and retrieve its identity
+		INSERT INTO	[Images] ([DesignId], [Name], [FileName]) 
+		VALUES		(@designId, @name, @filename)
+
+	END
+	ELSE
+	BEGIN
+
+		-- the record exists; update it
+		UPDATE	[Images] 
+		SET		[DesignId] = @designId, [Name] = @name, [FileName] = @filename
+		WHERE	[uid] = @id
+
+	END
+
+END
+]]></SQLServer>
+  <!--  -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[sp_AddLayout]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [sp_AddLayout]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROCEDURE [sp_AddLayout]
+		@designId				INT,
+	@name					NVARCHAR(50),
+	@tableWidth				NVARCHAR(50) = NULL,
+	@cellPadding			NVARCHAR(50) = NULL,
+	@cellSpacing			NVARCHAR(50) = NULL,
+	@borderSize				NVARCHAR(50) = NULL,
+	@borderColor			NVARCHAR(10) = NULL,
+	@horizontalAlignment	NVARCHAR(50) = NULL,
+	@verticalAlignment		NVARCHAR(50) = NULL,
+	@topMargin				INT = NULL,
+	@rightMargin			INT = NULL,
+	@bottomMargin			INT = NULL,
+	@leftMargin				INT = NULL,
+	@backgroundImageUrl		NVARCHAR(255) = NULL,
+	@backgroundColor		NVARCHAR(10) = NULL,
+	@fontFace				NVARCHAR(50) = NULL,
+	@fontSize				INT,
+	@fontColor				NVARCHAR(10) = NULL,
+	@fontStyle				NVARCHAR(50) = NULL,
+	@imageUrl				NVARCHAR(255) = NULL,
+	@displayStyle			INT,
+	@visible				INT
+AS
+BEGIN
+
+	DECLARE @id	INT
+
+	-- check for the records existance
+	SELECT	@id = [uid] 
+	FROM	[Layout] 
+	WHERE	[DesignId] = @designId AND UPPER([Name]) = UPPER(@name)
+
+	IF @id IS NULL
+	BEGIN
+
+		-- this record does not exist; insert it and retrieve its identity
+		INSERT INTO	[Layout] ([DesignId], [Name], [TableWidth], [CellPadding],
+			[CellSpacing], [BorderSize], [BorderColor], [HorizontalAlignment],
+			[VerticalAlignment], [TopMargin], [RightMargin], [BottomMargin], 
+			[LeftMargin], [BackgroundImageUrl], [BackgroundColor], [FontFace], 
+			[FontSize], [FontColor], [FontStyle], [ImageUrl], [DisplayStyle], 
+			[Visible]) 
+		VALUES		(@designId, @name, @tableWidth, @cellPadding, 
+			@cellSpacing, @borderSize, @borderColor, @horizontalAlignment, 
+			@verticalAlignment, @topMargin, @rightMargin, @bottomMargin, 
+			@leftMargin, @backgroundImageUrl, @backgroundColor, @fontFace, 
+			@fontSize, @fontColor, @fontStyle, @imageUrl, @DisplayStyle, 
+			@visible)
+
+	END
+	ELSE
+	BEGIN
+
+		-- the record exists; update it
+		UPDATE	[Layout] 
+		SET		[DesignId] = @designId, [Name] = @name, 
+			[TableWidth] = @tableWidth, [CellPadding] = @cellPadding, 
+			[CellSpacing] = @cellSpacing, [BorderSize] = @borderSize, 
+			[BorderColor] = @borderColor, 
+			[HorizontalAlignment] = @horizontalAlignment, 
+			[VerticalAlignment] = @verticalAlignment, [TopMargin] = @topMargin,
+			[RightMargin] = @rightMargin, [BottomMargin] = @bottomMargin, 
+			[LeftMargin] = @leftMargin, 
+			[BackgroundImageURL] = @backgroundImageUrl, 
+			[BackgroundColor] = @backgroundColor, [FontFace] = @fontFace, 
+			[FontStyle] = @fontStyle, [ImageURL] = @imageUrl, 
+			[DisplayStyle] = @displayStyle, [Visible] = @visible
+		WHERE	[uid] = @id
+
+	END
+
+END
+]]></SQLServer>
+  <!-- sp_AddMenuBar -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[sp_AddMenuBar]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [sp_AddMenuBar]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROCEDURE [sp_AddMenuBar]
+	@designId		INT,
+	@pageName		NVARCHAR(50),
+	@menuText		NVARCHAR(50) = NULL ,
+	@menuImage		NVARCHAR(255) = NULL ,
+	@menuOffImage	NVARCHAR(255) = NULL ,
+	@link			NVARCHAR(255),
+	@menuPosition	INT,
+	@linkVisibility	INT,
+	@orderPosition	INT
+AS
+BEGIN
+
+	DECLARE @id	INT
+
+	-- check for the records existance
+	SELECT	@id = [uid] 
+	FROM	[MenuBar] 
+	WHERE	[DesignId] = @designId AND 
+			UPPER([PageName]) = UPPER(@pageName) AND 
+			UPPER([MenuText]) = UPPER(@menuText)
+
+	IF @id IS NULL
+	BEGIN
+
+		IF	(UPPER(@menuText) <> N'CATEGORIES' AND UPPER(@menuText) <> N'ALL CATEGORIES') OR
+			(UPPER(@menuText) = N'CATEGORIES' OR UPPER(@menuText) = N'ALL CATEGORIES' AND 
+				NOT EXISTS (
+					SELECT	*
+					FROM	[MenuBar]
+					WHERE	[DesignID] = @designID AND
+							[MenuPosition] = @menuPosition AND 
+							(UPPER([MenuText]) = N'CATEGORIES' OR UPPER([MenuText]) = N'ALL CATEGORIES')
+					)
+			)
+		BEGIN
+
+			-- this record does not exist; insert it and retrieve its identity
+			INSERT INTO	[MenuBar] ([DesignId], [PageName], [MenuText], 
+				[MenuImage], [MenuOffImage], [Link], [MenuPosition], 
+				[LinkVisibility], [OrderPosition]) 
+			VALUES		(@designId, @pageName, @menuText, @menuImage, 
+				@menuOffImage, @link, @menuPosition, @linkVisibility, 
+				@orderPosition)
+
+		END
+
+	END
+	ELSE
+	BEGIN
+
+		-- the record exists; update it
+		UPDATE	[MenuBar] 
+		SET		[DesignId] = @designId, [PageName] = @pageName, 
+			[MenuText] = @menuText, [MenuImage] = @menuImage, 
+			[MenuOffImage] = @menuOffImage, [Link] = @link, 
+			[MenuPosition] = @menuPosition, [LinkVisibility] = @linkVisibility,
+			[OrderPosition] = @orderPosition
+		WHERE	[uid] = @id
+
+	END
+
+END
+]]></SQLServer>
+  <!-- sp_AddStoreFrontDesign -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[sp_AddStoreFrontDesign]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [sp_AddStoreFrontDesign]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROCEDURE [sp_AddStoreFrontDesign] 
+	@name		NVARCHAR(100),
+	@theme		NVARCHAR(50),
+	@subTheme	NVARCHAR(50),
+	@categories NVARCHAR(50),
+	@id			INT OUTPUT
+AS
+BEGIN
+
+	DECLARE @path		NVARCHAR(255)
+
+	IF @theme IS NULL
+	BEGIN
+		SET @subTheme = NULL
+	END
+
+	SET @path = '~/themes/StoreFront/' + 
+		CASE WHEN @theme IS NULL THEN N'' ELSE @theme + N'/' END + 
+		CASE WHEN @subTheme IS NULL THEN N'' ELSE @subTheme + N'/' END
+
+	EXEC sp_AddDesign @name, @path, @theme, @categories, @id OUT
+
+END
+]]></SQLServer>
+  <!-- usp_UpdateUser -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_UpdateUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_UpdateUser]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+create proc [usp_UpdateUser]
+	@uid int,
+	@Firstname varchar(50),
+	@Lastname varchar(50),
+	@Username varchar(100),
+	@password varchar(500),
+	@roleid int,
+	@NumFailedAttempt int,
+	@IsLocked int
+as
+begin
+ declare @Issuper bit
+ select @issuper = isSuper from  userroles where uid =@roleId
+	if @uid =0 -- new Admin - check if admin does not exists create one else return 0 for error check
+	begin
+		if not exists (select uid from administrators where username=@username )
+		begin		
+			insert into Administrators
+			values(@Firstname,@Lastname,@Username,@password,@roleId,isnull(@isSuper,0), @NumFailedAttempt, @IsLocked )
+			if @@error <> 0
+				set @uid = -1
+			else
+				set @Uid= @@identity 			
+		end
+		else set @Uid=0
+		 
+	end
+	else if @uid >0 --Existing Admin - check if username/password is unique, update data else return 0
+	begin
+	    if not exists(select uid from administrators where username=@username and uid <> @uid)
+		begin	    
+		   update Administrators
+		    set Firstname = @Firstname,
+		    lastname = @Lastname,
+		    username =@Username,
+		    password = @password,
+		    roleid= @roleId,
+		    IsSuperUser = isnull(@isSuper,0),
+		    NumFailedAttempt = @NumFailedAttempt,
+		    IsLocked = @IsLocked
+		    where uid =@uid
+		    if @@error <> 0
+			set @uid = -1
+		  end
+	     else set @Uid=0 
+	end
+	select @Uid
+end
+]]></SQLServer>
+  <!-- usp_categorysearch -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_categorysearch]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_categorysearch]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+create proc [usp_categorysearch]
+	@catid int, @answer varchar(8000) OUTPUT
+AS
+	Declare @vstacklist varchar(8000),@vpopped int
+	SET @vstacklist = CAST(@catid AS varchar)  + ','
+	
+	WHILE (LEN(@vstacklist) > 0 AND LEN(@vstacklist) < 8000 )
+	BEGIN
+		--pop the top of the stack	
+		SET @vpopped = SUBSTRING(@vstacklist,1,CHARINDEX(',',@vstacklist)-1)
+		SET @vstacklist =  RIGHT(@vstacklist,LEN(@vstacklist) - CHARINDEX(',',@vstacklist) )
+		SET @answer = @answer + CAST(@vpopped AS VARCHAR) +  ','
+		DECLARE catcrs CURSOR FOR 
+		SELECT uid FROM Categories WHERE parentid = @vpopped
+		
+		OPEN  catcrs
+		FETCH NEXT FROM catcrs INTO @catid
+		WHILE @@FETCH_STATUS = 0
+		BEGIN 
+		-- add all the children of this node to the list
+		SET @vstacklist = CAST(@catid AS varchar) + ',' + @vstacklist 
+		FETCH NEXT FROM catcrs INTO @catid	
+		END	   	
+		CLOSE catcrs
+		DEALLOCATE catcrs
+	END
+]]></SQLServer>
+  <!-- usp_getfilteredcategories -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_getfilteredcategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_getfilteredcategories]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+create Proc [usp_getfilteredcategories]
+	  @categoryid integer
+ as
+	 Select p.Name as Name, p.uid from Categories P inner join Categories C on (c.ParentID = P.uid and p.ParentID = @categoryid)	
+	 union 
+	 select c.Name as Name, c.uid from Categories c inner join ProductCategory Pc on (c.uid = pc.CategoryID and parentid = @categoryid)
+	 Order By Name
+]]></SQLServer>
+  <!-- usp_periodicdelete -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_periodicdelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_periodicdelete]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROC [usp_periodicdelete]
+	@LCID int,
+	@period int
+AS
+	DECLARE @dformat nchar(3)
+	SET @dformat = 'mdy'
+	(Select @dformat =dateformat From master.dbo.syslanguages Where LCID = @LCID)
+
+	SET dateformat @dformat
+	Delete From ShoppingCartGiftWrap Where ShoppingItemID in (Select uid from ShoppingCartItems where CartID in (Select uid from ShoppingCart where DATEDIFF(minute,CreatedDate,GetDate()) > @period))
+	Delete From ShoppingCartAttributes Where ShoppingCartItemID in (Select uid from ShoppingCartItems where CartID in (Select uid from ShoppingCart where DATEDIFF(minute,CreatedDate,GetDate()) > @period))
+	Delete From ShoppingCartItems where CartID in (Select uid from ShoppingCart where DATEDIFF(minute,CreatedDate,GetDate()) >@period)
+	Delete From ShoppingCart where DATEDIFF(minute,CreatedDate,GetDate()) > @period
+
+	Delete From Walkin where DATEDIFF(minute,CreatedDate,GetDate()) > @period
+]]></SQLServer>
+  <!-- usp_productcattables -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_productcattables]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_productcattables]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROC [usp_productcattables]
+	@prodIds varchar(8000),
+	@prodcatIds varchar(8000)
+	
+
+AS
+	DECLARE @vuid integer
+	DECLARE @vprodcatIds varchar(8000)
+	CREATE TABLE #tproducts (uid integer)
+	CREATE TABLE #tcatproducts (uid integer)
+
+	-- collect al the column names in temp table ( so that we can scroll through it)
+			
+	WHILE CHARINDEX(',',@prodIds) > 0 OR LEN(@prodIds) > 0
+	BEGIN
+	   IF CHARINDEX(',',@prodIds) > 0	
+		  SET @vuid = CONVERT(integer,SUBSTRING(@prodIds,1,CHARINDEX(',',@prodIds)-1))
+	   ELSE
+		  SET @vuid = CONVERT(integer,@prodIds)
+		
+	INSERT INTO #tproducts(uid) VALUES(@vuid)
+
+	IF CHARINDEX(',',@prodIds) > 0 
+			SET @prodIds =  SUBSTRING(@prodIds,CHARINDEX(',',@prodIds)+1,LEN(@prodIds))
+	ELSE
+		   SET @prodIds =''	
+	END
+
+
+	WHILE CHARINDEX(',',@prodcatIds) > 0 OR LEN(@prodcatIds) > 0
+	BEGIN
+	   IF CHARINDEX(',',@prodcatIds) > 0	
+		  SET @vprodcatIds = CONVERT(integer,SUBSTRING(@prodcatIds,1,CHARINDEX(',',@prodcatIds)-1))
+	   ELSE
+		  SET @vprodcatIds = CONVERT(integer,@prodcatIds)
+		
+	INSERT INTO #tcatproducts(uid) VALUES(@vprodcatIds)
+
+	IF CHARINDEX(',',@prodcatIds) > 0 
+			SET @prodcatIds =  SUBSTRING(@prodcatIds,CHARINDEX(',',@prodcatIds)+1,LEN(@prodcatIds))
+	ELSE
+		   SET @prodcatIds =''	
+	END
+
+
+	SELECT  uid,ParentLevel,ParentID,Name 
+		FROM Categories WHERE isActive = 1 
+
+	SELECT p.* FROM PRODUCTS p inner join #tproducts tp on (p.uid=tp.uid) ORDER BY p.Name
+	
+	select distinct a.* from attributes a inner join #tproducts tp on (a.productid = tp.uid) ORDER BY a.name
+	
+	SELECT distinct ad.* FROM attributedetail ad INNER JOIN attributes a ON
+		(ad.attributeid = a.uid)
+		inner join #tproducts tp on (a.productid = tp.uid)
+		ORDER BY ad.AttributeOrder
+	
+	SELECT distinct pc.* FROM productcategory pc inner join #tproducts tp on (pc.productid = tp.uid)  inner join #tcatproducts ct on (pc.categoryid = ct.uid)
+	
+	SELECT distinct V.*, A.company FROM
+		vendors V INNER JOIN addresses A ON (V.addressid = A.uid)
+		  INNER JOIN products P on (V.uid = P.vendorid) INNER JOIN #tproducts tp
+			ON (p.uid = tp.uid)
+	
+	SELECT distinct M.* , A.company FROM 
+	manufacturers M INNER JOIN addresses A ON (M.addressid  = A.uid)
+			INNER JOIN products P ON (P.manufacturerid = M.uid)
+			INNER JOIN #tproducts tp ON (p.uid = tp.uid)
+	
+	SELECT distinct vp.*, P.Price as ProductPrice FROM volumepricing vp
+	INNER JOIN #tproducts tp ON (vp.productid = tp.uid)
+	INNER JOIN products P ON (P.uid = tp.uid)
+	
+	SELECT gw.* FROM giftwrap gw
+	INNER JOIN #tproducts tp ON (gw.productid=tp.uid)
+	
+	--Tee 7/13/2007 commented out, exclude products with deactivated manufacturers
+	--SELECT distinct rp.* FROM relatedproducts rp
+	--INNER JOIN #tproducts tp ON (rp.parentid = tp.uid)
+	SELECT distinct rp.* FROM relatedproducts rp, #tproducts tp, manufacturers m, products p WHERE
+	p.manufacturerId = m.uid AND m.active = 1 AND rp.relatedId = p.uid AND rp.parentid = tp.uid AND p.IsActive = 1
+	--end Tee
+	
+	SELECT distinct C.*, CP.groupname,cp.amount, cp.grouptypeid
+	FROM customerspecificpricing C INNER JOIN customerpricegroups CP ON (C.groupid = CP.uid)
+	INNER JOIN #tproducts tp ON (C.productID = tp.uid)
+
+	SELECT ii.* FROM InventoryInfo ii
+	INNER JOIN #tproducts tp ON (ii.ProdID = tp.uid)
+
+	SELECT ProductsBundle.* FROM ProductsBundle INNER JOIN #tproducts ON (ProductsBundle.ProductId = #tproducts.uid) INNER JOIN Products ON (Products.uid = #tproducts.uid) ORDER BY DisplayOrder, Name
+
+	SELECT Products.* FROM Products 
+		INNER JOIN (ProductsBundle INNER JOIN #tproducts 
+			ON (ProductsBundle.ProductId = #tproducts.uid))
+				ON (Products.uid = ProductsBundle.BundleId)
+]]></SQLServer>
+  <!-- usp_producttables -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_producttables]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_producttables]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE PROC [usp_producttables]
+	@prodIds varchar(8000)
+
+AS
+	DECLARE @vuid integer
+	CREATE TABLE #tproducts (uid integer)
+	-- collect al the column names in temp table ( so that we can scroll through it)
+			
+	WHILE CHARINDEX(',',@prodIds) > 0 OR LEN(@prodIds) > 0
+	BEGIN
+	   IF CHARINDEX(',',@prodIds) > 0	
+		  SET @vuid = CONVERT(integer,SUBSTRING(@prodIds,1,CHARINDEX(',',@prodIds)-1))
+	   ELSE
+		  SET @vuid = CONVERT(integer,@prodIds)
+		
+	INSERT INTO #tproducts(uid) VALUES(@vuid)
+
+	IF CHARINDEX(',',@prodIds) > 0 
+			SET @prodIds =  SUBSTRING(@prodIds,CHARINDEX(',',@prodIds)+1,LEN(@prodIds))
+	ELSE
+		   SET @prodIds =''	
+	END
+
+	SELECT  uid,ParentLevel,ParentID,Name 
+		FROM Categories WHERE isActive = 1 
+
+	SELECT p.* FROM PRODUCTS p inner join #tproducts tp on (p.uid=tp.uid) ORDER BY p.&lt;%Param1%&gt;
+	
+	select distinct a.* from attributes a inner join #tproducts tp on (a.productid = tp.uid)
+	
+	SELECT distinct ad.* FROM attributedetail ad INNER JOIN attributes a ON
+		(ad.attributeid = a.uid)
+		inner join #tproducts tp on (a.productid = tp.uid)
+		ORDER BY ad.AttributeOrder
+	
+	SELECT distinct pc.* FROM productcategory pc inner join #tproducts tp on (pc.productid = tp.uid)
+	
+	SELECT distinct V.*, A.company FROM
+		vendors V INNER JOIN addresses A ON (V.addressid = A.uid)
+		  INNER JOIN products P on (V.uid = P.vendorid) INNER JOIN #tproducts tp
+			ON (p.uid = tp.uid)
+	
+	SELECT distinct M.* , A.company FROM 
+	manufacturers M INNER JOIN addresses A ON (M.addressid  = A.uid)
+			INNER JOIN products P ON (P.manufacturerid = M.uid)
+			INNER JOIN #tproducts tp ON (p.uid = tp.uid)
+	
+	SELECT distinct vp.*, P.Price as ProductPrice FROM volumepricing vp
+	INNER JOIN #tproducts tp ON (vp.productid = tp.uid)
+	INNER JOIN products P ON (P.uid = tp.uid)
+	
+	SELECT gw.* FROM giftwrap gw
+	INNER JOIN #tproducts tp ON (gw.productid=tp.uid)
+	
+	--Tee 7/13/2007 commented out, exclude products with deactivated manufacturers
+	--SELECT distinct rp.* FROM relatedproducts rp
+	--INNER JOIN #tproducts tp ON (rp.parentid = tp.uid)
+	SELECT distinct rp.* FROM relatedproducts rp, #tproducts tp, manufacturers m, products p WHERE
+	p.manufacturerId = m.uid AND m.active = 1 AND rp.relatedId = p.uid AND rp.parentid = tp.uid AND p.IsActive = 1
+	--end Tee
+	
+	-- begin: JDB - 7/10/2007 - Customer Price Groups
+	SELECT DISTINCT
+		CP.uid AS GroupID,
+		CP.GroupName,
+		CP.Amount,
+		CP.GroupTypeID,
+		ISNULL(ISNULL(ISNULL(ISNULL(C.ProductID, CPGC.ProductId), CPGM.ProductID), CPGV.ProductID), P.uid) AS ProductID
+	FROM
+		CustomerPriceGroups CP
+		LEFT OUTER JOIN CustomerSpecificPricing C ON CP.uid = C.GroupID
+		LEFT OUTER JOIN
+			(
+			SELECT
+				CPGC.CustomerPriceGroupId,
+				CP.ProductID
+			FROM
+				CustomerPriceGroupCategories CPGC
+				INNER JOIN Categories C ON CPGC.CategoryId = C.uid
+				INNER JOIN ProductCategory CP ON C.uid = CP.CategoryID
+			)CPGC ON CP.uid = CPGC.CustomerPriceGroupId
+		LEFT OUTER JOIN
+			(
+			SELECT
+				CPGM.CustomerPriceGroupId,
+				P.uid AS ProductID
+			FROM
+				CustomerPriceGroupManufacturers CPGM
+				INNER JOIN Products P ON CPGM.ManufacturerID = P.ManufacturerID
+			) CPGM ON CP.uid = CPGM.CustomerPriceGroupId
+		LEFT OUTER JOIN
+			(
+			SELECT
+				CPGV.CustomerPriceGroupId,
+				P.uid AS ProductID
+			FROM
+				CustomerPriceGroupVendors CPGV
+				INNER JOIN Products P ON CPGV.VendorID= P.VendorID
+			) CPGV ON CP.uid = CPGV.CustomerPriceGroupId
+		LEFT OUTER JOIN Products P ON CP.AllProducts = 1
+		INNER JOIN #tproducts tp ON (C.productID = tp.uid OR CPGC.ProductID = tp.uid OR CPGM.ProductID = tp.uid OR CPGV.ProductID = tp.uid OR P.uid = tp.uid)
+	WHERE
+		ISNULL(ISNULL(ISNULL(ISNULL(C.ProductID, CPGC.ProductId), CPGM.ProductID), CPGV.ProductID), P.uid) IS NOT NULL
+	-- end: JDB - 7/10/2007 - Customer Price Groups
+
+	SELECT ii.* FROM InventoryInfo ii
+	INNER JOIN #tproducts tp ON (ii.ProdID = tp.uid)
+	
+	SELECT ProductsBundle.* FROM ProductsBundle INNER JOIN #tproducts ON (ProductsBundle.ProductId = #tproducts.uid) INNER JOIN Products ON (Products.uid = #tproducts.uid) ORDER BY DisplayOrder, Name
+	
+	SELECT Products.* FROM Products 
+		INNER JOIN (ProductsBundle INNER JOIN #tproducts 
+			ON (ProductsBundle.ProductId = #tproducts.uid))
+				ON (Products.uid = ProductsBundle.BundleId)
+]]></SQLServer>
+  <!-- usp_rebuildcat -->
+  <SQLServer><![CDATA[
+if exists (select * from dbo.sysobjects where id = object_id(N'[usp_rebuildcat]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [usp_rebuildcat]
+]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE   PROCEDURE [usp_rebuildcat]
+	AS
+	DECLARE @vdbname varchar(128)
+	DECLARE @vcatname varchar(255)
+	DECLARE @tid int
+	SELECT @vdbname = DB_NAME()
+	
+	SELECT @tid = id FROM sysobjects where name = 'products'
+	
+	IF FULLTEXTSERVICEPROPERTY('IsFullTextINstalled') > 0  
+	BEGIN
+		IF (DATABASEPROPERTY(@vdbname,'IsFullTextEnabled') = 1)  AND (OBJECTPROPERTY(@tid,'TableHasActiveFulltextIndex') = 1) AND (FULLTEXTCATALOGPROPERTY (@vdbname+'catalog' ,'populatestatus') = 0)
+			BEGIN
+			  -- Create a new indexing catalog for the current database
+			   SET @vcatname = @vdbname + 'catalog'	
+			   exec sp_fulltext_catalog @vcatname,'start_full'
+			END
+		END
+	RETURN 0
+]]></SQLServer>
+  <SQLServer><![CDATA[
+	if exists (select * from sysobjects where id = object_id(N'[usp_prodinitialsearch]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+		drop procedure [usp_prodinitialsearch]
+]]></SQLServer>
+  <SQLServer Error="ProcError1"><![CDATA[
+DECLARE @vdbname varchar(128)
+DECLARE @vcatname varchar(255)
+DECLARE @vindname sysname
+DECLARE @vcolname varchar(255)
+DECLARE @searchon varchar(1000)
+SELECT @vdbname = DB_NAME()
+
+-- Enable the database for full text indexing
+exec sp_fulltext_database 'enable'	
+ 
+-- Create a new indexing catalog for the current database
+SET @vcatname = @vdbname + 'catalog'	
+
+IF (SELECT COUNT(*) FROM sysfulltextcatalogs WHERE name = @vcatname) > 0 
+BEGIN
+	EXEC sp_fulltext_table 'Products', 'drop'
+	EXEC sp_fulltext_catalog @vcatname, 'drop'
+END  
+
+exec sp_fulltext_catalog @vcatname,'create'
+
+-- get the index name of the uid column of products table
+SELECT @vindname = si.name FROM sysobjects so, syscolumns sc, sysindexes si, sysindexkeys sk
+WHERE
+	sc.id  = so.id
+	AND si.id = so.id
+	AND sk.id = so.id
+	AND sk.colid = sc.colid
+	AND si.indid = sk.indid
+	AND so.name = 'products'
+	AND sc.name = 'uid'
+
+-- create the products table for full text processing
+exec sp_fulltext_table 'products','create',@vcatname,@vindname
+	
+-- now add all the candidate columns which can be text searched
+SET  @searchon = '&lt;%Param2%&gt;'
+
+WHILE CHARINDEX(',',@searchon) &gt; 0 OR LEN(@searchon) &gt; 0
+BEGIN
+	IF CHARINDEX(',',@searchon) &gt; 0	
+		SET @vcolname = SUBSTRING(@searchon,1,CHARINDEX(',',@searchon)-1)
+	ELSE
+		SET @vcolname = @searchon
+
+	exec sp_fulltext_column 'products',@vcolname, 'add'		
+
+	IF CHARINDEX(',',@searchon) &gt; 0 
+		SET @searchon =  SUBSTRING(@searchon,CHARINDEX(',',@searchon)+1,LEN(@searchon))
+	ELSE
+		SET @searchon =''	
+END	
+
+-- activate the full text index for the table
+exec sp_fulltext_table  'products','activate'
+-- start the full text indexing of the of the catalog created
+exec sp_fulltext_catalog @vcatname, 'start_full'
+]]></SQLServer>
+  <!-- SP8 -->
+  <SQLServer><![CDATA[
+CREATE PROC usp_prodinitialsearch
+	@searchkey varchar(255),
+	@catid integer,
+	@searchtype smallint,
+	@searchon varchar(255),
+	@onlyforsale smallint,
+	@mfgrid int,
+	@vendorid int,
+	@lowerprice decimal(18,5),
+	@upperprice decimal(18,5),
+	@fromdate varchar(255),
+	@todate varchar(255),
+	@SearchFilterCondition VARCHAR(4000),
+	@SearchFilterCount INT,
+	@numrecs as int OUTPUT
+AS 
+	DECLARE @vkey varchar(255)
+	DECLARE @vdbname varchar(128), @vcatanswer  varchar(8000), @tempcatid int
+	DECLARE @vcolname varchar(100)
+	DECLARE @sqlstmt nvarchar(4000)
+	DECLARE @joinstmt nvarchar(4000)
+	DECLARE @wherestmt nvarchar(4000)
+	DECLARE @vorderby varchar(100)
+	CREATE TABLE #tproducts(uid INT)
+	CREATE TABLE #tproducts2(uid INT)
+	CREATE TABLE #tcategory(uid INT PRIMARY KEY)
+	SELECT @vdbname = DB_NAME()
+	SELECT @searchkey = LTRIM(RTRIM(@searchkey))
+	SELECT @vorderby = ProductSort FROM Admin
+
+	IF LEN(LTRIM(RTRIM(@searchkey))) &lt;= 0 
+		GOTO NOTEXTSEARCH	
+
+		--manipulate the searchkeyword according to the type of search
+		IF @searchtype = 0 -- all words
+		BEGIN	 
+			SET @searchkey =  LTRIM(RTRIM(@searchkey))
+			SET @searchkey = REPLACE(@searchkey,' ','*&quot; AND &quot;')
+			SET @searchkey = REPLACE(@searchkey,'-','*&quot; AND &quot;')	
+			SET @searchkey =  '&quot;' + @searchkey  + '*&quot;'
+		END	
+		ELSE IF @searchtype = 1	-- any word	
+		BEGIN	 
+			SET @searchkey =  LTRIM(RTRIM(@searchkey))
+			SET @searchkey = REPLACE(@searchkey,' ','*&quot; OR &quot;')
+			SET @searchkey = REPLACE(@searchkey,'-','*&quot; OR &quot;')
+			SET @searchkey =  '&quot;' + @searchkey  + '*&quot;'
+		END	
+		ELSE IF @searchtype = 2 -- phrase
+		BEGIN	 
+			SET @searchkey =  LTRIM(RTRIM(@searchkey))
+			SET @searchkey =  '&quot;' + @searchkey  + '&quot;'
+		END	 
+	  
+		INSERT INTO #tproducts
+		SELECT  uid FROM products 
+		WHERE code IS NOT NULL 
+		AND isactive = 1 AND CONTAINS(*,@searchkey) 
+		ORDER BY &lt;%Param1%&gt;
+		
+		GOTO SEARCHMORE
+	
+		NOTEXTSEARCH:
+		SET @sqlstmt = 'INSERT INTO #tproducts Select P.uid FROM Products P'
+		SET @wherestmt = ' WHERE P.uid not in (SELECT uid FROM #tproducts) AND isActive = 1'
+		--modified to reduce overhead
+		--Category Search
+		IF @catid &gt;= 0 
+		BEGIN
+			SET @vcatanswer=''
+			EXEC usp_categorysearch @catid, @vcatanswer OUTPUT
+			WHILE CHARINDEX(',',@vcatanswer) &gt; 0 OR LEN(@vcatanswer) &gt; 0
+			BEGIN
+				IF CHARINDEX(',',@vcatanswer) &gt; 0	
+					SET @tempcatid = SUBSTRING(@vcatanswer,1,CHARINDEX(',',@vcatanswer)-1)
+				ELSE
+					SET @tempcatid = @vcatanswer
+				INSERT INTO #tcategory (uid) VALUES (@tempcatid)
+				IF CHARINDEX(',',@vcatanswer) &gt; 0 
+					SET @vcatanswer =  SUBSTRING(@vcatanswer,CHARINDEX(',',@vcatanswer)+1,LEN(@vcatanswer))
+				ELSE
+					SET @vcatanswer =''	
+			END
+
+			SET @joinstmt = ' INNER JOIN productcategory PC ON (P.uid = PC.productid AND PC.categoryid in (SELECT uid FROM #tcategory))'	                             
+			SET @catid = -1
+		END
+		--Search by Sale Price
+		ELSE IF @onlyforsale &gt;= 0 
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND isonsale = ' + CAST(@onlyforsale as nvarchar(5))
+				SET @onlyforsale = -1
+			END
+		--Search by Manufacturer
+		ELSE IF @mfgrid &gt;= 0  
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND manufacturerId = ' + CAST(@mfgrid as nvarchar(100))
+			END
+		--Search by Vendor
+		ELSE IF @vendorid &gt;= 0  
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND VendorId = ' + CAST(@vendorid as nvarchar(100))
+				SET @vendorid = -1
+			END
+		--Search by Price
+		ELSE IF @upperprice &gt; 0  and @lowerprice &gt;= 0
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND ((CAST(price AS decimal(18,5)) BETWEEN ' + CAST(@lowerprice as nvarchar(100)) + ' AND ' + CAST(@upperprice as nvarchar(100)) + ')'
+				SET @wherestmt = @wherestmt + ' OR (CAST(saleprice AS decimal(18,5)) BETWEEN ' + CAST(@lowerprice as nvarchar(100)) + ' AND ' + CAST(@upperprice as nvarchar(100)) + ') AND isonsale = 1)'
+				SET @upperprice = -1
+				SET @lowerprice = -1
+			END
+		--Search by Date Added -- changed for SP8
+		ELSE IF len(@todate) &gt; 0 and len(@fromdate) &gt; 0 
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND CAST(dateadded AS datetime) BETWEEN CAST(''' + @fromdate + ''' AS datetime) AND CAST(''' + @todate + ''' AS datetime)'
+				SET @todate = ''
+				SET @fromdate = ''
+			END
+		SET @sqlstmt = @sqlstmt + ISNULL(@joinstmt,'') + ISNULL(@wherestmt,'') + ' Order by ' + @vorderby
+	  	--select @sqlstmt
+		exec sp_executesql @sqlstmt	
+
+		GOTO SEARCHMORE
+
+		SEARCHMORE:
+
+		-- if category is there, delete the products from the temp table which are not in category
+		IF @catid &gt;= 0 
+		BEGIN
+			SET @vcatanswer=''
+			EXEC usp_categorysearch @catid, @vcatanswer OUTPUT
+			WHILE CHARINDEX(',',@vcatanswer) &gt; 0 OR LEN(@vcatanswer) &gt; 0
+			BEGIN
+			      IF CHARINDEX(',',@vcatanswer) &gt; 0	
+				  SET @tempcatid = SUBSTRING(@vcatanswer,1,CHARINDEX(',',@vcatanswer)-1)
+			       ELSE
+				  SET @tempcatid = @vcatanswer
+				INSERT INTO #tcategory (uid) VALUES (@tempcatid)
+				 IF CHARINDEX(',',@vcatanswer) &gt; 0 
+				   SET @vcatanswer =  SUBSTRING(@vcatanswer,CHARINDEX(',',@vcatanswer)+1,LEN(@vcatanswer))
+				  ELSE
+				   SET @vcatanswer =''	
+			END
+			                             
+	          DELETE FROM #tproducts
+			WHERE uid NOT IN (SELECT P.uid 
+   			FROM products P INNER JOIN productcategory PC ON (P.uid = PC.productid AND PC.categoryid in (SELECT uid FROM #tcategory)))
+		END
+		
+		IF @onlyforsale &gt;= 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE isonsale = @onlyforsale)
+		END
+		 
+		IF @mfgrid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE manufacturerId = @mfgrid)
+		END 
+	
+		IF @vendorid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE VendorId = @vendorid)
+		END 
+	
+		IF @upperprice &gt; 0  and @lowerprice &gt;= 0
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE (CAST(price AS decimal(18,5)) BETWEEN @lowerprice AND @upperprice )
+						OR (CAST(saleprice AS decimal(18,5)) BETWEEN @lowerprice  AND @upperprice ) AND isonsale = 1)
+		END
+	
+		IF len(@todate) &gt; 0 and len(@fromdate) &gt; 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE 
+			CAST(dateadded AS datetime) BETWEEN CAST(@fromdate AS datetime) AND CAST(@todate AS datetime))
+		END
+		
+		-- Tee 7/13/2007 remove products with inactive manufacturer
+		DELETE FROM #tproducts
+		WHERE uid IN (SELECT Products.uid FROM Products, Manufacturers WHERE Products.ManufacturerId = Manufacturers.uid AND Manufacturers.Active &lt;&gt; 1)
+		-- Tee 8/15/2007 Product Configurator, remove merchant bundle without any component
+		DELETE FROM #tproducts
+		WHERE uid IN (SELECT Products.uid FROM Products WHERE ProductType IN (2,3) AND Products.uid NOT IN (SELECT ProductID FROM ProductsBundle))
+		-- Tee 8/15/2007 Product Configurator, remove customer defined bundle without any steps with component
+		DELETE FROM #tproducts
+		WHERE uid IN (SELECT uid FROM Products WHERE ProductType IN (4,5) AND uid NOT IN(
+		SELECT ProductID FROM BundleTemplateDetail WHERE uid IN(
+		SELECT td.uid FROM BundleTemplateDetail td, BundleProductDetail pd WHERE td.uid = pd.StepID AND td.SelectableQty > 0)))
+		-- end Tee
+
+		-- begin: JDB - Search Filters
+		IF @SearchFilterCount > 0
+		BEGIN
+			DECLARE @SearchFilterCountString VARCHAR(100)
+			SET @SearchFilterCountString = CAST(@SearchFilterCount AS VARCHAR(100))
+			EXEC('DELETE FROM #tproducts
+			WHERE uid NOT IN (
+			SELECT DISTINCT Attributes.ProductId
+			FROM
+				Attributes
+				INNER JOIN AttributeDetail ON Attributes.uid = AttributeDetail.AttributeId
+			WHERE' +
+			@SearchFilterCondition +
+			'GROUP BY Attributes.ProductId
+			HAVING COUNT(Attributes.ProductId) = ' +
+			@SearchFilterCountString +
+			')')
+		END
+		-- end: JDB - Search Filters
+
+		INSERT INTO #tproducts2
+			SELECT DISTINCT uid FROM #tproducts
+		SELECT @numrecs = COUNT(uid) FROM #tproducts2
+		-- since distinct causes the sort order to be lost we have to do a select stmt
+		-- SELECT uid FROM #tproducts2 
+		SET @sqlstmt= 'select products.uid from products inner join #tproducts2 on (products.uid = #tproducts2.uid) Order by ' + @vorderby
+		exec sp_executesql @sqlstmt
+
+		-- begin: JDB - Search Filters
+		SELECT DISTINCT A.[Name] AS AttributeName, SR.GlobalSelectorName, AD.[Name] AS AttributeValue
+		FROM
+			#tproducts P
+			INNER JOIN Attributes A ON  P.uid = A.ProductId
+			INNER JOIN SearchFilters SR ON A.[Name] = SR.AttributeName
+			INNER JOIN AttributeDetail AD ON A.uid = AD.AttributeId
+		WHERE A.Type = 0
+		ORDER BY A.[Name], AD.[Name]
+		-- end: JDB - Search Filters
+
+		DROP TABLE #tproducts
+		DROP TABLE #tproducts2
+		DROP TABLE #tcategory
+]]></SQLServer>
+  <ProcError1><![CDATA[
+CREATE  PROC usp_prodinitialsearch
+	@searchkey varchar(255),
+	@catid integer,
+	@searchtype smallint,
+	@searchon varchar(255),
+	@onlyforsale smallint,
+	@mfgrid int,
+	@vendorid int,
+	@lowerprice decimal(18,5),
+	@upperprice decimal(18,5),
+	@fromdate varchar(255),
+	@todate varchar(255),
+	@SearchFilterCondition VARCHAR(4000),
+	@SearchFilterCount INT,
+	@numrecs as int OUTPUT
+AS 
+	DECLARE @vkey varchar(255)
+	DECLARE @vdbname varchar(128), @vcatanswer  varchar(8000), @tempcatid int
+	DECLARE @vcolname varchar(100)
+	DECLARE @sqlstmt nvarchar(4000)
+	DECLARE @joinstmt nvarchar(4000)
+	DECLARE @wherestmt nvarchar(4000)
+	DECLARE @vorderby varchar(100)
+	CREATE TABLE #tproducts(uid INT)
+	CREATE TABLE #tproducts2(uid INT)
+	CREATE TABLE #tcategory(uid INT PRIMARY KEY)
+	SELECT @vdbname = DB_NAME()
+	
+	SELECT @searchkey = LTRIM(RTRIM(@searchkey))
+	SELECT @vorderby = ProductSort FROM Admin
+	
+	IF LEN(LTRIM(RTRIM(@searchkey))) &lt;= 0 
+		GOTO NOTEXTSEARCH	
+
+	IF @searchtype = 0 -- allwords 
+		SET @searchkey = '@ LIKE '+ char(39)  + '%' + replace(@searchkey,' ','%' + char(39) + ' AND @ LIKE ' + char(39)+ '%') + '%' +char(39)
+	ELSE IF @searchtype = 1 -- 	any word search
+		SET @searchkey = '@ LIKE '+ char(39) + '%' + replace(@searchkey,' ','%' + char(39) + ' OR @ LIKE ' + char(39)+ '%') + '%' +char(39)
+	ELSE IF @searchtype = 2 -- Exact phrase
+		SET @searchkey = '@ LIKE ' + char(39) + '%' + @searchkey + '%' + char(39)
+	
+	-- collect all the column names in temp table ( so that we can scroll through it)
+			
+	WHILE CHARINDEX(',',@searchon) &gt; 0 OR LEN(@searchon) &gt; 0
+	BEGIN
+	   IF CHARINDEX(',',@searchon) &gt; 0	
+		  SET @vcolname = SUBSTRING(@searchon,1,CHARINDEX(',',@searchon)-1)
+	   ELSE
+		  SET @vcolname = @searchon
+	-- the loop on the search runs here
+	  SET @sqlstmt = 'INSERT INTO #tproducts Select uid FROM Products' 
+	  SET @wherestmt = ' WHERE uid  not in (SELECT uid FROM #tproducts) AND isActive = 1 AND (' + @searchkey + ')'
+	  
+	  SET @wherestmt = replace(@wherestmt,'@',@vcolname)
+	  
+	  SET @sqlstmt = @sqlstmt + ISNULL(@wherestmt,'') + ' Order by ' + @vorderby
+	  
+	  exec sp_executesql @sqlstmt	
+	  
+	   IF CHARINDEX(',',@searchon) &gt; 0 
+		   SET @searchon =  SUBSTRING(@searchon,CHARINDEX(',',@searchon)+1,LEN(@searchon))
+	   ELSE
+		   SET @searchon =''	
+	END
+	GOTO SEARCHMORE
+
+	NOTEXTSEARCH:
+		SET @sqlstmt = 'INSERT INTO #tproducts Select P.uid FROM Products P'
+		SET @wherestmt = ' WHERE P.uid not in (SELECT uid FROM #tproducts) AND isActive = 1'
+		--modified to reduce overhead
+		--Category Search
+		IF @catid &gt;= 0 
+			BEGIN
+				SET @vcatanswer=''
+				EXEC usp_categorysearch @catid, @vcatanswer OUTPUT
+				WHILE CHARINDEX(',',@vcatanswer) &gt; 0 OR LEN(@vcatanswer) &gt; 0
+				BEGIN
+				      IF CHARINDEX(',',@vcatanswer) &gt; 0	
+					  SET @tempcatid = SUBSTRING(@vcatanswer,1,CHARINDEX(',',@vcatanswer)-1)
+				       ELSE
+					  SET @tempcatid = @vcatanswer
+					INSERT INTO #tcategory (uid) VALUES (@tempcatid)
+					 IF CHARINDEX(',',@vcatanswer) &gt; 0 
+					   SET @vcatanswer =  SUBSTRING(@vcatanswer,CHARINDEX(',',@vcatanswer)+1,LEN(@vcatanswer))
+					  ELSE
+					   SET @vcatanswer =''	
+				END
+	
+				SET @joinstmt = ' INNER JOIN productcategory PC ON (P.uid = PC.productid AND PC.categoryid in (SELECT uid FROM #tcategory))'	                             
+				SET @catid = -1
+			END
+		--Search by Sale Price
+		ELSE IF @onlyforsale &gt;= 0 
+			BEGIN
+				SET @wherestmt = ISNULL(@wherestmt,'') + ' AND isonsale = ' + CAST(@onlyforsale as nvarchar(5))
+				SET @onlyforsale = -1
+			END
+		--Search by Manufacturer
+		ELSE IF @mfgrid &gt;= 0  
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND manufacturerId = ' + CAST(@mfgrid as nvarchar(100))
+			END
+		--Search by Vendor
+		ELSE IF @vendorid &gt;= 0  
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND VendorId = ' + CAST(@vendorid as nvarchar(100))
+				SET @vendorid = -1
+			END
+		--Search by Price
+		ELSE IF @upperprice &gt; 0  and @lowerprice &gt;= 0
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND ((CAST(price AS decimal(18,5)) BETWEEN ' + CAST(@lowerprice as nvarchar(100)) + ' AND ' + CAST(@upperprice as nvarchar(100)) + ')'
+				SET @wherestmt = @wherestmt + ' OR (CAST(saleprice AS decimal(18,5)) BETWEEN ' + CAST(@lowerprice as nvarchar(100)) + ' AND ' + CAST(@upperprice as nvarchar(100)) + ') AND isonsale = 1)'
+				SET @upperprice = -1
+				SET @lowerprice = -1
+			END
+		--Search by Date Added
+		ELSE IF len(@todate) &gt; 0 and len(@fromdate) &gt; 0 
+			BEGIN
+				SET @wherestmt = @wherestmt + ' AND CAST(dateadded AS datetime) BETWEEN CAST(''' + @fromdate + ''' AS datetime) AND CAST(''' + @todate + ''' AS datetime)'
+				SET @todate = ''
+				SET @fromdate = ''
+			END
+		SET @sqlstmt = @sqlstmt + ISNULL(@joinstmt,'') + ISNULL(@wherestmt,'') + ' Order by ' + @vorderby
+	  	--select @sqlstmt
+		exec sp_executesql @sqlstmt	
+
+		GOTO SEARCHMORE
+		   
+
+	SEARCHMORE:
+
+		-- if category is there, delete the products from the temp table which are not in category
+		IF @catid &gt;= 0 
+		BEGIN
+			SET @vcatanswer=''
+			EXEC usp_categorysearch @catid, @vcatanswer OUTPUT
+			WHILE CHARINDEX(',',@vcatanswer) &gt; 0 OR LEN(@vcatanswer) &gt; 0
+			BEGIN
+			      IF CHARINDEX(',',@vcatanswer) &gt; 0	
+				  SET @tempcatid = SUBSTRING(@vcatanswer,1,CHARINDEX(',',@vcatanswer)-1)
+			       ELSE
+				  SET @tempcatid = @vcatanswer
+				INSERT INTO #tcategory (uid) VALUES (@tempcatid)
+				 IF CHARINDEX(',',@vcatanswer) &gt; 0 
+				   SET @vcatanswer =  SUBSTRING(@vcatanswer,CHARINDEX(',',@vcatanswer)+1,LEN(@vcatanswer))
+				  ELSE
+				   SET @vcatanswer =''	
+			END
+			                             
+	          DELETE FROM #tproducts
+			WHERE uid NOT IN (SELECT P.uid 
+   			FROM products P INNER JOIN productcategory PC ON (P.uid = PC.productid AND PC.categoryid in (SELECT uid FROM #tcategory)))
+		END
+		
+		IF @onlyforsale &gt;= 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE isonsale = @onlyforsale)
+		END
+		 
+		IF @mfgrid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE manufacturerId = @mfgrid)
+		END 
+	
+		IF @vendorid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE VendorId = @vendorid)
+		END 
+	
+		IF @upperprice &gt; 0  and @lowerprice &gt;= 0
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE (CAST(price AS decimal(18,5)) BETWEEN @lowerprice AND @upperprice )
+						OR (CAST(saleprice AS decimal(18,5)) BETWEEN @lowerprice  AND @upperprice ) AND isonsale = 1)
+		END
+	
+		IF len(@todate) &gt; 0 and len(@fromdate) &gt; 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE 
+			CAST(dateadded AS datetime) BETWEEN CAST(@fromdate AS datetime) AND CAST(@todate AS datetime))
+		END
+		
+		-- Tee 7/13/2007 remove products with inactive manufacturer
+		DELETE FROM #tproducts
+		WHERE uid IN (SELECT Products.uid FROM Products, Manufacturers WHERE Products.ManufacturerId = Manufacturers.uid AND Manufacturers.Active &lt;&gt; 1)
+		-- Tee 8/15/2007 Product Configurator, remove merchant bundle without any component
+		DELETE FROM #tproducts
+		WHERE uid IN (SELECT Products.uid FROM Products WHERE ProductType IN (2,3) AND Products.uid NOT IN (SELECT ProductID FROM ProductsBundle))
+		-- Tee 8/15/2007 Product Configurator, remove customer defined bundle without any steps with component
+		DELETE FROM #tproducts
+		WHERE uid IN (SELECT uid FROM Products WHERE ProductType IN (4,5) AND uid NOT IN(
+		SELECT ProductID FROM BundleTemplateDetail WHERE uid IN(
+		SELECT td.uid FROM BundleTemplateDetail td, BundleProductDetail pd WHERE td.uid = pd.StepID AND td.SelectableQty > 0)))
+		-- end Tee
+
+		-- begin: JDB - Search Filters
+		IF @SearchFilterCount > 0
+		BEGIN
+			DECLARE @SearchFilterCountString VARCHAR(100)
+			SET @SearchFilterCountString = CAST(@SearchFilterCount AS VARCHAR(100))
+			EXEC('DELETE FROM #tproducts
+			WHERE uid NOT IN (
+			SELECT DISTINCT Attributes.ProductId
+			FROM
+				Attributes
+				INNER JOIN AttributeDetail ON Attributes.uid = AttributeDetail.AttributeId
+			WHERE' +
+			@SearchFilterCondition +
+			'GROUP BY Attributes.ProductId
+			HAVING COUNT(Attributes.ProductId) = ' +
+			@SearchFilterCountString +
+			')')
+		END
+		-- end: JDB - Search Filters
+
+		INSERT INTO #tproducts2
+			SELECT DISTINCT uid FROM #tproducts
+		SELECT @numrecs = COUNT(uid) FROM #tproducts2
+		-- since distinct causes the sort order to be lost we have to do a select stmt
+		-- SELECT uid FROM #tproducts2 
+		SET @sqlstmt= 'select products.uid from products inner join #tproducts2 on (products.uid = #tproducts2.uid) Order by ' + @vorderby
+		exec sp_executesql @sqlstmt
+
+		-- begin: JDB - Search Filters
+		SELECT DISTINCT A.[Name] AS AttributeName, SR.GlobalSelectorName, AD.[Name] AS AttributeValue
+		FROM
+			#tproducts P
+			INNER JOIN Attributes A ON  P.uid = A.ProductId
+			INNER JOIN SearchFilters SR ON A.[Name] = SR.AttributeName
+			INNER JOIN AttributeDetail AD ON A.uid = AD.AttributeId
+		WHERE A.Type = 0
+		ORDER BY A.[Name], AD.[Name]
+		-- end: JDB - Search Filters
+
+		DROP TABLE #tproducts
+		DROP TABLE #tproducts2
+		DROP TABLE #tcategory
+]]></ProcError1>
+  <SQLServer><![CDATA[
+CREATE  INDEX [IX_DESCRIPTION] ON [Products]([Description]) ON [PRIMARY]
+CREATE  INDEX [IX_KEYWORDS] ON [Products](Keywords) ON [PRIMARY]
+]]></SQLServer>
+  <!-- begin - Update Theme Names -->
+  <SQLServer><![CDATA[
+UPDATE Designs SET [Name] = REPLACE([Name], 'Theme 1', 'Tuscan'), [Group] = 'Tuscan', [Categories] = 'Tuscan' WHERE [Name] LIKE 'Theme 1%' AND [Group] = 'Theme1' AND [Categories] = 'Theme 1'
+UPDATE Designs SET [Name] = REPLACE([Name], 'Theme 2', 'Default'), [Group] = 'Default', [Categories] = 'Default' WHERE [Name] LIKE 'Theme 2%' AND [Group] = 'Theme2' AND [Categories] = 'Theme 2'
+UPDATE Designs SET [Name] = REPLACE([Name], 'Theme 3 - Yellow', 'Toy Box'), [Group] = 'ToyBox', [Categories] = 'Toy Box' WHERE [Name] LIKE 'Theme 3 - Yellow' AND [Group] = 'Theme3' AND [Categories] = 'Theme 3'
+UPDATE Designs SET [Name] = REPLACE([Name], 'Theme 3', 'Torn'), [Group] = 'Torn', [Categories] = 'Torn' WHERE [Name] LIKE 'Theme 3%' AND [Group] = 'Theme3' AND [Categories] = 'Theme 3'
+UPDATE Designs SET [Name] = REPLACE([Name], 'Theme 6', 'Silver'), [Group] = 'Silver', [Categories] = 'Silver' WHERE [Name] LIKE 'Theme 6%' AND [Group] = 'Theme6' AND [Categories] = 'Theme 6'
+]]></SQLServer>
+  <!-- end - Update Theme Names -->
+  <!-- begin - Theme1 - Blue -->
+  <!-- note - Theme1 designs should not be installed until design has updated -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Tuscan - Blue')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Tuscan - Blue', N'~/themes/StoreFront/Theme1/Blue/', N'Tuscan', N'Tuscan', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-lagarde.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', N'15', NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, N'#000000', N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 2, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme1 - Blue -->
+  <!-- begin - Theme1 - Green -->
+  <!-- note - Theme1 designs should not be installed until design has updated -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Tuscan - Green')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Tuscan - Green', N'~/themes/StoreFront/Theme1/Green/', N'Tuscan', N'Tuscan', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-lagarde.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', N'15', NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, N'#000000', N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 2, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme1 - Green -->
+  <!-- begin - Theme1 - Red -->
+  <!-- note - Theme1 designs should not be installed until design has updated -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Tuscan - Red')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Tuscan - Red', N'~/themes/StoreFront/Theme1/Red/', N'Tuscan', N'Tuscan', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-lagarde.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', N'15', NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, N'#000000', N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 2, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme1 - Red -->
+  <!-- begin - Theme4 - Green -->
+  <SQLServer><![CDATA[
+IF EXISTS(SELECT * FROM Designs WHERE [Name] = 'Theme 4 - Green')
+BEGIN
+	DECLARE @designId INT
+	SELECT @designId = [uid] FROM Designs WHERE [Name] = 'Theme 4 - Green'
+	DELETE FROM [Images] WHERE DesignID = @designId
+	DELETE FROM [Layout] WHERE DesignID = @designId
+	DELETE FROM [MenuBar] WHERE DesignID = @designId
+	DELETE FROM [Designs] WHERE [uid] = @designId
+END
+]]></SQLServer>
+  <!-- end - Theme4 - Green -->
+  <!-- begin - Theme6 - Blue -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Silver - Blue')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Silver - Blue', N'~/themes/StoreFront/Theme6/Blue/', N'Silver', N'Silver', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-logo_lagarde.jpg'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, N'0', N'0', NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Normal', N'bn-logo.gif', 1, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 9, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme6 - Blue -->
+  <!-- begin - Theme6 - Brown -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Silver - Brown')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Silver - Brown', N'~/themes/StoreFront/Theme6/Brown/', N'Silver', N'Silver', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-logo_lagarde.jpg'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, N'0', N'0', NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Normal', N'bn-logo.gif', 1, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 9, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme6 - Brown -->
+  <!-- begin - Theme6 - Gold -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Silver - Gold')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddStoreFrontDesign N'Silver - Gold', N'Silver', N'Gold', N'Silver', @designId OUT
+	EXEC sp_AddDesign N'Silver - Gold', N'~/themes/StoreFront/Theme6/Gold/', N'Silver', N'Silver', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-logo_lagarde.jpg'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, N'0', N'0', NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Normal', N'bn-logo.gif', 1, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 9, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme6 - Gold -->
+  <!-- begin - Theme6 - Green -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Silver - Green')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Silver - Green', N'~/themes/StoreFront/Theme6/Green/', N'Silver', N'Silver', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-logo_lagarde.jpg'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, N'0', N'0', NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Normal', N'bn-logo.gif', 1, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 9, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme6 - Green -->
+  <!-- begin - Theme6 - Grey -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Silver - Grey')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Silver - Grey', N'~/themes/StoreFront/Theme6/Grey/', N'Silver', N'Silver', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-logo_lagarde.jpg'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, N'0', N'0', NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Normal', N'bn-logo.gif', 1, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 9, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme6 - Grey -->
+  <!-- begin - Theme6 - Red -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Silver - Red')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Silver - Red', N'~/themes/StoreFront/Theme6/Red/', N'Silver', N'Silver', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-logo_lagarde.jpg'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, N'0', N'0', NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Bold', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, N'Left', N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 8, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 10, NULL, N'Normal', N'bn-logo.gif', 1, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, N'Left', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 9, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme6 - Red -->
+  <!-- begin - Theme3 - Black -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Torn - Black')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Torn - Black', N'~/themes/StoreFront/Theme3/Black/', N'Torn', N'Torn', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme3 - Black -->
+  <!-- begin - Theme3 - Blue -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Torn - Blue')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Torn - Blue', N'~/themes/StoreFront/Theme3/Blue/', N'Torn', N'Torn', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme3 - Blue -->
+  <!-- begin - Theme3 - Brown -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Torn - Brown')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Torn - Brown', N'~/themes/StoreFront/Theme3/Brown/', N'Torn', N'Torn', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme3 - Brown -->
+  <!-- begin - Theme3 - Red -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Torn - Red')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Torn - Red', N'~/themes/StoreFront/Theme3/Red/', N'Torn', N'Torn', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme3 - Red -->
+  <!-- begin - Theme3 - Yellow -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Toy Box')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddStoreFrontDesign N'Toy Box', N'Toy Box', N'', N'Toy Box', @designId OUT
+	EXEC sp_AddDesign N'Toy Box', N'~/themes/StoreFront/Theme3/Yellow/', N'ToyBox', N'Toy Box', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme3 - Yellow -->
+  <!-- begin - Theme2 - Blue -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Default - Blue')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Default - Blue', N'~/themes/StoreFront/Theme2/Blue/', N'Default', N'Default', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme2 - Blue -->
+  <!-- begin - Theme2 - Grey -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Default - Grey')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Default - Grey', N'~/themes/StoreFront/Theme2/Grey/', N'Default', N'Default', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme2 - Grey -->
+  <!-- begin - Theme2 - Purple -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE [Name] = 'Default - Purple')
+BEGIN
+	DECLARE @designId INT
+
+	-- sp_AddDesign inserts the record into the Designs table or updates if a record with
+	-- the same name exists. This procedure returns the design id used by this theme.
+	EXEC sp_AddDesign N'Default - Purple', N'~/themes/StoreFront/Theme2/Purple/', N'Default', N'Default', @designId OUT
+
+	-- sp_AddImage inserts the record into the Images table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddImage @designId, N'Add', N'buttons/add.gif'
+	EXEC sp_AddImage @designId, N'AddAddress', N'buttons/add_addresses.gif'
+	EXEC sp_AddImage @designId, N'AddToOrder', N'buttons/add_to_cart.gif'
+	EXEC sp_AddImage @designId, N'AddToSavedCart', N'buttons/addtosavedcart.gif'
+	EXEC sp_AddImage @designId, N'Apply', N'buttons/apply.gif'
+	EXEC sp_AddImage @designId, N'BuyNow', N'buttons/buy_now.gif'
+	EXEC sp_AddImage @designId, N'Cancel', N'buttons/cancel.gif'
+	EXEC sp_AddImage @designId, N'CheckOut', N'buttons/checkout.gif'
+	EXEC sp_AddImage @designId, N'Clear', N'buttons/clear.gif'
+	EXEC sp_AddImage @designId, N'Close', N'buttons/close.gif'
+	EXEC sp_AddImage @designId, N'CompleteOrder', N'buttons/complete_order.gif'
+	EXEC sp_AddImage @designId, N'Continue', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'CreateAccount', N'buttons/continue.gif'
+	EXEC sp_AddImage @designId, N'Delete', N'buttons/delete.gif'
+	EXEC sp_AddImage @designId, N'Edit', N'buttons/edit.gif'
+	EXEC sp_AddImage @designId, N'EmailFriend', N'buttons/email_friend.gif'
+	EXEC sp_AddImage @designId, N'FilterResults', N'buttons/filter_results.gif'
+	EXEC sp_AddImage @designId, N'GiftWrap', N'buttons/gift_wrap.gif'
+	EXEC sp_AddImage @designId, N'LagardeLogo', N'ft-poweredby.gif'
+	EXEC sp_AddImage @designId, N'ManageAddresses', N'buttons/manage_addresses.gif'
+	EXEC sp_AddImage @designId, N'Remove', N'buttons/remove.gif'
+	EXEC sp_AddImage @designId, N'ReOrder', N'buttons/reorder.gif'
+	EXEC sp_AddImage @designId, N'Save', N'buttons/save.gif'
+	EXEC sp_AddImage @designId, N'SaveCart', N'buttons/save_cart.gif'
+	EXEC sp_AddImage @designId, N'Search', N'buttons/icon_go.gif'
+	EXEC sp_AddImage @designId, N'Send', N'buttons/send.gif'
+	EXEC sp_AddImage @designId, N'SignIn', N'buttons/sign_in.gif'
+	EXEC sp_AddImage @designId, N'SignOut', N'buttons/sign_out.gif'
+	EXEC sp_AddImage @designId, N'Track', N'buttons/track.gif'
+	EXEC sp_AddImage @designId, N'UpdateQuantity', N'buttons/update_quantity.gif'
+	EXEC sp_AddImage @designId, N'View', N'buttons/view.gif'
+	EXEC sp_AddImage @designId, N'ViewAndPrintReceipt', N'buttons/viewandprintreceipt.gif'
+
+	-- sp_AddLayout inserts the record into the Layout table or updates if a record with
+	-- the same name and design id exists.
+	EXEC sp_AddLayout @designId, N'BodyTable', NULL, NULL, NULL, NULL, NULL, N'Center', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ContentTableHeader', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'ErrorMessages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Footer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Headings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'Instruction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'LeftColumn', NULL, NULL, NULL, NULL, NULL, NULL, N'Top', NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 1
+	EXEC sp_AddLayout @designId, N'Messages', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, NULL
+	EXEC sp_AddLayout @designId, N'RightColumn', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, NULL, 0
+	EXEC sp_AddLayout @designId, N'TopBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+	EXEC sp_AddLayout @designId, N'TopSubBanner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Arial', 11, NULL, N'Normal', NULL, 0, 1
+
+	-- sp_AddMenuBar inserts the record into the MenuBar table or updates if a record with
+	-- the same page name, menu text and design id exists.
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 0, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Categories', NULL, NULL, N'SearchResult.aspx?CategoryID=', 1, 0, 12
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Home', NULL, NULL, N'default.aspx', 3, 0, 1
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'About Us', NULL, NULL, N'about.aspx', 3, 0, 2
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Contact Us', NULL, NULL, N'contact.aspx', 3, 0, 3
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'FAQ', NULL, NULL, N'faq.aspx', 3, 0, 4
+	EXEC sp_AddMenuBar @designId, N'Default.aspx', N'Privacy Policy', NULL, NULL, N'privacy-policy.aspx', 3, 0, 5
+END
+]]></SQLServer>
+  <!-- end - Theme2 - Purple -->
+  <!-- begin - Theme5 - Blue -->
+  <SQLServer><![CDATA[
+IF EXISTS(SELECT * FROM Designs WHERE [Name] = 'Theme 5 - Blue')
+BEGIN
+	DECLARE @designId INT
+	SELECT @designId = [uid] FROM Designs WHERE [Name] = 'Theme 5 - Blue'
+	DELETE FROM [Images] WHERE DesignID = @designId
+	DELETE FROM [Layout] WHERE DesignID = @designId
+	DELETE FROM [MenuBar] WHERE DesignID = @designId
+	DELETE FROM [Designs] WHERE [uid] = @designId
+END
+]]></SQLServer>
+  <!-- end - Theme5 - Blue -->
+  <!-- begin - Theme5 - Brown -->
+  <SQLServer><![CDATA[
+IF EXISTS(SELECT * FROM Designs WHERE [Name] = 'Theme 5 - Brown')
+BEGIN
+	DECLARE @designId INT
+	SELECT @designId = [uid] FROM Designs WHERE [Name] = 'Theme 5 - Brown'
+	DELETE FROM [Images] WHERE DesignID = @designId
+	DELETE FROM [Layout] WHERE DesignID = @designId
+	DELETE FROM [MenuBar] WHERE DesignID = @designId
+	DELETE FROM [Designs] WHERE [uid] = @designId
+END
+]]></SQLServer>
+  <!-- end - Theme5 - Brown -->
+  <!-- begin - Theme5 - Grey -->
+  <SQLServer><![CDATA[
+IF EXISTS(SELECT * FROM Designs WHERE [Name] = 'Theme 5 - Grey')
+BEGIN
+	DECLARE @designId INT
+	SELECT @designId = [uid] FROM Designs WHERE [Name] = 'Theme 5 - Grey'
+	DELETE FROM [Images] WHERE DesignID = @designId
+	DELETE FROM [Layout] WHERE DesignID = @designId
+	DELETE FROM [MenuBar] WHERE DesignID = @designId
+	DELETE FROM [Designs] WHERE [uid] = @designId
+END
+]]></SQLServer>
+  <!-- end - Theme5 - Grey -->
+  <SQLServer><![CDATA[
+IF NOT EXISTS(SELECT * FROM Designs WHERE IsActive = 1) UPDATE Designs SET IsActive = 1 WHERE [Name] = 'Default - Blue'
+]]></SQLServer>
+  <SQLServer><![CDATA[
+UPDATE [Layout] SET Editable = 0 WHERE [Name] = 'LeftColumn' AND DesignId IN (SELECT [uid] FROM Designs WHERE [Group] = 'Theme1')
+UPDATE [Layout] SET Editable = 0 WHERE [Name] = 'RightColumn' AND DesignId IN (SELECT [uid] FROM Designs WHERE [Group] = 'Theme2')
+UPDATE [Layout] SET Editable = 0 WHERE [Name] = 'RightColumn' AND DesignId IN (SELECT [uid] FROM Designs WHERE [Group] = 'Theme3')
+UPDATE [Layout] SET Editable = 0 WHERE [Name] = 'RightColumn' AND DesignId IN (SELECT [uid] FROM Designs WHERE [Group] = 'Theme6')
+]]></SQLServer>
+  <SQLServer><![CDATA[
+DECLARE @DesignIDs TABLE(DesignID INT)
+INSERT INTO @DesignIDs(DesignID) SELECT uid FROM Designs
+
+DECLARE @CurrentDesignID INT
+SELECT @CurrentDesignID = MIN(DesignID) FROM @DesignIDs
+
+WHILE @CurrentDesignID IS NOT NULL
+	BEGIN
+	EXEC sp_AddImage @CurrentDesignID, N'ContinueShopping', N'buttons/continue_shopping.gif'
+	EXEC sp_AddImage @CurrentDesignID, N'CreateAccount', N'buttons/create-account.gif'
+	SET @CurrentDesignID = (SELECT TOP 1 DesignID FROM @DesignIDs WHERE DesignID > @CurrentDesignID)
+	END
+]]></SQLServer>
+  <!-- StoreFront.Integration Indexes -->
+  <SQLServer><![CDATA[CREATE  INDEX [IX_Addresses_TYPE_COMPANY] ON [Addresses]([Type] ASC, [Company] ASC) ON [PRIMARY]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE  INDEX [IX_ProductCategory_ProductId_CategoryId] ON [ProductCategory]([ProductID] ASC, [CategoryID] ASC) ON [PRIMARY]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE  INDEX [IX_Categories_ParentId_Name] ON [Categories]([ParentID] ASC, [Name] ASC) ON [PRIMARY]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE  INDEX [IX_AttributeDetail_Name] ON [AttributeDetail]([Name] ASC) ON [PRIMARY]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE  INDEX [IX_Attributes_ProductId_Name] ON [Attributes]([ProductID] ASC, [Name] ASC) ON [PRIMARY]]]></SQLServer>
+  <!-- End - StoreFront.Integration Indexes -->
+  <!-- begin: JDB - Google Analytics -->
+  <SQLServer><![CDATA[ALTER TABLE Admin ADD GoogleAnalyticsID VARCHAR(20) NULL]]></SQLServer>
+  <!-- end: JDB - Google Analytics -->
+  <SQLServer><![CDATA[ALTER TABLE Layout ADD
+	Editable bit NULL]]></SQLServer>
+  <SQLServer><![CDATA[ALTER TABLE LayoutPreview ADD
+	Editable bit NULL]]></SQLServer>
+  <SQLServer><![CDATA[
+DECLARE @ActiveDefaultConstraintName AS VARCHAR(100)
+IF LOWER(LEFT(@@VERSION, 26)) = 'microsoft sql server  2000'
+	BEGIN
+	SELECT @ActiveDefaultConstraintName = [name] FROM sysobjects WHERE LOWER(OBJECT_NAME(parent_obj)) = 'manufacturers' and LOWER(LEFT([name], 3)) != 'pk_'
+	END
+ELSE
+	BEGIN
+	SELECT @ActiveDefaultConstraintName = [name] FROM sys.default_constraints WHERE LOWER(OBJECT_NAME(parent_object_id)) = 'manufacturers'
+	END
+EXEC('ALTER TABLE Manufacturers DROP CONSTRAINT ' + @ActiveDefaultConstraintName)
+EXEC('ALTER TABLE Manufacturers ADD CONSTRAINT ' + @ActiveDefaultConstraintName + ' DEFAULT(1) FOR Active')
+]]></SQLServer>
+  <SQLServer><![CDATA[UPDATE Layout SET DisplayStyle = 2 WHERE [Name] = 'TopSubBanner']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM MenuBar WHERE MenuText = 'Home' AND MenuPosition = 0]]></SQLServer>
+  <!-- SKC Changes -->
+  <SQLServer><![CDATA[
+		if exists (select * from sysobjects where id = object_id(N'[usp_CreateCategoriesFromDelimitedList]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+			drop procedure [usp_CreateCategoriesFromDelimitedList]
+	]]></SQLServer>
+  <SQLServer><![CDATA[
+CREATE   PROCEDURE [usp_CreateCategoriesFromDelimitedList]
+	@delimitedCategories		NVARCHAR(4000),
+	@delimiter					CHAR(1) = N'|',
+	@productid int
+AS
+BEGIN
+
+	DECLARE @startPos		INT
+	DECLARE @length			INT
+
+	DECLARE @category		NVARCHAR(255)
+
+	DECLARE @parentLevel	INT
+	DECLARE @parentId		INT
+
+	SET @parentLevel = 0
+	SET @parentId = 0
+
+	WHILE LEN(@delimitedCategories) > 0
+	BEGIN
+
+		-- strip out a category
+		SET @startPos = CHARINDEX(@delimiter, @delimitedCategories)
+		IF @startPos < 0 SET @startPos = 0
+
+		SET @length = LEN(@delimitedCategories) - @startPos - 1
+		IF @length < 0 SET @length = 0
+
+		IF @startPos > 0
+		BEGIN
+
+			SET @category = SUBSTRING(@delimitedCategories, 1, @startPos - 1)
+			SET @delimitedCategories = SUBSTRING(@delimitedCategories, @startPos + 1, LEN(@delimitedCategories) - @startPos)
+
+		END
+		ELSE
+		BEGIN
+
+			SET @category = @delimitedCategories
+			SET @delimitedCategories = N''
+
+		END
+
+		-- check for the its existence based on the category name, current parent level, and parent id
+		IF EXISTS (SELECT [uid] FROM [Categories] WHERE UPPER([Name]) = UPPER(@category) AND [ParentLevel] = @parentLevel AND [ParentId] = @parentId)
+		BEGIN
+
+			-- the record exists ... lets move on
+			SELECT @parentId = [uid] FROM [Categories] WHERE UPPER([Name]) = UPPER(@category) AND [ParentLevel] = @parentLevel AND [ParentId] = @parentId
+			
+		END
+		ELSE
+		BEGIN
+
+			-- the record does not exist ... lets add it
+			INSERT INTO [Categories] ([IsActive], [ParentLevel], [ParentId], [Name], [Description], [ImagePath]) VALUES (1, @parentLevel, @parentId, @category, '', '')
+			SET @parentId = @@IDENTITY
+
+		END
+
+		-- increment the parent level
+		SET @parentLevel = @parentLevel + 1
+
+	END
+
+	--Insert into the productcategories table
+	IF NOT EXISTS (SELECT [uid] FROM [ProductCategory] WHERE [ProductID] = @productid AND [CategoryID] = @parentId)
+	BEGIN
+		INSERT INTO [ProductCategory] ([ProductID], [CategoryID]) VALUES (@productid,@parentId)
+	END
+END
+]]></SQLServer>
+  <!-- End SKC -->
+  <!-- Tee 11/07/2007 added items per row column to product detail table -->
+  <SQLServer><![CDATA[ALTER TABLE ProductDetail ADD RecommendedItemsPerRow INTEGER NOT NULL DEFAULT 3]]></SQLServer>
+  <!-- begin: JDB - 2/20/2007 - UrlRewriter Add-On -->
+  <SQLServer><![CDATA[
+DECLARE @ProductsWithLinkToDetailPages TABLE(ProductUID INT, ProductName VARCHAR(255))
+INSERT INTO @ProductsWithLinkToDetailPages(ProductUID, ProductName)
+SELECT [uid], [Name] FROM Products WHERE DetailLink LIKE '../detail.aspx?ID=%' OR DetailLink LIKE '../prod-%' OR DetailLink LIKE '../product-%'
+
+DECLARE @CurrentProductUID INT
+DECLARE @MaxProductUID INT
+SELECT @CurrentProductUID = MIN(ProductUID), @MaxProductUID = MAX(ProductUID) FROM @ProductsWithLinkToDetailPages
+WHILE @CurrentProductUID <= @MaxProductUID
+	BEGIN
+	DECLARE @ProductName VARCHAR(255)
+	SELECT @ProductName = ProductName FROM @ProductsWithLinkToDetailPages WHERE ProductUID = @CurrentProductUID
+
+	DECLARE @NonAlphaNumericCharacterLocation INT
+	SET @NonAlphaNumericCharacterLocation = PATINDEX('%[^0-9A-Za-z_]%', @ProductName)
+	WHILE @NonAlphaNumericCharacterLocation > 0
+		BEGIN
+		SET @ProductName = STUFF(@ProductName, @NonAlphaNumericCharacterLocation, 1, '_')
+		SET @NonAlphaNumericCharacterLocation = PATINDEX('%[^0-9A-Za-z_]%', @ProductName)
+		END
+
+	UPDATE Products SET DetailLink = '../prod-' + @ProductName + '-' + CAST(@CurrentProductUID AS VARCHAR(10)) + '.aspx' WHERE [uid] = @CurrentProductUID
+
+	SELECT @CurrentProductUID = MIN(ProductUID) FROM @ProductsWithLinkToDetailPages WHERE ProductUID > @CurrentProductUID
+	END
+  ]]></SQLServer>
+  <SQLServer><![CDATA[UPDATE MenuBar SET Link = 'cat-{0}-{1}.aspx' WHERE MenuText = 'categories' OR MenuText = 'category-{0}-{1}.aspx']]></SQLServer>
+  <!-- end: JDB - 2/20/2007 - UrlRewriter Add-On -->
+  <!-- begin: JDB - 4/2/2007 - UrlRewriter Add-On -->
+  <SQLServer><![CDATA[CREATE TABLE [MappedURLs] (
+	[uid] [int] IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+	[BaseURL] [varchar] (255) NOT NULL ,
+	[RewrittenURL] [varchar] (255) NOT NULL 
+) ON [PRIMARY]]]></SQLServer>
+  <SQLServer><![CDATA[IF NOT EXISTS(SELECT * FROM MerchantToolsMenuDetails WHERE DisplayName = 'Mapped URLs')
+	BEGIN
+	INSERT INTO MerchantToolsMenuDetails (HeaderId, DisplayName, Link, DisplayOrder, Version) VALUES (4, 'Mapped URLs', 'MappedUrls.aspx', 8, 0)
+	END]]></SQLServer>
+  <!-- end: JDB - 4/2/2007 - UrlRewriter Add-On -->
+  <SQLServer><![CDATA[IF NOT EXISTS(SELECT * FROM MerchantToolsMenuDetails WHERE DisplayName = 'Custom Pages')
+	BEGIN
+	INSERT INTO MerchantToolsMenuDetails (HeaderId, DisplayName, Link, DisplayOrder, Version) VALUES (5, 'Custom Pages', 'CustomPages.aspx', 4, 0)
+	END]]></SQLServer>
+  <!-- Delete all products -->
+  <SQLServer><![CDATA[IF OBJECT_ID('[usp_DeleteProducts]', 'P') IS NOT NULL DROP PROCEDURE [usp_DeleteProducts]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE PROCEDURE usp_DeleteProducts
+		AS
+			DECLARE @result INT
+			BEGIN TRANSACTION
+				TRUNCATE TABLE Inventory
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE InventoryInfo
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE ProductCategory
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE InventoryInfo
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE Attributes
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE VolumePricing
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE CustomerSpecificPricing
+			IF (@@error <> 0) GOTO on_error
+				DELETE FROM Discounts WHERE AppliedTo = 1 AND AppliedToID > 0
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE RelatedProducts
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE SavedCartItems
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE GiftWrap
+			IF (@@error <> 0) GOTO on_error
+				EXEC usp_DeleteBundles
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE Products
+				COMMIT TRANSACTION
+				SET @result = 1
+				RETURN @result
+			on_error:
+				ROLLBACK TRANSACTION
+				SET @result = 0
+				RETURN @result
+	]]></SQLServer>
+  <!-- Delete all bundles -->
+  <SQLServer><![CDATA[IF OBJECT_ID('[usp_DeleteBundles]', 'P') IS NOT NULL DROP PROCEDURE [usp_DeleteBundles]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE PROCEDURE usp_DeleteBundles
+		AS
+			DECLARE @result INT
+			BEGIN TRANSACTION
+				TRUNCATE TABLE BundleOrderItems;
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE BundleProductDetail;
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE BundleTemplateDetail;
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE CustomerDefinedBundleRules;
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE ProductsBundle;
+			IF (@@error <> 0) GOTO on_error
+				DELETE FROM Products WHERE ProductType NOT IN (0, 1);
+				COMMIT TRANSACTION
+				SET @result = 1
+				RETURN @result
+			on_error:
+				ROLLBACK TRANSACTION
+				SET @result = 0
+				RETURN @result
+	]]></SQLServer>
+  <!-- Delete all categories -->
+  <SQLServer><![CDATA[IF OBJECT_ID('[usp_DeleteCategories]', 'P') IS NOT NULL DROP PROCEDURE [usp_DeleteCategories]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE PROCEDURE usp_DeleteCategories
+		AS
+			DECLARE @result INT
+			BEGIN TRANSACTION
+				TRUNCATE TABLE ProductCategory;
+			IF (@@error <> 0) GOTO on_error
+				TRUNCATE TABLE Categories;
+				COMMIT TRANSACTION
+				SET @result = 1
+				RETURN @result
+			on_error:
+				ROLLBACK TRANSACTION
+				SET @result = 0
+				RETURN @result
+	]]></SQLServer>
+  <!-- Tee 2/25/2008 bug 1143-->
+  <SQLServer><![CDATA[ALTER TABLE OrderPayment ALTER COLUMN CheckNumber NVARCHAR(255)]]></SQLServer>
+  <SQLServer><![CDATA[ALTER TABLE OrderPayment ALTER COLUMN RoutingNumber NVARCHAR(255)]]></SQLServer>
+  <SQLServer><![CDATA[ALTER TABLE OrderPayment ALTER COLUMN AccountNumber NVARCHAR(255)]]></SQLServer>
+  <!-- end Tee -->
+  <SQLServer><![CDATA[CREATE TABLE [CustomPages] (
+	[uid] [int] IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+	[Content] [nvarchar] (4000) NULL ,
+	[PageName] [nvarchar] (100) NULL ,
+	[PageTitle] [nvarchar] (100) NULL
+) ON [PRIMARY]]]></SQLServer>
+  <SQLServer><![CDATA[IF NOT EXISTS (SELECT uid FROM CustomPages WHERE PageName = 'about.aspx' OR PageTitle = 'About Us') INSERT INTO CustomPages(Content, PageName, PageTitle) VALUES(NULL, 'about.aspx', 'About Us')]]></SQLServer>
+  <SQLServer><![CDATA[IF NOT EXISTS (SELECT uid FROM CustomPages WHERE PageName = 'contact.aspx' OR PageTitle = 'Contact Us') INSERT INTO CustomPages(Content, PageName, PageTitle) VALUES(NULL, 'contact.aspx', 'Contact Us')]]></SQLServer>
+  <SQLServer><![CDATA[IF NOT EXISTS (SELECT uid FROM CustomPages WHERE PageName = 'faq.aspx' OR PageTitle = 'FAQ') INSERT INTO CustomPages(Content, PageName, PageTitle) VALUES(NULL, 'faq.aspx', 'FAQ')]]></SQLServer>
+  <!-- begin: GJV - 2/5/2008 - # 722 - clean up any bad alignment data in the searchresults table -->
+  <SQLServer><![CDATA[
+	   UPDATE [SearchResults] SET [Alignment] = 0 WHERE [Alignment] = 2
+	]]></SQLServer>
+  <!-- end: GJV - 2/5/2008 - # 722 -->
+  <!-- TonyK 1.8.07 add sku column -->
+  <SQLServer><![CDATA[ALTER TABLE OrderItems ADD Sku NVARCHAR(255) NULL]]></SQLServer>
+  <SQLServer><![CDATA[ALTER TABLE BundleOrderItems ADD Sku NVARCHAR(255) NULL]]></SQLServer>
+  <!-- begin: GJV - issue #947 - alter the OrderTracking.SentDate to be NVARCHAR(50) -->
+  <SQLServer><![CDATA[ALTER TABLE [OrderTracking] ALTER COLUMN [SentDate] NVARCHAR(50)]]></SQLServer>
+  <!-- end: GJV - issue #947 -->
+</SQLStatements>

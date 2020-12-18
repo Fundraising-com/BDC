@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Search - Fundraising.com";
+    ViewBag.Description = "Your good cause deserves a great fundraiser! Traditional and online fundraising ideas for schools, sports teams, churches and non-profits.";
+    ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("Search", "Home");
+}
+<h1>Search</h1>
+<div class="row">
+    <div class="col-xs-12">
+       <div class="row" ng-controller="SearchController as searchCtrl">
+          <form name="searchForm" ng-submit="searchForm.$submitted && searchForm.$valid && searchCtrl.Search()">
+             <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Find anything here..." ng-model="searchCtrl.q" ng-required="true" />
+             </div>
+          </form>
+       </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <script>
+    (function () {
+        var cx = '001438748860699026052:fwhi3od-x8e';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+    })();
+        </script>
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div>
+</div>

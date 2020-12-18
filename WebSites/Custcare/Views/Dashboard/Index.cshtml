@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.SubTitle = "<small>Quick Widgets</small>";
+    ViewBag.InitModule = "dashboardIndex";
+}
+@section featured {
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @ViewBag.Title @Html.Raw(ViewBag.SubTitle)
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> @ViewBag.Title
+                </li>
+            </ol>
+        </div>
+    </div>
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i>  <strong>Welcome to your new Custcare!</strong>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}

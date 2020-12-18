@@ -1,0 +1,26 @@
+USE [QSPFulfillment]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_ar_sync_set_last_successful_run_date]    Script Date: 06/16/2010 13:25:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Juan Martinez
+-- Create date: 2010-05-12
+-- Description:	Gets the last successfull run date for the ar sync
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_ar_sync_set_last_successful_run_date]
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE sync_last_succeeded_run SET last_succeeded_run = getdate() WHERE synchro_section = 'ar_sync'
+END
+
+GO
+
+

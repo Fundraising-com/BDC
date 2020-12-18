@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="eFundraisingProd" Class="eFundraisingProdDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=monqspmva2;Initial Catalog=eFundraisingProd;Integrated Security=True" SettingsObjectName="efundraising.EFundraisingCRM.Properties.Settings" SettingsPropertyName="eFundraisingProdConnectionString5" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.sync_service_log" Member="sync_service_logs">
+    <Type Name="sync_service_log">
+      <Column Name="ProcessDate" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Success" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.payment_term" Member="payment_terms">
+    <Type Name="payment_term">
+      <Column Name="payment_term_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="discount_percent" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="lead_days" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="default_ar_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hide_from_consultants" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ext_payment_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.payment_method" Member="payment_methods">
+    <Type Name="payment_method">
+      <Column Name="payment_method_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="is_negative" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="discount_percentage" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="ext_payment_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.payment" Member="payments">
+    <Type Name="payment">
+      <Column Name="sales_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="payment_no" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="payment_method_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="collection_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="payment_entry_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cashable_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="credit_card_no" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="expiry_date" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="name_on_card" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="authorization_number" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="payment_amount" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="commission_paid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="foreign_orderid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_payment_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reason" Member="Reasons">
+    <Type Name="Reason">
+      <Column Name="Reason_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Is_Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ext_adjustment_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Reason_Adjustment" Member="Adjustments" ThisKey="Reason_ID" OtherKey="Reason_ID" Type="Adjustment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Adjustment" Member="Adjustments">
+    <Type Name="Adjustment">
+      <Column Name="Sales_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adjustment_No" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Reason_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Adjustment_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Adjustment_Amount" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Adjustment_On_Shipping" Type="System.Decimal" DbType="Decimal(15,4)" CanBeNull="true" />
+      <Column Name="Adjustment_On_Taxes" Type="System.Decimal" DbType="Decimal(15,4)" CanBeNull="true" />
+      <Column Name="Adjustment_On_Sale_Amount" Type="System.Decimal" DbType="Decimal(15,4)" CanBeNull="true" />
+      <Column Name="Create_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Create_User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ext_Adjustment_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="charge_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Reason_Adjustment" Member="Reason" ThisKey="Reason_ID" OtherKey="Reason_ID" Type="Reason" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sale" Member="sales">
+    <Type Name="sale">
+      <Column Name="sales_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="consultant_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="carrier_id" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="shipping_option_id" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="payment_term_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="client_sequence_code" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="client_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sales_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="payment_method_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="po_status_id" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="production_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sponsor_consultant_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ar_consultant_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ar_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lead_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_company_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upfront_payment_method_id" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="confirmer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="collection_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="confirmation_method_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="credit_approval_method_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="po_number" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="expiry_date" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="sales_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="shipping_fees" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="shipping_fees_discount" Type="System.Decimal" DbType="Decimal(15,4)" CanBeNull="true" />
+      <Column Name="payment_due_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="confirmed_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="scheduled_delivery_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="scheduled_ship_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="actual_ship_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="waybill_no" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comment" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="coupon_sheet_assigned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Decimal(15,4)" CanBeNull="true" />
+      <Column Name="invoice_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cancellation_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="is_ordered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="po_received_on" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="is_delivered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="local_sponsor_found" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="box_return_date" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="reship_date" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="upfront_payment_required" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="upfront_payment_due_date" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="sponsor_required" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="actual_delivery_date" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="accounting_comments" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ssn_number" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="ssn_address" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ssn_city" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ssn_state_code" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ssn_country_code" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ssn_zip_code" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="is_validated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="promised_due_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="general_flag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fuelsurcharge" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="is_packed_by_participant" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="carrier_tracking_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="qsp_order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="credit_card_no" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wfc_invoice_number" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="cvv2" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="po_consultant_commission" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_sales_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_shipping_account_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ext_billing_account_id" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.charge" Member="charges">
+    <Type Name="charge">
+      <Column Name="charge_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="default_amount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="is_credit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fulf_charge_id" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

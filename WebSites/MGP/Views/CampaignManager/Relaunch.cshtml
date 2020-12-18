@@ -1,0 +1,76 @@
+﻿@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+    var eventBranding = ViewBag.Event as Event;
+   var partnerBranding = ViewBag.Partner as Partner;
+    ViewBag.Title = "Relaunch of " + eventBranding.Name;
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+}
+<div id="relaunch" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Relaunch @eventBranding.Name</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <small class="description_text">To relaunch your online fundraising @partnerBranding.GroupDisplay, simply click on the <strong>I Want to Relaunch!</strong> button below. You will then need to validate the information from your previous @partnerBranding.GroupDisplay.<br />
+                If there are any modifications to be made (for example, if there are any changes to your email address, @partnerBranding.GroupDisplay name, address to receive your profit check, @partnerBranding.GroupDisplay member list, etc.), you will be able to make these changes along the way.
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">&nbsp;</div>
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading text-center">@partnerBranding.GroupDisplay.ToLower().FirstLetterUpper() Summary</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>@eventBranding.Name</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">Last Activity Date</div>
+                        <div class="col-sm-4">@(((DateTime)(ViewBag.LastActivityDate)).ToShortDateString())</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">Number of Members</div>
+                        <div class="col-sm-4">@ViewBag.NumberMembers</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">Number of Supporters</div>
+                        <div class="col-sm-4">@ViewBag.NumberSupporters</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">Profit</div>
+                        <div class="col-sm-4">@ViewBag.Profit.ToString("C")</div>
+                    </div>
+                </div>
+                <div class="panel-body text-center" ng-cloak>
+                    <div class="row" ng-show="executingAction">
+                        <div class="col-sm-12">
+                            <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="resultFailed" ng-cloak>
+                        <div class="col-sm-12">
+                            <span class="text-danger">{{responseText}}</span>
+                        </div>
+                    </div>
+                    <div class="row" ng-hide="executingAction" ng-cloak>
+                        <div class="col-sm-12">
+                            <button class="btn btn-success form-control" ng-click="relaunch()">I Want to Relaunch!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">&nbsp;</div>
+    </div>
+</div>

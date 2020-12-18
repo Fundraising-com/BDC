@@ -1,0 +1,53 @@
+﻿@using GA.BDC.Web.MGP.Helpers.Extensions
+@model IList<GA.BDC.Web.MGP.Models.Views.Caroussel>
+<script type="text/javascript">
+    $(document).ready(function () {
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            @:angular.element("#sliders").scope().addToCarouselImage('@Model[i].EventId', '@Model[i].ParticipantId', '@Model[i].AnchorUrl.UrlDecode()', '@Model[i].RedirectToStore', '@Model[i].AlternativeText', '@Model[i].ImageUrl');
+        }
+        angular.element("#sliders").scope().setGroupedCarouselImages();
+        angular.element("#sliders").scope().safeApply();
+
+        @if (Model.Count > 0)
+        {
+            @:$("#carousselEventId").val("@Model[0].EventId");
+            @:$("#carousselParticipantId").val("@Model[0].ParticipantId");
+            @:$("#displayImage a#main").attr("href", "@Model[0].AnchorUrl").find("img").attr("src", "@Model[0].ImageUrl".replace("&amp;", "&"));            
+            @:$("#carousselRedirectToStore").val("@Model[0].RedirectToStore");
+        }
+        
+        $('.thumbImageClick').click(function () {
+            var src = $(this).find('img').attr('src');
+            if (src.toLowerCase().indexOf("youtube") >= 0) {
+                var youtubeid = src.match(/[\w\-]{11,}/)[0];
+                $("#displayImage").html("<iframe width='80%' src='//www.youtube.com/embed/" + youtubeid + "'/>");
+            }
+            else {
+                $("#carousselParticipantId").val($(this).find('img').data("id"));
+                $("#displayImage a#main").attr("href", $(this).find('img').data("url")).find("img").attr("src", src);
+                $("#carousselRedirectToStore").val($(this).find('img').data("redirect"));
+            }
+        });
+    });
+</script>
+<div class="row" id="sliders">
+    <input type="hidden" id="carousselEventId" name="carousselEventId" />
+    <input type="hidden" id="carousselParticipantId" name="carousselParticipantId" />
+    <input type="hidden" id="carousselRedirectToStore" name="carousselRedirectToStore" />
+    <div class="col-md-12">
+        <div id="displayImage"><a id="main" ng-click="carousselRedirectToStore()"><img style='margin:auto; width: 100%; height: 210px;'/></a></div>        
+    </div>
+    <div class="col-sm-12">
+        <div class="image-carousel" ng-show="groupedCarouselImages.length > 1 || (groupedCarouselImages.length == 1 && groupedCarouselImages[0].image2 !== undefined)">
+            <carousel interval="-1">
+                <slide ng-repeat="imgColl in groupedCarouselImages">
+                    <a href="" class="thumbImageClick"><img ng-src="{{imgColl.image1.ImageUrl}}" data-url="{{imgColl.image1.AnchorUrl}}" data-name="{{imgColl.image1.AlternativeText}}" data-id="{{imgColl.image1.ParticipantId}}" data-redirect="{{imgColl.image1.RedirectToStore}}" alt="Image" ng-show="'{{imgColl.image1.ImageUrl}}' != ''" style="margin:auto;" /></a>
+                    <a href="" class="thumbImageClick"><img ng-src="{{imgColl.image2.ImageUrl}}" data-url="{{imgColl.image2.AnchorUrl}}" data-name="{{imgColl.image2.AlternativeText}}" data-id="{{imgColl.image2.ParticipantId}}" data-redirect="{{imgColl.image2.RedirectToStore}}" alt="Image" ng-show="'{{imgColl.image2.ImageUrl}}' != ''" style="margin:auto;" /></a>
+                    <a href="" class="thumbImageClick"><img ng-src="{{imgColl.image3.ImageUrl}}" data-url="{{imgColl.image3.AnchorUrl}}" data-name="{{imgColl.image3.AlternativeText}}" data-id="{{imgColl.image3.ParticipantId}}" data-redirect="{{imgColl.image3.RedirectToStore}}" alt="Image" ng-show="'{{imgColl.image3.ImageUrl}}' != ''" style="margin:auto;" /></a>
+                    <a href="" class="thumbImageClick"><img ng-src="{{imgColl.image4.ImageUrl}}" data-url="{{imgColl.image4.AnchorUrl}}" data-name="{{imgColl.image4.AlternativeText}}" data-id="{{imgColl.image4.ParticipantId}}" data-redirect="{{imgColl.image4.RedirectToStore}}" alt="Image" ng-show="'{{imgColl.image4.ImageUrl}}' != ''" style="margin:auto;" /></a>
+                </slide>
+            </carousel>
+        </div>
+    </div>
+</div>

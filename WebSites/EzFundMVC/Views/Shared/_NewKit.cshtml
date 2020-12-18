@@ -1,0 +1,537 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Karla:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+
+<style>
+
+   .dollar {
+      width: 40%;
+      position: relative;
+   }
+
+      .dollar input {
+         padding-left: 15px;
+      }
+
+      .dollar:before {
+         position: absolute;
+         content: "$";
+         left: 5px;
+         top: 8px;
+      }
+
+
+   .slidecontainer {
+      width: 100%;
+   }
+
+   .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+   }
+
+      .slider:hover {
+         opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+         -webkit-appearance: none;
+         appearance: none;
+         width: 25px;
+         height: 25px;
+         border-radius: 50%;
+         background: #4CAF50;
+         cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+         width: 25px;
+         height: 25px;
+         border-radius: 50%;
+         background: #4CAF50;
+         cursor: pointer;
+      }
+
+   
+</style>
+
+
+
+<div ng-controller="KitRequestFormController as kitRequestCtrl">
+   <div class="row" style="font-family:karla">
+
+      <div class="modal-body" id="kit" style="padding-bottom:0px;  height:450px" ng-show="kitRequestCtrl.step1 == 1">
+         <form name="kitRequestForm" id="kitRequestForm" role="form" ng-submit="kitRequestForm.$valid && kitRequestCtrl.SendNew();">
+            <div class="row">
+               <div class="col-md-2 col-md-offset-1 col-xs-12" align="left">
+                  <div class="form-group">
+                     <span style="font-weight:bold; font-size:20px">Full Name</span>
+                  </div>
+               </div>
+               <div class="col-md-8 col-xs-12">
+                  <div class="form-group">
+                     <input type="text" class="form-control" placeholder="i.e. John Smith" id="kit.FirstName" name="kit.FirstName" required ng-required="true" ng-model="kitRequestCtrl.kit.FirstName" maxlength="50">
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <hr style="width:100%" />
+               </div>
+
+            </div>
+            <div class="row">
+               <div class="col-md-2 col-md-offset-1" align="left">
+                  <div class="form-group">
+                     <span style="font-weight:bold; font-size:20px">E-mail</span>
+                  </div>
+               </div>
+               <div class="col-md-8">
+                  <div class="form-group">
+                     <input type="email" class="form-control" placeholder="i.e. john.smith@gmail.com" id="kit.Email" name="kit.Email" required ng-required="true" ng-model="kitRequestCtrl.kit.Email" maxlength="50">
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <hr />
+               </div>
+
+            </div>
+            <div class="row">
+               <div class="col-md-2 col-md-offset-1" align="left">
+                  <div class="form-group">
+                     <span style="font-weight:bold; font-size:20px">Phone</span>
+                  </div>
+               </div>
+               <div class="col-md-8">
+                  <div class="form-group">
+                     <input type="tel" ui-mask="{{kitRequestCtrl.phoneMask}}" class="form-control" id="kit.Phone" name="kit.Phone" required ng-required="true" ng-model="kitRequestCtrl.kit.Phone" maxlength="20">
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <hr />
+               </div>
+
+            </div>
+            <div class="row">
+               <div class="col-md-2 col-md-offset-1" align="left">
+                  <div class="form-group">
+                     <span style="font-weight:bold; font-size:20px">Your Goal</span>
+                  </div>
+               </div>
+               <div class="col-md-8">
+                  <div class="form-group">
+
+                     <div class="slidecontainer">
+                        <input type="range" min="0" max="10000" value="1000" step="100" class="slider" id="AmountToRaise" ng-model="kitRequestCtrl.kit.AmountToRaise">
+                        <p>$<span id="demo" style=""></span></p>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+            <div class="row modal-footer" style="margin-top:10px">
+               <div class="row">
+                  <div class="col-md-4 col-xs-4 col-md-offset-1" align="left" style="padding-top:7px">
+                     <span class="text-info" ng-show="kitRequestCtrl.ActionState == 1" style="padding-top:8px">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>
+                     </span>
+
+                  </div>
+                  <div class="col-md-3 col-xs-3" align="left" style="padding-top:7px">
+                     <span style="font-size:17px; color:#626262;">1 of 3</span>
+                  </div>
+
+                  <div class="col-md-3 col-xs-3" align="right" style="padding-top:7px">
+                     <button type="submit" style="background-color:#057890; border-color:#057890;" class="btn btn-primary">Continue</button>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12" align="left">
+                     <div class="alert alert-danger" role="alert" ng-show="kitRequestCtrl.ActionState == 3">
+                        <strong>"Opps! There was a problem submitting form! Please call us 1-800-991-8779"</strong>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+         </form>
+      </div>
+
+
+
+      <div class="modal-body" id="kit2" style="padding-bottom:0px;  height:450px" ng-hide="kitRequestCtrl.step2 == 0" ng-cloak>
+         <form name="kitRequestForm2" id="kitRequestForm2" role="form" ng-submit="kitRequestForm.$valid && kitRequestCtrl.Step2();">
+            <div class="row" style="height:60px;">
+               <div class="col-md-6  col-md-offset-1" align="left"  style="height:50%">
+                  <div class="form-group" >
+                     <span style="font-weight:bold; font-size:20px">What kind of guide would you like?</span>
+                  </div>
+               </div>
+               <div class="col-md-3">
+                  <div class="form-group" >
+                     <select ng-model="kitRequestCtrl.kit.RType" id="kit.RType" class="form-control" ng-required="true">
+                        <option value="" ng-selected="true">Type of Guide*</option>
+                        <option value="2">Hardcopy + Digital</option>
+                        <option value="1">Digital Only</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <div class="row"  style="height:60px;">
+               <div class="col-md-12">
+                  <hr style="width:100%" />
+               </div>
+
+            </div>
+            <div class="row"  style="height:60px;">
+               <div class="col-md-6 col-md-offset-1" align="left">
+                  <div class="form-group">
+                     <span style="font-weight:bold; font-size:20px">What kind of group are you?</span>
+                  </div>
+               </div>
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <select ng-model="kitRequestCtrl.kit.GrpType" id="kit.GrpType" class="form-control" ng-required="true">
+                        <option value="" ng-selected="true">Type of Group*</option>
+                        <option label="4-H" value="4-H" selected>4-H</option>
+                        <option label="Academy" value="Academy">Academy</option>
+                        <option label="Athletic" value="Athletic">Athletic</option>
+                        <option label="Band" value="Band">Band</option>
+                        <option label="Baseball" value="Baseball">Baseball</option>
+                        <option label="Basketball" value="Basketball">Basketball</option>
+                        <option label="Booster Club" value="Booster Club">Booster Club</option>
+                        <option label="Bowling" value="Bowling">Bowling</option>
+                        <option label="Boy/Girl Cub Scouts" value="Boy/Girl Cub Scouts">Boy/Girl Cub Scouts</option>
+                        <option label="Broker" value="Broker">Broker</option>
+                        <option label="Business" value="Business">Business</option>
+                        <option label="Career/Tech Ctr" value="Career/Tech Ctr">Career/Tech Ctr</option>
+                        <option label="Catholic School" value="Catholic School">Catholic School</option>
+                        <option label="Cheerleaders" value="Cheerleaders">Cheerleaders</option>
+                        <option label="Choir" value="Choir">Choir</option>
+                        <option label="Christian School" value="Christian School">Christian School</option>
+                        <option label="Church" value="Church">Church</option>
+                        <option label="College" value="College">College</option>
+                        <option label="Color Guard" value="Color Guard">Color Guard</option>
+                        <option label="Dance" value="Dance">Dance</option>
+                        <option label="Daycare" value="Daycare">Daycare</option>
+                        <option label="Elementary School" value="Elementary School">Elementary School</option>
+                        <option label="Football" value="Football">Football</option>
+                        <option label="Grade School" value="Grade School">Grade School</option>
+                        <option label="Gymnastics" value="Gymnastics">Gymnastics</option>
+                        <option label="Head Start" value="Head Start">Head Start</option>
+                        <option label="High School" value="High School">High School</option>
+                        <option label="Hockey" value="Hockey">Hockey</option>
+                        <option label="Intermediate School" value="Intermediate School">Intermediate School</option>
+                        <option label="Jr High" value="Jr High">Jr High</option>
+                        <option label="K-8 School" value="K-8 School">K-8 School</option>
+                        <option label="Middle School" value="Middle School">Middle School</option>
+                        <option label="Military School" value="Military School">Military School</option>
+                        <option label="None" value="None">None</option>
+                        <option label="Not Sure" value="Not Sure">Not Sure</option>
+                        <option label="Personal" value="Personal">Personal</option>
+                        <option label="Pop Warner" value="Pop Warner">Pop Warner</option>
+                        <option label="Pre-school" value="Pre-school">Pre-school</option>
+                        <option label="Private School" value="Private School">Private School</option>
+                        <option label="Prom" value="Prom">Prom</option>
+                        <option label="Skating" value="Skating">Skating</option>
+                        <option label="Soccer" value="Soccer">Soccer</option>
+                        <option label="Softball" value="Softball">Softball</option>
+                        <option label="Swim Team" value="Swim Team">Swim Team</option>
+                        <option label="Tennis" value="Tennis">Tennis</option>
+                        <option label="Vendor" value="Vendor">Vendor</option>
+                        <option label="Vocational/Tech School" value="Vocational/Tech School">Vocational/Tech School</option>
+                        <option label="Volleyball" value="Volleyball">Volleyball</option>
+                        <option label="Wrestling" value="Wrestling">Wrestling</option>
+                        <option label="YMCA" value="YMCA">YMCA</option>
+                        <option label="Distributor" value="Distributor">Distributor</option>
+                        <option label="Track" value="Track">Track</option>
+                        <option label="PTO/PTA" value="PTO/PTA">PTO/PTA</option>
+                     </select>
+
+                  </div>
+               </div>
+            </div>
+            <div class="row"  style="height:60px;">
+               <div class="col-md-12">
+                  <hr />
+               </div>
+
+            </div>
+
+            <div class="row"  style="height:60px;">
+               <div class="col-md-6 col-md-offset-1" align="left">
+                  <div class="form-group">
+                     <span style="font-weight:bold; font-size:20px">What's the size of your group?</span>
+                  </div>
+               </div>
+               <div class="col-md-5">
+                  <div class="form-group">
+                     <input type="radio" name="numbersGroup" id="numbersGroup020" ng-model="kitRequestCtrl.kit.OrgMembQtyTxt" value="0-20" style="padding-right:5px"><span style="font-size:20px; padding-right:10px">0-20</span>
+                     <input type="radio" name="numbersGroup" id="numbersGroup2130" ng-model="kitRequestCtrl.kit.OrgMembQtyTxt" value="21-30" style="padding-right:5px"><span style="font-size:20px; padding-right:10px">21-30</span>
+                     <input type="radio" name="numbersGroup" id="numbersGroup3145" ng-model="kitRequestCtrl.kit.OrgMembQtyTxt" value="31-45" style="padding-right:5px"><span style="font-size:20px; padding-right:10px">31-45</span>
+                     <input type="radio" name="numbersGroup" id="numbersGroup50" ng-model="kitRequestCtrl.kit.OrgMembQtyTxt" value="50+" style="padding-right:5px"><span style="font-size:20px; padding-right:10px">50+</span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row modal-footer" style="margin-top:10px">
+               <div class="row">
+                  <div class="col-md-4 col-xs-4 col-md-offset-1" align="left" style="padding-top:7px">
+                     <button type="button" style="background-color:#828384; border-color:#828384;" class="btn btn-warning" ng-click="kitRequestCtrl.BackToStep1();">Back</button>&nbsp;
+                     <span class="text-info" ng-show="kitRequestCtrl.ActionState == 1" style="padding-top:10px">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>
+                     </span>
+
+                  </div>
+                  <div class="col-md-3 col-xs-3" align="left" style="padding-top:10px">
+                     <span style="font-size:17px; color:#626262;">2 of 3</span>
+                  </div>
+
+                  <div class="col-md-3 col-xs-3" align="right" style="padding-top:7px">
+                     <button type="submit" style="background-color:#057890; border-color:#057890;" class="btn btn-primary">Continue</button>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12" align="left">
+                     <div class="alert alert-danger" role="alert" ng-show="kitRequestCtrl.ActionState == 3">
+                        <strong>"Opps! There was a problem submitting form! Please call us 1-800-991-8779"</strong>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+         </form>
+      </div>
+
+
+
+      <div class="modal-body" id="kit3" style="padding-bottom:0px; height:450px" ng-hide="kitRequestCtrl.step3 == 0">
+         <form name="kitRequestForm3" id="kitRequestForm3" role="form" ng-submit="kitRequestCtrl.Step3();">
+            <div class="row form-inline" style="height:60px;">
+               <div class="col-md-10 col-md-offset-1">
+                  <label for="kit.Address" style="font-weight:bold; font-size:20px; margin-right:20px">Address</label>
+                  <div class="form-group" style="width:80%;">
+                     <input type="text" class="form-control" placeholder="Street Address*" id="kit.Address.Address1" required ng-required="true" ng-model="kitRequestCtrl.kit.Address.Address1" maxlength="40" style="width:100%;">
+                  </div>
+               </div>
+
+            </div>
+            <div class="row" style="height:60px;">
+               <div class="col-md-12">
+                  <hr />
+               </div>
+
+            </div>
+
+            <div class="row  form-inline" style="height:60px;">
+               <div class="col-md-5 col-md-offset-1">
+                  <label style="font-weight:bold; font-size:20px;  margin-right:20px">City</label>
+                  <div class="form-group" style="width:80%;">
+                     <input type="text" class="form-control input-md" placeholder="City*" id="kit.Address.City" required ng-required="true" ng-model="kitRequestCtrl.kit.Address.City" maxlength="30" style="width:100%;">
+
+                  </div>
+               </div>
+
+               <div class="visible-xs visible-sm" style="margin-top:20px"></div>
+               <div class="col-md-4" style="height:60px;">
+                  <span style="font-weight:bold; font-size:20px;  margin-right:20px">Zip Code</span>
+                  <div class="form-group" style="width:60%;">
+                     <input type="text" maxlength="6" pattern="\d*" class="form-control input-md" placeholder="Zip Code*" id="kit.Address.PostCode" required ng-required="true" ng-model="kitRequestCtrl.kit.Address.PostCode" maxlength="10" style="width:100%;">
+                  </div>
+               </div>
+
+            </div>
+
+            <div class="row" style="height:60px;">
+               <div class="col-md-12">
+                  <hr />
+               </div>
+
+            </div>
+            <div class="visible-xs visible-sm" style="margin-top:20px"><br /><br /></div>
+            <div class="row form-inline" style="height:60px;">
+
+               <div class="col-md-10 col-md-offset-1">
+                  <span style="font-weight:bold; font-size:20px; margin-right:20px">State</span>
+                  <div class="form-group" style="width:80%;">
+                     <select class="form-control input-md" id="Region" name="Region" ng-model="kitRequestCtrl.kit.State" required ng-required="true" style="width:100%;">
+                        <option value="" ng-selected="true">--- Please select State ---</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DC">District of Columbia</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="IA">Iowa</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MD">Maryland</option>
+                        <option value="ME">Maine</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MT">Montana</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NY">New York</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="PR">Puerto Rico</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VA">Virginia</option>
+                        <option value="VT">Vermont</option>
+                        <option value="WA">Washington</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WY">Wyoming</option>
+
+
+                     </select>
+                  </div>
+               </div>
+            </div>
+
+
+            <div class="row modal-footer" style="margin-top:10px">
+
+               <div class="row">
+                  <div class="col-md-4 col-xs-4 col-md-offset-1" align="left" style="padding-top:7px">
+                     <button type="button" style="background-color:#828384; border-color:#828384;" class="btn btn-warning" ng-click="kitRequestCtrl.BackToStep2();">Back</button>&nbsp;
+                     <span class="text-info" ng-show="kitRequestCtrl.ActionState == 1" style="padding-top:10px">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>
+                     </span>
+
+                  </div>
+                  <div class="col-md-3 col-xs-3" align="left" style="padding-top:10px">
+                     <span style="font-size:17px; color:#626262;">3 of 4</span>
+                  </div>
+
+                  <div class="col-md-3 col-xs-3" align="right" style="padding-top:7px">
+                     <button type="submit" style="background-color:#057890; border-color:#057890;" class="btn btn-primary" >Continue</button>
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col-md-12" align="left">
+                     <div class="alert alert-danger" role="alert" ng-show="kitRequestCtrl.ActionState == 3">
+                        <strong>"Opps! There was a problem submitting form! Please call us 1-800-991-8779"</strong>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+         </form>
+
+
+
+
+      </div>
+
+
+
+
+      <div class="modal-body hidden-xs hidden-sm" id="kit4" style="padding-bottom:0px; height:500px" ng-hide="kitRequestCtrl.step4 == 0" hidden-xs>
+
+         <div class="row ">
+            <div class="col-md-6 col-md-offset-1">
+               <div class="form-group">
+                  <div style="font-size:23px; margin-bottom:20px">Check your email for you digital version of the guide or click the button below</div>
+                  <br /> <br />
+                  <a class="btn btn-primary btn-lg" href="/content/pdf/ezfundkit.pdf" target="_blank" style="display: block; margin: 0 auto;">DOWNLOAD</a>
+                  <br /> <br /> <br />
+                  <div style="font-size:23px; margin-top:15px">
+                     If you ordered a hardcopy, expect 10-12 days for it to arrive
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-5">
+               <img src="~/Content/images/public/ezf_guide_cover.jpg" style="margin:auto;display:block;" />
+
+            </div>
+
+         </div>
+
+      </div>
+
+
+      <div class="modal-body visible-xs visible-sm" id="kit4" style="padding-bottom:0px; height:500px" ng-hide="kitRequestCtrl.step4 == 0">
+         <div class="row ">
+            <div class="col-md-6 col-md-offset-1">
+               <div class="form-group">
+                  <div style="font-size:18px; margin-bottom:15px; text-align:center">Check your email for you digital version of the guide or click the button below</div>
+                  <a class="btn btn-primary btn-lg" href="/content/pdf/ezfundkit.pdf" target="_blank" style="display: block; margin: 0 auto;">DOWNLOAD</a>
+               </div>
+            </div>
+
+
+         </div>
+         <div class="row ">
+            <div class="col-sm-12">
+               <img src="~/Content/images/public/ezf_guide_cover.jpg" style="margin:auto;display:block;margin-bottom:10px" class="img-responsive" />
+
+            </div>
+         </div>
+         <div class="row ">
+            <div class="col-md-6 col-md-offset-1">
+               <div class="form-group">
+                  <div style="font-size:15px;margin-top:15px; text-align:center">
+                     If you ordered a hardcopy, expect 10-12 days for it to arrive
+                  </div>
+               </div>
+            </div>
+
+
+         </div>
+
+      </div>
+
+
+   </div>
+   </div>
+
+     <script>
+         var slider = document.getElementById("AmountToRaise");
+         var output = document.getElementById("demo");
+         output.innerHTML = slider.value;
+
+         slider.oninput = function () {
+            output.innerHTML = this.value;
+         }
+      </script>

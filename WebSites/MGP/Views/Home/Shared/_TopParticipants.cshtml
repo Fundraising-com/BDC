@@ -1,0 +1,37 @@
+﻿@model IList<GA.BDC.Web.MGP.Models.Views.TopParticipant>
+   @{
+      var groupId = int.Parse(ViewBag.GroupId.ToString());
+      var routeValues = groupId > 0 ? new { groupId } : null;
+   }
+<div class="panel panel-default" style="width: 100%">
+    <div class="panel-heading">
+        <h3 class="panel-title">Top Participants</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var participant in Model)
+        {
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="@participant.Image" style="width: 100%" alt="@participant.Name"/>
+                </div>
+                <div class="col-sm-8">
+                    <strong>
+                        @Html.ActionLink(participant.Name, "Participant", "Group", new {eventId = participant.EventId, participantId = participant.Id}, null)
+                    </strong>
+                    <br/>
+                    @Html.ActionLink(participant.EventName, "Index", "Group", new {eventId = participant.EventId}, null)
+                    <br/>
+                    @string.Format("{0:C}", participant.AmountRaised)
+                </div>
+            </div>
+        }
+        @if (Model.Count > 0)
+        {
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    @Html.ActionLink("View more >", "FindAGroup", "Home", routeValues, null)
+                </div>
+            </div>
+        }
+    </div>
+</div>

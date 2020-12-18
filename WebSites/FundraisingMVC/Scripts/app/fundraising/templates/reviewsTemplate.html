@@ -1,0 +1,17 @@
+﻿<div ng-repeat="review in datasource | orderBy: '-Created' | limitTo: max" ng-if="review.Id > 0" itemscope itemtype="http://schema.org/Review">
+   <span class="hidden" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product"><span itemprop="name">{{::review.ProductName}}</span></span>
+   <span class="hidden" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><span itemprop="ratingValue">{{::review.Rating}}</span></span>
+   <span itemprop="author" itemscope itemtype="http://schema.org/Person"><strong itemprop="name">{{::review.Name}}</strong></span> 
+   <small style="font-size: 70%">
+      <rating class="text-danger" ng-model="review.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating>       
+   </small>
+   <small style="font-size: 70%" class="text-success" ng-hide="review.SaleId == 0">
+      <br />
+      <span class="glyphicon glyphicon glyphicon-ok"></span> <strong>Verified Purchase</strong>
+   </small>
+   <br />
+   <small style="font-size: 70%">{{review.Created | toDateDifference}}</small>
+   <br />
+   <span itemprop="reviewBody">{{::review.Comments}}</span>
+   <hr ng-show="!$last" />
+</div>

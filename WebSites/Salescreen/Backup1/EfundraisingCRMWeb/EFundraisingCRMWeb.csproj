@@ -1,0 +1,951 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8990F6E-0570-45BA-95B5-125CD972AF1C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EfundraisingCRM</RootNamespace>
+    <AssemblyName>EfundraisingCRM</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=1.0.10914.31965, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\AjaxControlToolkit\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenMail, Version=1.0.2063.37456, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\efundraising\bin\Release\DotNetOpenMail.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Collections, Version=1.0.3057.19586, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Collections\bin\Debug\efundraising.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Configuration, Version=1.0.3057.19587, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Configuration\bin\Debug\efundraising.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Core, Version=1.0.3057.19586, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Core\bin\Debug\efundraising.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.CreditCheck, Version=1.0.3057.19602, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\CreditCheck\bin\Debug\efundraising.CreditCheck.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Data.Sql, Version=1.0.3090.15998, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EFundraisingCRM\bin\Debug\efundraising.Data.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Diagnostics, Version=1.0.3831.17437, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="efundraising.EFundraisingCRM, Version=1.0.5519.23959, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\efundraising.EFundraisingCRM.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.eFundraisingStore, Version=1.0.3057.19600, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\eFundraisingStore\bin\Debug\efundraising.eFundraisingStore.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Email, Version=0.0.1.19586, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\efundraising\Source\eFundraisingSolutionNET20\Email\bin\Debug\efundraising.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.EnterpriseComponents, Version=1.1.3057.19587, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\EnterpriseComponents\bin\Debug\efundraising.EnterpriseComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.ESubsGlobal, Version=1.0.3057.19603, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\ESubsGlobal\bin\Debug\efundraising.ESubsGlobal.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Intranet, Version=1.0.3486.36267, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="efundraising.Utilities, Version=1.0.3057.19593, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Utilities\bin\Debug\efundraising.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Utilities.Compression, Version=1.0.3057.19612, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Utilities.Compression\Utilities.Compression\bin\Debug\efundraising.Utilities.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Utilities.CookieHandler, Version=1.0.3057.19593, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Utilities.CookieHandler\bin\Debug\efundraising.Utilities.CookieHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Utilities.Encryption, Version=1.0.3057.19597, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Utilities.Encryption\bin\Debug\efundraising.Utilities.Encryption.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Utilities.Encryption.DES, Version=1.0.3057.19588, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Utilities.Encryption.DES\bin\Debug\efundraising.Utilities.Encryption.DES.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Utilities.Format, Version=1.0.3057.19608, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eFundraisingSolutionNET20\Utilities.Format\bin\Debug\efundraising.Utilities.Format.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
+    <Reference Include="NHibernate.Mapping.Attributes, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
+    <Reference Include="SQLite.NET, Version=0.21.1869.3794, Culture=neutral, PublicKeyToken=c273bd375e695f9c">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\GlobalizerDLL\SQLite.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Components\User\Address.ascx" />
+    <Content Include="Components\User\ClientControls\ClientRequests.ascx" />
+    <Content Include="Components\User\ClientControls\CustomerInformation.ascx" />
+    <Content Include="Components\User\CommonFrame.ascx" />
+    <Content Include="Components\User\Lead\LeadSummary.ascx" />
+    <Content Include="Components\User\Sales\SaleInfoList.ascx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Ressources\Css\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\Server\ApplicationConstants.cs" />
+    <Compile Include="Components\Server\CurrentWorkingObject.cs" />
+    <Compile Include="Components\Server\DataGrid\Leads\LeadVisitsDataGrid.cs" />
+    <Compile Include="Components\Server\DataGrid\SaleItems\SaleItemsDataGrid.cs" />
+    <Compile Include="Components\Server\ImageTextButton.ascx.cs">
+      <DependentUpon>ImageTextButton.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Server\ImageTextButton.ascx.designer.cs">
+      <DependentUpon>ImageTextButton.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Server\IntegratedLogin\IntegratedLoginHandler.cs" />
+    <Compile Include="Components\Server\ManageClient.cs" />
+    <Compile Include="Components\Server\ManageProduct.cs" />
+    <Compile Include="Components\Server\ManageSaleScreen.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Server\Menu\eFundraisingCrmWebMenu.cs" />
+    <Compile Include="Components\Server\Menu\Menu.cs" />
+    <Compile Include="Components\Server\Menu\Menus.cs" />
+    <Compile Include="Components\Server\Menu\Role.cs" />
+    <Compile Include="Components\Server\Menu\Roles.cs" />
+    <Compile Include="Components\Server\Menu\Section.cs" />
+    <Compile Include="Components\Server\Menu\Sections.cs" />
+    <Compile Include="Components\Server\Tibo\TiboTalker.cs" />
+    <Compile Include="Components\Server\UrlParam.cs" />
+    <Compile Include="Components\Server\User\CrmUser.cs" />
+    <Compile Include="Components\Server\User\Role.cs" />
+    <Compile Include="Components\Server\User\Roles.cs" />
+    <Compile Include="Components\User\Address.ascx.cs">
+      <DependentUpon>Address.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Address.ascx.designer.cs">
+      <DependentUpon>Address.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\AddressHygiene\AddressHygiene.ascx.cs">
+      <DependentUpon>AddressHygiene.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygiene\AddressHygieneErrorCodes.cs" />
+    <Compile Include="Components\User\ClientControls\ClientRequests.ascx.cs">
+      <DependentUpon>ClientRequests.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\ClientControls\ClientRequests.ascx.designer.cs">
+      <DependentUpon>ClientRequests.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\ClientControls\CustomerInformation.ascx.cs">
+      <DependentUpon>CustomerInformation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\ClientControls\CustomerInformation.ascx.designer.cs">
+      <DependentUpon>CustomerInformation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\ClientHeader.ascx.cs">
+      <DependentUpon>ClientHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\ClientHeader.ascx.designer.cs">
+      <DependentUpon>ClientHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\ClientInformation.ascx.cs">
+      <DependentUpon>ClientInformation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\ClientInformation.ascx.designer.cs">
+      <DependentUpon>ClientInformation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\CommonFrame.ascx.cs">
+      <DependentUpon>CommonFrame.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\CommonFrame.ascx.designer.cs">
+      <DependentUpon>CommonFrame.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\CreditCheck\CreditInfo.ascx.cs">
+      <DependentUpon>CreditInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\CreditCheck\CreditInfo.ascx.designer.cs">
+      <DependentUpon>CreditInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\CreditRequestDetails_SaleScreen.ascx.cs">
+      <DependentUpon>CreditRequestDetails_SaleScreen.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\CreditRequestDetails_SaleScreen.ascx.designer.cs">
+      <DependentUpon>CreditRequestDetails_SaleScreen.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Lead\LeadSummary.ascx.cs">
+      <DependentUpon>LeadSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Lead\LeadSummary.ascx.designer.cs">
+      <DependentUpon>LeadSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductGrid.ascx.cs">
+      <DependentUpon>ProductGrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductGrid.ascx.designer.cs">
+      <DependentUpon>ProductGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductLookUP2.ascx.cs">
+      <DependentUpon>ProductLookUP2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductLookUP2.ascx.designer.cs">
+      <DependentUpon>ProductLookUP2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductPackageTreeView.ascx.cs">
+      <DependentUpon>ProductPackageTreeView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductPackageTreeView.ascx.designer.cs">
+      <DependentUpon>ProductPackageTreeView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductSearch.aspx.cs">
+      <DependentUpon>ProductSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Package\ProductSearch.aspx.designer.cs">
+      <DependentUpon>ProductSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\PaymentInformation\PaymentOptions.ascx.cs">
+      <DependentUpon>PaymentOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\PaymentInformation\PaymentOptions.ascx.designer.cs">
+      <DependentUpon>PaymentOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\PickDay.ascx.cs">
+      <DependentUpon>PickDay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\PickDay.ascx.designer.cs">
+      <DependentUpon>PickDay.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\PickDay.aspx.cs">
+      <DependentUpon>PickDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\PickDay.aspx.designer.cs">
+      <DependentUpon>PickDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrmLogin.aspx.cs">
+      <DependentUpon>CrmLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrmLogin.aspx.designer.cs">
+      <DependentUpon>CrmLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DebuggerWriter.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IenumerableClass.cs" />
+    <Compile Include="ienumerableForm.aspx.cs">
+      <DependentUpon>ienumerableForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ienumerableForm.aspx.designer.cs">
+      <DependentUpon>ienumerableForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LaunchPage.aspx.cs">
+      <DependentUpon>LaunchPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaunchPage.aspx.designer.cs">
+      <DependentUpon>LaunchPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CreditCard\Credit.aspx.cs">
+      <DependentUpon>Credit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\CreditCard\Credit.aspx.designer.cs">
+      <DependentUpon>Credit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CreditCard\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\CreditCard\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CreditCard\Refund.aspx.cs">
+      <DependentUpon>Refund.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\CreditCard\Refund.aspx.designer.cs">
+      <DependentUpon>Refund.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CreditCard\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\CreditCard\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\AddressPopUp.aspx.cs">
+      <DependentUpon>AddressPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\AddressPopUp.aspx.designer.cs">
+      <DependentUpon>AddressPopUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\DatePicker.aspx.cs">
+      <DependentUpon>DatePicker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\DatePicker.aspx.designer.cs">
+      <DependentUpon>DatePicker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\CreditCheckSA.aspx.cs">
+      <DependentUpon>CreditCheckSA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\CreditCheckSA.aspx.designer.cs">
+      <DependentUpon>CreditCheckSA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\Items.ascx.cs">
+      <DependentUpon>Items.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\Items.ascx.designer.cs">
+      <DependentUpon>Items.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\SaleDates.ascx.cs">
+      <DependentUpon>SaleDates.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\SaleDates.ascx.designer.cs">
+      <DependentUpon>SaleDates.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\SaleInfo.ascx.cs">
+      <DependentUpon>SaleInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\SaleInfo.ascx.designer.cs">
+      <DependentUpon>SaleInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\SaleInfoList.ascx.cs">
+      <DependentUpon>SaleInfoList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\SaleInfoList.ascx.designer.cs">
+      <DependentUpon>SaleInfoList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\Status.ascx.cs">
+      <DependentUpon>Status.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\Status.ascx.designer.cs">
+      <DependentUpon>Status.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\TextOnCard.ascx.cs">
+      <DependentUpon>TextOnCard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\TextOnCard.ascx.designer.cs">
+      <DependentUpon>TextOnCard.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\TextOnCard.aspx.cs">
+      <DependentUpon>TextOnCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Sales\TextOnCard.aspx.designer.cs">
+      <DependentUpon>TextOnCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\User\Sales\TextOnCardEventArgs.cs" />
+    <Compile Include="EFundraisingCRMSalesBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EfundraisingCRMWebBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IFrame.cs" />
+    <Compile Include="INoPageInformation.cs" />
+    <Compile Include="INoQuickCreate.cs" />
+    <Compile Include="INoQuickSearch.cs" />
+    <Compile Include="INoQuickToolBar.cs" />
+    <Compile Include="IPage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\SalesScreen\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\NewSales.aspx.cs">
+      <DependentUpon>NewSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\NewSales.aspx.designer.cs">
+      <DependentUpon>NewSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\ProductManager.asmx.cs">
+      <DependentUpon>ProductManager.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\SessionTimeOut.aspx.cs">
+      <DependentUpon>SessionTimeOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\SessionTimeOut.aspx.designer.cs">
+      <DependentUpon>SessionTimeOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\AdminSection.aspx.cs">
+      <DependentUpon>AdminSection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\AdminSection.aspx.designer.cs">
+      <DependentUpon>AdminSection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionExpired.aspx.cs">
+      <DependentUpon>SessionExpired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionExpired.aspx.designer.cs">
+      <DependentUpon>SessionExpired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\AddressHygiene.staging\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\com.efundraising.webservices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\com.qsp.dev-wsi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ePay.WebReference\Reference1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\XML.aspx.cs">
+      <DependentUpon>XML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesScreen\XML.aspx.designer.cs">
+      <DependentUpon>XML.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Castle.DynamicProxy.dll" />
+    <Content Include="bin\DotNetOpenMail.dll" />
+    <Content Include="bin\efundraising.Collections.dll" />
+    <Content Include="bin\efundraising.Collections.pdb" />
+    <Content Include="bin\efundraising.Configuration.dll" />
+    <Content Include="bin\efundraising.Configuration.pdb" />
+    <Content Include="bin\efundraising.Core.dll" />
+    <Content Include="bin\efundraising.Core.pdb" />
+    <Content Include="bin\efundraising.CreditCheck.dll" />
+    <Content Include="bin\efundraising.Data.Sql.dll" />
+    <Content Include="bin\efundraising.Data.Sql.pdb" />
+    <Content Include="bin\efundraising.Database.dll" />
+    <Content Include="bin\efundraising.Database.efundraising.dll" />
+    <Content Include="bin\efundraising.Diagnostics.dll" />
+    <Content Include="bin\efundraising.eFundData.dll" />
+    <Content Include="bin\efundraising.eFundData.pdb" />
+    <Content Include="bin\efundraising.efundraisingCore.dll" />
+    <Content Include="bin\efundraising.EFundraisingCRM.dll" />
+    <Content Include="bin\efundraising.EFundraisingCRM.pdb" />
+    <Content Include="bin\efundraising.eFundraisingStore.dll" />
+    <Content Include="bin\efundraising.Email.dll" />
+    <Content Include="bin\efundraising.EnterpriseComponents.dll" />
+    <Content Include="bin\efundraising.ESubsGlobal.dll" />
+    <Content Include="bin\efundraising.Globalization.dll" />
+    <Content Include="bin\efundraising.Intranet.dll" />
+    <Content Include="bin\efundraising.Reporting.Artefact.dll" />
+    <Content Include="bin\efundraising.Reporting.dll" />
+    <Content Include="bin\efundraising.Reporting.pdb" />
+    <Content Include="bin\efundraising.Utilities.Compression.dll" />
+    <Content Include="bin\efundraising.Utilities.CookieHandler.dll" />
+    <Content Include="bin\efundraising.Utilities.dll" />
+    <Content Include="bin\efundraising.Utilities.Encryption.DES.dll" />
+    <Content Include="bin\efundraising.Utilities.Encryption.dll" />
+    <Content Include="bin\efundraising.Utilities.Format.dll" />
+    <Content Include="bin\efundraising.Web.Services.eFundSoap.dll" />
+    <Content Include="bin\efundraising.Xml.dll" />
+    <Content Include="bin\efundraising.Xml.pdb" />
+    <Content Include="bin\EfundraisingCRM.dll" />
+    <Content Include="bin\EfundraisingCRM.pdb" />
+    <Content Include="bin\Iesi.Collections.dll" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\Mono.Security.dll" />
+    <Content Include="bin\MySql.Data.dll" />
+    <Content Include="bin\NHibernate.dll" />
+    <Content Include="bin\NHibernate.Mapping.Attributes.dll" />
+    <Content Include="bin\Npgsql.dll" />
+    <Content Include="bin\OrderExpressClient.dll" />
+    <Content Include="bin\OrderExpressClient.pdb" />
+    <Content Include="bin\QSP.Business.Fulfillment.dll" />
+    <Content Include="bin\QSP.Business.Fulfillment.pdb" />
+    <Content Include="bin\QSPForm.Business.dll" />
+    <Content Include="bin\QSPForm.Business.pdb" />
+    <Content Include="bin\QSPForm.Common.dll" />
+    <Content Include="bin\QSPForm.Common.pdb" />
+    <Content Include="bin\QSPForm.Data.dll" />
+    <Content Include="bin\QSPForm.Data.pdb" />
+    <Content Include="bin\QSPForm.SystemFramework.dll" />
+    <Content Include="bin\QSPForm.SystemFramework.pdb" />
+    <Content Include="bin\QSPForm_DataRepository.dll" />
+    <Content Include="bin\QSPForm_DataRepository.pdb" />
+    <Content Include="bin\SQLite.NET.dll" />
+    <Content Include="Components\User\AddressHygiene\AddressHygiene.ascx" />
+    <Content Include="Components\User\ClientHeader.ascx" />
+    <Content Include="Components\User\CreditCheck\CreditInfo.ascx" />
+    <Content Include="Components\User\CreditRequestDetails_SaleScreen.ascx" />
+    <Content Include="Components\User\Package\ProductGrid.ascx" />
+    <Content Include="Components\User\Package\ProductLookUP2.ascx" />
+    <Content Include="Components\User\Package\ProductPackageTreeView.ascx" />
+    <Content Include="Components\User\Package\ProductSearch.aspx" />
+    <Content Include="Components\User\PaymentInformation\PaymentOptions.ascx" />
+    <Content Include="Components\User\PickDay.ascx" />
+    <Content Include="Components\User\PickDay.aspx" />
+    <Content Include="CrmLogin.aspx" />
+    <Content Include="igoogle-classic.css" />
+    <Content Include="Ressources\Images\Login.gif" />
+    <Content Include="Ressources\Images\TerritoryManagement2.gif" />
+    <Content Include="Sales\CreditCard\Credit.aspx" />
+    <Content Include="Sales\CreditCard\Default.aspx" />
+    <Content Include="Sales\CreditCard\Refund.aspx" />
+    <Content Include="Sales\SalesScreen\CreditCheckSA.aspx" />
+    <Content Include="Components\User\Sales\Items.ascx" />
+    <Content Include="Components\User\Sales\SaleDates.ascx" />
+    <Content Include="Components\User\Sales\SaleInfo.ascx" />
+    <Content Include="Components\User\Sales\Status.ascx" />
+    <Content Include="Components\User\Sales\TextOnCard.ascx" />
+    <Content Include="Components\User\Sales\TextOnCard.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Ressources\Images\add_11.gif" />
+    <Content Include="Ressources\Images\close_11.gif" />
+    <Content Include="Ressources\Images\Continue4.gif" />
+    <Content Include="Ressources\Images\Continue5.gif" />
+    <Content Include="Ressources\Images\Edit2.gif" />
+    <Content Include="Ressources\Images\help_11.gif" />
+    <Content Include="Ressources\Images\indicator.gif" />
+    <Content Include="Ressources\Images\internet.gif" />
+    <Content Include="Ressources\Images\loupe.gif" />
+    <Content Include="Ressources\Images\order.gif" />
+    <Content Include="Ressources\Images\package.gif" />
+    <Content Include="Ressources\Images\report2.gif" />
+    <Content Include="Ressources\Images\ReportServer.gif" />
+    <Content Include="Ressources\Images\Search.gif" />
+    <Content Include="Ressources\Images\Search2.gif" />
+    <Content Include="Ressources\Images\SmallRemove.gif" />
+    <Content Include="Ressources\Images\track.gif" />
+    <Content Include="Ressources\Images\UserControls\icon_calendar.gif" />
+    <Content Include="Ressources\Images\wait.gif" />
+    <Content Include="Ressources\Images\work.gif" />
+    <Content Include="Ressources\Xml\Menu\Menu.xml" />
+    <Content Include="Sales\SalesScreen\Default.aspx" />
+    <Content Include="Sales\SalesScreen\NewSales.aspx" />
+    <Content Include="Sales\SalesScreen\ProductManager.asmx" />
+    <Content Include="Sales\SalesScreen\SessionTimeOut.aspx" />
+    <Content Include="Sales\SalesScreen\AdminSection.aspx" />
+    <Content Include="Site1.Master" />
+    <Content Include="Web References\WebReference\bpps.disco">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebForm1.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Components\User\CreditCheck\CreditInfo.ascx.resx">
+      <DependentUpon>CreditInfo.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\CreditRequestDetails_SaleScreen.ascx.resx">
+      <DependentUpon>CreditRequestDetails_SaleScreen.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Package\ProductGrid.ascx.resx">
+      <DependentUpon>ProductGrid.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Package\ProductPackageTreeView.ascx.resx">
+      <DependentUpon>ProductPackageTreeView.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Package\ProductSearch.aspx.resx">
+      <DependentUpon>ProductSearch.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\PaymentInformation\PaymentOptions.ascx.resx">
+      <DependentUpon>PaymentOptions.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\PickDay.ascx.resx">
+      <DependentUpon>PickDay.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\PickDay.aspx.resx">
+      <DependentUpon>PickDay.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrmLogin.aspx.resx">
+      <DependentUpon>CrmLogin.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CreditCard\Credit.aspx.resx">
+      <DependentUpon>Credit.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CreditCard\Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CreditCard\Refund.aspx.resx">
+      <DependentUpon>Refund.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\SalesScreen\CreditCheckSA.aspx.resx">
+      <DependentUpon>CreditCheckSA.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Sales\Items.ascx.resx">
+      <DependentUpon>Items.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Sales\SaleDates.ascx.resx">
+      <DependentUpon>SaleDates.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Sales\SaleInfo.ascx.resx">
+      <DependentUpon>SaleInfo.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Sales\Status.ascx.resx">
+      <DependentUpon>Status.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Sales\TextOnCard.ascx.resx">
+      <DependentUpon>TextOnCard.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Sales\TextOnCard.aspx.resx">
+      <DependentUpon>TextOnCard.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eFundData\eFundData.csproj">
+      <Project>{3B38826D-7C96-4A10-A174-A29A3793D6B3}</Project>
+      <Name>eFundData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderExpressClient\OrderExpressClient.csproj">
+      <Project>{2A1758BB-535D-454D-8A71-5157744A8361}</Project>
+      <Name>OrderExpressClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QSP.Business.Fulfillment\QSP.Business.Fulfillment.csproj">
+      <Project>{4E55EB19-53BC-4A27-991F-31B1DEEF896B}</Project>
+      <Name>QSP.Business.Fulfillment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QSP.OrderExpress.Business\QSP.OrderExpress.Business.csproj">
+      <Project>{F43D94AB-3FBB-4E55-A48E-2D06E62CAE99}</Project>
+      <Name>QSP.OrderExpress.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QSP.OrderExpress.Common\QSP.OrderExpress.Common.csproj">
+      <Project>{23CCC929-2B4A-486B-A86D-3A031CF05089}</Project>
+      <Name>QSP.OrderExpress.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QSP.OrderExpress.DataRepository\QSP.OrderExpress.DataRepository.csproj">
+      <Project>{928EBB51-0530-4E89-BF66-A7EDC3BAB83E}</Project>
+      <Name>QSP.OrderExpress.DataRepository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://wsi.qsp.com/qpay/bpps.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ePay.WebReference\</RelPath>
+      <UpdateFromURL>http://wsi.qsp.com/qpay/bpps.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EfundraisingCRM_ePay_WebReference_BatchPaymentSystemWebservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://dev-wsi.qsp.com/qpay/bpps.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.qsp.dev-wsi\</RelPath>
+      <UpdateFromURL>http://dev-wsi.qsp.com/qpay/bpps.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EfundraisingCRM_com_qsp_dev_wsi_BatchPaymentSystemWebservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://staging-wsi.qsp.com/QSP.AddressHygiene/AddressHygieneContract.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AddressHygiene.staging\</RelPath>
+      <UpdateFromURL>http://staging-wsi.qsp.com/QSP.AddressHygiene/AddressHygieneContract.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EfundraisingCRM_com_qsp_staging_wsi_AddressHygieneContract</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://webservices.efundraising.com/paymentech.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.efundraising.webservices\</RelPath>
+      <UpdateFromURL>http://webservices.efundraising.com/paymentech.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EfundraisingCRM_com_efundraising_webservices_PaymenTech</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Themes\Modal\Styles.css" />
+    <Content Include="bin\efundraising.Diagnostics.pdb" />
+    <Content Include="bin\efundraising.Intranet.pdb" />
+    <Content Include="bin\efundraising.Utilities.CookieHandler.pdb" />
+    <Content Include="bin\efundraising.Utilities.Encryption.DES.pdb" />
+    <Content Include="Components\Server\ImageTextButton.ascx" />
+    <Content Include="Components\User\ClientInformation.ascx" />
+    <Content Include="ienumerableForm.aspx" />
+    <Content Include="LaunchPage.aspx" />
+    <Content Include="Ressources\efrSyncInfo_2010129-9619_Log.xml" />
+    <Content Include="Ressources\Images\activity.gif" />
+    <Content Include="Ressources\Images\bodyBg.jpg" />
+    <Content Include="Ressources\Images\bodyBg2.jpg" />
+    <Content Include="Ressources\Images\clear.gif" />
+    <Content Include="Ressources\Images\delete.gif" />
+    <Content Include="Ressources\Images\disabled.gif" />
+    <Content Include="Ressources\Images\efund11.gif" />
+    <Content Include="Ressources\Images\efund12.gif" />
+    <Content Include="Ressources\Images\efund123.gif" />
+    <Content Include="Ressources\Images\efund_small.gif" />
+    <Content Include="Ressources\Images\loupe2.gif" />
+    <Content Include="Ressources\Images\loupe9.gif" />
+    <Content Include="Ressources\Images\qspLogo.gif" />
+    <Content Include="Ressources\Images\Save.gif" />
+    <Content Include="Ressources\Images\small_save.jpg" />
+    <Content Include="Ressources\Images\Untitled-2.gif" />
+    <Content Include="Ressources\Images\us.jpg" />
+    <None Include="Web References\AddressHygiene.staging\AddressHygieneMessageResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AddressHygiene.staging\AddressHygieneSingleMessageResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.efundraising.webservices\paymentech.disco" />
+    <None Include="Web References\com.efundraising.webservices\paymentech.wsdl" />
+    <None Include="Web References\com.efundraising.webservices\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Ressources\Images\warning.jpg" />
+    <Content Include="Sales\CreditCard\WebForm1.aspx" />
+    <Content Include="Sales\SalesScreen\AddressPopUp.aspx" />
+    <Content Include="Sales\SalesScreen\DatePicker.aspx" />
+    <None Include="Web References\AddressHygiene.staging\AddressHygieneContract.wsdl" />
+    <None Include="Web References\AddressHygiene.staging\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\com.qsp.dev-wsi\bpps.wsdl" />
+    <None Include="Web References\com.qsp.dev-wsi\BPPSTxResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.qsp.dev-wsi\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ePay.WebReference\bpps.disco">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\ePay.WebReference\bpps.wsdl" />
+    <None Include="Web References\ePay.WebReference\BPPSTxResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ePay.WebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference1.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AddressHygiene.staging\AddressHygieneContract.disco" />
+    <None Include="Web References\com.qsp.dev-wsi\bpps.disco" />
+    <Content Include="Sales\SalesScreen\ManageProducts.aspx" />
+    <Content Include="SessionExpired.aspx" />
+    <Content Include="test.aspx" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sales\SalesScreen\XML.aspx" />
+    <None Include="Web References\WebReference\bpps.wsdl" />
+    <None Include="Web References\WebReference\BPPSTxResponse.datasource" />
+    <None Include="Web References\WebReference\Reference.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64206</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_representativePortal.cshtml";
+}
+@section header
+{
+   <title>Testimonials - {{::representativeCtrl.Representative.Name}}</title>
+   <meta name="description" content="Fundraisings {{::representativeCtrl.Representative.Name}} personal website for Fundraising.com" />
+   <meta property="og:title" content="{{::representativeCtrl.Representative.Name}}" />
+   <meta name="keywords" content="fundraising, fundraising ideas, representative fundraiser, {{::representativeCtrl.Representative.Name}}" />
+}
+   <div class="row" style="margin-top:125px">
+       <div class="col-sm-12">
+           <span itemscope itemtype="https://schema.org/Breadcrumb">
+               <a itemprop="url" href="/">
+                   <span itemprop="title">Home</span>
+               </a> &gt;
+           </span>
+           <span itemscope itemtype="https://schema.org/Breadcrumb">
+               <a itemprop="name">
+                   <span itemprop="title"><strong>Testimonials</strong></span>
+               </a>
+           </span>
+       </div>
+   </div>
+
+<h1>Testimonials</h1>
+<div ng-show="representativeCtrl.Representative.Testimonials.length > 0">
+<div class="row" ng-repeat="testimonial in representativeCtrl.Representative.Testimonials">
+   <div class="col-xs-12 text-info">
+      <span>"{{::testimonial.Message}}"</span>
+      <br ng-show="testimonial.Author" />
+      <span ng-show="testimonial.Author" style="font-weight: bold;">- {{::testimonial.Author}}</span>
+      <br />
+      <br />
+   </div>
+</div>
+</div>
+<div ng-show="representativeCtrl.Representative.Testimonials.length === 0">
+    <div class="row">
+        <div class="col-xs-12 text-info">
+            <h3>“Great American stands behind their products. Thanks for a great experience every time!”<br /><br />
+            -Gwen Graham, Choral Director</h3>
+
+        </div>
+    </div>
+</div>

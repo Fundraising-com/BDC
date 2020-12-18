@@ -1,0 +1,44 @@
+<PUBLIC:COMPONENT tagName="DataEntryBehavior">
+	<PUBLIC:ATTACH EVENT="onkeypress" FOR="element" ONEVENT="InspectKeyCode()" />
+	<PUBLIC:ATTACH EVENT="onkeydown" FOR="element" ONEVENT="InspectKeyCode()" />
+	<PUBLIC:ATTACH EVENT="onkeyup" FOR="element" ONEVENT="InspectKeyCode()" />
+	<PUBLIC:ATTACH EVENT="onchange" FOR="element" ONEVENT="SetChangeFlag()" />
+	<PUBLIC:ATTACH EVENT="onclick" FOR="element" ONEVENT="VerifyTag()" />
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	function InspectKeyCode()
+	{
+		var oSource = window.event.srcElement;
+		if(oSource.type != "textarea") {
+			if(event.keyCode == 13) {
+				event.keyCode = 0;
+				event.returnValue=false; 			
+			}
+		}		
+	}
+
+	function SetChangeFlag()
+	{		
+		if(window.document.forms[0].hidChange != "undefined") {
+			window.document.forms[0].hidChange.value = 1;
+				 			
+		}
+		//alert(window.document.forms[0].hidChange.value);
+		
+	}
+	
+	function VerifyTag()
+	{		
+		var oSource = window.event.srcElement;
+		
+		
+		if(oSource.type == "checkbox") {
+			SetChangeFlag();
+				 			
+		}
+	}
+
+
+</SCRIPT>

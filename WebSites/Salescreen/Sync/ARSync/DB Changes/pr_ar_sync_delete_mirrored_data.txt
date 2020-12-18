@@ -1,0 +1,37 @@
+USE [QSPFulfillment]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_ar_sync_delete_mirrored_data]    Script Date: 06/16/2010 13:23:44 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Juan Martinez
+-- Create date: 2010-05-14
+-- Description:	Start date is inclisive
+--				End date is exclusive
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_ar_sync_delete_mirrored_data]
+	@pStartDate datetime, 
+	@pEndDate datetime
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE 
+	FROM 
+			as400_ardhisp 
+	WHERE 
+			transaction_date >= @pStartDate 
+		AND transaction_date < @pEndDate
+	;
+
+END
+
+GO
+
+

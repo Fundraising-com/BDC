@@ -1,0 +1,22 @@
+﻿(function () {
+   "use strict";
+   var module = angular.module("lisa.content");
+
+   function ContentFactory($resource, hosts) {
+      return {
+         Banner: $resource(hosts.webApiFundraisingBaseUrl + "/banners/:id", null, { 'update': { method: 'PUT' } }),
+         ViewPort: $resource(hosts.webApiFundraisingBaseUrl + "/viewports/:id", null, { 'update': { method: 'PUT' } }),
+         BlogCategory: $resource(hosts.webApiFundraisingBaseUrl + "/blogcategories/:id", null, { 'update': { method: 'PUT' } }),
+         BlogEntry: $resource(hosts.webApiFundraisingBaseUrl + "/blog/:id", null, { 'update': { method: 'PUT' } }),
+         BlogTag: $resource(hosts.webApiFundraisingBaseUrl + "/blogtags/:id", null, { 'update': { method: 'PUT' } }),
+         EzBlogCategory: $resource(hosts.webApiEzFundBaseUrl + "/blogcategories/:id", null, { 'update': { method: 'PUT' } }),
+         EzBlogEntry: $resource(hosts.webApiEzFundBaseUrl + "/blog/:id", null, { 'update': { method: 'PUT' } }),
+         EzBlogTag: $resource(hosts.webApiEzFundBaseUrl + "/blogtags/:id", null, { 'update': { method: 'PUT' } }),
+         HomePageRotator: $resource(hosts.webApiFundraisingBaseUrl + "/homepagerotator/:id", null, { 'update': { method: 'PUT' } }),
+         MotivationalPhrase: [{ Text: "You miss 100% of the shots you don’t take.", Author: "Wayne Gretzky" }, { Text: "Out of clutter, find Simplicity. From discord, find Harmony. In the middle of difficulty lies Opportunity.", Author: "Albert Einstein" }, { Text: "Nobody can go back and start a new beginning, but anyone can start today and make a new ending.", Author: "Maria Robinson" }, { Text: "Change your thoughts and you change your world.", Author: "Norman Vincent Peale" }, { Text: "If you can imagine it, you can achieve it; if you can dream it, you can become it.", Author: "William Arthur Ward" }, { Text: "Strength does not come from winning. Your struggles develop your strengths. When you go through hardships and decide not to surrender, that is strength.", Author: "Arnold Schwarzenegger" }, { Text: "My attitude is that if you push me towards something that you think is a weakness, then I will turn that perceived weakness into a strength.", Author: "Michael Jordan" }, { Text: "Success consists of going from failure to failure without loss of enthusiasm.", Author: "Winston Churchill" }, { Text: "Believe in yourself! Have faith in your abilities! Without a humble but reasonable confidence in your own powers you cannot be successful or happy.", Author: "Norman Vincent Peale" }, { Text: "Be patient with yourself. Self-growth is tender; it’s holy ground. There’s no greater investment.", Author: "Stephen Covey" }, { Text: "The task of leadership is not to put greatness into people, but to elicit it, for the greatness is there already.", Author: "John Buchan" }, { Text: "An invincible determination can accomplish almost anything and in this lies the great distinction between great men and little men.", Author: "Thomas Fuller" }, { Text: "Knowing trees, I understand the meaning of patience. Knowing grass, I can appreciate persistence.", Author: "Hal Borland" }, { Text: "The quality of a person’s life is in direct proportion to their commitment to excellence, regardless of their chosen field of endeavor.", Author: "Vince Lombardi" }, { Text: "The secret of joy in work is contained in one word – excellence. To know how to do something well is to enjoy it.", Author: "Pearl Buck" }, { Text: "If you are going to achieve excellence in big things, you develop the habit in little matters. Excellence is not an exception, it is a prevailing attitude.", Author: "Charles R. Swindoll" }, { Text: "Give yourself an even greater challenge than the one you are trying to master and you will develop the powers necessary to overcome the original difficulty.", Author: "William J. Bennett – The Book of Virtues" }, { Text: "By recording your dreams and goals on paper, you set in motion the process of becoming the person you most want to be. Put your future in good hands — your own.", Author: "Mark Victor Hansen" }, { Text: "The tragedy in life doesn’t lie in not reaching your goal. The tragedy lies in having no goal to reach.", Author: "Benjamin Mays" }]
+      };
+   }
+   ContentFactory.$inject = ["$resource", "hosts"];
+   module.factory("ContentFactory", ContentFactory);
+
+})();

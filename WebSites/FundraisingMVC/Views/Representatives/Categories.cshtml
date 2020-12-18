@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "~/Views/Shared/_representativePortal.cshtml";
+}
+@section header
+{
+   <title>Categories - {{::representativeCtrl.Representative.Name}}</title>
+   <meta name="description" content="Request Information to {{::representativeCtrl.Representative.Name}}" />
+   <meta property="og:title" content="{{::representativeCtrl.Representative.Name}}" />
+   <meta name="keywords" content="fundraising, fundraising ideas, representative fundraiser, {{::representativeCtrl.Representative.Name}}" />
+}
+<div class="row" style="margin-top:125px">
+    <div class="col-sm-12">
+        <span itemscope itemtype="https://schema.org/Breadcrumb">
+            <a itemprop="url" href="/">
+                <span itemprop="title">Home</span>
+            </a> &gt;
+        </span>
+        <span itemscope itemtype="https://schema.org/Breadcrumb">
+            <a itemprop="url" href="@Url.Action("Fundraisers")">
+                <span itemprop="title">Available Fundraisers</span>
+            </a> &gt;
+        </span>
+        <span itemscope itemtype="https://schema.org/Breadcrumb">
+            <a itemprop="name">
+                <span itemprop="title"><strong>Categories</strong></span>
+            </a>
+        </span>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+
+       <h3 class="active">Click on image for more information</h3>
+    </div>
+</div>
+
+<div class="row" ng-init="representativeCtrl.GetFundraiserProducts(@ViewBag.CategoryId);">
+   
+    <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="product in representativeCtrl.FundraiserProducts" ng-cloak>
+      <a ng-href="@Url.Action("Product")?productId={{::product.Id}}"><img ng-src="/Content/external/rep/fundraisers/{{::product.Image}}" alt="{{::product.Name}}" style="width: 100%;" /></a>
+   </div>
+</div>
+

@@ -1,0 +1,128 @@
+﻿<div role="tabpanel" class="tab-pane fade in active" id="account" aria-labelledby="sponsors-tab">
+    <div class="bs-bg">
+        <p class="bg-primary">
+            <span>Sponsor Information</span>
+            <span class="pull-right">
+                <button type="button" class="btn btn-success btn-xs" ng-click="refresh()">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh
+                </button>
+            </span>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{sponsor.eventName}}</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="sponsorInfoForm" class="form-horizontal" novalidate data-ng-submit="saveSponsor('REGULAR')">
+                        <div class="form-group">
+                            <label for="inputOrganizerFirstName" class="col-sm-3 control-label">First Name:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputOrganizerFirstName" name="inputOrganizerFirstName" ng-model="sponsor.firstName" required>
+                                <span class="error" data-ng-show="sponsorInfoForm.inputOrganizerFirstName.$error.required">* Organizer First Name is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputOrganizerLastName" class="col-sm-3 control-label">Last Name:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputOrganizerLastName" name="inputOrganizerLastName" ng-model="sponsor.lastName" required>
+                                <span class="error" data-ng-show="sponsorInfoForm.inputOrganizerLastName.$error.required">* Organizer Last Name is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber" class="col-sm-3 control-label">Phone Number:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputPhoneNumber" ng-model="sponsor.phoneNumber">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEventID" class="col-sm-3 control-label">Event ID:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputEventID" value="{{sponsor.eventId}}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputGroupID" class="col-sm-3 control-label">Group ID:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputGroupID" value="{{sponsor.groupId}}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-3 control-label">User Name/Email:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail" ng-model="sponsor.emailAddress" required>
+                                <span class="error" data-ng-show="sponsorInfoForm.inputEmail.$error.required">* Email Address is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-sm-3 control-label">Password:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputPassword" ng-model="sponsor.password" required>
+                                <span class="error" data-ng-show="sponsorInfoForm.inputPassword.$error.required">* Password is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMovieTicket" class="col-sm-3 control-label">Movie Ticket?</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputMovieTicket" value="{{sponsor.movieTicket}}" style="width: 55px; display: inline;" readonly>
+                                <a href="" data-toggle="modal" data-target="#movieTicketModal" ng-hide="sponsor.movieTicket == 'No'">Detail</a>
+                            </div>
+                            <div class="modal fade" id="movieTicketModal" tabindex="-1" role="dialog" aria-labelledby="movieTicketModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="movieTicketModalLabel">Movie Ticket Detail</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <label for="item-code" class="control-label">Item Code:</label>
+                                                <input type="text" class="form-control" id="item-code" value="{{sponsor.earnedPrize.prizeItemCode}}" readonly>
+                                            </div>
+                                            <div>
+                                                <label for="date-issued" class="control-label">Date Issued:</label>
+                                                <input type="datetime-local" class="form-control" id="date-issued" value="{{sponsor.earnedPrize.dateIssued | date:'medium'}}" readonly>
+                                            </div>
+                                            <div>
+                                                <label for="expiry-date" class="control-label">Expiry Date:</label>
+                                                <input type="datetime-local" class="form-control" id="expiry-date" value="{{sponsor.earnedPrize.expirationDate | date:'medium'}}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                            <button type="button" class="btn btn-primary" ng-click="issueNewMovieTicket()">Issue New Ticket</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUnsubscribed" class="col-sm-3 control-label">Unsubscribed:</label>
+                            <div class="col-sm-9" style="padding-top:8px">
+                                <input type="checkbox" id="inputUnsubscribed" ng-model="sponsor.unsubscribed" ng-true-value="1" ng-false-value="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9 text-right">
+                                <button type="submit" class="btn btn-default" data-ng-disabled="sponsorInfoForm.$invalid">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Comments</h3>
+                </div>
+                <div class="panel-body" ng-bind-html="commentsView">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

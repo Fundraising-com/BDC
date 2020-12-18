@@ -1,0 +1,353 @@
+@using System.Configuration
+@using System.Web.Optimization
+@using GA.BDC.Web.MGP.Helpers
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+   var partnerBranding = ViewBag.Partner as Partner;
+	var hideTopMenu = ViewBag.HideTopMenu ?? false;
+}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width" />
+   <title>@ViewBag.PageTitle : @ViewBag.Title</title>
+   <meta name="description" content="@ViewBag.Description" />
+   <meta name="keywords" content="@ViewBag.Keywords" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+   <meta property="og:url" content="http://www.efundraising.com/" />
+   <meta property="og:title" content="Efundraising.com : Online Magazine Fundraising Made Easy!" />
+   <meta property="og:description" content="Online Magazine Fundraiser! 100% free, more profit less effort!" />
+   <meta property="og:image" content="http://www.efundraising.com/Content/images/public/content/mainLogo.gif" />
+   <link rel="shortcut icon" type="image/ico" href="/Content/images/public/content/favicon.ico" />
+   @Styles.Render("~/general")
+   <link type="text/css" rel="stylesheet" href="@Url.Content(ConfigurationManager.AppSettings["PublicCssHref"])" />
+   @Scripts.Render("~/jquery")
+   @Scripts.Render("~/angular")
+   @Scripts.Render("~/app")
+   @if (ViewBag.CanonicalUrl != null && !string.IsNullOrEmpty(ViewBag.CanonicalUrl))
+   {
+      <link rel="canonical" href="@string.Format("http://www.efundraising.com{0}", ViewBag.CanonicalUrl)" />
+   }
+   <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Yellowtail" rel="stylesheet">
+</head>
+<body ng-app="mgp" style="background-color: #182e58;">
+   <div class="container-fluid">
+      <div id="background-home" style="background-image: url('@ViewBag.BackgroundUrl');">
+         <nav class="navbar visible-xs">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <a class="navbar-brand" href="/">
+                     @partnerBranding.Name.ToUpper()
+                  </a>
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                  </button>
+
+               </div>
+               <div class="collapse navbar-collapse @(hideTopMenu ? "hidden" : string.Empty)" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                     <li><a href="@Url.Action("HowItWorks", "Home")">How it Works</a></li>
+                     <li><a href="@Url.Action("FindAGroup", "Home")">Find a Group</a></li>
+                     @*<li><a href="@Url.Action("Incentives", "Home")">Incentives</a></li>*@
+                     <li><a href="@Url.Action("ContactUs", "Home")">Contact Us</a></li>
+                     <li class="@(User.Identity.IsAuthenticated ? "hidden" : string.Empty)"><a href="@Url.Action("SignIn", "Home")">Log In</a></li>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+         <div id="menuTop" class="container-fluid hidden-xs" style="background-color: @(ViewBag.MenuTopBackgroundColor ?? "#1C3A72");">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xs-4">
+                     @if (partnerBranding.Name == "efundraising.com")
+                     {
+                        <img src="/Content/images/public/content/main-logo.png" alt="Home" />
+
+                     }
+                     else if (partnerBranding.Name == "ezfund")
+                     {
+                        <a href="/" style="text-decoration:none"><img src="/Content/images/public/content/ezf-logo.png" alt="Home" border="0" /></a>
+                     }
+                     else
+                     {
+                        <a href="/" style="font-size: 18px; color:white; text-decoration:none">@partnerBranding.Name.ToUpper()</a>
+                     }
+
+                  </div>
+                  <div class="col-xs-8 text-right @(hideTopMenu ? "hidden" : string.Empty)">
+                     <a href="@Url.Action("HowItWorks", "Home")">how it works</a>
+                     <a href="@Url.Action("FindAGroup", "Home")" class="hidden-sm">find a group</a>
+                     @*<a href="@Url.Action("Incentives", "Home")">incentives</a>*@
+                     <a href="@Url.Action("ContactUs", "Home")">contact us</a>
+
+                     @*<a href="@Url.Action("SignIn", "Home")" class="@(User.Identity.IsAuthenticated ? "hidden" : string.Empty)">log in</a>*@
+                     <a href="#" data-toggle="modal" data-target="#LoginModal">
+                        Login
+                     </a>
+
+                     <a href="@Url.Action("FindAGroup", "Home")" class="hidden-sm"><span class="glyphicon glyphicon-search"></span></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container">
+            @RenderBody()
+         </div>
+         <footer class="container-fluid">
+            <div id="testimonials" class="row container-fluid">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-xs-12 text-center">
+                        <span id="happyCommunities">
+                           happy communities
+                        </span>
+                        <br />
+                        <span id="whatPeopleSay">
+                           what people say
+                        </span>
+                        <br />
+                        <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+                     </div>
+                  </div>
+                  <br /><br />
+                  <div class="row">
+                     <div class="col-md-12 col-md-offset-3 col-xs-offset-2">
+                        <div class="media">
+                           <div class="media-left">
+                              <img src="/Content/images/public/content/profilpic2.png" class="img-responsive" />
+                           </div>
+                           <div class="media-right media-middle">
+                              <strong>Peter Campbell</strong>
+                              <br />
+                              <i>Football Coach, Santa Ana California</i>
+                              <br />
+                              <img src="/Content/images/public/content/separator.png" />
+                           </div>
+                        </div>
+                        <br />
+                        <div class="text-muted small col-md-6 ">
+                           This way of raising funds is great, kids are so used to doing everything online that they were very comfortable and happy to run the fundraiser through efundraising and to share it on Facebook.
+                        </div>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+            <div id="statistics" class="row container-fluid">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-2 text-center border-left">
+                        <span class="title">$750K</span>
+                        <br />
+                        <span class="description small">raised last year</span>
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-2 text-center border-left border-right">
+                        <span class="title">+730K</span>
+                        <br />
+                        <span class="description small">campaigns launched</span>
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-2 text-center border-right">
+                        <span class="title">+450K</span>
+                        <br />
+                        <span class="description small">visitors on our website</span>
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-2 text-center border-right">
+                        <span class="title">+29K</span>
+                        <br />
+                        <span class="description small">users registered</span>
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-2 text-center border-right">
+                        <span class="title">40%</span>
+                        <br />
+                        <span class="description small">profit in your pocket</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </footer>
+      </div>
+   </div>
+
+
+
+   <div id="signIn" ng-controller="loginController">
+   <div class="modal fade" tabindex="-1" role="dialog" id="LoginModal">
+      <div class="modal-dialog modal-md" role="document" style="width:40%">
+         <div class="modal-content">
+            <div class="modal-header text-center" style="background-color:#e4e8ec; border-top-left-radius:6px; border-top-right-radius:6px;">
+               <h3 class="modal-title text-muted" style="font-weight:bold">WELCOME BACK</h3>
+            </div>
+            <div class="modal-body" style="background-color:#f3f5f7;  border-bottom-left-radius:6px; border-bottom-right-radius:6px;">
+               <form id="formLoginExternal" method="POST" action="@Url.Action("LoginExternal", "Security")">
+                  <input type="hidden" name="providerName" />
+                  <div class="row ">
+                     <div class="col-xs-12">
+                        <div class="form-group">
+                           <button class="btn btn-facebook btn-lg form-control" style="height:auto !important" onclick="loginExternal('facebook');">
+                              <span class="fa fa-facebook"></span> Login with facebook
+                           </button>
+                        </div>
+                     </div>
+
+                  </div>
+                  <div class="row ">
+                     <div class="col-xs-12">
+                        <div class="form-group">
+                           <button class="btn btn-google btn-lg form-control" style="height:auto !important" onclick="loginExternal('google');">
+                              <span class="fa fa-google"></span> Login with Google
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-12 text-center">
+                        <span class="small text-muted">NOTHING WILL EVER BE POSTED WITHOUT YOUR PERMISSION.</span>
+                     </div>
+                  </div>
+
+               </form>
+               <br /><br />
+              
+               <div class="row">
+                  <div class="col-xs-12">
+                     <div style="width: 100%; height: 11px; border-bottom: 1px solid #e4e8ec; text-align: center">
+                        <span style="font-size: 15px; background-color: #F3F5F6; padding: 0 5px; color:#777">
+                           OR LOGIN WITH EMAIL <!--Padding is optional-->
+                        </span>
+                     </div>
+                  </div>
+               </div>
+               <br />
+
+               <form id="signInForm" name="signInForm" ng-submit="login('@ViewBag.ReturnUrl')">
+                  <div class="form-group">
+                     <label for="email" class="sr-only">Email address</label>
+                     <input ng-model="view.Username" type="email" id="email" name="email" ng-init="view.Username = '@ViewBag.Email'" required class="form-control input-lg" placeholder="Email" />
+                  </div>
+                  <div class="form-group">
+                     <label for="password" class="sr-only">Password</label>
+                     <input ng-model="view.Password" type="password" name="password" id="password" required class="form-control input-lg" placeholder="Password" />
+                  </div>
+                  <div class="checkbox">
+                     <label>
+                        <input ng-model="view.RememberMe" type="checkbox" value="false">
+                        Remember Me
+                     </label>
+                  </div>
+                  <div class="form-group" ng-cloak>
+                     <span class="text-info" ng-show="executingAction">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+                     </span>
+                     <span class="text-danger" ng-show="resultFailed">
+                        {{responseText}}<br />
+                     </span>
+                     <button class="btn btn-odnoklassniki btn-lg form-control" style="height:auto !important" ng-hide="executingAction" trigger-change="#password.dirty"><span class="glyphicon glyphicon-envelope"></span> Log In</button>
+                  </div>
+                  <div class="form-group text-right">
+                     <a href="@Url.Action("RecoverPassword", "Security")" class="small">I can't remember my Password</a>
+                  </div>
+               </form>
+
+            </div>
+               </div>
+            </div>
+   </div>
+</div>
+
+
+
+
+
+   @RenderSection("scripts", false)
+
+
+ 
+{
+      <script type="text/javascript">
+         $("input#password").addClass('dirty');
+         function loginExternal(providerName) {
+            $("input[name=providerName]").val(providerName);
+            ga('send', 'event', 'User', 'Login', providerName);
+            $("#formLoginExternal").submit();
+         }
+      </script>
+   }
+
+
+   <!-- Affiliate Window Master Tag -->
+   <script src="https://www.dwin1.com/5458.js" type="text/javascript" defer="defer"></script>
+   <!-- Affiliate Window Master Tag code end -->
+   <!-- post affiliate script begin all pages-->
+   <script type="text/javascript">
+<!--
+      document.write(unescape("%3Cscript id='pap_x2s6df8d' src='" +
+         (("https:" == document.location.protocol) ? "https://" : "http://") +
+         "fundraising.postaffiliatepro.com/scripts/trackjs.js' type='text/javascript'%3E%3C/script%3E")); //-->
+   </script>
+   <script type="text/javascript">
+<!--
+      PostAffTracker.setAccountId('default1');
+      try {
+         PostAffTracker.track();
+      } catch (err) {
+      }
+      //-->
+   </script>
+   <!-- post affiliate script end -->
+   <!-- Starts Google Analytics -->
+   <script>
+      (function (i, s, o, g, r, a, m) {
+         i['GoogleAnalyticsObject'] = r;
+         i[r] = i[r] ||
+            function () {
+               (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+         a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+         a.async = 1;
+         a.src = g;
+         m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('require', 'linker');
+      ga('linker:autoLink',
+      [
+         'efundraising.com', 'fundraising411.com', 'juniorleaguefundraising.com', '1stfundraisers.com',
+         'ssgfundraising.com', 'usafundraising.com', 'schoolsfundraising.com', 'gamefundraising.com',
+         'fundraisingsolution.om', 'fundraisingnews.com', 'fundraisingclub.com', 'emailfundraising.com',
+         'scratchandsave.com', 'canadafundraising.com', 'raising-fund.com', 'tshirtfundraising.com',
+         'snacksfundraising.com', 'lollipopfundraisers.om', 'chocolatefundraisers.com', 'fund-raising.com',
+         'nhscamagagazines.com', 'lgfundraising.com', 'fastpitchsoftballmags.com', 'chocolatefundraiser.com',
+         'fundraisingsearch.com', 'online-fundraising.com', 'cdfundraising.com', 'discoveryschoolfundraising.com',
+         'onlyfundraising.com', 'efundraisingcorp.com', 'universalfundraising.net', 'teamcheerfundraising.com',
+         'efundraisingsuperstore.com', 'asafundraising.om', 'e-fundraising.com', 'mystore.fundraising.com'
+      ]);
+      ga('create', '@ConfigurationManager.AppSettings["GoogleAnalyticsTrackingId"]', 'auto', { 'allowLinker': true });
+      ga('send', 'pageview');
+   </script>
+   <!-- Ends Google Analytics -->
+@if (bool.Parse(ConfigurationManager.AppSettings["showChatProviderCode"]))
+{
+   <!--Start of Zendesk Chat Script-->
+   <script type="text/javascript">
+      window.$zopim || (function (d, s) {
+         var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+               z.set.
+                  _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+         $.src = "https://v2.zopim.com/?4PAzjvVQt7v9pN2vyypOIT5kFW768OdB"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+      })(document, "script");
+
+      $zopim(function () {
+         $zopim.livechat.departments.setVisitorDepartment('EFundraising');
+      });
+   </script>
+   <!--End of Zendesk Chat Script-->
+}
+</body>
+</html>

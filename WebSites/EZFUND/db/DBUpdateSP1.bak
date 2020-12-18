@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<SQLStatements Completed="1" Version="SP1">
+  <Access><![CDATA[UPDATE QBTemplates SET Description='Gift&nbsp;Wrap', Active=1, Skip=0, ColumnVisible=1 WHERE PageName='Invoice' AND Sequence='005']]></Access>
+  <SQLServer><![CDATA[UPDATE QBTemplates SET Description='Gift&nbsp;Wrap', Active=1, Skip=0, ColumnVisible=1 WHERE PageName='Invoice' AND Sequence='005']]></SQLServer>
+  <Access><![CDATA[ALTER TABLE SearchResults ADD COLUMN NumOfRows INT]]></Access>
+  <SQLServer><![CDATA[sp_rename 'SearchResults.Rows', 'NumOfRows', 'COLUMN']]></SQLServer>
+  <Access><![CDATA[UPDATE SearchResults SET SearchResults.NumOfRows = [SearchResults].[Rows]]]></Access>
+  <Access><![CDATA[ALTER TABLE SearchResults Drop COLUMN [Rows]]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderAddresses ADD CODAmount nvarchar(20) NULL]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderAddresses ADD COLUMN CODAmount text(20) NULL]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderItems ALTER COLUMN Category ntext]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderItems ALTER COLUMN Category memo]]></Access>
+  <Access><![CDATA[ALTER TABLE Admin ALTER COLUMN NextOrderNumber Long]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin ALTER COLUMN NextOrderNumber numeric(10, 0)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN OrderID Long ]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN OrderID numeric(10, 0)]]></SQLServer>
+  <SQLServer><![CDATA[sp_rename 'QBSettings.Memo', 'QBMemo', 'COLUMN' ]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE QBSettings ADD COLUMN QBMemo Memo ]]></Access>
+  <Access><![CDATA[UPDATE QBSettings SET QBSettings.QBMemo=[QBSettings].[Memo]]]></Access>
+  <Access><![CDATA[ALTER TABLE QBSettings Drop COLUMN [Memo] ]]></Access>
+  <Access><![CDATA[ALTER TABLE OrderItems ALTER COLUMN ProductName text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderItems ALTER COLUMN ProductName nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Categories ALTER COLUMN Name text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Categories ALTER COLUMN Name nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AffiliateSettings ALTER COLUMN Terms Memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AffiliateSettings ALTER COLUMN Terms ntext]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Admin DROP COLUMN DomainName]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin DROP COLUMN DomainName]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Admin ADD COLUMN WebLicense Memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin ADD WebLicense ntext NULL]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Attributes ALTER COLUMN Name text(200)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Attributes ALTER COLUMN Name nvarchar(200)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN Name text(200)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN Name nvarchar(200)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN FileLocation text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN FileLocation nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[INSERT INTO QBConversion ([PageName], [Sequence], [WebID], [QuickBooksID], [QBAccount]) VALUES( 'Shipping', '060', 'DEFAULT2', 'UPS', 'UPS')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[QBConversion] ([PageName], [Sequence], [WebID], [QuickBooksID], [QBAccount]) VALUES( 'Shipping', '060', 'DEFAULT2', 'UPS', 'UPS')]]></SQLServer>
+  <SQLServer><![CDATA[UPDATE qbconversion 
+SET qbaccount=(SELECT qbaccount FROM qbconversion WHERE WebID='DEFAULT' AND PageName='Shipping'),
+[Sequence]=(select [Sequence] from qbconversion WHERE WebID='DEFAULT' AND PageName='Shipping'),
+QuickBooksID=(select QuickBooksID from QBConversion WHERE WebID='DEFAULT' AND PageName='Shipping') 
+WHERE WebID='DEFAULT2']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM QBConversion WHERE WebID='DEFAULT' AND PageName='Shipping']]></SQLServer>
+  <SQLServer><![CDATA[UPDATE QBConversion SET WebID='DEFAULT' WHERE PageName='Shipping' AND WebID='DEFAULT2']]></SQLServer>
+  <Access><![CDATA[UPDATE QBConversion Q, QBConversion QB SET Q.Sequence=QB.Sequence, Q.QuickBooksID=QB.QuickBooksID, Q.QBAccount=QB.QBAccount WHERE Q.WebID='DEFAULT2' AND QB.WebID='DEFAULT']]></Access>
+  <Access><![CDATA[DELETE from QBConversion WHERE PageName='Shipping' AND WebID='DEFAULT']]></Access>
+  <Access><![CDATA[UPDATE QBConversion SET WebID='DEFAULT' WHERE WebID='DEFAULT2']]></Access>
+  <Access><![CDATA[UPDATE Admin SET WebLicense='69 159 139 247 59 253 137 38 201 207 84 123 242 56 225 142 9 212 178 27 214 8 202 233 236 227 68 44 7 104 142 36 142 235 253 86 137 247 168 1' WHERE WebLicense IS NULL OR WebLicense='']]></Access>
+  <SQLServer><![CDATA[UPDATE Admin SET WebLicense='69 159 139 247 59 253 137 38 201 207 84 123 242 56 225 142 9 212 178 27 214 8 202 233 236 227 68 44 7 104 142 36 142 235 253 86 137 247 168 1' WHERE WebLicense IS NULL OR WebLicense='']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://cart.bamart.com/soap/listener.mart' WHERE NAME='BankOfAmerica']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://cart.bamart.com/soap/listener.mart' WHERE NAME='BankOfAmerica']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.linkpt.net' WHERE NAME='LinkPoint']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.linkpt.net' WHERE NAME='LinkPoint']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.psigate.com' WHERE NAME='PsiGate']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.psigate.com' WHERE NAME='PsiGate']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.securepay.com/secure1/index.asp' WHERE NAME='SecurePay']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.securepay.com/secure1/index.asp' WHERE NAME='SecurePay']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='payflow.verisign.com' WHERE NAME='Verisign']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='payflow.verisign.com' WHERE NAME='Verisign']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll' WHERE NAME='AuthorizeNet']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll' WHERE NAME='AuthorizeNet']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.paypal.com/cgi-bin/webscr' WHERE NAME='PayPal']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.paypal.com/cgi-bin/webscr' WHERE NAME='PayPal']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://select.worldpay.com/wcc/purchase'  WHERE NAME='WorldPay']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://select.worldpay.com/wcc/purchase'  WHERE NAME='WorldPay']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdqEncTool.e|https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdq.e'  WHERE NAME='Barclay']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdqEncTool.e|https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdq.e'  WHERE NAME='Barclay']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='QuickCommerce']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='QuickCommerce']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='PlanetPayment']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='PlanetPayment']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='SecureSource']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='SecureSource']]></SQLServer>
+  <Access><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Invoice' and clng(Sequence)=22]]></Access>
+  <SQLServer><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Invoice' and Sequence=22]]></SQLServer>
+  <Access><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Receipt' and clng(Sequence)=23]]></Access>
+  <SQLServer><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Receipt' and Sequence=23]]></SQLServer>
+  <Access><![CDATA[INSERT INTO QBAccounts ([AccountName], [Description], [Item]) VALUES('Order Discounts', 'Gift Certificates', 'GiftCertificate')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[QBAccounts] ([AccountName], [Description], [Item]) VALUES('Order Discounts', 'Gift Certificates', 'GiftCertificate')]]></SQLServer>
+  <Access><![CDATA[DELETE FROM QBAccounts WHERE  (uid > 12)]]></Access>
+  <SQLServer><![CDATA[DELETE FROM QBAccounts WHERE  (uid > 12)]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) VALUES('addgiftcertificates.ascx', 'Error', 'Duplicate', 'This Gift Certificate Code is already in use')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) VALUES('addgiftcertificates.ascx', 'Error', 'Duplicate', 'This Gift Certificate Code is all ready in use')]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE Page='addcategory' AND Action='Error' AND Condition='Duplicate']]></Access>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE Page='addcategory' AND Action='Error' AND Condition='Duplicate']]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) VALUES ('addcategory', 'Error', 'Duplicate', 'A root category with this name already exists.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) VALUES ('addcategory', 'Error', 'Duplicate', 'A root category with this name already exists.')]]></SQLServer>
+  <Access><![CDATA[CREATE INDEX IX_MANUFACTURERID on Products(ManufacturerId)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_VENDORID on Products(VendorId)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CODE on Products(Code)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ISACTIVE on Products(IsActive)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on Products(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on ProductCategory(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CATEGORYID on ProductCategory(CategoryID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on Inventory(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ATTRIBUTEDETAILID on Inventory(AttributeDetailID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODID on InventoryInfo(ProdID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on Giftwrap(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on VolumePricing(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ADDRESSID on Manufacturers(AddressID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ADDRESSID on Vendors(AddressID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on Attributes(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PARENTID on RelatedProducts(ParentID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_RELATEDID on RelatedProducts(RelatedID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on CustomerSpecificPricing(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_GROUPID on CustomerSpecificPricing(GroupID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CUSTGROUPID on Customers(CustGroupID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CUSTOMERID on Addresses(CustomerID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ATTRIBUTEID on AttributeDetail(AttributeID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ORDERID on OrderAddresses(OrderID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CUSTOMERID on Orders(CustomerID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ISACTIVE on Categories(IsActive)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PARENTLEVEL on Categories(ParentLevel)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PARENTID on Categories(ParentID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on Categories(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on Attributes(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CODE on PRODUCTS(Code)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ISACTIVE on PRODUCTS(IsActive)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on PRODUCTS(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAMEPLURAL on PRODUCTS(NamePlural)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_SHORTDESCRIPTION on PRODUCTS(ShortDescription)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_DESCRIPTION on PRODUCTS(Description)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_KEYWORDS on PRODUCTS(Keywords)]]></Access>
+  <SQLServer><![CDATA[CREATE INDEX IX_MANUFACTURERID on Products(ManufacturerId)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_VENDORID on Products(VendorId)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CODE on Products(Code)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ISACTIVE on Products(IsActive)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on Products(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on ProductCategory(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CATEGORYID on ProductCategory(CategoryID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on Inventory(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ATTRIBUTEDETAILID on Inventory(AttributeDetailID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODID on InventoryInfo(ProdID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on Giftwrap(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on VolumePricing(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ADDRESSID on Manufacturers(AddressID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ADDRESSID on Vendors(AddressID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on Attributes(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PARENTID on RelatedProducts(ParentID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_RELATEDID on RelatedProducts(RelatedID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on CustomerSpecificPricing(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_GROUPID on CustomerSpecificPricing(GroupID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CUSTGROUPID on Customers(CustGroupID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CUSTOMERID on Addresses(CustomerID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ATTRIBUTEID on AttributeDetail(AttributeID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ORDERID on OrderAddresses(OrderID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CUSTOMERID on Orders(CustomerID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ISACTIVE on Categories(IsActive)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PARENTLEVEL on Categories(ParentLevel)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PARENTID on Categories(ParentID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on Categories(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on Attributes(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CODE on PRODUCTS(Code)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ISACTIVE on PRODUCTS(IsActive)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on PRODUCTS(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAMEPLURAL on PRODUCTS(NamePlural)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_SHORTDESCRIPTION on PRODUCTS(ShortDescription)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_DESCRIPTION on PRODUCTS(Description)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_KEYWORDS on PRODUCTS(Keywords)]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankProductID']]></Access>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankCategoryID']]></Access>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankVendorID']]></Access>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankManufacturerID']]></Access>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankProductID']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankProductID']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankVendorID']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankManufacturerID']]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankProductID', 'Must select a Product')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankProductID', 'Must select a Product')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankCategoryID', 'Must select a Category')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankCategoryID', 'Must select a Category')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankVendorID', 'Must select a Vendor')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankVendorID', 'Must select a Vendor')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankManufacturerID', 'Must select a Manufacturer')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankManufacturerID', 'Must select a Manufacturer')]]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE ([Page]='EmailaFriend.aspx') AND ([Action]='PageTitle') AND ([Condition]='Title')]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='EmailaFriend.aspx' AND [Action]='PageTitle' AND [Condition]='Title']]></Access>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) VALUES ('EmailaFriend.aspx', 'PageTitle', 'Title', 'E-Mail a Friend')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages]  ([Page], [Action], [Condition], [Message]) VALUES ('EmailaFriend.aspx', 'PageTitle', 'Title', 'E-Mail a Friend')]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Customers ALTER COLUMN HTTPReferrer text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Customers ALTER COLUMN HTTPReferrer nvarchar(255)]]></SQLServer>
+</SQLStatements>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="QSPFulfillment" Class="OrderExpressDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=qspdevdb1.qsp;Initial Catalog=QSPFulfillment;Persist Security Info=True;User ID=QSPFormWebUser" SettingsObjectName="PAToOrderMappingData.Properties.Settings" SettingsPropertyName="QSPFulfillmentConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.form_requires_form" Member="form_requires_forms">
+    <Type Name="form_requires_form">
+      <Column Name="form_requires_form_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="required_form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_form_requires_form" Member="Form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+      <Association Name="form_form_requires_form1" Member="RequiredForm" ThisKey="required_form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form" Member="forms">
+    <Type Name="form">
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="version" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="program_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="program_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="entity_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="form_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="program_basics_text" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="order_terms_text" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="closing_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="enabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="is_product_price_updatable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="parent_form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tax_postal_address_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_base_form" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_quantity_adjustment_allowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="warehouse_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_bulk" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="report_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="is_warehouse_selectable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="default_warehouse_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="season_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="form_form_requires_form" Member="RequiredForms" ThisKey="form_id" OtherKey="form_id" Type="form_requires_form" />
+      <Association Name="form_form_requires_form1" Member="RequiredBy" ThisKey="form_id" OtherKey="required_form_id" Type="form_requires_form" />
+      <Association Name="form_program_agreement" Member="program_agreements" ThisKey="form_id" OtherKey="form_id" Type="program_agreement" />
+    </Type>
+  </Table>
+  <Table Name="dbo.program_agreement_order" Member="program_agreement_orders">
+    <Type Name="program_agreement_order">
+      <Column Name="program_agreement_order_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="program_agreement_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="program_agreement_program_agreement_order" Member="program_agreement" ThisKey="program_agreement_id" OtherKey="program_agreement_id" Type="program_agreement" IsForeignKey="true" />
+      <Association Name="order_program_agreement_order" Member="order" ThisKey="order_id" OtherKey="order_id" Type="order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.program_agreement" Member="program_agreements">
+    <Type Name="program_agreement">
+      <Column Name="program_agreement_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fulf_program_agreement_id" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="program_agreement_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tax_exemption_number" Type="System.String" DbType="VarChar(23)" CanBeNull="true" />
+      <Column Name="tax_exemption_expiration_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="holiday_start_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="holiday_end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="enrollment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="goal_estimated_gross" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="renewal_sign_up_term" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="profit_rate" Type="System.Decimal" DbType="Decimal(2,2) NOT NULL" CanBeNull="false" />
+      <Column Name="priced" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="program_agreement_program_agreement_order" Member="program_agreement_orders" ThisKey="program_agreement_id" OtherKey="program_agreement_id" Type="program_agreement_order" />
+      <Association Name="program_agreement_program_agreement_campaign" Member="program_agreement_campaigns" ThisKey="program_agreement_id" OtherKey="program_agreement_id" Type="program_agreement_campaign" />
+      <Association Name="form_program_agreement" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[order]" Member="orders">
+    <Type Name="order">
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="campaign_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_reason_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_postal_address_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="billing_phone_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_fax_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_email_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="participant_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="installment_plan_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fm_id" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="OL#ORD" Member="OL_ORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="adjustment_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fulf_order_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="profit_rate" Type="System.Decimal" DbType="Decimal(2,2) NOT NULL" CanBeNull="false" />
+      <Column Name="customer_po_number" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="is_dsd" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_continuation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isMailReferred" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Association Name="order_program_agreement_order" Member="program_agreement_orders" ThisKey="order_id" OtherKey="order_id" Type="program_agreement_order" />
+      <Association Name="order_program_agreement_campaign" Member="program_agreement_campaigns" ThisKey="order_id" OtherKey="order_id" Type="program_agreement_campaign" />
+    </Type>
+  </Table>
+  <Table Name="dbo.program_agreement_campaign" Member="program_agreement_campaigns">
+    <Type Name="program_agreement_campaign">
+      <Column Name="program_agreement_campaign_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="program_agreement_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="campaign_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="program_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="order_program_agreement_campaign" Member="order" ThisKey="order_id" OtherKey="order_id" Type="order" IsForeignKey="true" />
+      <Association Name="program_agreement_program_agreement_campaign" Member="program_agreement" ThisKey="program_agreement_id" OtherKey="program_agreement_id" Type="program_agreement" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,71 @@
+@using System.Configuration
+@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.PageTitle : @ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/ico" href="/Content/images/public/content/favicon.ico"/>
+    <link type="text/css" rel="stylesheet" href="@Url.Content(ConfigurationManager.AppSettings["BootstrapCssHref"])"/>
+</head>
+<body>
+    <br />
+    <div class="container">
+        @RenderBody()
+    </div>
+@if (bool.Parse(ConfigurationManager.AppSettings["showChatProviderCode"]))
+{
+   <!--Start of Zendesk Chat Script-->
+   <script type="text/javascript">
+      window.$zopim || (function (d, s) {
+         var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+               z.set.
+               _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+         $.src = "https://v2.zopim.com/?4PAzjvVQt7v9pN2vyypOIT5kFW768OdB"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+      })(document, "script");
+
+      $zopim(function () {
+         $zopim.livechat.departments.setVisitorDepartment('EFundraising');
+      });
+   </script>
+   <!--End of Zendesk Chat Script-->
+}
+    <!-- Affiliate Window Master Tag -->
+    <script src="https://www.dwin1.com/5458.js" type="text/javascript" defer="defer"> </script>
+    <!-- Affiliate Window Master Tag code end -->
+    <!-- post affiliate script begin all pages-->
+    <script type="text/javascript"><!--
+    document.write(unescape("%3Cscript id='pap_x2s6df8d' src='" + (("https:" == document.location.protocol) ? "https://" : "http://") + "fundraising.postaffiliatepro.com/scripts/trackjs.js' type='text/javascript'%3E%3C/script%3E"));//-->
+    </script>
+    <script type="text/javascript"><!--
+    PostAffTracker.setAccountId('default1');
+    try {
+        PostAffTracker.track();
+    } catch (err) { }
+    //-->
+    </script>
+    <!-- post affiliate script end -->
+    <!-- Starts Google Analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('require', 'linker');
+        ga('linker:autoLink', ['efundraising.com', 'fundraising411.com', 'juniorleaguefundraising.com', '1stfundraisers.com', 'ssgfundraising.com', 'usafundraising.com', 'schoolsfundraising.com', 'gamefundraising.com', 'fundraisingsolution.om', 'fundraisingnews.com', 'fundraisingclub.com', 'emailfundraising.com', 'scratchandsave.com', 'canadafundraising.com', 'raising-fund.com', 'tshirtfundraising.com', 'snacksfundraising.com', 'lollipopfundraisers.om', 'chocolatefundraisers.com', 'fund-raising.com', 'nhscamagagazines.com', 'lgfundraising.com', 'fastpitchsoftballmags.com', 'chocolatefundraiser.com', 'fundraisingsearch.com', 'online-fundraising.com', 'cdfundraising.com', 'discoveryschoolfundraising.com', 'onlyfundraising.com', 'efundraisingcorp.com', 'universalfundraising.net', 'teamcheerfundraising.com', 'efundraisingsuperstore.com', 'asafundraising.om', 'e-fundraising.com', 'mystore.fundraising.com']);
+        ga('create', '@ConfigurationManager.AppSettings["GoogleAnalyticsTrackingId"]', 'auto', { 'allowLinker': true });
+        ga('send', 'pageview');
+        ga('send', 'exception', {
+            'exDescription': '@ViewBag.ErrorCode',
+            'exFatal': @ViewBag.ErrorFatal
+        });
+    </script>
+<!-- Ends Google Analytics -->
+</body>
+</html>

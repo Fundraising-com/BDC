@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.OrderExpress.com/QSPFormWebServices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.OrderExpress.com/QSPFormWebServices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.OrderExpress.com/QSPFormWebServices/">
+      <s:element name="GetCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoriesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Orphans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="orderID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrphansResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrphansResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Standard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fulfillmentOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StandardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StandardResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_List">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_ListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AssetMgmt_ListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_List_Formated">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Format" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_List_FormatedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AssetMgmt_List_FormatedResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_Image">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AssetID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Resolution" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_ImageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AssetMgmt_ImageResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_Image_Formated">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AssetID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Resolution" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Format" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssetMgmt_Image_FormatedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AssetMgmt_Image_FormatedResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePersonalization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="PersonalizedDetail" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdatePersonalizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePersonalizationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dts">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePEResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogonUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogonUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogonUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategories" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrphansSoapIn">
+    <wsdl:part name="parameters" element="tns:Orphans" />
+  </wsdl:message>
+  <wsdl:message name="OrphansSoapOut">
+    <wsdl:part name="parameters" element="tns:OrphansResponse" />
+  </wsdl:message>
+  <wsdl:message name="StandardSoapIn">
+    <wsdl:part name="parameters" element="tns:Standard" />
+  </wsdl:message>
+  <wsdl:message name="StandardSoapOut">
+    <wsdl:part name="parameters" element="tns:StandardResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_ListSoapIn">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_List" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_ListSoapOut">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_List_FormatedSoapIn">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_List_Formated" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_List_FormatedSoapOut">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_List_FormatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_ImageSoapIn">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_Image" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_ImageSoapOut">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_ImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_Image_FormatedSoapIn">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_Image_Formated" />
+  </wsdl:message>
+  <wsdl:message name="AssetMgmt_Image_FormatedSoapOut">
+    <wsdl:part name="parameters" element="tns:AssetMgmt_Image_FormatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePersonalizationSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePersonalization" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePersonalizationSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePersonalizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePESoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePE" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePESoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePEResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogonUserSoapIn">
+    <wsdl:part name="parameters" element="tns:LogonUser" />
+  </wsdl:message>
+  <wsdl:message name="LogonUserSoapOut">
+    <wsdl:part name="parameters" element="tns:LogonUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PersonalizationSoap">
+    <wsdl:operation name="GetCategories">
+      <wsdl:input message="tns:GetCategoriesSoapIn" />
+      <wsdl:output message="tns:GetCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Orphans">
+      <wsdl:input message="tns:OrphansSoapIn" />
+      <wsdl:output message="tns:OrphansSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Standard">
+      <wsdl:input message="tns:StandardSoapIn" />
+      <wsdl:output message="tns:StandardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_List">
+      <wsdl:input message="tns:AssetMgmt_ListSoapIn" />
+      <wsdl:output message="tns:AssetMgmt_ListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_List_Formated">
+      <wsdl:input message="tns:AssetMgmt_List_FormatedSoapIn" />
+      <wsdl:output message="tns:AssetMgmt_List_FormatedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_Image">
+      <wsdl:input message="tns:AssetMgmt_ImageSoapIn" />
+      <wsdl:output message="tns:AssetMgmt_ImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_Image_Formated">
+      <wsdl:input message="tns:AssetMgmt_Image_FormatedSoapIn" />
+      <wsdl:output message="tns:AssetMgmt_Image_FormatedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonalization">
+      <wsdl:input message="tns:UpdatePersonalizationSoapIn" />
+      <wsdl:output message="tns:UpdatePersonalizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePE">
+      <wsdl:input message="tns:UpdatePESoapIn" />
+      <wsdl:output message="tns:UpdatePESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogonUser">
+      <wsdl:input message="tns:LogonUserSoapIn" />
+      <wsdl:output message="tns:LogonUserSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PersonalizationSoap" type="tns:PersonalizationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCategories">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/GetCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Orphans">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/Orphans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Standard">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/Standard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_List">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_List_Formated">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_List_Formated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_Image">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_Image" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_Image_Formated">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_Image_Formated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonalization">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/UpdatePersonalization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePE">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/UpdatePE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogonUser">
+      <soap:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/LogonUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PersonalizationSoap12" type="tns:PersonalizationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCategories">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/GetCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Orphans">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/Orphans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Standard">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/Standard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_List">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_List" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_List_Formated">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_List_Formated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_Image">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_Image" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssetMgmt_Image_Formated">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/AssetMgmt_Image_Formated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonalization">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/UpdatePersonalization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePE">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/UpdatePE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogonUser">
+      <soap12:operation soapAction="http://www.OrderExpress.com/QSPFormWebServices/LogonUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Personalization">
+    <wsdl:port name="PersonalizationSoap" binding="tns:PersonalizationSoap">
+      <soap:address location="http://localhost/QSPFormWebServices/Personalization.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PersonalizationSoap12" binding="tns:PersonalizationSoap12">
+      <soap12:address location="http://localhost/QSPFormWebServices/Personalization.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

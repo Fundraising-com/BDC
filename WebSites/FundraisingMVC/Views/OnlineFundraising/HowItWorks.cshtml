@@ -1,0 +1,68 @@
+@using System.Configuration
+@{
+    ViewBag.Title = "How a Fundraising.com Online Fundraiser Works - Fundraising.com";
+    ViewBag.Description = "Raise money by fundraising online with popular magazines and other profitable fundraising products";
+    ViewBag.Keywords = "profitable fundraising products, online fundraiser, fundraising/com online fundraiser, online store, raise money";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("HowItWorks", "OnlineFundraising");
+}
+<div style="margin-top:125px">
+   <div class="row">
+      <div class="col-sm-12" style="margin:0px; text-align:center">
+         <h2>ONLINE FUNDRAISING</h2>
+         <h3 style="color:#a8b9c0">HOW IT WORKS</h3>
+         <hr style="color:#00768c; width:20%; border:solid 0.5px" />
+      </div>
+   </div>
+   <br />
+   <div class="row">
+      <div class="col-sm-4">
+         <img class="img-responsive" src="~/Content/images/public/howitworks-page_03.jpg" alt="online fundraising ideas" style="margin: auto;" />
+         <div style="text-align:center; margin-bottom:15px">Personalize your store with your photos, logo and message.</div>
+      </div>
+      <div class="col-sm-4">
+         <img class="img-responsive" src="~/Content/images/public/howitworks-page_05.jpg" alt="online fundraising ideas" style="margin: auto;" />
+         <div style="text-align:center; margin-bottom:15px">Invite your group members, friends and family to join the cause and spread the word via email and Social Media</div>
+      </div>
+      <div class="col-sm-4">
+         <img class="img-responsive" src="~/Content/images/public/howitworks-page_07.jpg" alt="online fundraising ideas" style="margin: auto;" />
+         <div style="text-align:center; margin-bottom:15px">Sell popular magazines, including titles like People and Sports Illustrated. Or sell cool stuff to Inspire Kindness! You keep 40% profit.</div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-sm-12" style="margin-top:40px">
+         <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/Home/Register?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Register">
+            <img class="img-responsive hidden-xs" src="~/Content/external/newhp/howitworks-page_12.jpg" alt="online fundraising ideas" style="margin: auto; display: block;" border="0" />
+         </a>
+         <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/Home/Register?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Register">
+            <img class="img-responsive visible-xs" src="~/Content/external/newhp/m-howitworks-page_03.jpg" alt="online fundraising ideas" style="margin: auto; display: block;" border="0" />
+         </a>
+         <div style="text-align:center; margin-top:15px" class="visible-xs">
+            <span style="font-weight:bold; font-size:30px; margin-bottom:15px">Create your Online Store</span>
+            <br /><br />
+            <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/Home/Register?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" class="btn btn-primary btn-lg" style="background-color:#9db624; border-radius: 24px; font-size:20px; border:0px; width:50%">START NOW</a>
+         </div>
+
+      </div>
+
+   </div>
+   <div class="row" style="margin-top:30px; margin-bottom:30px">
+      <div class="col-sm-10 col-sm-offset-1">
+         <span style="font-weight:bold; font-size:20px;color:#9db624;">What do I get with my Online Fundraising Store?</span><br /><br />
+         <ul >
+            <li style="margin-bottom:10px">The ability to customize your Online Fundraising Store with your own logo, photos and text</li>
+               <li style="margin-bottom:10px">Enjoy full control of your campaign and track your sales and profits through a personal Campaign Manager</li>
+               <li style="margin-bottom:10px">An online fundraising store offering a wide variety of popular magazines, and products to Inspire Kindness. Items ship direct to your supporters!</li>
+               <li style="margin-bottom:10px">A dashboard to easily invite your supporters to participate by shopping on your personalized fundraising store. Share your store's link on Social Media and by email.</li>
+               <li>Get reports about your sales and profits earned</li>
+         </ul>
+         <br /><br />
+               <span style="font-weight:bold; font-size:20px;">Your personalized online fundraising store stays open 24 hours a day, 7 days a week!</span><br /><br />
+         <img class="img-responsive" src="~/Content/images/public/howitworks-page_15.jpg" alt="online fundraising ideas" style="margin: auto; display: block;" border="0" /><br /><br />
+         <div style="text-align:center; margin-top:15px">
+            <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/Home/Register?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" class="btn btn-default btn-lg" style="border-color:black; border-style:solid; font-size:3vw; width:90%">Start my Fundraising Campaign</a>
+         </div>
+      </div>
+      </div>
+</div>
+

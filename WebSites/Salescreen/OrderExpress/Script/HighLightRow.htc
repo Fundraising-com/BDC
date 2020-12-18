@@ -1,0 +1,27 @@
+<PUBLIC:COMPONENT tagName="HighLightRow">
+	<PUBLIC:PROPERTY NAME="bgcolor" />
+	<PUBLIC:ATTACH EVENT="onactivate" FOR="element" ONEVENT="SetBGColor_On()" />
+	<PUBLIC:ATTACH EVENT="ondeactivate" FOR="element" ONEVENT="SetBGColor_Off()" />
+	<PUBLIC:ATTACH EVENT="onmouseover" FOR="element" ONEVENT="SetBGColor_On()" />
+	<PUBLIC:ATTACH EVENT="onmouseout" FOR="element" ONEVENT="SetBGColor_Off()" />
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	var OldBgColor;
+	
+	function SetBGColor_On()
+	{		
+		re = /_off/gi;
+		element.className = element.className.replace(re,"_on");		
+	}
+	
+	function SetBGColor_Off()
+	{
+		re = /_on/gi;
+		element.className = element.className.replace(re,"_off");
+	}
+
+</SCRIPT>
+
+

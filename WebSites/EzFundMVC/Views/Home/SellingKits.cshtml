@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "Request a Selling Kit - EzFund.com";
+    ViewBag.Description = "Your good cause deserves a great fundraiser! Traditional and online fundraising ideas for schools, sports teams, churches and non-profits. Get our free selling kit! ";
+    ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row nav-section">
+    <div class="container">
+        <div class="row">
+            <ul class="breadcrumb">
+                <li><a ng-href="/">Home</a></li>
+                <li class="active">Request a Free Selling Kit</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container request-form" ng-controller="SellingKitFormController as sellingkitRequestCtrl">
+    <form name="sellingkitRequestForm" id="sellingkitRequestForm" role="form" ng-submit="sellingkitRequestForm.$submitted && sellingkitRequestForm.$valid && sellingkitRequestCtrl.Send();">
+        <div class="row row-padding-lg">
+            <div class="col-xs-12">
+                <h3>Ready to Sign-up for a "Fundraising Sale"? Complete this form.</h3>
+            </div>
+        </div>
+        <div class="row row-padding-lg">
+            <div class="col-xs-12">
+                To receive your FREE Selling Kits please complete all required information in the form below.
+                A Fundraising Consultant will contact you when your selling kits are ready to ship.
+                <br /><br />
+                Note: If you are NOT ready to sign-up for a Fundraising program and just wish to receive
+                additional product information, please click <a href="/request-a-kit" title="Fundraising Guide" style="font-weight:bold; text-decoration:none">here</a> to request your free fundraising guide.
+                <br /><br />
+                These programs are recommended for groups with Goals of $1,000 & up in profit (200+ items sold).
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <h4>CHOOSE A FUNDRAISER</h4>
+            </div>
+        </div>
+        
+        <div class="row row-padding-sm">
+            <div class="col-sm-5">
+                <select class="form-control input-lg" style="height: 50px;" id="kit.program" ng-required="true" ng-model="sellingkitRequestCtrl.kit.primaryprogramcode" ng-options="opt.pgmdesctxt as opt.pgmdesctxt for opt in sellingkitRequestCtrl.sellingkitOptions | orderBy: 'PGMSEQNBR'" ng-cloak>
+                    <option value="">Select one primary program*</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <select class="form-control input-lg" style="height: 50px;" id="kit.tagprogram" ng-required="false" ng-model="sellingkitRequestCtrl.kit.tagprogram" ng-cloak>
+                    <option value="">Select a Tag Program (add more variety - optional)</option>
+                    <option value="PV-3767">Pretzels, Pumkin Rolls, Cheesecake...</option>
+                </select>
+            </div>
+
+        </div>
+        <br /><br />
+        <div class="row row-padding-xm">
+            <div class="col-sm-4 col-element-margin-sm">
+                How many sellers in your organization?*
+            </div>
+            <div class="col-sm-4 col-element-margin-sm">
+                <input type="number" min="0" class="form-control input-md" id="kit.member" ng-model="sellingkitRequestCtrl.kit.NumberOfMembers" maxlength="64">
+            </div>
+        </div>
+        <br /><br />
+        <div class="row row-padding-xm">
+            <div class="col-sm-4 col-element-margin-sm">
+                How much money are you trying to raise?*
+            </div>
+            <div class="col-sm-4 col-element-margin-sm">
+                <input type="number" min="0" class="form-control input-md" id="kit.amount" ng-model="sellingkitRequestCtrl.kit.ProfitAmount" maxlength="64">
+            </div>
+        </div>
+        <br /><br />
+        <div class="row row-padding-xm">
+            <div class="col-sm-4 col-element-margin-sm">
+                When do you want to kick-off your sale?*
+            </div>
+            <div class="col-sm-4 col-element-margin-sm">
+                <input type="date" min="0" class="form-control input-md" id="kit.startdate" ng-model="sellingkitRequestCtrl.kit.StartDate" maxlength="64">
+            </div>
+        </div>
+        <br /><br />
+        <div class="row row-padding-xm">
+            <div class="col-sm-4 col-element-margin-sm">
+                Are you interested in a prize incentive program?*
+            </div>
+            <div class="col-sm-4 col-element-margin-sm">
+                <select ng-model="sellingkitRequestCtrl.kit.PrizeRequired" id="kit.PrizeRequired" class="form-control">
+                    <option value=1>Yes</option>
+                    <option value=2>No</option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-element-margin-sm" ng-hide="sellingkitRequestCtrl.kit.PrizeRequired == 2">
+                <input type="text" class="form-control input-md" placeholder="Specify general age level for prizes" id="kit.age" ng-required="sellingkitRequestCtrl.kit.PrizeRequired != 2" ng-model="sellingkitRequestCtrl.kit.AgeLevel" maxlength="40">
+            </div>
+        </div>
+        <br /><br />
+        <div class="row row-padding-xs">
+            <div class="col-xs-12">
+                <textarea class="form-control" rows="3" ng-required="false" id="kit.specialcomment" placeholder="Any special considerations or additional information to better help you with your fundraiser?" ng-model="sellingkitRequestCtrl.kit.SpecialNoteText" maxlength="4000"></textarea>
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-sm-12">
+                <hr />
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <h4>ABOUT YOUR ORGANIZATION</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="Contact Name*" id="kit.FirstName" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Name" maxlength="40">
+            </div>
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="Title*" id="kit.title" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Title" maxlength="40">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="Organization Name*" id="kit.org" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Group" maxlength="40">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="Street Address*" id="kit.address" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Address1.Address1" maxlength="40">
+            </div>
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="Apt. or Suite" id="kit.suite" ng-required="false" ng-model="sellingkitRequestCtrl.kit.Address2.Address2" maxlength="40">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="City*" id="kit.city" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Address1.City" maxlength="40">
+
+            </div>
+            <div class="col-sm-6 col-element-margin-sm">
+                <select class="form-control input-lg" id="kit.Address1.Region"  ng-model="sellingkitRequestCtrl.kit.Address1.Region" ng-required="true" ng-options="state as state.Name for state in sellingkitRequestCtrl.states track by state.Code">
+                    <option value="">Select State*</option>
+                </select>
+            </div>
+            
+           
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" class="form-control input-lg" placeholder="Zip Code*" id="kit.zipcode" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Address1.PostCode" maxlength="40">
+            </div>
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="email" class="form-control input-lg" placeholder="Email*" id="kit.email" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Email" maxlength="40">
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-element-margin-sm">
+                <input type="text" ui-mask="(999) 999-9999" class="form-control input-lg" placeholder="Phone*" ui-mask-placeholder id="kit.Phone" ng-required="true" ng-model="sellingkitRequestCtrl.kit.Phone1" maxlength="25">
+            </div>
+            <div class="col-sm-6 col-element-margin-sm">
+                <select class="form-control input-lg" style="height: 50px;"  ng-required="true" ng-model="sellingkitRequestCtrl.kit.grouptype" ng-options="opt.Name as opt.Name for opt in sellingkitRequestCtrl.organizationtTypeOptions" ng-cloak>
+                    <option value="">Type of Organization*</option>
+                </select>
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-sm-12">
+                <hr />
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <h4>OTHER INFORMATION</h4>
+            </div>
+        </div>
+        <br />
+        <div class="row row-padding-xm">
+            <div class="col-sm-3 col-element-margin-sm">
+                How did you learn about our website?*
+            </div>
+            <div class="col-sm-4 col-element-margin-sm">
+                <select class="form-control input-md" ng-required="true"  ng-model="sellingkitRequestCtrl.kit.ReferralCode" ng-options="opt.ReferralCode as opt.ReferralTxt for opt in sellingkitRequestCtrl.learnAboutUsOptions" ng-cloak>
+                    <option value="">Select one*</option>
+                </select>
+                
+            </div>
+           
+        </div>
+        <br />
+        <div class="row row-padding-xs">
+            <div class="col-xs-12">
+                <textarea class="form-control" rows="3" ng-required="false" id="kit.comments" placeholder="Any additional comments?" ng-model="sellingkitRequestCtrl.kit.CommentText" maxlength="4000"></textarea>
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group" ng-cloak>
+            <div class="row row-padding-sm">
+                <div class="col-xs-12 text-center btn-padding">
+                    @*<button type="button" class="btn btn-primary btn-lg btn-request" ng-show="kitRequestCtrl.ActionState != 1 && !kitRequestForm.$valid" ng-disabled="true">Please fill all required Fields</button>*@
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+                <br /><br />
+                <div class="col-xs-12 text-center"><br />
+                    You will receive a phone confimation when your selling kit is ready to ship.
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <span class="text-info" ng-show="sellingkitRequestCtrl.ActionState == 1">
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+                <uib-progressbar class="progress-striped" max="100" value="kitRequestCtrl.progress" type="warning" animate="true"></uib-progressbar>
+            </span>
+        </div>
+        <div class="row">
+            <div class="alert alert-danger" role="alert" ng-show="sellingkitRequestCtrl.ActionState == 3">
+                <strong>{{sellingkitRequestCtrl.error.Message}}</strong>
+                <ul class="text-danger" ng-show="sellingkitRequestCtrl.ActionState == 3">
+                    <li ng-repeat="e in sellingkitRequestCtrl.error.ModelStateErrors">
+                        {{e}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+        </div>
+       
+
+

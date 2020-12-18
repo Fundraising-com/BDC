@@ -1,0 +1,17 @@
+﻿@using GA.BDC.Web.MGP.Models.Branding
+
+@{
+    ViewBag.Title = "GroupNotFound";
+    Layout = "~/Views/Shared/_public.cshtml";
+   var partner = ViewBag.Partner as Partner;
+}
+<div class="row">
+   <div class="col-xs-12 text-center">
+      <h1>Oops! We can't find your @(partner.GroupDisplay.ToLower())s</h1>
+      <h2>
+         You can find more @(partner.GroupDisplay.ToLower())s <a href="@Url.Action("FindAGroup")"><strong>here</strong></a>
+      </h2>
+   </div>
+</div>
+
+

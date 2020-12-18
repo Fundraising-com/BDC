@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="ImportOrder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Order" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="uid" type="xs:string" />
+                            <xs:element name="CustomerID" type="xs:string" />
+                            <xs:element name="DateOrdered" type="xs:date" />
+                            <xs:element name="SubTotal" type="xs:decimal" />
+                            <xs:element name="ShippingTotal" type="xs:decimal" />
+                            <xs:element name="HandlingTotal" type="xs:decimal" />
+                            <xs:element name="CountryTax" type="xs:decimal" />
+                            <xs:element name="StateTax" type="xs:decimal" />
+                            <xs:element name="PayMethodID" type="xs:string" />
+                            <xs:element name="GiftCertificateTotal" type="xs:decimal" />
+                            <xs:element name="DownloadDate" type="xs:date" minOccurs="0" />
+                            <xs:element name="TotalBilled" type="xs:decimal" />
+                            <xs:element name="AmountRemaining" type="xs:decimal" />
+                            <xs:element name="OrderNumber" type="xs:string" />
+                            <xs:element name="TotalAppliedDiscounts" type="xs:decimal" />
+                            <xs:element name="LocalTaxTotal" type="xs:decimal" />
+                            <xs:element name="Units" type="xs:integer" />
+                            <xs:element name="GrandTotal" type="xs:decimal" />
+                            <xs:element name="PaymentsPending" type="xs:string" />
+                            <xs:element name="BOPaymentsPending" type="xs:boolean" />
+                            <xs:element name="Void" type="xs:boolean" />
+                            <xs:element name="Referrer" type="xs:integer" minOccurs="0" />
+                            <xs:element name="PayMethod">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="eCheck" />
+                                        <xs:enumeration value="COD" />
+                                        <xs:enumeration value="PO" />
+                                        <xs:enumeration value="PhoneFax" />
+                                        <xs:enumeration value="PayPal" />
+                                        <xs:enumeration value="Credit Card" />
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="PaymentStatus">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Pending" />
+                                        <xs:enumeration value="Collected" />
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Customer">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="uid" type="xs:string" />
+                                        <xs:element name="ExternalNumber" type="xs:string" minOccurs="1" maxOccurs="1" />
+                                        <xs:element name="FirstName" type="xs:string" />
+                                        <xs:element name="LastName" type="xs:string" />
+                                        <xs:element name="Pass" type="xs:string" />
+                                        <xs:element name="EMail" type="xs:string" />
+                                        <xs:element name="Subscribed" type="xs:boolean" />
+                                        <xs:element name="CustGroupID" type="xs:string" />
+                                        <xs:element name="CustomerAddress" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="uid" type="xs:string" />
+                                                    <xs:element name="CustomerID" type="xs:string" />
+                                                    <xs:element name="Type" type="xs:string" />
+                                                    <xs:element name="NickName" type="xs:string" />
+                                                    <xs:element name="FirstName" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="MI" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="LastName" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Company" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Address1" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Address2" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="City" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="State" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Zip" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Country" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Phone" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Fax" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="EMail" type="xs:string" minOccurs="0" />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="OrderAddress" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="uid" type="xs:string" />
+                                        <xs:element name="OrderID" type="xs:string" />
+                                        <xs:element name="FirstName" type="xs:string" minOccurs="0" />
+                                        <xs:element name="MI" type="xs:string" minOccurs="0" />
+                                        <xs:element name="LastName" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Company" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Address1" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Address2" type="xs:string" minOccurs="0" />
+                                        <xs:element name="City" type="xs:string" minOccurs="0" />
+                                        <xs:element name="State" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Zip" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Country" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Phone" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Fax" type="xs:string" minOccurs="0" />
+                                        <xs:element name="EMail" type="xs:string" minOccurs="0" />
+                                        <xs:element name="ShipMethod" type="xs:string" minOccurs="0" />
+                                        <xs:element name="CountryTaxRate" type="xs:decimal" />
+                                        <xs:element name="StateTaxRate" type="xs:decimal" />
+                                        <xs:element name="LocalTaxRate" type="xs:decimal" />
+                                        <xs:element name="DiscountTotal" type="xs:decimal" />
+                                        <xs:element name="IsShippingTaxed" type="xs:boolean" />
+                                        <xs:element name="ShippableShippingTotal" type="xs:decimal" />
+                                        <xs:element name="HandlingTotal" type="xs:decimal" />
+                                        <xs:element name="ShipType" type="xs:string" minOccurs="0" />
+                                        <xs:element name="BackOrderShippingTotal" type="xs:decimal" />
+                                        <xs:element name="BOQuantity" type="xs:integer" />
+                                        <xs:element name="NickName" type="xs:string" />
+                                        <xs:element name="BOPending" type="xs:boolean" />
+                                        <xs:element name="Pending" type="xs:string" minOccurs="0" />
+                                        <xs:element name="ShippingCarrier" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="NONE" />
+                                                    <xs:enumeration value="General" />
+                                                    <xs:enumeration value="CanadaPost" />
+                                                    <xs:enumeration value="UPS" />
+                                                    <xs:enumeration value="FedEx" />
+                                                    <xs:enumeration value="USPS" />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="TotalBilled" type="xs:decimal" />
+                                        <xs:element name="AmountRemaining" type="xs:decimal" />
+                                        <xs:element name="CODAmount" type="xs:decimal" />
+                                        <xs:element name="SpecialInstruction" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Type">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="Billing" />
+                                                    <xs:enumeration value="Shipping" />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        
+                                        <xs:element name="Product" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="uid" type="xs:string" />
+                                                    <xs:element name="OrderID" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="ProductID" type="xs:string" />
+                                                    <xs:element name="AddressID" type="xs:string" />
+                                                    <xs:element name="Quantity" type="xs:integer" />
+                                                    <xs:element name="ProductName" type="xs:string" />
+                                                    <xs:element name="IsOnSale" type="xs:boolean" />
+                                                    <xs:element name="Price" type="xs:decimal" />
+                                                    <xs:element name="SalePrice" type="xs:decimal" />
+                                                    <xs:element name="IsGiftWrap" type="xs:boolean" />
+                                                    <xs:element name="GiftwrapPrice" type="xs:decimal" />
+                                                    <xs:element name="GiftWrapQuantity" type="xs:integer" />
+                                                    <xs:element name="ItemCode" type="xs:string" />
+                                                    <xs:element name="IsShipable" type="xs:boolean" />
+                                                    <xs:element name="ShipPrice" type="xs:decimal" />
+                                                    <xs:element name="Cost" type="xs:decimal" />
+                                                    <xs:element name="HasCountryTax" type="xs:boolean" />
+                                                    <xs:element name="HasStateTax" type="xs:boolean" />
+                                                    <xs:element name="HasLocalTax" type="xs:boolean" />
+                                                    <xs:element name="Downloaded" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="ItemPrice" type="xs:decimal" />
+                                                    <xs:element name="BackOrderedQty" type="xs:integer" />
+                                                    <xs:element name="itemTotal" type="xs:decimal" minOccurs="0" />
+                                                    <xs:element name="Weight" type="xs:decimal" />
+                                                    <xs:element name="Email" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="DownloadOneTime" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="IsItemEbay" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="VendorName" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="ProductType" type="xs:string" />
+                                                    <xs:element name="RecurringSubscriptionPrice" type="xs:decimal" minOccurs="0" />
+                                                    <xs:element name="PaymentPeriod" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="Term" type="xs:string" minOccurs="0" />
+                                                    <xs:element name="BillingStartDate" type="xs:date" minOccurs="0" />
+                                                    <xs:element name="Sku" type="xs:string" minOccurs="0" />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Payment" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="uid" type="xs:string" minOccurs="0" />
+                                        <xs:element name="Type" type="xs:string" minOccurs="0" />
+                                        <xs:element name="PONumber" type="xs:string" minOccurs="0" />
+                                        <xs:element name="CreditCardNumber" type="xs:string" minOccurs="0" />
+                                        <xs:element name="CardType" type="xs:string" minOccurs="0" />
+                                        <xs:element name="CheckNumber" type="xs:string" minOccurs="0" />
+                                        <xs:element name="ExpireMonth" type="xs:integer" minOccurs="0" />
+                                        <xs:element name="ExpireYear" type="xs:integer" minOccurs="0" />
+                                        <xs:element name="BankName" type="xs:string" minOccurs="0" />
+                                        <xs:element name="RoutingNumber" type="xs:string" minOccurs="0" />
+                                        <xs:element name="AccountNumber" type="xs:string" minOccurs="0" />
+                                        <xs:element name="SecurityCode" type="xs:string" minOccurs="0" />
+                                        <xs:element name="OrderID" type="xs:string" minOccurs="0" />
+                                        <xs:element name="StartMonth" type="xs:integer" minOccurs="0" />
+                                        <xs:element name="StartYear" type="xs:integer" minOccurs="0" />
+                                        <xs:element name="IsDirty" type="xs:string" minOccurs="0" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="PaymentResponse" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="uid" type="xs:string"  minOccurs="1" maxOccurs="1" />
+                                        <xs:element name="OrderID" type="xs:string" minOccurs="1" maxOccurs="1" />
+                                        <xs:element name="CustTransNo" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="MerchantTransNo" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="AVSResult" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="ActionCode" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="RetrievalCode" type="xs:string" minOccurs="0" maxOccurs="1"  />
+                                        <xs:element name="AuthorizationNo" type="xs:string" minOccurs="0" maxOccurs="1"  />
+                                        <xs:element name="Success" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="CVVResult" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="ErrorLocation" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="AuxMessage" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="ErrorMessage" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                                        <xs:element name="FullResponse" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="SchemaVersion" type="xs:decimal" use="required" fixed="1.0" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

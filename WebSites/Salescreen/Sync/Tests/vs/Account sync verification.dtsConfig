@@ -1,0 +1,17 @@
+<?xml version="1.0"?><DTSConfiguration><DTSConfigurationHeading><DTSConfigurationFileInfo GeneratedBy="RDIGEST\pgirard" GeneratedFromPackageName="Sync Verification" GeneratedFromPackageID="{99F56CA3-6F2D-417C-BDD4-6553BBFEE446}" GeneratedDate="3/30/2010 11:55:17 AM"/></DTSConfigurationHeading><Configuration ConfiguredType="Property" Path="\Package.Connections[QDC400.QS36F].Properties[ConnectionString]" ValueType="String"><ConfiguredValue>Data Source=10.176.182.241;User ID=ORDENT;Password=password;Initial Catalog=QDC400;Provider=IBMDASQL.DataSource.1;Persist Security Info=True;Default Collection=QS36F;Catalog Library List=QS36F;</ConfiguredValue></Configuration><Configuration ConfiguredType="Property" Path="\Package.Connections[QSPWorkspace].Properties[ConnectionString]" ValueType="String"><ConfiguredValue>Data Source=TMPQSPMA7;User ID=sync_account;Password=v3sp4esk;Initial Catalog=QSPWorkspace;Provider=SQLNCLI.1;Persist Security Info=True;Auto Translate=False;</ConfiguredValue></Configuration><Configuration ConfiguredType="Property" Path="\Package.Variables[User::q_update_account].Properties[Expression]" ValueType="String"><ConfiguredValue>"UPDATE QS36F.ARMCUSP
+SET ARLCHG = YEAR(current_timestamp) 
+|| substr(digits(MONTH(current_timestamp))
+,9) 
+|| substr(digits(DAY(current_timestamp)),9)
+|| substr(digits(HOUR(current_timestamp)),9)
+|| substr(digits(MINUTE(current_timestamp)),9)
+|| substr(digits(SECOND(current_timestamp)),9)
+WHERE ARCUST = " +  @[User::ARCUST]</ConfiguredValue></Configuration><Configuration ConfiguredType="Property" Path="\Package.Variables[User::q_update_pa].Properties[Expression]" ValueType="String"><ConfiguredValue>"UPDATE QS36F.PAMCDPP
+SET PALCHG = YEAR(current_timestamp) 
+|| substr(digits(MONTH(current_timestamp))
+,9) 
+|| substr(digits(DAY(current_timestamp)),9)
+|| substr(digits(HOUR(current_timestamp)),9)
+|| substr(digits(MINUTE(current_timestamp)),9)
+|| substr(digits(SECOND(current_timestamp)),9)
+WHERE PAACT# = " +  @[User::ARCUST]</ConfiguredValue></Configuration></DTSConfiguration>

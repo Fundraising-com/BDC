@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Group Donation Report";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var eventBranding = ViewBag.Event as GA.BDC.Web.MGP.Models.Branding.Event;
+}
+<div id="report" ng-controller="campaignManagerController">
+    <div class="row" ng-init="participantId = @eventBranding.ParticipantId; searchType='all'; findGroupDonationReport();">
+        <div class="col-sm-12">
+            <h1 id="title">My Group Report</h1>
+        </div>
+    </div>
+    <div class="row" ng-cloak>
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h1>{{totalAmount | currency}} <small>donation</small></h1>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h1>{{totalProfit | currency}} <small>profit</small></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="executingAction" ng-cloak>
+        <div class="col-md-12 text-center">
+            <img src="/Content/images/public/content/loading.gif" alt="Loading" />
+        </div>
+    </div>
+    <div class="row" ng-cloak>
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="active"><a href="#grid" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>&nbsp;&nbsp;Grid</a></li>
+                <li><a href="#chart" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;&nbsp;Chart</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="grid">
+                    <br />
+                    <table class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Member</th>
+                                <th class="text-center">Donations</th>
+                                <th class="text-center">Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in data">
+                                <td>{{row.MemberName}}</td>
+                                <td class="text-center">{{row.Donations | currency}}</td>
+                                <td class="text-center">{{row.Profit | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="chart">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <center>
+                                <div id="chartContainer"></div>            
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="/Scripts/highcharts/highcharts.js"></script>
+}
+

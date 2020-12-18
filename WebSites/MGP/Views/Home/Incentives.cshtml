@@ -1,0 +1,44 @@
+﻿@using GA.BDC.Web.MGP.Models.Branding
+@{
+   ViewBag.Title = "Fundraising Online, Free Prizes !";
+   ViewBag.Description = "My.Fundraising.com : Start Online fundraising and get free prizes !!";
+   ViewBag.Keywords = "online fundraising prizes, Win, online fundraising campaign, Free online fundraising campaign, free ga savings pass,  fundraising online, fundraise for group to win, Prizes, fundraising online, fundraising bonuses, online magazine fundraising prize, fundraising campaign online, magazine fundraisers online";
+   Layout = "~/Views/Shared/_public2.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("Incentives", "Home");
+   var partnerBranding = ViewBag.Partner as Partner;
+}
+
+<div id="incentives">
+    <div class="row">
+        <div class="col-md-12 text-center">
+           <h1>Incentives</h1>
+           <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="description_text">We integrate free prizing into online @partnerBranding.GroupDisplay.ToLower()s to engage, motivate and reward your group members!</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <img src="/Content/images/common/gasavingpass.jpg" alt="Cinema Prizes"/>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="description_text">We keep fundraising FUN by providing built-in prizing. This not only motivates group members to participate in your @partnerBranding.GroupDisplay.ToLower(), but gives them goals to work toward and serves as a 'thank you' for their involvement!
+                            <br />
+                            <br />
+                            <span class="incentive_title">Night Out</span>
+                            <br />
+                            <br />
+                            Members who invite 12 people to view your online campaign and make just one sale receive a <strong><a href="https://www.fundraising.com/products/discount-fundraisers/all-discount-fundraisers/national-savings-card" target="_blank">GA Savings Pass</a></strong> redeemable online.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

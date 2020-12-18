@@ -1,0 +1,213 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using QSP.OrderExpress.Web;
+using QSPForm.Common.DataDef;
+
+public partial class CouponStep_Detail : BaseWebFormControl
+{
+    private QSPForm.Business.CommonSystem comSys = new QSPForm.Business.CommonSystem();
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        //LoadStep();
+        //if (!IsPostBack)
+        //{
+        //    this.phContainer.Controls[0].DataBind();
+        //}
+    }
+    protected override void OnInit(EventArgs e)
+    {
+        LoadStep();
+        base.OnInit(e);
+    }
+    protected void btnBack_Click(object sender, ImageClickEventArgs e)
+    {
+        PreviousStep();
+    }
+    protected void btnNext_Click(object sender, ImageClickEventArgs e)
+    {
+        NextStep();
+    }
+    public int VendorID
+    {
+        get { return Convert.ToInt32(Request.QueryString["v"]); }
+    }
+
+    public int Step
+    {
+        get 
+        {
+            int step = 0;
+            if (Session["Step"] != null)
+            {
+                step = Convert.ToInt32(this.Session["Step"].ToString());
+            }
+            else
+            {
+                Session["Step"] = 2;
+                return 2;
+            }
+            return step;
+        }
+        set 
+        {
+            this.Session["Step"] = value;
+        }
+    }
+
+    public DataSet DataSource
+    {
+        get 
+        {
+            try 
+            {
+                if (this.ViewState["DataSource"] == null)
+                {
+                    QSPForm.Common.DataDef.PromoCouponTable tbl = new QSPForm.Common.DataDef.PromoCouponTable();
+                    DataRow r = tbl.NewRow();
+                    r[QSPForm.Common.DataDef.PromoCouponTable.FLD_VENDOR_ID] = this.VendorID;
+                    tbl.Rows.Add(r);
+                    DataSet dts = new DataSet();
+                    dts.Tables.Add(tbl);
+                    this.ViewState["DataSource"] = dts;
+                    return dts;
+                }
+                else 
+                {
+                    return (DataSet)this.ViewState["DataSource"]; 
+                }
+                
+            }
+            catch { return null; }
+        }
+        set 
+        {
+            this.ViewState["DataSource"] = value;
+        }
+    }
+
+    private void PreviousStep()
+    {
+        try
+        {
+            Step = Step - 1;
+            LoadStep();
+            this.phContainer.Controls[0].DataBind();
+        }
+        catch (Exception e)
+        {
+            Step = Step + 1;
+            this.Page.SetPageError(e);
+        }
+    }
+    private void NextStep()
+    {
+        try
+        {
+            Step = Step + 1;
+            if(Step == 3)
+                UpdateDataSource();
+            LoadStep();
+            this.phContainer.Controls[0].DataBind();
+        }
+        catch (Exception e)
+        {
+            Step = Step - 1;
+            this.Page.SetPageError(e);
+        }
+    }
+
+    private void LoadStep()
+    {
+        
+
+            if (this.Step == 1)
+            {
+                string url = this.Page.GetPageToGo(QSPForm.Business.AppItem.CouponStep_1);
+                Response.Redirect(url,false);
+            }
+            else if ((this.Step == 2) || (this.Step == 0))
+            {
+                LoadHeaderForm();
+            }
+            else if (this.Step == 3)
+            {
+                LoadDetailForm();
+            }
+            else if(this.Step >= 4)
+            {
+                Save();
+                string url = this.Page.GetPageToGo(QSPForm.Business.AppItem.CouponStep_4);
+                Response.Redirect(url);
+            }
+            else
+            {
+                throw new Exception("enable to load the right control");
+            }
+    }
+
+    private void LoadHeaderForm()
+    { 
+        Control ctrl = LoadControl("Promo_CouponHeaderForm.ascx");
+        ((BasePromo_CouponDetail)ctrl).DataSource = this.DataSource;
+        //ctrl.DataBind();
+
+        phContainer.Controls.Clear();
+        phContainer.Controls.Add(ctrl);
+       // phContainer.DataBind();
+        btnBack.AlternateText = "Vendor Selection";
+        btnNext.ImageUrl = "images/btnNext.gif";
+
+    }
+
+    private void LoadDetailForm()
+    {
+        Control ctrl = LoadControl("CouponStep_Validation.ascx");
+        ((BasePromo_CouponDetail)ctrl).DataSource = this.DataSource;
+        
+        //ctrl.DataBind();
+
+        //((BasePromo_CouponDetail)ctrl).DataSrouce = this
+        phContainer.Controls.Clear();
+        phContainer.Controls.Add(ctrl);
+        //phContainer.DataBind();
+        btnNext.ImageUrl = "images/btnConfirm.gif";
+        btnBack.AlternateText = "Coupon Information";
+    }
+
+    public void UpdateDataSource()
+    {
+        DataSet dts = this.DataSource;
+        QSP.OrderExpress.Web.BasePromo_CouponDetail ctrl = (BasePromo_CouponDetail)this.phContainer.Controls[0];
+        DataRow update = ctrl.UpdatedDataSource.Tables[0].Rows[0];
+        DataRow r = dts.Tables[0].Rows[0];
+
+        comSys.UpdateRow(r, PromoCouponTable.FLD_FM_ID, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_FM_NAME, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_DESCRIPTION, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_PROMO_LOGO_ID, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_PROMO_LOGO_NAME, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_PROMO_TEXT_ID, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_PROMO_TEXT_NAME, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_LABELING_START_DATE, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_LABELING_END_DATE, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_EXPIRATION_DATE, update);
+        comSys.UpdateRow(r, PromoCouponTable.FLD_VENDOR_ID, update);
+       
+        DataSource = dts;
+        
+        //comSys.UpdateRow(r,QSPForm.Common.DataDef.PromoCouponTable.FLD_EXPIRATION_DATE,);
+    }
+    private void Save()
+    {
+    }
+    
+}

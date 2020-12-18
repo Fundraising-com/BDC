@@ -1,0 +1,230 @@
+<SCRIPT LANGUAGE=VBScript RUNAT=Server>                                                     
+Sub Application_OnStart
+	'==FrontPage Generated - startspan==
+	Dim FrontPage_UrlVars(2)
+	'--Project Data Connection
+		Application("ezfund_ConnectionString") = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=URL=fpdb/storefront.mdb"
+		FrontPage_UrlVars(0) = "ezfund_ConnectionString"
+		Application("ezfund_ConnectionTimeout") = 15
+		Application("ezfund_CommandTimeout") = 30
+		Application("ezfund_CursorLocation") = 3
+		Application("ezfund_RuntimeUserName") = ""
+		Application("ezfund_RuntimePassword") = ""
+	'--Project Data Connection
+		Application("ezupgraded_ConnectionString") = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=URL=db/SF6.mdb"
+		FrontPage_UrlVars(1) = "ezupgraded_ConnectionString"
+		Application("ezupgraded_ConnectionTimeout") = 15
+		Application("ezupgraded_CommandTimeout") = 30
+		Application("ezupgraded_CursorLocation") = 3
+		Application("ezupgraded_RuntimeUserName") = ""
+		Application("ezupgraded_RuntimePassword") = ""
+	'--
+	Application("FrontPage_UrlVars") = FrontPage_UrlVars
+	'==FrontPage Generated - endspan==
+End Sub
+Sub FrontPage_StartSession
+	On Error Resume Next
+	if Len(Application("FrontPage_VRoot")) > 0 then Exit Sub
+	' discover the VRoot for the current page;
+	' walk back up VPath until we find global.asa
+	Vroot = Request.ServerVariables("PATH_INFO")
+	strG1 = "global.asa"
+	strG2 = "Global.asa"
+	iCount = 0
+	do while Len(Vroot) > 1
+		idx = InStrRev(Vroot, "/")
+		if idx > 0 then
+			Vroot = Left(Vroot,idx)
+		else
+			' error; assume root web
+			Vroot = "/"
+		end if
+		if FrontPage_FileExists(Server.MapPath(Vroot & strG1)) then exit do
+		if FrontPage_FileExists(Server.MapPath(Vroot & strG2)) then exit do
+		if Right(Vroot,1) = "/" then Vroot = Left(Vroot,Len(Vroot)-1)
+		iCount = iCount + 1
+		if iCount > 100 then
+			' error; assume root web
+			Vroot = "/"
+			exit do
+		end if
+	loop
+	' map all URL= attributes in _ConnectionString variables
+	Application.Lock
+	if Len(Application("FrontPage_VRoot")) = 0 then
+		Application("FrontPage_VRoot") = Vroot
+		UrlVarArray = Application("FrontPage_UrlVars")
+		for i = 0 to UBound(UrlVarArray)
+			if Len(UrlVarArray(i)) > 0 then FrontPage_MapUrl(UrlVarArray(i))
+		next
+	end if
+	Application.Unlock
+End Sub
+Function FrontPage_FileExists(fspath)
+	On Error Resume Next
+	FrontPage_FileExists = False
+	set fs = CreateObject("Scripting.FileSystemObject")
+	Err.Clear
+	set istream = fs.OpenTextFile(fspath)
+	if Err.Number = 0 then
+		FrontPage_FileExists = True
+		istream.Close
+	end if
+	set istream = Nothing
+	set fs = Nothing
+End Function
+Sub FrontPage_MapUrl(AppVarName)
+	' convert URL attribute in conn string to absolute file location
+	strVal = Application(AppVarName)
+	strKey = "URL="
+	idxStart = InStr(strVal, strKey)
+	If idxStart = 0 Then Exit Sub
+	strBefore = Left(strVal, idxStart - 1)
+	idxStart = idxStart + Len(strKey)
+	idxEnd = InStr(idxStart, strVal, ";")
+	If idxEnd = 0 Then
+		strAfter = ""
+		strURL = Mid(strVal, idxStart)
+	Else
+		strAfter = ";" & Mid(strVal, idxEnd + 1)
+		strURL = Mid(strVal, idxStart, idxEnd - idxStart)
+	End If
+	strOut = strBefore & Server.MapPath(Application("FrontPage_VRoot") & strURL) & strAfter
+	Application(AppVarName) = strOut
+End Sub
+'Access Version
+'@APPVERSION: 50.4014.0.2
+	TM = Time()
+	HR = Hour(TM)
+	MN = Minute(TM)
+	SC = Second(TM)
+	OrderTime = HR&":"&MN&":"&SC
+	SpMarker = " "
+	
+	Function MakeUSDate(orderdate)
+		If Not IsDate(orderdate) Then Exit Function
+		MakeUSDate = Month(orderdate)&"/"&Day(orderdate)&"/"&Right(Year(orderdate),2)&SpMarker&OrderTime
+	End Function
+
+
+Sub Session_OnStart
+ '-----------------------------------------------------
+  'DO NOT REMOVE OR MODIFY THESE VARIABLES
+  Application("AppName")    ="StoreFront" 
+  Application("CartName")  = "Saved Cart"
+  Application("CartSaveButton") =  "Save To Cart"
+  Application("AppDatabase") = "Access"
+ '-----------------------------------------------------
+
+	
+	FrontPage_StartSession '==FrontPage Generated==
+	Dim cnn, SQL, rsAdmin, rsDelete7, sFilter, rsList, txtList, objSFO, appDict, i, rsDelete8, dKey, dODate, dRDate, dDate, ProdPath
+	Set cnn=Server.CreateObject("ADODB.Connection")
+
+	Set appDict = Server.CreateObject("Scripting.Dictionary")	
+	i = 0 														
+	For each element in Application.Contents					
+	appDict.Item(i) = element									
+	i = i + 1													
+	next														
+	Session("DSN_Name") = Application(appDict.Item(0)) 			
+	'Session("DSN_Name") = "Your DSN Here"						
+	DSN_Name = Session("DSN_Name")								
+
+	dKey = Now()	
+	dODate = MakeUSDate(dKey)
+	dRDate = DateAdd("d", -1, Now())
+	dDDate = MakeUSDate(dRDate)
+
+	cnn.Open DSN_Name
+	Set rsAdmin = Server.CreateObject("ADODB.Recordset")
+	rsAdmin.Open "SELECT adminLCID, adminDeletePolicy, adminDeleteSchedule, adminDomainName, adminDomainName FROM sfAdmin", cnn, 3, 3, &H0001
+	Session.LCID = trim(rsAdmin.Fields("adminLCID"))
+	Session("LCID") = Session.LCID
+	Session("ProdPath") = trim(rsAdmin.Fields("adminDomainName"))
+	
+	Set rsDelete7 = Server.CreateObject("ADODB.Recordset")
+	on error resume next
+	'Deletes Orders which were not completed after 24 hours
+  sSql = "Delete  from sfOrderAttributes Where odrattrOrderDetailId IN" _
+     & "(Select sfOrderDetails.odrdtID FROM (sfOrders inner JOIN sfOrderDetails ON sfOrders.orderID = sfOrderDetails.odrdtOrderId)" _
+     & " Where (sfOrders.orderIsComplete =0 Or sfOrders.orderIsComplete Is NULL) AND orderDate <= #" & dDDate & "#);"
+    cnn.Execute sSql
+  sSql = "Delete  From sfOrderDetails Where odrdtOrderId IN(Select sfOrders.OrderID From sfOrders " _
+    & " Where (sfOrders.orderIsComplete =0 Or sfOrders.orderIsComplete Is NULL) AND orderDate <= #" & dDDate & "#)"
+    cnn.Execute sSql
+  sSql = "Delete  From sfOrders" _
+     & " Where (sfOrders.orderIsComplete =0 Or sfOrders.orderIsComplete Is NULL) AND orderDate <= #" & dDDate & "#;"
+    cnn.Execute sSql
+	'End Delete Incomplete Orders
+	'Clean Temp Orders Table of orders older than 24 hours
+
+  sSql = "Delete  From sfTmpOrderAttributes Where odrattrtmpOrderDetailId IN " _
+     & "(Select  odrdttmpID From sfTmpOrderDetails Where odrdttmpDate <= #" & dDDate & "#)"
+     cnn.Execute sSql
+  sSql = "Delete  From sfTmpOrderDetails Where odrdttmpDate <= #" & dDDate & "#"
+     cnn.Execute sSql
+    'End Cleanup of Temp Orders Table
+    'Clean Saved Orders Table of orders older than 2 weeks
+    sSql = "Delete  from sfSavedOrderAttributes Where odrattrsvdOrderDetailId IN" _
+      & "(Select odrdtsvdID From sfSavedOrderDetails Where odrdtsvdDate <= #" & Date - 14 & "#)"
+       cnn.Execute sSql
+    sSql = "Delete  From  sfSavedOrderDetails Where odrdtsvdDate <= #" & Date - 14 & "#"
+    cnn.Execute sSql
+	'End Cleanup of Temp Orders Table
+	
+	
+	'Delete Credit Card Numbers
+	
+	If rsAdmin.Fields("adminDeletePolicy") = "2" Then
+		rsDelete7.Open "SELECT payCardNumber FROM sfCPayments INNER JOIN sfCustomers ON sfCPayments.payCustId = sfCustomers.custID WHERE custLastAccess < #" & MakeUSDate(date() - rsAdmin.Fields("adminDeleteSchedule")) & "#", cnn, 1, 3, &H0001
+		
+		While Not rsDelete7.EOF 
+			rsDelete7("payCardNumber") = "****-***-***-****"
+			rsDelete7.Update
+			rsDelete7.MoveNext 
+		Wend
+		 
+	End If
+	
+	Set rsDelete7 = Nothing
+	
+	
+	Session("DomainPath") = trim(rsAdmin("adminDomainName"))
+	
+	If Mid(Session("DomainPath"), Len(Session("DomainPath")), 1) <> "/" Then
+        Session("DomainPath") = Session("DomainPath") & "/"
+    End If
+	
+	rsAdmin.Close 
+	Set rsAdmin = Nothing
+	
+	'Referal Varables
+	REFERER = Request.QueryString("REFERER")
+	HTTP_REFERER = Request.ServerVariables("HTTP_REFERER")
+	REMOTE_ADDRESS = Request.ServerVariables("REMOTE_ADDR")
+	Response.Cookies("sfHTTP_REFERER")("REFERER") = REFERER
+	Response.Cookies("sfHTTP_REFERER")("HTTP_REFERER") = HTTP_REFERER
+	Response.Cookies("sfHTTP_REFERER")("REMOTE_ADDRESS") = REMOTE_ADDRESS
+	Response.Cookies("sfHTTP_REFERER").Expires = Date() + 1
+	If instr(Request.ServerVariables("QUERY_STRING"),"message") > 0 or instr(Request.ServerVariables("QUERY_STRING"),"custom")> 0 or instr(Request.ServerVariables("QUERY_STRING"),"CSVPOSRESPONSE")> 0 or instr(Request.ServerVariables("QUERY_STRING"),"wpresponse")> 0 then 
+      'this is returning from a processor, so do not expire   cookie
+    Else
+     Response.Cookies("sfCustomer").Expires = Now()
+    End if
+	cnn.Close 
+	Set cnn=nothing
+	Session("SessionID") = Session.SessionID 
+	Session("sfPath") = Session("DomainPath") & "addproduct.asp"
+End Sub
+</SCRIPT>
+
+
+
+<head><title>Web Settings for Active Server Pages</title><html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:connectionstatus msdt:dt="string">ezfund=1 ezupgraded=1</mso:connectionstatus>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>

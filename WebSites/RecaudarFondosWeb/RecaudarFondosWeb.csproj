@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E31F93AA-4EED-4A2D-8292-C6D53F1866CD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>efundraising.RecaudarFondosWeb</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>efundraising.RecaudarFondosWeb</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <SccProjectName>%24/Great-American/1.DEV/GA/BDC/Web/RecaudarFondosWeb</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://tfs.swgao.net:8080/tfs/sourcecode</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GA.BDC.Core.AddressHygiene">
+      <HintPath>..\..\Core\AddressHygiene\bin\Debug\GA.BDC.Core.AddressHygiene.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.BusinessBase, Version=1.0.5611.23387, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Core\BusinessBase\bin\Debug\GA.BDC.Core.BusinessBase.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.Collections">
+      <HintPath>..\..\Core\Collections\bin\Debug\GA.BDC.Core.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.Configuration">
+      <HintPath>..\..\Core\Configuration\bin\Debug\GA.BDC.Core.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.Diagnostics">
+      <HintPath>..\..\Core\Diagnostics\bin\Debug\GA.BDC.Core.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.efundraisingCore">
+      <HintPath>..\..\Core\efundraisingCore\bin\Debug\GA.BDC.Core.efundraisingCore.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.EFundraisingCRM">
+      <HintPath>..\..\Core\EFundraisingCRM\bin\Debug\GA.BDC.Core.EFundraisingCRM.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.Email">
+      <HintPath>..\..\Core\Email\bin\Debug\GA.BDC.Core.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.Tracking, Version=1.0.5611.23391, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Core\Tracking\bin\Debug\GA.BDC.Core.Tracking.dll</HintPath>
+    </Reference>
+    <Reference Include="GA.BDC.Core.Web.UI.Tracking.Omniture">
+      <HintPath>..\..\Core\Web\UI\Tracking\Omniture\bin\Debug\GA.BDC.Core.Web.UI.Tracking.Omniture.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\..\Core\AddressHygiene\GA.BDC.Core.AddressHygiene.csproj">
+      <Name>GA.BDC.Core.AddressHygiene</Name>
+      <Project>{D2992B85-6727-43C3-B246-AAA078766555}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Diagnostics\GA.BDC.Core.Diagnostics.csproj">
+      <Name>GA.BDC.Core.Diagnostics</Name>
+      <Project>{626D15D6-C03F-4054-85C3-86B331CCF087}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\EFundraisingCRM\GA.BDC.Core.EFundraisingCRM.csproj">
+      <Name>GA.BDC.Core.EFundraisingCRM</Name>
+      <Project>{920EA03B-53BE-4089-8A3D-B43C1D3A8A26}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\efundraisingCore\GA.BDC.Core.efundraisingCore.csproj">
+      <Name>GA.BDC.Core.efundraisingCore</Name>
+      <Project>{93841639-D58E-417A-8C41-BFD615BC0A96}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\EnterpriseComponents\GA.BDC.Core.EnterpriseComponents.csproj">
+      <Name>GA.BDC.Core.EnterpriseComponents</Name>
+      <Project>{1060FDBE-9C62-4F62-AE5D-0018C5A9026F}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Tracking\GA.BDC.Core.Tracking.csproj">
+      <Name>GA.BDC.Core.Tracking</Name>
+      <Project>{6663D5FB-C681-4452-B887-EE1C210D78C8}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Web\UI\Tracking\Omniture\GA.BDC.Core.Web.UI.Tracking.Omniture.csproj">
+      <Name>Web.UI.Tracking.Omniture</Name>
+      <Project>{0CE52CC6-B002-4563-ABA6-56EF093ADB5B}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Chocolate.aspx.cs">
+      <DependentUpon>Chocolate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Server\Omniture\RecaudarFondosOmniture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygene\AddressHygiene.ascx.cs">
+      <DependentUpon>AddressHygiene.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygene\AddressHygieneErrorCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygene\ExplicitAddressConfirmation.ascx.cs">
+      <DependentUpon>ExplicitAddressConfirmation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Partner\EfunBottom.ascx.cs">
+      <DependentUpon>EfunBottom.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Partner\MagfunBottom.ascx.cs">
+      <DependentUpon>MagfunBottom.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Partner\MagfunTop.ascx.cs">
+      <DependentUpon>MagfunTop.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactUs.aspx.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CookieDough.aspx.cs">
+      <DependentUpon>CookieDough.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gift.aspx.cs">
+      <DependentUpon>Gift.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RecaudarFondosWebPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SampleKit.aspx.cs">
+      <DependentUpon>SampleKit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scratchcard.aspx.cs">
+      <DependentUpon>Scratchcard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tips.aspx.cs">
+      <DependentUpon>Tips.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Content Include="Chocolate.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Components\User\AddressHygene\AddressHygiene.ascx" />
+    <Content Include="Components\User\AddressHygene\ExplicitAddressConfirmation.ascx" />
+    <Content Include="Components\User\Partner\EfunBottom.ascx" />
+    <Content Include="Components\User\Partner\MagfunBottom.ascx" />
+    <Content Include="Components\User\Partner\MagfunTop.ascx" />
+    <Content Include="ContactUs.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="CookieDough.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Default.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Error.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Gift.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Global.asax">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="Resources\css\_RecaudarFondos_\_classic_\es-us\rdstyles.css" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\brochures.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\button_form.gif" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\choco.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Chocolate.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Chocolates.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\cookie.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\CookieDough.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\error.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Folletos_Con_Regalos.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\form_image.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\form_logos.gif" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\f_boy.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\f_kit.gif" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\f_tips.gif" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\f_top.gif" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\logo_efr.gif" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Masapara_Hornear_Galletas.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\products.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Revista_En_Linea.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\sc.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Scratchcard.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Tarjetas_Sorpresa.jpg" />
+    <Content Include="Resources\images\_RecaudarFondos_\_classic_\es-us\Top_01.gif" />
+    <Content Include="Resources\javascript\JavaScript.js" />
+    <Content Include="Resources\javascript\recaudarfondosdev_s_code.js" />
+    <Content Include="Resources\javascript\recaudarfondos_s_code.js" />
+    <Content Include="SampleKit.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Scratchcard.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Tips.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Web.config" />
+    <EmbeddedResource Include="Chocolate.aspx.resx">
+      <DependentUpon>Chocolate.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\AddressHygene\AddressHygiene.ascx.resx">
+      <DependentUpon>AddressHygiene.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\AddressHygene\ExplicitAddressConfirmation.ascx.resx">
+      <DependentUpon>ExplicitAddressConfirmation.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Partner\EfunBottom.ascx.resx">
+      <DependentUpon>EfunBottom.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Partner\MagfunBottom.ascx.resx">
+      <DependentUpon>MagfunBottom.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Partner\MagfunTop.ascx.resx">
+      <DependentUpon>MagfunTop.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactUs.aspx.resx">
+      <DependentUpon>ContactUs.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CookieDough.aspx.resx">
+      <DependentUpon>CookieDough.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Error.aspx.resx">
+      <DependentUpon>Error.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gift.aspx.resx">
+      <DependentUpon>Gift.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Global.asax.resx">
+      <DependentUpon>Global.asax.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SampleKit.aspx.resx">
+      <DependentUpon>SampleKit.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scratchcard.aspx.resx">
+      <DependentUpon>Scratchcard.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tips.aspx.resx">
+      <DependentUpon>Tips.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Components\User\Partner\_svn\entries" />
+    <None Include="Components\User\Partner\_svn\format" />
+    <None Include="Components\User\Partner\_svn\text-base\EfunBottom.ascx.cs.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\EfunBottom.ascx.resx.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\EfunBottom.ascx.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\MagfunBottom.ascx.cs.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\MagfunBottom.ascx.resx.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\MagfunBottom.ascx.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\MagfunTop.ascx.cs.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\MagfunTop.ascx.resx.svn-base" />
+    <None Include="Components\User\Partner\_svn\text-base\MagfunTop.ascx.svn-base" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\User\Partner\_svn\prop-base\" />
+    <Folder Include="Components\User\Partner\_svn\props\" />
+    <Folder Include="Components\User\Partner\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\Partner\_svn\tmp\props\" />
+    <Folder Include="Components\User\Partner\_svn\tmp\text-base\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4961</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

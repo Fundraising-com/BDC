@@ -1,0 +1,77 @@
+﻿@using GA.BDC.Web.MGP.Models.Branding
+@model Int32
+@{
+    var eventBranding = ViewBag.Event as Event;
+    ViewBag.Title = "Sent Emails";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";    
+}
+<div id="information" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId; sentEmailsTotalServerItems = @Model; sentEmailsGetPagedDataAsync(sentEmailsPagingOptions.pageSize, sentEmailsPagingOptions.currentPage, '');">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Sent Emails</h1>
+            <small>The following emails were already sent.</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            @Html.Partial("Shared/_SendMessagesMenu", 2)
+        </div>
+        <div class="col-sm-9" ng-cloak>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="text-info" ng-show="executingAction">Sending the information...</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="text-success" ng-show="success">{{responseText}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="text-danger" ng-show="resultFailed">{{responseText}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="gridStyle" ng-grid="sentEmailsGridOptions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="sentEmailModal" tabindex="-1" role="dialog" aria-labelledby="sentEmailSubject" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="sentEmailSubject">{{sentEmailSelected.Subject}}</h4>
+            </div>
+            <div class="modal-body">
+                <strong>To:</strong><br />
+                <span id="sentEmailTo">{{sentEmailSelected.To}}</span>
+                <br />
+                <br />
+                <strong>Message:</strong><br />
+                <span id="sentEmailMessage">{{sentEmailSelected.Body}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <link href="/Content/ng-grid.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".tip").tooltip({});
+        });
+    </script>
+}

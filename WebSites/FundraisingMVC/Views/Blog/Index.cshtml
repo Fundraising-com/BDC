@@ -1,0 +1,37 @@
+@using GA.BDC.Shared.Entities
+@{
+    ViewBag.Title = "The Fundraising Blog - by Fundraising.com";
+    ViewBag.Description = "Funraising blog with tons of ideas for your event";
+    ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers, blog";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = "/blog";
+    var posts = ViewBag.Posts as IList<BlogPost>;
+}
+<div class="row">
+   <div class="col-sm-12 col-md-9" style="margin-top:125px">
+      <h1>Fundraising Ideas Blog</h1>
+     
+      <div class="row">
+         @foreach (var post in posts)
+         {
+            <div class="col-sm-6 col-md-4 text-center" style="height:200px;">
+               <a ng-href="/blog/post/@post.Url" class="thumbnail">
+                  <img ng-src="/Content/external/blog/@post.ThumbnailUrl" alt="@post.Title" class="img-responsive" />
+                  <h5>@post.Title</h5>
+                  <span style="text-decoration: none; color: black">@post.Summary</span>
+               </a>
+            </div>
+         }
+      </div>
+      <div class="row">
+         <div class="col-xs-12 text-center">
+            <a href="/blog/old-posts"><strong>View All Posts</strong></a>
+         </div>
+      </div>
+   </div>
+
+    <div class="col-sm-12 col-md-3" style="margin-top:125px">
+        @{ Html.RenderPartial("Blog/_lastPosts", ViewBag.LastPosts as List<BlogPost>); }
+        @{ Html.RenderPartial("Blog/_categories", ViewBag.Categories as List<BlogCategory>); }
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model GA.BDC.Shared.Entities.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.UseAngularJSMetaData = true;
+}
+
+<div ng-controller="CategoriesController as categoryCtrl">
+    <div class="row nav-section">
+        <div class="container">
+            <div class="row">
+                <ul class="breadcrumb">
+                    <li id="breadcrumb.root"><a href="/">Home</a></li>
+                    <li id="breadcrumb.products"><a href="/Products">All fundraisers</a></li>
+                    <li id="breadcrumb.category" class="active" ng-cloak>{{categoryCtrl.parentCategory.Name}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container product-description-container" ng-cloak>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <h3>{{categoryCtrl.parentCategory.Name}}</h3>
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <div ng-bind-html="categoryCtrl.scope.$sce.trustAsHtml(categoryCtrl.parentCategory.Description)"></div>
+                <div ng-bind-html="categoryCtrl.scope.$sce.trustAsHtml(categoryCtrl.parentCategory.Description2)"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 text-center" ng-repeat="subCategory in categoryCtrl.subCategories" ng-cloak>
+            <a ng-href="/products/{{::subCategory.Parent.Url}}/{{::subCategory.Url}}" class="thumbnail product-thumbnail" ng-init="googleAnalyticsCtrl.ProductShowed(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products');">
+                <img ng-src="/Content/external{{subCategory.Image.Url}}" alt="{{subCategory.Image.AlternativeText}}" class="img-responsive" ng-click="googleAnalyticsCtrl.ProductClicked(subCategory.Id, subCategory.Name, subCategory.Category.Parent.Name, subCategory.Category.Name, $index + 1, 'All Products')"/>
+                <h5 ng-click="googleAnalyticsCtrl.ProductClicked(subCategory.Id, subCategory.Name, subCategory.Category.Parent.Name, subCategory.Category.Name, $index + 1, 'All Products')">{{::subCategory.Name}}</h5>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+@using GA.BDC.Shared.Entities
+@using GA.BDC.Web.Fundraising.MVC.Helpers
+@model Category
+@{
+
+    ViewBag.Title = ViewBag.CountryId == 1 ? "Products | Canada | Fundraising.com": "Products - Fundraising.com";
+    //ViewBag.Title = "Products - Fundraising.com";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.Description = "High Profit Fundraising Products for Sports teams, schools, churches and all types of groups, Fundraising.com offers all kind of fundraising ideas to help you reach your goals.";
+    ViewBag.Keywords = "Fundraising Products, Sports Teams, Schools, Fundraising Ideas";
+    ViewBag.CanonicalUrl = string.Format("/{0}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId));
+
+}
+<div class="container" style="margin-top:125px">
+<div ng-controller="DetectCountryController as detectCountryCtrl">
+    
+    <div class="row visible-xs">
+        <div class="col-sm-12">
+            <span itemscope itemtype="https://schema.org/Breadcrumb">
+                <a itemprop="url" href="/">
+                    <span itemprop="title">Home</span>
+                </a> &gt;
+            </span>
+            <span itemscope itemtype="https://schema.org/Breadcrumb">
+                <a itemprop="url" ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)">
+                    <span itemprop="title">Products</span>
+                </a>
+            </span>
+        </div>
+    </div>
+        <div class="row" >
+            <div class="row visible-xs text-center" ng-show="detectCountryCtrl.country == 1">
+                <div id="myCarousel" class="carousel slide visible-xs" data-ride="carousel">
+                   <div class="carousel-inner text-center" role="listbox" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+                      <div class="item active">
+                         <a data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'Kit Request', 'HomePage Open Popup ' + location.pathname);" alt="Request a Free Kit" title="Request a Free Kit">
+                            <img class="img-responsive" src="~/Content/external/banners/banner_mobile_guide_CAN.jpg" style="margin:auto; width:100%;" alt="banner">
+                         </a>
+                      </div>
+                      @*<div class="item">
+                         <a href="" data-toggle="modal" data-target="#kit-request-modal" onclick="ga('send', 'event', 'Kit Request', 'Open canadian Popup1'); " alt="Request a Free Kit" title="Request a Free Kit">
+                            <img class="img-responsive" src="~/Content/external/banners/banner_mobile_guide2018_CAN.jpg" style="margin:auto; width:100%;" alt="canadian banner">
+                         </a>
+                      </div>*@
+
+                      @*<div class="item">
+                         <a href="/canada/cookie-dough" ng-click="googleAnalyticsCtrl.BannerClicked(217);">
+                            <img class="img-responsive" src="~/Content/external/banners/banner_mobile_coockie_CAN.jpg" style="margin:auto; width:100%;" alt="canadian cookies banner">
+                         </a>
+                      </div>*@
+
+                      @*<div class="item">
+                         <a href="/canada/online-fundraiser/magazine-fundraising/canadian-magazine" ng-click="googleAnalyticsCtrl.BannerClicked(217);">
+                            <img class="img-responsive" src="~/Content/external/banners/banner_mobile_magazines_CAN.jpg" style="margin:auto; width:100%;" alt="magazine banner">
+                         </a>
+                      </div>*@
+                      @*<div class="item">
+                         <a href="/canada/pretzel-rods/all-canadian-pretzel-rods/pretzel-rods-canada" ng-click="googleAnalyticsCtrl.BannerClicked(217);">
+                            <img class="img-responsive" src="~/Content/external/banners/banner_mobile_rods_CANADA.jpg" style="margin:auto; width:100%;" alt="pretzel rods banner">
+                         </a>
+                      </div>*@
+                   </div>
+                    @*<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" ng-non-bindable>
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" ng-non-bindable>
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>*@
+                </div>
+            </div>
+            <h1 ng-cloak><span ng-show="detectCountryCtrl.country === 1">canadian fundraisers</span><span ng-show="detectCountryCtrl.country === 0">fundraising products</span></h1>
+
+            <div style="padding-left:5px; padding-right:5px">
+                From schools to sports teams, there are plenty of groups who need help raising money. Thankfully, our enjoyable fundraising campaigns make it easy to get the money you need with products that everyone loves.<br /><br />
+                Food is always a well-liked choice for a fundraiser, and there are several different options from which to choose. Your supporters will love the convenience of pre-made cookie dough.
+                Chocolate is another hit; easy, 50% profit, and who doesn't like chocolate anyway! As a low-cost product that everyone loves, lollipops also make great fundraiser. You can even sell novelty lollipops for holidays or find a theme that suits your group type.
+            </div>
+            <br /><br />
+            <div ng-show="detectCountryCtrl.country === 1" ng-cloak>
+                <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
+                   <div class="carousel-inner text-center" role="listbox" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+
+                      <div class="item active">
+                         <a  data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'Kit Request', 'HomePage Open Popup ' + location.pathname);" alt="Request a Free Kit" title="Request a Free Kit">
+                            <img class="img-responsive" src="~/Content/external/banners/CAN_banner.jpg" style="margin:auto; width:100%;" alt="banner">
+                         </a>
+                      </div>
+                      @*<div class="item">
+                         <a href="" data-toggle="modal" data-target="#kit-request-modal" onclick="ga('send', 'event', 'Kit Request', 'Open canadian Popup1'); " alt="Request a Free Kit" title="Request a Free Kit">
+                            <img class="img-responsive" src="~/Content/external/banners/Banner-guide2018_CAN.jpg" style="margin:auto; width:100%;" alt="canadian banner">
+                         </a>
+                      </div>*@
+
+                      @*<div class="item">
+                         <a href="/canada/cookie-dough" ng-click="googleAnalyticsCtrl.BannerClicked(217);">
+                            <img class="img-responsive" src="~/Content/external/banners/Banner-cookie_CAN.jpg" style="margin:auto; width:100%;" alt="canadian cookies banner">
+                         </a>
+                      </div>*@
+                      @*<div class="item">
+                         <a href="/canada/online-fundraiser/magazine-fundraising/canadian-magazine" ng-click="googleAnalyticsCtrl.BannerClicked(217);">
+                            <img class="img-responsive" src="~/Content/external/banners/Banner-magazines_CAN.jpg" style="margin:auto; width:100%;" alt="canadian magazine">
+                         </a>
+                      </div>*@
+                      @*<div class="item">
+                         <a href="/canada/pretzel-rods/all-canadian-pretzel-rods/pretzel-rods-canada" ng-click="googleAnalyticsCtrl.BannerClicked(217);">
+                            <img class="img-responsive" src="~/Content/external/banners/Banner-CAN-rods.jpg" style="margin:auto; width:100%;" alt="canadian pretzel rods">
+                         </a>
+                      </div>*@
+
+                   </div>
+                    @*<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" ng-non-bindable>
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" ng-non-bindable>
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>*@
+                </div>
+
+
+            </div>
+            <br />
+            <br />
+            <div ng-controller="CategoriesController as categoryCtrl">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 text-center" ng-repeat="category in categoryCtrl.categories| orderBy:'Order'" ng-cloak>
+                    <a ng-href="/{{::categoryCtrl.categoryPath}}/{{::category.Url}}" class="thumbnail product-thumbnail">
+                        <img ng-src="/Content/external/products/cover/{{::category.Id}}.jpg" alt="{{::category.Name}}" class="img-responsive" />
+                        <h4>{{::category.Name}}</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

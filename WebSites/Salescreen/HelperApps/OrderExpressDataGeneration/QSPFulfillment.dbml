@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="QSPFulfillment" Class="QSPFulfillmentDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=qspdevdb1.qsp;Initial Catalog=QSPFulfillment;Persist Security Info=True;User ID=QSPFormWebUser" SettingsObjectName="OrderExpress.DataGeneration.Properties.Settings" SettingsPropertyName="QSPFulfillmentConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.form" Member="forms">
+    <Type Name="form">
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="version" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="program_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="program_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="entity_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="form_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="program_basics_text" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="order_terms_text" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="closing_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="enabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="is_product_price_updatable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="parent_form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tax_postal_address_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_base_form" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_quantity_adjustment_allowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="warehouse_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_bulk" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="report_name" Type="System.String" DbType="VarChar(50)" CanBeNull="false" />
+      <Column Name="is_warehouse_selectable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="default_warehouse_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="season_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="form_form_order_type" Member="form_order_types" ThisKey="form_id" OtherKey="form_id" Type="form_order_type" />
+      <Association Name="form_form_delivery_method" Member="form_delivery_methods" ThisKey="form_id" OtherKey="form_id" Type="form_delivery_method" />
+      <Association Name="form_business_rule" Member="business_rules" ThisKey="form_id" OtherKey="form_id" Type="business_rule" />
+      <Association Name="form_business_exception" Member="business_exceptions" ThisKey="form_id" OtherKey="form_id" Type="business_exception" />
+      <Association Name="form_form_permission" Member="form_permissions" ThisKey="form_id" OtherKey="form_id" Type="form_permission" />
+      <Association Name="form_form_delivery_date_type" Member="form_delivery_date_types" ThisKey="form_id" OtherKey="form_id" Type="form_delivery_date_type" />
+      <Association Name="form_form_requires_form" Member="form_requires_forms" ThisKey="form_id" OtherKey="form_id" Type="form_requires_form" />
+      <Association Name="form_form_requires_form1" Member="form_requires_forms1" ThisKey="form_id" OtherKey="required_form_id" Type="form_requires_form" />
+      <Association Name="form_group_form" Member="form_group" ThisKey="form_group_id" OtherKey="form_group_id" Type="form_group" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_group" Member="form_groups">
+    <Type Name="form_group">
+      <Column Name="form_group_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_group_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_group_form" Member="forms" ThisKey="form_group_id" OtherKey="form_group_id" Type="form" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_order_type" Member="form_order_types">
+    <Type Name="form_order_type">
+      <Column Name="form_order_type_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_form_order_type" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_delivery_method" Member="form_delivery_methods">
+    <Type Name="form_delivery_method">
+      <Column Name="form_delivery_method_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="delivery_method_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_form_delivery_method" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_section" Member="form_sections">
+    <Type Name="form_section">
+      <Column Name="form_section_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="form_section_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="form_section_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_section_title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="catalog_item_category_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catalog_group" Member="catalog_groups">
+    <Type Name="catalog_group">
+      <Column Name="catalog_group_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_group_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="catalog_group_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="catalog_group_catalog" Member="catalogs" ThisKey="catalog_group_id" OtherKey="catalog_group_id" Type="catalog" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catalog" Member="catalogs">
+    <Type Name="catalog">
+      <Column Name="catalog_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catalog_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="catalog_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="culture" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_priced" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="true" />
+      <Association Name="catalog_catalog_item_category" Member="catalog_item_categories" ThisKey="catalog_id" OtherKey="catalog_id" Type="catalog_item_category" />
+      <Association Name="catalog_group_catalog" Member="catalog_group" ThisKey="catalog_group_id" OtherKey="catalog_group_id" Type="catalog_group" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catalog_item_category" Member="catalog_item_categories">
+    <Type Name="catalog_item_category">
+      <Column Name="catalog_item_category_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="parent_catalog_item_category_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="catalog_item_category_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="catalog_item_category_catalog_item_category" Member="catalog_item_categories" ThisKey="catalog_item_category_id" OtherKey="parent_catalog_item_category_id" Type="catalog_item_category" />
+      <Association Name="catalog_item_category_catalog_item_category_catalog_item" Member="catalog_item_category_catalog_items" ThisKey="catalog_item_category_id" OtherKey="catalog_item_category_id" Type="catalog_item_category_catalog_item" />
+      <Association Name="catalog_catalog_item_category" Member="catalog" ThisKey="catalog_id" OtherKey="catalog_id" Type="catalog" IsForeignKey="true" />
+      <Association Name="catalog_item_category_catalog_item_category" Member="catalog_item_category1" ThisKey="parent_catalog_item_category_id" OtherKey="catalog_item_category_id" Type="catalog_item_category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.product" Member="products">
+    <Type Name="product">
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="product_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vendor_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="coupon_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="nb_units" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="unit_cost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="nb_day_lead_time" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vendor_item_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="oracle_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="commission" Type="System.Decimal" DbType="Decimal(19,4)" CanBeNull="true" />
+      <Column Name="is_free_sample" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="business_division_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IVITEM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IVCOUP" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="vendor_product" Member="vendor" ThisKey="vendor_id" OtherKey="vendor_id" Type="vendor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catalog_item" Member="catalog_items">
+    <Type Name="catalog_item">
+      <Column Name="catalog_item_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catalog_item_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="catalog_item_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="nb_units" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="catalog_item_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catalog_item_export_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="catalog_item_catalog_item_category_catalog_item" Member="catalog_item_category_catalog_items" ThisKey="catalog_item_id" OtherKey="catalog_item_id" Type="catalog_item_category_catalog_item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catalog_item_detail" Member="catalog_item_details">
+    <Type Name="catalog_item_detail">
+      <Column Name="catalog_item_detail_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_item_detail_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="catalog_item_detail_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="catalog_item_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="nb_units" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="term" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="is_default" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="profit_rate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catalog_item_category_catalog_item" Member="catalog_item_category_catalog_items">
+    <Type Name="catalog_item_category_catalog_item">
+      <Column Name="catalog_item_category_catalog_item_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_item_category_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catalog_item_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="display_order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="catalog_item_catalog_item_category_catalog_item" Member="catalog_item" ThisKey="catalog_item_id" OtherKey="catalog_item_id" Type="catalog_item" IsForeignKey="true" />
+      <Association Name="catalog_item_category_catalog_item_category_catalog_item" Member="catalog_item_category" ThisKey="catalog_item_category_id" OtherKey="catalog_item_category_id" Type="catalog_item_category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.business_rule" Member="business_rules">
+    <Type Name="business_rule">
+      <Column Name="business_rule_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="logical_operator_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="field_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="business_rule_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="message" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="value_to_compare" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_section_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_section_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="form_business_rule" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.business_exception" Member="business_exceptions">
+    <Type Name="business_exception">
+      <Column Name="business_exception_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="business_exception_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="exception_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="entity_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(2048)" CanBeNull="true" />
+      <Column Name="warning_message" Type="System.String" DbType="VarChar(2048)" CanBeNull="true" />
+      <Column Name="exception_expression" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="fees_value_expression" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="app_item_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_section_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_section_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="business_rule_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="form_business_exception" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vendor" Member="vendors">
+    <Type Name="vendor">
+      <Column Name="vendor_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vendor_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vendor_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="postal_address_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="phone_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fax_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="email_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="division" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vendor_term" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="oracle_vendor_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PO#CO" Member="PO_CO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="last_import_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="import_source_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vendor_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="vendor_product" Member="products" ThisKey="vendor_id" OtherKey="vendor_id" Type="product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_catalog_group" Member="form_catalog_groups">
+    <Type Name="form_catalog_group">
+      <Column Name="form_catalog_group_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catalog_group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_catalog_item_category_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="supply_catalog_item_category_id" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="optional_product_catalog_item_catagory_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_profit_rate" Member="form_profit_rates">
+    <Type Name="form_profit_rate">
+      <Column Name="form_profit_rate_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="profit_rate_id" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_permission" Member="form_permissions">
+    <Type Name="form_permission">
+      <Column Name="form_permission_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="role_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="allow_read" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="allow_write" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_form_permission" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_delivery_date_type" Member="form_delivery_date_types">
+    <Type Name="form_delivery_date_type">
+      <Column Name="form_delivery_date_type_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="delivery_date_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_form_delivery_date_type" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.form_requires_form" Member="form_requires_forms">
+    <Type Name="form_requires_form">
+      <Column Name="form_requires_form_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="required_form_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="form_form_requires_form" Member="form" ThisKey="form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+      <Association Name="form_form_requires_form1" Member="form1" ThisKey="required_form_id" OtherKey="form_id" Type="form" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

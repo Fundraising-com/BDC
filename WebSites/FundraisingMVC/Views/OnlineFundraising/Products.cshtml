@@ -1,0 +1,56 @@
+@using System.Configuration
+@{
+    ViewBag.Title = "Online Fundraising Products - Fundraising.com";
+    ViewBag.Description = "RaiseASell popular fundraising products like magazines, cookie dough, flower bulbs, jewelry and more through a convenient and customizable online fundraising store. Earn up to 40% profit on your sales";
+    ViewBag.Keywords = "personalized online fundraising store, profitable fundraising products, magazines, cookie dough fundraising, flower bulbs fundraiser, successful fundraisers, green fundraiser, fundraising jewelry";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("Products", "OnlineFundraising");
+}
+
+<h1>Online Fundraising Products</h1>
+<div class="row">
+    <div class="col-sm-7">
+        Your personalized online fundraising store offers a wide variety of profitable fundraising products at great prices! It stays open 24 hours a day, 7 days a week! You’ll earn up to 40%* profit on all sales generated through your store.
+        <br /><br />
+        <ul>
+            <li>Popular magazine titles</li>
+            <li>Elegant jewelry</li>
+            <li>Restaurant.com e-certificates</li>
+            <li>And more...</li>
+        </ul>
+        <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/Home/Register?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" target="_blank" title="online fundraising"><img src="~/Content/images/public/b_register.gif" alt="register now" style="border:none" /></a>
+        <br /><br />
+    </div>
+    <div class="col-sm-5">
+        <img class="img-responsive" src="~/Content/images/public/online-fundraising-products.jpg" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <img class="img-responsive"  src="~/Content/images/public/online-fundraising-products2.jpg" />
+    </div>
+    <div class="col-sm-6">
+       <strong>Magazines</strong><br />
+        Who doesn't love to read a good magazine? Offer your supporters all their favorite magazine titles at up to <strong>85% off newsstand prices</strong>. With over 600 titles to choose from, including Sports Illustrated, ESPN, People, Time, Fortune, Golf Magazine and much more, your magazine fundraiser will be among your most successful fundraisers yet!
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <img class="img-responsive" src="~/Content/images/public/online-fundraising-products4.jpg" />
+    </div>
+    <div class="col-sm-6">
+        <strong>Restaurant eCertificates</strong><br />
+        Cookie dough fundraising has become one of the fastest growing and most popular programs, so it’s no surprise that you can now find it as an online fundraiser! Your supporters will love these delicious cookies in a variety of flavors, while you’ll love the incredible profit, plus the fact that it’s shipped directly to your supporters!
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <img class="img-responsive" src="~/Content/images/public/online-fundraising-products6.jpg" />
+    </div>
+    <div class="col-sm-6">
+        <strong>Jewelry</strong><br />
+        Add elegance to your next fundraising campaign with this beautiful and unique collection of fundraising jewelry. Everyone can find something to suit their taste with pieces for women, men and children. Plus, they make excellent gifts!
+    </div>
+</div>

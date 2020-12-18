@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="BN_ZGAFOCUSWEBSVC">
+    <wsp:ExactlyOne xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility">
+      <wsp:All>
+        <sp:TransportBinding>
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:TripleDesRsa15 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+    <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/" wsp:Optional="true" />
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF_ZGAFOCUSWEBSVC">
+    <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+      <sapsession:enableSession>false</sapsession:enableSession>
+    </sapsession:Session>
+    <wsp:ExactlyOne xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" />
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZBapiGaGetOnlineOrderNum">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:simpleType name="char1">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char12">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char132">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="132" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char18">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="18" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char20">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char25">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="25" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char30">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char40">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char60">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="60" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="curr13.2">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="13" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric16">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="16" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric6">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="6" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="quantum15.3">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="15" />
+          <xsd:fractionDigits value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="unit3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ZgaFocusOrderHdrAddr02">
+        <xsd:sequence>
+          <xsd:element name="Name" type="tns:char40" />
+          <xsd:element name="Address1" type="tns:char60" />
+          <xsd:element name="Address2" type="tns:char60" />
+          <xsd:element name="City" type="tns:char40" />
+          <xsd:element name="State" type="tns:char3" />
+          <xsd:element name="Zip" type="tns:char10" />
+          <xsd:element name="Telephone" type="tns:char30" />
+          <xsd:element name="Email" type="tns:char132" />
+          <xsd:element name="Method" type="tns:char2" />
+          <xsd:element name="Comments" type="tns:char40" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapiret2">
+        <xsd:sequence>
+          <xsd:element name="Type" type="n0:char1" />
+          <xsd:element name="Id" type="n0:char20" />
+          <xsd:element name="Number" type="n0:numeric3" />
+          <xsd:element name="Message" type="n0:char220" />
+          <xsd:element name="Logno" type="n0:char20" />
+          <xsd:element name="Logmsgno" type="n0:numeric6" />
+          <xsd:element name="Messagev1" type="n0:char50" />
+          <xsd:element name="Messagev2" type="n0:char50" />
+          <xsd:element name="Messagev3" type="n0:char50" />
+          <xsd:element name="Messagev4" type="n0:char50" />
+          <xsd:element name="Parameter" type="n0:char32" />
+          <xsd:element name="Row" type="xsd:int" />
+          <xsd:element name="Field" type="n0:char30" />
+          <xsd:element name="System" type="n0:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZstGafuCancgiftItm">
+        <xsd:sequence>
+          <xsd:element name="Offermaterial" type="tns:char18" />
+          <xsd:element name="Quantity" type="tns:quantum15.3" />
+          <xsd:element name="Uom" type="tns:unit3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZstGafuMvpmtItm">
+        <xsd:sequence>
+          <xsd:element name="Sodetailid" type="tns:numeric10" />
+          <xsd:element name="Quantity" type="tns:quantum15.3" />
+          <xsd:element name="Orderitem" type="tns:numeric6" />
+          <xsd:element name="Processed" type="tns:char1" />
+          <xsd:element name="Uom" type="tns:unit3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfZstGafuCancgiftItm">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZstGafuCancgiftItm" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfZstGafuMvpmtItm">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZstGafuMvpmtItm" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ZBapiGaChgZgonShipAddr">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IOrdernum" type="tns:char10" />
+            <xsd:element name="IShipaddr" type="tns:ZgaFocusOrderHdrAddr02" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaChgZgonShipAddrResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaDeleteSapOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IRefid" type="tns:char12" />
+            <xsd:element minOccurs="0" name="IUserid" type="tns:char20" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaDeleteSapOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaGetGiftOrderNum">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IRefid" type="tns:char12" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaGetGiftOrderNumResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EOrdernum" type="tns:char10" />
+            <xsd:element name="EOrderstatus" type="tns:char1" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaGetOlProfitStmt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IAccount" type="tns:char10" />
+            <xsd:element minOccurs="0" name="IAltid" type="tns:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaGetOlProfitStmtResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EPdfout" type="xsd:base64Binary" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaGetOnlineOrderNum">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IRefid" type="tns:char12" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZBapiGaGetOnlineOrderNumResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EOrdernum" type="tns:char10" />
+            <xsd:element name="EOrderstatus" type="tns:char1" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaCancelOnlineGiftOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ISqlid" type="tns:char10" />
+            <xsd:element minOccurs="0" name="TItem" type="tns:TableOfZstGafuCancgiftItm" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaCancelOnlineGiftOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ENewzmgc" type="tns:char10" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+            <xsd:element name="TItem" type="tns:TableOfZstGafuCancgiftItm" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaCancelOnlineMagOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ISqlid" type="tns:char10" />
+            <xsd:element name="TItem" type="tns:TableOfZstGafuMvpmtItm" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaCancelOnlineMagOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+            <xsd:element name="TItem" type="tns:TableOfZstGafuMvpmtItm" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaMoveOnlineGiftOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="INewctr" type="tns:char10" />
+            <xsd:element name="IOldctr" type="tns:char10" />
+            <xsd:element minOccurs="0" name="IPrevspr" type="tns:char10" />
+            <xsd:element name="ISqlid" type="tns:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaMoveOnlineGiftOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ENewidoc" type="tns:numeric16" />
+            <xsd:element name="ENewzmgc" type="tns:char10" />
+            <xsd:element name="ENewzmgd" type="tns:char10" />
+            <xsd:element name="EOldzgon" type="tns:char10" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaMoveOnlineMagOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="INewctr" type="tns:char10" />
+            <xsd:element name="IOldctr" type="tns:char10" />
+            <xsd:element minOccurs="0" name="IPrevspr" type="tns:char10" />
+            <xsd:element name="ISqlid" type="tns:char10" />
+            <xsd:element name="TItem" type="tns:TableOfZstGafuMvpmtItm" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaMoveOnlineMagOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ENewbilldoc" type="tns:char10" />
+            <xsd:element name="ENewidoc" type="tns:numeric16" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+            <xsd:element name="TItem" type="tns:TableOfZstGafuMvpmtItm" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaMoveOnlinePayment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IAmount" type="tns:curr13.2" />
+            <xsd:element name="INewctr" type="tns:char10" />
+            <xsd:element name="IOldctr" type="tns:char10" />
+            <xsd:element minOccurs="0" name="IPrevspr" type="tns:char10" />
+            <xsd:element name="ISqlid" type="tns:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaMoveOnlinePaymentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ENewdoc" type="tns:char10" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaPostProcFee">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IAmount" type="tns:curr13.2" />
+            <xsd:element name="IContract" type="tns:char10" />
+            <xsd:element name="IHdrtext" type="tns:char25" />
+            <xsd:element name="ISponsor" type="tns:char10" />
+            <xsd:element minOccurs="0" name="ITxntype" type="tns:char1" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZGaPostProcFeeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDocnum" type="tns:char10" />
+            <xsd:element name="EReturn" type="tns:Bapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="char1">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char20">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char220">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="220" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char30">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char32">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="32" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char50">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric6">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="6" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZBapiGaChgZgonShipAddr">
+    <wsdl:part name="parameters" element="tns:ZBapiGaChgZgonShipAddr" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaChgZgonShipAddrResponse">
+    <wsdl:part name="parameter" element="tns:ZBapiGaChgZgonShipAddrResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaDeleteSapOrder">
+    <wsdl:part name="parameters" element="tns:ZBapiGaDeleteSapOrder" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaDeleteSapOrderResponse">
+    <wsdl:part name="parameter" element="tns:ZBapiGaDeleteSapOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaGetGiftOrderNum">
+    <wsdl:part name="parameters" element="tns:ZBapiGaGetGiftOrderNum" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaGetGiftOrderNumResponse">
+    <wsdl:part name="parameter" element="tns:ZBapiGaGetGiftOrderNumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaGetOlProfitStmt">
+    <wsdl:part name="parameters" element="tns:ZBapiGaGetOlProfitStmt" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaGetOlProfitStmtResponse">
+    <wsdl:part name="parameter" element="tns:ZBapiGaGetOlProfitStmtResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaGetOnlineOrderNum">
+    <wsdl:part name="parameters" element="tns:ZBapiGaGetOnlineOrderNum" />
+  </wsdl:message>
+  <wsdl:message name="ZBapiGaGetOnlineOrderNumResponse">
+    <wsdl:part name="parameter" element="tns:ZBapiGaGetOnlineOrderNumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZGaCancelOnlineGiftOrder">
+    <wsdl:part name="parameters" element="tns:ZGaCancelOnlineGiftOrder" />
+  </wsdl:message>
+  <wsdl:message name="ZGaCancelOnlineGiftOrderResponse">
+    <wsdl:part name="parameter" element="tns:ZGaCancelOnlineGiftOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZGaCancelOnlineMagOrder">
+    <wsdl:part name="parameters" element="tns:ZGaCancelOnlineMagOrder" />
+  </wsdl:message>
+  <wsdl:message name="ZGaCancelOnlineMagOrderResponse">
+    <wsdl:part name="parameter" element="tns:ZGaCancelOnlineMagOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZGaMoveOnlineGiftOrder">
+    <wsdl:part name="parameters" element="tns:ZGaMoveOnlineGiftOrder" />
+  </wsdl:message>
+  <wsdl:message name="ZGaMoveOnlineGiftOrderResponse">
+    <wsdl:part name="parameter" element="tns:ZGaMoveOnlineGiftOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZGaMoveOnlineMagOrder">
+    <wsdl:part name="parameters" element="tns:ZGaMoveOnlineMagOrder" />
+  </wsdl:message>
+  <wsdl:message name="ZGaMoveOnlineMagOrderResponse">
+    <wsdl:part name="parameter" element="tns:ZGaMoveOnlineMagOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZGaMoveOnlinePayment">
+    <wsdl:part name="parameters" element="tns:ZGaMoveOnlinePayment" />
+  </wsdl:message>
+  <wsdl:message name="ZGaMoveOnlinePaymentResponse">
+    <wsdl:part name="parameter" element="tns:ZGaMoveOnlinePaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZGaPostProcFee">
+    <wsdl:part name="parameters" element="tns:ZGaPostProcFee" />
+  </wsdl:message>
+  <wsdl:message name="ZGaPostProcFeeResponse">
+    <wsdl:part name="parameter" element="tns:ZGaPostProcFeeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ZGAFOCUSWEBSVC">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF_ZGAFOCUSWEBSVC" />
+    </wsp:Policy>
+    <wsdl:operation name="ZBapiGaChgZgonShipAddr">
+      <wsdl:input message="tns:ZBapiGaChgZgonShipAddr" />
+      <wsdl:output message="tns:ZBapiGaChgZgonShipAddrResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaDeleteSapOrder">
+      <wsdl:input message="tns:ZBapiGaDeleteSapOrder" />
+      <wsdl:output message="tns:ZBapiGaDeleteSapOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaGetGiftOrderNum">
+      <wsdl:input message="tns:ZBapiGaGetGiftOrderNum" />
+      <wsdl:output message="tns:ZBapiGaGetGiftOrderNumResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaGetOlProfitStmt">
+      <wsdl:input message="tns:ZBapiGaGetOlProfitStmt" />
+      <wsdl:output message="tns:ZBapiGaGetOlProfitStmtResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaGetOnlineOrderNum">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZBapiGaGetOnlineOrderNum" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZBapiGaGetOnlineOrderNum" />
+      <wsdl:output message="tns:ZBapiGaGetOnlineOrderNumResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZGaCancelOnlineGiftOrder">
+      <wsdl:input message="tns:ZGaCancelOnlineGiftOrder" />
+      <wsdl:output message="tns:ZGaCancelOnlineGiftOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZGaCancelOnlineMagOrder">
+      <wsdl:input message="tns:ZGaCancelOnlineMagOrder" />
+      <wsdl:output message="tns:ZGaCancelOnlineMagOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZGaMoveOnlineGiftOrder">
+      <wsdl:input message="tns:ZGaMoveOnlineGiftOrder" />
+      <wsdl:output message="tns:ZGaMoveOnlineGiftOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZGaMoveOnlineMagOrder">
+      <wsdl:input message="tns:ZGaMoveOnlineMagOrder" />
+      <wsdl:output message="tns:ZGaMoveOnlineMagOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZGaMoveOnlinePayment">
+      <wsdl:input message="tns:ZGaMoveOnlinePayment" />
+      <wsdl:output message="tns:ZGaMoveOnlinePaymentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZGaPostProcFee">
+      <wsdl:input message="tns:ZGaPostProcFee" />
+      <wsdl:output message="tns:ZGaPostProcFeeResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZGAFOCUSWEBSVC" type="tns:ZGAFOCUSWEBSVC">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN_ZGAFOCUSWEBSVC" />
+    </wsp:Policy>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZBapiGaChgZgonShipAddr">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaDeleteSapOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaGetGiftOrderNum">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaGetOlProfitStmt">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBapiGaGetOnlineOrderNum">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZGaCancelOnlineGiftOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZGaCancelOnlineMagOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZGaMoveOnlineGiftOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZGaMoveOnlineMagOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZGaMoveOnlinePayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZGaPostProcFee">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="service">
+    <wsdl:port name="ZGAFOCUSWEBSVC" binding="tns:ZGAFOCUSWEBSVC">
+      <soap:address location="http://sapd0101.swgao.int:8000/sap/bc/srt/rfc/sap/zgafocuswebsvc/020/zgafocuswebsvc/zgafocuswebsvc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <section name="applicationSettings" type="efundraising.Configuration.MultiNameValueSectionHandler, efundraising.Configuration"/>
+	</configSections>
+    
+    <applicationSettings>
+		<!-- ############### -->
+		<!-- COMMON SETTINGS -->
+		<!-- ############### -->
+		<!-- ERROR LOGGING. 
+			 Specify where to log errors. You may specify more than one location.
+			 Valid logType is "email", "eventlog" or "file".
+			 Valid logSource is either the email address for "email" type, source name
+			 for "eventlog" type or file name for "file" type.
+			 For "eventlog" type, you may need to create a new Key with the source name 
+			 in the registry under HKLM\SYSTEM\CurrentControlSet\Services\Eventlog\Application
+		-->
+		<add key="Common.Log.Error" logType="email" logSource="pavel_tarassov@qsp.com" />
+		<!--add key="Common.Log.Error" logType="email" logSource="jfbuist@rd.com" /-->
+		<add key="Common.Log.Error" logType="file" logSource="E:\Log\ReportingCenter_%yyyy%%MM%%dd%_Log.xml" />
+		<add key="Common.Log.Warn" logType="file" logSource="E:\Log\ReportingCenter_%yyyy%%MM%%dd%_Log.xml" />
+		<add key="Common.Log.Info" logType="file" logSource="E:\Log\ReportingCenter_%yyyy%%MM%%dd%_Log.xml" />
+		<!--<add key="Common.Log.Info" logType="email" logSource="gcarmel@rd.com" />-->
+		<add key="Common.Log.Debug" logType="file" logSource="E:\Log\ReportingCenter_%yyyy%%MM%%dd%_Log.xml" />
+		<add key="Common.Email.SmtpServer" host="outgoingsmtp" />
+
+		<!-- Database and Application level access -->
+		
+		<!-- Application can be deployed on intranet (CAEFR3K01: external = false) or internet (WEBREMOTE2: external = true) -->
+		<!-- This key defines some of the accessibility of actions in the application -->
+		<!-- For example, authentication is required from internet, but there is no login page in the intranet -->		
+		<add key="Reports.External" isExternal="false" />
+
+		<!-- Reports.Production can be set to true even in dev since reports are all read only and the connection string -->
+		<!-- is redefined in the methods of the Report class, which gets its information in the report_center_v2 database -->
+		<!-- if isExternal=true, then isProduction will have no effect and always be in production -->
+		<add key="Reports.Production" isProduction="true" />
+
+		<!-- External Release Connection String -->
+		<add key="Reports.SqlConnection.External.Release" provider="mssql" connectionString="Data Source=161.230.16.122;Initial Catalog=report_center_v2;connection timeout=100;user id=ereport;password=eg3rawme" />
+
+		<!-- Internal Release Connection String on replication database -->
+		<!-- Production Connection String -->
+		<add key="Reports.SqlConnection.Internal.Release" provider="mssql" connectionString="Data Source=10.177.157.11; Initial Catalog=report_center_v2;connection timeout=100;user id=ereport;password=eg3rawme" />
+		<!-- Debug Connection String -->
+		<add key="Reports.SqlConnection.Internal.Debug" provider="mssql" connectionString="Data Source=Azote;Initial Catalog=report_center_v2;connection timeout=100;user id=eReport;password=eg3rawme" />
+		
+
+
+
+		<!-- Temporary eFund Database access -->
+		<!-- Temporary connection strings until the back end for a partner is finished in eFundWeb -->
+		<!-- For now, the back end of the partner is in eReport to validate partners for authenticated access to reports -->
+		<!-- When finished, this back end for a partner could be used in eFundWeb back-end -->
+
+		<add key="EFundWeb.Production" isProduction="true" />
+		<add key="EFundWeb.SqlConnection.Release" provider="mssql" connectionString="Data Source=uspvl3k123, 1435;Initial Catalog=eFundWeb;connection timeout=100;user id=eMagnetWeb;password=!magnet$73!" />
+		<add key="EFundWeb.SqlConnection.Debug" provider="mssql" connectionString="Data Source=Azote;Initial Catalog=eFundWeb;connection timeout=100;user id=eMagnetWeb;password=!magnet$73!" />
+
+<!--	<add key="eFundWeb.Production" isProduction="false" />
+		<add key="eFundWeb.SqlConnection.External" provider="mssql" connectionString="Data Source=WebRemote2;Initial Catalog=eFundWeb;connection timeout=100;user id=eMagnetWeb;password=!magnet$73!" />
+		<add key="eFundWeb.SqlConnection.Release" provider="mssql" connectionString="Data Source=CAEFR3K01;Initial Catalog=eFundWeb;connection timeout=100;user id=eMagnetWeb;password=!magnet$73!" />
+		<add key="eFundWeb.SqlConnection.Debug" provider="mssql" connectionString="Data Source=Azote;Initial Catalog=eFundWeb;connection timeout=100;user id=eMagnetWeb;password=!magnet$73!" />
+-->
+	</applicationSettings>
+	
+	<appSettings>
+		<!-- Groups allowed to access all reports -->		
+		<add key="Group.Access.AllReports" value="1" />
+	</appSettings>
+  <system.web>
+
+    <!--  DYNAMIC DEBUG COMPILATION
+          Set compilation debug="true" to enable ASPX debugging.  Otherwise, setting this value to
+          false will improve runtime performance of this application. 
+          Set compilation debug="true" to insert debugging symbols (.pdb information)
+          into the compiled page. Because this creates a larger file that executes
+          more slowly, you should set this value to true only when debugging and to
+          false at all other times. For more information, refer to the documentation about
+          debugging ASP.NET files.
+    -->
+    <compilation 
+         defaultLanguage="c#"
+         debug="true"
+    />
+
+    <!--  CUSTOM ERROR MESSAGES
+          Set customErrors mode="On" or "RemoteOnly" to enable custom error messages, "Off" to disable. 
+          Add <error> tags for each of the errors you want to handle.
+
+          "On" Always display custom (friendly) messages.
+          "Off" Always display detailed ASP.NET error information.
+          "RemoteOnly" Display custom (friendly) messages only to users not running 
+           on the local Web server. This setting is recommended for security purposes, so 
+           that you do not display application detail information to remote clients.
+    -->
+    <customErrors 
+    mode="Off" 
+    /> 
+
+    <!--  AUTHENTICATION 
+          This section sets the authentication policies of the application. Possible modes are "Windows", 
+          "Forms", "Passport" and "None"
+
+          "None" No authentication is performed. 
+          "Windows" IIS performs authentication (Basic, Digest, or Integrated Windows) according to 
+           its settings for the application. Anonymous access must be disabled in IIS. 
+          "Forms" You provide a custom form (Web page) for users to enter their credentials, and then 
+           you authenticate them in your application. A user credential token is stored in a cookie.
+          "Passport" Authentication is performed via a centralized authentication service provided
+           by Microsoft that offers a single logon and core profile services for member sites.
+    -->
+    <authentication mode="Windows" /> 
+
+	<!--  AUTHORIZATION 
+          This section sets the authorization policies of the application. You can allow or deny access
+          to application resources by user or role. Wildcards: "*" mean everyone, "?" means anonymous 
+          (unauthenticated) users.
+    -->
+
+    <authorization>
+        <allow users="*" /> <!-- Allow all users -->
+            <!--  <allow     users="[comma separated list of users]"
+                             roles="[comma separated list of roles]"/>
+                  <deny      users="[comma separated list of users]"
+                             roles="[comma separated list of roles]"/>
+            -->
+    </authorization>
+
+    <!--  APPLICATION-LEVEL TRACE LOGGING
+          Application-level tracing enables trace log output for every page within an application. 
+          Set trace enabled="true" to enable application trace logging.  If pageOutput="true", the
+          trace information will be displayed at the bottom of each page.  Otherwise, you can view the 
+          application trace log by browsing the "trace.axd" page from your web application
+          root. 
+    -->
+    <trace
+        enabled="false"
+        requestLimit="10"
+        pageOutput="false"
+        traceMode="SortByTime"
+		localOnly="true"
+    />
+
+    <!--  SESSION STATE SETTINGS
+          By default ASP.NET uses cookies to identify which requests belong to a particular session. 
+          If cookies are not available, a session can be tracked by adding a session identifier to the URL. 
+          To disable cookies, set sessionState cookieless="true".
+    -->
+    <sessionState 
+            mode="InProc"
+            stateConnectionString="tcpip=127.0.0.1:42424"
+            sqlConnectionString="data source=127.0.0.1;Trusted_Connection=yes"
+            cookieless="false" 
+            timeout="20" 
+    />
+
+    <!--  GLOBALIZATION
+          This section sets the globalization settings of the application. 
+    -->
+    <globalization 
+            requestEncoding="utf-8" 
+            responseEncoding="utf-8" 
+   />
+   
+   <browserCaps>
+
+
+    <!-- 
+    Name:    BrowserCaps update for modern browsers, http://slingfive.com/pages/code/browserCaps/
+    Author:  Rob Eberhardt, http://slingfive.com/
+    History:
+      2004-11-19  improved detection of Safari, Konqueror &amp; Mozilla variants, added Opera detection
+      2003-12-21  updated TagWriter info
+      2003-12-03  first published
+    -->
+
+      <!-- GECKO Based Browsers (Netscape 6+, Mozilla/Firefox, ...) //-->
+      <case match="^Mozilla/5\.0 \([^)]*\) (Gecko/[-\d]+)(?'VendorProductToken' (?'type'[^/\d]*)([\d]*)/(?'version'(?'major'\d+)(?'minor'\.\d+)(?'letters'\w*)))?">
+        browser=Gecko
+        <filter>
+          <case match="(Gecko/[-\d]+)(?'VendorProductToken' (?'type'[^/\d]*)([\d]*)/(?'version'(?'major'\d+)(?'minor'\.\d+)(?'letters'\w*)))">
+            type=${type}
+          </case>
+          <case> <!-- plain Mozilla if no VendorProductToken found -->
+            type=Mozilla
+          </case>
+        </filter>
+        frames=true
+        tables=true
+        cookies=true
+        javascript=true
+        javaapplets=true
+        ecmascriptversion=1.5
+        w3cdomversion=1.0
+        css1=true
+        css2=true
+        xml=true
+        tagwriter=System.Web.UI.HtmlTextWriter
+        <case match="rv:(?'version'(?'major'\d+)(?'minor'\.\d+)(?'letters'\w*))">
+          version=${version}
+          majorversion=0${major}
+          minorversion=0${minor}
+          <case match="^b" with="${letters}">
+            beta=true
+          </case>
+        </case>
+      </case>
+
+      <!-- AppleWebKit Based Browsers (Safari...) //-->
+      <case match="AppleWebKit/(?'version'(?'major'\d?)(?'minor'\d{2})(?'letters'\w*)?)">
+        browser=AppleWebKit
+        version=${version}
+        majorversion=0${major}
+        minorversion=0.${minor}
+        frames=true
+        tables=true
+        cookies=true
+        javascript=true
+        javaapplets=true
+        ecmascriptversion=1.5
+        w3cdomversion=1.0
+        css1=true
+        css2=true
+        xml=true
+        tagwriter=System.Web.UI.HtmlTextWriter
+        <case match="AppleWebKit/(?'version'(?'major'\d)(?'minor'\d+)(?'letters'\w*))(.* )?(?'type'[^/\d]*)/.*( |$)">
+          type=${type}
+        </case>
+      </case>
+
+      <!-- Konqueror //-->
+      <case match=".+[K|k]onqueror/(?'version'(?'major'\d+)(?'minor'(\.[\d])*)(?'letters'[^;]*));\s+(?'platform'[^;\)]*)(;|\))">
+        browser=Konqueror
+        version=${version}
+        majorversion=0${major}
+        minorversion=0${minor}
+        platform=${platform}
+        type=Konqueror
+        frames=true
+        tables=true
+        cookies=true
+        javascript=true
+        javaapplets=true
+        ecmascriptversion=1.5
+        w3cdomversion=1.0
+        css1=true
+        css2=true
+        xml=true
+        tagwriter=System.Web.UI.HtmlTextWriter
+      </case>
+
+      <!-- Opera //-->
+      <case match="Opera[ /](?'version'(?'major'\d+)(?'minor'\.(?'minorint'\d+))(?'letters'\w*))">
+        <filter match="[7-9]" with="${major}">
+          tagwriter=System.Web.UI.HtmlTextWriter
+        </filter>
+        <filter>
+          <case match="7" with="${major}">
+            <filter>
+              <case match="[5-9]" with="${minorint}">
+                ecmascriptversion=1.5
+              </case>
+              <case>
+                ecmascriptversion=1.4
+              </case>
+            </filter>
+          </case>
+          <case match="[8-9]" with="${major}">
+            ecmascriptversion=1.5
+          </case>
+        </filter>
+      </case>
+
+    </browserCaps>
+   
+ </system.web>
+
+</configuration>

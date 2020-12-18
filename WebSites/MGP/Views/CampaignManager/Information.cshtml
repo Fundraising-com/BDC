@@ -1,0 +1,404 @@
+@model GA.BDC.Web.MGP.Models.Views.Information
+@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Models.Branding;
+@{
+    ViewBag.Title = "My Personal Information";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+    var partnerBranding = ViewBag.Partner as Partner;
+    var userBranding = ViewBag.User as User;
+    var eventBranding = ViewBag.Event as Event;
+    var required = userBranding.IsSponsor ? "required" : string.Empty;
+}
+<div id="information"  ng-controller="campaignManagerController" ng-init=" participantId = @eventBranding.ParticipantId; registerView = @serializedModel;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Edit my personal information</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <small>You can edit your account information here. Simply modify the desired fields below and click 'Save Changes'.</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Account Information</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <small>* Indicates required field.</small>
+                        </div>
+                    </div>
+                    <form role="form" ng-submit="updateInformation()" name="informationForm" id="informationForm">
+                        <input type="hidden" name="participantId" ng-model="registerView.ParticipantId" ng-value="registerView.ParticipantId = @Model.ParticipantId" />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="firstName">* First Name</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="text" name="firstName" class="form-control" @required ng-model="registerView.FirstName" placeholder="i.e. John" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="lastName">* Last Name</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="text" name="lastName" class="form-control" @required ng-model="registerView.LastName" placeholder="i.e. Smith" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="email">* Email Address</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control" @required ng-model="registerView.Email" placeholder="i.e. my.mail@provider.com" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row @(userBranding.IsParticipant ? "hidden" : string.Empty)">
+                            <div class="col-sm-4">
+                                <label for="phone"> Phone Number</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="tel" name="phone" class="form-control" ng-model="registerView.Phone" placeholder="i.e. 55589569871" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1 visible-md visible-lg">
+                                <span class="tip text-info" data-toggle="tooltip" data-placement="left" title="Your phone number will allow a fundraising consultant to contact you in case you need any help setting up or managing your online fundraising campaign.">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row @(userBranding.IsParticipant ? "hidden" : string.Empty)">
+                            <div class="col-sm-4">
+                                <label for="campaignName">* Campaign Name</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="text" name="campaignName" class="form-control" @required ng-model="registerView.CampaignName" placeholder="i.e. My Fundraising Event!" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1 visible-md visible-lg">
+                                <span class="tip text-info" data-toggle="tooltip" data-placement="left" title="Your group name is the name of the group, event or cause for which you need to raise funds.">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="campaignName">I want to change my password</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="checkbox" name="changePassword" class="checkbox" ng-model="registerView.ChangePassword" value="true" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row password">
+                            <div class="col-sm-4">
+                                <label for="password0">Current Password</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="password" name="password0" class="form-control" ng-model="registerView.CurrentPassword" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row password">
+                            <div class="col-sm-4">
+                                <label for="password1">New Password</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="password" name="password1" class="form-control" ng-model="registerView.NewPassword1" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row password">
+                            <div class="col-sm-4">
+                                <label for="password2">Repeat New Password</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="password" name="password2" class="form-control" ng-model="registerView.NewPassword2" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="@(userBranding.IsParticipant || partnerBranding.PaymentTo == PaymentTo.Partner ? "hidden" : string.Empty)">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <strong>Payment Information</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Please make my profit check payable to:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label style="font-weight: normal">
+                                            <input type="radio" name="paymentType" value="1" checked="checked" ng-model="registerView.PaymentType" />
+                                            Myself
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label style="font-weight: normal">
+                                            <input type="radio" name="paymentType" value="2" ng-model="registerView.PaymentType" />
+                                            My group
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label style="font-weight: normal">
+                                            <input type="radio" name="paymentType" value="3" ng-model="registerView.PaymentType" />
+                                            Other
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row payTo">
+                                <div class="col-sm-4">
+                                    <label for="payTo">* Pay To</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <input type="text" name="payTo" class="form-control" @required ng-model="registerView.PayTo" placeholder="i.e. John Smith" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="address">* Address</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <input type="text" name="address" class="form-control" @required ng-model="registerView.Address" placeholder="i.e. 555 First Avenue" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="city">* City</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <input type="text" name="city" class="form-control" @required ng-model="registerView.City" placeholder="i.e. Nashville" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="zipCode">* Zip Code</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <input type="text" name="zipCode" class="form-control" @required ng-model="registerView.ZipCode" placeholder="i.e. 90210" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="state">* State</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control" @required ng-model="registerView.State" name="state">
+                                            <option value="US-AA">Armed Forces Americas (except Canada)</option>
+                                            <option value="US-AE">Armed Forces (Africa, Canada, Europe, Middle East)</option>
+                                            <option value="US-AK">Alaska</option>
+                                            <option value="US-AL">Alabama</option>
+                                            <option value="US-AP">Armed Forces Pacific</option>
+                                            <option value="US-AR">Arkansas</option>
+                                            <option value="US-AZ">Arizona</option>
+                                            <option value="US-CA">California</option>
+                                            <option value="US-CO">Colorado</option>
+                                            <option value="US-CT">Connecticut</option>
+                                            <option value="US-DC">District of Columbia</option>
+                                            <option value="US-DE">Delaware</option>
+                                            <option value="US-FL">Florida</option>
+                                            <option value="US-GA">Georgia</option>
+                                            <option value="US-HI">Hawaii</option>
+                                            <option value="US-IA">Iowa</option>
+                                            <option value="US-ID">Idaho</option>
+                                            <option value="US-IL">Illinois</option>
+                                            <option value="US-IN">Indiana</option>
+                                            <option value="US-KS">Kansas</option>
+                                            <option value="US-KY">Kentucky</option>
+                                            <option value="US-LA">Louisiana</option>
+                                            <option value="US-MA">Massachusetts</option>
+                                            <option value="US-MD">Maryland</option>
+                                            <option value="US-ME">Maine</option>
+                                            <option value="US-MI">Michigan</option>
+                                            <option value="US-MN">Minnesota</option>
+                                            <option value="US-MO">Missouri</option>
+                                            <option value="US-MS">Mississippi</option>
+                                            <option value="US-MT">Montana</option>
+                                            <option value="US-NC">North Carolina</option>
+                                            <option value="US-ND">North Dakota</option>
+                                            <option value="US-NE">Nebraska</option>
+                                            <option value="US-NH">New Hampshire</option>
+                                            <option value="US-NJ">New Jersey</option>
+                                            <option value="US-NM">New Mexico</option>
+                                            <option value="US-NV">Nevada</option>
+                                            <option value="US-NY">New York</option>
+                                            <option value="US-OH">Ohio</option>
+                                            <option value="US-OK">Oklahoma</option>
+                                            <option value="US-OR">Oregon</option>
+                                            <option value="US-PA">Pennsylvania</option>
+                                            <option value="US-PR">Puerto Rico</option>
+                                            <option value="US-RI">Rhode Island</option>
+                                            <option value="US-SC">South Carolina</option>
+                                            <option value="US-SD">South Dakota</option>
+                                            <option value="US-TN">Tennessee</option>
+                                            <option value="US-TX">Texas</option>
+                                            <option value="US-UT">Utah</option>
+                                           <option value="US-VA">Virginia</option>
+                                           <option value="US-VI">Virgin Islands</option>
+                                            <option value="US-VT">Vermont</option>
+                                            <option value="US-WA">Washington</option>
+                                            <option value="US-WI">Wisconsin</option>
+                                            <option value="US-WV">West Virginia</option>
+                                            <option value="US-WY">Wyoming</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                        </div>
+                        <div class="@(userBranding.IsParticipant || partnerBranding.PaymentTo == PaymentTo.Group ? "hidden" : string.Empty)">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <h3>Please note that all monthly profit checks will be sent directly to @partnerBranding.Name</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label style="font-weight: normal">
+                                        <input type="checkbox" name="newsletter" value="1" ng-model="registerView.Newsletter" />
+                                        I wish to receive periodic emails from Fundraising.com
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="executingAction" ng-cloak>
+                            <div class="col-sm-12">
+                                <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="resultFailed" ng-cloak>
+                            <div class="col-sm-12">
+                                <span class="text-danger">{{responseText}}</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="success" ng-cloak>
+                            <div class="col-sm-12">
+                                <span class="text-success">{{responseText}}</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-hide="executingAction" ng-cloak>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success form-control">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade @(userBranding.IsParticipant ? "hidden" : string.Empty)" id="modalAddressHygiene" tabindex="-1" role="dialog" aria-labelledby="modalAddressHygieneLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Please verify your address</h4>
+                </div>
+                <div class="modal-body">
+                    Is this address correct? Please double check for accuracy to ensure your profit checks reach you:<br />
+                    <strong>
+                        {{newAddress}}<br />
+                        {{newCity}}<br />
+                        {{newState}}<br />
+                        {{newZipCode}}
+                    </strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-dismiss="modal" ng-click="registerView.IgnoreAddressHygiene = true; registerView.Address = newAddress; registerView.City = newCity; registerView.State = newState; registerView.ZipCode = newZipCode; updateInformation();">Yes, this is correct</button>
+                    <button type="button" class="btn btn-primary" ng-click="registerView.IgnoreAddressHygiene = true; updateInformation();" data-dismiss="modal">Use what I provided</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input[name=changePassword]").change(function () {
+                if ($(this).prop("checked")) {
+                    $("div.password").fadeIn("slow");
+                } else {
+                    $("div.password").fadeOut("slow");
+                }
+            });
+
+            $("input[name=paymentType]").change(function () {
+                if ($(this).val() == 3 && $(this).prop("checked")) {
+                    $("div.payTo").fadeIn("slow");
+                } else {
+                    $("div.payTo").fadeOut("slow");
+                }
+            });
+            $("input[name=paymentType]").trigger("change");
+        });
+    </script>
+}

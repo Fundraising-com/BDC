@@ -1,0 +1,578 @@
+@*@using GA.BDC.Shared.Entities*@
+@{
+   ViewBag.Title = "EZFund.com - Fundraising Ideas Blog";
+   ViewBag.Description = "EzFund blog with tons of ideas for your event";
+   ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers, blog";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+   ViewBag.CanonicalUrl = "/blog";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('body').append('<div id="toTop" class="btn btn-info"><i class="glyphicon glyphicon-chevron-up"></i>&nbsp;Back to Top</div>');
+        $(window).scroll(function () {
+            if ($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+        $('#toTop').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+    });
+
+</script>
+
+<style>
+   #toTop {
+      position: fixed;
+      bottom: 60px;
+      right: 10px;
+      cursor: pointer;
+      display: none;
+      margin-right: 5px;
+   }
+
+   .anchor {
+      display: block;
+      height: 115px; /*same height as header*/
+      margin-top: -115px; /*same height as header*/
+      visibility: hidden;
+   }
+</style>
+
+<script type="text/javascript">
+
+    $('.back-to-top').click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
+
+    $(window).scroll(function () {
+        var height = $('body').height(),
+        scrollTop = $(window).scrollTop();
+        if (scrollTop > 100) {
+            $('.back-to-top').css({ 'position': 'fixed', 'bottom': '50px', 'display': 'block' });
+        }
+        else {
+            $('.back-to-top').css({ 'position': 'absolute', 'bottom': '-50px', 'display': 'none' });
+        }
+    });
+
+   ``
+</script>
+
+
+<div class="container">
+   <div class="row row-padding-lg">
+      <div class="col-lg-12 hidden-xs" style="text-align:center">
+         <img src="~/Content/images/public/ezfund-blog_banner.jpg" class="img-responsive" style="border:none" />
+      </div>
+      <div class="col-lg-12 visible-xs" style="text-align:center">
+         <img src="~/Content/images/public/ezfund-blog_2019-mobilebanner.jpg" class="img-responsive" style="border:none" />
+      </div>
+   </div>
+
+   <div class="row row-padding-lg">
+      <div class="col-lg-12" style="text-align:center">
+         <h3>Click on the links below to read up on some great fundraising ideas for your next fundraiser!</h3>
+      </div>
+   </div>
+
+
+   <div class="row">
+      <div class="col-sm-4">
+         <a href="#lowcost" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Low-Cost or Even No-Cost Fundraising Ideas
+         </a><br />
+         <a href="#lowcost">
+
+            <img src="~/Content/images/public/bloglowcost.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            1. 50/50 raffle<br />
+            This is a known one, but it's still around because it's one of the easiest and cheapest ways to fundraise.
+            <br /><a href="#lowcost" style="font-size:18px;">Learn More</a>
+         </div>
+
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#church" style="text-decoration:none; font-size:17px; color:#347ab6">
+            4 Ideas for Church Fundraising
+         </a><br />
+         <a href="#church">
+
+            <img src="~/Content/images/public/blogchurch.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            If you are trying to raise money for your charity or maintenance of your church, you must know that organizing a fundraiser will not only get you the necessary income.
+            <br /><a href="#church" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#potsup" style="text-decoration:none; font-size:17px; color:#347ab6">
+            10 Tips to Be a Great Salesman
+         </a><br />
+         <a href="#potsup">
+            <img src="~/Content/images/public/blogsalesman.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            When trying to raise funds for your team, using your team's name, logo, or pictures of players will gain the attention of your prospective buyers.
+            <br /><a href="#potsup" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+
+   </div>
+
+   <br /><br />
+
+
+
+
+
+
+   <div class="row">
+      <div class="col-sm-4">
+         <a href="#football" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Football Fundraisers Ideas To Help You
+         </a><br />
+         <a href="#football">
+            <img src="~/Content/images/public/blogfootball.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Sports teams often have to launch fundraising campaigns and we've got six solid football fundraisers to get you started.
+            <br /><a href="#football" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#fun" style="text-decoration:none; font-size:17px; color:#347ab6">
+            How to Put the Fun in Fundaising
+         </a><br />
+         <a href="#fun">
+
+            <img src="~/Content/images/public/blogfun.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Fundraising is hard work. It takes a great deal of planning, effort, and coordination from everyone involved. It helps if you can make all this work feel more like fun.
+            <br /><a href="#fun" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#sportteams" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Sports Teams: Personalize your Fundraiser
+         </a><br />
+         <a href="#sportteams">
+            <img src="~/Content/images/public/blogsports.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            When trying to raise funds for your team, using your team's name, logo, or pictures of players will gain the attention of your prospective buyers.
+            <br /><a href="#ecotips" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+
+   </div>
+
+
+
+
+   <br /><br />
+   <div class="row row-padding-lg">
+      <div class="col-sm-4">
+         <a href="#middleschool" style="text-decoration:none; font-size:17px; color:#347ab6">
+            4 Fundraising ideas for Middle School Coaches
+         </a><br />
+         <a href="#middleschool">
+            <img src="~/Content/images/public/blogideacoach.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            When coaching a team, often times the coach finds his/herself wanting to help the kids raise funds for uniforms or trips.
+            <br /><a href="#middleschool" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#wordout" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Get the Word Out About Your Next Fundraiser
+         </a><br />
+         <a href="#wordout">
+            <img src="~/Content/images/public/blogwordout.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            When it comes to fundraising, it is important to spread the word about your event so that you get a good turn out.
+            <br /><a href="#wordout" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#ecotips" style="text-decoration:none; font-size:17px; color:#347ab6">
+            4 Tips Eco-Friendly Fundraisers for your school
+         </a><br />
+         <a href="#ecotips">
+            <img src="~/Content/images/public/blogeco.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Everyone wants to live in a clean neighbourhood, and most people care about the environment in this day and age.
+            <br /><a href="#ecotips" style="font-size:18px;">Learn More</a>
+         </div>
+      </div>
+
+   </div>
+   <br /><br />
+
+   <div class="row row-padding-lg">
+      <div class="col-sm-4">
+         <a href="#selltips" style="text-decoration:none; font-size:17px; color:#347ab6">
+            4 Tips to Sell More at your Fundraiser
+         </a><br />
+         <a href="#selltips" style="text-decoration:none; font-size:17px; color:#347ab6">
+            <img src="~/Content/images/public/blogsellmore.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            It's not easy to launch a successful fundraiser because there are a lot of things to consider in making sure you see the desired results.
+            <br /><a href="#selltips" style="font-size:18px;">Learn More</a>
+         </div>
+
+
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      
+
+   </div>
+   <br /><br />
+
+   <a name="lowcost"></a>
+   <br /><br />
+   <img ng-src="/Content/images/public/blog_lowcost.jpg" alt="Low-Cost or Even No-Cost Fundraising Ideas" title="Low-Cost or Even No-Cost Fundraising Ideas" class="img-responsive center" style="border:none" />
+   <span style="text-decoration:none; font-size:24px; color:#347ab6">
+      Low-Cost or Even No-Cost Fundraising Ideas
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         <strong>1. 50/50 raffle</strong>
+         <br />
+         This is a known one, but it's still around because it's one of the easiest and cheapest ways to fundraise. You just need to buy a raffle ticket roll from a party store and start selling the tickets. The raffle works very well in community events where you have access to a greater amount of people at once.
+         <br /><br />
+         <strong>2.	Prom dress fundraiser</strong>
+         <br />
+         This campaign is very useful for fundraising groups who don't have a selling big force. Get people to donate the prom dresses they won't use anymore.  If you promote it well and with some time in advance, you can raise some good money. This is a campaign that you can run every year after the celebrations are over. There are also 2 other good moments throughout the year; one, at the beginning of the year since the December holiday season is over. And two, during Spring Cleaning time, people clean the closets, and many would rather donate to your cause instead of thinking what to do with the clothes that they don't want to wear anymore. To promote the donations you can use a website, the school newsletter, a dress shop, or a stand in your school. Plan the selling event and invite the community!
+         <br /><br />
+         <strong>3.	Bring and Buy Sale</strong>
+         <br />
+         This is a very easy method to raise funds. You need a big space, some promotion, several tables, and some change. Invite people to come and sell their old stuff or the things they don't need anymore. Ask people for a small door fee. All the funds you get are yours, while people will be happy to sell their stuff they do not use anymore and make some money. Furthermore, make sure you promote the event!
+         <h3>Good luck!</h3>
+      </div>
+   </div>
+
+   <br />
+
+
+
+   <a name="church"></a>
+   <br /><br />
+   <img ng-src="/Content/images/public/blog_church.jpg" alt="4 Ideas for Church Fundraising" title="4 Ideas for Church Fundraising" class="img-responsive center" style="border:none" />
+   <span style="text-decoration:none; font-size:24px; color:#347ab6">
+      4 Ideas for Church Fundraising
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         If you are trying to raise money for your charity or maintenance of your church, you must know that organizing a fundraiser will not only get you the necessary income, but could also develop in your community a sense of partnership in working together for a bigger purpose. Church fundraising implies asking people to make a financial contribution for the sake of a vision or a mission. Therefore, organization and communication are key to succeed at fundraising for a church.
+         <br /><br />
+         <strong>Work with a committee </strong>
+         <br />
+         Whether your goal is to start church fundraising or something else, working alone will always prove to be difficult. Therefore, try to find people who share your passion and vision. The best way to get people working together is to create a committee and, in the case of church fundraising, a very good idea is to invite the church leader to also join the committee. Be sure to make public your efforts and be visible to the whole community, so that more people can join the movement. Schedule meetings and try to make regular announcements in the church newsletter, talk about your cause on your website or directly send emails or letters to the members of the church.
+         <br /><br />
+         <strong>Create events or sales</strong>
+         <br />
+         These are opportunities not only to obtain donations, but also to develop fellowship with other participants. For example, a backyard product sale in the church's parking lot is always a good idea. Moreover, you can ask other participants to contribute with items they no longer use, from apparel and electronics to home furniture, anything can be saved. Be sure to check both the attic room and the cellar. If possible, schedule the fundraising on a sunny morning of the weekend; this will help the event go smoothly. If you want to know more about planning events for a church fundraising, take a tour around our website.
+         <br /><br />
+         <strong>Fundraising through candles</strong>
+         <br />
+         This is a traditional and popular method that churches use to increase their revenue. Since candles are a part of the spiritual side, they will always be easy and quick to sell. Candle fundraising is also a good method to start, when the church doesn't have enough money for larger campaigns. For example, it is not unusual for an individual to sell up to 20 candles to a family and to neighbors or friends. You can also deliver candles to folks and make your church the intermediate: you can invite people to order and buy candles through the church.
+         <br /><br />
+         <strong>Provide discount cards for the church fundraisers</strong>
+         <br />
+         This is one of the most profitable ways to increase the revenue in a church. These cards provide a variety of small discounts for a wide range of services and goods, while the profit is quite high.  This is an intelligent approach, by offering an actual benefit and at the same time a substantial return of your initial investment. The discounts are offered by the local merchants and shops who receive, in return, free publicity in the church's community.
+      </div>
+   </div>
+
+   <br />
+
+
+   <a name="potsup"></a>
+   <br /><br />
+   <img ng-src="/Content/images/public/blog_salesman.jpg" alt="10 Tips to Be a Great Salesman for Your Potential Supporters" title="10 Tips to Be a Great Salesman for Your Potential Supporters" class="img-responsive center" style="border:none" />
+   <span style="text-decoration:none; font-size:24px; color:#347ab6">
+      10 Tips to Be a Great Salesman for Your Potential Supporters
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         No matter if you are a salesman for a business or for a non-profit organization, you must know that Sales is an art. If you want to convince somebody your cause is worth giving to, you need to find the right balance between persuasion and charisma. If you manage to do that, you are on your way to becoming a great sales person, because you will be able to sell anything to anybody.
+         <br /><br />
+         In order to help you become a better sales person, we prepared 10 tips that will help you. Whether you are doing church fundraising, school fundraising, or any other type of fundraising, follow these steps, and you will see an improvement.
+         <br />
+         <div style="padding:15px">
+            <strong>1.</strong>	Supporters come first - You cannot sell a fundraising idea if your supporter doesn't trust you. Be sincere, firm, assertive, and honest, and show the supporter you are approaching he can trust you. It will convince him to seal the deal.<br />
+            <strong>2.</strong>	Empathize - Find out what motivates your supporter and present him your fundraising ideas with that in mind. Understand his desires, ask him questions, interact with him, and present him his best options.<br />
+            <strong>3.</strong>	Know what you are selling - You must be an expert on the fundraising product you are selling! If you don't know your product or your service, how do you expect a supporter to trust you and give you money? Learn every single detail!<br />
+            <strong>4.</strong>	Follow up - For those who want to be really good salesmen, you need to go over and above the others. That means to keep in contact with your supporters, and make sure they are happy with the product they bought. It will help you build a relationship with them, and in the future you will be able to count on them.<br />
+            <strong>5.</strong>	Look the part - You need to look professional, so make sure you respect the standard codes and rules. Be groomed, clean, and friendly.<br />
+            <strong>6.</strong>	Anticipate any objection - You need to be prepared, because it is not always easy convince supporters to participate. Find the strengths and the weaknesses of your fundraising ideas and be ready to present alternatives and other benefits that will convince the supporter anyway.<br />
+            <strong>7.</strong>	Stay focused - It is very important to be focused on your projects, and to sell it with passion. Don't compare yourself with the competitors, and celebrate every time you have a success.<br />
+            <strong>8.</strong>	Be optimistic - Show your supporters you are a positive person, optimistic, and it will be easier to convince them to support your cause.<br />
+            <strong>9.</strong>	Be a good listener - Pay attention to what your supporter says, and to what his expectations are. Make sure you are able to give him everything he needs or wants.<br />
+            <strong>10.</strong> Be grateful - Your supporters will be happier and will appreciate you more if you show gratitude for their participation. It is a great idea to thank them in public for their support.<br />
+         </div>
+      </div>
+   </div>
+
+   <br />
+
+
+
+
+   <a name="fun"></a>
+   <img ng-src="/Content/images/public/blog_funfundraisers.jpg" alt="Fun Fundraisers" title="Fun Fundraisers" class="img-responsive center" style="border:none" />
+   <span title="Fun Fundraisers" style="text-decoration:none; font-size:24px; color:#347ab6">
+      How to Put the Fun in Fundraising
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Fundraising is hard work. It takes a great deal of planning, effort, and coordination from everyone involved. It helps if you can make all this work feel more like fun. There are many effective fundraising ideas that can be a lot of fun for everyone involved; here are a few ideas to put the fun in fundraising.
+         <br /><br />
+         <strong>Get Cooking</strong>
+         <br />
+         Food brings people together, so any kind of fundraiser focused around food is sure to generate good times for everyone. Bake sales and barbeques are easy enough to organize, and it shouldn't take much convincing to get people to buy a freshly cooked meal. If you want to make it a bake sale, you can use some <a href="/products/cookie-dough-fundraisers/cookie-dough" title="cookie dough">
+            cookie dough
+         </a>. Pancake dinners and Spaghetti Dinners are always a great opportunity to get together and strengthen the sense of community.
+         <br /><br />
+         <strong>Friendly Competition</strong>
+         <br />
+         Athletic competitions like sporting events and tournaments also bring people together with the spirit of community. It is important to emphasize with any kind of sport-themed fundraiser that it doesn't matter who wins the game. The real winners are the people who you're fundraising for.
+         <br /><br />
+         <strong>Let the Games Begin</strong>
+         <br />
+         Not everything has to be a competition. Carnival games like target shooting, whack-a-mole, bouncy castles, and dunk tanks also work well. You can look for carnival games rental companies or you can create your own and have some fun with the creative process. These events involve quite some logistics including setting everything up. If you decide to hire a rental company, you'll find a huge variety of games to choose from and they may also provide people to set everything up which can make the process easier if your budget allows it.
+         <br /><br />
+         Fundraising can be tough, but that doesn't mean you can't make it fun. We hope these ideas help you inject a little fun and games into your next fundraiser.
+
+      </div>
+   </div>
+   <br /><br />
+   <a name="sportteams"></a>
+   <img ng-src="/Content/images/public/blog_personalizesports.jpg" alt="Sports Teams: Personalize your Fundraiser" title="Sports Teams: Personalize your Fundraiser" class="img-responsive center" style="border:none" />
+
+   <span title="Sports Teams: Personalize your Fundraiser" style="text-decoration:none; font-size:24px; color:#347ab6">
+      Sports Teams: Personalize your Fundraiser
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         When trying to raise funds for your team, using your team's name, logo, or pictures of players will gain the attention of your prospective buyers. Anyone who is a family member or friend of an individual in the team will be interested in donating their money for the cause because they get to keep an item that reminds them of the team every time it is viewed. Also, players who used to belong to the team themselves will be excited to have an item that gives them a bit of nostalgia. Here are some custom fundraisers for sports groups that will help you raise funds and bring the cheer!
+         <br /><br />
+         <strong>Scratch Cards</strong>
+         <br />
+         These cards are fun for people who enjoy the luck of the draw. How it works is that the buyer will decide how many dots they want to scratch and then give you the amounts underneath the dots to go towards your fundraiser. Your group can raise up to $100. It is a fun game of chance to see how much each person has to fork over for your group. It is all in fun and you can warn the participants that the highest amount is $5. You can also play little games where the winners will get a prize and losers will have to scratch a dot. After they hand you the money, hand them a discount coupon to be used at local restaurants and stores. You can use a sports design from our catalog but you can also personalize it with team's picture or logo.
+         <br /><br />
+         <strong>Custom T-Shirts</strong>
+         <br />
+         T-shirts can be a big hit when having a team fundraiser. A high quality T-shirts with your team's logo is an easy buy among family, friends and fans who will be glad to show some team pride. You can choose from a variety of colors and locations for you designs, just head to out <a href="/products/custom/customized-Fundraising-Products/custom-t-shirts" title="Custom T-Shirts">Custom T-shirts</a> page or give us a call at 1-800-991-8779
+         <br /><br />
+         <strong>Custom Spirit Sleeves </strong>
+         <br />
+         Your supporters will also enjoy the idea of <a href="/products/custom/customized-Fundraising-Products/custom-spirit-sleeves" title="Custom Spirit Sleeves">Spirit Sleeves</a> they can come very handy for an early walk or an outdoors workout. A funky or cool design will assure that people will be happy to wear them at the games but also in their regular day-to-day.
+      </div>
+   </div>
+   <br /><br />
+   <a name="middleschool"></a>
+   <img ng-src="/Content/images/public/blog_middleschoolcoach.jpg" alt="4 Fundraising Ideas for Middle School Coaches" title="4 Fundraising Ideas for Middle School Coaches" class="img-responsive center" style="border:none" />
+   <span title="4 Fundraising Ideas for Middle School Coaches" style="text-decoration:none; font-size:24px; color:#347ab6">
+      4 Fundraising Ideas for Middle School Coaches
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         When coaching a team, often times the coach finds his/herself wanting to help the kids raise funds for uniforms or trips. Among some of the most popular school fundraisers are bake sales and car washes, and while those ideas are tried and true, why not come up with some fresh fundraising ideas to intrigue and attract your supporters? We know some will prefer to go with fundraisers that have been successful so we gathered a bit of both worlds, some that you might have heard of, and some that probably you have never tried.
+         <br /><br />
+         <strong>Rent-An-Athlete</strong>
+         <br />
+         The Rent-An-Athlete fundraiser is super easy to do! These fundraisers get the whole team involved, and the best part is that there is a 100% profit. Offer to "rent your athletes" to families to mow the lawn, walk the dog, or any other little job someone might need done. Advertising this fundraiser draws a lot of attention and gives the team a sense of accomplishment and community.
+         <br /><br />
+         <strong>Temporary Tattoos</strong>
+         <br />
+         Temporary tattoos are a great substitute for a bake sale for a middle school fundraiser. You can get some custom made tattoos with your team's logo, and make a great profit at low expense for your supporters. Besides, who doesn't love a team-spirited tattoo, right?
+         <br /><br />
+         <strong>Duct Tape Your Coach to the Wall</strong>
+         <br />
+         This is a great fundraising idea that has been around for a while now, but it's still fun and students continue to have a blast. Another advantage is that you host it right at the school which makes it easier in terms of logistics. Offer a strip of duct tape for $1 and let the kids tape their coach to the gym wall. This is a perfect opportunity to get involved in the fundraiser, since you're the coach, you can offer yourself as the victim. This fundraiser can make a good profit, and the only expense is the duct tape!
+         <br /><br />
+         <strong>Candy Bars</strong>
+         <br />
+         This is a classic fundraising idea for a reason. Selling $1 candy bars is a sure way to make a profit. It's simple and straight forward. Just select the <a href="/products/in-hand-sellers/candies/original-one-dollar-bar" title="One Dollar bar">One Dollar bar</a>, buy online, get it at your school and start raising funds!
+      </div>
+   </div>
+
+   <br /><br />
+   <a name="wordout"></a>
+   <img ng-src="/Content/images/public/word.jpg" alt="3 Ways to Get the Word Out " title="3 Ways to Get the Word Out " class="img-responsive center" style="border:none" />
+
+   <span href="/blog/3-Ways-to-Get-the-Word-Out" title="3 Ways to Get the Word Out " style="text-decoration:none; font-size:24px; color:#347ab6">
+      3 Ways to Get the Word Out About Your Next Fundraiser
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         When it comes to fundraising, it is important to spread the word about your event so that you get a good turn out. Here are some fundraising ideas to help you reach an audience and make the most of your event.
+         <br /><br />
+         <strong>Word of Mouth</strong>
+         <br />
+         People often times forget about the most basic form of sharing information: word of mouth. Talk to family members, friends, and people in your community or at your work place about your fundraiser; hey may continue to spread the word. People need to know your story to care, so telling people face-to-face gives you a chance to connect with them.
+         <br /><br />
+         <strong>Local News</strong>
+         <br />
+         The local news is always looking for a great new story, so share yours! Reach out to local newspapers, radio stations, and news channels to advertise your event. People love to support their community, especially when it comes to school fundraisers or church fundraisers. The local news will get your story out to people in your community who would be willing to show their support.
+         <br /><br />
+         <strong>Social Media</strong>
+         <br />
+         The best outlet to reach the largest group of people is through social media. Fundraising on social media is becoming huge, so post your fundraiser on every platform you can Facebook, Twitter, and Pinterest are all great outlets to share your story.<br /><br />
+         These are just a few great fundraising tips to spread the word about your next event. For more helpful advice, give us a call at <a href="tel:+1-800-991-8779" style="text-decoration:none; font-weight:bold">1.800.991.8779</a>
+      </div>
+   </div>
+   <br /><br />
+   <a name="ecotips"></a>
+   <img ng-src="/Content/images/public/ecofriendlyfundraisers.jpg" alt="eco friendly fundraising" title="eco friendly fundraising" class="img-responsive center" style="border:none" />
+   <span href="/blog/4-Tips-Eco-Friendly-Fundraisers" title="4 Tips Eco-Friendly Fundraisers for your School" style="text-decoration:none; font-size:24px; color:#347ab6">
+      4 Tips Eco-Friendly Fundraisers for your School
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Everyone wants to live in a clean neighbourhood, and most people care about the environment in this day and age, so there are several eco-friendly fundraising ideas that you can take advantage of. Do your part to help the environment and earn a few bucks with these sustainable fundraising ideas.
+         <br /><br />
+         <strong>Clean Up the Neighbourhood</strong>
+         <br />
+         An environmental cleanup is an awesome green fundraiser that students are sure to love because it will get them out of the classroom and in the outdoors for a while. Ask for pledges from people and in exchange perform a trash clean up in the neighbourhood or a nearby park. Not only will the students love the fresh air, but local residents will be happy to have a nice and clean neighbourhood to call their home.
+         <br /><br />
+         <strong>Smencils</strong>
+         <br />
+         Students always need a pencil, right? So you can make a fundraiser out of selling Smencils. These are scented pens and pencils made with recycled materials, and we always have loads of them in stock in several different colours and themes.
+         <br /><br />
+         <strong>Sapling Sale</strong>
+         <br />
+         Spring and fall are perfect times to sell saplings and seeds, and few things are more environmentally friendly than planting a few trees. This is another school fundraiser that will get the kids out in the neighbourhood and involved with the community. To find the seeds and saplings try asking some local greenhouses if they have anything to spare, or see if they'll offer you a bulk discount.
+         <br /><br />
+         <strong>Bottle and Can Collection</strong>
+         <br />
+         It's always a shame to see empty bottles and cans littering the streets and parks where you live. Turn that into a green fundraising idea by doing a bottle collection drive! Ask people to bring in their empty bottles and cans, or look for sponsors willing to pay your students to scour the neighbourhood for empties. At the end of the day, all those 10 cent deposits can really add up!
+         <br /><br />
+         Most students love the chance to get out of the classroom for a little while, and these fundraisers not only raise money for your cause but also help the environment. In the end, everyone benefits from these eco-friendly fundraising ideas.
+      </div>
+   </div>
+   <br /><br />
+   <a name="selltips"></a>
+   <img ng-src="/Content/images/public/tipssellmore.jpg" alt="tips to Sell More at your Fundraiser" title="tips to Sell More at your Fundraiser" class="img-responsive center" style="border:none" />
+
+   <span href="/blog/4-Tips-to-Sell-More" title="4 Tips to Sell More at your Fundraiser" style="text-decoration:none; font-size:24px; color:#347ab6">
+      4 Tips to Sell More at your Fundraiser
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         It's not easy to launch a successful fundraiser because there are a lot of things to consider in making sure you see the desired results.  Not all fundraising ideas are made equal, and there is no one-size-fits-all solution, but there are a few things to bear in mind that can help. So, here are a few tips that should help you sell more at your fundraising event.
+         <br /><br />
+         <strong>Be Original</strong>
+         <br />
+         There are a lot of old fundraising ideas that people have seen a hundred times, so you might have some trouble getting people's attention. This includes things like bake sales, garage sales, and raffle tickets, just to name a few. Get creative and put a new spin on an old idea; if you're having a bake sale, add a theme related to your cause, or you can reserve a spot at a local park and turn it into a full day of family activities. You just might be able to turn a few heads with something fresh.
+         <br /><br />
+         <strong>Generate a Buzz</strong>
+         <br />
+         These days it's very easy to utilize social media, emails and even online marketing to generate a buzz about your fundraiser. More and more people are logging onto Facebook and other online outlets so you can easily get the word out about your fundraiser and generate a buzz before you get things started. When people start talking and sharing your content there is the potential to go viral if the right elements are in place, and then you'll really see the funds rolling in.
+         <br /><br />
+         <strong>Get Foot Traffic</strong>
+         <br />
+         If you do an outdoor event it's best to do it in a place where you get a lot of foot traffic. It's just the same principle as opening a retail store: you want to set up shop in a place where the most people will walk by and see what you're doing. Each person who walks by is a potential donor for your fundraiser.
+         <br /><br />
+         <strong>Know Your Audience</strong>
+         <br />
+         Not everyone will react to the same things. You need to zero in on exactly who you're marketing to with your fundraiser and tailor it to them. Are you looking for seniors? Students? Parents? Just like in advertising, you have to know your audience to get the most results. Figure out who your audience is and what they'll go for.
+         <br /><br />
+         Fundraising can be a challenge, but it can also be a lot of fun if you keep your group engaged and your goal at sight.
+
+      </div>
+   </div>
+   <br /><br />
+   <a name="football"></a>
+   <img ng-src="/Content/images/public/footballfundraisers.jpg" alt="Football Fundraisers Guaranteed To Make You Money" title="Football Fundraisers Guaranteed To Make You Money" class="img-responsive center" style="border:none" />
+   <span href="/blog/Football-Fundraisers" title="Football Fundraisers Guaranteed To Make You Money" style="text-decoration:none; font-size:24px">Football Fundraisers Guaranteed To Make You Money</span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Sports teams often have to launch fundraising campaigns and we've got six solid football fundraisers to get you started. Whether you need new equipment, uniforms, or a tour bus to get to away games, consider these fundraisers for your team.
+         <br /><br />
+         <strong>Punt Pass & Kick Competition</strong>
+         <br />
+         The NFL's Punt, Pass and Kick competition has been a smash hit for years, so why not stage your own version of it? The way this fundraiser works is pretty straightforward: players pay a fee to join the competition in which they compete in punting, passing, and place kicking. There are different age divisions to keep things fair. For example, you might have one for 5-7 year olds, another for 8-10 year olds, another for 11-12 year olds, and so on.
+         <br /><br />
+         <strong>Hall of Famer Diner Party</strong>
+         <br />
+         Arrange for a fun and affordable dinner party at a banquet hall and invite former players and coaches as well as people currently on the team. Ask for a modest fee and make it clear in the invitation that it's a fundraising event for the team. It'll be a great opportunity for people to meet former players, exchange stories, and maybe even make new friends. It's sure to be a fun night for everyone.
+         <br /><br />
+         <strong>Concession Stand Sales</strong>
+         <br />
+         What's game night without some drinks and snacks to enjoy while you're cheering for the team? See if you can get a local business to help you out by providing things like coffee, chips, hot dogs, and anything else you feel might be easy to sell to the fans. You'll probably have to give your business partner a small cut of the proceeds to make it worth their while, but everything can be put towards your fundraising efforts. You can place your concession stand at the entrance and set it up with a sport's theme. The options are endless, from football lollipops to custom T-shirts, you can have a good variety to cover different tastes and budgets.We have some great products for your concession stand, so don't hesitate to call us and get some great advice from our fundraising consultants.
+         <br /><br />
+         <strong>Team Memorabilia</strong>
+         <br />
+         Shirts, hats, and jerseys are a mainstay for professional sports teams, and your team can have its own sports apparel and accessories personalized with your team logo or name.
+         <br /><br />
+         <strong>Football 101</strong>
+         <br />
+         Have some of your players offer to teach a football clinic to kids in the area for a small fee. The Football 101 lessons can be offeres in a park with a football field open to the public. Put up some posters and flyers around the city to attract attention before the big day. Social media is another good way to generate a buzz for this fundraiser.
+         <br /><br />
+         <strong>Sponsored Touchdowns</strong>
+         <br />
+         This football fundraiser is a good one because it will inspire the players to play hard, and play to win. Have them collect a list of sponsors from the community who will agree to submit a donation each time a player scores a touchdown. For a little extra incentive you can also offer a prize to the player who manages to raise the most money. The same thing could be done with QB sacks, completed passes, interceptions, or field goals instead of touchdowns.
+         <br /><br />
+         Hopefully at least one of these fundraising ideas will work out for your team. If you need anything to help get your fundraiser off the ground, don't hesitate to call or email us!
+      </div>
+   </div>
+
+</div>
+
+
+      @*<div class="row" ng-controller="BlogIndexController as blogIndexCtrl">
+          <div class="col-sm-12 col-md-9">
+              <h1>Fundraising Ideas Blog</h1>
+              <div class="row">
+                  <div class="col-sm-6 col-md-4 text-center" ng-repeat="post in blogIndexCtrl.posts" ng-cloak>
+                      <a ng-href="/blog/post/{{::post.Url}}" class="thumbnail">
+                          <img ng-src="/Content/external/blog/{{::post.ThumbnailUrl}}" alt="{{::post.Title}}" class="img-responsive" />
+                          <h5>{{::post.Title}}</h5>
+                          <span style="text-decoration: none; color: black">{{::post.Summary}}</span>
+                      </a>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 text-center">
+                      <a href="/blog/old-posts"><strong>View All Posts</strong></a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-12 col-md-3">
+              @Html.Partial("Blog/_lastPosts")
+              @Html.Partial("Blog/_categories")
+          </div>
+      </div>*@

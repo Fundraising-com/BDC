@@ -1,0 +1,275 @@
+@using System.Configuration
+@using System.Web.Optimization
+@model GA.BDC.Web.MGP.Models.Branding.PublicEvent
+<html>
+<head>
+   <title>In-Vest USA</title>
+   @Styles.Render("~/general")
+   <link type="text/css" rel="stylesheet" href="@Url.Content(ConfigurationManager.AppSettings["GroupCssHref"])" />
+   @Scripts.Render("~/jquery")
+   @Scripts.Render("~/angular")
+   @Scripts.Render("~/app")
+   <!-- Starts Google Analytics -->
+   <script>
+      (function (i, s, o, g, r, a, m) {
+         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+         }, i[r].l = 1 * new Date(); a = s.createElement(o),
+             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('require', 'linker');
+      ga('linker:autoLink', ['efundraising.com', 'fundraising411.com', 'juniorleaguefundraising.com', '1stfundraisers.com', 'ssgfundraising.com', 'usafundraising.com', 'schoolsfundraising.com', 'gamefundraising.com', 'fundraisingsolution.om', 'fundraisingnews.com', 'fundraisingclub.com', 'emailfundraising.com', 'scratchandsave.com', 'canadafundraising.com', 'raising-fund.com', 'tshirtfundraising.com', 'snacksfundraising.com', 'lollipopfundraisers.om', 'chocolatefundraisers.com', 'fund-raising.com', 'nhscamagagazines.com', 'lgfundraising.com', 'fastpitchsoftballmags.com', 'chocolatefundraiser.com', 'fundraisingsearch.com', 'online-fundraising.com', 'cdfundraising.com', 'discoveryschoolfundraising.com', 'onlyfundraising.com', 'efundraisingcorp.com', 'universalfundraising.net', 'teamcheerfundraising.com', 'efundraisingsuperstore.com', 'asafundraising.om', 'e-fundraising.com', 'mystore.fundraising.com']);
+      ga('create', '@ConfigurationManager.AppSettings["GoogleAnalyticsTrackingId"]', 'auto', { 'allowLinker': true });
+      ga('send', 'pageview');
+
+   </script>
+   <!-- Ends Google Analytics -->
+
+   <script src="https://use.fontawesome.com/08b1aa719e.js"></script>
+
+   <style type="text/css">
+      .img-thumbnail {
+         background-color: #9faaae;
+         border-color: #9faaae;
+         border:2px;
+        
+         
+      }
+      
+   </style>
+
+
+
+</head>
+<body ng-app="mgp" ng-controller="groupPageController">
+   <div class="container">
+
+      <div class="row">
+         <div class="col-md-12"  style="padding:0px">
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom:0px;background-color:#071425">
+               <img src="http://efundraising.com/bdcnewsletter/investus/logo.png" alt="" style="display: block; float:left; padding-left:20px" border="0">
+               <div class="navbar-header" style="background-color:#071425">
+
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                  </button>
+               </div>
+
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color:#071425;">
+                  <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+                  <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+
+                  <ul class="nav navbar-nav">
+                     <li><a href="#facts">Facts</a></li>
+                     <li><a href="#officers">Officers</a></li>
+                     <li><a href="#programs">Programs</a></li>
+                     <li><a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0">In-Vest USA Shop</a></li>
+                  </ul>
+               </div>
+
+            </nav>
+
+         </div>
+      </div>
+
+
+
+      <div class="row " style="padding-top:0px">
+         <div class="col-md-12 " style="padding:0px">
+            <img src="http://efundraising.com/bdcnewsletter/investus/bg-image.jpg" class="img-responsive" alt="" style="display: block;" border="0">
+            <div class="col-md-5 hidden-xs hidden-sm hidden-md" style="position: absolute; top: 20px; left: 100px">
+               <span style="font-weight:bold; font-size:50px; color:#f5c026">In-Vest</span>&nbsp; <span style="font-size:50px; color:white">USA</span>
+               <br />
+               <span style="font-size:35px; color:black">Bulletproof Vests For <br />Law Enforcement Officers</span>
+               <br />
+               <hr style="border-top:white 2px solid; margin-top:25px; margin-bottom:25px; width:30%" align="left" />
+               <span style="font-size:15px; color:black">Currently almost 400,000 officers in the US have NO protective vest. With your help, we can make a difference in the lives of those who have sworn to protect our families, communities and homeland. Please donate now or become a volunteer.</span>
+               <br /><br />
+               <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+               <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+               <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0" class="btn btn-warning btn-lg" style="font-size:30px">Shop Now</a>
+            </div>
+            <div class="col-md-5 visible-md" style="position: absolute; top: 20px; left: 50px">
+               <span style="font-weight:bold; font-size:50px; color:#f5c026">In-Vest</span>&nbsp; <span style="font-size:50px; color:white">USA</span>
+               <br />
+               <span style="font-size:35px; color:black">Bulletproof Vests For <br />Law Enforcement Officers</span>
+               <br />
+               <hr style="border-top:white 2px solid; margin-top:25px; margin-bottom:25px; width:30%" align="left" />
+               <span style="font-size:15px; color:black">Currently almost 400,000 officers in the US have NO protective vest.</span>
+               <br /><br />
+               <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+               <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+               <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0" class="btn btn-warning btn-lg" style="font-size:30px">Shop Now</a>
+            </div>
+            <div class="col-md-5 visible-xs visible-sm" style="position: absolute; top: 20px; left: 15px">
+               <span style="font-weight:bold; font-size:25px; color:#f5c026">In-Vest</span>&nbsp; <span style="font-size:25px; color:white">USA</span>
+               <br />
+               <span style="font-size:15px; color:black">Bulletproof Vests For <br />Law Enforcement Officers</span>
+               <br /><br />
+               <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+               <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+               <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0" class="btn btn-warning btn-lg">Shop Now</a>
+            </div>
+         </div>
+      </div>
+
+     
+      <div class="row" style="background-color:#eeedeb; padding-bottom:30px; padding-top:30px">
+
+         <div class="col-md-3 hidden-sm hidden-xs"  align="center">
+            <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage-po_03.jpg" alt="" style="display: block;" border="0">
+            <span style="font-size:24px"><bt>TOTAL RAISED<br />@Model.TotalProfit.ToString("C2")</span><br /><br />
+         </div>
+
+         <div class="col-md-9" align="center">
+            <div class="row hidden-xs hidden-sm" style="background-color:#293543; padding-bottom:30px; padding-top:30px;">
+               <div class="col-md-3" style="color:white;  text-align:center; margin-top:30px">
+                  <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+                  <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0" class="btn btn-warning btn-lg" style="font-size:25px">Shop Our <br />Recommended<br /> Products</a><br /><br />
+                 
+               </div>
+               <div class="col-md-3" align="center">
+                  <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+                  <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="8423" class="ex3">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage_03.jpg" class="img-thumbnail img-responsive" alt="" style="display: block; width:95%" border="0" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="8423">
+                  </a>
+               </div>
+               <div class="col-md-3" align="center">
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="6399">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage_05.jpg" class="img-thumbnail img-responsive" alt="" style="display: block; width:95%" border="0" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="6399">
+                  </a>
+               </div>
+               <div class="col-md-3" align="center">
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="14167">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage_07.jpg" class="img-thumbnail img-responsive" alt="" style="display: block;  width:95%" border="0" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="14167">
+                  </a>
+               </div>
+            </div>
+
+            <!--MOBILE layout-->
+            <div class="row visible-xs visible-sm" style="background-color:#293543; padding-bottom:30px; padding-top:30px;">
+               <div class="col-md-3" style="color:white;  text-align:center; margin-top:30px">
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0" class="btn btn-warning btn-lg" style="font-size:25px">Shop Our <br />Recommended<br /> Products</a><br /><br />
+
+               </div>
+               <div class="col-md-3" align="center">
+                  <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+                  <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="8423" class="ex3">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage_03.jpg" class="img-thumbnail img-responsive" alt="" style="display: block; width:95%" border="0" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="8423">
+                  </a><br />
+               </div>
+               <div class="col-md-3" align="center">
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="6399">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage_05.jpg" class="img-thumbnail img-responsive" alt="" style="display: block; width:95%" border="0" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="6399">
+                  </a><br />
+               </div>
+               <div class="col-md-3" align="center">
+                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="14167">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage_07.jpg" class="img-thumbnail img-responsive" alt="" style="display: block;  width:95%" border="0" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="14167">
+                  </a>
+               </div>
+            </div>
+            <!-- END MOBILE layout-->
+            <a name="officers"></a>
+            <row>
+               <div style="padding-bottom:30px; padding-top:50px;">
+                  <div class="col-md-4" align="center">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage-po_06.jpg" alt="" style="display: block;" border="0"><br /><hr style="border-top:#f5c026 2px solid; margin:0px; width:40%" /><br />Our Community, Our Commitment
+                  </div>
+                  <div class="col-md-4" align="center">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage-po_08.jpg" alt="" style="display: block;" border="0"><br /><hr style="border-top:#f5c026 2px solid; margin:0px; width:40%" /><br />To Serve and Protect
+                  </div>
+                  <div class="col-md-4" align="center">
+                     <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage-po_10.jpg" alt="" style="display: block;" border="0"><br /><hr style="border-top:#f5c026 2px solid; margin:0px; width:40%" /><br />Pride, Commitment, and Service
+                  </div>
+               </div>
+            </row>
+
+         </div>
+
+         <div class="col-md-3 visible-sm visible-xs" align="center">
+            <img src="http://efundraising.com/bdcnewsletter/investus/in-vest_landingpage-po_03.jpg" alt="" style="display: block;" border="0">
+            <span style="font-size:24px"><bt>TOTAL RAISED<br />@Model.TotalProfit.ToString("C2")</span><br /><br />
+         </div>
+
+
+      </div>
+
+
+
+
+
+      <a name="facts"></a>
+      <div class="row" style="margin-top:20px; margin-bottom:40px">
+         <div class="col-md-6">
+            <h2>Our history</h2>
+            <hr style="border-top:#f5c026 2px solid; margin:0px; width:40%" align="left" />
+            <br />
+            In-Vest USA began in 1993 when South Carolina businessman Michael Letts first learned that local law enforcement officers were not provided protective vests as a regular part of their personal equipment. Outraged and resolved to correct this situation, Letts formed In-Vest USA, a recognized 501(c)(3) nonprofit organization, to help officers in South Carolina.<br /><br />
+
+            Twenty-Three years later, In-Vest USA went national with the support of an extensive network of grassroots volunteers as well as corporate sponsors. In-Vest USA now helps raise awareness of the issue and raise funds to distribute free vests and equipment to first responders in communities across America. In 2003 In-Vest USA went national, and in 2004  and every year thereafter the organization was named one of the Top 10 Angel Charities in South Carolina by the Secretary of State. Our mission has stayed the same- Protect Those Who Protect Us. We will not stop until every law enforcement officer in America is provided a free personal body armor vest.
+         </div>
+         <div class="col-md-1" hidden-xs></div>
+         <div class="col-md-5">
+            <h2>Facts</h2>
+            <hr style="border-top:#f5c026 2px solid; margin:0px; width:40%" align="left" /><br />
+            <span class="fa fa-check-circle-o" aria-hidden="true"></span>&nbsp;&nbsp;1 OF EVERY 36 OFFICERS INJURED YEARLY; 1:10 assaulted; 86 officers died; one officer per 475 citizens.<br /><br />
+
+            <span class="fa fa-check-circle-o" aria-hidden="true"></span>&nbsp;&nbsp;An officer not wearing a body armor vest is 14 times more likely to be killed by a firearm than an officer wearing a vest.<br /><br />
+
+            <span class="fa fa-check-circle-o" aria-hidden="true"></span>&nbsp;&nbsp;40% of officers do not have a protective vests (almost 400,000).<br /><br />
+
+            <span class="fa fa-check-circle-o" aria-hidden="true"></span>&nbsp;&nbsp;Of those who do have a protective vest to wear on duty, nearly 20% of those vests do not fit properly. A properly fitting vest can mean the difference between life and death.<br /><br />
+
+            <span class="fa fa-check-circle-o" aria-hidden="true"></span>&nbsp;&nbsp;Body armor vests must be replaced every 5 years and starts at $700 each, but can cost as much as $3,000, which is a small price to pay for the lives of our law enforcement officers.
+       </div>
+
+      </div>
+      
+
+      <a name="programs"></a>
+      <div class="row" style=" margin-top:20px; margin-bottom:30px">
+         <div class="col-md-6">
+            <br />
+            <img src="http://efundraising.com/bdcnewsletter/investus/award_image.jpg" class="img-responsive" alt="" style="display: block;" border="0">
+            <br /><br />
+            <img src="http://efundraising.com/bdcnewsletter/investus/partners_logo.jpg" class="img-responsive" alt="" style="display: block;" border="0">
+         </div>
+
+         <div class="col-md-6">
+            <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" />
+            <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0" />
+            <h2>Participate</h2>
+            <hr style="border-top:#f5c026 2px solid; margin:0px; width:40%" align="left" />
+            <br />
+            How often do you have a real opportunity to say thank you to the law enforcement officers who keep you, your family and your community safe? How often can you make a direct difference in helping those who daily put their lives on the line? Today you can, even the smallest donation counts.
+            <br /><br />
+            <strong>Donate</strong><br />
+            All donations are tax deductible. Your donation makes a huge difference. All donations are used to purchase and distribute vests, to build public awareness or to support community fundraising. <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["InVestUsa.EventId"]" scid="0" style="font-weight:bold; text-decoration:none; color:#747478">Support Us</a>
+            <br /><br />
+            <strong>Sponsor</strong><br />
+            Our sponsors play an essential role in the success of our mission and can influence the life of not only one officer, but an entire agency. We strive to recognize our sponsors at every available opportunity as we realize their vast importance to the safety of our entire country. Sponsorships are available on several levels through cash or trade and can be tailored to your company's needs. <a href="mailto:jedwards@investusa.org?" style="font-weight:bold; text-decoration:none; color:#747478">Email us</a>
+            <br /><br />
+            <strong>Volunteer</strong><br />
+            Volunteers are an important part of our organization and our community. Help organize a fund raising event with your church, school or civic organization to help police officers or work with one of sponsors at an event in your community.  Spread the word about In-Vest USA and have people view our website and check our <a href="https://www.facebook.com/InVestUSA/" style="font-weight:bold; text-decoration:none; color:#747478">Facebook</a> page. <a href="mailto:jedwards@investusa.org?" style="font-weight:bold; text-decoration:none; color:#747478">Email us</a>
+
+
+         </div>
+      </div>
+   </div>
+ 
+
+
+
+
+      
+  
+</body>
+</html>

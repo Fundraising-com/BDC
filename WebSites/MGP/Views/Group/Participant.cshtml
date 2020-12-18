@@ -1,0 +1,119 @@
+@using System.Text.RegularExpressions
+@using GA.BDC.Web.MGP.Models.Views
+@model ParticipantPage
+@{
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+    var publicEventBranding = ViewBag.PublicEvent as GA.BDC.Web.MGP.Models.Branding.PublicEvent;
+    var amountRaisedIndicator = ViewBag.AmountRaisedIndicator as AmountRaisedIndicator;
+    var coverImg = publicEventBranding.CoverImage ?? string.Empty;
+    ViewBag.Title = string.Concat("Fundraising online: ", Model.Name);
+    ViewBag.Keywords = string.Concat("magazine fundraising, support, online fundraiser, ", Model.Name);
+    ViewBag.Description = "";
+    Layout = "~/Views/Shared/_group.cshtml";
+    ViewBag.CanonicalUrl = publicEventBranding.Redirect;
+}
+<div class="row" ng-controller="groupPageController">
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="carousselContainer" style="padding: 10px;">
+                    @Html.Partial("../Group/Shared/_Carrousel", ViewBag.Caroussel as IList<Caroussel>)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12  text-center">
+                        <div class="blackImage" style="background-color: black; height: 100%;">
+                            <h4 style="margin-top: 0px; padding-top: 10px;">
+                                <a href="/Group?eventId=@publicEventBranding.Id">Back to group page ></a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="raisedAmountIndicator"  style="padding: 10px; padding-top:10%">
+                            @Html.Partial("../Group/Shared/_AmountRaisedIndicator", amountRaisedIndicator)
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8 ">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="messageContainer">
+                    <h1>@Model.Name</h1>
+                    <span class="small">Online fundraising campaign with @publicEventBranding.Name</span><br/>
+                    @if (!string.IsNullOrEmpty(Model.Message))
+                    {
+                        <h4>Message from @Model.Name</h4>
+                        <span class="small">@Html.Raw(Model.Message)</span>
+                    }                    
+                    <h4>Message from @publicEventBranding.Name</h4>
+                    <span class="small">@Html.Raw(Model.GroupMessage)</span>
+                </div>
+            </div>
+        </div>
+        @if (publicEventBranding.IsGASavingsCard)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>redeem your saving pass</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 text-center">
+                    <div class="gaSavingCardButton">
+                        <button class="btn btn-lg btn-warning" onclick="window.location.href='http://www.gapreferred.com'">local offers</button>
+                    </div>
+                </div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-5 text-center">
+                    <div class="gaSavingCardButton">
+                        <button class="btn btn-lg btn-warning" onclick="window.location.href='http://www.gasavingspass.com'">national offers</button>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (partnerBranding.ProductOffer != GA.BDC.Web.MGP.Models.Branding.ProductOffer.DonationOnly && partnerBranding.ShowPopularItems)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>@partnerBranding.ShopNowForOurCauseMessage</h3>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="executingAction">
+                        <div class="col-sm-12 text-center">
+                            <span class="text-info"><strong>We are sending you to the Store...</strong></span>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="executingAction">
+                        <div class="col-sm-12 text-center">
+                            <img src="/Content/images/public/content/loading.gif" />
+                        </div>
+                    </div>
+                    <div class="row" ng-hide="executingAction">
+                        <div class="col-sm-12">
+                            <div id="shopNowForOurCause">
+                                @Html.Partial("../Group/Shared/_ShopNow", ViewBag.PopularItems as IList<PopularItem>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section facebookOpenGraph {
+    <meta property="og:url" content="http://www.efundraising.com/@publicEventBranding.Redirect" />
+    <meta property="og:title" content="@publicEventBranding.Name.Trim()" />
+    <meta property="og:description" content="@Regex.Replace(publicEventBranding.Message, @"<[^>]+>|&nbsp;", "").Trim()" />
+    <meta property="og:image" content="http://www.efundraising.com/@HttpUtility.UrlEncode(coverImg.TrimStart(new char[] {'/'})).Replace("+", "%20")" />
+}

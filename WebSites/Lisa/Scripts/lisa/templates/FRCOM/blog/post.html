@@ -1,0 +1,139 @@
+
+   <md-dialog>
+      <form name="postForm" id="postForm">
+         <md-dialog-content>
+            <md-toolbar md-scroll-shrink>
+               <div class="md-toolbar-tools">
+                  <h2>Post</h2>
+                  <span flex></span>
+               </div>
+            </md-toolbar>
+            <md-content>
+               <div layout="column" flex="98">
+                  <div layout="row" layout-padding>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Title</label>
+                        <input type="text" name="title" ng-model="ctrl.post.Title" required md-maxlength="36">
+                        <div class="hint">The Title will appear at the Top of the Post.</div>
+                        <div ng-messages="postForm.title.$error">
+                           <div ng-message="required">Title is required.</div>
+                           <div ng-message="md-maxlength">The title has to be less than 36 characters long.</div>
+                        </div>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex="50">
+                        <label>URL</label>
+                        <input type="text" name="url" ng-model="ctrl.post.Url" required md-maxlength="255" trim>
+                        <div class="hint">Clean URL for the Post. It can't contain white spaces or special characters.</div>
+                        <div ng-messages="postForm.url.$error">
+                           <div ng-message="required">URL is required.</div>
+                           <div ng-message="md-maxlength">The URL has to be less than 255 characters long.</div>
+                           <div ng-message="trim">The URL can't contain white spaces.</div>
+                        </div>
+                     </md-input-container>
+                  </div>
+                  <div layout="row" layout-padding>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Summary</label>
+                        <input type="text" name="summary" ng-model="ctrl.post.Summary" required md-maxlength="60">
+                        <div class="hint">Brief Summary of the Post. It will appear in the Thumbnails.</div>
+                        <div ng-messages="postForm.summary.$error">
+                           <div ng-message="required">Summary is required.</div>
+                           <div ng-message="md-maxlength">The Summary has to be less than 60 characters long.</div>
+                        </div>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Category</label>
+                        <md-select ng-model="ctrl.post.Category" name="category" required ng-model-options="{trackBy: '$value.Id'}">
+                           <md-option ng-repeat="category in ctrl.categories" ng-value="category">
+                              {{category.Name}}
+                           </md-option>
+                        </md-select>
+                        <div class="hint">Category to which the Post belongs.</div>
+                        <div ng-messages="postForm.category.$error">
+                           <div ng-message="required">Category is required.</div>
+                        </div>
+                     </md-input-container>
+                  </div>
+                  <div layout="row" layout-padding>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Meta Title</label>
+                        <input type="text" name="metatitle" ng-model="ctrl.post.MetaTitle" required md-maxlength="255">
+                        <div class="hint">Meta Title for SEO.</div>
+                        <div ng-messages="postForm.metatitle.$error">
+                           <div ng-message="required">Meta Title is required.</div>
+                           <div ng-message="md-maxlength">The Meta Title has to be less than 255 characters long.</div>
+                        </div>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Meta Description</label>
+                        <input type="text" name="metadescription" ng-model="ctrl.post.MetaDescription" required md-maxlength="255">
+                        <div class="hint">Meta Description for SEO.</div>
+                        <div ng-messages="postForm.metadescription.$error">
+                           <div ng-message="required">Meta Description is required.</div>
+                           <div ng-message="md-maxlength">The Meta Description has to be less than 255 characters long.</div>
+                        </div>
+                     </md-input-container>
+                  </div>
+                  <div layout="row" layout-padding>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Main Image</label>
+                        <input type="text" name="imageurl" ng-model="ctrl.post.ImageUrl" required md-maxlength="160">
+                        <div class="hint">
+                           Please place a copy of the image in the folder located on server <strong>\\FOCUS-FIS\FundraisingImages\blog</strong>
+                        </div>
+                        <div ng-messages="postForm.imageurl.$error">
+                           <div ng-message="required">Main Image is required.</div>
+                           <div ng-message="md-maxlength">The Main Image has to be less than 160 characters long.</div>
+                        </div>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex="50">
+                        <label>Thumbnail Image</label>
+                        <input type="text" name="thumbnailurl" ng-model="ctrl.post.ThumbnailUrl" required md-maxlength="160">
+                        <div class="hint">
+                           Please place a copy of the image in the folder located on server <strong>\\FOCUS-FIS\FundraisingImages\blog</strong>. Suggested size: 252px width by 85px height.
+                        </div>
+                        <div ng-messages="postForm.thumbnailurl.$error">
+                           <div ng-message="required">Thumbnail Image is required.</div>
+                           <div ng-message="md-maxlength">The Thumbnail Image has to be less than 255 characters long.</div>
+                        </div>
+                     </md-input-container>
+                  </div>
+                  <div layout="row" layout-padding>
+                     <md-input-container class="md-block" flex="50">
+                        <md-switch class="md-primary" name="isdraft" ng-model="ctrl.post.IsDraft" ng-true-value="true" ng-false-value="false">Is Draft</md-switch>
+                        <div class="hint">If the Post is a Draft, it won't be published.</div>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex="50" ng-hide="ctrl.post.IsDraft">
+                        <label>Publish Date</label>
+                        <md-datepicker ng-model="ctrl.post.Published" name="publishdate" ng-required="!ctrl.post.IsDraft"></md-datepicker>
+                        <div class="hint">Date when the Post will be published.</div>
+                        <div ng-messages="postForm.publishdate.$error">
+                           <div ng-message="required">Publish Date is required.</div>
+                        </div>
+                     </md-input-container>
+                  </div>
+                  <div layout="row" layout-padding>
+                     <md-input-container flex="100">
+                        <label>Tags</label>
+                        <md-select ng-model="ctrl.post.Tags" multiple ng-model-options="{trackBy: '$value.Id'}">
+                           <md-option ng-value="tag" ng-repeat="tag in ctrl.tags">{{tag.Name}}</md-option>
+                        </md-select>
+                     </md-input-container>
+                  </div>
+                  <div layout="row" layout-padding>
+                     <md-input-container class="md-block" flex="100">
+                        <label>Text *</label>
+                        <ng-wig ng-model="ctrl.post.Text" required source-mode-allowed name="text"></ng-wig>
+                     </md-input-container>
+                  </div>
+                 </div>
+            </md-content>
+         </md-dialog-content>
+         <md-dialog-actions>
+            <div layout="row" layout-fill layout-align="end center" flext="95">
+               <md-button ng-click="ctrl.save()" ng-disabled="!postForm.$valid" class="md-primary md-raised">Save</md-button>
+               <md-button ng-click="ctrl.cancel()" class="md-primary md-raised">Cancel</md-button>
+            </div>
+         </md-dialog-actions>
+      </form>
+</md-dialog>

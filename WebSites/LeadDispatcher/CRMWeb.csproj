@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{94AB29B5-D661-4FC4-A5DF-6D57BA86C51B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>CRMWeb</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CRMWeb</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.UI.WebControls">
+      <HintPath>..\..\..\..\[Microsoft]\Web\UI\WebControls\Microsoft.Web.UI.WebControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\BusinessProcess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\ClientInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\EmailHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\LeadInfo_Basic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\SaleInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\SendEmail.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classes\UserInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="credit_test.ascx.cs">
+      <DependentUpon>credit_test.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="credit_test.ascx.designer.cs">
+      <DependentUpon>credit_test.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseObjects.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="treeview.aspx.cs">
+      <DependentUpon>treeview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdjustmentInfo.ascx.cs">
+      <DependentUpon>AdjustmentInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdjustmentInfo.ascx.designer.cs">
+      <DependentUpon>AdjustmentInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin_All_Accounts.ascx.cs">
+      <DependentUpon>Admin_All_Accounts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin_All_Accounts.ascx.designer.cs">
+      <DependentUpon>Admin_All_Accounts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin_Menu.ascx.cs">
+      <DependentUpon>Admin_Menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin_Menu.ascx.designer.cs">
+      <DependentUpon>Admin_Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin_Section.ascx.cs">
+      <DependentUpon>Admin_Section.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin_Section.ascx.designer.cs">
+      <DependentUpon>Admin_Section.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AllAccountsForLead.ascx.cs">
+      <DependentUpon>AllAccountsForLead.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AllAccountsForLead.ascx.designer.cs">
+      <DependentUpon>AllAccountsForLead.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AllAccountsForLead_Lotus.ascx.cs">
+      <DependentUpon>AllAccountsForLead_Lotus.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AllAccountsForLead_Lotus.ascx.designer.cs">
+      <DependentUpon>AllAccountsForLead_Lotus.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataHeaderAR.ascx.cs">
+      <DependentUpon>DataHeaderAR.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataHeaderAR.ascx.designer.cs">
+      <DependentUpon>DataHeaderAR.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\DataHeaderLead.ascx.cs">
+      <DependentUpon>DataHeaderLead.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\DataHeaderLead.ascx.designer.cs">
+      <DependentUpon>DataHeaderLead.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\LeadDispatcher.ascx.cs">
+      <DependentUpon>LeadDispatcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\LeadDispatcher.ascx.designer.cs">
+      <DependentUpon>LeadDispatcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\LeadDispatcherTEST.ascx.cs">
+      <DependentUpon>LeadDispatcherTEST.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\LeadDispatcherTEST.ascx.designer.cs">
+      <DependentUpon>LeadDispatcherTEST.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\LeadInfo.ascx.cs">
+      <DependentUpon>LeadInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\LeadInfo.ascx.designer.cs">
+      <DependentUpon>LeadInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\PromotionGroups.ascx.cs">
+      <DependentUpon>PromotionGroups.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\PromotionGroups.ascx.designer.cs">
+      <DependentUpon>PromotionGroups.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\temp.ascx.cs">
+      <DependentUpon>temp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\temp.ascx.designer.cs">
+      <DependentUpon>temp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lead\TopMenuLead.ascx.cs">
+      <DependentUpon>TopMenuLead.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Lead\TopMenuLead.ascx.designer.cs">
+      <DependentUpon>TopMenuLead.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LeftMenuConsultant.ascx.cs">
+      <DependentUpon>LeftMenuConsultant.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\LeftMenuConsultant.ascx.designer.cs">
+      <DependentUpon>LeftMenuConsultant.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MyCalendar.ascx.cs">
+      <DependentUpon>MyCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MyCalendar.ascx.designer.cs">
+      <DependentUpon>MyCalendar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PaymentAdjusment_Header.ascx.cs">
+      <DependentUpon>PaymentAdjusment_Header.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PaymentAdjusment_Header.ascx.designer.cs">
+      <DependentUpon>PaymentAdjusment_Header.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PaymentInfo.ascx.cs">
+      <DependentUpon>PaymentInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PaymentInfo.ascx.designer.cs">
+      <DependentUpon>PaymentInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\temp.ascx.cs">
+      <DependentUpon>temp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\temp.ascx.designer.cs">
+      <DependentUpon>temp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TopMenuAR.ascx.cs">
+      <DependentUpon>TopMenuAR.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\TopMenuAR.ascx.designer.cs">
+      <DependentUpon>TopMenuAR.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WebUserControl1.ascx.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\WebUserControl1.ascx.designer.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\zzz.ascx.cs">
+      <DependentUpon>zzz.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\zzz.ascx.designer.cs">
+      <DependentUpon>zzz.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm.aspx.cs">
+      <DependentUpon>WebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm.aspx.designer.cs">
+      <DependentUpon>WebForm.aspx</DependentUpon>
+    </Compile>
+    <Content Include="credit_test.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Default.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Doc_Confirmation.html" />
+    <Content Include="Global.asax">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="images\add.gif" />
+    <Content Include="images\arrow.gif" />
+    <Content Include="images\arrow_down.gif" />
+    <Content Include="images\arrow_down2.gif" />
+    <Content Include="images\arrow_up.gif" />
+    <Content Include="images\backgrnd.gif" />
+    <Content Include="images\backgrnd2.gif" />
+    <Content Include="images\backgrnd2_.gif" />
+    <Content Include="images\backgrnd_test.gif" />
+    <Content Include="images\backgrnd_test2.gif" />
+    <Content Include="images\calCalendar.gif" />
+    <Content Include="images\can1.gif" />
+    <Content Include="images\can10.gif" />
+    <Content Include="images\can11.gif" />
+    <Content Include="images\can2.gif" />
+    <Content Include="images\can3.gif" />
+    <Content Include="images\can4.gif" />
+    <Content Include="images\can5.gif" />
+    <Content Include="images\can6.gif" />
+    <Content Include="images\can7.gif" />
+    <Content Include="images\can8.gif" />
+    <Content Include="images\can9.gif" />
+    <Content Include="images\cancel2.gif" />
+    <Content Include="images\Continue.gif" />
+    <Content Include="images\downArrow2.gif" />
+    <Content Include="images\Edit.gif" />
+    <Content Include="images\Edit2.gif" />
+    <Content Include="images\efund_top2.gif" />
+    <Content Include="images\execute2.gif" />
+    <Content Include="images\goBack.gif" />
+    <Content Include="images\hdot.gif" />
+    <Content Include="images\help.gif" />
+    <Content Include="images\line.gif" />
+    <Content Include="images\logOff_leftmenu.gif" />
+    <Content Include="images\mycrm_leftmenu.gif" />
+    <Content Include="images\new.gif" />
+    <Content Include="images\OK.gif" />
+    <Content Include="images\quote.gif" />
+    <Content Include="images\refresh.gif" />
+    <Content Include="images\refresh2.gif" />
+    <Content Include="images\reports_leftmenu.gif" />
+    <Content Include="images\Search.gif" />
+    <Content Include="images\search_b.gif" />
+    <Content Include="images\signin6.gif" />
+    <Content Include="images\signIn7.gif" />
+    <Content Include="images\Untitled-1 copy.gif" />
+    <Content Include="images\UPArrow2.gif" />
+    <Content Include="images\Update.jpg" />
+    <Content Include="images\update2.gif" />
+    <Content Include="Styles.css" />
+    <Content Include="test.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="treeview.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="UserControls\AdjustmentInfo.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Admin_All_Accounts.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Admin_Menu.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Admin_Section.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\AllAccountsForLead.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\AllAccountsForLead_Lotus.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\DataHeaderAR.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\DataHeaderLead.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\LeadDispatcher.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\LeadDispatcherTEST.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\LeadInfo.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\PromotionGroups.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\temp.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Lead\TopMenuLead.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\LeftMenuConsultant.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\Login.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\MyCalendar.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\PaymentAdjusment_Header.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\PaymentInfo.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\temp.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\TopMenuAR.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\WebUserControl1.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="UserControls\zzz.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Web.config" />
+    <Content Include="WebForm.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <EmbeddedResource Include="credit_test.ascx.resx">
+      <DependentUpon>credit_test.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Global.asax.resx">
+      <DependentUpon>Global.asax.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="test.aspx.resx">
+      <DependentUpon>test.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="treeview.aspx.resx">
+      <DependentUpon>treeview.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdjustmentInfo.ascx.resx">
+      <DependentUpon>AdjustmentInfo.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin_All_Accounts.ascx.resx">
+      <DependentUpon>Admin_All_Accounts.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin_Menu.ascx.resx">
+      <DependentUpon>Admin_Menu.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin_Section.ascx.resx">
+      <DependentUpon>Admin_Section.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AllAccountsForLead.ascx.resx">
+      <DependentUpon>AllAccountsForLead.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AllAccountsForLead_Lotus.ascx.resx">
+      <DependentUpon>AllAccountsForLead_Lotus.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataHeaderAR.ascx.resx">
+      <DependentUpon>DataHeaderAR.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\DataHeaderLead.ascx.resx">
+      <DependentUpon>DataHeaderLead.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\LeadDispatcher.ascx.resx">
+      <DependentUpon>LeadDispatcher.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\LeadDispatcherTEST.ascx.resx">
+      <DependentUpon>LeadDispatcherTEST.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\LeadInfo.ascx.resx">
+      <DependentUpon>LeadInfo.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\PromotionGroups.ascx.resx">
+      <DependentUpon>PromotionGroups.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\temp.ascx.resx">
+      <DependentUpon>temp.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Lead\TopMenuLead.ascx.resx">
+      <DependentUpon>TopMenuLead.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\LeftMenuConsultant.ascx.resx">
+      <DependentUpon>LeftMenuConsultant.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Login.ascx.resx">
+      <DependentUpon>Login.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MyCalendar.ascx.resx">
+      <DependentUpon>MyCalendar.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PaymentAdjusment_Header.ascx.resx">
+      <DependentUpon>PaymentAdjusment_Header.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PaymentInfo.ascx.resx">
+      <DependentUpon>PaymentInfo.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\temp.ascx.resx">
+      <DependentUpon>temp.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TopMenuAR.ascx.resx">
+      <DependentUpon>TopMenuAR.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\WebUserControl1.ascx.resx">
+      <DependentUpon>WebUserControl1.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\zzz.ascx.resx">
+      <DependentUpon>zzz.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebForm.aspx.resx">
+      <DependentUpon>WebForm.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControls\AR\" />
+    <Folder Include="webctrl_client\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\EnterpriseComponents\GA.BDC.Core.EnterpriseComponents.csproj">
+      <Project>{1060fdbe-9c62-4f62-ae5d-0018c5a9026f}</Project>
+      <Name>GA.BDC.Core.EnterpriseComponents</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4595</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/CRMWeb</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+</Project>

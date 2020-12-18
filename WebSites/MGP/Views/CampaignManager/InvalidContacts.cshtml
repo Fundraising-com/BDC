@@ -1,0 +1,57 @@
+﻿@using GA.BDC.Web.MGP.Models.Branding
+@model Int32
+@{
+    var eventBranding = ViewBag.Event as Event;
+    ViewBag.Title = "Invalid Contacts";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+}
+<div id="information" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId; invalidContactsTotalServerItems = @Model; invalidContactsGetPagedDataAsync(invalidContactsPagingOptions.pageSize, invalidContactsPagingOptions.currentPage, '');">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Invalid Contacts</h1>
+            <small>To edit a Contact double click the cell or hit F2 on your keyboard. Use the text box to filter.</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            @Html.Partial("Shared/_SendMessagesMenu", 5)
+        </div>
+        <div class="col-sm-9" ng-cloak>            
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" ng-model="invalidContactsFilterOptions.filterText" class="form-control" placeholder="Filter contacts by..."/>
+                </div>
+                <div class="col-sm-6">
+                    <span class="text-info" ng-show="executingAction">Sending the information...</span>
+                    <span class="text-success" ng-show="success">{{responseText}}</span>
+                    <span class="text-danger" ng-show="resultFailed">{{responseText}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="gridStyle" ng-grid="invalidContactsGridOptions"></div>
+                </div>
+            </div>
+            
+        </div>        
+    </div>    
+</div>
+@section scripts
+{
+    <link href="/Content/ng-grid.min.css" rel="stylesheet"/>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".tip").tooltip({});
+        });
+    </script>
+}

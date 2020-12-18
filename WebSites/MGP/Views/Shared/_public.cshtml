@@ -1,0 +1,222 @@
+@using System.Configuration
+@using System.Web.Optimization
+@using GA.BDC.Web.MGP.Helpers
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+   var partnerBranding = ViewBag.Partner as Partner;
+   var disableHeader = Session[Constants.SESSION_KEY_DISABLE_HEADER] != null
+                       ? bool.Parse(Session[Constants.SESSION_KEY_DISABLE_HEADER].ToString())
+                       : false;
+   var disableFooter = Session[Constants.SESSION_KEY_DISABLE_FOOTER] != null
+                       ? bool.Parse(Session[Constants.SESSION_KEY_DISABLE_FOOTER].ToString())
+                       : false;
+}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width" />
+   <title>@ViewBag.PageTitle : @ViewBag.Title</title>
+   <meta name="description" content="@ViewBag.Description" />
+   <meta name="keywords" content="@ViewBag.Keywords" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+   <meta property="og:url" content="http://www.efundraising.com/" />
+   <meta property="og:title" content="Efundraising.com : Online Magazine Fundraising Made Easy!" />
+   <meta property="og:description" content="Online Magazine Fundraiser! 100% free, more profit less effort!" />
+   <meta property="og:image" content="http://www.efundraising.com/Content/images/public/content/mainLogo.gif" />
+   <link rel="shortcut icon" type="image/ico" href="/Content/images/public/content/favicon.ico" />
+   @Styles.Render("~/general")
+   <link type="text/css" rel="stylesheet" href="@Url.Content(ConfigurationManager.AppSettings["PublicCssHref"])" />
+   @Scripts.Render("~/jquery")
+   @Scripts.Render("~/angular")
+   @Scripts.Render("~/app")
+   @if (ViewBag.CanonicalUrl != null && !string.IsNullOrEmpty(ViewBag.CanonicalUrl))
+   {
+      <link rel="canonical" href="@string.Format("http://www.efundraising.com{0}", ViewBag.CanonicalUrl)" />
+   }
+   @if (!string.IsNullOrEmpty(partnerBranding.OverrideCSSFile))
+   {
+      <link type="text/css" rel="stylesheet" href="/Content/partners/@partnerBranding.OverrideCSSFile" />
+   }
+</head>
+<body ng-app="mgp">
+   <br />
+   <div class="container">
+      <header class="@(disableHeader ? "hidden" : string.Empty)">
+         <div class="row">
+            <div class="col-md-9 col-sm-12">
+               <a>
+                  @if (!partnerBranding.ShowOnlyPartnerLogo)
+                  {
+                     <img src="/Content/images/public/content/main-logo.png" alt="Home" />
+                     if (!string.IsNullOrEmpty(partnerBranding.Logo))
+                     {
+                        <img src="@partnerBranding.Logo" alt="Home" class="img-responsive" />
+                     }
+                  }
+                  else
+                  {
+                     if (!string.IsNullOrEmpty(partnerBranding.Logo))
+                     {
+                        <img src="@partnerBranding.Logo" alt="Home" class="img-responsive" />
+                     }
+                  }
+               </a>
+            </div>
+            <div class="col-md-3 hidden-xs">
+               <div class="row">
+                  <div class="col-md-12 text-right">
+                     @if (WebSecurity.IsAuthenticated)
+                     {
+                        @Html.ActionLink("My Campaigns", "Campaigns", "CampaignManager")
+                     }
+                     else
+                     {
+                        @Html.ActionLink("Sign In", "SignIn", "Home")
+                     }
+                     <span class="@(partnerBranding.ProductOffer == ProductOffer.DonationOnly ? "hidden" : string.Empty)">@Html.ActionLink("Canada", "Canada", "Home")</span>
+                     @Html.ActionLink("Contact Us", "ContactUs", "Home")
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12">
+                     <div id="AddThisDIV" runat="server" style="margin-top: 5px; float: right;">
+                        <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+                           <a class="addthis_button_facebook"></a>
+                           <a class="addthis_button_twitter"></a>
+                           <a class="addthis_button_pinterest_share"></a>
+                           <a class="addthis_button_google_plusone_share"></a>
+                           <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+                        </div>
+                        <script type="text/javascript"> var addthis_config = { "data_track_addressbar": true }; </script>
+                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=magfund"></script>
+                        <!-- AddThis Button END -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      @if (!partnerBranding.HideMainMenu)
+      {
+         <nav class="navbar navbar-mgp hidden-sm hidden-md hidden-lg" style="margin-bottom: 0px;" role="navigation">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">@partnerBranding.Name</a>
+               </div>
+
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                     @Html.MenuLink("Home", "Index", "Home")
+                     @Html.MenuLink("Register", "Register", "Home")
+                     @Html.MenuLink("How it Works", "HowItWorks", "Home")
+                     @Html.MenuLink($"Find a {partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()}", "FindAGroup", "Home")
+                     @if (partnerBranding.PrizeProgram && partnerBranding.ProductOffer != ProductOffer.DonationOnly)
+                     {
+                        @Html.MenuLink("Incentives", "Incentives", "Home")
+                     }
+                  </ul>
+               </div>
+            </div>
+         </nav>
+            <nav class="hidden-xs @((ViewBag.HideMenu != null && ((bool)ViewBag.HideMenu)==true) ? "hidden" : string.Empty)">
+               <div class="row">
+                  <div class="col-md-12">
+                     <ul class="nav nav-pills nav-justified">
+                        @Html.MenuLink("Home", "Index", "Home")
+                        @Html.MenuLink("Register", "Register", "Home")
+                        @Html.MenuLink("How it Works", "HowItWorks", "Home")
+                        @Html.MenuLink($"Find a {partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()}", "FindAGroup", "Home")
+                        @if (partnerBranding.PrizeProgram && partnerBranding.ProductOffer != ProductOffer.DonationOnly)
+                        {
+                           @Html.MenuLink("Incentives", "Incentives", "Home")
+                        }
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+      }
+      <section>
+         <div class="row @(partnerBranding.DoRedirectToLandingPage && !Request.Url.AbsolutePath.ToLower().EndsWith("landing") ? string.Empty : "hidden")">
+            <div class="col-md-12" style="border: none">
+               <br />
+               <a href="@partnerBranding.ESubsUrl"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Return to @partnerBranding.Name Page</a>
+            </div>
+         </div>
+         @RenderBody()
+      </section>
+      <footer class="@(disableFooter ? "hidden" : string.Empty)">
+         <div class="row">
+            <div class="col-md-4">
+               <div>
+
+               </div>
+            </div>
+            <div class="col-md-2 text-center @(partnerBranding.ProductOffer == ProductOffer.DonationOnly ? "hidden" : string.Empty)"><a href="/Content/files/pdf/listmag.pdf" target="_blank">Magazine Titles</a></div>
+            <div class="col-md-2 text-center @(partnerBranding.ProductOffer == ProductOffer.DonationOnly || partnerBranding.HideFaq ? "hidden" : string.Empty)">@Html.ActionLink("FAQ", "FAQ", "Home")</div>
+            <div class="col-md-@(partnerBranding.ProductOffer == ProductOffer.DonationOnly ? "6" : "2") text-center">@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home")</div>
+            <div class="col-md-2 text-center @(partnerBranding.ProductOffer == ProductOffer.DonationOnly ? "hidden" : string.Empty)">@Html.ActionLink("Site Map", "SiteMap", "Home")</div>
+         </div>
+      </footer>
+   </div>
+   @RenderSection("scripts", false)
+@if (bool.Parse(ConfigurationManager.AppSettings["showChatProviderCode"]))
+{
+   <!--Start of Zendesk Chat Script-->
+   <script type="text/javascript">
+      window.$zopim || (function (d, s) {
+         var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+               z.set.
+               _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+         $.src = "https://v2.zopim.com/?4PAzjvVQt7v9pN2vyypOIT5kFW768OdB"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+      })(document, "script");
+
+      $zopim(function () {
+         $zopim.livechat.departments.setVisitorDepartment('EFundraising');
+      });
+   </script>
+   <!--End of Zendesk Chat Script-->
+}
+   <!-- Affiliate Window Master Tag -->
+   <script src="https://www.dwin1.com/5458.js" type="text/javascript" defer="defer"> </script>
+   <!-- Affiliate Window Master Tag code end -->
+   <!-- post affiliate script begin all pages-->
+   <script type="text/javascript">
+<!--
+        document.write(unescape("%3Cscript id='pap_x2s6df8d' src='" + (("https:" == document.location.protocol) ? "https://" : "http://") + "fundraising.postaffiliatepro.com/scripts/trackjs.js' type='text/javascript'%3E%3C/script%3E"));//-->
+   </script>
+   <script type="text/javascript">
+<!--
+        PostAffTracker.setAccountId('default1');
+        try {
+            PostAffTracker.track();
+        } catch (err) { }
+        //-->
+   </script>
+   <!-- post affiliate script end -->
+   <!-- Starts Google Analytics -->
+   <script>
+      (function (i, s, o, g, r, a, m) {
+         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+         }, i[r].l = 1 * new Date(); a = s.createElement(o),
+             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('require', 'linker');
+      ga('linker:autoLink', ['efundraising.com', 'fundraising411.com', 'juniorleaguefundraising.com', '1stfundraisers.com', 'ssgfundraising.com', 'usafundraising.com', 'schoolsfundraising.com', 'gamefundraising.com', 'fundraisingsolution.om', 'fundraisingnews.com', 'fundraisingclub.com', 'emailfundraising.com', 'scratchandsave.com', 'canadafundraising.com', 'raising-fund.com', 'tshirtfundraising.com', 'snacksfundraising.com', 'lollipopfundraisers.om', 'chocolatefundraisers.com', 'fund-raising.com', 'nhscamagagazines.com', 'lgfundraising.com', 'fastpitchsoftballmags.com', 'chocolatefundraiser.com', 'fundraisingsearch.com', 'online-fundraising.com', 'cdfundraising.com', 'discoveryschoolfundraising.com', 'onlyfundraising.com', 'efundraisingcorp.com', 'universalfundraising.net', 'teamcheerfundraising.com', 'efundraisingsuperstore.com', 'asafundraising.om', 'e-fundraising.com', 'mystore.fundraising.com']);
+      ga('create', '@ConfigurationManager.AppSettings["GoogleAnalyticsTrackingId"]', 'auto', { 'allowLinker': true });
+      ga('send', 'pageview');
+   </script>
+   <!-- Ends Google Analytics -->
+</body>
+</html>

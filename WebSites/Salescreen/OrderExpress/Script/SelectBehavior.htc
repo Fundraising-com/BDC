@@ -1,0 +1,25 @@
+<PUBLIC:COMPONENT tagName="SelectBehavior">
+	<PUBLIC:ATTACH EVENT="onchange" FOR="element" ONEVENT="VerifyInfo()" />
+	<PUBLIC:ATTACH EVENT="onclick" FOR="element" ONEVENT="VerifyInfo()" />
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	
+	function VerifyInfo()
+	{		
+		var oSource = window.event.srcElement;
+		
+		if(oSource.type == "radio") {
+			for (var i=0; i < oSource.length;i++) {
+				if (oSource[i].checked) {
+					alert("Valeur sélectionné = "+ oSource[i].value)
+					return;
+				}
+			}
+				 			
+		}
+	}
+
+
+</SCRIPT>

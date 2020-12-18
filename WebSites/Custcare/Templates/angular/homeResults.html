@@ -1,0 +1,25 @@
+﻿<div role="tabpanel" class="tab-pane fade in active" id="results" aria-labelledby="results-tab">
+    <p>{{data.length}} event(s) found:</p>
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-lg-7">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Event ID</th>
+                            <th>Event Name</th>
+                            <th>Start Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="entry in data">
+                            <td><a href="#" ui-sref="sponsor" ng-click="openEvent($index)" ng-class="{'error' : !entry.active}">{{entry.eventId}}</a></td>
+                            <td ng-class="{'inactive' : !entry.active}">{{entry.eventName}}</td>
+                            <td ng-class="{'inactive' : !entry.active}">{{entry.startDate | date:'medium'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>        
+    </div>
+</div>

@@ -1,0 +1,213 @@
+@using System.Web.Script.Serialization
+@model GA.BDC.Shared.Entities.ReferralProgram
+@{
+    ViewBag.Title = "Refer-a-friend and earn more money - Fundraising.com";
+    ViewBag.Description = "With Fundraising.com's fundraising referral program, you can refer your friends and help with their fundraising to earn extra cash… and you could win free gas!";
+    ViewBag.Keywords = "Fundraising referral, Fundraisers friends, Earn Extra Cash";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+    ViewBag.CanonicalUrl = Url.Action("ReferralProgram", "AboutUs");
+}
+
+<div class="container">
+    <h1>Refer-A-Friend, Earn More</h1>
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <img src="/Content/images/public/referralProgram.jpg" alt="Referral Program" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-justify">
+            <h3>How do Your Refer to Earn? </h3>
+            <span>If you have friends who are interested in fundraising, simply refer them to Fundraising.com. For every person you refer who purchases and pays for a fundraiser, you’ll get $75! </span>
+            <h3>Get Started</h3>
+            <span>To get started, simply fill out the form below, or send your friends’ contact information by email to <a href="mailto:CustomerService.EFR@fundraising.com">CustomerService.EFR@fundraising.com</a>. You can also fax the info to 1-800-443-5353.</span><br />
+            <span class="small">Please note that you must fill out a <a href="" target="_blank">W-9</a> form and return it to us in order to receive your check. If you do not wish to fill out this form, you will be eligible for a $75 rebate off your next order. Allow 4-6 weeks after your referral has purchased and paid to receive your $75 gift (your referral's purchase must be a minimum of $500). Please note that you cannot refer yourself. </span>
+            <h3>How do you start?</h3>
+            <span>Simply send your friends' contact info by email to <a href="mailto:CustomerService.EFR@fundraising.com">CustomerService.EFR@fundraising.com</a></span>
+        </div>
+    </div>
+    <br />
+    <div class="row hidden" ng-controller="apiController" ng-init="view = @serializedModel">
+        <form class="form-horizontal" ng-submit="ReferFriends()">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Your Information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group" bs-has>
+                            <label for="firstName" class="col-sm-6">Your First Name *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="firstName" name="FirstName" ng-model="view.FirstName" placeholder="i.e. Lisa" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group" bs-has>
+                            <label for="lastName" class="col-sm-6">Your Last Name *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="lastName" name="LastName" ng-model="view.LastName" placeholder="i.e. Smith" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group" bs-has>
+                            <label class="col-sm-6">Have you previously purchased with us?</label>
+                            <div class="col-sm-6">
+                                <label class="radio-inline">
+                                    <input type="radio" name="AlreadyPuchased" value="1" ng-model="view.AlreadyPurchased"> Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="AlreadyPuchased" value="0" ng-model="view.AlreadyPurchased"> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 1" bs-has>
+                            <label for="referenceNumber" class="col-sm-6">Your Reference Number *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="referenceNumber" name="ReferenceNumber" placeholder="i.e. 23949422" ng-model="view.ReferenceNumber" ng-required="view.AlreadyPurchased == 1">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 1" bs-has>
+                            <label for="fundraisingConsultant" class="col-sm-6">Your Fundraising Consultant *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="fundraisingConsultant" name="Consultant" placeholder="i.e. Terry Jones" ng-model="view.Consultant" ng-required="view.AlreadyPurchased == 1">
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="address" class="col-sm-6">Your Address *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="address" name="Address" placeholder="i.e. 23 1st St" ng-model="view.Address" ng-required="view.AlreadyPurchased == 0">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="city" class="col-sm-6">Your City *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="city" name="City" placeholder="i.e. Nashville" ng-model="view.City" ng-required="view.AlreadyPurchased == 0">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="state" class="col-sm-6">Your State/Province *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="state" name="State" placeholder="i.e. Tennessee" ng-model="view.State" ng-required="view.AlreadyPurchased == 0">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="country" class="col-sm-6">Your Country *</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="country" name="Country" placeholder="i.e. USA" ng-model="view.Country" ng-required="view.AlreadyPurchased == 0">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="phone" class="col-sm-6">Your Phone Number *</label>
+                            <div class="col-sm-6">
+                                <input type="tel" class="form-control" id="phone" name="Phone" placeholder="i.e. 555-123-4567" ng-model="view.Phone" ng-required="view.AlreadyPurchased == 0">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="phone2" class="col-sm-6">Your Alternate Phone Number</label>
+                            <div class="col-sm-6">
+                                <input type="tel" class="form-control" id="phone2" name="Phone2" placeholder="i.e. 555-987-6543" ng-model="view.Phone2">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="view.AlreadyPurchased == 0" bs-has>
+                            <label for="email" class="col-sm-6">Your Email Address</label>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email" name="Email" placeholder="i.e. lisa.smith@gmail.com" ng-model="view.Email">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-show="ActionState != 1">Submit</button>
+                        <div class="row" ng-show="ActionState == 1">
+                            <div class="col-sm-12">
+                                <span class="text-info">Sending your information...</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="ActionState == 2 && error == null">
+                            <div class="col-sm-12">
+                                <div class="alert alert-success" role="alert">Your information was sent successfully</div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="ActionState == 2 && error != null">
+                            <div class="col-sm-12">
+                                <div class="alert alert-danger" role="alert">
+                                    {{error.Message}}
+                                    <ul ng-repeat="modelError in error.ModelState">
+                                        {{modelError}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Your Friend's Information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="well well-sm" ng-repeat="friend in view.Friends track by $index">
+                            <div id="Friends[{{$index}}]" class="form-group" bs-has>
+                                <label for="Friends[{{$index}}].FirstName" class="col-sm-6">First Name</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="Friends[{{$index}}].FirstName" name="Friends[{{$index}}].FirstName" ng-model="view.Friends[$index].FirstName" placeholder="i.e. Lisa" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group" bs-has>
+                                <label for="Friends[{{$index}}].LastName" class="col-sm-6">Last Name</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="Friends[{{$index}}].LastName" name="Friends[{{$index}}].LastName" ng-model="view.Friends[$index].LastName" placeholder="i.e. Smith" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Friends[{{$index}}].Address" class="col-sm-6">Address</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="Friends[{{$index}}].Address" name="Friends[{{$index}}].Address" ng-model="view.Friends[$index].Address" placeholder="i.e. 23 1st St">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Friends[{{$index}}].City" class="col-sm-6">City</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="Friends[{{$index}}].City" name="Friends[{{$index}}].City" ng-model="view.Friends[$index].City" placeholder="i.e. Nashville">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Friends[{{$index}}].State" class="col-sm-6">State/Province</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="Friends[{{$index}}].State" name="Friends[{{$index}}].State" ng-model="view.Friends[$index].State" placeholder="i.e. Tennessee">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Friends[{{$index}}].Country" class="col-sm-6">Country</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="Friends[{{$index}}].Country" name="Friends[{{$index}}].Country" ng-model="view.Friends[$index].Country" placeholder="i.e. USA">
+                                </div>
+                            </div>
+                            <div class="form-group" bs-has>
+                                <label for="Friends[{{$index}}].Phone" class="col-sm-6">Phone Number</label>
+                                <div class="col-sm-6">
+                                    <input type="tel" class="form-control" id="Friends[{{$index}}].Phone" name="Friends[{{$index}}].Phone" ng-model="view.Friends[$index].Phone" placeholder="i.e. 555-123-4567">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Friends[{{$index}}].Phone2" class="col-sm-6">Alternate Phone Number</label>
+                                <div class="col-sm-6">
+                                    <input type="tel" class="form-control" id="Friends[{{$index}}].Phone2" name="Friends[{{$index}}].Phone2" ng-model="view.Friends[$index].Phone2" placeholder="i.e. 555-987-6543">
+                                </div>
+                            </div>
+                            <div class="form-group" bs-has>
+                                <label for="Friends[{{$index}}].Email" class="col-sm-6">Email Address</label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" id="Friends[{{$index}}].Email" name="Friends[{{$index}}].Email" ng-model="view.Friends[$index].Email" placeholder="i.e. lisa.smith@gmail.com" required="required">
+                                </div>
+                            </div>
+                            <div ng-show="$index > 0">
+                                <a href="" class="small" ng-click="RemoveFriend($index)">[<span class="glyphicon-minus"></span> Remove Friend]</a>
+                            </div>
+                        </div>
+                        <a href="" ng-click="AddFriend()"><span class="glyphicon-plus"></span> Add another friend</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

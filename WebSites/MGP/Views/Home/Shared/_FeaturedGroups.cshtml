@@ -1,0 +1,37 @@
+﻿@using GA.BDC.Web.MGP.Helpers.Extensions
+@model IList<GA.BDC.Web.MGP.Models.Views.FeaturedGroup>
+   @{
+      var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+      var groupId = int.Parse(ViewBag.GroupId.ToString());
+      var routeValues = groupId > 0 ? new { groupId } : null;
+   }
+<div class="panel panel-default" style="width: 100%">
+    <div class="panel-heading">
+        <h3 class="panel-title">Featured @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()s</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var gr in Model)
+        {
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="@gr.Image" style="width: 100%" alt="@gr.Name"/>
+                </div>
+                <div class="col-sm-8">
+                    <strong>
+                        @Html.ActionLink(gr.Name, "Index", "Group", new {eventId = gr.Id}, null)
+                    </strong>                    
+                    <br/>
+                    @string.Format("{0:C}", gr.AmountRaised)
+                </div>
+            </div>
+        }
+        @if (Model.Count > 0)
+        {
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    @Html.ActionLink("View more >", "FindAGroup", "Home", routeValues, null)
+                </div>
+            </div>
+        }
+    </div>
+</div>

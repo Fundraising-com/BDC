@@ -1,0 +1,99 @@
+@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Models.Views
+@model Registration
+@{
+    ViewBag.Title = "Fundraising Online, Register your Campaign";
+    ViewBag.Description = "My.Fundraising.com : Register your Fundraising Online Campaign";
+    ViewBag.Keywords = "online fundraising register, sign up EfundraisingOnline.com, start your online fundraising campaign, begin fundraising, register online fundraising campaign, start fundraising campaign online, register, EfundraisingOnline.com, My.Fundraising.com";
+    Layout = "~/Views/Shared/_public2.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+    ViewBag.CanonicalUrl = Url.Action("Register", "Home");
+}
+
+<div id="registration" ng-controller="loginController" ng-init="registerView = @serializedModel;">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+           <h1>Register</h1>
+           <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+            <div class="panel panel-success">
+                <div class="panel-body">                    
+                <form role="form" ng-submit="register()" id="registrationForm" name="registrationForm">
+                <input type="hidden" name="registerView.GroupId" ng-model="registerView.GroupId" ng-init="registerView.GroupId = @(!string.IsNullOrEmpty(Context.Request.Params["groupId"]) ? Context.Request.Params["groupId"] : "0");" />
+                <input type="hidden" name="registerView.Terms" ng-model="registerView.Terms" ng-init="registerView.Terms = 1;"/>
+                <input type="hidden" name="registerView.Newsletter" ng-model="registerView.Newsletter" ng-init="registerView.Newsletter = 1;"/>
+                <div class="row">
+                   <div class="col-sm-12">
+                      <div class="form-group">
+                         <label class="sr-only" for="firstName">First Name</label>
+                         <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                            <input id="firstName" type="text" name="firstName" class="form-control input-lg" required ng-model="registerView.FirstName" placeholder="First Name" tabindex="1"/>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-12">
+                      <label class="sr-only" for="lastName">Last Name</label>
+                      <div class="form-group">
+                         <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                            <input id="lastName" type="text" name="lastName" class="form-control input-lg" required ng-model="registerView.LastName" placeholder="Last Name" tabindex="2" />
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-12">
+                      <label for="email" class="sr-only">* Email Address</label>
+                      <div class="form-group">
+                         <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                            <input id="email" type="email" name="email" class="form-control input-lg" required ng-model="registerView.Email" placeholder="Email Address" tabindex="3" />
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-12">
+                      <div class="form-group">
+                         <label for="password" class="sr-only">* Password</label>
+                         <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                            <input id="password" type="password" name="password" class="form-control input-lg" required ng-model="registerView.Password1" tabindex="4" placeholder="Password"/>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-12">
+                      <span class="text-muted small">By continuing, you agree with the eFundraising.com @Html.ActionLink("terms and privacy policy", "PrivacyPolicy", "Home", null, new {target = "_blank"}).</span>                                
+                   </div>
+                </div>
+                <div class="row" ng-show="executingAction" ng-cloak>
+                   <div class="col-sm-12">
+                      <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                   </div>
+                </div>
+                <div class="row" ng-show="resultFailed" ng-cloak>
+                   <div class="col-sm-12">
+                      <span class="text-danger">{{responseText}}</span>
+                   </div>
+                </div>
+                <div class="row" ng-hide="executingAction" ng-cloak>
+                   <div class="col-sm-12">
+                      <div class="form-group">
+                         <button type="submit" class="btn btn-odnoklassniki form-control btn-lg" tabindex="12" ng-disabled="!registrationForm.$valid">Sign Up</button>
+                      </div>
+                   </div>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

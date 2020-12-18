@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<EmailTemplate>
+	<Templates Name="FreeKit">
+		<Culture Name="en-US" Subject="Fundraising Info Request Received - Start Earning Profits Now!">
+			<Template PartnerID="0" MailDesignPath="Resources/EmailTemplate/en-US/default_freekit_en_us.htm">
+				<TagList>
+					<Tag Name="first_name" BindingField="FirstName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="last_name" BindingField="LastName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="partner_name" BindingField="PartnerName" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+					<Tag Name="partner_url" BindingField="Url" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+					<Tag Name="esubs_url" BindingField="ESubsUrl" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+					<Tag Name="lid" BindingField="LeadID" SourceObject="Lead" Action="Assign"/>
+					<Tag Name="partner_phone_number" BindingField="PhoneNumber" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+				</TagList>
+			</Template>
+			<Template PartnerID="58" MailDesignPath="Resources/EmailTemplate/en-US/llu_freekit_en_us.htm">
+				<TagList>
+					<Tag Name="first_name" BindingField="FirstName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="last_name" BindingField="LastName" SourceObject="Lead" Action="Replace"/>
+				</TagList>
+			</Template>
+		</Culture>
+		<Culture Name="en-CA" Subject="Fundraising Info Request Received - Start Earning Profits Now!">
+			<Template PartnerID="0" MailDesignPath="Resources/EmailTemplate/en-CA/default_freekit_en_ca.htm">
+				<TagList>
+					<Tag Name="first_name" BindingField="FirstName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="last_name" BindingField="LastName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="partner_name" BindingField="PartnerName" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+					<Tag Name="partner_url" BindingField="Url" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+				</TagList>
+			</Template>
+			<Template PartnerID="58" MailDesignPath="Resources/EmailTemplate/en-CA/llu_freekit_en_ca.htm">
+				<TagList>
+					<Tag Name="first_name" BindingField="FirstName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="last_name" BindingField="LastName" SourceObject="Lead" Action="Replace"/>
+				</TagList>
+			</Template>
+		</Culture>	
+	</Templates>
+	<Templates Name="AddNewLeadReport">
+		<Culture Name="en-CA" Subject="A new lead have been added - Scratchcard">
+			<Template PartnerID="0" MailDesignPath="Resources/EmailTemplate/NewLead/NewLeadTxt.txt">
+				<TagsList>
+					<Tag Name="partner_id" BindingField="PartnerID" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+					<Tag Name="promotion_id" BindingField="Description" SourceObject="Promotion" Action="Replace"/>
+					<Tag Name="lead_id" BindingField="LeadID" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="first_name" BindingField="FirstName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="last_name" BindingField="LastName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="title_" BindingField="Title" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="email_" BindingField="Email" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="group_name" BindingField="GroupName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="address_" BindingField="StreetAddress" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="city_" BindingField="City" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="zip_" BindingField="ZipCode" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="state_" BindingField="State" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="country_" BindingField="Country" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="day_phone" BindingField="DayPhone" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="day_phone_ext" BindingField="DayPhoneExt" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="evening_phone" BindingField="EveningPhone" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="evening_phone_ext" BindingField="EveningPhoneExt" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="best_time_to_call" BindingField="BestTimeToCall" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="organization_type" BindingField="OrganizationTypeID" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="group_name" BindingField="GroupName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="group_members" BindingField="ParticipantCount" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="decision_maker" BindingField="DecisionMaker" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="news_letter" BindingField="OnEmailList" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="ProductInterested_InList" BindingField="ProductsInterest" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="fundraising_month" BindingField="FundraisingDate" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="comments_" BindingField="Comments" SourceObject="Lead" Action="Replace"/>
+				</TagsList>
+			</Template>
+		</Culture>
+		<Culture Name="en-US" Subject="A new lead have been added - Scratchcard">
+			<Template PartnerID="0" MailDesignPath="Resources/EmailTemplate/NewLead/NewLead.htm">
+				<TagsList>
+					<Tag Name="partner_id" BindingField="PartnerID" SourceObject="eFundEnv.PartnerInfo" Action="Replace"/>
+					<Tag Name="promotion_id" BindingField="Description" SourceObject="Promotion" Action="Replace"/>
+					<Tag Name="lead_id" BindingField="LeadID" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="first_name" BindingField="FirstName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="last_name" BindingField="LastName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="title_" BindingField="Title" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="email_" BindingField="Email" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="group_name" BindingField="GroupName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="address_" BindingField="StreetAddress" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="city_" BindingField="City" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="zip_" BindingField="ZipCode" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="state_" BindingField="State" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="country_" BindingField="Country" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="day_phone" BindingField="DayPhone" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="day_phone_ext" BindingField="DayPhoneExt" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="evening_phone" BindingField="EveningPhone" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="evening_phone_ext" BindingField="EveningPhoneExt" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="best_time_to_call" BindingField="BestTimeToCall" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="organization_type" BindingField="OrganizationTypeID" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="group_name" BindingField="GroupName" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="group_members" BindingField="ParticipantCount" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="decision_maker" BindingField="DecisionMaker" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="news_letter" BindingField="OnEmailList" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="ProductInterested_InList" BindingField="ProductsInterest" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="fundraising_month" BindingField="FundraisingDate" SourceObject="Lead" Action="Replace"/>
+					<Tag Name="comments_" BindingField="Comments" SourceObject="Lead" Action="Replace"/>
+				</TagsList>
+			</Template>
+		</Culture>
+	</Templates>
+</EmailTemplate>

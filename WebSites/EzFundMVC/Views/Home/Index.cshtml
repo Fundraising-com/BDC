@@ -1,0 +1,428 @@
+@{
+   ViewBag.Title = "EzFund.com - We Make Fundraising EZ!";
+}
+<link href="~/Content/HomeBanner.css" rel="stylesheet" />
+
+<style>
+   /*.box {
+       position: relative;
+      }*/
+
+
+   .img-title-desktop {
+      position: absolute;
+      color: #fff;
+      text-align: center;
+      left: 0;
+      right: 0;
+      top: 45%;
+      letter-spacing: 3px;
+   }
+
+
+   .img-title-ipadpro {
+      position: absolute;
+      color: #fff;
+      text-align: center;
+      left: 0;
+      right: 0;
+      top: 15%;
+      letter-spacing: 3px;
+   }
+
+
+   .img-title-mobile {
+      position: absolute;
+      color: #fff;
+      text-align: center;
+      left: 0;
+      right: 0;
+      top: 22%;
+      letter-spacing: 3px;
+   }
+
+
+   .btn-xlarge {
+      margin-top: 10px;
+      padding: 15px 38px;
+      font-size: 30px; /*change this to your desired size line-height: normal;*/
+      line-height: normal;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+   }
+
+   .btn-xlarge-mobile {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 15px; /*change this to your desired size line-height: normal;*/
+      line-height: normal;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+   }
+</style>
+
+<div class="box-full" id="box-full" hidden>
+   <img class="img-responsive" src="~/Content/images/public/banner_ezf.jpg" alt="fundraising ideas free guide" style="width:100%" />
+   <div class="img-title-desktop">
+      <h1 style="text-transform: uppercase; font-weight:bold; font-size:2.5vw">100+ easy fundraising ideas for every</h1>
+      <h1 style="text-transform: uppercase; font-weight:bold; font-size:2.5vw">group and organization</h1>
+      <h1 style="font-size:1.5vw">Get your free guide today</h1>
+      <a  ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" class="btn btn-xlarge" style="color:white; float:none; background-color:#9bb5d0; border:#9bb5d0; font-weight:bold">HERE</a>
+   </div>
+</div>
+
+
+<div class="box-ipadpro" id="box-ipadpro" hidden>
+   <img class="img-responsive" src="~/Content/images/public/banner_ezf.jpg" alt="fundraising ideas free guide" style="width:100%" />
+   <div class="img-title-ipadpro">
+      <h1 style="text-transform: uppercase; font-weight:bold; font-size:2.5vw">100+ easy fundraising ideas for every</h1>
+      <h1 style="text-transform: uppercase; font-weight:bold; font-size:2.5vw">group and organization</h1>
+      <h1 style="font-size:1.5vw">Get your free guide today</h1>
+      <a  ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" class="btn btn-xlarge" style="color:white; float:none; background-color:#9bb5d0; border:#9bb5d0; font-weight:bold">HERE</a>
+   </div>
+</div>
+
+<div class="box-mobile" id="box-mobile" hidden>
+   <img class="img-responsive" src="~/Content/images/public/mobile-banner-ezf.jpg" alt="fundraising ideas free guide" style="width:100%" />
+   <div class="img-title-mobile">
+      <h1 style="text-transform: uppercase; font-weight:bold; font-size:3.5vw; line-height:25px">100+ easy fundraising ideas for<br />every group and organization</h1>
+      <h1 style="font-size:3.0vw">Get your free guide today</h1>
+      <a  ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" class="btn btn-xlarge-mobile" style="color:white; float:none; background-color:#9bb5d0; border:#9bb5d0; font-weight:bold">HERE</a>
+   </div>
+</div>
+
+
+@*<div class="container">
+   <div class="row-padding-sm hidden-xs hidden-sm hidden-md">
+      <div class="row" ng-controller="BannerControllerDesktop as bannerCtrl" ng-cloak>
+         <div ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+            <div uib-carousel id='mainBanner' active="0" interval="bannerCtrl.interval" no-wrap="bannerCtrl.noWrap">
+               <div uib-slide ng-repeat="slide in bannerCtrl.slides" index="$index">
+                  <a ng-href="{{::slide.Url}}" ng-click="googleAnalyticsCtrl.BannerClicked(slide.Id);">
+                     <img ng-src="{{slide.Image}}" style="margin:auto; width:100%" class="img-responsive">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row-padding-sm visible-sm visible-md visible-xs" style="margin-top: 0px;">
+      <div class="row" ng-controller="BannerControllerMobile as bannerCtrl" ng-cloak>
+         <div ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+            <div uib-carousel id='mainBanner' active="0" interval="bannerCtrl.interval" no-wrap="bannerCtrl.noWrap">
+               <div uib-slide ng-repeat="slide in bannerCtrl.slides" index="$index">
+                  <a ng-href="{{::slide.Url}}" ng-click="googleAnalyticsCtrl.BannerClicked(slide.Id);">
+                     <img ng-src="{{slide.Image}}" style="margin:auto; width:100%" class="img-responsive">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>*@
+<div class="container">
+
+
+
+
+</div><!--//container -->
+
+
+
+<div class="container ng-cloak">
+   <!-- position changed for mobile view -->
+   <div class="row  visible-sm visible-md visible-xs">
+      <div class="col-md-12">
+         <div class="thumbnail thumbnail-index-mobile">
+            <div class="div-center" ng-controller="HomePageRotatorController as bannerCtrl">
+               <div uib-carousel id="middleCarousel" active="0" data-interval="3000" no-wrap="homePageRotatorCtrl.noWrap">
+                  <div uib-slide ng-repeat="banner in bannerCtrl.banners" index="$index">
+                     <div class="row text-center div-center">
+                        <div class="col-xs-6">
+                           <img ng-src="/Content/external/direct/images/{{banner.Image}}" class="img-responsive">
+                        </div>
+                        <div class="col-xs-6">
+                           <h3>{{banner.Title}}</h3>
+                           <h4>{{banner.SubTitle}}</h4>
+                           <div class="thumbnail-index-text-reg">
+                              {{banner.AlternativeText}}
+                           </div><br>
+                           <a ng-href="{{banner.Url}}" class="btn btn-primary" ng-show="banner.IsProduct">ORDER NOW</a>
+                           <a ng-href="{{banner.CategoryUrl}}" class="btn btn-primary" ng-show="!banner.IsProduct">GO!</a>
+                           <br><br>
+                           <a ng-href="{{banner.CategoryUrl}}" ng-show="banner.IsProduct" class="pop-fund-color">Shop All Categories</a><br>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+   </div>
+
+   <div class="row  visible-sm visible-md visible-xs">
+      <div class="col-xs-6 thumbnail thumbnail-index-mobile">
+
+         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators" style="margin-bottom:-16px">
+               <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+               <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+               <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+               <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+               <div class="vertical-text2">
+                  <p>Fundraisers</p>
+               </div>
+               <div class="item active">
+                  <a ng-href="products/in-hand-sellers/candies/sweet-and-salty-pretzels" title="pretzel" class="new-bottomlink-color">
+                     <img ng-src="/Content/images/public/products-pretzelrods.jpg" alt="Pretzel Rods" class="img-responsive center" />
+                  </a>
+                  <h5><a ng-href="products/in-hand-sellers/candies/sweet-and-salty-pretzels" title="pretzel" class="new-bottomlink-color  pop-fund-color">Pretzel Rods</a></h5>
+
+               </div>
+
+               <div class="item">
+                  <a ng-href="/products/in-hand-sellers/lollipops/yummy-lix-rounds" title="yummy lix" class="new-bottomlink-color">
+                     <img ng-src="/Content/images/public/product-yummylix.jpg" alt="Yummy-Lix" class="img-responsive center" />
+                  </a>
+                  <h5><a ng-href="/products/in-hand-sellers/lollipops/yummy-lix-rounds" title="yummy lix" class="new-bottomlink-color  pop-fund-color">Yummy-Lix</a></h5>
+
+               </div>
+
+               <div class="item">
+                  <a ng-href="/products/in-hand-sellers/beef-jerky-products" title="beef jerky" class="new-bottomlink-color">
+                     <img ng-src="/Content/images/public/product-squatchsticks.jpg" alt="beef jerky" class="img-responsive center" />
+                  </a>
+                  <h5><a ng-href="/products/in-hand-sellers/beef-jerky-products" title="beef jerky" class="new-bottomlink-color  pop-fund-color">Beef Jerky</a></h5>
+
+               </div>
+               <div class="item">
+
+                  <a ng-href="/products/in-hand-sellers/fusion-drinkware-tumblers" title="tumblers" class="new-bottomlink-color">
+                     <img ng-src="/Content/images/public/tumblershomepage.jpg" alt="tumblers" class="img-responsive center" />
+                  </a>
+                  <h5><a ng-href="/products/in-hand-sellers/fusion-drinkware-tumblers" title="tumblers" class="new-bottomlink-color  pop-fund-color">Tumblers</a></h5>
+               </div>
+            </div>
+
+
+         </div>
+      </div>
+
+
+      <div class="col-xs-6">
+         <div class="thumbnail thumbnail-index thumbnail-index-text-link thumbnail-index-mobile">
+            <div class="cr cr-top cr-left cr-sticky cr-blue"><span>New</span></div>
+            <div id="carousel-example-generic2" class="carousel slide" data-ride="carousel">
+               <!-- Indicators -->
+               @*<ol class="carousel-indicators"  style="margin-bottom:-16px">
+                      <li data-target="#carousel-example-generic2" data-slide-to="0" class="active"></li>
+                      <li data-target="#carousel-example-generic2" data-slide-to="1"></li>
+
+                  </ol>*@
+               <!-- Wrapper for slides -->
+               <div class="carousel-inner">
+                  <div class="item active">
+                     <a ng-href="/products/cookie-dough-fundraisers/cookie-dough" title="cookies" class="new-bottomlink-color">
+                        <img ng-src="/Content/images/public/products-crazyaboutcookies.jpg" alt="Cookie Dough" class="img-responsive center" />
+                     </a>
+                     <h5><a ng-href="/products/cookie-dough-fundraisers/cookie-dough" title="cookies" class="new-bottomlink-color  pop-fund-color">Cookie Dough</a></h5>
+
+
+                     <div class="item">
+                        <a ng-href="/request-selling-kit" title="selling kit" class="new-bottomlink-color">
+                           <img ng-src="/Content/images/public/calltoaction_sellingkit.jpg" alt="selling kit" class="img-responsive center" />
+                        </a>
+                        <h5><a ng-href="/request-selling-kit" title="selling kit" class="new-bottomlink-color  pop-fund-color">Selling Kit</a></h5>
+                     </div>
+
+
+                  </div>
+
+
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+   <!-- position changed for mobile view -->
+   <!-- position changed for desktop  view -->
+   <div class="container">
+      <div class="row  hidden-xs hidden-sm hidden-md">
+         <div class="col-md-4 col-no-padding">
+            <div class="thumbnail thumbnail-index">
+               <div class="vertical-text">
+                  <p>POPULAR FUNDRAISERS</p>
+               </div>
+
+
+               <div class="row" style="padding-left:36px;">
+                  <div class="col-xs-11">
+                     <div class="row text-center center-padding">
+                        <div class="col-xs-6">
+                           <a ng-href="products/in-hand-sellers/candies/sweet-and-salty-pretzels" title="pretzel" class="new-bottomlink-color">
+                              <img ng-src="/Content/images/public/products-pretzelrods.jpg" alt="Pretzel Rods" class="img-responsive center" />
+                           </a>
+                           <h5><a ng-href="products/in-hand-sellers/candies/sweet-and-salty-pretzels" title="pretzel" class="new-bottomlink-color  pop-fund-color">Pretzel Rods</a></h5>
+                        </div>
+                        <div class="col-xs-6">
+                           <a ng-href="/products/in-hand-sellers/lollipops/yummy-lix-rounds" title="yummy lix" class="new-bottomlink-color">
+                              <img ng-src="/Content/images/public/product-yummylix.jpg" alt="Yummy-Lix" class="img-responsive center" />
+                           </a>
+                           <h5><a ng-href="/products/in-hand-sellers/lollipops/yummy-lix-rounds" title="yummy lix" class="new-bottomlink-color  pop-fund-color">Yummy-Lix</a></h5>
+                        </div>
+                        <div class="col-xs-6">
+                           <a ng-href="/products/in-hand-sellers/beef-jerky-products" title="beef jerky" class="new-bottomlink-color">
+                              <img ng-src="/Content/images/public/product-squatchsticks.jpg" alt="beef jerky" class="img-responsive center" />
+                           </a>
+                           <h5><a ng-href="/products/in-hand-sellers/beef-jerky-products" title="beef jerky" class="new-bottomlink-color  pop-fund-color">Beef Jerky</a></h5>
+                        </div>
+                       <div class="col-xs-6">
+                           <a ng-href="/products/in-hand-sellers/fusion-drinkware-tumblers" title="tumblers" class="new-bottomlink-color">
+                              <img ng-src="/Content/images/public/tumblershomepage.jpg" alt="tumblers" class="img-responsive center" />
+                           </a>
+                           <h5><a ng-href="/products/in-hand-sellers/fusion-drinkware-tumblers" title="tumblers" class="new-bottomlink-color  pop-fund-color">Tumblers</a></h5>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+         <div class="col-md-2">
+            <div class="thumbnail thumbnail-index thumbnail-index-text-link">
+               <div class="cr cr-top cr-left cr-sticky cr-blue"><span>New</span></div>
+               <div class="row text-center center-padding">
+                  <div class="col-xs-12">
+                     <a ng-href="/products/cookie-dough-fundraisers/cookie-dough" title="cookies" class="new-bottomlink-color">
+                        <img ng-src="/Content/images/public/products-crazyaboutcookies.jpg" alt="Cookie Dough" class="img-responsive center" />
+                     </a>
+                     <h5><a ng-href="/products/cookie-dough-fundraisers/cookie-dough" title="cookies" class="new-bottomlink-color  pop-fund-color">Cookie Dough</a></h5>
+
+                  </div>
+                  <div class="col-xs-12">
+                     <a ng-href="/request-selling-kit" title="selling kit" class="new-bottomlink-color">
+                        <img ng-src="/Content/images/public/calltoaction_sellingkit.jpg" alt="selling kit" class="img-responsive center" />
+                     </a>
+                     <h5><a ng-href="/request-selling-kit" title="selling kit" class="new-bottomlink-color  pop-fund-color">Selling Kit</a></h5>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-no-padding hidden-sm hidden-xs hidden-md" ng-cloak>
+            <div class="thumbnail thumbnail-index" style="height:344px">
+               <div class="div-center" ng-controller="HomePageRotatorController as bannerCtrl">
+                  <div uib-carousel id="middleCarousel" active="0" data-interval="3000" no-wrap="homePageRotatorCtrl.noWrap">
+                     <div uib-slide ng-repeat="banner in bannerCtrl.banners" index="$index">
+                        <div class="row text-center div-center">
+                           <div class="col-xs-6">
+                              <img ng-src="/Content/external/direct/images/{{banner.Image}}" class="img-responsive">
+                           </div>
+                           <div class="col-xm-6">
+                              <h3>{{banner.Title}}</h3>
+                              <h4>{{banner.SubTitle}}</h4>
+                              <div class="thumbnail-index-text-reg">
+                                 {{banner.AlternativeText}}
+                              </div><br>
+                              <a ng-href="{{banner.Url}}" class="btn btn-primary" ng-show="banner.IsProduct">ORDER NOW</a>
+                              <a ng-href="{{banner.CategoryUrl}}" class="btn btn-primary" ng-show="!banner.IsProduct">GO!</a>
+                              <br><br>
+                              <a ng-href="{{banner.CategoryUrl}}" ng-show="banner.IsProduct" class="pop-fund-color">Shop All Categories</a><br>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- position changed for desktop  view -->
+   <div style="background:white;">
+      <div class="container index-info" style="background:white;">
+         <div class="row">
+            <div class="col-sm-12 ">
+               <h3><span>MAKE IT EZ</span></h3>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-4">
+               <div>
+                  <a ng-href="/request-a-kit" title="order guide now">
+                     <img ng-src="/Content/images/public/icon-freeguide.jpg" alt="order free guide" style="border:none">
+                  </a><br>
+                  <h5><span><a ng-href="/request-a-kit" title="order guide now" class="new-bottomlink-color make-itez-color">ORDER YOUR FREE GUIDE</a></span></h5>
+                  <div>
+                     Need mor information about our products?<br>Order Our Fundraising Guide! It's free, full of tips and with plenty of great fundraisers.
+                  </div>
+                  <h6><span><a ng-href="/request-a-kit" title="order guide now" class="new-bottomlink-color make-itez-color">ORDER NOW</a></span></h6>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div>
+                  <a ng-href="/blog" title="blog fundraiser online" style="border:none">
+                     <img ng-src="/Content/images/public/icon-blog.jpg" alt="blog">
+                  </a><br>
+                  <h5>OUR BLOG</h5>
+                  <div>
+                     We have easy fundraising ideas with quality products and services. Our programs work well for schools, churches and sport teams.
+                  </div>
+                  <h6>
+                     <a ng-href="/blog" title="blog fundraiser online" class="new-bottomlink-color make-itez-color">ENGLISH</a> /
+                     <a ng-href="/blog/blog-spanish" title="blog fundraiser online" class="new-bottomlink-color make-itez-color">EN ESPA&Ntilde;OL</a>
+                  </h6>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div>
+                  <a ng-href="/products/magazines-fundraisers/featured-magazine-fundraiser/online-magazine-program" title="magazine fundraiser online" style="border:none">
+                     <img ng-src="/Content/images/public/icon-onlinefundraising.jpg" alt="online fundraising">
+                  </a><br>
+                  <h5><span><a ng-href="/products/magazines-fundraisers/featured-magazine-fundraiser/online-magazine-program" title="magazine fundraiser online" class="new-bottomlink-color make-itez-color">ONLINE STORE</a></span></h5>
+                  <div>
+                     Create Your Online Fundraising Store For Free. It's open 24/7 and your supporters can choose from +1500 products and magazines.
+                  </div>
+                  <h6><span><a ng-href="/products/magazines-fundraisers/featured-magazine-fundraiser/online-magazine-program" title="magazine fundraiser online" class="new-bottomlink-color make-itez-color">LEARN MORE</a></span></h6>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="testimonial-container" ng-cloak>
+      <div class="container" style="margin-top:20px">
+         <div class="row">
+
+            <div class="col-sm-4">
+               <h4 class="testimonial-format">Why Choose Us?</h4>
+               <br>
+               <p class="reduced">We offer a wide variety of food product fundraisers such as cookie dough, pretzels, funnel cakes and dessert bars. If you are looking for a quick idea, try our In-Hand Sellers like Smencils, gourmet lollipops, and candy. We also offer Brochure Programs such as seasonal flowers, holiday shoppers and candles.</p>
+            </div>
+            <div class="col-sm-4 center">
+               <img ng-src="~/Content/images/public/stats.png" alt="stats" class="testimonial-center-img">
+
+            </div>
+            <div class="col-sm-4" ng-controller="TestimonialsController as testimonialsCtrl">
+               <h4 class="testimonial-format">What Client's Say?</h4><br>
+               <p class="reduced">
+                  <span class="testimonial-message" ng-bind-html="testimonialsCtrl.scope.$sce.trustAsHtml(testimonialsCtrl.testimonial.Message)"></span>
+                  <br>
+                  <span class="testimonial-creator">
+                     {{testimonialsCtrl.testimonial.Author}}
+                  </span>
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

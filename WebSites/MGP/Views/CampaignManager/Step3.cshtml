@@ -1,0 +1,93 @@
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+   ViewBag.Title = "Fundraising Online, Registration - Step 3";
+   ViewBag.Description = "My.Fundraising.com : Register your Fundraising Online Campaign";
+   ViewBag.Keywords = "online fundraising register, sign up EfundraisingOnline.com, start your online fundraising campaign, begin fundraising, register online fundraising campaign, start fundraising campaign online, register, EfundraisingOnline.com, My.Fundraising.com";
+	ViewBag.HideTopMenu = true;
+   Layout = "~/Views/Shared/_public2.cshtml";
+   var eventBranding = ViewBag.Event as Event;
+}
+<div class="registration-steps" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;registerView.Body = '';">
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <h1>Step 3</h1>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 text-center registration-subtitle">
+         <span>what are you raising funds for</span>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <span class="small text-muted">Explain how you and your group will benefit from this fundraiser and thank your supporters for the positive impact their help will provide.</span>
+      </div>
+   </div>
+   <br />
+   <div class="row">
+      <div class="col-xs-12 col-md-offset-2 col-md-8">
+         <div class="panel">
+            <div class="panel-body">
+               
+               <div class="row">
+                  <div class="col-xs-12">
+                     <form name="form">
+                        <ng-wig ng-model="registerView.Body" required name="message" ng-required="true" placeholder="Your story will be displayed on your personal page for supporters to see"></ng-wig>
+                        <span style="font-size:12px">*Maximum characters 2000: {{2000 - registerView.Body.length}}  remaining - (minumum 400 characters)</span>
+                     </form>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xs-12">
+                     <div class="text-right">
+                        <a href="#" class="" ng-hide="registerView.Body.length < 8" ng-click="step3(true);"><br /><strong>[PREVIEW]</strong><br /></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 text-center" ng-hide="executingAction" ng-cloak>         
+         <button type="button" class="btn btn-lg btn-facebook form-control" ng-click="step3(false);" ng-disabled="(registerView.Body.length < 2001 && registerView.Body.length > 401) ? false : true">Next Step</button>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12" ng-hide="executingAction">
+         <a href="/registration/step-2?participantId=@eventBranding.ParticipantId" class="small text-muted">Go Back</a>
+      </div>
+   </div>
+   <div class="row" ng-show="executingAction" ng-cloak>
+      <div class="col-sm-12 text-center">
+         <span class="text-info"><strong><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</strong></span>
+      </div>
+   </div>
+   <div class="row" ng-show="resultFailed" ng-cloak>
+      <div class="col-sm-12 text-center">
+         <span class="text-danger"><strong>{{responseText}}</strong></span>
+      </div>
+   </div>
+   <div class="modal fade" id="preview-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+            <div class="modal-body">
+               <div class="embed-responsive embed-responsive-4by3">
+                  <iframe id="previewIframe" class="embed-responsive-item" src="@Url.Action("Index", "Group", new {eventId = eventBranding.Id, isPreview = true})"></iframe>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<br />
+<br />
+

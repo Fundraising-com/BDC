@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+<SQLStatements Completed="1" Version="SP202">
+  <SQLServer><![CDATA[ALTER TABLE OrderItems ALTER COLUMN itemTotal nvarchar(50)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderItems ALTER COLUMN itemTotal text(50)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin ADD SearchOnFields nvarchar(255) NULL]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Admin ADD COLUMN SearchOnFields text(255) NULL]]></Access>
+  <SQLServer><![CDATA[UPDATE Admin SET SearchOnFields='Code,Name,NamePlural,ShortDescription,keywords' WHERE SearchOnFields IS NULL ]]></SQLServer>
+  <Access><![CDATA[UPDATE Admin SET Admin.SearchOnFields='Code,Name,NamePlural,ShortDescription,keywords'WHERE Admin.SearchOnFields='']]></Access>
+  <Access><![CDATA[UPDATE QBTemplates SET Description='Gift&nbsp;Wrap', Active=1, Skip=0, ColumnVisible=1 WHERE PageName='Invoice' AND Sequence='005']]></Access>
+  <SQLServer><![CDATA[UPDATE QBTemplates SET Description='Gift&nbsp;Wrap', Active=1, Skip=0, ColumnVisible=1 WHERE PageName='Invoice' AND Sequence='005']]></SQLServer>
+  <Access><![CDATA[ALTER TABLE SearchResults ADD COLUMN NumOfRows INT]]></Access>
+  <SQLServer><![CDATA[sp_rename 'SearchResults.Rows', 'NumOfRows', 'COLUMN']]></SQLServer>
+  <Access><![CDATA[UPDATE SearchResults SET SearchResults.NumOfRows = [SearchResults].[Rows]]]></Access>
+  <Access><![CDATA[ALTER TABLE SearchResults Drop COLUMN [Rows]]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderAddresses ADD CODAmount nvarchar(20) NULL]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderAddresses ADD COLUMN CODAmount text(20) NULL]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderItems ALTER COLUMN Category ntext]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderItems ALTER COLUMN Category memo]]></Access>
+  <Access><![CDATA[ALTER TABLE Admin ALTER COLUMN NextOrderNumber Long]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin ALTER COLUMN NextOrderNumber numeric(10, 0)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN OrderID Long ]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN OrderID numeric(10, 0)]]></SQLServer>
+  <SQLServer><![CDATA[sp_rename 'QBSettings.Memo', 'QBMemo', 'COLUMN' ]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE QBSettings ADD COLUMN QBMemo Memo ]]></Access>
+  <Access><![CDATA[UPDATE QBSettings SET QBSettings.QBMemo=[QBSettings].[Memo]]]></Access>
+  <Access><![CDATA[ALTER TABLE QBSettings Drop COLUMN [Memo] ]]></Access>
+  <Access><![CDATA[ALTER TABLE OrderItems ALTER COLUMN ProductName text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderItems ALTER COLUMN ProductName nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Categories ALTER COLUMN Name text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Categories ALTER COLUMN Name nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AffiliateSettings ALTER COLUMN Terms Memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AffiliateSettings ALTER COLUMN Terms ntext]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Admin DROP COLUMN DomainName]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin DROP COLUMN DomainName]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Admin ADD COLUMN WebLicense Memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Admin ADD WebLicense ntext NULL]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Attributes ALTER COLUMN Name text(200)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Attributes ALTER COLUMN Name nvarchar(200)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN Name text(200)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN Name nvarchar(200)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN FileLocation text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN FileLocation nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[INSERT INTO QBConversion ([PageName], [Sequence], [WebID], [QuickBooksID], [QBAccount]) VALUES( 'Shipping', '060', 'DEFAULT2', 'UPS', 'UPS')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[QBConversion] ([PageName], [Sequence], [WebID], [QuickBooksID], [QBAccount]) VALUES( 'Shipping', '060', 'DEFAULT2', 'UPS', 'UPS')]]></SQLServer>
+  <SQLServer><![CDATA[UPDATE qbconversion 
+SET qbaccount=(SELECT qbaccount FROM qbconversion WHERE WebID='DEFAULT' AND PageName='Shipping'),
+[Sequence]=(select [Sequence] from qbconversion WHERE WebID='DEFAULT' AND PageName='Shipping'),
+QuickBooksID=(select QuickBooksID from QBConversion WHERE WebID='DEFAULT' AND PageName='Shipping') 
+WHERE WebID='DEFAULT2']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM QBConversion WHERE WebID='DEFAULT' AND PageName='Shipping']]></SQLServer>
+  <SQLServer><![CDATA[UPDATE QBConversion SET WebID='DEFAULT' WHERE PageName='Shipping' AND WebID='DEFAULT2']]></SQLServer>
+  <Access><![CDATA[UPDATE QBConversion Q, QBConversion QB SET Q.Sequence=QB.Sequence, Q.QuickBooksID=QB.QuickBooksID, Q.QBAccount=QB.QBAccount WHERE Q.WebID='DEFAULT2' AND QB.WebID='DEFAULT']]></Access>
+  <Access><![CDATA[DELETE from QBConversion WHERE PageName='Shipping' AND WebID='DEFAULT']]></Access>
+  <Access><![CDATA[UPDATE QBConversion SET WebID='DEFAULT' WHERE WebID='DEFAULT2']]></Access>
+  <Access><![CDATA[UPDATE Admin SET WebLicense='69 159 139 247 59 253 137 38 201 207 84 123 242 56 225 142 9 212 178 27 214 8 202 233 236 227 68 44 7 104 142 36 142 235 253 86 137 247 168 1' WHERE WebLicense IS NULL OR WebLicense='']]></Access>
+  <SQLServer><![CDATA[UPDATE Admin SET WebLicense='69 159 139 247 59 253 137 38 201 207 84 123 242 56 225 142 9 212 178 27 214 8 202 233 236 227 68 44 7 104 142 36 142 235 253 86 137 247 168 1' WHERE WebLicense IS NULL OR WebLicense='']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://cart.bamart.com/soap/listener.mart' WHERE NAME='BankOfAmerica']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://cart.bamart.com/soap/listener.mart' WHERE NAME='BankOfAmerica']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.linkpt.net' WHERE NAME='LinkPoint']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.linkpt.net' WHERE NAME='LinkPoint']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.psigate.com' WHERE NAME='PsiGate']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='secure.psigate.com' WHERE NAME='PsiGate']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.securepay.com/secure1/index.asp' WHERE NAME='SecurePay']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.securepay.com/secure1/index.asp' WHERE NAME='SecurePay']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='payflow.verisign.com' WHERE NAME='Verisign']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='payflow.verisign.com' WHERE NAME='Verisign']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll' WHERE NAME='AuthorizeNet']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll' WHERE NAME='AuthorizeNet']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.paypal.com/cgi-bin/webscr' WHERE NAME='PayPal']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://www.paypal.com/cgi-bin/webscr' WHERE NAME='PayPal']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://select.worldpay.com/wcc/purchase'  WHERE NAME='WorldPay']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://select.worldpay.com/wcc/purchase'  WHERE NAME='WorldPay']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdqEncTool.e|https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdq.e'  WHERE NAME='Barclay']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdqEncTool.e|https://secure2.epdq.co.uk/cgi-bin/CcxBarclaysEpdq.e'  WHERE NAME='Barclay']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='QuickCommerce']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='QuickCommerce']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='PlanetPayment']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='PlanetPayment']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='SecureSource']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET LiveServerPath='https://secure.authorize.net/gateway/transact.dll'  WHERE NAME='SecureSource']]></SQLServer>
+  <Access><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Invoice' and clng(Sequence)=22]]></Access>
+  <SQLServer><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Invoice' and Sequence=22]]></SQLServer>
+  <Access><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Receipt' and clng(Sequence)=23]]></Access>
+  <SQLServer><![CDATA[UPDATE QBTemplates SET Description='Gift Certificates', ColumnVisible=1 WHERE PageName='Receipt' and Sequence=23]]></SQLServer>
+  <Access><![CDATA[INSERT INTO QBAccounts ([AccountName], [Description], [Item]) VALUES('Order Discounts', 'Gift Certificates', 'GiftCertificate')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[QBAccounts] ([AccountName], [Description], [Item]) VALUES('Order Discounts', 'Gift Certificates', 'GiftCertificate')]]></SQLServer>
+  <Access><![CDATA[DELETE FROM QBAccounts WHERE  (uid > 12)]]></Access>
+  <SQLServer><![CDATA[DELETE FROM QBAccounts WHERE  (uid > 12)]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) VALUES('addgiftcertificates.ascx', 'Error', 'Duplicate', 'This Gift Certificate Code is already in use')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) VALUES('addgiftcertificates.ascx', 'Error', 'Duplicate', 'This Gift Certificate Code is all ready in use')]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE Page='addcategory' AND Action='Error' AND Condition='Duplicate']]></Access>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE Page='addcategory' AND Action='Error' AND Condition='Duplicate']]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) VALUES ('addcategory', 'Error', 'Duplicate', 'A root category with this name already exists.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) VALUES ('addcategory', 'Error', 'Duplicate', 'A root category with this name already exists.')]]></SQLServer>
+  <Access><![CDATA[CREATE INDEX IX_MANUFACTURERID on Products(ManufacturerId)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_VENDORID on Products(VendorId)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CODE on Products(Code)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ISACTIVE on Products(IsActive)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on Products(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on ProductCategory(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CATEGORYID on ProductCategory(CategoryID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on Inventory(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ATTRIBUTEDETAILID on Inventory(AttributeDetailID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODID on InventoryInfo(ProdID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on Giftwrap(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on VolumePricing(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ADDRESSID on Manufacturers(AddressID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ADDRESSID on Vendors(AddressID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on Attributes(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PARENTID on RelatedProducts(ParentID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_RELATEDID on RelatedProducts(RelatedID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PRODUCTID on CustomerSpecificPricing(ProductID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_GROUPID on CustomerSpecificPricing(GroupID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CUSTGROUPID on Customers(CustGroupID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CUSTOMERID on Addresses(CustomerID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ATTRIBUTEID on AttributeDetail(AttributeID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ORDERID on OrderAddresses(OrderID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CUSTOMERID on Orders(CustomerID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ISACTIVE on Categories(IsActive)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PARENTLEVEL on Categories(ParentLevel)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_PARENTID on Categories(ParentID)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on Categories(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on Attributes(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_CODE on PRODUCTS(Code)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_ISACTIVE on PRODUCTS(IsActive)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAME on PRODUCTS(Name)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_NAMEPLURAL on PRODUCTS(NamePlural)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_SHORTDESCRIPTION on PRODUCTS(ShortDescription)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_DESCRIPTION on PRODUCTS(Description)]]></Access>
+  <Access><![CDATA[CREATE INDEX IX_KEYWORDS on PRODUCTS(Keywords)]]></Access>
+  <SQLServer><![CDATA[CREATE INDEX IX_MANUFACTURERID on Products(ManufacturerId)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_VENDORID on Products(VendorId)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CODE on Products(Code)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ISACTIVE on Products(IsActive)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on Products(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on ProductCategory(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CATEGORYID on ProductCategory(CategoryID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on Inventory(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ATTRIBUTEDETAILID on Inventory(AttributeDetailID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODID on InventoryInfo(ProdID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on Giftwrap(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on VolumePricing(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ADDRESSID on Manufacturers(AddressID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ADDRESSID on Vendors(AddressID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on Attributes(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PARENTID on RelatedProducts(ParentID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_RELATEDID on RelatedProducts(RelatedID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PRODUCTID on CustomerSpecificPricing(ProductID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_GROUPID on CustomerSpecificPricing(GroupID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CUSTGROUPID on Customers(CustGroupID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CUSTOMERID on Addresses(CustomerID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ATTRIBUTEID on AttributeDetail(AttributeID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ORDERID on OrderAddresses(OrderID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CUSTOMERID on Orders(CustomerID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ISACTIVE on Categories(IsActive)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PARENTLEVEL on Categories(ParentLevel)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_PARENTID on Categories(ParentID)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on Categories(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on Attributes(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_CODE on PRODUCTS(Code)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_ISACTIVE on PRODUCTS(IsActive)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAME on PRODUCTS(Name)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_NAMEPLURAL on PRODUCTS(NamePlural)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_SHORTDESCRIPTION on PRODUCTS(ShortDescription)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_DESCRIPTION on PRODUCTS(Description)]]></SQLServer>
+  <SQLServer><![CDATA[CREATE INDEX IX_KEYWORDS on PRODUCTS(Keywords)]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankProductID']]></Access>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankCategoryID']]></Access>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankVendorID']]></Access>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankManufacturerID']]></Access>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankProductID']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankProductID']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankVendorID']]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE [Page]='editcoupon' AND [Action]='Error' AND [Condition]='BlankManufacturerID']]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankProductID', 'Must select a Product')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankProductID', 'Must select a Product')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankCategoryID', 'Must select a Category')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankCategoryID', 'Must select a Category')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankVendorID', 'Must select a Vendor')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankVendorID', 'Must select a Vendor')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankManufacturerID', 'Must select a Manufacturer')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('editcoupon', 'Error', 'BlankManufacturerID', 'Must select a Manufacturer')]]></SQLServer>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE ([Page]='EmailaFriend.aspx') AND ([Action]='PageTitle') AND ([Condition]='Title')]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE [Page]='EmailaFriend.aspx' AND [Action]='PageTitle' AND [Condition]='Title']]></Access>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) VALUES ('EmailaFriend.aspx', 'PageTitle', 'Title', 'E-Mail a Friend')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages]  ([Page], [Action], [Condition], [Message]) VALUES ('EmailaFriend.aspx', 'PageTitle', 'Title', 'E-Mail a Friend')]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Customers ALTER COLUMN HTTPReferrer text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Customers ALTER COLUMN HTTPReferrer nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[INSERT INTO[Instructions] ([PageName], [Instruction]) VALUES ('Confirm.aspx(PF)', 'Thank you for your order! Print the order summary below and submit it by phone, mail or fax it to complete the order process.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Instructions] ([PageName], [Instruction]) VALUES ('Confirm.aspx(PF)', 'Thank you for your order! Print the order summary below and submit it by phone, mail or fax it to complete the order process.')]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Affiliates ALTER COLUMN HomePage text(100)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Affiliates ALTER COLUMN HomePage nvarchar(100)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Affiliates ALTER COLUMN Email text(100)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Affiliates ALTER COLUMN Email nvarchar(100)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN Name text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE AttributeDetail ALTER COLUMN Name nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE Inventory ALTER COLUMN AttributeName text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE Inventory ALTER COLUMN AttributeName nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderItemsAttributes ALTER COLUMN AttributeName text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderItemsAttributes ALTER COLUMN AttributeName nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE OrderItemsAttributes ALTER COLUMN AttributeDetailName text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE OrderItemsAttributes ALTER COLUMN AttributeDetailName nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN CustTransNo text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN CustTransNo nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN ActionCode text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN ActionCode nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN RetrievalCode text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN RetrievalCode nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN AuthorizationNo text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN AuthorizationNo nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN CVVResult text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN CVVResult nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN ErrorLocation text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN ErrorLocation nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN AVSResult text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN AVSResult nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN MerchantTransNo text(255)]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE ProcessorResponse ALTER COLUMN MerchantTransNo nvarchar(255)]]></SQLServer>
+  <Access><![CDATA[DELETE FROM Messages WHERE Page='ParaData' and Action= 'Error']]></Access>
+  <SQLServer><![CDATA[DELETE FROM Messages WHERE Page='ParaData' and Action= 'Error']]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '2', 'A required field is missing.  Please enter data in all required fields and submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '2', 'A required field is missing.  Please enter data in all required fields and submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '3', 'A required field was given an invalid value in the request.  Please re-enter a valid value in the required fields and try to submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '3', 'A required field was given an invalid value in the request.  Please re-enter a valid value in the required fields and try to submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '4', 'The transaction you attempted is not allowed.  Please contact the site administrator to report the issue.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '4', 'The transaction you attempted is not allowed.  Please contact the site administrator to report the issue.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '5', 'The transaction server could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '5', 'The transaction server could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '6', 'The transaction you attempted could not be performed.  Please contact the site administrator and report the issue.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '6', 'The transaction you attempted could not be performed.  Please contact the site administrator and report the issue.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '7', 'The software version is out of date.  Please contact the site administrator and report the issue.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '7', 'The software version is out of date.  Please contact the site administrator and report the issue.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '8', 'The required response files from the payment handler is invalid.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '8', 'The required response files from the payment handler is invalid.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '9', 'A required response file from the payment handler is invalid.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '9', 'A required response file from the payment handler is invalid.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '10', 'The transaction you attempted could not be performed.  Please contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '10', 'The transaction you attempted could not be performed.  Please contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '100', 'There is a problem authorizing the credit card provided.  Please ensure that a valid credit card has been provided and submit the order again.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '100', 'There is a problem authorizing the credit card provided.  Please ensure that a valid credit card has been provided and submit the order again.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '12', 'The acquirer gateway could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '12', 'The acquirer gateway could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '101', 'The acquirer gateway could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '101', 'The acquirer gateway could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '13', 'The payment engine could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '13', 'The payment engine could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[INSERT INTO Messages ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '102', 'The payment engine could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></Access>
+  <SQLServer><![CDATA[INSERT INTO [dbo].[Messages] ([Page], [Action], [Condition], [Message]) values('ParaData', 'Error', '102', 'The payment engine could not process the transaction.  Please submit the order again.  If the problem persists, contact the site administrator.')]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE PaymentProcessors ALTER COLUMN Pass memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE PaymentProcessors ALTER COLUMN Pass nvarchar(500)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE PaymentProcessors ALTER COLUMN UserID memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE PaymentProcessors ALTER COLUMN UserID nvarchar(500)]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE PaymentProcessors ALTER COLUMN MerchantID memo]]></Access>
+  <SQLServer><![CDATA[ALTER TABLE PaymentProcessors ALTER COLUMN MerchantID nvarchar(500)]]></SQLServer>
+  <SQLServer Error="UpdateError4"><![CDATA[UPDATE [dbo].[PaymentProcessors] Set MerchantID='' WHERE [Name]='Paradata CommerceConnect' OR [Name]='Paradata']]></SQLServer>
+  <SQLServer Error="UpdateError3"><![CDATA[UPDATE [dbo].[PaymentProcessors] Set MerchantID='' WHERE [Name]='StoreFront Payment Gateway']]></SQLServer>
+  <Access Error="UpdateError1"><![CDATA[UPDATE PaymentProcessors Set MerchantID='' WHERE [Name]='StoreFront Payment Gateway']]></Access>
+  <UpdateError1><![CDATA[INSERT INTO PaymentProcessors ([Name], [MerchantID], [UserID], [Pass], [DeclineMode], [AVSIsActive], [LiveServerPath], [AuthMode], [AVSFlags]) VALUES ('StoreFront Payment Gateway', NULL, NULL, NULL, 0, 0, NULL, 0, 'N')]]></UpdateError1>
+  <Access Error="UpdateError2"><![CDATA[UPDATE PaymentProcessors Set MerchantID='' WHERE [Name]='Paradata CommerceConnect' OR [Name]='Paradata']]></Access>
+  <UpdateError2><![CDATA[INSERT INTO PaymentProcessors ([Name], [MerchantID], [UserID], [Pass], [DeclineMode], [AVSIsActive], [LiveServerPath], [AuthMode], [AVSFlags]) VALUES ('Paradata CommerceConnect', NULL, NULL, NULL, 0, 0, NULL, 0, 'N')]]></UpdateError2>
+  <UpdateError3><![CDATA[INSERT INTO [dbo].[PaymentProcessors] ([Name], [MerchantID], [UserID], [Pass], [DeclineMode], [AVSIsActive], [LiveServerPath], [AuthMode], [AVSFlags]) VALUES ('StoreFront Payment Gateway', NULL, NULL, NULL, 0, 0, NULL, 0, 'N')]]></UpdateError3>
+  <UpdateError4><![CDATA[INSERT INTO [dbo].[PaymentProcessors] ([Name], [MerchantID], [UserID], [Pass], [DeclineMode], [AVSIsActive], [LiveServerPath], [AuthMode], [AVSFlags]) VALUES ('Paradata CommerceConnect', NULL, NULL, NULL, 0, 0, NULL, 0, 'N')]]></UpdateError4>
+  <Access><![CDATA[UPDATE Admin a, PaymentProcessors p SET a.TransMethod=p.uid WHERE a.CCOnline=0 AND p.[Name]='StoreFront Payment Gateway']]></Access>
+  <SQLServer><![CDATA[UPDATE Admin SET TransMethod=(SELECT uid FROM PaymentProcessors WHERE [Name]='StoreFront Payment Gateway') WHERE CCOnline=0]]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET NAME='VeriSign' WHERE NAME='Verisign']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET Name='VeriSign' WHERE NAME='Verisign']]></SQLServer>
+  <Access><![CDATA[UPDATE PaymentProcessors SET NAME='Paradata' WHERE NAME='Paradata CommerceConnect']]></Access>
+  <SQLServer><![CDATA[UPDATE PaymentProcessors SET Name='Paradata' WHERE NAME='Paradata CommerceConnect']]></SQLServer>
+  <SQLServer><![CDATA[ALTER TABLE PaymentProcessors ADD TestMode integer NULL]]></SQLServer>
+  <Access><![CDATA[ALTER TABLE PaymentProcessors ADD COLUMN TestMode INT]]></Access>
+  <SQLServer><![CDATA[if exists (select * from dbo.sysobjects where id = object_id(N'[usp_rebuildcat]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+				drop procedure [usp_rebuildcat]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE   PROCEDURE usp_rebuildcat
+	AS
+	DECLARE @vdbname varchar(128)
+	DECLARE @vcatname varchar(255)
+	DECLARE @tid int
+	SELECT @vdbname = DB_NAME()
+	
+	SELECT @tid = id FROM sysobjects where name = 'products'
+	
+	IF FULLTEXTSERVICEPROPERTY('IsFullTextINstalled') &gt; 0  
+	BEGIN
+		IF (DATABASEPROPERTY(@vdbname,'IsFullTextEnabled') = 1)  AND (OBJECTPROPERTY(@tid,'TableHasActiveFulltextIndex') = 1) AND (FULLTEXTCATALOGPROPERTY (@vdbname+'catalog' ,'populatestatus') = 0)
+			BEGIN
+			  -- Create a new indexing catalog for the current database
+			   SET @vcatname = @vdbname + 'catalog'	
+			   exec sp_fulltext_catalog @vcatname,'start_full'
+			END
+		END
+	RETURN 0]]></SQLServer>
+  <SQLServer><![CDATA[if exists (select * from sysobjects where id = object_id(N'[usp_categorysearch]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+  	drop procedure [usp_categorysearch]]]></SQLServer>
+  <SQLServer><![CDATA[create proc usp_categorysearch 
+                      @catid int, @answer varchar(8000) OUTPUT
+                      AS
+			Declare @vstacklist varchar(8000),@vpopped int
+			SET @vstacklist = CAST(@catid AS varchar)  + ','
+	
+			WHILE (LEN(@vstacklist) &gt; 0 AND LEN(@vstacklist) &lt; 8000 )
+			BEGIN
+			   --pop the top of the stack	
+			   SET @vpopped = SUBSTRING(@vstacklist,1,CHARINDEX(',',@vstacklist)-1)
+			   SET @vstacklist =  RIGHT(@vstacklist,LEN(@vstacklist) - CHARINDEX(',',@vstacklist) )
+			   SET @answer = @answer + CAST(@vpopped AS VARCHAR) +  ','
+			   DECLARE catcrs CURSOR FOR 
+			   SELECT uid FROM Categories WHERE parentid = @vpopped
+		
+			   OPEN  catcrs
+			   FETCH NEXT FROM catcrs INTO @catid
+			   WHILE @@FETCH_STATUS = 0
+			   BEGIN 
+				-- add all the children of this node to the list
+				SET @vstacklist = CAST(@catid AS varchar) + ',' + @vstacklist 
+				FETCH NEXT FROM catcrs INTO @catid	
+			   END	   	
+			   CLOSE catcrs
+			   DEALLOCATE catcrs
+			END]]></SQLServer>
+  <SQLServer><![CDATA[if exists (select * from sysobjects where id = object_id(N'[usp_prodinitialsearch]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+						drop procedure [usp_prodinitialsearch]]]></SQLServer>
+  <SQLServer Error="ProcError1"><![CDATA[DECLARE @vdbname varchar(128)
+
+DECLARE @vcatname varchar(255)
+DECLARE @vindname sysname
+DECLARE @vcolname varchar(255)
+DECLARE @searchon varchar(1000)
+SELECT @vdbname = DB_NAME()
+
+ -- Enable the database for full text indexing
+  exec sp_fulltext_database 'enable'	
+ 
+  -- Create a new indexing catalog for the current database
+  SET @vcatname = @vdbname + 'catalog'	
+
+
+IF (SELECT COUNT(*) FROM sysfulltextcatalogs WHERE name = @vcatname) > 0 
+BEGIN
+	EXEC sp_fulltext_table 'Products', 'drop'
+    exec sp_fulltext_catalog @vcatname, 'drop'
+END  
+
+exec sp_fulltext_catalog @vcatname,'create'
+
+  -- get the index name of the uid column of products table
+  SELECT @vindname = si.name FROM sysobjects so, syscolumns sc, sysindexes si, sysindexkeys sk
+         WHERE sc.id  = so.id
+		 AND si.id = so.id
+ 	   AND sk.id = so.id
+ 	   AND sk.colid = sc.colid
+	   AND si.indid = sk.indid
+	   AND so.name = 'products'
+	   AND sc.name = 'uid'
+
+	  		
+   -- create the products table for full text processing
+  exec sp_fulltext_table 'products','create',@vcatname,@vindname
+	
+  -- now add all the candidate columns which can be text searched
+  SET  @searchon = '&lt;%Param2%&gt;'
+	  
+          		
+	WHILE CHARINDEX(',',@searchon) &gt; 0 OR LEN(@searchon) &gt; 0
+	BEGIN
+	   IF CHARINDEX(',',@searchon) &gt; 0	
+		  SET @vcolname = SUBSTRING(@searchon,1,CHARINDEX(',',@searchon)-1)
+	   ELSE
+		  SET @vcolname = @searchon
+	
+   	  exec sp_fulltext_column 'products',@vcolname, 'add'		
+
+	   IF CHARINDEX(',',@searchon) &gt; 0 
+		  SET @searchon =  SUBSTRING(@searchon,CHARINDEX(',',@searchon)+1,LEN(@searchon))
+	   ELSE
+		   SET @searchon =''	
+	END	
+	 
+         -- activate the full text index for the table
+  
+         exec sp_fulltext_table  'products','activate'
+
+	-- start the full text indexing of the of the catalog created
+
+	exec sp_fulltext_catalog @vcatname, 'start_full']]></SQLServer>
+  <SQLServer><![CDATA[CREATE  PROC usp_prodinitialsearch
+  		@searchkey varchar(255),
+		@catid integer,
+		@searchtype smallint,
+		@searchon varchar(255),
+		@onlyforsale smallint,
+		@mfgrid int,
+		@vendorid int,
+		@lowerprice decimal(18,5),
+		@upperprice decimal(18,5),
+		@fromdate varchar(255),
+		@todate varchar(255),
+		@numrecs as int OUTPUT
+	
+	AS 
+	
+
+	DECLARE @vkey varchar(255)
+	DECLARE @vdbname varchar(128), @vcatanswer  varchar(8000), @tempcatid int
+	CREATE TABLE #tproducts(uid INT)
+	CREATE TABLE #tcategory(uid INT PRIMARY KEY)
+	SELECT @vdbname = DB_NAME()
+	
+		-- collect al the column names in temp table ( so that we can scroll through it)
+	IF LEN(LTRIM(RTRIM(@searchkey))) &lt;= 0 
+		GOTO NOTEXTSEARCH	
+
+		  --manipulate the searchkeyword according to the type of search
+		   IF @searchtype = 0 -- all words
+		   BEGIN	 
+			  SET @searchkey =  LTRIM(RTRIM(@searchkey))
+			  SET @searchkey = REPLACE(@searchkey,' ','*&quot; AND &quot;')
+			  SET @searchkey =  '&quot;' + @searchkey  + '*&quot;'
+		   END	
+		   ELSE IF @searchtype = 1	-- any word	
+		   BEGIN	 
+			  SET @searchkey =  LTRIM(RTRIM(@searchkey))
+			  SET @searchkey = REPLACE(@searchkey,' ','*&quot; OR &quot;')
+			  SET @searchkey =  '&quot;' + @searchkey  + '*&quot;'
+		   END	
+		   ELSE IF @searchtype = 2 -- phrase
+		   BEGIN	 
+			  SET @searchkey =  LTRIM(RTRIM(@searchkey))
+			  SET @searchkey =  '&quot;' + @searchkey  + '&quot;'
+		   END	 
+		
+		INSERT INTO #tproducts
+		SELECT  uid FROM products 
+		WHERE code IS NOT NULL 
+		AND isactive = 1 AND CONTAINS(*,@searchkey) 
+		ORDER BY &lt;%Param1%&gt;
+		
+		GOTO SEARCHMORE
+	
+	NOTEXTSEARCH:
+		INSERT INTO #tproducts
+		SELECT uid FROM products WHERE isActive = 1   ORDER BY &lt;%Param1%&gt;
+		GOTO SEARCHMORE
+ 
+	
+	SEARCHMORE:
+		
+		-- if category is there, delete the products from the temp table which are not in category
+		IF @catid &gt;= 0 
+		BEGIN
+			SET @vcatanswer=''
+			EXEC usp_categorysearch @catid, @vcatanswer OUTPUT
+			WHILE CHARINDEX(',',@vcatanswer) &gt; 0 OR LEN(@vcatanswer) &gt; 0
+			BEGIN
+			      IF CHARINDEX(',',@vcatanswer) &gt; 0	
+				  SET @tempcatid = SUBSTRING(@vcatanswer,1,CHARINDEX(',',@vcatanswer)-1)
+			       ELSE
+				  SET @tempcatid = @vcatanswer
+				INSERT INTO #tcategory (uid) VALUES (@tempcatid)
+				 IF CHARINDEX(',',@vcatanswer) &gt; 0 
+				   SET @vcatanswer =  SUBSTRING(@vcatanswer,CHARINDEX(',',@vcatanswer)+1,LEN(@vcatanswer))
+				  ELSE
+				   SET @vcatanswer =''	
+			END
+			                             
+	          DELETE FROM #tproducts
+			WHERE uid NOT IN (SELECT P.uid 
+   			FROM products P INNER JOIN productcategory PC ON (P.uid = PC.productid AND PC.categoryid in (SELECT uid FROM #tcategory)))
+		END
+
+		
+		IF @onlyforsale &gt;= 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE isonsale = @onlyforsale)
+		END
+		 
+		IF @mfgrid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE manufacturerId = @mfgrid)
+		END 
+	
+		IF @vendorid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE VendorId = @vendorid)
+		END 
+	
+		IF @upperprice &gt; 0  and @lowerprice &gt;= 0
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE (CAST(price AS decimal) BETWEEN @lowerprice AND @upperprice )
+						OR (CAST(saleprice AS decimal) BETWEEN @lowerprice  AND @upperprice ) AND isonsale = 1)
+		END
+
+	
+		IF len(@todate) &gt; 0 and len(@fromdate) &gt; 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE 
+			CAST(dateadded AS datetime) BETWEEN CAST(@fromdate AS datetime) AND CAST(@todate AS datetime))
+		END   	 
+	
+		SELECT @numrecs = COUNT(uid) FROM #tproducts 
+		SELECT uid FROM #tproducts
+		DROP TABLE #tproducts]]></SQLServer>
+  <ProcError1><![CDATA[CREATE  PROC usp_prodinitialsearch
+  		@searchkey varchar(255),
+		@catid integer,
+		@searchtype smallint,
+		@searchon varchar(255),
+		@onlyforsale smallint,
+		@mfgrid int,
+		@vendorid int,
+		@lowerprice decimal(18,5),
+		@upperprice decimal(18,5),
+		@fromdate varchar(255),
+		@todate varchar(255),
+		@numrecs as int OUTPUT
+	
+	AS 
+	DECLARE @vcolname varchar(100)
+	DECLARE @vkey varchar(255)
+	DECLARE @vdbname varchar(128), @vcatanswer  varchar(8000), @tempcatid int, @sqlstmt nvarchar(4000)
+	DECLARE @vorderby varchar(100)
+	CREATE TABLE #tproducts(uid INT)
+	CREATE TABLE #tcategory(uid INT PRIMARY KEY)
+	SELECT @vdbname = DB_NAME()
+	
+	SELECT @searchkey = LTRIM(RTRIM(@searchkey))
+	SELECT @vorderby = ProductSort FROM Admin
+	
+	IF LEN(LTRIM(RTRIM(@searchkey))) &lt;= 0 
+		GOTO NOTEXTSEARCH	
+
+	IF @searchtype = 0 -- allwords 
+		SET @searchkey = '@ LIKE '+ char(39)  + '%' + replace(@searchkey,' ','%' + char(39) + ' AND @ LIKE ' + char(39)+ '%') + '%' +char(39)
+	ELSE IF @searchtype = 1 -- 	any word search
+		SET @searchkey = '@ LIKE '+ char(39) + '%' + replace(@searchkey,' ','%' + char(39) + ' OR @ LIKE ' + char(39)+ '%') + '%' +char(39)
+	ELSE IF @searchtype = 2 -- Exact phrase
+		SET @searchkey = '@ LIKE ' + char(39) + '%' + @searchkey + '%' + char(39)
+	
+	-- collect al the column names in temp table ( so that we can scroll through it)
+			
+	WHILE CHARINDEX(',',@searchon) &gt; 0 OR LEN(@searchon) &gt; 0
+	BEGIN
+	   IF CHARINDEX(',',@searchon) &gt; 0	
+		  SET @vcolname = SUBSTRING(@searchon,1,CHARINDEX(',',@searchon)-1)
+	   ELSE
+		  SET @vcolname = @searchon
+	-- the loop on the search runs here
+	  SET @sqlstmt = 'INSERT INTO #tproducts Select uid FROM Products WHERE uid  not in (SELECT uid FROM #tproducts) AND isActive = 1 AND ' + @searchkey
+	  
+	  SET @sqlstmt = replace(@sqlstmt,'@',@vcolname)
+	  
+	  SET @sqlstmt = @sqlstmt +  ' Order by ' + @vorderby
+	  
+	  exec sp_executesql @sqlstmt	
+	  
+	   IF CHARINDEX(',',@searchon) &gt; 0 
+		   SET @searchon =  SUBSTRING(@searchon,CHARINDEX(',',@searchon)+1,LEN(@searchon))
+	   ELSE
+		   SET @searchon =''	
+	END
+	GOTO SEARCHMORE
+
+        	
+	
+	
+	NOTEXTSEARCH:
+		INSERT INTO #tproducts
+		SELECT uid FROM products WHERE isActive = 1   ORDER BY &lt;%Param1%&gt;
+		GOTO SEARCHMORE
+		   
+
+	SEARCHMORE:
+		-- if category is there, delete the products from the temp table which are not in category
+		IF @catid &gt;= 0 
+		BEGIN
+			SET @vcatanswer=''
+			EXEC usp_categorysearch @catid, @vcatanswer OUTPUT
+			WHILE CHARINDEX(',',@vcatanswer) &gt; 0 OR LEN(@vcatanswer) &gt; 0
+			BEGIN
+			      IF CHARINDEX(',',@vcatanswer) &gt; 0	
+				  SET @tempcatid = SUBSTRING(@vcatanswer,1,CHARINDEX(',',@vcatanswer)-1)
+			       ELSE
+				  SET @tempcatid = @vcatanswer
+				INSERT INTO #tcategory (uid) VALUES (@tempcatid)
+				 IF CHARINDEX(',',@vcatanswer) &gt; 0 
+				   SET @vcatanswer =  SUBSTRING(@vcatanswer,CHARINDEX(',',@vcatanswer)+1,LEN(@vcatanswer))
+				  ELSE
+				   SET @vcatanswer =''	
+			END
+			                             
+	          DELETE FROM #tproducts
+			WHERE uid NOT IN (SELECT P.uid 
+   			FROM products P INNER JOIN productcategory PC ON (P.uid = PC.productid AND PC.categoryid in (SELECT uid FROM #tcategory)))
+		END
+		
+		IF @onlyforsale &gt;= 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE isonsale = @onlyforsale)
+		END
+		 
+		IF @mfgrid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE manufacturerId = @mfgrid)
+		END 
+	
+		IF @vendorid &gt;= 0  
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE VendorId = @vendorid)
+		END 
+	
+		IF @upperprice &gt; 0  and @lowerprice &gt;= 0
+		BEGIN
+		  DELETE FROM #tproducts
+			  WHERE uid NOT IN (SELECT uid FROM products WHERE (CAST(price AS decimal) BETWEEN @lowerprice AND @upperprice )
+						OR (CAST(saleprice AS decimal) BETWEEN @lowerprice  AND @upperprice ) AND isonsale = 1)
+		END
+
+	
+		IF len(@todate) &gt; 0 and len(@fromdate) &gt; 0 
+		BEGIN
+		  DELETE FROM #tproducts
+		  WHERE uid NOT IN (SELECT uid FROM products WHERE 
+			CAST(dateadded AS datetime) BETWEEN CAST(@fromdate AS datetime) AND CAST(@todate AS datetime))
+		END   	 
+	
+		SELECT @numrecs = COUNT(uid) FROM #tproducts 
+		SELECT uid FROM #tproducts
+		DROP TABLE #tproducts]]></ProcError1>
+  <SQLServer><![CDATA[if exists (select * from sysobjects where id = object_id(N'[usp_producttables]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+			drop procedure [usp_producttables]]]></SQLServer>
+  <SQLServer><![CDATA[CREATE PROC usp_producttables
+							@prodIds varchar(8000)
+						
+						AS
+							DECLARE @vuid integer
+							CREATE TABLE #tproducts (uid integer)
+							-- collect al the column names in temp table ( so that we can scroll through it)
+									
+							WHILE CHARINDEX(',',@prodIds) &gt; 0 OR LEN(@prodIds) &gt; 0
+							BEGIN
+							   IF CHARINDEX(',',@prodIds) &gt; 0	
+								  SET @vuid = CONVERT(integer,SUBSTRING(@prodIds,1,CHARINDEX(',',@prodIds)-1))
+							   ELSE
+								  SET @vuid = CONVERT(integer,@prodIds)
+								
+							INSERT INTO #tproducts(uid) VALUES(@vuid)
+						
+							IF CHARINDEX(',',@prodIds) &gt; 0 
+									SET @prodIds =  SUBSTRING(@prodIds,CHARINDEX(',',@prodIds)+1,LEN(@prodIds))
+							ELSE
+								   SET @prodIds =''	
+							END
+						
+							SELECT  uid,ParentLevel,ParentID,Name 
+								FROM Categories WHERE isActive = 1 
+						
+							SELECT PRODUCTS.* FROM PRODUCTS where uid in (SELECT uid FROM #tproducts) ORDER BY &lt;%Param1%&gt;
+						
+						
+							SELECT distinct attributes.* FROM attributes WHERE productid  IN (SELECT uid FROM #tproducts) ORDER BY Attributes.name 
+						
+						
+							SELECT distinct attributedetail.* FROM attributedetail INNER JOIN attributes ON
+								(attributedetail.attributeid = attributes.uid)
+								WHERE attributes.productid in (SELECT uid FROM #tproducts)
+								ORDER BY Attributedetail.AttributeOrder
+						
+						
+							SELECT distinct productcategory.* FROM productcategory WHERE productid in (SELECT uid FROM #tproducts)
+						
+						
+							SELECT distinct V.*, A.company FROM
+								vendors V INNER JOIN addresses A ON (V.addressid = A.uid)
+								  INNER JOIN products P on (V.uid = P.vendorid)
+							WHERE P.uid  in (SELECT uid FROM #tproducts)
+						
+							
+							SELECT distinct M.* , A.company FROM 
+							manufacturers M INNER JOIN addresses A ON (M.addressid  = A.uid)
+									INNER JOIN products P ON (P.manufacturerid = M.uid)
+							WHERE P.uid in (SELECT uid FROM #tproducts)
+						
+							SELECT distinct volumepricing.* FROM volumepricing 
+							WHERE productid in (SELECT uid FROM #tproducts)
+						
+							SELECT giftwrap.* FROM giftwrap 
+							WHERE giftwrap.uid in (SELECT uid FROM #tproducts)
+						
+							SELECT distinct relatedproducts.* FROM relatedproducts 
+							WHERE parentid in (SELECT uid FROM #tproducts)
+						
+							SELECT distinct C.*, CP.groupname,cp.amount, cp.grouptypeid
+							FROM customerspecificpricing C INNER JOIN customerpricegroups CP ON (C.groupid = CP.uid)
+							WHERE C.productid in (SELECT uid FROM #tproducts)]]></SQLServer>
+</SQLStatements>

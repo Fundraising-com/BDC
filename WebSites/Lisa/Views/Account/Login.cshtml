@@ -1,0 +1,69 @@
+@using System.Configuration
+@{
+   Layout = null;
+   ViewBag.Title = "Welcome to L.I.S.A.";
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="lisa" ng-strict-di>
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title</title>
+	@Styles.Render("~/Content/css")
+   @Html.Partial("_Libraries")
+</head>
+<body>
+   <div layout="column" layout-align="center center">
+      <div hide-xs>
+         <img src="/Content/images/logo-big.png" style="max-height: 300px;" />
+      </div>
+      <div>
+         <span class="md-display-2">Hi, I'm L.I.S.A. </span>
+         <br />
+         <span class="md-subhead">Local Intranet Software Application</span>
+      </div>
+      <div ng-controller="LoginController as loginCtrl">
+         <form ng-submit="loginCtrl.Login()" name="loginForm" id="loginForm">
+            <div layout="column" layout-align="center center">
+               <div layout-xs="column" layout-gt-xs="row" layout-align="center center" ng-hide="loginCtrl.executing">
+                  <md-input-container>
+                     <label>Username</label>
+                     <input type="text" name="username" ng-model="loginCtrl.user.Username" required>
+                     <div ng-messages="loginForm.username.$error">
+                        <div ng-message="required">This is required!</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container>
+                     <label>Password</label>
+                     <input type="password" name="password" ng-model="loginCtrl.user.Password" required>
+                     <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">This is required!</div>
+                     </div>
+                  </md-input-container>
+               </div>
+               <md-button class="md-primary md-raised" type="submit" ng-hide="loginCtrl.executing">Submit</md-button>
+               <md-progress-circular md-mode="indeterminate" ng-show="loginCtrl.executing" ng-cloak></md-progress-circular>
+            </div>
+         </form>
+      </div>
+   </div>
+   @Scripts.Render("~/bundles/angular")
+   <script src="https://cdn.rawgit.com/stevermeister/ngWig/master/dist/ng-wig.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
+<script type="text/javascript">
+   (function() {
+      'use strict';
+      var app = angular.module('lisa');
+      app.constant('hosts', {
+         webApiCoreBaseUrl: '@ConfigurationManager.AppSettings["core.webapi.host"]',
+         webApiFundraisingBaseUrl: '@ConfigurationManager.AppSettings["fundraising.webapi.host"]',
+         webApiSecurityBaseUrl: '@ConfigurationManager.AppSettings["security.webapi.host"]',
+         webApiReportsBaseUrl: '@ConfigurationManager.AppSettings["reports.webapi.host"]',
+         clientId: 'lisa',
+         topMenuItem: '@ViewBag.TopMenuItem'
+      });
+   })();
+   </script>
+</body>
+</html>

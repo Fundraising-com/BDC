@@ -1,0 +1,9 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.MenuHelperModel
+@using MvcSiteMapProvider.Web.Html.Models
+
+<ul class="nav nav-pills nav-justified">
+    @foreach (var node in Model.Nodes)
+    {
+        <li class="@Html.Raw(node.IsCurrentNode ? "active" : string.Empty)">@Html.DisplayFor(m => node)</li>
+    }
+</ul>

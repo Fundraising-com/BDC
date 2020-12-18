@@ -1,0 +1,194 @@
+@using System.Configuration
+@using System.Web.Optimization
+@model GA.BDC.Web.MGP.Models.Branding.PublicEvent
+<html>
+<head>
+   <title>United Airlines</title>
+   @Styles.Render("~/general")
+   <link type="text/css" rel="stylesheet" href="@Url.Content(ConfigurationManager.AppSettings["GroupCssHref"])" />
+   @Scripts.Render("~/jquery")
+   @Scripts.Render("~/angular")
+   @Scripts.Render("~/app")
+   <!-- Starts Google Analytics -->
+   <script>
+      (function (i, s, o, g, r, a, m) {
+         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+         }, i[r].l = 1 * new Date(); a = s.createElement(o),
+             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('require', 'linker');
+      ga('linker:autoLink', ['efundraising.com', 'fundraising411.com', 'juniorleaguefundraising.com', '1stfundraisers.com', 'ssgfundraising.com', 'usafundraising.com', 'schoolsfundraising.com', 'gamefundraising.com', 'fundraisingsolution.om', 'fundraisingnews.com', 'fundraisingclub.com', 'emailfundraising.com', 'scratchandsave.com', 'canadafundraising.com', 'raising-fund.com', 'tshirtfundraising.com', 'snacksfundraising.com', 'lollipopfundraisers.om', 'chocolatefundraisers.com', 'fund-raising.com', 'nhscamagagazines.com', 'lgfundraising.com', 'fastpitchsoftballmags.com', 'chocolatefundraiser.com', 'fundraisingsearch.com', 'online-fundraising.com', 'cdfundraising.com', 'discoveryschoolfundraising.com', 'onlyfundraising.com', 'efundraisingcorp.com', 'universalfundraising.net', 'teamcheerfundraising.com', 'efundraisingsuperstore.com', 'asafundraising.om', 'e-fundraising.com', 'mystore.fundraising.com']);
+      ga('create', '@ConfigurationManager.AppSettings["GoogleAnalyticsTrackingId"]', 'auto', { 'allowLinker': true });
+      ga('send', 'pageview');
+
+   </script>
+   <!-- Ends Google Analytics -->
+</head>
+<body ng-app="mgp" ng-controller="groupPageController">
+   <div class="container">
+      <table style="font-family: Arial, Helvetica, sans-serif; margin:auto" border="0">
+         <tr>
+            <td>
+               <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_03.jpg" alt="" style="display: block;" border="0">
+            </td>
+            <td>
+               <div class="row">
+                  <div class="col-md-12 text-right">
+                     <a href="/Home/SignIn">Sign In</a> -
+                     <a href="/Home/ContactUs">Contact Us</a>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12">
+                     <div id="AddThisDIV" runat="server" style="margin-top: 5px; float: right;">
+                        <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+                           <a class="addthis_button_facebook"></a>
+                           <a class="addthis_button_twitter"></a>
+                           <a class="addthis_button_pinterest_share"></a>
+                           <a class="addthis_button_google_plusone_share"></a>
+                           <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+                        </div>
+                        <script type="text/javascript"> var addthis_config = { "data_track_addressbar": true }; </script>
+                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=magfund"></script>
+                        <!-- AddThis Button END -->
+                     </div>
+                  </div>
+               </div>
+
+            </td>
+
+         </tr>
+         <tr>
+            <td style="height:300px"><br />
+               <span style="font-weight: bold; color: #003496; font-size: 25px">UNITED AIRLINES SCHOLARSHIP FUND</span><br /><br />
+               <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_07.jpg" alt="" style="display: block;" border="0">
+              
+            </td>
+            <td rowspan="4" valign="top">
+                <br /><br />
+               <table frame="box">
+                  <tr>
+                     <td style='padding: 5px 10px 5px 10px;' align="center">
+                        <table>
+                           <tr>
+                              <td style="text-align: center; width: 250px">
+                                 <br />
+                                 <span style="font-size: 22px; font-weight: bold; color: #003496">GROUP GOAL:</span><br>
+                                 <span style="font-size: 22px; font-weight: bold; color: #6d6e71">$500,000.00</span>
+                                 <br><br>
+                                 <span style="font-size: 25px; font-weight: bold; color: #003496">AMOUNT RAISED:</span><br>
+                                 <span style="font-size: 40px; font-weight: bold; color: #6d6e71">@Model.TotalProfit.ToString("C2")</span>
+                                 <br /><br />
+                              </td>
+                            </tr>
+                            
+                           <tr ng-hide="executingAction">
+                              <td style="text-align: center; color: #003496; font-weight: bold; font-size: 18px">
+                                 <br />
+                                 POPULAR ITEMS
+                                 <br />
+                                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="904">
+                                      <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_11.jpg" alt="" style="display: block;" border="0" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="904">
+                                  </a>
+
+                                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="904"  style="color: #a4a5a6">
+                                      Subscription & Renewals >>
+                                  </a>
+
+                                 <br /><br />
+                                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="3603">
+                                      <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_16.jpg" alt="" style="display: block;" border="0" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="3603">
+                                  </a>
+
+                                  <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="3603"  style="color: #a4a5a6">
+                                      Digital Savings App >>
+                                  </a>
+                                 <br /><br />
+                              </td>
+
+                           </tr>
+
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+               <br />
+               <table>
+                  <tr>
+                      <td>
+                          <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.efundraising.com/unitedairlines" onclick="ga('send', 'social', 'Facebook', 'Share', '/unitedairlines');" target="_blank">
+                              <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_19.jpg" alt="" style="display: block;" border="0">
+                          </a>
+                      </td>
+                      <td>
+                          <a href="https://twitter.com/intent/tweet?text=I am spreading a word of a worthwhile cause I think you may want to suppport: http://www.efundraising.com/unitedairlines" onclick="ga('send', 'social', 'Twitter', 'Share', '/unitedairlines');" target="_blank">
+                              <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_20.jpg" alt="" style="display: block;" border="0">
+                          </a>
+                      </td>
+                      <td>
+                          <a href="mailto:?subject=A cause worth supporting&body=I am spreading a word of a worthwhile cause I think you may want to suppport: http://www.efundraising.com/unitedairlines" onclick="ga('send', 'social', 'Email', 'Share', '/unitedairlines');" target="_blank">
+                              <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_21.jpg" alt="" style="display: block;" border="0">
+                          </a>
+</td>
+                     <td>
+                         <a href="http://pinterest.com/pin/create/button/?url=http://www.efundraising.com/BGCADefaultGroup&media=http://www.efundraising.com/Content/images/public/content/square_logo.jpg&description=Help us with our online Fundraising!" onclick="ga('send', 'social', 'Pinterest', 'Share', '/unitedairlines');" target="_blank">
+
+                             <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_22.jpg" alt="" style="display: block;" border="0">
+                             </a>
+</td>
+                  </tr>
+                  <tr>
+                     <td style="font-size: 12px; text-align: right;" colspan="4">
+                        <br />
+                        <a href="@Url.Action("HowItWorks","Home")" style="color: #5771bb">Create a fundraising store</a> | <a href="http://www.efundraising.com/Home/PrivacyPolicy" style="color: #5771bb">Privacy Policy</a>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+
+         <tr>
+            <td style="width: 550px; font-size: 15px; vertical-align:top">
+               The scholarship program is funded entirely by employee contributions and fundraising efforts. Since 2002, the United Scholarship Fund has awarded 2,161 scholarships worth more than $7 million.
+                <br /><br />
+                40% of your purchase will go directly to the scholarship fund.
+                <br /><br />
+                We hope you will take a moment to browse the online store, filled with hundreds of popular magazine titles as well as gifts items that you're sure to love - there's something for everyone!
+                <br /><br />
+                We thank you in advance for your time and support!
+            </td>
+         </tr>
+         <tr>
+            <td style="width: 550px" ng-hide="executingAction">
+               <br/>
+               <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]"/>
+               <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="0"/>
+               <a href="" ng-click="popularStoreItemsRedirectToStore($event)" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="904">
+                  <img src="http://efundraising.com/bdcnewsletter/UnitedAirlinesFunds_14.jpg" alt="" style="display: block;" border="0" eid="@ConfigurationManager.AppSettings["UnitedAirlines.EventId"]" scid="904">
+               </a>
+            </td>
+            <td style="width: 550px" ng-show="executingAction">
+               <div class="row" ng-show="executingAction">
+                  <div class="col-sm-12 text-center">
+                     <span class="text-info"><strong>We are sending you to the Store...</strong></span>
+                     <img src="/Content/images/public/content/loading.gif" />
+                  </div>
+               </div>
+            </td>
+         </tr>
+         <tr>
+            <td style="width: 550px; height: 100px; font-size: 20px">
+               Have a cause you care about?
+               <br />
+                <a href="@Url.Action("HowItWorks","Home")" style="font-weight: bold; color: #003496">Start a free online fundraiser of your own>></a>
+            </td>
+         </tr>
+
+
+
+      </table>
+      
+   </div>
+</body>
+</html>

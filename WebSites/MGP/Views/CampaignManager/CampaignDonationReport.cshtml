@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Campaign Donation Report";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+    var eventBranding = ViewBag.Event as GA.BDC.Web.MGP.Models.Branding.Event;
+}
+<div id="report" ng-controller="campaignManagerController">
+    <div class="row" ng-init="participantId = @eventBranding.ParticipantId; searchType='all'; findCampaignDonationReport();">
+        <div class="col-sm-12">
+            <h1 id="title">Campaign Report</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h1>{{totalAmount | currency}} <small>donation</small></h1>
+            </div>
+        </div>
+        <div class="col-sm-6 @(partnerBranding.HideProfit ? "hidden" : string.Empty)">
+            <div class="jumbotron">
+                <h1>{{totalProfit | currency}} <small>profit</small></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="executingAction">
+        <div class="col-md-12 text-center">
+            <img src="/Content/images/public/content/loading.gif" alt="Loading" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="active"><a href="#grid" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>&nbsp;&nbsp;Grid</a></li>
+                <li><a href="#chart" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;&nbsp;Chart</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="grid">
+                    <br />
+                    <table class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Member Name</th>
+                                <th>Emails Sent</th>
+                                <th class="text-center">Donations</th>
+                                <th class="text-center">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in data">
+                                <td>{{row.MemberName}}</td>
+                                <td>{{row.EmailsSent}}</td>
+                                <td class="text-center">{{row.Donations | currency}}</td>
+                                <td class="text-center"><a href="#" ng-click="findCampaignDonationReportDetail(row.MemberName);"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;Details</a></td>
+                            </tr>
+                        </tbody>                        
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="chart">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <center>
+                                <div id="chartContainer"></div>            
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h4 class="modal-title">Details for {{memberName}}</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-condensed table-hover table-striped footer-no-border">
+                <thead>
+                    <tr>
+                        <th>Supporter</th>
+                        <th class="text-center">Donation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in items">
+                        <td>{{row.SupporterName}}</td>
+                        <td class="text-center">{{row.Donations | currency}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total:</td>
+                        <td class="text-center">{{totalAmount | currency}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">Close</button>
+        </div>
+</script>
+@section scripts
+{
+    <script src="/Scripts/highcharts/highcharts.js"></script>
+}

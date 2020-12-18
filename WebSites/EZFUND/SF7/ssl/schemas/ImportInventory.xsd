@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="ImportInventory">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Product" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Code" type="xs:string" maxOccurs="1" minOccurs="1" />
+                            <xs:element name="Price" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+                            <xs:element name="Cost" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+                            <xs:element name="QtyInStock" type="xs:integer" maxOccurs="1" minOccurs="0" />
+                            <xs:element name="QtyLowFlag" type="xs:integer" maxOccurs="1" minOccurs="0" />
+                            <xs:element name="IsOnSale" type="xs:boolean"  maxOccurs="1" minOccurs="0" />
+                            <xs:element name="SalePrice" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="SchemaVersion" type="xs:decimal" use="required" fixed="1.0" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

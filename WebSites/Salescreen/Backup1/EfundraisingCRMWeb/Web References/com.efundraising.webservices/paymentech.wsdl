@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://webservices.efundraising.com/PaymenTech" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://webservices.efundraising.com/PaymenTech" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Web Service for credit card transactions through PaymenTech</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://webservices.efundraising.com/PaymenTech">
+      <s:element name="Authorize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="amt" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="ccNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ccExpMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ccExpYear" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ccCardSecurityCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fullName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postalCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isSecurityCheck" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthorizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthorizeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Settle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="paymentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SettleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SettleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Credit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="amt" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="ccNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ccExpMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ccExpYear" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ccCardSecurityCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fullName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postalCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isSecurityCheck" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreditResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreditResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Refund">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="paymentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogoutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsLoggedIn">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsLoggedInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsLoggedInResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastError">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLastErrorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLastErrorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthorizeSoapIn">
+    <wsdl:part name="parameters" element="tns:Authorize" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthorizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SettleSoapIn">
+    <wsdl:part name="parameters" element="tns:Settle" />
+  </wsdl:message>
+  <wsdl:message name="SettleSoapOut">
+    <wsdl:part name="parameters" element="tns:SettleResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreditSoapIn">
+    <wsdl:part name="parameters" element="tns:Credit" />
+  </wsdl:message>
+  <wsdl:message name="CreditSoapOut">
+    <wsdl:part name="parameters" element="tns:CreditResponse" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapIn">
+    <wsdl:part name="parameters" element="tns:Refund" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapOut">
+    <wsdl:part name="parameters" element="tns:RefundResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsLoggedInSoapIn">
+    <wsdl:part name="parameters" element="tns:IsLoggedIn" />
+  </wsdl:message>
+  <wsdl:message name="IsLoggedInSoapOut">
+    <wsdl:part name="parameters" element="tns:IsLoggedInResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLastErrorSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLastError" />
+  </wsdl:message>
+  <wsdl:message name="GetLastErrorSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLastErrorResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PaymenTechSoap">
+    <wsdl:operation name="Authorize">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authorizes a customer's credit card for the specified amount.</wsdl:documentation>
+      <wsdl:input message="tns:AuthorizeSoapIn" />
+      <wsdl:output message="tns:AuthorizeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Settle">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Settles a previously-authorized card.</wsdl:documentation>
+      <wsdl:input message="tns:SettleSoapIn" />
+      <wsdl:output message="tns:SettleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Credit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Credits an arbitrary amount to a card.</wsdl:documentation>
+      <wsdl:input message="tns:CreditSoapIn" />
+      <wsdl:output message="tns:CreditSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cancels or voids a previous transaction.</wsdl:documentation>
+      <wsdl:input message="tns:RefundSoapIn" />
+      <wsdl:output message="tns:RefundSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide your Username and Password to Login on WebService.efundraising.com</wsdl:documentation>
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide the way to Logout of webservice.efundraising.com</wsdl:documentation>
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get if the current user is authenticate</wsdl:documentation>
+      <wsdl:input message="tns:IsLoggedInSoapIn" />
+      <wsdl:output message="tns:IsLoggedInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastError">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Lastest errors encounted on your Web Service session</wsdl:documentation>
+      <wsdl:input message="tns:GetLastErrorSoapIn" />
+      <wsdl:output message="tns:GetLastErrorSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PaymenTechSoap" type="tns:PaymenTechSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authorize">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/Authorize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Settle">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/Settle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Credit">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/Credit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/Refund" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/IsLoggedIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastError">
+      <soap:operation soapAction="http://webservices.efundraising.com/PaymenTech/GetLastError" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PaymenTechSoap12" type="tns:PaymenTechSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authorize">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/Authorize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Settle">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/Settle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Credit">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/Credit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/Refund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/IsLoggedIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastError">
+      <soap12:operation soapAction="http://webservices.efundraising.com/PaymenTech/GetLastError" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PaymenTech">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Web Service for credit card transactions through PaymenTech</wsdl:documentation>
+    <wsdl:port name="PaymenTechSoap" binding="tns:PaymenTechSoap">
+      <soap:address location="http://webservices.efundraising.com/paymentech.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PaymenTechSoap12" binding="tns:PaymenTechSoap12">
+      <soap12:address location="http://webservices.efundraising.com/paymentech.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

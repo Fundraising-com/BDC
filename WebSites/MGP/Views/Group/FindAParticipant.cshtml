@@ -1,0 +1,126 @@
+@using GA.BDC.Web.MGP.Models.Views
+@using System.Web.Script.Serialization
+@model List<Participant>
+@{
+   var publicEventBranding = ViewBag.PublicEvent as GA.BDC.Web.MGP.Models.Branding.PublicEvent;
+   var coverImg = publicEventBranding.CoverImage ?? string.Empty;
+   var amountRaisedIndicator = ViewBag.AmountRaisedIndicator as AmountRaisedIndicator;
+   ViewBag.Title = string.Concat("Fundraising online: ", publicEventBranding.Name);
+   ViewBag.Keywords = string.Concat("magazine fundraising, support, online fundraiser, ", publicEventBranding.Name);
+   ViewBag.Description = "";
+   Layout = "~/Views/Shared/_group.cshtml";
+   var serializedModel = new JavaScriptSerializer().Serialize(Model);
+}
+<div id="findAParticipant" ng-app="mgp" ng-controller="groupPageController" ng-init="eventId = @publicEventBranding.Id; Participants = @serializedModel">
+    <div class="row">
+        <div class="col-sm-4 ">
+            <div class="row">
+                <div class="col-sm-12">
+                   <div id="carousselContainer" style="padding: 10px;">
+                      <img src="@coverImg" style="width: 100%;" />
+                   </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="blackImage" style="background-color: black; height: 100%;">
+                        <h4 style="margin-top: 0px; padding-top: 10px;">
+                        @Html.ActionLink("Back to group page >", "Index", "Group", new { eventId = publicEventBranding.Id }, null)
+                            </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" >
+                    <div class="raisedAmountIndicator" style="padding-top:10%">
+                        @Html.Partial("../Group/Shared/_AmountRaisedIndicator", amountRaisedIndicator)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8" ng-cloak>
+            <div class="panel panel-info">
+               <div class="panel-heading">
+                  @publicEventBranding.Name Member's<br /> Please select the member you wish to support!<br />
+                  <strong>Please note - all orders will appear on member's page within 24 hours</strong><br />
+                  @Html.ActionLink("Member not Listed? Click Here", "Index", "Group", new { eventId = publicEventBranding.Id }, new { @style = "color:red;text-decoration:underline" })
+               </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form role="form" method="POST" class="form-inline" ng-submit="findAParticipant()" name="findAParticipantForm">
+                                <input type="hidden" ng-model="view.EventId" ng-value="view.EventId = @publicEventBranding.Id"/>
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">Name</label>
+                                    <input type="text" class="form-control" placeholder="Name" ng-model="view.Name" required name="name" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default" ng-hide="executingAction">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Name
+                                        </th>
+	                                    <th>
+		                                    Amount Sold <a role="button" tabindex="0" class="amount-question" data-toggle="popover" data-trigger="focus" data-placement="auto" data-content="Transactions can take up to 24 hours to be reflected here."><span class="glyphicon glyphicon-question-sign"></span></a>
+	                                    </th>
+                                        <th>Goal
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="participant in Participants | startFrom:currentPage*pageSize | limitTo:pageSize">
+                                        <td><a href="{{participant.Url}}">{{participant.Name}}</a></td>
+                                        <td>{{participant.AmountRaised | currency : symbol}}</td>
+                                        <td>{{participant.Goal | currency : symbol}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12 text-center" ng-show="Participants.length == 0">
+                            There are currently no members to display.<br />
+                            <a href="@Url.Action("ParticipantRegister","Home", new { eventId = publicEventBranding.Id })">Are you a member of this group? Join the campaign!</a>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="executingAction">
+                        <div class="col-sm-12 text-center">
+                            <img src="/Content/images/public/content/loading.gif" />
+                        </div>
+                    </div>
+                    <div class="row" ng-show="resultFailed">
+                        <div class="col-sm-12">
+                            <span class="text-danger">{{responseText}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-show="!executingAction && Participants.length > 0">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-right">
+                                <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn btn-sm">
+                                    Back
+                                </button>
+                                Page {{currentPage+1}} of {{numberOfPages()}} | {{Participants.length}} result(s) found
+                                <button ng-disabled="currentPage >= Participants.length/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-sm">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

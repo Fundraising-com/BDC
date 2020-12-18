@@ -1,0 +1,1473 @@
+<SCRIPT LANGUAGE=VBScript RUNAT=Server>
+'You can add special event handlers in this file that will get run automatically when
+'special Active Server Pages events occur. To create these handlers, just create a
+'subroutine with a name from the list below that corresponds to the event you want to
+'use. For example, to create an event handler for Session_OnStart, you would put the
+'following code into this file (without the comments):
+
+'Sub Session_OnStart
+'**Put your code here **
+'End Sub
+
+' ------------------------------------------------------------------------------------------
+' WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS! 
+'
+'
+' IMPORTANT!!! Switch back to production version of the database before moving ONLINE!
+'              Required changes are in Application_OnStart()
+'
+'
+' WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS! 
+' ------------------------------------------------------------------------------------------
+
+'EventName              Description
+
+' VirtualCookie and EZMain database methods and constants - 
+' copied from DBUtils.asp into global.asa for the usual reason.
+
+' Login methods and constants -
+' copied from EZPageTop.asp and EZLogin.asp into global.asa for the usual reason.
+
+' Application names (database connections) - the Application() values loaded in Application_OnStart()
+' -- Virtual Cookie
+Const cAppVirtualCookieTableName = "VirtualCookieTableName"
+Const cAppVirtualCookieDB_DBName = "VirtualCookieDB_DBName"
+Const cAppVirtualCookieDB_ConnectString = "VirtualCookieDB_ConnectString"
+Const cAppVirtualCookieDB_ConnectTimeout = "VirtualCookieDB_ConnectTimeout"
+Const cAppVirtualCookieDB_CommandTimeout = "VirtualCookieDB_CommandTimeout"
+' -- EZMain
+Const cAppEZMainDB_DBName = "EZMainDB_DBName"
+Const cAppEZMainDB_ConnectString = "EZMainDB_ConnectString"
+Const cAppEZMainDB_ConnectTimeout = "EZMainDB_ConnectTimeout"
+Const cAppEZMainDB_CommandTimeout = "EZMainDB_CommandTimeout"
+
+' Session/VirtualCookie names
+' Use these constants whenever you check or set a session variable,
+' rather than risk misspelling the session name.
+' -- Virtual Cookie ID
+Const cSessionVCID = "VCID"
+' -- Login information
+Const cSessionLoginUID = "LoginUID"
+Const cSessionPassword = "Password"
+Const cSessionBrowserType = "BrowserType"
+'''Const cSessionLoginEmail = "LoginEmail"
+'''Const cSessionCompanyName = "CompanyName"
+' -- My EZFund.com account variables
+'''Const cSessionMYEZGMAccountNumber = "MYEZGMAcctNbr"		' GoldMine account
+Const cSessionMYEZOrgId = "MYEZOrgId"
+Const cSessionMYEZOrganizationName = "MYEZOrgNme"
+Const cSessionMYEZContactName = "MYEZCtctNme"
+Const cSessionMYEZContactEmail = "MYEZCtctEmlTxt"
+Const cSessionMYEZSalesperson = "MYEZSlspNme"
+'Const cSessionMYEZBillingNumber = "MYEZSolmAcctNbr"	' FUTURE USE: Billing/Invoice?
+
+'''Const cSessionLoginEmail = "LoginEmail"
+'''Const cSessionLoginName = "LoginName"
+' -- My EZFund.com permissions
+Const cSessionMYEZPermissions = "MYEZPermissions"
+' -- Time to force abandon this session
+Const cSessionNextSessionAbandonTime = "NextSessionAbandonTime"
+' -- Variable for storing last Global.asa error
+Const cSessionGlobalAsaFail = "GLOBAL_ASA_FAIL"
+
+' Cookie Expire interval
+Const cCookieExpireDays = 30		' expire the virtual cookie in 30 days
+' My EZFund.com Permissions
+Const dfltMYEZPermissions = "NNNN"	' !BLB, !DEC, !MMI, !LINK (products), in other words, it's ignored for now!
+
+' Global definitions for identifying Public members
+Const PUBLIC_LOGINUID = "VISITOR"
+Const PUBLIC_PASSWORD = "365DAYS"
+'
+' ---------- End of PageTop(.asp) constants
+
+' NOTE! THESE CONSTANTS AND VARIABLES ARE REPLICATED IN both AMgrSlspInclude.asp and global.asa ...
+' if you change them, be sure to do so in both places!
+'
+' Session variables specific to account manager and salesperson
+'	Account manager
+Const cSessionLoginAMgrCde = "LoginAMgrCde"
+Dim sSessionLoginAMgrCde 
+Const cSessionLoginAMgrPrsnNme = "LoginAMgrPrsnNme"
+Dim sSessionLoginAMgrPrsnNme 
+Const cSessionLoginAMgrPrsnTitlTxt = "LoginAMgrPrsnTitlTxt"
+Dim sSessionLoginAMgrPrsnTitlTxt 
+Const cSessionLoginAMgrPhExtNbr = "LoginAMgrPhExtNbr"
+Dim sSessionLoginAMgrPhExtNbr 
+Const cSessionLoginAMgrEmlTxt = "LoginAMgrEmlTxt"
+Dim sSessionLoginAMgrEmlTxt 
+'	Salesperson
+Const cSessionLoginSlspCde = "LoginSlspCde"
+Dim sSessionLoginSlspCde 
+Const cSessionLoginSlspPrsnNme = "LoginSlspPrsnNme"
+Dim sSessionLoginSlspPrsnNme 
+Const cSessionLoginSlspPrsnTitlTxt = "LoginSlspPrsnTitlTxt"
+Dim sSessionLoginSlspPrsnTitlTxt 
+Const cSessionLoginSlspPhExtNbr = "LoginSlspPhExtNbr"
+Dim sSessionLoginSlspPhExtNbr 
+Const cSessionLoginSlspEmlTxt = "LoginSlspEmlTxt"
+Dim sSessionLoginSlspEmlTxt 
+' END OF CONSTANTS AND VARIABLES REPLICATED IN AMgrSlspInclude.asp
+
+' --- Local to Global.asa only ---
+
+' Session Timeout interval
+Const cSessionTimeoutInterval = .04		' approx 1/24th days (1 hour)
+
+' Database connection object
+Dim objVCDB
+Dim objEZMainDB
+
+' Recordset object
+Dim objRS
+
+' NOTE: Session_OnStart has been moved near the bottom, 
+' with the other Application and Session event handlers. - SSB 12/6/2001
+
+' ---- VIRTUAL COOKIE database ----
+Function OpenVirtualCookieDB()
+	OpenVirtualCookieDB = OpenDatabaseConnection(objVCDB, Application(cAppVirtualCookieDB_ConnectString))
+End Function
+
+Function CloseVirtualCookieDB()
+	Call CloseDatabaseConnection(objVCDB)
+End Function
+
+Function CreateVirtualCookieRS(RS, SQLStmt)
+	' returns True when successful create
+	If Not OpenVirtualCookieDB Then CreateVirtualCookieRS = False: Exit Function
+	On Error Resume Next
+	objVCDB.CommandTimeout = Application(cAppVirtualCookieDB_CommandTimeout)
+	Set RS = objVCDB.Execute(SQLStmt)
+	If Err <> 0 Then
+		Set RS = Nothing
+		CreateVirtualCookieRS = False
+	Else	
+		CreateVirtualCookieRS = True
+	End If	
+End Function
+
+Function GetVirtualCookieRS(RS, SQLStmt)
+	' returns True when non-empty recordset
+	If Not OpenVirtualCookieDB Then GetVirtualCookieRS = False: Exit Function
+	If Not CreateVirtualCookieRS(RS, SQLStmt) Then
+		' Create failed!
+		GetVirtualCookieRS = False
+	ElseIf Not CheckRS(RS) Then 
+		' Empty recordset!
+		Set RS = Nothing
+		GetVirtualCookieRS = False
+	Else
+		' Data is available
+		GetVirtualCookieRS = True
+	End If	
+End Function
+
+Function SetVirtualCookie(KeyText, ValueText) ' As Boolean
+
+	' Set a "virtual cookie" to the specified value:
+	' set it as a session variable 
+	' and store it in the database if appropriate.
+	'
+	' NOTE: This version of the routine has been modified from 
+	' the original located in VirtualCookie.asp.  This version
+	' assumes a connection to VirtualCookie DB.
+
+	Dim SQLStmt
+	Dim locn
+	Dim sRemoteIPAddr
+	Dim objVCRS
+	
+	' Force these to be objects
+	Set objVCRS = Nothing
+	
+	' First, make it available as a Session variable
+	Session(KeyText) = ValueText
+
+	' If user is a visitor, we don't save virtual cookies
+	If Session(cSessionVCID) = "VISITOR" Then 
+		SetVirtualCookie = True
+		Exit Function
+	End If
+
+	On Error Resume Next
+
+	sRemoteIPAddr = Request.ServerVariables("REMOTE_ADDR")
+
+	' Create a recordset
+	SQLStmt = "Select * From " & Application(cAppVirtualCookieTableName) & " Where STN_ID_CDE='" & Session(cSessionVCID) & "' And KEY_CDE='" & KeyText & "'"
+	locn = "creating recordset"
+	Set objVCRS = Server.CreateObject("ADODB.Recordset")
+	objVCRS.CursorType = adOpenKeyset
+	objVCRS.LockType = adLockPessimistic
+	objVCRS.Open SQLStmt, objVCDB, , , adCmdText
+	If Err = 0 Then
+		If objVCRS.BOF And objVCRS.EOF Then
+			locn = "adding new"
+			objVCRS.AddNew
+		End If
+	End If
+	If Err = 0 Then
+		locn = "setting fields"
+		objVCRS.Fields("STN_ID_CDE").Value = Session(cSessionVCID)
+		objVCRS.Fields("KEY_CDE").Value = KeyText
+		objVCRS.Fields("VALU_TXT").Value = ValueText
+		objVCRS.Fields("LAST_MODF_DTE").Value = Now
+		objVCRS.Fields("IP_ADDR_TXT").Value = sRemoteIPAddr
+	End If
+	If Err = 0 Then
+		locn = "updating"
+		objVCRS.Update
+	End If
+	If Err <> 0 Then
+		Session(cSessionGlobalAsaFail) = "SetVirtualCookie (" & locn & ")"
+	End If
+	SetVirtualCookie = (Err = 0)
+	
+	' Clean up
+	On Error Resume Next
+	If Not objVCRS Is Nothing Then
+		objVCRS.Close
+		Set objVCRS = Nothing
+	End If	
+	
+End Function
+
+Function UpdateVirtualCookieAccessTime(StationVCID, sDateValue)
+
+	' Set Virtual Cookie LAST_MODF_DTE for LoginUID key
+	' for the given station (i.e., the given VCID).
+
+	Dim sSql
+	Dim sRemoteIPAddr
+
+	On Error Resume Next
+	
+	If StationVCID = "VISITOR" Then
+		UpdateVirtualCookieAccessTime = True
+		Exit Function
+	End If
+
+	sRemoteIPAddr = Request.ServerVariables("REMOTE_ADDR")
+
+	' Update LAST_MODF_DTE for LoginUID key.
+	' This will help in deciding what to prune from the 
+	' Virtual Cookie table.	 Previously, the date was modified
+	' only if the user went through the Login script.
+	sSql = ""
+	sSql = sSql & "Update " & Application(cAppVirtualCookieTableName) & " "
+	sSql = sSql & "Set LAST_MODF_DTE = '" & sDateValue & "', "
+	sSql = sSql & "    IP_ADDR_TXT = '" & sRemoteIPAddr & "' "
+	sSql = sSql & "Where STN_ID_CDE='" & StationVCID & "' "
+	sSql = sSql & "      And "
+	sSql = sSql & "      KEY_CDE='LoginUID' "
+	If CreateVirtualCookieRS(objRS, sSql) = True Then
+		UpdateVirtualCookieAccessTime = (Err = 0)
+	Else
+		UpdateVirtualCookieAccessTime = False
+	End If
+	If Not objRS Is Nothing then
+		objRS.Close
+		Set objRS = Nothing
+	End If
+
+End Function
+
+Function GetSessionVars(StationVCID)
+
+	' Set Session() variables from Virtual Cookie table
+	' for the given station (i.e., the given VCID).
+	' Pass a VCID or "SESSION".
+
+	Dim sSql
+	Dim sStnIdCde, sKeyCde, sValuTxt, dteLastModfDte
+
+	On Error Resume Next
+	sSql = "Select KEY_CDE, VALU_TXT From " & Application(cAppVirtualCookieTableName) & " Where STN_ID_CDE='" & StationVCID & "'"
+	If GetVirtualCookieRS(objRS, sSql) = True Then
+		Do While Not objRS.EOF
+			' Not being used, or retrieved!
+			' sStnIdCde = objRS.Fields("STN_ID_CDE").Value
+			sKeyCde = objRS.Fields("KEY_CDE").Value
+			sValuTxt = objRS.Fields("VALU_TXT").Value
+			' Not being used, or retrieved!
+			' dteLastModfDte = objRS.Fields("LAST_MODF_DTE").Value
+			If Left(sKeyCde, 1) <> "(" Then	' avoid "(explanation)"
+				Session(sKeyCde) = sValuTxt
+			End If
+			objRS.MoveNext
+		Loop
+		GetSessionVars = (Err = 0)
+	Else
+		GetSessionVars = False
+	End If
+	If Not objRS Is Nothing then
+		objRS.Close
+		Set objRS = Nothing
+	End If
+
+End Function
+
+' ---- EZMain database ----
+Function OpenEZMainDB()
+	OpenEZMainDB = OpenDatabaseConnection(objEZMainDB, Application(cAppEZMainDB_ConnectString))
+End Function
+
+Function CloseEZMainDB()
+	Call CloseDatabaseConnection(objEZMainDB)
+End Function
+
+Function CreateEZMainRS(RS, SQLStmt)
+	' returns True when successful create
+	If Not OpenEZMainDB Then CreateEZMainRS = False: Exit Function
+	On Error Resume Next
+	objEZMainDB.CommandTimeout = Application(cAppEZMainDB_CommandTimeout)
+	Set RS = objEZMainDB.Execute(SQLStmt)
+	If Err <> 0 Then
+		Set RS = Nothing
+		CreateEZMainRS = False
+	Else	
+		CreateEZMainRS = True
+	End If	
+End Function
+
+Function GetEZMainRS(RS, SQLStmt)
+	' returns True when non-empty recordset
+	If Not OpenEZMainDB Then GetEZMainRS = False: Exit Function
+	If Not CreateEZMainRS(RS, SQLStmt) Then
+		' Create failed!
+		GetEZMainRS = False
+	ElseIf Not CheckRS(RS) Then 
+		' Empty recordset!
+		Set RS = Nothing
+		GetEZMainRS = False
+	Else
+		' Data is available
+		GetEZMainRS = True
+	End If	
+End Function
+
+' ---- THE FOLLOWING (4) ROUTINES ARE DUPLICATED IN EZLogin.asp ---
+
+Function ValidateLogin(theUID, thePassword, sMyOrgId)
+	Dim RS, SQLStmt, bOK
+	
+	' Validate this UID and PASSWORD
+	SQLStmt = "MYEZ_ValidateLogin @Username='" & theUID & "', @Password='" & thePassword & "'"
+	If GetEZMainRS(RS, SQLStmt) Then
+		' There should be exactly 1 account for this username/password pair, else we have a problem
+		bOK = nvn(RS.Fields("ACCT_QTY")) = 1
+		If bOK = True Then sMyOrgId = nvn(RS.Fields("ORG_ID")) Else sMyOrgId = 0
+		RS.Close
+		Set RS = Nothing
+		ValidateLogin = bOK
+	Else	
+		sMyOrgId = ""
+		ValidateLogin = False
+	End If
+End Function
+
+Function SetSessionOnlyVariables(theOrgId)
+	Dim RS, SQLStmt
+	Dim rsOrgNme, rsCtctNme, rsCtctEmlTxt, rsSlspNme
+	
+	On Error Resume Next
+
+	Session(cSessionMYEZOrgId) = theOrgId
+	
+	If GetMyEZFundAccountRS(RS, theOrgId) = True Then
+		' Load our db fields into local variables
+		' Retrieve GM Organization name, primary Contact, primary Email, salesperson
+		rsOrgNme = nvl(RS.Fields("ORG_NME").Value)
+		rsCtctNme = nvl(RS.Fields("CTCT_NME").Value)
+		rsCtctEmlTxt = nvl(RS.Fields("EML_TXT").Value)
+		rsSlspNme = nvl(RS.Fields("SLSP_NME").Value)
+		
+		' Set name of organization, contact, email and salesperson for this account
+		Session(cSessionMYEZOrganizationName) = rsOrgNme
+		Session(cSessionMYEZContactName) = rsCtctNme
+		Session(cSessionMYEZContactEmail) = rsCtctEmlTxt
+		Session(cSessionMYEZSalesperson) = rsSlspNme
+		RS.Close
+		Set RS = Nothing
+	Else
+		Session(cSessionMYEZOrganizationName) = ""
+		Session(cSessionMYEZContactName) = ""
+		Session(cSessionMYEZContactEmail) = ""
+		Session(cSessionMYEZSalesperson) = ""
+	End If
+	Call CloseEZMainDB()
+End Function
+
+Function GetMyEZFundAccountRS(RS, theOrgId)
+	Dim SQLStmt
+
+	On Error Resume Next
+	If theOrgId = "" Then GetMyEZFundAccountRS = False: Exit Function
+
+	' WRITE THIS! For now, use the sp() available to Internal site
+	' NB: This sp() contains a Memo field, so you'll need to retrieve
+	' the fields in order.
+	SQLStmt = "ORG_OrgDetail @OrgId='" & theOrgId & "'"
+	' Return True if success creating the recordset
+	GetMyEZFundAccountRS = GetEZMainRS(RS, SQLStmt)
+	
+End Function
+
+Function SetMYEZPermissions(theOrgId)
+	' The My EZFund.com Permissions session variable is a string
+	' of Y/N characters representing the following:
+	'   {reserved for future use}
+	On Error Resume Next
+	Session(cSessionMYEZPermissions) = dfltMYEZPermissions
+End Function
+
+' NOTE! THESE FUNCTIONS ARE REPLICATED IN both AMgrSlspInclude.asp and global.asa ...
+' if you change it, be sure to do so in both places!
+Function GetEZAMgrSlspInfo(ByVal theOrgId)
+
+	' Retrieve account manager (and salesperson) info from the database
+	' into the sSessionLoginAMgrXXX and sSessionLoginSlspXXX variables.
+	' NOTE! the variables will be set ONLY if the ATC person has a password!
+
+	' Validate the given EmailAddress exists for this user
+	Dim objConn, RS, SQLStmt
+	Dim bEOF
+	Dim bGotInfo
+	Dim iPos
+
+	' In case we don't fetch...
+	sSessionLoginAMgrCde = Null
+	sSessionLoginAMgrPrsnNme = Null
+	sSessionLoginAMgrPrsnTitlTxt = Null
+	sSessionLoginAMgrPhExtNbr = Null
+	sSessionLoginAMgrEmlTxt = Null
+	sSessionLoginSlspCde = Null
+	sSessionLoginSlspPrsnNme = Null
+	sSessionLoginSlspPrsnTitlTxt = Null
+	sSessionLoginSlspPhExtNbr = Null
+	sSessionLoginSlspEmlTxt = Null
+
+	On Error Resume Next    
+	Set objConn = Server.CreateObject("ADODB.Connection")
+	objConn.Open Application(cAppEZMainDB_ConnectString)
+	If Err Then
+		Err.Clear
+		Set objConn = Nothing
+		GetEZAMgrSlspInfo = False
+		Exit Function
+	End If
+
+	' Put everything into session variables
+	SQLStmt = "MYEZ_AccountSupportInfo @OrgId='" & theOrgId & "'"
+	objConn.CommandTimeout = Application(cAppEZMainDB_ConnectTimeout)
+	Set RS = Nothing
+	Set RS = objConn.Execute(SQLStmt)
+	If RS Is Nothing Or Err.number <> 0 Then
+		bGotInfo = False
+	Else
+		bGotInfo = (RS.EOF = False)
+	End If
+	If bGotInfo Then
+'		If IsNull(RS.Fields("AMGR_PSWD_TXT")) = False Then
+			sSessionLoginAMgrCde = RS.Fields("AMGR_CDE")
+			sSessionLoginAMgrPrsnNme = RS.Fields("AMGR_PRSN_NME")
+'''			iPos = InStr(sSessionLoginAMgrPrsnNme, ",")
+'''			If iPos > 0 Then sSessionLoginAMgrPrsnNme = Trim(Mid(sSessionLoginAMgrPrsnNme, iPos + 1)) + " " + Trim(Left(sSessionLoginAMgrPrsnNme, iPos-1))
+			sSessionLoginAMgrPrsnTitlTxt = RS.Fields("AMGR_PRSN_TITL_TXT")
+			sSessionLoginAMgrPhExtNbr = RS.Fields("AMGR_PH_EXT_NBR")
+			sSessionLoginAMgrEmlTxt = RS.Fields("AMGR_EML_TXT")
+'		End If
+'		If IsNull(RS.Fields("SLSP_PSWD_TXT")) = False Then
+			sSessionLoginSlspCde = RS.Fields("SLSP_CDE")
+			sSessionLoginSlspPrsnNme = RS.Fields("SLSP_PRSN_NME")
+'''			iPos = InStr(sSessionLoginSlspPrsnNme, ",")
+'''			If iPos > 0 Then sSessionLoginSlspPrsnNme = Trim(Mid(sSessionLoginSlspPrsnNme, iPos + 1)) + " " + Trim(Left(sSessionLoginSlspPrsnNme, iPos-1))
+			sSessionLoginSlspPrsnTitlTxt = RS.Fields("SLSP_PRSN_TITL_TXT")
+			sSessionLoginSlspPhExtNbr = RS.Fields("SLSP_PH_EXT_NBR")
+			sSessionLoginSlspEmlTxt = RS.Fields("SLSP_EML_TXT")
+'		End If
+		RS.Close
+	End If
+	Set RS = Nothing
+	
+	objConn.Close
+	Set objConn = Nothing
+	GetEZAMgrSlspInfo = bGotInfo
+
+End Function
+
+Function SetAMgrSlspSessionVars(ByVal theOrgId, ByVal bSetAMgr, ByVal bSetSlsp)
+	' Set session variables, if we haven't already done so.
+	' Fetch values from the database if we need to.
+
+	Dim bNeedDBInfo
+
+	' Make sure we have locals
+	bNeedDBInfo = False
+	If bSetAMgr = True Then
+		If ("" & Session(cSessionLoginAMgrCde)) = "" Then 
+			bNeedDBInfo = True
+		End If
+	End If
+	If bSetSlsp = True Then
+		If ("" & Session(cSessionLoginSlspCde)) = "" Then 
+			bNeedDBInfo = True
+		End If
+	End If
+	If bNeedDBInfo Then Call GetEZAMgrSlspInfo(theOrgId)
+
+	' Set session variables as requested
+	If bSetAMgr Then
+		Session(cSessionLoginAMgrCde) = sSessionLoginAMgrCde
+		Session(cSessionLoginAMgrPrsnNme) = sSessionLoginAMgrPrsnNme
+		Session(cSessionLoginAMgrPrsnTitlTxt) = sSessionLoginAMgrPrsnTitlTxt
+		Session(cSessionLoginAMgrPhExtNbr) = sSessionLoginAMgrPhExtNbr
+		Session(cSessionLoginAMgrEmlTxt) = sSessionLoginAMgrEmlTxt
+	End If
+	If bSetSlsp Then
+		Session(cSessionLoginSlspCde) = sSessionLoginSlspCde
+		Session(cSessionLoginSlspPrsnNme) = sSessionLoginSlspPrsnNme
+		Session(cSessionLoginSlspPrsnTitlTxt) = sSessionLoginSlspPrsnTitlTxt
+		Session(cSessionLoginSlspPhExtNbr) = sSessionLoginSlspPhExtNbr
+		Session(cSessionLoginSlspEmlTxt) = sSessionLoginSlspEmlTxt
+	End If
+
+End Function
+' END OF FUNCTION(S) REPLICATED IN global.asa
+
+' ---- Generic database functions ----
+Function OpenDatabaseConnection(objConnection, sConnectString)
+
+    If Not objConnection Is Nothing Then 
+        OpenDatabaseConnection = True
+        Exit Function
+    End If    
+    
+	On Error Resume Next    
+    Set objConnection = Server.CreateObject("ADODB.Connection")
+    objConnection.Open sConnectString
+    If Err Then
+		' WRITE THIS! DO SOMETHING APPROPRIATE HERE!
+		Session(cSessionGlobalAsaFail) = "True"
+		Err.Clear
+		Set objConnection = Nothing
+		OpenDatabaseConnection = False
+    Else    
+		OpenDatabaseConnection = True
+    End If
+
+End Function
+
+Function CloseDatabaseConnection(objConnection)
+	' If you use database access, call this routine before you exit!!!
+	If objConnection Is Nothing Then Exit Function
+	On Error Resume Next    
+	objConnection.Close
+	Set objConnection = Nothing
+End Function
+
+Function CheckRS(RS)
+	Dim bEOF
+	On Error Resume Next
+	bEOF = RS.EOF
+	If Err Or bEOF Then
+		CheckRS = False
+	Else
+		CheckRS = True
+	End If
+End Function
+
+' ---- Utility functions ----
+Function nvl (ByVal s)
+	On Error Resume Next
+    If IsNull(s) Then nvl = "" Else nvl = s
+End Function
+
+Function nvn(ByVal n)
+	On Error Resume Next
+	If IsNumeric(n) Then nvn = CDbl(n) Else nvn = CDbl(0)
+	If Err Then nvn = CDbl(0)
+End Function
+
+' ---- User connection management ----
+
+' NOTE! many of these const's and functions are copied from
+' common/ConnectionInclude.asp ... if you change those, change these!
+' Recommend replacing entire content between the lines of tics, 
+' just to make sure things are truly the same as in the include-file.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Constants naming different kinds of Session variable tables
+' and their fields
+
+Const cAppUserTable = "AppUserTable"
+	' Field subscripts within a given UID
+	Const cAUTUID = 1
+	Const cAUTMaxVCIDCount = 2
+	Const cAUTLastTimestamp = 3
+	Const cAUTUserSessionTable = 4
+	Const cAUTUBound = 4
+
+Const cUserSessionTable = "UserSessionTable"
+	' Field subscripts within a given VCID
+	Const cUSTVCID = 1
+	Const cUSTEarliestSessionStartTime = 2
+	Const cUSTSessionIDTable = 3
+	Const cUSTIPAddress = 4
+	Const cUSTEmail = 5
+	Const cUSTUBound = 5
+
+Const cSessionIDTable = "SessionIDTable"
+	' Field subscripts within a given session ID
+	Const cSITSessionID = 1
+	Const cSITSessionStartTime = 2
+	Const cSITUBound = 2
+
+' These two are used by the connection tracking mechanism
+' during an explicit logout by a user.
+Const cLogoutUID = "LogoutUID"
+Const cLogoutVCID = "LogoutVCID"
+
+' The default max # of logins permitted a UID
+Const cDfltMaxUserLoginCnt = 10		' NB: This value also exists in ConnectionInclude.asp
+									' 10/23/07 - change from 3 to 10 users
+
+' This Session variable holds the current # of public (VISITOR) sessions
+Const cNumPublicSessions = "NumPublicSessions"
+
+' Routines for managing the public session count
+Function NumPublicSessions()
+	NumPublicSessions = Application(cNumPublicSessions)
+End Function
+Function InitNumPublicSessions()
+	Application(cNumPublicSessions) = 0
+End Function
+Function DeleteNumPublicSessions()
+	Application(cNumPublicSessions) = Empty
+End Function
+Function IncrNumPublicSessions()
+	Application(cNumPublicSessions) = Application(cNumPublicSessions) + 1
+End Function
+Function DecrNumPublicSessions()
+	Application(cNumPublicSessions) = Application(cNumPublicSessions) - 1
+	If Application(cNumPublicSessions) < 0 Then Application(cNumPublicSessions) = 0
+End Function
+
+' Routines for managing associative arrays held in strings.
+' (Necessary because arrays and Application variables don't mix well.)
+' * Each "array" is held in an Application variable.
+' The whole "array" is a string. Initially it contains only a CRLF.
+' * Each array row begins with a unique key, 
+' followed by a TAB and anything you want,
+' and ends with a CRLF. The key is considered part of the row.
+' * Variable-length rows are allowed, though not recommended.
+
+' General associative string array routines
+
+' - App locking/unlocking
+
+' NOTE: if you're using the String Array functions,
+' all Application locking/unlocking on the page
+' should be done using the following routines,
+' to avoid superfluous locking/unlocking.
+
+Dim LockDepth: LockDepth = 0	' count of OUR locking by this page only
+
+Function AppLock()
+	' Lock the Application, if we haven't already locked it
+	If LockDepth = 0 Then Application.Lock
+	LockDepth = LockDepth + 1
+End Function
+
+Function AppUnLock()
+	' UnLock the Application, if we have already locked it
+	If LockDepth > 0 Then 
+		LockDepth = LockDepth - 1
+		If LockDepth = 0 Then Application.UnLock
+	End If
+End Function
+
+Function AppLockedByUs()
+	' Did we lock the Application
+	AppLockedByUs = (LockDepth > 0)
+End Function
+
+Function FullAppUnLock()
+	' Call this when done to be very, very sure the Application is unlocked.
+	Application.UnLock
+	LockDepth = 0
+End Function
+
+' - Creating/deleting/detecting
+
+' NOTE:	every row begins and ends with a vbCrLf. A string array looks like
+'			vbCrLf {row 1} vbCrLf {row 2} ... {row n} vbCrLf
+'		where each row begins with its key and everything is tab-separated.
+'		A string array with 0 rows contains a single vbCrLf.
+
+Function CreateStringArray(sStringArrayName)
+	' Create a new string array with 0 rows
+	On Error Resume Next
+	AppLock
+	If Not StringArrayExists(sStringArrayName) Then
+		Application(sStringArrayName) = vbCrLf
+	End If
+	AppUnLock
+End Function
+
+Function DeleteStringArray(sStringArrayName)
+	' Delete an existing string array
+	On Error Resume Next
+	AppLock
+	If StringArrayExists(sStringArrayName) Then
+		Application(sStringArrayName) = Empty
+	End If
+	AppUnLock
+End Function
+
+Function StringArrayExists(sStringArrayName)
+	' Does the named string array exist
+	On Error Resume Next
+	StringArrayExists = Not IsEmpty(Application(sStringArrayName))
+End Function
+
+Function StringArrayHasRows(sStringArrayName)
+	' Does the named string array contain 1 or more rows
+	On Error Resume Next
+	If StringArrayExists(sStringArrayName) Then
+		StringArrayHasRows = (Application(sStringArrayName) <> vbCrLf)
+	Else
+		StringArrayHasRows = False
+	End If
+End Function
+
+' - Finding rows
+
+' NOTE: these are mostly for internal use by the get/set functions below.
+
+Function FindNthRowInStringArray(sStringArrayName, nRow)
+	' Return the position of the N'th row in a string array.
+	' NOTE: this may be used as a string index or as a boolean.
+	Dim sArray, iPos, iRow
+	If Not StringArrayHasRows(sStringArrayName) Then
+		FindNthRowInStringArray = 0
+		Exit Function
+	End If
+	sArray = Application(sStringArrayName)	' since we don't know if we're Application-locked
+	iPos = 0: iRow = 0
+	Do
+		iPos = InStr(iPos+1, sArray, vbCrLf)
+		If iPos = 0 Then
+			FindNthRowInStringArray = 0
+			Exit Function
+		End If
+		iRow = iRow + 1
+		If iRow = nRow Then
+			FindNthRowInStringArray = iPos
+			Exit Function
+		End If
+	Loop While iRow < nRow
+	FindNthRowInStringArray = 0
+End Function
+
+Function FindRowInStringArray(sStringArrayName, vKey)
+	' Find the row with key vKey if vKey is a string, or the vKey'th row if vKey is a number.
+	' NOTE: this may be used as a string index or as a boolean.
+	On Error Resume Next
+	If Not StringArrayHasRows(sStringArrayName) Then
+		FindRowInStringArray = 0
+	ElseIf TypeName(vKey) <> "String" Then
+		' Assume ordinal number of row
+		FindRowInStringArray = FindNthRowInStringArray(sStringArrayName, CLng(vKey))
+		' WRITE THIS
+	ElseIf vKey = "*" Then
+		' Return start of first row, no matter what its key
+		FindRowInStringArray = 1	' where the first vbCrLf lives (hence first row)
+	Else
+		' Ordinary key search
+		FindRowInStringArray = InStr(Application(sStringArrayName), vbCrLf & vKey & vbTab)
+	End If
+End Function
+
+' NOTE:	the Findxxx() functions return the position of the vbCrLf before the row.
+'		But the Getxxx() returned row begins with key.
+
+' - Adding/deleting/getting rows
+
+Function AddRowToStringArray(sStringArrayName, sKey, sRow)
+	' Add a row to the end of the string array.
+	' Pass the key and the rest of the row.
+	On Error Resume Next
+	AppLock
+	Call CreateStringArray(sStringArrayName) ' just in case
+	Application(sStringArrayName) = Application(sStringArrayName) & _
+									sKey & vbTab & sRow & vbCrLf
+	AppUnLock
+End Function
+
+Function DeleteRowFromStringArray(sStringArrayName, sKey)
+	' Return an array row (string) by key. Returned row begins with key.
+	On Error Resume Next
+	Dim iPos1, iPos2
+	AppLock
+	iPos1 = FindRowInStringArray(sStringArrayName, sKey)
+	If iPos1 = 0 Then
+		AppUnlock
+		Exit Function
+	End If
+	iPos1 = iPos1 + 2 ' skip vbCrLf
+	iPos2 = InStr(iPos1, Application(sStringArrayName), vbCrLf)
+	If iPos2 > 0 Then
+		Application(sStringArrayName) = Left(Application(sStringArrayName), iPos1-1) & Mid(Application(sStringArrayName), iPos2+2)
+	End If
+	AppUnLock
+End Function
+
+Function ReplaceRowInStringArray(sStringArrayName, sKey, sNewRow)
+	' Return an array row (string) by key. Returned row begins with key.
+	On Error Resume Next
+	Dim iPos1, iPos2
+	AppLock
+	iPos1 = FindRowInStringArray(sStringArrayName, sKey)
+	If iPos1 = 0 Then
+		AppUnlock
+		Exit Function
+	End If
+	iPos1 = iPos1 + 2 ' skip vbCrLf
+	iPos2 = InStr(iPos1, Application(sStringArrayName), vbCrLf)
+	If iPos2 > 0 Then
+		Application(sStringArrayName) = Left(Application(sStringArrayName), iPos1-1) & sNewRow & vbCrLf & Mid(Application(sStringArrayName), iPos2+2)
+	End If
+	AppUnLock
+End Function
+
+' NOTE: for the next two functions, caller must pass the same temp work string...
+' Without this, we wouldn't be able to nest calls.
+' This is the recommended way of iterating through rows.
+
+Function GetFirstRowInStringArray(sStringArrayName, sTemp)
+	' "Snapshot" the array and return its first row
+	If Not StringArrayHasRows(sStringArrayName) Then
+		sTemp = ""
+		GetFirstRowInStringArray = ""
+		Exit Function
+	End If
+	sTemp = Application(sStringArrayName)
+	GetFirstRowInStringArray = GetNextRowInStringArray(sTemp)
+End Function
+
+Function GetNextRowInStringArray(sTemp)
+	' Return the next row from the snapshot taken above
+	Dim sRow, iPos1, iPos2
+	iPos1 = 0: iPos2 = 0
+	iPos1 = InStr(sTemp, vbCrLf)
+	If iPos1 > 0 Then
+		iPos2 = InStr(iPos1+1, sTemp, vbCrLf)
+	End If
+	If iPos1 > 0 And iPos2 > 0 Then
+		sRow = Mid(sTemp, iPos1+2, iPos2-iPos1-2)
+		sTemp = Mid(sTemp, iPos2)
+	Else
+		sRow = ""
+		sTemp = ""
+	End If
+	GetNextRowInStringArray = sRow
+End Function
+
+Function GetRowFromStringArray(sStringArrayName, vKey)
+	' Return an array row (string) by key or ordinal. 
+	On Error Resume Next
+	Dim iPos1, iPos2
+	AppLock
+	iPos1 = FindRowInStringArray(sStringArrayName, vKey)
+	If iPos1 = 0 Then
+		GetRowFromStringArray = ""
+		AppUnlock
+		Exit Function
+	End If
+	iPos1 = iPos1 + 2 ' skip vbCrLf
+	iPos2 = InStr(iPos1, Application(sStringArrayName), vbCrLf)
+	If iPos2 > 0 Then
+		GetRowFromStringArray = Mid(Application(sStringArrayName), iPos1, iPos2-iPos1)
+	Else
+		GetRowFromStringArray = ""
+	End If
+	AppUnLock
+End Function
+
+' - Getting/setting one element
+
+Function GetStringArrayRowElement(sRow, nElement)
+	On Error Resume Next
+	Dim iElement, sElement, sRowTemp, iPos
+	sRowTemp = sRow
+	sElement = ""
+	For iElement = 1 To nElement
+		iPos = InStr(sRowTemp, vbTab)
+		If iPos > 0 Then
+			sElement = Left(sRowTemp, iPos-1)
+			sRowTemp = Mid(sRowTemp, iPos+1)
+		Else
+			sElement = sRowTemp
+			Exit For
+		End If
+	Next
+	GetStringArrayRowElement = sElement
+End Function
+
+Function LetStringArrayRowElement(sRow, nElement, sNewElement)
+    On Error Resume Next
+    Dim iElement, sElement, sOldRow, sNewRow, iPos, sSep
+    sOldRow = sRow
+    sElement = ""
+    sNewRow = ""
+    sSep = ""
+    iElement = 1
+    Do While sOldRow <> ""
+        iPos = InStr(sOldRow, vbTab)
+        If iPos > 0 Then
+            If iElement = nElement Then
+                sElement = sNewElement
+            Else
+                sElement = Left(sOldRow, iPos - 1)
+            End If
+            sOldRow = Mid(sOldRow, iPos + 1)
+        Else
+            If iElement = nElement Then
+                sElement = sNewElement
+            Else
+                sElement = sOldRow
+            End If
+            sOldRow = ""
+        End If
+        sNewRow = sNewRow & sSep & sElement
+        sSep = vbTab
+        iElement = iElement + 1
+    Loop
+    
+    sRow = sNewRow
+End Function
+
+Function GetStringArrayElement(sStringArrayName, vKey, nElement)
+	Dim iPos, sRow, iPos1, iPos2, iElement
+	sRow = GetRowFromStringArray(sStringArrayName, vKey)
+	If sRow <> "" Then
+		GetStringArrayElement = GetStringArrayRowElement(sRow, nElement)
+	Else
+		GetStringArrayElement = ""
+	End If
+End Function
+
+Function LetStringArrayElement(sStringArrayName, vKey, nElement, sNewElement)
+	Dim iPos, sRow, iPos1, iPos2, iElement
+	sRow = GetRowFromStringArray(sStringArrayName, vKey)
+	If sRow <> "" Then
+		Call LetStringArrayRowElement(sRow, nElement, sNewElement)
+		Call ReplaceRowInStringArray(sStringArrayName, vKey, sRow)
+	End If
+End Function
+
+' Specific App User mechanism routines
+
+' - AppUserTable 
+
+Dim sAppUserTableTemp	' for GetFirst/GetNext
+Function CreateAppUserTable()
+	Call CreateStringArray(cAppUserTable)
+End Function
+Function DeleteAppUserTable()
+	Call DeleteStringArray(cAppUserTable)
+End Function
+Function AppUserTableExists()
+	AppUserTableExists = StringArrayExists(cAppUserTable)
+End Function
+Function AppUserTableHasRows()
+	AppUserTableHasRows = StringArrayHasRows(cAppUserTable)
+End Function
+Function AppUserTableRowExists(sUID)
+	AppUserTableRowExists = CBool(FindRowInStringArray(cAppUserTable, sUID))
+End Function
+Function AddAppUserTableRow(sUID, sMaxVCIDCount, sLastTimeStamp)
+	Call AddRowToStringArray(cAppUserTable, sUID, sMaxVCIDCount & vbTab & sLastTimeStamp & vbTab & cUserSessionTable & "__" & sUID)
+End Function
+Function GetAppUserTableRow(sUID)
+	GetAppUserTableRow = GetRowFromStringArray(cAppUserTable, sUID)
+End Function
+Function GetFirstAppUserTableRow()
+	GetFirstAppUserTableRow = GetFirstRowInStringArray(cAppUserTable, sAppUserTableTemp)
+End Function
+Function GetNextAppUserTableRow()
+	GetNextAppUserTableRow = GetNextRowInStringArray(sAppUserTableTemp)
+End Function
+Function DeleteAppUserTableRow(sUID)
+	Call DeleteRowFromStringArray(cAppUserTable, sUID)
+End Function
+
+' - UserSessionTable
+
+Dim sUserSessionTableTemp	' for GetFirst/GetNext
+Function CreateUserSessionTable(sUID)
+	Call CreateStringArray(cUserSessionTable & "__" & sUID)
+End Function
+Function DeleteUserSessionTable(sUID)
+	Call DeleteStringArray(cUserSessionTable & "__" & sUID)
+End Function
+Function UserSessionTableExists(sUID)
+	UserSessionTableExists = StringArrayExists(cUserSessionTable & "__" & sUID)
+End Function
+Function UserSessionTableHasRows(sUID)
+	UserSessionTableHasRows = StringArrayHasRows(cUserSessionTable & "__" & sUID)
+End Function
+Function UserSessionTableRowExists(sUID, sVCID)
+	UserSessionTableRowExists = CBool(FindRowInStringArray(cUserSessionTable & "__" & sUID, sVCID))
+End Function
+Function AddUserSessionTableRow(sUID, sVCID, sEarliestSessionStartTime, sIPAddr, sEmail)
+	Call AddRowToStringArray(cUserSessionTable & "__" & sUID, sVCID, sEarliestSessionStartTime & vbTab & cSessionIDTable & "__" & sUID & "__" & sVCID & vbTab & sIPAddr & vbTab & sEmail)
+End Function
+Function GetUserSessionTableRow(sUID, sVCID)
+	GetUserSessionTableRow = GetRowFromStringArray(cUserSessionTable & "__" & sUID, sVCID)
+End Function
+Function GetFirstUserSessionTableRow(sUID)
+	GetFirstUserSessionTableRow = GetFirstRowInStringArray(cUserSessionTable & "__" & sUID, sUserSessionTableTemp)
+End Function
+Function GetNextUserSessionTableRow()
+	GetNextUserSessionTableRow = GetNextRowInStringArray(sUserSessionTableTemp)
+End Function
+Function DeleteUserSessionTableRow(sUID, sVCID)
+	Call DeleteRowFromStringArray(cUserSessionTable & "__" & sUID, sVCID)
+End Function
+
+' - SessionIDTable
+
+Dim SessionIDTableTemp	' for GetFirst/GetNext
+Function CreateSessionIDTable(sUID, sVCID)
+	Call CreateStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID)
+End Function
+Function DeleteSessionIDTable(sUID, sVCID)
+	Call DeleteStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID)
+End Function
+Function SessionIDTableExists(sUID, sVCID)
+	SessionIDTableExists = StringArrayExists(cSessionIDTable & "__" & sUID & "__" & sVCID)
+End Function
+Function SessionIDTableHasRows(sUID, sVCID)
+	SessionIDTableHasRows = StringArrayHasRows(cSessionIDTable & "__" & sUID & "__" & sVCID)
+End Function
+Function SessionIDTableRowExists(sUID, sVCID, sSessionID)
+	SessionIDTableRowExists = CBool(FindRowInStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID, sSessionID))
+End Function
+Function AddSessionIDTableRow(sUID, sVCID, sSessionID, sSessionStartTime)
+	Call AddRowToStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID, sSessionID, sSessionStartTime)
+End Function
+Function GetSessionIDTableRow(sUID, sVCID, sSessionID)
+	GetSessionIDTableRow = GetRowFromStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID, sSessionID)
+End Function
+Function GetFirstSessionIDTableRow(sUID, sVCID)
+	GetFirstSessionIDTableRow = GetFirstRowInStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID, sSessionIDTableTemp)
+End Function
+Function GetNextSessionIDTableRow()
+	GetNextSessionIDTableRow = GetNextRowInStringArray(sSessionIDTableTemp)
+End Function
+Function DeleteSessionIDTableRow(sUID, sVCID, sSessionID)
+	Call DeleteRowFromStringArray(cSessionIDTable & "__" & sUID & "__" & sVCID, sSessionID)
+End Function
+
+' - Max VCID count (i.e., max workstation count) for a UID
+
+Function MaxVCIDCountForUID(sUID)
+	' Obtain max workstation count from database.
+	' NOTE! THIS CODE IS SPECIFIC TO THIS EZ/CCE/CTP SITE ONLY!
+	' The max count is obtained in a different way on all three sites!
+
+	MaxVCIDCountForUID = cDfltMaxUserLoginCnt
+	Exit Function
+' --- My EZFund.com site utilizes a universal MaxCount
+
+	Dim RS, SQLStmt, sDeptPrfxCde, sPrsnInitTxt, nMax, iPos
+
+	On Error Resume Next
+	
+	If sUID = PUBLIC_LOGINUID Then
+		MaxVCIDCountForUID = 0	' arbitrary... we don't track these!
+		Exit Function
+	End If
+
+	nMax = cDfltMaxUserLoginCnt
+
+	' EZ users have a department prefix code and "_" before the real UID (their initials)
+	sPrsnInitTxt = sUID
+	iPos = InStr(sPrsnInitTxt, "_")
+	If iPos > 0 Then
+		sDeptPrfxCde = Left(UCase(sUID), iPos)
+		sPrsnInitTxt = Mid(UCase(sUID), iPos+1)
+	Else
+		sDeptPrfxCde = ""
+		sPrsnInitTxt = UCase(sUID)	' probably won't work, but may as well try
+	End If
+
+	' NOTE: in global.asa, we could just use GetEZPrsnRS, 
+	' but this function also occurs in ConnectionInclude.asp .
+	SQLStmt = "Select MAX_USER_LOGIN_CNT From EZ_MSTR_PRSN_TBL "
+	SQLStmt = SQLStmt & "Where DEPT_PRFX_CDE = '" & sDeptPrfxCde & "' "
+	SQLStmt = SQLStmt & "      And "
+	SQLStmt = SQLStmt & "      PRSN_INIT_TXT = '" & sPrsnInitTxt & "' "
+	SQLStmt = SQLStmt & "      And "
+	SQLStmt = SQLStmt & "      PSWD_TXT <> '' "
+
+	Call GetEZMainRS(RS, SQLStmt)
+	If CheckRS(RS) Then
+		If Not IsNull(RS.Fields("MAX_USER_LOGIN_CNT").Value) Then
+			If IsNumeric(RS.Fields("MAX_USER_LOGIN_CNT").Value) Then
+				nMax = RS.Fields("MAX_USER_LOGIN_CNT").Value
+			End If
+		End If
+	End If
+
+	RS.Close
+	Set RS = Nothing
+
+	MaxVCIDCountForUID = nMax
+
+End Function
+
+Function GetMaxVCIDCount(sUID)
+	Dim nMax
+	If sUID = PUBLIC_LOGINUID Then
+		GetMaxVCIDCount = 0
+		Exit Function
+	End If
+	nMax = GetStringArrayElement(cAppUserTable, sUID, cAUTMaxVCIDCount)
+	If IsNumeric(nMax) Then 
+		nMax = CLng(nMax)
+	Else
+		nMax = cDfltMaxUserLoginCnt
+	End If
+	GetMaxVCIDCount = nMax
+End Function
+Function LetMaxVCIDCount(sUID, vNewCount)
+	If sUID = PUBLIC_LOGINUID Then Exit Function
+	Call LetStringArrayElement(cAppUserTable, sUID, cAUTMaxVCIDCount, CStr(vNewCount))
+End Function
+
+' - Session start of logged-in user, or successful login of user
+
+Function StartTrackingConnection()
+	Dim RS, SQLStmt
+	Dim nMaxVCIDCount
+	Dim sRow
+	Dim dteNow, dteNoDate
+	Dim sUID, sVCID, sSessionID, sIPAddr, sEmail
+	
+	sUID = Session(cSessionLoginUID)
+	sVCID = Session(cSessionVCID)
+	sSessionID = Session.SessionID
+	sIPAddr = Request.ServerVariables("REMOTE_ADDR")
+	sEmail = ""	 ' NOTE! NO EMAIL IN EZ YET!
+'	sEmail = Session(cSessionLoginEmail)
+
+	' We don't track visitors, only subscribers
+	If sUID = PUBLIC_LOGINUID Then Exit Function
+
+	dteNoDate = CDate(0)
+	dteNow = Now
+	nMaxVCIDCount = MaxVCIDCountForUID(sUID)
+
+	AppLock
+	
+	Call CreateAppUserTable()				' harmless if redundant
+	If Not AppUserTableRowExists(sUID) Then
+		' First session for this UID
+		Call AddAppUserTableRow(sUID, nMaxVCIDCount, dteNow)
+	Else
+		' UID exists, new session: just set the max count in case it changed
+		Call LetMaxVCIDCount(sUID, nMaxVCIDCount)
+	End If
+	Call CreateUserSessionTable(sUID)		' harmless if redundant
+	If Not UserSessionTableRowExists(sUID, sVCID) Then
+		Call AddUserSessionTableRow(sUID, sVCID, dteNow, sIPAddr, sEmail)
+	End If
+	Call CreateSessionIDTable(sUID, sVCID)	' harmless if redundant
+	If Not SessionIDTableRowExists(sUID, sVCID, sSessionID) Then
+		Call AddSessionIDTableRow(sUID, sVCID, sSessionID, dteNow)
+	End If
+
+	FullAppUnLock
+End Function
+
+' - Session end of logged-in user, or successful logout of logged-in user
+
+Function StopTrackingConnection(bIsLogout)
+	Dim sUID, sVCID, sSessionID, sLogoutUID, sLogoutVCID, iSession
+
+	On Error Resume Next
+
+	sUID = Session(cSessionLoginUID)
+	sVCID = Session(cSessionVCID)
+	sSessionID = Session.SessionID
+	sLogoutUID = Session(cLogoutUID)
+	sLogoutVCID = Session(cLogoutVCID)
+
+'Application.Lock
+'Application("DebugOnEnd") = "" & Application("DebugOnEnd") & _
+'	" sUID=" & sUID & _
+'	" sVCID=" & sVCID & _
+'	" sSessionID=" & sSessionID & _
+'	" sLogoutUID=" & sLogoutUID & _
+'	" sLogoutVCID=" & sLogoutVCID & vbCrLf
+'Application.UnLock
+
+	' We don't track visitors, only subscribers
+	' NOTE: during an earlier logout, a subscriber becomes a visitor;
+	' if that logout left us a LogoutUID, we do still have something to do here.
+	If sUID = PUBLIC_LOGINUID And IsEmpty(sLogoutUID) = True Then Exit Function
+	If sLogoutUID & "" = PUBLIC_LOGINUID Then Exit Function ' shouldn't happen, but better safe than sorry
+
+	AppLock
+	If bIsLogout Then
+		' User is logging out: save these var's before LoginUID and LoginVCID are destroyed.
+		' The resulting Session_OnEnd will take care of the rest; see below.
+		Session(cLogoutUID) = sUID
+		Session(cLogoutVCID) = sVCID
+	Else
+		' Session is ending: delete one or more table rows as needed
+		' - first the session ID table row
+		If IsEmpty(sLogoutUID) = False And IsEmpty(sLogoutVCID) = False Then
+			' Session is ending after explicit user logout: get rid of this and all related sessions
+			sUID = sLogoutUID
+			sVCID = sLogoutVCID
+			Session(cLogoutUID) = Empty
+			Session(cLogoutVCID) = Empty
+			' NOTE: loop runaway would be disastrous here; we guard it with an improbable max of 10 sessions.
+			For iSession = 1 To 10
+				If SessionIDTableRowExists(sUID, sVCID, "*") Then
+					Call DeleteSessionIDTableRow(sUID, sVCID, "*")	' i.e., the first row
+				Else
+					Exit For
+				End If
+			Next
+		Else
+			' Ordinary session timeout: get rid of this session only
+			If IsEmpty(sUID) = False And IsEmpty(sVCID) = False Then
+				Call DeleteSessionIDTableRow(sUID, sVCID, sSessionID)
+			End If
+		End If
+		' - next the user session table row and the whole session ID table
+		If IsEmpty(sUID) = False And IsEmpty(sVCID) = False Then
+			If Not SessionIDTableRowExists(sUID, sVCID, "*") Then
+				' No more sessions for this UID/VCID
+				Call DeleteSessionIDTable(sUID, sVCID)
+				Call DeleteUserSessionTableRow(sUID, sVCID)
+			End If
+		End If
+		' - finally the app user table row and the whole user session table
+		If IsEmpty(sUID) = False Then
+			If Not UserSessionTableRowExists(sUID, "*") Then
+				' No more sessions for this UID
+				Call DeleteUserSessionTable(sUID)
+				Call DeleteAppUserTableRow(sUID)
+			End If
+		End If
+		' - We never delete the app user table until application onend!
+	End If
+	FullAppUnLock
+End Function
+
+' - Utilities
+
+Function DeleteAllAppUserVariables()
+	' NOTE! application variables are returned as upper case!
+	Dim AppVariable
+	AppLock
+	For Each AppVariable In Application.Contents
+		If UCase(Left(AppVariable, Len(cAppUserTable))) = UCase(cAppUserTable) Then
+			Application(AppVariable) = Empty
+		ElseIf UCase(Left(AppVariable, Len(cUserSessionTable))) = UCase(cUserSessionTable) Then
+			Application(AppVariable) = Empty
+		ElseIf UCase(Left(AppVariable, Len(cSessionIDTable))) = UCase(cSessionIDTable) Then
+			Application(AppVariable) = Empty
+		ElseIf UCase(Left(AppVariable, Len("Debug"))) = UCase("Debug") Then
+			Application(AppVariable) = Empty
+		End If
+	Next
+	FullAppUnLock
+End Function
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' End of routines copied from ConnectionInclude.asp .
+
+' NOTE: see /ProjectNotes/_EZ_ConnectionManagement.asp on the EZ development site 
+' for documentation of this mechanism. Oh, for a scripting language that can define objects!
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE=VBScript RUNAT=Server>
+
+'Application_OnStart    Runs once when the first page of your application is run for the first time by any user
+Sub Application_OnStart
+
+	' Initialize database connections
+	' -- Virtual Cookie
+	Application(cAppVirtualCookieTableName) = "MYEZ_VIRT_COOKIE_TBL"
+	Application(cAppVirtualCookieDB_DBName) = "EZMain"
+' ------------------------------------------------------------------------------------------
+' WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS! 
+
+	' Switch back to production version of the database before moving ONLINE!
+	' Comment 'DSN=RD_EZMain' line and uncomment 'DSN=EZMain' line...
+
+	' DEVELOPMENT database
+'''	Application(cAppVirtualCookieDB_ConnectString) = "DSN=EZMain; UID=EZ_User; PWD=texans02"
+	' PRODUCTION database
+	Application(cAppVirtualCookieDB_ConnectString) = "DSN=EZMain; UID=EZ_User; PWD=texans02;"
+
+' WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS! 
+' ------------------------------------------------------------------------------------------
+	Application(cAppVirtualCookieDB_ConnectTimeout) = 20
+	Application(cAppVirtualCookieDB_CommandTimeout) = 60
+	' -- EZMain
+	Application(cAppEZMainDB_DBName) = "EZMain"
+' ------------------------------------------------------------------------------------------
+' WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS! 
+
+	' Switch back to production version of the database before moving ONLINE!
+	' Comment 'DSN=RD_EZMain' line and uncomment 'DSN=EZMain' line...
+
+	' DEVELOPMENT databas
+'''	Application(cAppEZMainDB_ConnectString) = "DSN=EZMain; UID=EZ_User; PWD=texans02"
+	' PRODUCTION database
+	Application(cAppEZMainDB_ConnectString) = "DSN=EZMain; UID=EZ_User; PWD=texans02;"
+
+' WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS!  WRITE THIS! 
+' ------------------------------------------------------------------------------------------
+	Application(cAppEZMainDB_ConnectTimeout) = 20
+	Application(cAppEZMainDB_CommandTimeout) = 120
+
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+	' Initialize tracking of user connections
+	Call CreateAppUserTable()
+	Call InitNumPublicSessions()
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Application("DebugOnEnd") = "" & Application("DebugOnEnd") & " Application_OnStart" & " - " & Now() & vbCrLf		' REMOVE THIS! DEBUG!
+
+End Sub
+
+'Session_OnStart        Runs the first time a user runs any page in your application
+Sub Session_OnStart        
+	' Runs the first time a user runs any page in your application
+	Dim dfltLastReadTime
+	Dim sErrorMessage
+	Dim nOrgId	' formerly sGMAcctNbr
+
+	nOrgId = ""
+	' Get client's virtual cookie ID
+	If Request.Cookies(cSessionVCID) <> "" Then
+		' User has logged in before
+		Session(cSessionVCID) = Request.Cookies(cSessionVCID)
+	Else
+		Session(cSessionVCID) = PUBLIC_LOGINUID
+	End If
+	
+	' Initialize Session variables for that user from VirtualCookie 
+	Set objVCDB = Nothing
+	Set objEZMainDB = Nothing
+	Set objRS = Nothing
+	If OpenVirtualCookieDB() = True Then
+		If GetSessionVars(Session(cSessionVCID)) = False Then
+			' May have logged in before, but database was pruned of this VCID: log in as visitor
+			If Session(cSessionVCID) <> PUBLIC_LOGINUID Then
+				Session(cSessionVCID) = PUBLIC_LOGINUID
+				If GetSessionVars(Session(cSessionVCID)) = False Then
+					Session(cSessionGlobalAsaFail) = "Getting VCID Session Vars for VISITOR"
+				End If
+			End If
+		End If
+		If GetSessionVars("SESSION") = False Then
+			Session(cSessionGlobalAsaFail) = "Getting VCID Session Vars for SESSION"
+		End If
+	Else
+		Session(cSessionGlobalAsaFail) = "Opening VirtualCookie DB"
+	End If
+	
+	If Session(cSessionVCID) <> PUBLIC_LOGINUID Then
+		' Validate this user against the database
+		If ValidateLogin(Session(cSessionLoginUID), Session(cSessionPassword), nOrgId) Then
+			' Update time last access so we can track "active" cookies
+			Call UpdateVirtualCookieAccessTime(Session(cSessionVCID), Now())
+			' Update this user's browser type in cookie table
+			Call SetVirtualCookie(cSessionBrowserType, Request.ServerVariables("HTTP_USER_AGENT"))
+			' Set this user's cookie with new Expire date
+			Response.Cookies(cSessionVCID) = Session(cSessionVCID)
+			Response.Cookies(cSessionVCID).Expires = Now() + cCookieExpireDays
+			' Set permissions for this user
+			Call SetMYEZPermissions(nOrgId)
+			' Set Account Manager session variables for this user
+			' NOTE: the Account Manager is currently not being used, but we still load them
+			Call SetAMgrSlspSessionVars(nOrgId, True, True)
+		Else
+			Session(cSessionVCID) = PUBLIC_LOGINUID
+			If GetSessionVars(Session(cSessionVCID)) = False Then
+				Session(cSessionGlobalAsaFail) = "Getting VCID Session Vars for VISITOR"
+			End If
+			' Make sure we classify this guy as PUBLIC enemy!
+			Session(cSessionLoginUID) = PUBLIC_LOGINUID
+		End If
+	End If
+
+	If Not objRS Is Nothing then
+		objRS.Close
+		Set objRS = Nothing
+	End If
+	If Not objVCDB Is Nothing Then
+		objVCDB.Close
+		Set objVCDB = Nothing
+	End If
+	If Not objEZMainDB Is Nothing Then
+		objEZMainDB.Close
+		Set objEZMainDB = Nothing
+	End If
+
+	If "" & Session(cSessionLoginUID) = "" Then
+		Session(cSessionLoginUID) = PUBLIC_LOGINUID
+		Session(cSessionPassword) = PUBLIC_PASSWORD
+		Session(cSessionMYEZPermissions) = dfltMYEZPermissions
+	End If
+	' Set the full name (and other information) for this logged in user
+	Call SetSessionOnlyVariables(nOrgId)
+	' Force a re-evaluation of the user status (ie. validate the user)
+	Session(cSessionNextSessionAbandonTime) = Now() + cSessionTimeoutInterval
+
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+	If Session(cSessionLoginUID) <> PUBLIC_LOGINUID Then
+		' User is logged in: create entries in connection tracking tables as needed
+
+		' Initialize tracking of user connections, if it hasn't already been done
+		Call CreateAppUserTable()	' harmless if redundant
+		' Begin tracking this connection
+		Call StartTrackingConnection()
+	Else
+		Call IncrNumPublicSessions()
+	End If
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+End Sub
+
+'Session_OnEnd          Runs when a user's session times out or quits your application
+Sub Session_OnEnd
+
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+	' Remove info about this connection from the connection management Session variables
+	If Session(cSessionLoginUID) = PUBLIC_LOGINUID Then 
+		Call DecrNumPublicSessions()
+	End If
+	Call StopTrackingConnection(False)	' False = this is an OnEnd not a Logout
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+End Sub
+
+'Application_OnEnd      Runs once when the web server shuts down
+Sub Application_OnEnd
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+	Call DeleteAppUserTable()			' cut root of tree explicitly first (prevent further use)
+	Call DeleteAllAppUserVariables()	' then get rid of the rest
+	Call DeleteNumPublicSessions()
+	'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+End Sub
+
+</SCRIPT>

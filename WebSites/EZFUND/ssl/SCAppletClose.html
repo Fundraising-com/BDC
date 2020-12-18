@@ -1,0 +1,3 @@
+<SCRIPT>
+window.close();
+</SCRIPT>

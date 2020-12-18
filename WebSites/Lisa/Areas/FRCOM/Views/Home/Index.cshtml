@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div layout="column">
+   <div class="md-caption">Use the menu on your left to navigate</div>
+</div>
+<md-content class="md-padding" layout-xs="column" layout="row">
+   <md-card md-whiteframe="10" ng-controller="ReviewsController as reviewsCtrl" ng-init="reviewsCtrl.GetReviews()" ng-show="(reviewsCtrl.reviews | filter: {IsApproved: 'false'}).length > 0" ng-cloak>
+      <md-card-content>
+         <h2><ng-md-icon icon="rate_review" style="fill: red" size="48"></ng-md-icon> Unapproved Reviews</h2>
+         <p>You have <strong>{{(reviewsCtrl.reviews | filter: {IsApproved: 'false'}).length}}</strong> review(s) waiting to be approved.
+         </p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+         <md-button href="/FRCOM/products/reviews" class="md-primary md-raised">Go to Reviews</md-button>
+      </md-card-actions>
+   </md-card>
+   <md-card md-whiteframe="10" ng-cloak>
+      <md-card-content>
+         <div layout="column">
+            <h2><ng-md-icon icon="person" style="fill: rgb(255,64,129)" size="48"></ng-md-icon> Leads Created</h2>
+            <div layout="row" ng-controller="LeadsController as leadsCtrl">
+               <div layout="column" flex="50" layout-align="center center" ng-init="leadsCtrl.GetAYearAgoLeads()">
+                  <div class="md-subhead">{{leadsCtrl.yearAgo | date: 'shortDate'}}</div>
+                  <div class="md-display-2" ng-class="{'text-success' : leadsCtrl.todayLeads.length < leadsCtrl.aYearAgoLeads.length, 'text-error' : leadsCtrl.todayLeads.length > leadsCtrl.aYearAgoLeads.length}">{{leadsCtrl.aYearAgoLeads.length}}</div>
+               </div>
+               <div layout="column" flex="50" ng-init="leadsCtrl.GetTodayLeads()" layout-align="center center">
+                  <div class="md-subhead">{{leadsCtrl.today | date: 'shortDate'}}</div>
+                  <div class="md-display-2" ng-class="{'text-success' : leadsCtrl.todayLeads.length > leadsCtrl.aYearAgoLeads.length, 'text-error' : leadsCtrl.todayLeads.length < leadsCtrl.aYearAgoLeads.length}">{{leadsCtrl.todayLeads.length}}</div>
+               </div>
+            </div>
+         </div>
+      </md-card-content>
+   </md-card>
+</md-content>
+@section left_navigation_menu
+{
+   @Html.Partial("_menu")
+}

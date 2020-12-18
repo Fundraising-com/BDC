@@ -1,0 +1,2190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0B75088D-F92C-4DA0-9655-44E76093BEC8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Web.MGP</RootNamespace>
+    <AssemblyName>GA.BDC.Web.MGP</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\DotNetOpenAuth.ApplicationBlock.1.0.472.82\lib\net472\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.ApplicationBlock, Version=1.0.472.82, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\DotNetOpenAuth.ApplicationBlock.1.0.472.82\lib\net472\DotNetOpenAuth.ApplicationBlock.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.CommonProtos, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Api.CommonProtos.1.1.0\lib\net45\Google.Api.CommonProtos.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Api.Gax.2.2.0\lib\net45\Google.Api.Gax.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax.Grpc, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Api.Gax.Grpc.2.2.0\lib\net45\Google.Api.Gax.Grpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.36.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Apis.1.36.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.36.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Apis.Auth.1.36.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.36.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Apis.Auth.1.36.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.36.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Apis.Core.1.36.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.36.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Apis.1.36.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Cloud.Language.V1, Version=1.1.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Cloud.Language.V1.1.1.0\lib\net45\Google.Cloud.Language.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.GData.Client.2.2.0.0\lib\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Contacts, Version=2.2.0.0, Culture=neutral, PublicKeyToken=7e065189dd4b982f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.GData.Contacts.2.2.0.0\lib\Google.GData.Contacts.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.GData.Extensions.2.2.0.0\lib\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.3.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Protobuf.3.3.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Grpc.Auth.1.7.0\lib\net45\Grpc.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Grpc.Core.1.7.1\lib\net45\Grpc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=3.8.472.3, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\LumenWorks.Framework.IO.3.8.472.3\lib\net472\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Mail, Version=3.0.18201.1449, Culture=neutral, PublicKeyToken=6dc438ab78a525b3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Mail.dll.3.0.18201.1449\lib\net45\Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.Primitives.4.0.1\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.Registry.AccessControl.4.5.0\lib\net461\Microsoft.Win32.Registry.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.SystemEvents, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.SystemEvents.4.5.0\lib\net461\Microsoft.Win32.SystemEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-WPF">
+      <HintPath>..\..\[Shared Dependencies]\PdfSharp-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RestSharp.Portable.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be81bb0f53eab22f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\FubarCoder.RestSharp.Portable.Core.3.3.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\RestSharp.Portable.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp.Portable.HttpClient, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be81bb0f53eab22f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\FubarCoder.RestSharp.Portable.HttpClient.3.3.0\lib\net45\RestSharp.Portable.HttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="SAP.Connector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=50436dca5c7f7d23">
+      <HintPath>..\..\..\..\packages\SWCorporate.SAP.Shared.5.1.0.82\lib\net472\SAP.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="SAP.Connector.Rfc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=50436dca5c7f7d23">
+      <HintPath>..\..\..\..\packages\SWCorporate.SAP.Shared.5.1.0.82\lib\net472\SAP.Connector.Rfc.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.AppServices.Shared, Version=5.2.14.82, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.AppServices.Shared.5.2.14.82\lib\net472\SWCorporate.AppServices.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.PaymentProcessing.Model, Version=1.8.9.80, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.PaymentProcessing.Model.1.8.9.80\lib\net472\SWCorporate.PaymentProcessing.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.PlatformInvocationLibrary, Version=5.0.20.4, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.PlatformInvocationLibrary.5.0.20.4\lib\net472\SWCorporate.PlatformInvocationLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.SAP.Shared, Version=5.1.0.82, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.SAP.Shared.5.1.0.82\lib\net472\SWCorporate.SAP.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.ServiceModelEx, Version=5.0.23.22, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.ServiceModelEx.5.0.23.22\lib\net472\SWCorporate.ServiceModelEx.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.SystemEx, Version=5.0.29.82, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.SystemEx.5.0.29.82\lib\net472\SWCorporate.SystemEx.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.SystemEx.Cryptography, Version=5.0.20.12, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.SystemEx.Cryptography.5.0.20.12\lib\net472\SWCorporate.SystemEx.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.SystemEx.DirectoryServices, Version=5.0.20.16, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.SystemEx.DirectoryServices.5.0.20.16\lib\net472\SWCorporate.SystemEx.DirectoryServices.dll</HintPath>
+    </Reference>
+    <Reference Include="SWCorporate.SystemEx.Messaging, Version=5.2.2.82, Culture=neutral, PublicKeyToken=3268d2a822844cac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SWCorporate.SystemEx.Messaging.5.2.2.82\lib\net472\SWCorporate.SystemEx.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.CData.GoogleContacts, Version=18.0.0.40, Culture=neutral, PublicKeyToken=cdc168f89cffe9cf, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\CData.GoogleContacts.18.0.6817\lib\net40\System.Data.CData.GoogleContacts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.CData.GoogleContacts.Designer, Version=18.0.0.40, Culture=neutral, PublicKeyToken=cdc168f89cffe9cf, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\CData.GoogleContacts.18.0.6817\lib\net40\System.Data.CData.GoogleContacts.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.CData.GoogleContacts.Entities.EF6, Version=18.0.0.40, Culture=neutral, PublicKeyToken=cdc168f89cffe9cf, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\CData.GoogleContacts.18.0.6817\lib\net40\System.Data.CData.GoogleContacts.Entities.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Odbc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Data.Odbc.4.5.0\lib\net461\System.Data.Odbc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.5.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Data.SqlClient.4.6.1\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Diagnostics.DiagnosticSource.4.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.EventLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Diagnostics.EventLog.4.5.0\lib\net461\System.Diagnostics.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.PerformanceCounter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Diagnostics.PerformanceCounter.4.5.0\lib\net461\System.Diagnostics.PerformanceCounter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.4.1.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.FileSystem.AccessControl.4.5.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.Packaging.4.5.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipes.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.Pipes.AccessControl.4.5.1\lib\net461\System.IO.Pipes.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Ports, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.Ports.4.5.0\lib\net461\System.IO.Ports.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Net.Http.4.1.1\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Resources.Extensions.4.6.0\lib\netstandard2.0\System.Resources.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Runtime.4.1.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Algorithms.4.2.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Cng, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Cng.4.5.0\lib\net47\System.Security.Cryptography.Cng.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Encoding.4.0.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=4.0.3.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Pkcs.4.5.2\lib\net461\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Primitives.4.0.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.ProtectedData.4.5.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.X509Certificates.4.1.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Principal.Windows.4.5.1\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.ServiceModel.Duplex, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Duplex.4.5.3\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Http.4.5.3\lib\net461\System.ServiceModel.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.NetTcp.4.5.3\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Primitives.4.5.3\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Security, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Security.4.5.3\lib\net461\System.ServiceModel.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Syndication, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Syndication.4.5.0\lib\net461\System.ServiceModel.Syndication.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.ServiceProcess.ServiceController, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceProcess.ServiceController.4.5.0\lib\net461\System.ServiceProcess.ServiceController.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Text.Encoding.CodePages.4.5.1\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Threading.AccessControl.4.5.0\lib\net461\System.Threading.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.WorkflowServices" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CampaignManagerController.cs" />
+    <Compile Include="Controllers\DonationController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ActionHelper.cs" />
+    <Compile Include="Helpers\AddressHygieneHelper.cs" />
+    <Compile Include="Helpers\AESHelper.cs" />
+    <Compile Include="Helpers\ApplicationHelper.cs" />
+    <Compile Include="Helpers\Context\RequestInfo.cs" />
+    <Compile Include="Helpers\Context\ResponseInfo.cs" />
+    <Compile Include="Helpers\EmailTemplate\TagParsor.cs" />
+    <Compile Include="Helpers\EmailTemplate\TouchHelper.cs" />
+    <Compile Include="Helpers\Exceptions\EmptyEventException.cs" />
+    <Compile Include="Helpers\Extensions\ApplicationExtension.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\PartnerHelper.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\PDFSharpReport.cs" />
+    <Compile Include="Helpers\RegexHelper.cs" />
+    <Compile Include="Helpers\Routes\Attributes\RenderEventBranding.cs" />
+    <Compile Include="Helpers\Routes\Attributes\RenderLeadBranding.cs" />
+    <Compile Include="Helpers\Routes\Attributes\RenderOutputTextAttribute.cs" />
+    <Compile Include="Helpers\Routes\Attributes\RenderPublicEventBranding.cs" />
+    <Compile Include="Helpers\Routes\Attributes\RenderTouchBranding.cs" />
+    <Compile Include="Helpers\Routes\Filters\CanadaFilter.cs" />
+    <Compile Include="Helpers\Routes\Filters\CustomRequireHttpsAttribute.cs" />
+    <Compile Include="Helpers\Routes\Filters\UnsupportedBrowserFilter.cs" />
+    <Compile Include="Helpers\Routes\Filters\EnvironmentFilter.cs" />
+    <Compile Include="Helpers\Routes\Filters\InitializeAuthenticationFilter.cs" />
+    <Compile Include="Helpers\Routes\Attributes\MGPAuthentication.cs" />
+    <Compile Include="Helpers\Routes\Attributes\RenderPartnerBranding.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Routes\Filters\ExceptionFilter.cs" />
+    <Compile Include="Helpers\Routes\Filters\LeadFilter.cs" />
+    <Compile Include="Helpers\Routes\Filters\PartnerFilter.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\Routes\Constraints\GroupConstraint.cs" />
+    <Compile Include="Helpers\Routes\Constraints\ParticipantConstraint.cs" />
+    <Compile Include="Helpers\Security\MGPOAuthWebSecurity.cs" />
+    <Compile Include="Helpers\FilterStream\TextAsset.cs" />
+    <Compile Include="Helpers\UrlMapHelper.cs" />
+    <Compile Include="Helpers\Validations\Attributes\ExcludeValueAttribute.cs" />
+    <Compile Include="Helpers\XFactor\Eteamz.cs" />
+    <Compile Include="Models\Branding\Event.cs" />
+    <Compile Include="Models\Branding\Lead.cs" />
+    <Compile Include="Models\Branding\Partner.cs" />
+    <Compile Include="Models\Branding\PublicEvent.cs" />
+    <Compile Include="Models\Branding\TouchInvitation.cs" />
+    <Compile Include="Models\Branding\User.cs" />
+    <Compile Include="Models\Views\AmountRaisedIndicator.cs" />
+    <Compile Include="Models\Views\CampaignReport.cs" />
+    <Compile Include="Models\Views\Donation.cs" />
+    <Compile Include="Models\Views\Email.cs" />
+    <Compile Include="Models\Views\EmailContact.cs" />
+    <Compile Include="Models\Views\EmailOverview.cs" />
+    <Compile Include="Models\Views\GroupViewModel.cs" />
+    <Compile Include="Models\Views\ImportAddressBookModel.cs" />
+    <Compile Include="Models\Views\NewCampaign.cs" />
+    <Compile Include="Models\Views\Event.cs" />
+    <Compile Include="Models\Views\Caroussel.cs" />
+    <Compile Include="Models\Views\Comments.cs" />
+    <Compile Include="Models\Views\FeaturedGroup.cs" />
+    <Compile Include="Models\Views\FindAGroup.cs" />
+    <Compile Include="Models\Views\FindAParticipant.cs" />
+    <Compile Include="Models\Views\GalleryImage.cs" />
+    <Compile Include="Models\Views\Information.cs" />
+    <Compile Include="Models\Views\KickOff.cs" />
+    <Compile Include="Models\Views\LandingPage.cs" />
+    <Compile Include="Models\Views\OAuth.cs" />
+    <Compile Include="Models\Views\Participant.cs" />
+    <Compile Include="Models\Views\ParticipantPage.cs" />
+    <Compile Include="Models\Views\ParticipantPrize.cs" />
+    <Compile Include="Models\Views\ParticipantRotator.cs" />
+    <Compile Include="Models\Views\Personalization.cs" />
+    <Compile Include="Models\Views\PersonalizationImage.cs" />
+    <Compile Include="Models\Views\PopularItem.cs" />
+    <Compile Include="Models\Views\Promote.cs" />
+    <Compile Include="Models\Views\RegisterExternal.cs" />
+    <Compile Include="Helpers\Security\MGPSimpleMembershipProvider.cs" />
+    <Compile Include="Models\Views\Registration.cs" />
+    <Compile Include="Models\Views\SignIn.cs" />
+    <Compile Include="Models\Views\SupportBox.cs" />
+    <Compile Include="Models\Views\SupporterInvited.cs" />
+    <Compile Include="Models\Views\TopParticipant.cs" />
+    <Compile Include="Models\Views\TopSeller.cs" />
+    <Compile Include="Models\Views\Unsubscribe.cs" />
+    <Compile Include="Models\Views\UploadedCSV.cs" />
+    <Compile Include="Models\Views\UploadedImage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SAP\ZBapiGa\Client.cs" />
+    <Compile Include="SAP\ZBapiGa\Reference.cs" />
+    <Compile Include="Views\Localization\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\com.eteamz.services.efundraising\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\com.qsp.wsi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\QPayWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SAP.ZBapiGa\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\angular-ui.css" />
+    <Content Include="Content\angular-ui.min.css" />
+    <Content Include="Content\bootstrap-social.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\common\backArrow.gif" />
+    <Content Include="Content\images\common\b_copylink.gif" />
+    <Content Include="Content\images\common\dinnerandmovie.gif" />
+    <Content Include="Content\images\common\gasavingpass.JPG" />
+    <Content Include="Content\images\common\hand.png" />
+    <Content Include="Content\images\common\msgIcon.gif" />
+    <Content Include="Content\images\common\pdficon_large.png" />
+    <Content Include="Content\images\common\checker.png" />
+    <Content Include="Content\images\common\poweredby.jpg" />
+    <Content Include="Content\images\common\redeem.png" />
+    <Content Include="Content\images\corporate\alumniassociationapproach\logo.jpg" />
+    <Content Include="Content\images\corporate\alumniassociationapproach\magazines.jpg" />
+    <Content Include="Content\images\corporate\alumniassociationapproach\main.jpg" />
+    <Content Include="Content\images\corporate\charityfundapproach\logo.jpg" />
+    <Content Include="Content\images\corporate\charityfundapproach\magazines.jpg" />
+    <Content Include="Content\images\corporate\charityfundapproach\main.jpg" />
+    <Content Include="Content\images\corporate\cysticfibrosisfoundation\logo.jpg" />
+    <Content Include="Content\images\corporate\cysticfibrosisfoundation\main.jpg" />
+    <Content Include="Content\images\corporate\cysticfibrosisfoundation\popular_items_jewelry.gif" />
+    <Content Include="Content\images\corporate\cysticfibrosisfoundation\popular_items_tublers.jpg" />
+    <Content Include="Content\images\corporate\mbfinancial\logo.jpg" />
+    <Content Include="Content\images\corporate\mbfinancial\main.jpg" />
+    <Content Include="Content\images\corporate\racewalkapproach\logo.jpg" />
+    <Content Include="Content\images\corporate\racewalkapproach\magazines.jpg" />
+    <Content Include="Content\images\corporate\racewalkapproach\main.jpg" />
+    <Content Include="Content\images\corporate\scholarshipfundapproach\logo.jpg" />
+    <Content Include="Content\images\corporate\scholarshipfundapproach\magazines.jpg" />
+    <Content Include="Content\images\corporate\scholarshipfundapproach\main.jpg" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\donate_button.png" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_1.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_1.png" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_2.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_2.png" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_3.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_3.png" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_4.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_4.png" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_5.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word_5.png" />
+    <Content Include="Content\images\groups\banners\banner_120x120.jpg" />
+    <Content Include="Content\images\groups\banners\banner_234x60.jpg" />
+    <Content Include="Content\images\groups\banners\banner_468x60.jpg" />
+    <Content Include="Content\images\groups\banners\banner_468x60_small.jpg" />
+    <Content Include="Content\images\groups\campaignManager\01.jpg" />
+    <Content Include="Content\images\groups\campaignManager\02.jpg" />
+    <Content Include="Content\images\groups\campaignManager\03.jpg" />
+    <Content Include="Content\images\groups\campaignManager\04.jpg" />
+    <Content Include="Content\images\groups\campaignManager\05.jpg" />
+    <Content Include="Content\images\groups\donate_button.png" />
+    <Content Include="Content\images\groups\downloadTools\b_download.gif" />
+    <Content Include="Content\images\groups\downloadTools\emailcollect_thum.gif" />
+    <Content Include="Content\images\groups\downloadTools\lettergroup_thumb.gif" />
+    <Content Include="Content\images\groups\downloadTools\lettersupp_thumb.gif" />
+    <Content Include="Content\images\groups\downloadTools\listmag_thumb.gif" />
+    <Content Include="Content\images\groups\downloadTools\pdf.gif" />
+    <Content Include="Content\images\groups\group.gif" />
+    <Content Include="Content\images\groups\howItWorks.jpg" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\join_button.png" />
+    <Content Include="Content\images\groups\lettergroup.gif" />
+    <Content Include="Content\images\groups\letterpen.gif" />
+    <Content Include="Content\images\groups\magazinesbanner.jpg" />
+    <Content Include="Content\images\groups\money.jpg" />
+    <Content Include="Content\images\groups\participant.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\spread_the_word.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\therm_bottom.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\therm_empty.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\therm_full.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\therm_top_empty.gif" />
+    <Content Include="Content\images\groups\amountRaisedIndicator\therm_top_full.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_cookie.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_decor.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_discounts.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_ecard.jpg" />
+    <Content Include="Content\images\groups\popularItems\popular_items_gift.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_jewelry.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_magazines.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_magazines_sportsillustratedcombo.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_magazines_timecombo.gif" />
+    <Content Include="Content\images\groups\popularItems\popular_items_tublers.jpg" />
+    <Content Include="Content\images\groups\popularItems\popular_items_wrist.gif" />
+    <Content Include="Content\images\groups\smallpig2.gif" />
+    <Content Include="Content\images\landing\AOII.png" />
+    <Content Include="Content\images\landing\Cameron.jpg" />
+    <Content Include="Content\images\landing\Envision.jpg" />
+    <Content Include="Content\images\landing\BGCA.jpg" />
+    <Content Include="Content\images\landing\KappaDelta.jpg" />
+    <Content Include="Content\images\landing\KappaDeltaSorority.jpg" />
+    <Content Include="Content\images\landing\KGH.jpg" />
+    <Content Include="Content\images\landing\Lydia.jpg" />
+    <Content Include="Content\images\landing\Lydia.png" />
+    <Content Include="Content\images\landing\Pilot.jpg" />
+    <Content Include="Content\images\landing\relayforlife.png" />
+    <Content Include="Content\images\landing\relayforlife_top.jpg" />
+    <Content Include="Content\images\landing\tricities.jpg" />
+    <Content Include="Content\images\personalization\logo\1\banner.gif" />
+    <Content Include="Content\images\personalization\logo\active\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\active\logo.gif" />
+    <Content Include="Content\images\personalization\logo\active\logo_old.gif" />
+    <Content Include="Content\images\personalization\logo\aop\banner.gif" />
+    <Content Include="Content\images\personalization\logo\asa\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\asa\Logo.gif" />
+    <Content Include="Content\images\personalization\logo\ash\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\ash\Logo.gif" />
+    <Content Include="Content\images\personalization\logo\ATS\banner.gif" />
+    <Content Include="Content\images\personalization\logo\ATS\logo.gif" />
+    <Content Include="Content\images\personalization\logo\baberuth\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\baberuth\logo.gif" />
+    <Content Include="Content\images\personalization\logo\bgca\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\bgca\logo.gif" />
+    <Content Include="Content\images\personalization\logo\bgca\banner.gif" />
+    <Content Include="Content\images\personalization\logo\cdls\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\cdls\logo.gif" />
+    <Content Include="Content\images\personalization\logo\cheerdeals\logo.gif" />
+    <Content Include="Content\images\personalization\logo\Churchbizo\logo.gif" />
+    <Content Include="Content\images\personalization\logo\classfundr\classfundraising.jpg" />
+    <Content Include="Content\images\personalization\logo\classfundr\logo.gif" />
+    <Content Include="Content\images\personalization\logo\coacheer\logo.gif" />
+    <Content Include="Content\images\personalization\logo\DanceSupp\logo.gif" />
+    <Content Include="Content\images\personalization\logo\efundraising\logo.gif" />
+    <Content Include="Content\images\personalization\logo\efundraisi\logo.gif" />
+    <Content Include="Content\images\personalization\logo\efunds\logo.gif" />
+    <Content Include="Content\images\personalization\logo\egad\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\egad\logo.gif" />
+    <Content Include="Content\images\personalization\logo\enewslette\logo.gif" />
+    <Content Include="Content\images\personalization\logo\envisiondonation\banner.gif" />
+    <Content Include="Content\images\personalization\logo\ezfund\logo.gif" />
+    <Content Include="Content\images\personalization\logo\fastTrack\logo.gif" />
+    <Content Include="Content\images\personalization\logo\fds\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\fds\logo.gif" />
+    <Content Include="Content\images\personalization\logo\frinsight\logo.gif" />
+    <Content Include="Content\images\personalization\logo\Frugalmom\logo.gif" />
+    <Content Include="Content\images\personalization\logo\fundalley\logo.gif" />
+    <Content Include="Content\images\personalization\logo\fundideas\logo.gif" />
+    <Content Include="Content\images\personalization\logo\FUNDNEWS\logo.gif" />
+    <Content Include="Content\images\personalization\logo\fundrahelp\logo.gif" />
+    <Content Include="Content\images\personalization\logo\Fundraisin\logo - Copy.gif" />
+    <Content Include="Content\images\personalization\logo\Fundraisin\logo.gif" />
+    <Content Include="Content\images\personalization\logo\gic\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\gic\logo.gif" />
+    <Content Include="Content\images\personalization\logo\Girlgotgam\logo.gif" />
+    <Content Include="Content\images\personalization\logo\goalline\logo.gif" />
+    <Content Include="Content\images\personalization\logo\grantsaler\logo.gif" />
+    <Content Include="Content\images\personalization\logo\helpfr\logo.gif" />
+    <Content Include="Content\images\personalization\logo\hms\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\hms\logo.gif" />
+    <Content Include="Content\images\personalization\logo\hoopskills\logo.gif" />
+    <Content Include="Content\images\personalization\logo\houseoflin\logo.gif" />
+    <Content Include="Content\images\personalization\logo\justforkix\logo.gif" />
+    <Content Include="Content\images\personalization\logo\kap\banner.gif" />
+    <Content Include="Content\images\personalization\logo\kap\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\kap\logo.gif" />
+    <Content Include="Content\images\personalization\logo\kdresto\banner.gif" />
+    <Content Include="Content\images\personalization\logo\leadam\logo.gif" />
+    <Content Include="Content\images\personalization\logo\leaguelineup\banner.gif" />
+    <Content Include="Content\images\personalization\logo\leaguelineup\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\leaguelineup\Logo.gif" />
+    <Content Include="Content\images\personalization\logo\lydiadonation\banner.gif" />
+    <Content Include="Content\images\personalization\logo\marching\logo.gif" />
+    <Content Include="Content\images\personalization\logo\nera\logo.gif" />
+    <Content Include="Content\images\personalization\logo\optionc\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\optionc\logo.gif" />
+    <Content Include="Content\images\personalization\logo\pilot\banner.gif" />
+    <Content Include="Content\images\personalization\logo\Pony\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\Pony\Logo.gif" />
+    <Content Include="Content\images\personalization\logo\profitquests\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\profitquests\logo.gif" />
+    <Content Include="Content\images\personalization\logo\relayforlife\logo.gif" />
+    <Content Include="Content\images\personalization\logo\restocom\banner.gif" />
+    <Content Include="Content\images\personalization\logo\restocom\Copy of logo.gif" />
+    <Content Include="Content\images\personalization\logo\restocom\logo.gif" />
+    <Content Include="Content\images\personalization\logo\rewardfi\logo.gif" />
+    <Content Include="Content\images\personalization\logo\sage\logo.gif" />
+    <Content Include="Content\images\personalization\logo\scfund\logo.gif" />
+    <Content Include="Content\images\personalization\logo\spirit\logo.gif" />
+    <Content Include="Content\images\personalization\logo\statewide\banner.gif" />
+    <Content Include="Content\images\personalization\logo\statewide\logo.gif" />
+    <Content Include="Content\images\personalization\logo\stepbystep\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\stepbystep\logo.gif" />
+    <Content Include="Content\images\personalization\logo\SuperFundr\logo.gif" />
+    <Content Include="Content\images\personalization\logo\tc\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\tc\logo.gif" />
+    <Content Include="Content\images\personalization\logo\The Coachs\logo.gif" />
+    <Content Include="Content\images\personalization\logo\TopSchool\logo.gif" />
+    <Content Include="Content\images\personalization\logo\tpaf\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\tpaf\logo.gif" />
+    <Content Include="Content\images\personalization\logo\tricitiescharities\logo.gif" />
+    <Content Include="Content\images\personalization\logo\USAFootball\logo.gif" />
+    <Content Include="Content\images\personalization\logo\USAFootball\usnft_gao.jpg" />
+    <Content Include="Content\images\personalization\logo\usafund\logo.gif" />
+    <Content Include="Content\images\personalization\logo\usahockey\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\usahockey\Logo.gif" />
+    <Content Include="Content\images\personalization\logo\yboa\homebanner.jpg" />
+    <Content Include="Content\images\personalization\logo\yboa\logo.gif" />
+    <Content Include="Content\images\personalization\logo\yourway\logo.gif" />
+    <Content Include="Content\images\personalization\gallery\community\band.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\boycout.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\boyscouts.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\children.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\church.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\church_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\church_2.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\church_3.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\church_4.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\community.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\girlscouts.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\girlsscout.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\music.jpg" />
+    <Content Include="Content\images\personalization\gallery\community\scout.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\beach.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\flag.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\flowers.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\flower_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\flower_2.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\flower_default.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\generic.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\group_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\general\trip.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\alumni.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\band.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\board.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\dance.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\elementary.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\elementary_school.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\junior_&amp;_high_school.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\kindergarten.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\music.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\school_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\school_2.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\university.jpg" />
+    <Content Include="Content\images\personalization\gallery\school\university_&amp;_college.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\ballet.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\band.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\baseball.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\basketball.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\basketball_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\basketball_2.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\bowling.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\cheer&amp;foot.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\cheer&amp;foot_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\cheer.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\cheerfoot.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\dance.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\fencing.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\football.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\football_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\football_2.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\girls_basketball.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\gymnastics.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\hockey.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\lacrosse.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\martialarts.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\martial_arts.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\rowing.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\soccer.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\soccer_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\soccer_2.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\softball.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\softball2.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\softball_1.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\swimming.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\tennis.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\track&amp;field.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\trackfield.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\track_&amp;_field.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\volley.jpg" />
+    <Content Include="Content\images\personalization\gallery\sports\wrestling.jpg" />
+    <Content Include="Content\images\personalization\groupphotoplaceholder.gif" />
+    <Content Include="Content\images\personalization\participant_default.gif" />
+    <Content Include="Content\images\personalization\partner\AOII\Magazine Website.jpg" />
+    <Content Include="Content\images\personalization\partner\AOII\MagazineWebsite.jpg" />
+    <Content Include="Content\images\personalization\partner\LLU\llu.jpg" />
+    <Content Include="Content\images\pixel.gif" />
+    <Content Include="Content\images\public\content\404_1.jpg" />
+    <Content Include="Content\images\public\content\404_2.jpg" />
+    <Content Include="Content\images\public\content\404_3.jpg" />
+    <Content Include="Content\images\public\content\404_4.jpg" />
+    <Content Include="Content\images\public\content\bg-image.jpg" />
+    <Content Include="Content\images\public\content\error_page.jpg" />
+    <Content Include="Content\images\public\content\EventNotFound.jpg" />
+    <Content Include="Content\images\public\content\excel.png" />
+    <Content Include="Content\images\public\content\faq_arrows.gif" />
+    <Content Include="Content\images\public\content\favicon.ico" />
+    <Content Include="Content\images\public\content\gmail-icon.svg" />
+    <Content Include="Content\images\public\content\groupPagePreview.jpg" />
+    <Content Include="Content\images\public\content\groupPagePreviewKappaDelta.jpg" />
+    <Content Include="Content\images\public\content\groupPagePreviewRelayForLife.jpg" />
+    <Content Include="Content\images\public\content\howitworks-page_03.jpg" />
+    <Content Include="Content\images\public\content\howitworks-page_05.jpg" />
+    <Content Include="Content\images\public\content\howitworks-page_07.jpg" />
+    <Content Include="Content\images\public\content\howitworks-page_12.jpg" />
+    <Content Include="Content\images\public\content\howitworks-page_15.jpg" />
+    <Content Include="Content\images\public\content\howitworks_button.gif" />
+    <Content Include="Content\images\public\content\howitworks_page.jpg" />
+    <Content Include="Content\images\public\content\import_google.png" />
+    <Content Include="Content\images\public\content\import_yahoo.png" />
+    <Content Include="Content\images\public\content\incentives_cinemaprizes.jpg" />
+    <Content Include="Content\images\public\content\inviteFriends.jpg" />
+    <Content Include="Content\images\public\content\loading.gif" />
+    <Content Include="Content\images\public\content\login.jpg" />
+    <Content Include="Content\images\public\content\main-logo.png" />
+    <Content Include="Content\images\public\content\mainLogo.gif" />
+    <Content Include="Content\images\public\content\mainlogo2.gif" />
+    <Content Include="Content\images\public\content\next-horizontal.png" />
+    <Content Include="Content\images\public\content\NotAuthorized.jpg" />
+    <Content Include="Content\images\public\content\prev-horizontal.png" />
+    <Content Include="Content\images\public\content\profilpic1.png" />
+    <Content Include="Content\images\public\content\profilpic2.png" />
+    <Content Include="Content\images\public\content\public_group_01.jpg" />
+    <Content Include="Content\images\public\content\public_group_02.jpg" />
+    <Content Include="Content\images\public\content\public_group_03.jpg" />
+    <Content Include="Content\images\public\content\public_group_04.jpg" />
+    <Content Include="Content\images\public\content\public_group_05.jpg" />
+    <Content Include="Content\images\public\content\public_group_06.jpg" />
+    <Content Include="Content\images\public\content\runwithit.jpg" />
+    <Content Include="Content\images\public\content\searchtip.jpg" />
+    <Content Include="Content\images\public\content\separator.png" />
+    <Content Include="Content\images\public\content\shareguy.jpg" />
+    <Content Include="Content\images\public\content\shareonfacebook.jpg" />
+    <Content Include="Content\images\public\content\shareontwitter.jpg" />
+    <Content Include="Content\images\public\content\signin.gif" />
+    <Content Include="Content\images\public\content\signin.jpg" />
+    <Content Include="Content\images\public\content\signin_aol.png" />
+    <Content Include="Content\images\public\content\signin_facebook.png" />
+    <Content Include="Content\images\public\content\signin_google.png" />
+    <Content Include="Content\images\public\content\signin_microsoft.png" />
+    <Content Include="Content\images\public\content\signin_plaxo.png" />
+    <Content Include="Content\images\public\content\signin_twitter.png" />
+    <Content Include="Content\images\public\content\signin_yahoo.png" />
+    <Content Include="Content\images\public\content\slide1.jpg" />
+    <Content Include="Content\images\public\content\slide2.jpg" />
+    <Content Include="Content\images\public\content\slide3.jpg" />
+    <Content Include="Content\images\public\content\slide4.jpg" />
+    <Content Include="Content\images\public\content\square_logo.jpg" />
+    <Content Include="Content\images\public\content\welcomeback.jpg" />
+    <Content Include="Content\images\public\content\yahoo-icon.svg" />
+    <Content Include="Content\images\public\footer\boysandgirlsclubs.gif" />
+    <Content Include="Content\images\public\footer\boysandgirlsclubs.png" />
+    <Content Include="Content\images\public\footer\kappadeltasorority.gif" />
+    <Content Include="Content\images\public\footer\kappadeltasorority.png" />
+    <Content Include="Content\images\public\footer\thehumansociety.gif" />
+    <Content Include="Content\images\public\footer\thehumansociety.png" />
+    <Content Include="Content\images\public\footer\theysignedup.gif" />
+    <Content Include="Content\images\public\footer\theysignedup.png" />
+    <Content Include="Content\images\public\newsletters\motherday2015.png" />
+    <Content Include="Content\images\public\newsletters\usafootball.png" />
+    <Content Include="Content\images\public\newsletters\usafootball_2.png" />
+    <Content Include="Content\ng-grid.min.css" />
+    <Content Include="Content\ng-wig.css" />
+    <Content Include="Content\partners\relayforlife.css" />
+    <Content Include="Content\partners\kappa.css" />
+    <Content Include="Content\select2.css" />
+    <Content Include="Content\select2.png" />
+    <Content Include="Content\select2x2.png" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\site\campaignManager.css" />
+    <Content Include="Content\site\custom-ckEditor-content.css" />
+    <Content Include="Content\site\donation.css" />
+    <Content Include="Content\site\group.css" />
+    <Content Include="Content\site\public.css" />
+    <Content Include="Content\spinner.gif" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-aria.js" />
+    <Content Include="Scripts\angular-aria.min.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular-csp.css" />
+    <Content Include="Scripts\angular-file-upload\angular-file-upload-html5-shim.js" />
+    <Content Include="Scripts\angular-file-upload\angular-file-upload-html5-shim.min.js" />
+    <Content Include="Scripts\angular-file-upload\angular-file-upload-shim.js" />
+    <Content Include="Scripts\angular-file-upload\angular-file-upload-shim.min.js" />
+    <Content Include="Scripts\angular-file-upload\angular-file-upload.js" />
+    <Content Include="Scripts\angular-file-upload\angular-file-upload.min.js" />
+    <Content Include="Scripts\angular-file-upload\FileAPI.flash.swf" />
+    <Content Include="Scripts\angular-file-upload\FileAPI.min.js" />
+    <Content Include="Scripts\angular-loader.js" />
+    <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-message-format.js" />
+    <Content Include="Scripts\angular-message-format.min.js" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-parse-ext.js" />
+    <Content Include="Scripts\angular-parse-ext.min.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-scenario.js" />
+    <Content Include="Scripts\angular-touch.js" />
+    <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui-ieshiv.js" />
+    <Content Include="Scripts\angular-ui-ieshiv.min.js" />
+    <Content Include="Scripts\angular-ui.js" />
+    <Content Include="Scripts\angular-ui.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\controllers.js" />
+    <Content Include="Scripts\app\modules.js" />
+    <Content Include="Scripts\app\services.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\css\wordcount.css" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\es.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\jp.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\plugin.js" />
+    <Content Include="Content\files\pdf\emailcollectpage.pdf" />
+    <Content Include="Content\files\pdf\listmag.pdf" />
+    <Content Include="Content\files\pdf\FreeKit.pdf" />
+    <Content Include="Content\files\pdf\InviteToHelp.pdf" />
+    <Content Include="Content\files\pdf\omnes_girlscoutsbold.ttf" />
+    <Content Include="Content\files\pdf\omnes_girlscoutsregular.ttf" />
+    <Content Include="Content\files\pdf\omnes_girlscoutssemibold.ttf" />
+    <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
+    <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\highcharts\highcharts-3d.js" />
+    <Content Include="Scripts\highcharts\highcharts-3d.src.js" />
+    <Content Include="Scripts\highcharts\highcharts-all.js" />
+    <Content Include="Scripts\highcharts\highcharts-more.js" />
+    <Content Include="Scripts\highcharts\highcharts-more.src.js" />
+    <Content Include="Scripts\highcharts\highcharts.js" />
+    <Content Include="Scripts\highcharts\highcharts.src.js" />
+    <Content Include="Scripts\highcharts\modules\canvas-tools.js" />
+    <Content Include="Scripts\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\highcharts\modules\data.js" />
+    <Content Include="Scripts\highcharts\modules\data.src.js" />
+    <Content Include="Scripts\highcharts\modules\drilldown.js" />
+    <Content Include="Scripts\highcharts\modules\drilldown.src.js" />
+    <Content Include="Scripts\highcharts\modules\exporting.js" />
+    <Content Include="Scripts\highcharts\modules\exporting.src.js" />
+    <Content Include="Scripts\highcharts\modules\funnel.js" />
+    <Content Include="Scripts\highcharts\modules\funnel.src.js" />
+    <Content Include="Scripts\highcharts\modules\heatmap.js" />
+    <Content Include="Scripts\highcharts\modules\heatmap.src.js" />
+    <Content Include="Scripts\highcharts\modules\no-data-to-display.js" />
+    <Content Include="Scripts\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\highcharts\modules\solid-gauge.js" />
+    <Content Include="Scripts\highcharts\modules\solid-gauge.src.js" />
+    <Content Include="Scripts\highcharts\themes\dark-blue.js" />
+    <Content Include="Scripts\highcharts\themes\dark-green.js" />
+    <Content Include="Scripts\highcharts\themes\dark-unica.js" />
+    <Content Include="Scripts\highcharts\themes\gray.js" />
+    <Content Include="Scripts\highcharts\themes\grid-light.js" />
+    <Content Include="Scripts\highcharts\themes\grid.js" />
+    <Content Include="Scripts\highcharts\themes\sand-signika.js" />
+    <Content Include="Scripts\highcharts\themes\skies.js" />
+    <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
+    <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_aa.js" />
+    <Content Include="Scripts\i18n\angular-locale_af-na.js" />
+    <Content Include="Scripts\i18n\angular-locale_af-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_af.js" />
+    <Content Include="Scripts\i18n\angular-locale_agq-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_agq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ak-gh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ak.js" />
+    <Content Include="Scripts\i18n\angular-locale_am-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_am.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-001.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ae.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-bh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-dj.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-dz.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-eg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-eh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-il.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-iq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-jo.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-km.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-kw.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-lb.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ly.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-mr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-om.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ps.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-qa.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-sa.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-sd.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-so.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ss.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-sy.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-td.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-tn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ye.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar.js" />
+    <Content Include="Scripts\i18n\angular-locale_as-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_as.js" />
+    <Content Include="Scripts\i18n\angular-locale_asa-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_asa.js" />
+    <Content Include="Scripts\i18n\angular-locale_ast-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_ast.js" />
+    <Content Include="Scripts\i18n\angular-locale_az-cyrl-az.js" />
+    <Content Include="Scripts\i18n\angular-locale_az-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_az-latn-az.js" />
+    <Content Include="Scripts\i18n\angular-locale_az-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_az.js" />
+    <Content Include="Scripts\i18n\angular-locale_bas-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_bas.js" />
+    <Content Include="Scripts\i18n\angular-locale_be-by.js" />
+    <Content Include="Scripts\i18n\angular-locale_be.js" />
+    <Content Include="Scripts\i18n\angular-locale_bem-zm.js" />
+    <Content Include="Scripts\i18n\angular-locale_bem.js" />
+    <Content Include="Scripts\i18n\angular-locale_bez-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_bez.js" />
+    <Content Include="Scripts\i18n\angular-locale_bg-bg.js" />
+    <Content Include="Scripts\i18n\angular-locale_bg.js" />
+    <Content Include="Scripts\i18n\angular-locale_bm-latn-ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_bm-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_bm-ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_bm.js" />
+    <Content Include="Scripts\i18n\angular-locale_bn-bd.js" />
+    <Content Include="Scripts\i18n\angular-locale_bn-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_bn.js" />
+    <Content Include="Scripts\i18n\angular-locale_bo-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_bo-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_bo.js" />
+    <Content Include="Scripts\i18n\angular-locale_br-fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_br.js" />
+    <Content Include="Scripts\i18n\angular-locale_brx-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_brx.js" />
+    <Content Include="Scripts\i18n\angular-locale_bs-cyrl-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_bs-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_bs-latn-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_bs-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_bs.js" />
+    <Content Include="Scripts\i18n\angular-locale_byn-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_byn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-ad.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-es-valencia.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-it.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca.js" />
+    <Content Include="Scripts\i18n\angular-locale_cgg-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_cgg.js" />
+    <Content Include="Scripts\i18n\angular-locale_chr-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_chr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-arab-iq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-arab-ir.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-arab.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-iq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-ir.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-latn-iq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ckb.js" />
+    <Content Include="Scripts\i18n\angular-locale_cs-cz.js" />
+    <Content Include="Scripts\i18n\angular-locale_cs.js" />
+    <Content Include="Scripts\i18n\angular-locale_cy-gb.js" />
+    <Content Include="Scripts\i18n\angular-locale_cy.js" />
+    <Content Include="Scripts\i18n\angular-locale_da-dk.js" />
+    <Content Include="Scripts\i18n\angular-locale_da-gl.js" />
+    <Content Include="Scripts\i18n\angular-locale_da.js" />
+    <Content Include="Scripts\i18n\angular-locale_dav-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_dav.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-at.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-de.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-li.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-lu.js" />
+    <Content Include="Scripts\i18n\angular-locale_de.js" />
+    <Content Include="Scripts\i18n\angular-locale_dje-ne.js" />
+    <Content Include="Scripts\i18n\angular-locale_dje.js" />
+    <Content Include="Scripts\i18n\angular-locale_dsb-de.js" />
+    <Content Include="Scripts\i18n\angular-locale_dsb.js" />
+    <Content Include="Scripts\i18n\angular-locale_dua-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_dua.js" />
+    <Content Include="Scripts\i18n\angular-locale_dyo-sn.js" />
+    <Content Include="Scripts\i18n\angular-locale_dyo.js" />
+    <Content Include="Scripts\i18n\angular-locale_dz-bt.js" />
+    <Content Include="Scripts\i18n\angular-locale_dz.js" />
+    <Content Include="Scripts\i18n\angular-locale_ebu-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_ebu.js" />
+    <Content Include="Scripts\i18n\angular-locale_ee-gh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ee-tg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ee.js" />
+    <Content Include="Scripts\i18n\angular-locale_el-cy.js" />
+    <Content Include="Scripts\i18n\angular-locale_el-gr.js" />
+    <Content Include="Scripts\i18n\angular-locale_el.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-001.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-150.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ag.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ai.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-as.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-au.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bb.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bs.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ca.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-cc.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ck.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-cx.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-dg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-dm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-fj.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-fk.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-fm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gb.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gd.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gh.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gi.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gu.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gy.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ie.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-im.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-io.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-iso.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-je.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-jm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ki.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-kn.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ky.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-lc.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-lr.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ls.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mh.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mp.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ms.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mu.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-my.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-na.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-nf.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ng.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-nr.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-nu.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-nz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ph.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pk.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pn.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pr.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-rw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sb.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sc.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sd.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sh.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sl.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ss.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sx.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tc.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tk.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-to.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tt.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tv.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-um.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-vc.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-vg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-vi.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-vu.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ws.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-zm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-zw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en.js" />
+    <Content Include="Scripts\i18n\angular-locale_eo-001.js" />
+    <Content Include="Scripts\i18n\angular-locale_eo.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-419.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ar.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-bo.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-cl.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-co.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-cr.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-cu.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-do.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ea.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ec.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-gq.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-gt.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-hn.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ic.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-mx.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ni.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-pa.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-pe.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ph.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-pr.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-py.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-sv.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-uy.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ve.js" />
+    <Content Include="Scripts\i18n\angular-locale_es.js" />
+    <Content Include="Scripts\i18n\angular-locale_et-ee.js" />
+    <Content Include="Scripts\i18n\angular-locale_et.js" />
+    <Content Include="Scripts\i18n\angular-locale_eu-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_eu.js" />
+    <Content Include="Scripts\i18n\angular-locale_ewo-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_ewo.js" />
+    <Content Include="Scripts\i18n\angular-locale_fa-af.js" />
+    <Content Include="Scripts\i18n\angular-locale_fa-ir.js" />
+    <Content Include="Scripts\i18n\angular-locale_fa.js" />
+    <Content Include="Scripts\i18n\angular-locale_ff-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_ff-gn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ff-mr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ff-sn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ff.js" />
+    <Content Include="Scripts\i18n\angular-locale_fi-fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_fil-ph.js" />
+    <Content Include="Scripts\i18n\angular-locale_fil.js" />
+    <Content Include="Scripts\i18n\angular-locale_fo-fo.js" />
+    <Content Include="Scripts\i18n\angular-locale_fo.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bi.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bj.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bl.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ca.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cg.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ci.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-dj.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-dz.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ga.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gn.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gp.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gq.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ht.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-km.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-lu.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mc.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mg.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mq.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mr.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mu.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-nc.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ne.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-pf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-pm.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-re.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-rw.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-sc.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-sn.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-sy.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-td.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-tg.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-tn.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-vu.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-wf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-yt.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_fur-it.js" />
+    <Content Include="Scripts\i18n\angular-locale_fur.js" />
+    <Content Include="Scripts\i18n\angular-locale_fy-nl.js" />
+    <Content Include="Scripts\i18n\angular-locale_fy.js" />
+    <Content Include="Scripts\i18n\angular-locale_ga-ie.js" />
+    <Content Include="Scripts\i18n\angular-locale_ga.js" />
+    <Content Include="Scripts\i18n\angular-locale_gd-gb.js" />
+    <Content Include="Scripts\i18n\angular-locale_gd.js" />
+    <Content Include="Scripts\i18n\angular-locale_gl-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_gl.js" />
+    <Content Include="Scripts\i18n\angular-locale_gsw-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_gsw-fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_gsw-li.js" />
+    <Content Include="Scripts\i18n\angular-locale_gsw.js" />
+    <Content Include="Scripts\i18n\angular-locale_gu-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_gu.js" />
+    <Content Include="Scripts\i18n\angular-locale_guz-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_guz.js" />
+    <Content Include="Scripts\i18n\angular-locale_gv-im.js" />
+    <Content Include="Scripts\i18n\angular-locale_gv.js" />
+    <Content Include="Scripts\i18n\angular-locale_ha-latn-gh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ha-latn-ne.js" />
+    <Content Include="Scripts\i18n\angular-locale_ha-latn-ng.js" />
+    <Content Include="Scripts\i18n\angular-locale_ha-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ha.js" />
+    <Content Include="Scripts\i18n\angular-locale_haw-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_haw.js" />
+    <Content Include="Scripts\i18n\angular-locale_he-il.js" />
+    <Content Include="Scripts\i18n\angular-locale_he.js" />
+    <Content Include="Scripts\i18n\angular-locale_hi-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_hi.js" />
+    <Content Include="Scripts\i18n\angular-locale_hr-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_hr-hr.js" />
+    <Content Include="Scripts\i18n\angular-locale_hr.js" />
+    <Content Include="Scripts\i18n\angular-locale_hsb-de.js" />
+    <Content Include="Scripts\i18n\angular-locale_hsb.js" />
+    <Content Include="Scripts\i18n\angular-locale_hu-hu.js" />
+    <Content Include="Scripts\i18n\angular-locale_hu.js" />
+    <Content Include="Scripts\i18n\angular-locale_hy-am.js" />
+    <Content Include="Scripts\i18n\angular-locale_hy.js" />
+    <Content Include="Scripts\i18n\angular-locale_ia-fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ia.js" />
+    <Content Include="Scripts\i18n\angular-locale_id-id.js" />
+    <Content Include="Scripts\i18n\angular-locale_id.js" />
+    <Content Include="Scripts\i18n\angular-locale_ig-ng.js" />
+    <Content Include="Scripts\i18n\angular-locale_ig.js" />
+    <Content Include="Scripts\i18n\angular-locale_ii-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ii.js" />
+    <Content Include="Scripts\i18n\angular-locale_in.js" />
+    <Content Include="Scripts\i18n\angular-locale_is-is.js" />
+    <Content Include="Scripts\i18n\angular-locale_is.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-it.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-sm.js" />
+    <Content Include="Scripts\i18n\angular-locale_it.js" />
+    <Content Include="Scripts\i18n\angular-locale_iw.js" />
+    <Content Include="Scripts\i18n\angular-locale_ja-jp.js" />
+    <Content Include="Scripts\i18n\angular-locale_ja.js" />
+    <Content Include="Scripts\i18n\angular-locale_jgo-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_jgo.js" />
+    <Content Include="Scripts\i18n\angular-locale_jmc-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_jmc.js" />
+    <Content Include="Scripts\i18n\angular-locale_ka-ge.js" />
+    <Content Include="Scripts\i18n\angular-locale_ka.js" />
+    <Content Include="Scripts\i18n\angular-locale_kab-dz.js" />
+    <Content Include="Scripts\i18n\angular-locale_kab.js" />
+    <Content Include="Scripts\i18n\angular-locale_kam-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_kam.js" />
+    <Content Include="Scripts\i18n\angular-locale_kde-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_kde.js" />
+    <Content Include="Scripts\i18n\angular-locale_kea-cv.js" />
+    <Content Include="Scripts\i18n\angular-locale_kea.js" />
+    <Content Include="Scripts\i18n\angular-locale_khq-ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_khq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ki-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_ki.js" />
+    <Content Include="Scripts\i18n\angular-locale_kk-cyrl-kz.js" />
+    <Content Include="Scripts\i18n\angular-locale_kk-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_kk.js" />
+    <Content Include="Scripts\i18n\angular-locale_kkj-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_kkj.js" />
+    <Content Include="Scripts\i18n\angular-locale_kl-gl.js" />
+    <Content Include="Scripts\i18n\angular-locale_kl.js" />
+    <Content Include="Scripts\i18n\angular-locale_kln-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_kln.js" />
+    <Content Include="Scripts\i18n\angular-locale_km-kh.js" />
+    <Content Include="Scripts\i18n\angular-locale_km.js" />
+    <Content Include="Scripts\i18n\angular-locale_kn-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_kn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ko-kp.js" />
+    <Content Include="Scripts\i18n\angular-locale_ko-kr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ko.js" />
+    <Content Include="Scripts\i18n\angular-locale_kok-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_kok.js" />
+    <Content Include="Scripts\i18n\angular-locale_ks-arab-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ks-arab.js" />
+    <Content Include="Scripts\i18n\angular-locale_ks.js" />
+    <Content Include="Scripts\i18n\angular-locale_ksb-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_ksb.js" />
+    <Content Include="Scripts\i18n\angular-locale_ksf-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_ksf.js" />
+    <Content Include="Scripts\i18n\angular-locale_ksh-de.js" />
+    <Content Include="Scripts\i18n\angular-locale_ksh.js" />
+    <Content Include="Scripts\i18n\angular-locale_kw-gb.js" />
+    <Content Include="Scripts\i18n\angular-locale_kw.js" />
+    <Content Include="Scripts\i18n\angular-locale_ky-cyrl-kg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ky-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_ky.js" />
+    <Content Include="Scripts\i18n\angular-locale_lag-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_lag.js" />
+    <Content Include="Scripts\i18n\angular-locale_lb-lu.js" />
+    <Content Include="Scripts\i18n\angular-locale_lb.js" />
+    <Content Include="Scripts\i18n\angular-locale_lg-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_lg.js" />
+    <Content Include="Scripts\i18n\angular-locale_lkt-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_lkt.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-ao.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-cf.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-cg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln.js" />
+    <Content Include="Scripts\i18n\angular-locale_lo-la.js" />
+    <Content Include="Scripts\i18n\angular-locale_lo.js" />
+    <Content Include="Scripts\i18n\angular-locale_lt-lt.js" />
+    <Content Include="Scripts\i18n\angular-locale_lt.js" />
+    <Content Include="Scripts\i18n\angular-locale_lu-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_lu.js" />
+    <Content Include="Scripts\i18n\angular-locale_luo-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_luo.js" />
+    <Content Include="Scripts\i18n\angular-locale_luy-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_luy.js" />
+    <Content Include="Scripts\i18n\angular-locale_lv-lv.js" />
+    <Content Include="Scripts\i18n\angular-locale_lv.js" />
+    <Content Include="Scripts\i18n\angular-locale_mas-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_mas-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_mas.js" />
+    <Content Include="Scripts\i18n\angular-locale_mer-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_mer.js" />
+    <Content Include="Scripts\i18n\angular-locale_mfe-mu.js" />
+    <Content Include="Scripts\i18n\angular-locale_mfe.js" />
+    <Content Include="Scripts\i18n\angular-locale_mg-mg.js" />
+    <Content Include="Scripts\i18n\angular-locale_mg.js" />
+    <Content Include="Scripts\i18n\angular-locale_mgh-mz.js" />
+    <Content Include="Scripts\i18n\angular-locale_mgh.js" />
+    <Content Include="Scripts\i18n\angular-locale_mgo-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_mgo.js" />
+    <Content Include="Scripts\i18n\angular-locale_mk-mk.js" />
+    <Content Include="Scripts\i18n\angular-locale_mk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ml-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_mn-cyrl-mn.js" />
+    <Content Include="Scripts\i18n\angular-locale_mn-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_mn.js" />
+    <Content Include="Scripts\i18n\angular-locale_mr-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_mr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-latn-bn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-latn-my.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-latn-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms.js" />
+    <Content Include="Scripts\i18n\angular-locale_mt-mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_mua-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_mua.js" />
+    <Content Include="Scripts\i18n\angular-locale_my-mm.js" />
+    <Content Include="Scripts\i18n\angular-locale_my.js" />
+    <Content Include="Scripts\i18n\angular-locale_naq-na.js" />
+    <Content Include="Scripts\i18n\angular-locale_naq.js" />
+    <Content Include="Scripts\i18n\angular-locale_nb-no.js" />
+    <Content Include="Scripts\i18n\angular-locale_nb-sj.js" />
+    <Content Include="Scripts\i18n\angular-locale_nb.js" />
+    <Content Include="Scripts\i18n\angular-locale_nd-zw.js" />
+    <Content Include="Scripts\i18n\angular-locale_nd.js" />
+    <Content Include="Scripts\i18n\angular-locale_ne-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ne-np.js" />
+    <Content Include="Scripts\i18n\angular-locale_ne.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-aw.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-bq.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-cw.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-nl.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-sr.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-sx.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl.js" />
+    <Content Include="Scripts\i18n\angular-locale_nmg-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_nmg.js" />
+    <Content Include="Scripts\i18n\angular-locale_nn-no.js" />
+    <Content Include="Scripts\i18n\angular-locale_nn.js" />
+    <Content Include="Scripts\i18n\angular-locale_nnh-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_nnh.js" />
+    <Content Include="Scripts\i18n\angular-locale_no-no.js" />
+    <Content Include="Scripts\i18n\angular-locale_no.js" />
+    <Content Include="Scripts\i18n\angular-locale_nr-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_nr.js" />
+    <Content Include="Scripts\i18n\angular-locale_nso-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_nso.js" />
+    <Content Include="Scripts\i18n\angular-locale_nus-sd.js" />
+    <Content Include="Scripts\i18n\angular-locale_nus.js" />
+    <Content Include="Scripts\i18n\angular-locale_nyn-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_nyn.js" />
+    <Content Include="Scripts\i18n\angular-locale_om-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_om-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_om.js" />
+    <Content Include="Scripts\i18n\angular-locale_or-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_or.js" />
+    <Content Include="Scripts\i18n\angular-locale_os-ge.js" />
+    <Content Include="Scripts\i18n\angular-locale_os-ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_os.js" />
+    <Content Include="Scripts\i18n\angular-locale_pa-arab-pk.js" />
+    <Content Include="Scripts\i18n\angular-locale_pa-arab.js" />
+    <Content Include="Scripts\i18n\angular-locale_pa-guru-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_pa-guru.js" />
+    <Content Include="Scripts\i18n\angular-locale_pa.js" />
+    <Content Include="Scripts\i18n\angular-locale_pl-pl.js" />
+    <Content Include="Scripts\i18n\angular-locale_pl.js" />
+    <Content Include="Scripts\i18n\angular-locale_ps-af.js" />
+    <Content Include="Scripts\i18n\angular-locale_ps.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-ao.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-br.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-cv.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-gw.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-mz.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-pt.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-st.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-tl.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt.js" />
+    <Content Include="Scripts\i18n\angular-locale_qu-bo.js" />
+    <Content Include="Scripts\i18n\angular-locale_qu-ec.js" />
+    <Content Include="Scripts\i18n\angular-locale_qu-pe.js" />
+    <Content Include="Scripts\i18n\angular-locale_qu.js" />
+    <Content Include="Scripts\i18n\angular-locale_rm-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_rm.js" />
+    <Content Include="Scripts\i18n\angular-locale_rn-bi.js" />
+    <Content Include="Scripts\i18n\angular-locale_rn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro-md.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro-ro.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro.js" />
+    <Content Include="Scripts\i18n\angular-locale_rof-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_rof.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-by.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-kg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-kz.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-md.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-ua.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_rw-rw.js" />
+    <Content Include="Scripts\i18n\angular-locale_rw.js" />
+    <Content Include="Scripts\i18n\angular-locale_rwk-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_rwk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sah-ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_sah.js" />
+    <Content Include="Scripts\i18n\angular-locale_saq-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_saq.js" />
+    <Content Include="Scripts\i18n\angular-locale_sbp-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_sbp.js" />
+    <Content Include="Scripts\i18n\angular-locale_se-fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_se-no.js" />
+    <Content Include="Scripts\i18n\angular-locale_se-se.js" />
+    <Content Include="Scripts\i18n\angular-locale_se.js" />
+    <Content Include="Scripts\i18n\angular-locale_seh-mz.js" />
+    <Content Include="Scripts\i18n\angular-locale_seh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ses-ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_ses.js" />
+    <Content Include="Scripts\i18n\angular-locale_sg-cf.js" />
+    <Content Include="Scripts\i18n\angular-locale_sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_shi-latn-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_shi-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_shi-tfng-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_shi-tfng.js" />
+    <Content Include="Scripts\i18n\angular-locale_shi.js" />
+    <Content Include="Scripts\i18n\angular-locale_si-lk.js" />
+    <Content Include="Scripts\i18n\angular-locale_si.js" />
+    <Content Include="Scripts\i18n\angular-locale_sk-sk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sl-si.js" />
+    <Content Include="Scripts\i18n\angular-locale_sl.js" />
+    <Content Include="Scripts\i18n\angular-locale_smn-fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_smn.js" />
+    <Content Include="Scripts\i18n\angular-locale_sn-zw.js" />
+    <Content Include="Scripts\i18n\angular-locale_sn.js" />
+    <Content Include="Scripts\i18n\angular-locale_so-dj.js" />
+    <Content Include="Scripts\i18n\angular-locale_so-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_so-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_so-so.js" />
+    <Content Include="Scripts\i18n\angular-locale_so.js" />
+    <Content Include="Scripts\i18n\angular-locale_sq-al.js" />
+    <Content Include="Scripts\i18n\angular-locale_sq-mk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sq-xk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sq.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-me.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-xk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-me.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-xk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ss-sz.js" />
+    <Content Include="Scripts\i18n\angular-locale_ss-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_ss.js" />
+    <Content Include="Scripts\i18n\angular-locale_ssy-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_ssy.js" />
+    <Content Include="Scripts\i18n\angular-locale_st-ls.js" />
+    <Content Include="Scripts\i18n\angular-locale_st-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_st.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv-ax.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv-fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv-se.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw.js" />
+    <Content Include="Scripts\i18n\angular-locale_swc-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_swc.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-lk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-my.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta.js" />
+    <Content Include="Scripts\i18n\angular-locale_te-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_te.js" />
+    <Content Include="Scripts\i18n\angular-locale_teo-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_teo-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_teo.js" />
+    <Content Include="Scripts\i18n\angular-locale_tg-cyrl-tj.js" />
+    <Content Include="Scripts\i18n\angular-locale_tg-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_tg.js" />
+    <Content Include="Scripts\i18n\angular-locale_th-th.js" />
+    <Content Include="Scripts\i18n\angular-locale_th.js" />
+    <Content Include="Scripts\i18n\angular-locale_ti-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_ti-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_ti.js" />
+    <Content Include="Scripts\i18n\angular-locale_tig-er.js" />
+    <Content Include="Scripts\i18n\angular-locale_tig.js" />
+    <Content Include="Scripts\i18n\angular-locale_tl.js" />
+    <Content Include="Scripts\i18n\angular-locale_tn-bw.js" />
+    <Content Include="Scripts\i18n\angular-locale_tn-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_tn.js" />
+    <Content Include="Scripts\i18n\angular-locale_to-to.js" />
+    <Content Include="Scripts\i18n\angular-locale_to.js" />
+    <Content Include="Scripts\i18n\angular-locale_tr-cy.js" />
+    <Content Include="Scripts\i18n\angular-locale_tr-tr.js" />
+    <Content Include="Scripts\i18n\angular-locale_tr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ts-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_ts.js" />
+    <Content Include="Scripts\i18n\angular-locale_twq-ne.js" />
+    <Content Include="Scripts\i18n\angular-locale_twq.js" />
+    <Content Include="Scripts\i18n\angular-locale_tzm-latn-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_tzm-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_tzm.js" />
+    <Content Include="Scripts\i18n\angular-locale_ug-arab-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ug-arab.js" />
+    <Content Include="Scripts\i18n\angular-locale_ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_uk-ua.js" />
+    <Content Include="Scripts\i18n\angular-locale_uk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur-pk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz-arab-af.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz-arab.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz-cyrl-uz.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz-latn-uz.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_uz.js" />
+    <Content Include="Scripts\i18n\angular-locale_vai-latn-lr.js" />
+    <Content Include="Scripts\i18n\angular-locale_vai-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_vai-vaii-lr.js" />
+    <Content Include="Scripts\i18n\angular-locale_vai-vaii.js" />
+    <Content Include="Scripts\i18n\angular-locale_vai.js" />
+    <Content Include="Scripts\i18n\angular-locale_ve-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_ve.js" />
+    <Content Include="Scripts\i18n\angular-locale_vi-vn.js" />
+    <Content Include="Scripts\i18n\angular-locale_vi.js" />
+    <Content Include="Scripts\i18n\angular-locale_vo-001.js" />
+    <Content Include="Scripts\i18n\angular-locale_vo.js" />
+    <Content Include="Scripts\i18n\angular-locale_vun-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_vun.js" />
+    <Content Include="Scripts\i18n\angular-locale_wae-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_wae.js" />
+    <Content Include="Scripts\i18n\angular-locale_wal-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_wal.js" />
+    <Content Include="Scripts\i18n\angular-locale_xh-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_xh.js" />
+    <Content Include="Scripts\i18n\angular-locale_xog-ug.js" />
+    <Content Include="Scripts\i18n\angular-locale_xog.js" />
+    <Content Include="Scripts\i18n\angular-locale_yav-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_yav.js" />
+    <Content Include="Scripts\i18n\angular-locale_yi-001.js" />
+    <Content Include="Scripts\i18n\angular-locale_yi.js" />
+    <Content Include="Scripts\i18n\angular-locale_yo-bj.js" />
+    <Content Include="Scripts\i18n\angular-locale_yo-ng.js" />
+    <Content Include="Scripts\i18n\angular-locale_yo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zgh-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_zgh.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-tw.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-tw.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh.js" />
+    <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Mvc.sitemap" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\GAWEBP01.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBP02.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBP03.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBP04.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBT01.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBT02.pubxml" />
+    <Content Include="Scripts\angular-parse-ext.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-message-format.min.js.map" />
+    <Content Include="Scripts\angular-aria.min.js.map" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ng-file-upload-shim.js" />
+    <Content Include="Scripts\ng-file-upload.js" />
+    <Content Include="Scripts\ng-grid-2.0.11.min.js" />
+    <Content Include="Scripts\ng-img-crop.js" />
+    <Content Include="Scripts\ng-wig.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="temp\empty.txt" />
+    <Content Include="Web References\com.qsp.wsi\AddressHygieneContract.disco" />
+    <None Include="Web References\QPayWS\bpps.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Error\500.cshtml" />
+    <Content Include="Views\Error\404.cshtml" />
+    <Content Include="Views\Shared\_error.cshtml" />
+    <Content Include="Views\Shared\_group.cshtml" />
+    <Content Include="Views\Shared\_campaignmanager.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\HowItWorks.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\FindAGroup.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Group\Participant.cshtml" />
+    <Content Include="Views\Home\Incentives.cshtml" />
+    <Content Include="Views\Home\SignIn.cshtml" />
+    <Content Include="Views\Security\RecoverPassword.cshtml" />
+    <Content Include="Views\CampaignManager\Index.cshtml" />
+    <Content Include="Views\CampaignManager\Campaigns.cshtml" />
+    <Content Include="Views\CampaignManager\Information.cshtml" />
+    <Content Include="Views\CampaignManager\Page.cshtml" />
+    <Content Include="Views\CampaignManager\Promote.cshtml" />
+    <Content Include="Views\CampaignManager\Prizes.cshtml" />
+    <Content Include="Views\Home\SiteMap.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Security\LoginExternal.cshtml" />
+    <Content Include="Views\Home\LoginExternalFailed.cshtml" />
+    <Content Include="Views\Home\RegisterExternal.cshtml" />
+    <Content Include="Views\Group\FindAParticipant.cshtml" />
+    <Content Include="Views\Home\Landing.cshtml" />
+    <Content Include="Views\Group\Shared\_AmountRaisedIndicator.cshtml" />
+    <Content Include="Views\Group\Shared\_ShopNow.cshtml" />
+    <Content Include="Views\Group\Shared\_Carrousel.cshtml" />
+    <Content Include="Views\Group\Shared\_ReportGroup.cshtml" />
+    <Content Include="Views\Home\Shared\_AmountRaisedIndicator.cshtml" />
+    <Content Include="Views\Home\Shared\_FeaturedGroups.cshtml" />
+    <Content Include="Views\Home\Shared\_TopParticipants.cshtml" />
+    <Content Include="Views\Home\Shared\_SupportBox.cshtml" />
+    <Content Include="Views\CampaignManager\Register.cshtml" />
+    <Content Include="Views\CampaignManager\KickOff.cshtml" />
+    <Content Include="Web References\com.qsp.wsi\AddressHygieneContract.wsdl" />
+    <Content Include="Web References\com.qsp.wsi\AddressHygieneMessageResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.qsp.wsi\AddressHygieneSingleMessageResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.qsp.wsi\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CampaignManager\Create.cshtml" />
+    <Content Include="Views\CampaignManager\Relaunch.cshtml" />
+    <Content Include="Views\CampaignManager\RelaunchInformation.cshtml" />
+    <Content Include="Views\CampaignManager\OAuthCallback.cshtml" />
+    <Content Include="Views\CampaignManager\SendMessages.cshtml" />
+    <Content Include="Views\CampaignManager\Shared\_SendMessagesMenu.cshtml" />
+    <Content Include="Views\CampaignManager\PendingEmails.cshtml" />
+    <Content Include="Views\CampaignManager\InvalidContacts.cshtml" />
+    <Content Include="Views\CampaignManager\Contacts.cshtml" />
+    <Content Include="Views\CampaignManager\SentEmails.cshtml" />
+    <Content Include="Views\CampaignManager\SendNewMessage.cshtml" />
+    <Content Include="Views\CampaignManager\Twitter.cshtml" />
+    <Content Include="Views\CampaignManager\Facebook.cshtml" />
+    <Content Include="Views\Home\ParticipantRegister.cshtml" />
+    <Content Include="Scripts\version.json" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-loader.min.js.map" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\CampaignManager\CampaignReport.cshtml" />
+    <Content Include="Views\CampaignManager\GroupReport.cshtml" />
+    <Content Include="Views\CampaignManager\CampaignReportParticipant.cshtml" />
+    <Content Include="Views\CampaignManager\CampaignReportParticipantMagazine.cshtml" />
+    <Content Include="Web References\SAP.ZBapiGa\document.wsdl" />
+    <Content Include="Web References\SAP.ZBapiGa\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZBapiGaChgZgonShipAddrResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZBapiGaDeleteSapOrderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZBapiGaGetGiftOrderNumResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZBapiGaGetOlProfitStmtResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZBapiGaGetOnlineOrderNumResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZGaCancelOnlineGiftOrderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZGaCancelOnlineMagOrderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZGaMoveOnlineGiftOrderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZGaMoveOnlineMagOrderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZGaMoveOnlinePaymentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAP.ZBapiGa\ZGaPostProcFeeResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\ParticipantJoin.cshtml" />
+    <Content Include="Views\CampaignManager\Shared\_AmountRaisedIndicator.cshtml" />
+    <Content Include="Views\Home\CampaignClosed.cshtml" />
+    <Content Include="Views\Home\Unsubscribe.cshtml" />
+    <Content Include="Views\Home\EventNotFound.cshtml" />
+    <Content Include="Views\CampaignManager\Step1.cshtml" />
+    <Content Include="Views\CampaignManager\Step2.cshtml" />
+    <Content Include="Views\CampaignManager\Step3.cshtml" />
+    <Content Include="Views\CampaignManager\Step4.cshtml" />
+    <Content Include="Views\CampaignManager\Step5.cshtml" />
+    <Content Include="Views\CampaignManager\Step6.cshtml" />
+    <None Include="Views\Error\403.cshtml" />
+    <Content Include="Views\CampaignManager\CampaignDonationReport.cshtml" />
+    <Content Include="Views\CampaignManager\CampaignDonationReportParticipant.cshtml" />
+    <Content Include="Views\CampaignManager\GroupDonationReport.cshtml" />
+    <Content Include="Views\Shared\_donation.cshtml" />
+    <Content Include="Views\Donation\CheckOut.cshtml" />
+    <Content Include="Views\Donation\Confirmation.cshtml" />
+    <None Include="Web References\QPayWS\bpps.wsdl" />
+    <Content Include="Web References\QPayWS\BPPSTxResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\QPayWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Home\PublicGroup.cshtml" />
+    <Content Include="Web References\com.eteamz.services.efundraising\eFundraising.wsdl" />
+    <Content Include="Web References\com.eteamz.services.efundraising\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Error\406.cshtml" />
+    <Content Include="Views\Home\UnitedAirlines.cshtml" />
+    <Content Include="Views\Home\MBFinancial.cshtml" />
+    <Content Include="Views\Home\CharityFundApproach.cshtml" />
+    <Content Include="Views\Home\ScholarshipFundApproach.cshtml" />
+    <Content Include="Views\Home\AlumniAssociationApproach.cshtml" />
+    <Content Include="Views\Home\CysticFibrosisFoundation.cshtml" />
+    <Content Include="Views\Home\RaceWalkApproach.cshtml" />
+    <Content Include="Views\Home\GroupNotFound.cshtml" />
+    <Content Include="Views\Home\Groups.cshtml" />
+    <Content Include="Views\Shared\_public2.cshtml" />
+    <Content Include="Views\Home\InVestUsa.cshtml" />
+    <Content Include="Views\Home\ExternalLoginError.cshtml" />
+    <Content Include="Views\Home\Step0.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
+    <None Include="Web.1.DEV.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.3.PROD.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.2.TEST.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\images\donation\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\prop-base\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\props\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\text-base\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\tmp\prop-base\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\tmp\props\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\tmp\text-base\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\tmp\wcprops\" />
+    <Folder Include="Content\images\personalization\logo\Fundraisin\_svn\wcprops\" />
+    <Folder Include="Scripts\ckeditor\adapters\" />
+    <Folder Include="Scripts\ckeditor\lang\" />
+    <Folder Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\" />
+    <Folder Include="Scripts\ckeditor\plugins\about\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\clipboard\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\dialog\" />
+    <Folder Include="Scripts\ckeditor\plugins\image\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\link\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\link\images\" />
+    <Folder Include="Scripts\ckeditor\plugins\pastefromword\filter\" />
+    <Folder Include="Scripts\ckeditor\plugins\scayt\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\specialchar\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\tabletools\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\table\dialogs\" />
+    <Folder Include="Scripts\ckeditor\plugins\wsc\dialogs\" />
+    <Folder Include="Scripts\ckeditor\skins\moono\images\hidpi\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_public.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Shared\GA.Core.Shared.csproj">
+      <Project>{570BF7F0-6C41-42C4-A4E6-7494957F9E08}</Project>
+      <Name>GA.Core.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Store\Shared\GA.Store.Shared.csproj">
+      <Project>{E49E9742-B7F9-4378-879E-254E500306E5}</Project>
+      <Name>GA.Store.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\MGP\GA.BDC.Data.MGP.csproj">
+      <Project>{6adb716d-b34c-4d7a-9393-e30347f06a79}</Project>
+      <Name>GA.BDC.Data.MGP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\GA.BDC.Shared.csproj">
+      <Project>{e284cab1-4979-40d7-bb94-4238f1d487a7}</Project>
+      <Name>GA.BDC.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://sapd0101.swgao.int:8000/sap/bc/srt/wsdl/bndg_DFC5A05C422D82F189EB005056A57C14/wsdl11/allinone/ws_policy/document%3fsap-client=020">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\SAP.ZBapiGa\</RelPath>
+      <UpdateFromURL>http://sapd0101.swgao.int:8000/sap/bc/srt/wsdl/bndg_DFC5A05C422D82F189EB005056A57C14/wsdl11/allinone/ws_policy/document%3fsap-client=020</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>GA_BDC_Web_MGP_SAP_ZBapiGa_service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://wsi.qsp.com/qpay/bpps.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\QPayWS\</RelPath>
+      <UpdateFromURL>http://wsi.qsp.com/qpay/bpps.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>GA_BDC_Web_MGP_QPayWS_BatchPaymentSystemWebservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://wsi.qsp.com/QSP.AddressHygiene/AddressHygieneContract.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.qsp.wsi\</RelPath>
+      <UpdateFromURL>http://wsi.qsp.com/QSP.AddressHygiene/AddressHygieneContract.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>GA_BDC_Web_MGP_com_qsp_wsi_AddressHygieneContract</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://services.eteamz.com/eFundraising/eFundraising.cfc%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.eteamz.services.efundraising\</RelPath>
+      <UpdateFromURL>https://services.eteamz.com/eFundraising/eFundraising.cfc%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>GA_BDC_Web_MGP_com_eteamz_services_efundraising_EFundraisingService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Localization\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '1.DEV|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '2.TEST|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '3.PROD|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65043</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://local.efundraising.com</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\Grpc.Core.1.7.1\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Grpc.Core.1.7.1\build\net45\Grpc.Core.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="..\..\..\..\packages\Grpc.Core.1.7.1\build\net45\Grpc.Core.targets" Condition="Exists('..\..\..\..\packages\Grpc.Core.1.7.1\build\net45\Grpc.Core.targets')" />
+  <Import Project="..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

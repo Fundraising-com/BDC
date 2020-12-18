@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://tempuri.org/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="EfundraisingServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://ws.qsp.com/QSP.OrderExpress.Efundraising/Service_0.xsd" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://ws.qsp.com/QSP.OrderExpress.Efundraising/Service_1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://ws.qsp.com/QSP.OrderExpress.Efundraising/Service_2.xsd" namespace="http://schemas.datacontract.org/2004/07/QSP.WebService.OrderExpress.Efundraising" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEfundraisingServices_GetProgramType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProgramType" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetProgramType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProgramTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetForm_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetForm" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetForm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetCatalogItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCatalogItem" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetCatalogItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCatalogItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_CreateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrder" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_CreateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetOrderStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderStatus" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetOrderStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_UpdateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrder" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_UpdateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetOrderShippedDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderShippedDate" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetOrderShippedDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderShippedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrder" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetWarehouseList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWarehouseList" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetWarehouseList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWarehouseListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetWarehousePickupList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWarehousePickupList" />
+  </wsdl:message>
+  <wsdl:message name="IEfundraisingServices_GetWarehousePickupList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWarehousePickupListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IEfundraisingServices">
+    <wsdl:operation name="GetProgramType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetProgramType" message="tns:IEfundraisingServices_GetProgramType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetProgramTypeResponse" message="tns:IEfundraisingServices_GetProgramType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetForm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetForm" message="tns:IEfundraisingServices_GetForm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetFormResponse" message="tns:IEfundraisingServices_GetForm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCatalogItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetCatalogItem" message="tns:IEfundraisingServices_GetCatalogItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetCatalogItemResponse" message="tns:IEfundraisingServices_GetCatalogItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/CreateOrder" message="tns:IEfundraisingServices_CreateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/CreateOrderResponse" message="tns:IEfundraisingServices_CreateOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetOrderStatus" message="tns:IEfundraisingServices_GetOrderStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetOrderStatusResponse" message="tns:IEfundraisingServices_GetOrderStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/UpdateOrder" message="tns:IEfundraisingServices_UpdateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/UpdateOrderResponse" message="tns:IEfundraisingServices_UpdateOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderShippedDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetOrderShippedDate" message="tns:IEfundraisingServices_GetOrderShippedDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetOrderShippedDateResponse" message="tns:IEfundraisingServices_GetOrderShippedDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetOrder" message="tns:IEfundraisingServices_GetOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetOrderResponse" message="tns:IEfundraisingServices_GetOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWarehouseList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetWarehouseList" message="tns:IEfundraisingServices_GetWarehouseList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetWarehouseListResponse" message="tns:IEfundraisingServices_GetWarehouseList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWarehousePickupList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEfundraisingServices/GetWarehousePickupList" message="tns:IEfundraisingServices_GetWarehousePickupList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEfundraisingServices/GetWarehousePickupListResponse" message="tns:IEfundraisingServices_GetWarehousePickupList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EfundraisingServices" type="tns:IEfundraisingServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProgramType">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetProgramType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForm">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCatalogItem">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetCatalogItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderStatus">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetOrderStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/UpdateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderShippedDate">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetOrderShippedDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrder">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWarehouseList">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetWarehouseList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWarehousePickupList">
+      <soap:operation soapAction="http://tempuri.org/IEfundraisingServices/GetWarehousePickupList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EfundraisingServices">
+    <wsdl:port name="EfundraisingServices" binding="tns:EfundraisingServices">
+      <soap:address location="http://ws.qsp.com/QSP.OrderExpress.Efundraising/Service.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,159 @@
+﻿<div role="tabpanel" class="tab-pane fade in active" id="account" aria-labelledby="account-tab">
+    <div class="bs-bg">
+        <p class="bg-warning">
+            <span>Account Information</span>
+            <span class="pull-right">
+                <button type="button" class="btn btn-success btn-xs" ng-click="refresh()">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh
+                </button>
+            </span>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">General</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="accountInfoForm" class="form-horizontal" novalidate data-ng-submit="saveEvent()">
+                        <div class="form-group">
+                            <label for="inputEventName" class="col-sm-2 control-label">Event Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputEventName" name="inputEventName" ng-model="data.eventName" required>
+                                <span class="error" data-ng-show="accountInfoForm.inputEventName.$error.required">* Event Name is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCreationDate" class="col-sm-2 control-label">Creation Date:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputCreationDate" readonly value="{{data.createDate | date:'medium'}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectEventType" class="col-sm-2 control-label">Event Type:</label>
+                            <div class="col-sm-6">
+                                <select name="selectEventType" class="form-control" ng-model="selectedEventType" ng-options="type.name for type in eventTypes"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectEventActive" class="col-sm-2 control-label">Deactivated:</label>
+                            <div class="col-sm-10">
+                                <select name="selectEventActive" class="form-control display-inline" style="width: 100px" ng-model="selectedActive" ng-options="state.name for state in activeState"></select>
+                                &nbsp;&nbsp;<span class="text-size-up" ng-hide="data.active">{{data.endDate | date:'medium'}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10 text-right">
+                                <button type="submit" class="btn btn-default" data-ng-disabled="accountInfoForm.$invalid">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Partner Info</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="partnerInfoForm" class="form-horizontal" novalidate data-ng-submit="saveExternalGroup()">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Partner:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputPartnerName" name="inputPartnerName" ng-model="account.partner.partnerName" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Lead ID:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputLeadId" name="inputLeadId" ng-model="account.group.leadId" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Ext Group ID:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control display-inline" id="inputExtGrpId" name="inputExtGrpId" ng-model="account.group.externalGroupId" style="width: 130px">
+                                &nbsp;&nbsp;Link from Event Id &nbsp;<input type="text" class="form-control display-inline" id="inputLinkToEventId" name="inputLinkToEventId" ng-model="account.linkToEventId" style="width: 120px">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Partner Type:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="inputPartnerType" name="inputPartnerType" ng-model="account.partner.partnerTypeName" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10 text-right">
+                                <button type="submit" class="btn btn-default" data-ng-disabled="partnerInfoForm.$invalid">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Shipping Address</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="shippingAddressForm" class="form-horizontal" novalidate data-ng-submit="saveAccount()">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Address:</label>
+                            <div class="col-sm-10">
+                                <input type="hidden" ng-model="account.paymentInfo.paymentInfoId" />
+                                <input type="text" class="form-control" id="inputStreetName" name="inputStreetName" ng-model="account.shippingAddress.address1" required>
+                                <span class="error" data-ng-show="shippingAddressForm.inputStreetName.$error.required">* Street Name is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">City:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputCity" name="inputCity" ng-model="account.shippingAddress.city" required>
+                                <span class="error" data-ng-show="shippingAddressForm.inputCity.$error.required">* City is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" ng-model="selectedShippingState" ng-options="state.stateName for state in account.shippingStates"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Country:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputCountry" name="inputCountry" ng-model="account.shippingAddress.countryCode" required>
+                                <span class="error" data-ng-show="shippingAddressForm.inputCountry.$error.required">* Country is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Zip code:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputZipCode" name="inputZipCode" ng-model="account.shippingAddress.zipCode" required>
+                                <span class="error" data-ng-show="shippingAddressForm.inputZipCode.$error.required">* ZipCode is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Payable Name:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputPayableName" name="inputPayableName" ng-model="account.paymentInfo.paymentName" required>
+                                <span class="error" data-ng-show="shippingAddressForm.inputPayableName.$error.required">* Payable name is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10 text-right">
+                                <button type="submit" class="btn btn-default" data-ng-disabled="shippingAddressForm.$invalid">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

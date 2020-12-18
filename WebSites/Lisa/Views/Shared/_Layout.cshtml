@@ -1,0 +1,81 @@
+﻿@using System.Configuration
+@using System.Security.Claims
+@{
+   var user = User.Identity as ClaimsIdentity;
+   var displayName = string.Empty;
+   if (user != null)
+   {
+      var displayNameClaim = user.FindFirst("displayName");
+      displayName = displayNameClaim?.Value;
+   }
+}
+<!DOCTYPE html>
+<html ng-app="lisa">
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>L.I.S.A.</title>
+   @Styles.Render("~/Content/css")
+	@Html.Partial("_Libraries")
+</head>
+<body>
+<div layout="column" layout-margin>
+	<div layout="column" ng-controller="TopMenuController as topMenuCtrl" class="hidden-print">
+		<md-nav-bar md-selected-nav-item="topMenuCtrl.hosts.topMenuItem" nav-bar-aria-label="Top Menu">
+			<a href="/"><img src="/Content/images/logo-small.png" width="45" height="45"/></a>
+			<md-nav-item md-nav-href="/FRCOM" name="FRCOM">Fundraising.com</md-nav-item>
+			<md-nav-item md-nav-href="/EzFund" name="EzFund">EzFund.com</md-nav-item>
+			<md-nav-item md-nav-href="#" name="EFR" ng-click="topMenuCtrl.ShowSoonDialog();">MGP</md-nav-item>
+			<md-nav-item md-nav-href="#" name="CRM" ng-click="topMenuCtrl.ShowSoonDialog();">CRM</md-nav-item>
+			<md-nav-item md-nav-href="#" name="SALES" ng-click="topMenuCtrl.ShowSoonDialog();">Sales</md-nav-item>
+			<md-nav-item md-nav-href="/Reports" name="REPORTS">Reports</md-nav-item>
+			<div flex></div>
+			<md-menu>
+				<md-button ng-click="$mdOpenMenu($event)">
+					<md-icon md-menu-origin>account_box</md-icon> @displayName
+				</md-button>
+				<md-menu-content width="2">
+					<md-menu-item>
+						<md-button href="/account/logout">
+							<md-icon md-menu-align-target>exit_to_app</md-icon>
+							Logout
+						</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</md-nav-bar>
+	</div>
+	<div layout="row">
+		<md-sidemenu locked="false" class="hidden-print">
+			@RenderSection("left_navigation_menu", required: false)
+		</md-sidemenu>
+		<md-content flex="100">
+			@RenderBody()
+		</md-content>
+	</div>
+	<footer></footer>
+</div>
+
+@Scripts.Render("~/bundles/angular")
+<script src="https://cdn.rawgit.com/stevermeister/ngWig/master/dist/ng-wig.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+@RenderSection("scripts", required: false)
+<script type="text/javascript">
+	(function() {
+		'use strict';
+		var app = angular.module('lisa');
+		app.constant('hosts',
+			{
+				webApiCoreBaseUrl: '@ConfigurationManager.AppSettings["core.webapi.host"]',
+				webApiFundraisingBaseUrl: '@ConfigurationManager.AppSettings["fundraising.webapi.host"]',
+				webApiEzFundBaseUrl: '@ConfigurationManager.AppSettings["ezfund.webapi.host"]',
+				webApiSecurityBaseUrl: '@ConfigurationManager.AppSettings["security.webapi.host"]',
+				webApiReportsBaseUrl: '@ConfigurationManager.AppSettings["reports.webapi.host"]',
+				clientId: 'lisa',
+				topMenuItem: '@ViewBag.TopMenuItem'
+			});
+	})();
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="QSPFulfillment" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=qspproddb1.qsp;Initial Catalog=QSPFulfillment;Integrated Security=True" SettingsObjectName="WindowsFormsApplication2.Properties.Settings" SettingsPropertyName="QSPFulfillmentConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[order]" Member="orders">
+    <Type Name="order">
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="campaign_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_reason_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_postal_address_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="billing_phone_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_fax_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_email_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="participant_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="installment_plan_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fm_id" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="OL#ORD" Member="OL_ORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="adjustment_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fulf_order_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="profit_rate" Type="System.Decimal" DbType="Decimal(2,2) NOT NULL" CanBeNull="false" />
+      <Column Name="customer_po_number" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="is_dsd" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_continuation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isMailReferred" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Association Name="order_order_detail" Member="order_details" ThisKey="order_id" OtherKey="order_id" Type="order_detail" />
+      <Association Name="campaign_order" Member="campaign" ThisKey="campaign_id" OtherKey="campaign_id" Type="campaign" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.order_detail" Member="order_details">
+    <Type Name="order_detail">
+      <Column Name="order_detail_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catalog_item_detail_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_reason_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shipment_group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="adjustment_quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sync_oe#ord" Member="sync_oe_ord" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sync_oecoup" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="sync_oeitem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="personalization_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="renewal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="priceA" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="order_order_detail" Member="order" ThisKey="order_id" OtherKey="order_id" Type="order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.campaign" Member="campaigns">
+    <Type Name="campaign">
+      <Column Name="campaign_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="account_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fulf_campaign_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="program_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="warehouse_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="campaign_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fm_id" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="tax_exemption_number" Type="System.String" DbType="VarChar(23)" CanBeNull="true" />
+      <Column Name="tax_exemption_expiration_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="fiscal_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="enrollment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="goal_estimated_gross" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ARORBL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dts_CAccountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dts_CCAInstance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="trade_class_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="form_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="campaign_order" Member="orders" ThisKey="campaign_id" OtherKey="campaign_id" Type="order" />
+    </Type>
+  </Table>
+</Database>

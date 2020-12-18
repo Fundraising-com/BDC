@@ -1,0 +1,97 @@
+﻿@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+   ViewBag.Title = "Fundraising Online, Sign In !";
+   ViewBag.Description = "My.Fundraising.com: Sign in and start Online fundraising !!";
+   ViewBag.Keywords = "online fundraising prizes, Win, online fundraising campaign, Free online fundraising campaign, free ga savings pass,  fundraising online, fundraise for group to win, Prizes, fundraising online, fundraising bonuses, online magazine fundraising prize, fundraising campaign online, magazine fundraisers online";
+   Layout = "~/Views/Shared/_public2.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("SignIn", "Home");
+   var partnerBranding = ViewBag.Partner as Partner;
+}
+<div id="signIn" ng-controller="loginController">
+   <div class="row">
+      <div class="col-md-12 text-center">
+         <h1>log In</h1>
+         <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+         <div class="panel panel-success">
+            <div class="panel-body">
+               <form id="formLoginExternal" method="POST" action="@Url.Action("LoginExternal", "Security")">
+                  <input type="hidden" name="providerName" />
+                  <div class="row hidden">
+                     <div class="col-xs-12">
+                        <div class="form-group">
+                           <button class="btn btn-facebook btn-lg form-control" onclick="loginExternal('facebook');">
+                              <span class="fa fa-facebook"></span> log in with facebook
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row hidden">
+                     <div class="col-xs-12">
+                        <div class="form-group">
+                           <button class="btn btn-google btn-lg form-control" onclick="loginExternal('google');">
+                              <span class="fa fa-google"></span> log in with google
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row hidden">
+                     <div class="col-xs-12">
+                        <div class="form-group">
+                           <button class="btn btn-twitter btn-lg form-control" onclick="loginExternal('twitter');">
+                              <span class="fa fa-twitter"></span> log in with twitter
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+               <hr/>
+               <form id="signInForm" name="signInForm" ng-submit="login('@ViewBag.ReturnUrl')">
+                  <div class="form-group">
+                     <label for="email" class="sr-only">Email address</label>
+                     <input ng-model="view.Username" type="email" id="email" name="email" ng-init="view.Username = '@ViewBag.Email'" required class="form-control input-lg" placeholder="Email" />
+                  </div>
+                  <div class="form-group">
+                     <label for="password" class="sr-only">Password</label>
+                     <input ng-model="view.Password" type="password" name="password" id="password" required class="form-control input-lg" placeholder="Password" />
+                  </div>                  
+                  <div class="checkbox">
+                     <label>
+                        <input ng-model="view.RememberMe" type="checkbox" value="false">
+                        Remember Me
+                     </label>
+                  </div>
+                  <div class="form-group" ng-cloak>
+                     <span class="text-info" ng-show="executingAction">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+                     </span>
+                     <span class="text-danger" ng-show="resultFailed">
+                        {{responseText}}<br />
+                     </span>
+                     <button class="btn btn-odnoklassniki btn-lg form-control" ng-hide="executingAction" trigger-change="#password.dirty"><span class="glyphicon glyphicon-envelope"></span> log in with Email</button>
+                  </div>
+                  <div class="form-group text-right">
+                     <a href="@Url.Action("RecoverPassword", "Security")" class="small">I can't remember my Password</a>                     
+                  </div>
+               </form>
+            </div>
+         </div>
+
+      </div>
+   </div>  
+</div>
+@section scripts
+{
+   <script type="text/javascript">
+      $("input#password").addClass('dirty');
+      function loginExternal(providerName) {
+         $("input[name=providerName]").val(providerName);
+         ga('send', 'event', 'User', 'Login', providerName);
+         $("#formLoginExternal").submit();
+      }
+   </script>
+}

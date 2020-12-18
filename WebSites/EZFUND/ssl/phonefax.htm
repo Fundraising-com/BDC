@@ -1,0 +1,468 @@
+<!--webbot bot="HTMLMarkup" startspan -->
+<html>
+ <head>
+<%
+'Generate Credit Card List
+Do While NOT RSCC.EOF
+		ccOption = ccOption & vbCrLf & "<option value=" & Trim(RSCC("CARD_ABB")) & ">" & Trim(RSCC("CARD_NAME")) & "</option>"		      
+		RSCC.MoveNext
+Loop
+%>	
+<%
+'Generate State List
+Do While NOT RSState.EOF
+		stateOption = stateOption & vbCrLf & "<option value=" & RSState("State_Abb")& ">" & RSState("State") & "</option>"
+		RSState.MoveNext
+Loop
+%>	
+<%
+'Generate Country List
+Do While NOT RSCountry.EOF
+		countryOption = countryOption & vbCrLf & "<option value=" & RSCountry("Country_Abb") & ">" & RSCountry("Country") & "</option>"
+		RSCountry.MoveNext
+Loop
+%>
+
+<!--webbot BOT="GeneratedScript" PREVIEW=" " startspan --><script Language="JavaScript"><!--
+function FrontPage_Form1_Validator(theForm)
+{
+
+  if (theForm.CARD_NAME.value == "")
+  {
+    alert("Please enter a value for the \"Card Holder Name\" field.");
+    theForm.CARD_NAME.focus();
+    return (false);
+  }
+<% if credit = 1 then %>
+  var checkOK = "0123456789-- \t\r\n\f";
+  var checkStr = theForm.CARD_NO.value;
+  var allValid = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("Please enter only digit, whitespace and \"-\" characters in the \"Credit Card Account Number\" field.");
+    theForm.CARD_NO.focus();
+    return (false);
+  }
+<% end if %>
+  if (theForm.ADDRESS_2.value == "")
+  {
+    alert("Please enter a value for the \"Address\" field.");
+    theForm.ADDRESS_2.focus();
+    return (false);
+  }
+
+  if (theForm.CITY.value == "")
+  {
+    alert("Please enter a value for the \"City\" field.");
+    theForm.CITY.focus();
+    return (false);
+  }
+
+  if (theForm.CITY.value.length < 2)
+  {
+    alert("Please enter at least 2 characters in the \"City\" field.");
+    theForm.CITY.focus();
+    return (false);
+  }
+
+  if (theForm.State.selectedIndex < 0)
+  {
+    alert("Please select one of the \"State\" options.");
+    theForm.State.focus();
+    return (false);
+  }
+
+  if (theForm.COUNTRY.selectedIndex < 0)
+  {
+    alert("Please select one of the \"Country\" options.");
+    theForm.COUNTRY.focus();
+    return (false);
+  }
+
+  if (theForm.PHONE.value == "")
+  {
+    alert("Please enter a value for the \"Phone\" field.");
+    theForm.PHONE.focus();
+    return (false);
+  }
+
+  if (theForm.E_MAIL.value == "")
+  {
+    alert("Please enter a value for the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+
+  if (theForm.E_MAIL.value.length < 5)
+  {
+    alert("Please enter at least 5 characters in the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+
+  var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzƒŠŒŽšœžŸÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ0123456789-@.-_";
+  var checkStr = theForm.E_MAIL.value;
+  var allValid = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("Please enter only letter, digit and \"@.-_\" characters in the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+  return (true);
+}
+//--></script>
+</head
+<body><!--webbot BOT="HTMLMarkup" endspan --><!--webbot BOT="GeneratedScript" PREVIEW=" " startspan --><script Language="JavaScript" Type="text/javascript"><!--
+function FrontPage_Form1_Validator(theForm)
+{
+
+  if (theForm.CARD_NAME.value == "")
+  {
+    alert("Please enter a value for the \"Card Holder Name\" field.");
+    theForm.CARD_NAME.focus();
+    return (false);
+  }
+
+  var checkOK = "0123456789-- \t\r\n\f";
+  var checkStr = theForm.CARD_NO.value;
+  var allValid = true;
+  var validGroups = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("Please enter only digit, whitespace and \"-\" characters in the \"Credit Card Account Number\" field.");
+    theForm.CARD_NO.focus();
+    return (false);
+  }
+
+  if (theForm.ADDRESS_2.value == "")
+  {
+    alert("Please enter a value for the \"Address\" field.");
+    theForm.ADDRESS_2.focus();
+    return (false);
+  }
+
+  if (theForm.CITY.value == "")
+  {
+    alert("Please enter a value for the \"City\" field.");
+    theForm.CITY.focus();
+    return (false);
+  }
+
+  if (theForm.CITY.value.length < 2)
+  {
+    alert("Please enter at least 2 characters in the \"City\" field.");
+    theForm.CITY.focus();
+    return (false);
+  }
+
+  if (theForm.State.selectedIndex < 0)
+  {
+    alert("Please select one of the \"State\" options.");
+    theForm.State.focus();
+    return (false);
+  }
+
+  if (theForm.COUNTRY.selectedIndex < 0)
+  {
+    alert("Please select one of the \"Country\" options.");
+    theForm.COUNTRY.focus();
+    return (false);
+  }
+
+  if (theForm.PHONE.value == "")
+  {
+    alert("Please enter a value for the \"Phone\" field.");
+    theForm.PHONE.focus();
+    return (false);
+  }
+
+  if (theForm.E_MAIL.value == "")
+  {
+    alert("Please enter a value for the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+
+  if (theForm.E_MAIL.value.length < 5)
+  {
+    alert("Please enter at least 5 characters in the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+
+  var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzƒŠŒŽšœžŸÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ0123456789-@.-_";
+  var checkStr = theForm.E_MAIL.value;
+  var allValid = true;
+  var validGroups = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("Please enter only letter, digit and \"@.-_\" characters in the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+  return (true);
+}
+//--></script><!--webbot BOT="GeneratedScript" endspan --><form method="POST" action="confirm.asp?ORDER_ID=<%= Order_ID %>" name="FrontPage_Form1" onsubmit="return FrontPage_Form1_Validator(this)" language="JavaScript">
+  <table border="0" cellpadding="0" cellspacing="0" width="95%" align="center">
+    <tr align="center">
+      <td align="left" colspan="2" height="21"><div align="center"><center><p><!--webbot bot="HTMLMarkup" startspan -->
+<input type="hidden" name="PrmShip" value="<% If PrmShip = "1" Then %>1<%Else %>0<% End If %>"> 
+<input type="hidden" name="ShipMeth" value="<%= ShipMeth %>">
+<input type="hidden" name="PaymentMethod" value="<%= PaymentMethod %>">
+<!--webbot bot="HTMLMarkup" endspan --> <small><font color="#CC0033"><strong>PAYMENT INFORMATION<br>
+You may print & mail in this form with your check, or credit card information.<br>
+Please fill out this form and press "Complete Order" at the bottom of the page for a printable order form.<br>
+We grant 30 day terms only to K-12 Public Schools</strong></font></small></p>
+          </center></td>
+      </tr>
+      <tr align="center">
+        <td align="right"><font size="2"><strong>Purchaser Name:&nbsp;</strong></font>
+          </td>
+        <td align="left"><!--webbot bot="Validation" s-display-name="Card Holder Name" b-value-required="TRUE" --><input type="text" name="CARD_NAME" size="28" value="<%= P_CUST_NAME%>"><font size="1"><strong>( Required )</strong></font></td>
+      </tr>
+      <% If CREDIT = "1" Then %>
+      <tr align="center">
+          <td colspan="2" align="center" height="18">
+            <small><strong>
+            <font color="#CC0033">COMPLETE THIS SECTION FOR CREDIT CARD PURCHASES</font></strong></small></td>
+      </tr>
+       <tr align="center">
+        <td align="right"><b><font size="2">Card Type</font>: </b></td>
+
+           <td align="left"><select name="CARD_TYPE" size="1">
+              	<%
+			Response.Write ccOption
+				%>	
+            </select><b> </b><strong><font size="1">( Required For Credit Card Purchase )</font></strong>
+        </td>
+      </tr>
+      <tr align="center">
+        <td align="right"><b><font size="2">Credit Card #</font>: </b></td>
+        <td align="left"><!--webbot bot="Validation" s-display-name="Credit Card Account Number" s-data-type="String" b-allow-digits="TRUE" b-allow-whitespace="TRUE" s-allow-other-chars="-" --><input type="text" size="28" name="CARD_NO"><strong><font size="1">( Required For Credit Card Purchase )</font></strong></td>
+      </tr>
+      <tr align="center">
+        <td align="right"><b><font size="2">Exp.Date: </font></b></td>
+        <td align="left">
+          <input type="text" size="10" name="CARD_EXP">
+          <strong><font size="1">( Required for Credit Card Purchase )</font></strong> </td>
+		</tr>
+      <% End If %>
+      <% If ECHECK = "1" Then %>
+      <tr align="center">
+        <td colspan="2" align="center"><small><strong>
+          <font color="#CC0033">COMPLETE THIS SECTION FOR ELECTRONIC CHECK PURCHASES</font></strong></small></td>
+      </tr>
+      <tr align="center">
+        <td align="right"><b><font size="2">Bank Name:</font></b></td>
+        <td align="left"><strong><input type="text" name="BANK_NAME" size="20"><font size="1">( Required for Electronic Check Purchase )</font></strong></td>
+      </tr>
+      <tr align="center">
+        <td align="right"><b><font size="2">Bank Routing Number:</font></b></td>
+        <td align="left"><strong><input type="text" name="BANK_CODE" size="20"><font size="1">( Required for Electronic Check Purchase )</font></strong></td>
+      </tr>
+      <tr align="center">
+        <td align="right"><b><font size="2">Check Number:</font></b></td>
+        <td align="left"><strong><input type="text" name="CHK_NO" size="20"><font size="1">( Required for Electronic Check Purchase )</font></strong></td>
+      </tr>
+      <tr align="center">
+        <td align="right"><b><font size="2">Checking Account Number:</font></b></td>
+        <td align="left"><strong><input type="text" name="CHK_ACCT_NO" size="20"><font size="1">( Required for Electronic Check Purchase )</font></strong></td>
+      </tr>
+      <% End If %>
+      <% If PO = "1" Then %>
+      <tr align="center"><td colspan="2" align="center" height="18"><small><strong><font color="#CC0033">COMPLETE THIS SECTION FOR PURCHASE ORDER TRANSACTIONS</font></strong></small></td>
+      </tr>
+      <tr align="center">
+        <td align="right" height="50"><b><font size="2">Purchase Order Number:</font></b></td>
+        <td height="50" align="left"><strong><input type="text" name="PURCH_ORDER_NO" size="20"><font size="1">( Required for Purchase Orders )</font></strong> </td>
+      </tr>
+      <% End If %>
+      <tr align="center"><td align="right" colspan="2" height="21"><div align="center"><center><p><small><font color="#CC0033"><strong>PURCHASER INFORMATION</strong></font></small></p>
+            </div></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>School/Organization:</b></font></td>
+          <td align="left" height="25"><input type="text" size="30" name="COMPANY" value="<%=P_COMPANY%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="34"><font size="2"><b>Street Address:</b></font></td>
+          <td align="left" height="34"><!--webbot bot="Validation" s-display-name="Address" b-value-required="TRUE" --><input type="text" size="30" name="ADDRESS_2" value="<%=P_ADDRESS_2%>"> <small><small><strong>( Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="34"><font size="2"><strong>Apt. or Suite:</strong></font></td>
+          <td align="left" height="34"><input type="text" size="20" name="ADDRESS_1" value="<%=P_ADDRESS_1%>"> </td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>City:</b></font></td>
+          <td align="left" height="25"><!--webbot bot="Validation" s-display-name="City" b-value-required="TRUE" i-minimum-length="2" --><input type="text" size="20" name="CITY" value="<%=P_CITY%>"> <strong><small><small>( Required )</small></small></strong></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>State:</b></font></td>
+          <td align="left" height="25"><!--webbot bot="Validation" s-display-name="State" b-value-required="TRUE" --><select name="State" size="1">
+              <option value="<%= RSSelState("STATE_ABB") %>" selected><%= RSSelState("STATE") %></option>
+              	<%
+			Response.Write stateOption
+				%>	
+            </select> <small><small><strong>( Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>Country</b></font></td>
+          <td align="left" height="25"><!--webbot bot="Validation" s-display-name="Country" b-value-required="TRUE" --><select name="COUNTRY" size="1">
+              <option value="<%= RSSelCountry("COUNTRY_ABB") %>" selected><%= RSSelCountry("COUNTRY") %></option>
+		        <%
+			Response.Write countryOption
+				%>	
+            </select><small><small><strong> ( Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>Zip:</b></font></td>
+          <td align="left" height="25"><input type="text" size="10" name="ZIP" value="<%=P_ZIP%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="31"><font size="2"><b>Telephone: </b></font></td>
+          <td align="left" height="31"><!--webbot bot="Validation" s-display-name="Phone" b-value-required="TRUE" --><input type="text" size="20" name="PHONE" value="<%=P_PHONE%>"> <small><small><strong>(
+      Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>Fax: </b></font></td>
+          <td align="left" height="25"><input type="text" size="20" name="FAX" value="<%=P_FAX%>"> </td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><font size="2"><b>E-Mail: </b></font></td>
+          <td align="left" height="25"><!--webbot bot="Validation" S-Display-Name="E-Mail Address" S-Data-Type="String" B-Allow-Letters="TRUE" B-Allow-Digits="TRUE" S-Allow-Other-Chars="@.-_" B-Value-Required="TRUE" I-Minimum-Length="5" --><input type="text" size="20" name="E_MAIL" value="<%=P_EMAIL%>"> <small><small><strong>( Required )</strong></small></small></td>
+        </tr>
+         <% If SubscribeMail = "1" Then %>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Add to Mailing List: </b></font></td>
+          <td align="left"><input type="checkbox" checked name="MailSubscribed" value="1"></td>
+        </tr>      
+        <% Else %>
+        <input type="hidden" name="MailSubscribed" value="1">     
+        <% End If %>  
+
+
+
+        <tr align="center">
+          <td align="center" colspan="2" height="18"><small><b><font color="#CC0033">SHIPPING
+      INFORMATION</font></b></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><div align="right"><p><font size="2"><strong>Name:</strong></font></p>
+            </div></td>
+          <td align="left" height="25"><input type="text" size="30" name="SHIP_NAME" value="<%=P_SHIP_NAME%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><div align="right"><p><font size="2"><strong>Company:</strong></font></p>
+            </div></td>
+          <td align="left" height="25"><input type="text" size="30" name="SHIP_COMPANY" value="<%=P_SHIP_COMPANY%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="25"><div align="right"><p><font size="2"><strong>Address:</strong></font></p>
+            </div></td>
+          <td align="left" height="25"><input type="text" size="30" name="SHIP_ADDRESS_2" value="<%=P_SHIP_ADDRESS_2%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right" height="34"><div align="right"><p><font size="2"><strong>Apt. or Suite:</strong></font></p>
+            </div></td>
+          <td align="left" height="34"><input type="text" size="30" name="SHIP_ADDRESS_1" value="<%=P_SHIP_ADDRESS_1%>" </td>
+          </tr>
+          <tr align="center">
+            <td align="right" height="25"><div align="right"><p><font size="2"><strong>City:</strong></font></p>
+              </div></td>
+            <td align="left" height="25"><input type="text" size="20" name="SHIP_CITY" value="<%=P_SHIP_CITY%>"></td>
+          </tr>
+          <tr align="center">
+            <td align="right" valign="top" height="25"><font size="2"><strong>State:</strong></font></td>
+            <td align="left" valign="top" height="25"><div align="left"><p><font size="2"><select name="SHIP_STATE" size="1">
+                  <option selected><%=P_SHIP_STATE%></option>
+              	  <%
+			Response.Write stateOption
+				  %>	
+                </select></font></p>
+              </div></td>
+          </tr>
+          <tr align="center">
+            <td align="right" height="25"><font size="2"><b>Country</b></font></td>
+            <td align="left" height="25"><select name="SHIP_COUNTRY" size="1">
+                <option selected><%=P_SHIP_COUNTRY%></option>
+            	  <%
+			Response.Write countryOption
+				  %>	
+              </select></td>
+          </tr>
+          <tr align="center">
+            <td align="right" valign="top" height="25"><font size="2"><strong>Zip</strong></font></td>
+            <td align="left" valign="top" height="25"><input type="text" size="10" name="SHIP_ZIP" value="<%=P_SHIP_ZIP%>"> </td>
+          </tr>
+          <tr align="center">
+            <td align="right" valign="top" height="25"><font size="2"><strong>Telephone</strong>:</font></td>
+            <td align="left" valign="top" height="25"><input type="text" size="20" name="SHIP_TELEPHONE" value="<%=P_SHIP_TELEPHONE%>"></td>
+          </tr>
+          <tr>
+            <td align="right" colspan="2" height="21"><font size="2"><div align="center"><center><p></font><small><b><font color="#CC0033">SPECIAL INSTRUCTIONS</font></b></small><font size="2"></font></p>
+              </div></td>
+            </tr>
+            <tr align="center">
+              <td align="right" valign"top" height="62"></td>
+              <td align="left" valign="top" height="62"><textarea name="SHIP_MESSAGE" rows="2" cols="47"></textarea></td>
+            </tr>
+            <tr align="center">
+              <td align="right" height="27"></td>
+              <td align="right" height="27"><input type="submit" value="Complete Order" name="Submit"></td>
+            </tr>
+          </table>
+        </form>
+      </body>
+     </html>
+
+<!--webbot bot="HTMLMarkup" endspan -->
+

@@ -1,0 +1,163 @@
+@using GA.BDC.Shared.Entities
+
+@{
+   ViewBag.Title = "Get Started";
+   ViewBag.Description = "Easy Sports Apparel Get Started";
+   ViewBag.Keywords = "fundraising ideas, sports apparel, fundraising sports";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("GetStarted", "Home");
+
+}
+
+
+
+<script type="text/javascript">
+   function fileValidation() {
+      var fileInput = document.getElementById('gs.Imagefile');
+      var filePath = fileInput.value;
+      var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+      if (!allowedExtensions.exec(filePath)) {
+         error = "Please upload file having extensions .jpeg/.jpg/.png/.gif only.";
+         document.getElementById("errorid").innerHTML = error;
+         return false;
+      }
+   }
+
+
+</script>
+
+
+
+<div class="container-fluid" style="padding-left:0px; padding-right:0px">
+   <div class="row">
+      <div class="col-lg-12" style="width:auto;overflow:hidden;">
+         <img class="img-responsive" src="/Content/home/banner_form.jpg" style="position:relative;display: inline-block; width:100%" alt="easy sports apparel" title="easy sports apparel" />
+         @*<div style="position:absolute; top:40%; left:15%; font-size:2.5vw; color:#fff; text-align:center">Get Started</div>*@
+      </div>
+   </div>
+</div>
+<div class="container request-form" style="padding-left:0px; padding-right:0px" ng-controller="KitRequestController as kitRequestCtrl">
+
+   @using (Html.BeginForm("UploadFileAsync", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+   {
+      <div class="row" style="margin-top:20px">
+         <div class="col-lg-10 col-lg-offset-2 col-xs-offset-2">
+            <input type="text" class="form-control input-lg" placeholder="Name*" id="gs.Fullname" name="gs.Fullname" ng-required="true" ng-model="kitRequestCtrl.kit.FirstName" maxlength="40">
+            <br />
+            <input type="email" class="form-control input-lg" placeholder="Email*" id="gs.Email" name="gs.Email" ng-required="true" ng-model="kitRequestCtrl.kit.Email" maxlength="60">
+            <br />
+            <input type="text" class="form-control input-lg" placeholder="Organization Name*" ng-required="true" id="gs.Group" name="gs.Group" ng-model="kitRequestCtrl.kit.Group" maxlength="40">
+            <br />
+            <input type="text" ui-mask="(999) 999-9999" class="form-control input-lg" ng-required="true" placeholder="Phone*" ui-mask-placeholder id="gs.Phone" name="gs.Phone" ng-model="kitRequestCtrl.kit.Phone" maxlength="25">
+            <br />
+            <select class="form-control input-lg" name="gs.Address.Region" id="gs.Address.Region" ng-model="kitRequestCtrl.kit.Address.Region" ng-required="true" ng-options="state as state.Name for state in kitRequestCtrl.states track by state.Code">
+               <option value="">-- Select State/Province --</option>
+            </select>
+            <br />
+            <select class="form-control input-lg" name="gs.Address.Country" id="gs.Address.Country" ng-model="kitRequestCtrl.kit.Address.Country" ng-required="true" ng-change="kitRequestCtrl.UpdateStates();" ng-options="country as country.Name for country in kitRequestCtrl.countries track by country.Code"></select>
+            <br />
+            <input type="number" min="0" class="form-control input-lg" ng-required="true" name="gs.NumMembers" id="gs.NumMembers" placeholder="Number of members*" ng-model="kitRequestCtrl.kit.NumberOfMembers" maxlength="64">
+            <br />
+            <input placeholder="Enter Start Date" style="height: 45px;" name="gs.StartDate" id="gs.StartDate" class="form-control" ng-required="true" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="kitRequestCtrl.kit.StartRange">
+            <br />
+            <input class="form-control input-lg" type="file"
+                   placeholder="Upload Image*"
+                   id="gs.Imagefile"
+                   ng-required="true"
+                   accept="image/*"
+                   name="uploadFile"
+                   data-type="image"
+                   ng-model="kitRequestCtrl.kit.Image"
+                   maxlength="40">
+            <br />
+            <div class="row hidden">
+               <div class="col-lg-10">
+                  <h3>Please select desired catalog</h3>
+               </div>
+            </div>
+            <br />
+            <div class="row hidden">
+
+               <div class="col-lg-3">
+                  <label><input id="gs.Cat1" name="catalog" type="radio" value="Cat1" checked="checked">Option 1</label>
+               </div>
+               <div class="col-lg-3">
+                  <label><input id="gs.Cat2" name="catalog" type="radio" value="Cat2">Option 2</label>
+               </div>
+               <div class="col-lg-3">
+                  <label><input id="gs.Cat3" name="catalog" type="radio" value="Cat3">Option 3</label>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-lg-10 form-group">
+                  <button type="submit" class="btn btn-warning btn-lg" id="btnSave">Submit</button>
+               </div>
+            </div>
+
+         </div>
+
+
+
+
+      </div>
+
+   }
+   <div style="margin-top:50px"></div>
+   <div class="row">
+      <div class="col-lg-5 hidden-xs hidden-sm hidden-md" style="background-color:#333333; text-align:center; color:white; font-size:15px; padding-bottom:20px; padding-top:20px; margin-bottom:20px;margin-left:40px;  margin-right:10px;">
+         <a href="/catalog" onclick="ga('send', 'event', 'ALL BROCHURES', 'Click', 'ALL BROCHURES');" style="color:white">VIEW OUR CATALOG 2018</a>
+      </div>
+      <div class="col-lg-5 visible-xs visible-sm visible-md" style="background-color:#333333; text-align:center; color:white; font-size:15px; padding-bottom:20px; padding-top:20px; margin-bottom:20px;  margin-right:10px;">
+         <a href="/catalog" onclick="ga('send', 'event', 'ALL BROCHURES', 'Click', 'ALL BROCHURES');" style="color:white">VIEW OUR CATALOG 2018</a>
+      </div>
+
+      <div class="col-lg-6" style="background-color:#3363a1; text-align:center; padding-bottom:20px; padding-top:20px; color:white; font-size:15px; margin-bottom:20px; ">
+         IF YOU ARE LOOKING FOR WHOLESALE PRICES <a href="tel:+1-800-443-5353" style="text-decoration: none; font-weight:bold; color:white" onclick="ga('send', 'social', 'easyapparel call', 'Click'); ">CALL US 800.443.5353</a>
+
+
+      </div>
+
+   </div>
+
+   <!-- Modal -->
+   <div class="modal fade" id="myModalerror" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="left:auto">
+         <div class="modal-content">
+
+            <div class="modal-body">
+               <img class="img-responsive" src="/Content/home/errorimage.jpg" style="display:block; margin:auto " alt="easy sports apparel" title="easy sports apparel" />
+               <br />Something went wrong when uploading your information!<br />
+               Please contact Customer Service at 1.800.443.5353 for further assistance.<br />
+               Thank You.
+               @TempData["message"]
+
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="myModalgood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="left:auto">
+         <div class="modal-content">
+            <div class="modal-body">
+               <img class="img-responsive" src="/Content/home/1-Home-popup.jpg" style="position:relative;display: inline-block" alt="easy sports apparel" title="easy sports apparel" />
+               @TempData["message"]
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>
+
+
+
+

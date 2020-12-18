@@ -1,0 +1,26 @@
+﻿<md-dialog>
+   <form name="form" id="form">
+      <md-dialog-content>
+         <div layout="column" flex="98" layout-padding>
+            <div flex class="md-headline">{{ctrl.review.Name}} <span class="md-subhead">{{ctrl.review.Email}}</span></div>
+            <div flex class="md-subhead">Product: {{ctrl.review.ProductName}}</div>
+            <div flex class="md-caption">Created on: {{ctrl.review.Created | date: 'short'}} - Rating: {{ctrl.review.Rating}}</div>
+            <div flex class="md-subhead">{{ctrl.review.Comments}}</div>
+            <md-input-container class="md-block" flex="50">
+               <label>Sale Id</label>
+               <input type="number" name="name" ng-model="ctrl.review.SaleId">
+               <div class="hint">By indicating a Sale Id the Review will be displayed as Verified Purchase</div>
+            </md-input-container>
+            <md-switch ng-model="ctrl.review.IsApproved">
+               Review is {{ctrl.review.IsApproved ? '' : 'not'}} approved
+            </md-switch>
+         </div>
+      </md-dialog-content>
+      <md-dialog-actions>
+         <div layout="row" layout-fill layout-align="end center" flext="95">
+            <md-button ng-click="ctrl.save()" ng-disabled="!form.$valid" class="md-primary md-raised">Save</md-button>
+            <md-button ng-click="ctrl.cancel()" class="md-primary md-raised">Cancel</md-button>
+         </div>
+      </md-dialog-actions>
+   </form>
+</md-dialog>

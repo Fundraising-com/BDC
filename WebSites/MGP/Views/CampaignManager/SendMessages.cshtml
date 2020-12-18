@@ -1,0 +1,104 @@
+﻿@using GA.BDC.Web.MGP.Models.Branding
+@{
+   var userBranding = ViewBag.User as User;
+   var eventBranding = ViewBag.Event as Event;
+   var partnerBranding = ViewBag.Partner as Partner;
+   ViewBag.Title = "Send Messages";
+   Layout = "~/Views/Shared/_campaignmanager.cshtml";
+}
+<div id="information" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Send messages</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            @Html.Partial("Shared/_SendMessagesMenu", 1)
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-4 @(userBranding.IsParticipant || eventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "hidden" : string.Empty)">
+                    <div class="panel panel-info">
+                        <div class="panel-heading text-center">
+                            <strong>Invite Members</strong>
+                        </div>
+                        <div class="panel-body" style="padding: 10px">
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <img src="/Content/images/groups/campaignManager/03.jpg" style="height: 80px;" alt="Invite members" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <span class="small">Invite members to join my @partnerBranding.GroupDisplay.ToLower() by creating their own fundraising page.</span><br />
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <button class="btn btn-sm btn-default form-control" onclick="window.location.href='@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 1 })'">Send Emails</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-@(userBranding.IsParticipant || eventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "6" : "4")">
+                    <div class="panel panel-info">
+                        <div class="panel-heading text-center">
+                            <strong>Invite Supporters</strong>
+                        </div>
+                        <div class="panel-body" style="padding: 10px">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <img src="/Content/images/groups/campaignManager/04.jpg" style="height: 80px;" alt="Invite supporters" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <span class="small">Invite friends/family to support your @partnerBranding.GroupDisplay.ToLower() by making a purchase online.</span><br />
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <button class="btn btn-sm btn-default form-control" onclick="window.location.href='@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 2 })'">Send Emails</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-@(userBranding.IsParticipant || eventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "6" : "4")">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <strong>Send Supporters Updates</strong>
+                        </div>
+                        <div class="panel-body" style="padding: 10px">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <img src="/Content/images/groups/campaignManager/05.jpg" style="height: 80px;" alt="Send supporters updates" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <span class="small">Update contacts about your @partnerBranding.GroupDisplay.ToLower().</span><br /><br/>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <button class="btn btn-sm btn-default form-control" onclick="window.location.href='@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 3 })'">Send Emails</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

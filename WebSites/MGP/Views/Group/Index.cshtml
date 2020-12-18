@@ -1,0 +1,263 @@
+@using System.Text.RegularExpressions
+@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Models.Views
+@{
+    var publicEventBranding = ViewBag.PublicEvent as GA.BDC.Web.MGP.Models.Branding.PublicEvent;
+    var participants = ViewBag.ParticipantsRotator as IList<ParticipantRotator>;
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+    var hasParticipants = (bool)ViewBag.HasParticipants;
+    var amountRaisedIndicator = ViewBag.AmountRaisedIndicator as AmountRaisedIndicator;
+    var coverImg = publicEventBranding.CoverImage ?? string.Empty;
+    ViewBag.Title = string.Concat("Fundraising online: ", publicEventBranding.Name);
+    ViewBag.Keywords = string.Concat("magazine fundraising, support, online fundraiser, ", publicEventBranding.Name);
+    ViewBag.Description = "";
+    Layout = "~/Views/Shared/_group.cshtml";
+    ViewBag.CanonicalUrl = "/" + publicEventBranding.Redirect;
+}
+
+
+<style>
+    .gpbutton2 {
+        background-color: #808080;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        opacity: 0.8;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+        .gpbutton2:hover {
+            opacity: 2
+        }
+        .gpbutton2:visited {
+            color: white
+        }
+
+    .gpbutton {
+        background-color:black;
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        opacity: 0.8;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+        .gpbutton:hover {
+            opacity: 2
+        }
+
+</style>
+
+
+<div class="row" ng-controller="groupPageController" ng-init="isPreview = '@ViewBag.IsPreview.ToString()' === 'True'">
+    <div class="col-sm-12 ">
+        <img src="/Content/images/groups/bannertop_efr.jpg" style="width: 100%; margin-bottom:15px">
+    </div>
+    <div class="col-sm-4 ">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="padding: 10px;">
+                    <img src="@coverImg" style="width: 100%;" />
+                </div>
+            </div>
+        </div>
+        @*@if (hasParticipants && !partnerBranding.HideBrowseParticipants)
+        {
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="blackImage" style="background-color: black; height: 100%;">
+                        <h4 style="margin-top: 0px; padding-top: 10px;">
+                            @Html.ActionLink("Browse participants >", "FindAParticipant", "Group", new { eventId = publicEventBranding.Id }, null)
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        }*@
+        @*<div class="row">
+            <div class="col-sm-12">
+                <div class="raisedAmountIndicator" style="padding: 10px; padding-top:10%">
+                    @Html.Partial("../Group/Shared/_AmountRaisedIndicator", amountRaisedIndicator)
+                </div>
+            </div>
+        </div>*@
+    </div>
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="messageContainer">
+                    <h1 style="color:black">@publicEventBranding.Name</h1>
+                    @Html.Partial("../Group/Shared/_AmountRaisedIndicator", amountRaisedIndicator)
+                    <br />
+                    <span class="small">
+                        @Html.Raw(publicEventBranding.Message)
+                    </span>
+
+                    <div class="row" style="padding-top:15px">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div style="height: 100%;">
+                                        
+                                            <a class="gpbutton" href="" ng-click="!isPreview && popularStoreItemsRedirectToStore($event, @((!ViewBag.IsParticipant && partnerBranding.Id == 143) ? "true" : "false"))" eid="" scid="904" style="color:white; text-decoration:none; font-weight:bold">
+                                                SHOP FOR OUR CAUSE</a>
+                                                @*<button class="gpbutton"> @Html.ActionLink("Browse participants >", "FindAParticipant", "Group", new { eventId = publicEventBranding.Id }, null)</button>*@
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div style="height: 100%;">
+
+
+                                        <span class="gpbutton2" style="color:white"> @Html.ActionLink("BROWSE PARTICIPANTS", "FindAParticipant", "Group", new { eventId = publicEventBranding.Id}, htmlAttributes: new { Style = "color:White;text-decoration:none" })</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        @if (!publicEventBranding.IsGASavingsCard && partnerBranding.ProductOffer != GA.BDC.Web.MGP.Models.Branding.ProductOffer.DonationOnly && participants.Any(p => p.AmountRaised > 0))
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div>
+                        <h3>let's raise those funds!</h3>
+                    </div>
+                    <div id="participantsRotator" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+
+                            @{
+                                var participantCounter = 1;
+                                foreach (var participant in participants.Where(p => p.AmountRaised > 0))
+                                {
+                                    <div class="item text-center @(participantCounter == 1 ? "active" : "")">
+                                        @Html.ActionLink(string.Format("{0} has raised {1:C}!", participant.Name, participant.AmountRaised), "Participant", new { eventId = publicEventBranding.Id, participantId = participant.Id })
+                                    </div>
+
+                                    {
+                                        participantCounter++;
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @*@if (publicEventBranding.IsGASavingsCard)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>redeem your saving pass</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 text-center">
+                    <div class="gaSavingCardButton">
+                        <button class="btn btn-lg btn-warning" onclick="window.location.href='http://www.gapreferred.com'">local offers</button>
+                    </div>
+                </div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-5 text-center">
+                    <div class="gaSavingCardButton">
+                        <button class="btn btn-lg btn-warning" onclick="window.location.href='http://www.gasavingspass.com'">national offers</button>
+                    </div>
+                </div>
+            </div>
+        }*@
+       
+        @*<div class="row @(partnerBranding.HideHowItWorks ? "hidden" : string.Empty)" style="padding-top:10%">
+            <div class="col-sm-8" id="howItWorksLink">
+                <h4>Have a cause you care about?</h4>
+                <a href="@Url.Action("HowItWorks", "Home")">
+                    Start a free online fundraiser of your own
+                </a>
+            </div>
+        </div>*@
+    </div>
+</div>
+<div class="row ng-scope" style="font-family: 'Roboto', sans-serif; margin-top:20px" ng-controller="groupPageController" ng-init="isPreview = 'False' === 'True'" >
+    @if (partnerBranding.ProductOffer != GA.BDC.Web.MGP.Models.Branding.ProductOffer.DonationOnly && partnerBranding.ShowPopularItems)
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12" style="margin-left:20px">
+
+                            <span style="font-size:18px; font-weight:bold; color:#808080">Browse Products</span>
+                            <hr style="width:25%; font-weight:bold; margin-top:0px" align="left">
+                        </div>
+                    </div>
+                    @*<div class="col-sm-12">
+                        <h3>@(publicEventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "want to support me? shop now!" : partnerBranding.ShopNowForOurCauseMessage)</h3>
+                    </div>*@
+                </div>
+                <div class="row" ng-show="executingAction" ng-cloak>
+                    <div class="col-sm-12 text-center">
+                        <span class="text-info"><strong>We are sending you to the Store...</strong></span>
+                    </div>
+                </div>
+                <div class="row" ng-show="executingAction" ng-cloak>
+                    <div class="col-sm-12 text-center">
+                        <img src="/Content/images/public/content/loading.gif" />
+                    </div>
+                </div>
+                <div class="row" ng-hide="executingAction" ng-cloak>
+                    <div class="col-sm-12">
+                        <div id="shopNowForOurCause">
+                            @Html.Partial("../Group/Shared/_ShopNow", ViewBag.PopularItems as IList<PopularItem>)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+    @section scripts
+{
+        <script type="text/javascript">
+      $("#participantsRotator").carousel();
+
+      if ("@ViewBag.IsPreview.ToString()" === "True") {
+         var anchors = document.getElementsByTagName("a");
+         for (var i = 0; i < anchors.length; i++) {
+            anchors[i].onclick = function() { return (false); };
+         }
+      }
+        </script>
+    }
+    @section facebookOpenGraph {
+        <meta property="og:url" content="http://www.efundraising.com/@publicEventBranding.Redirect" />
+        <meta property="og:title" content="@publicEventBranding.Name.Trim()" />
+        <meta property="og:description" content="@Regex.Replace(publicEventBranding.Message, @"<[^>]+>|&nbsp;", "").Trim()" />
+        <meta property="og:image" content="http://www.efundraising.com/@HttpUtility.UrlEncode(coverImg.TrimStart(new char[] {'/'})).Replace("+", "%20")" />
+    }

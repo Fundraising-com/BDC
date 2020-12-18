@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Document" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ImportInventory" minOccurs="1" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Product" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ProductCode" type="xs:string" minOccurs="1"/>
+													<xs:element name="Price" type="xs:decimal" minOccurs="0"/>
+													<xs:element name="Cost" type="xs:decimal" minOccurs="0"/>
+													<xs:element name="IsOnSale" type="xs:boolean" minOccurs="0"/>
+													<xs:element name="SalePrice" type="xs:decimal" minOccurs="0"/>
+													<xs:element name="Inventory" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Sku" type="xs:string" minOccurs="0"/>
+																<xs:element name="Quantity" type="xs:integer" minOccurs="0"/>
+																<xs:element name="LowQtyFlag" type="xs:integer" minOccurs="0"/>
+																													
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="Transaction" type="xs:string" form="unqualified"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

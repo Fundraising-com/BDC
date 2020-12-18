@@ -1,0 +1,85 @@
+﻿@using System.Configuration
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <meta property="og:url" content="http://www.efundraising.com/" />
+    <meta property="og:title" content="Efundraising.com : Online Magazine Fundraising Made Easy!" />
+    <meta property="og:description" content="Online Magazine Fundraiser! 100% free, more profit less effort!" />
+    <meta property="og:image" content="http://www.efundraising.com/Content/images/public/content/mainLogo.gif" />
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <meta property="og:title" content="Fundraising.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.fundraising.com" />
+    <meta property="og:image" content="https://www.fundraising.com/Resources/Images/_fund_/_classic_/en-US/partner/logo/0.gif" />
+    <meta property="og:description " content="Your good cause deserves a great fundraiser! Traditional and online fundraising ideas for schools, sports teams, churches and non-profits." />
+    <meta property="og:locale " content="en_US" />
+    <meta property="og:site_name " content="Fundraising.com" />
+   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.css" />
+    @Styles.Render("~/bundles/styles")
+</head>
+<body ng-app="fundraising">
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+   @Html.Partial(HttpContext.Current.IsDebuggingEnabled ? "_coreJSFiles" : "_coreJSFiles.min")
+   @Scripts.Render("~/bundles/angular")
+   @Scripts.Render("~/bundles/app")
+    <!--Start of Lucky Orange Chat Script-->
+    <script type='text/javascript'>
+    window.__wtw_lucky_site_id = 35761;
+
+    (function () {
+        var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+        wa.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://cdn') + '.luckyorange.com/w.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+    })();
+    </script>
+    <!--End of Lucky Orange Chat Script-->
+    <!--Start of Google Analytics-->
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-6620752-4', 'auto', { 'allowLinker': true });
+        ga('send', 'pageview');
+    </script>
+    <!--End of Google Analytics-->    
+    <!-- start web api hosts -->
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+            var app = angular.module('fundraising');
+            app.constant('hosts', {
+                webApiCoreBaseUrl: '@ConfigurationManager.AppSettings["core.webapi.host"]',
+                webApiFundraisingBaseUrl: '@ConfigurationManager.AppSettings["fundraising.webapi.host"]'
+            });
+        })();
+    </script>
+    <!-- end web api hosts -->
+    <script>
+        (function () {
+            var cx = '001438748860699026052:fwhi3od-x8e';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

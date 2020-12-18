@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="column" layout-margin ng-controller="ReviewsController as reviewsCtrl" id="reviews">
+   <div ng-cloak>
+      <h1 class="text-md-primary md-title">Product Reviews (Showing {{reviewsCtrl.showApprovedSwitch ? '' : 'not'}} approved reviews only)</h1>
+   </div>
+   <div layout="column" layout-align="center center" flex="100">
+      <div ng-show="reviewsCtrl.executing" ng-cloak>
+         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+         <br />
+      </div>
+   </div>
+   <div ng-hide="reviewsCtrl.executing" ng-cloak>
+      <div layout="column" style="height:700px">
+         <md-toolbar class="md-primary md-hue-1" md-scroll-shrink>
+            <div class="md-toolbar-tools">
+               <h2><ng-md-icon icon="search" style="fill: white" size="16"></ng-md-icon> Search:</h2>
+               <md-input-container md-no-float>
+                  <input type="text" name="filter" ng-model="reviewsCtrl.filter">
+               </md-input-container>
+               <md-switch ng-model="reviewsCtrl.showApprovedSwitch">
+                  Show <span ng-show="reviewsCtrl.showApprovedSwitch">Not</span> Approved Only
+               </md-switch>
+               <span flex></span>
+               <md-button ng-disabled="reviewsCtrl.reviewsSelected.length == 0" class="md-raised" ng-click="reviewsCtrl.DeleteReviews()">
+                  <md-icon>delete</md-icon>
+                  Delete Selected(s)
+               </md-button>
+            </div>
+         </md-toolbar>
+         <md-content flex>
+            <md-list ng-init="reviewsCtrl.GetReviews()">
+               <md-list-item class="md-3-line" ng-repeat="review in reviewsCtrl.reviews | filter: {Name: reviewsCtrl.filter, IsApproved: reviewsCtrl.showApprovedSwitch }" ng-click="reviewsCtrl.OpenReviewDialog(review)">
+                  <md-checkbox ng-model="review.Selected" ng-true-value="true" ng-false-value="false" ng-change="reviewsCtrl.ReviewCheckboxChanged(review)"></md-checkbox>
+                  <div class="md-list-item-text" layout="column">
+                     <h3>{{review.Name}} ({{review.Email}})</h3>
+                     <h4>Rating: {{review.Rating}} - Validated Purchase: {{review.SaleId > 0 ? 'Yes' : 'No'}}</h4>
+                     <p>Created on {{review.Created | date: 'short'}}</p>
+                  </div>
+               </md-list-item>
+            </md-list>
+         </md-content>
+      </div>
+   </div>
+</div>
+
+@section left_navigation_menu
+{
+   @Html.Partial("_menu")
+}

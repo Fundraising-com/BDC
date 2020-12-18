@@ -1,0 +1,167 @@
+USE [QSPFulfillment]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_ar_sync_generate_adjustment_data]    Script Date: 06/16/2010 13:23:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Juan Martinez
+-- Create date: 2010-05-14
+-- Description:	Start date is inclisive
+--				End date is exclusive
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_ar_sync_generate_adjustment_data]
+	@pStartDate datetime, 
+	@pEndDate datetime
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	-- Declare temp table for adjustments
+	DECLARE @TempAdjustments TABLE
+	(
+		id int identity, 
+		is_processed bit, 
+		transaction_date datetime, 
+		fulf_account_id int, 
+		fulf_ar_sequence_line int, 
+		fulf_ar_sequence_line_for_invoice int, 
+		adjustment_id int,
+		adjustment_date datetime, 
+		adjustment_type_id int, 
+		amount decimal(18,2), 
+		create_date datetime, 
+		create_user_id int, 
+		update_date datetime, 
+		update_user_id int
+	)
+
+
+
+	-- Insert adjustment values from as400 data
+	insert into @TempAdjustments
+	select		0, 
+				transaction_date, 
+				ARCUST, 
+				AR#SEQ, 
+				AR#ISQ,
+				null, 
+				transaction_date, 
+				(select adjustment_type_id from adjustment_type where fulf_adjustment_type_code = ARCDTR) 
+					as adjustment_type_id, 
+				ARAMTR, 
+				getdate(), 
+				100010, 
+				null, 
+				null
+	from		as400_ardhisp 
+	where		ARGORF = 'F' 
+		and		ARCDTR in (select fulf_adjustment_type_code from adjustment_type)
+		and		transaction_date >= @pStartDate 
+		and		transaction_date < @pEndDate
+
+
+
+	-- Iterate through temp values
+	-- Create qspfulfillment adjustments
+	-- Get the newly created adjustment id
+	declare @current_temp_adjustment_id int
+	declare @new_adjustment_id int
+
+	while exists (select * from @TempAdjustments where is_processed = 0)
+		begin
+			select @current_temp_adjustment_id = MIN(id) from @TempAdjustments where is_processed = 0
+
+			insert into adjustment
+				select	adjustment_type_id, 
+						adjustment_date, 
+						amount, 
+						create_date, 
+						create_user_id, 
+						update_date, 
+						update_user_id, 
+						transaction_date, 
+						1, 
+						fulf_ar_sequence_line, 
+						fulf_account_id
+				from	@TempAdjustments
+				where	id = @current_temp_adjustment_id
+
+			set @new_adjustment_id = SCOPE_IDENTITY()
+
+			update	@TempAdjustments
+			set		adjustment_id = @new_adjustment_id, 
+					is_processed = 1
+			where	id = @current_temp_adjustment_id
+		end
+
+
+
+	-- Declare temp table for adjustment invoice records
+	DECLARE @TempAdjustmentInvoices TABLE
+	(
+		adjustment_id int, 
+		invoice_id int, 
+		fulf_ar_sequence_line_for_invoice int, 
+		fulf_account_id int, 
+		amount decimal(18,2), 
+		create_date datetime, 
+		create_user_id int, 
+		update_date datetime, 
+		update_user_id int, 
+		transaction_date datetime
+	)
+
+
+
+	-- Insert temp adjustment invoice records
+	insert into @TempAdjustmentInvoices
+		select	ta.adjustment_id, 
+				(
+					select		i.invoice_id 
+					from		[invoice] i
+					where	
+							i.fulf_account_id = ta.fulf_account_id
+						and i.fulf_ar_sequence_line = ta.fulf_ar_sequence_line_for_invoice
+				)	as invoice_id, 
+				ta.fulf_ar_sequence_line_for_invoice, 
+				ta.fulf_account_id, 
+				ta.amount, 
+				ta.create_date, 
+				ta.create_user_id, 
+				ta.update_date, 
+				ta.update_user_id, 
+				ta.transaction_date
+		from	@TempAdjustments ta
+
+
+
+	-- Insert adjustment invoice records
+	insert into adjustment_invoice
+		select	adjustment_id, 
+				invoice_id, 
+				amount, 
+				create_date, 
+				create_user_id, 
+				update_date, 
+				update_user_id, 
+				transaction_date, 
+				1
+		from	@TempAdjustmentInvoices
+		where	invoice_id is not null
+	
+	
+END
+
+
+
+GO
+
+

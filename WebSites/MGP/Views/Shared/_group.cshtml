@@ -1,0 +1,202 @@
+@using System.Configuration
+@using System.Web.Optimization
+@using GA.BDC.Web.MGP.Helpers
+@{ var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;}
+@{ var publicEventBranding = ViewBag.PublicEvent as GA.BDC.Web.MGP.Models.Branding.PublicEvent;}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description"/>
+    <meta name="keywords" content="@ViewBag.Keywords"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <meta property="fb:admins" content="100001988005678" />    
+    <link rel="shortcut icon" type="image/ico" href="/Content/images/public/content/favicon.ico"/>
+    @RenderSection("facebookOpenGraph", false)
+   @Styles.Render("~/general")
+   <link type="text/css" rel="stylesheet" href="@Url.Content(ConfigurationManager.AppSettings["GroupCssHref"])" />
+   @Scripts.Render("~/jquery")
+   @Scripts.Render("~/angular")
+   @Scripts.Render("~/app")
+   
+    @if (ViewBag.CanonicalUrl != null && !string.IsNullOrEmpty(ViewBag.CanonicalUrl))
+    {
+        <link rel="canonical" href="@string.Format("http://www.efundraising.com{0}", ViewBag.CanonicalUrl)" />
+    }
+   @if (!string.IsNullOrEmpty(partnerBranding.OverrideCSSFile))
+   {
+      <link type="text/css" rel="stylesheet" href="/Content/partners/@partnerBranding.OverrideCSSFile" />
+   }
+</head>
+<body ng-app="mgp">
+    <br />
+    <div class="container">
+        <header style="background-color:black">
+            <div class="row">
+                <div class="col-md-7 col-sm-12" >
+                    <a>
+                        @if (!partnerBranding.ShowOnlyPartnerLogo)
+                        {
+                            <img src="/Content/images/public/content/mainLogo2.jpg" alt="Home" style="padding-left:15px" />
+                            if (!string.IsNullOrEmpty(partnerBranding.Logo))
+                            {
+                            <img src="@partnerBranding.Logo" alt="Home" class="img-responsive"/>
+                            }
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(partnerBranding.Logo))
+                            {
+                            <img src="@partnerBranding.Logo" alt="Home" class="img-responsive"/>
+                            }
+                        } 
+                    </a>
+                </div>
+                <div class="col-md-5 hidden-xs">
+                    <!--
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="AddThisDIV" runat="server" style="margin-top: 5px; float: right;">
+                                <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+                                    <a class="addthis_button_facebook"></a>
+                                    <a class="addthis_button_twitter"></a>
+                                    <a class="addthis_button_pinterest_share"></a>
+                                    <a class="addthis_button_google_plusone_share"></a>
+                                    <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+                                </div>
+                                <script type="text/javascript">var addthis_config = { "data_track_addressbar": true };</script>
+                                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=magfund"></script>
+                                
+                            </div>
+
+                        </div>
+                    </div> -->
+                   <div class="row">
+                      <div class="col-md-12">
+                         <div  style="margin-top:6px; float: right; padding-right:15px">
+                            <span class=""><a href="@Url.Action("Register", "Home")" style="text-transform:uppercase; font-size:11px; color:white">start a free online fundraiser on your own</a></span>
+                            </div>
+                         </div>
+
+                      </div>
+                   </div>
+                </div>
+        </header>
+       <section id="groupPage">
+         
+          @RenderBody()
+       </section>
+       <footer>
+           <div class="row hidden">
+               <div class="col-sm-12">
+                   <div class="small">
+                       Created by @publicEventBranding.SponsorName for @publicEventBranding.Name on @publicEventBranding.Created.ToString("MM/dd/yyyy")
+                   </div>
+               </div>
+           </div>
+           
+           <div class="row" style="background-color:#1c3a72; padding:5px; margin-top:10px">
+               <div class="col-md-2">
+                   @Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home", null, new { @class = "small" })
+               </div>
+               <div class="col-md-10" style="text-align: right;" >
+                            <span style="color:white; font-size:10px">SPREAD THE WORD </span>
+                               <a href="mailto:?subject=A cause worth supporting&body=I am spreading a word of a worthwhile cause I think you may want to suppport: http://www.efundraising.com/@publicEventBranding.Redirect" onclick="ga('send', 'social', 'Email', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_email.jpg" border="0" alt="Send an email" style="padding-right:5px; padding-left:5px" />
+                               </a>
+
+                               <a href="https://twitter.com/intent/tweet?text=I am spreading a word of a worthwhile cause I think you may want to suppport: http://www.efundraising.com/@publicEventBranding.Redirect" onclick="ga('send', 'social', 'Twitter', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_twitter.jpg" border="0" alt="Share on Twitter" style="padding-right:5px"/>
+                               </a>
+                               <a href="http://pinterest.com/pin/create/button/?url=http://www.efundraising.com/@publicEventBranding.Redirect&media=http://www.efundraising.com/Content/images/public/content/square_logo.jpg&description=Help us with our online Fundraising!" onclick="ga('send', 'social', 'Pinterest', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_pinterest.jpg" border="0" alt="Share on Pinterest" style="padding-right:5px"/>
+                               </a>
+                               <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.efundraising.com/@publicEventBranding.Redirect" onclick="ga('send', 'social', 'Facebook', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_fb.jpg" border="0" alt="Share on Facebook" />
+                               </a>
+
+                           
+                           @*<div class="col-xs-6 text-center" style="padding-left: 0px;">
+                               <a href="https://twitter.com/intent/tweet?text=I am spreading a word of a worthwhile cause I think you may want to suppport: http://www.efundraising.com/@publicEventBranding.Redirect" onclick="ga('send', 'social', 'Twitter', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_twitter.jpg" border="0"  alt="Share on Twitter" />
+                               </a>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-xs-6 text-center" style="padding-right: 0px;">
+                               <a href="http://pinterest.com/pin/create/button/?url=http://www.efundraising.com/@publicEventBranding.Redirect&media=http://www.efundraising.com/Content/images/public/content/square_logo.jpg&description=Help us with our online Fundraising!" onclick="ga('send', 'social', 'Pinterest', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_pinterest.jpg" border="0"  alt="Share on Pinterest" />
+                               </a>
+                           </div>
+                           <div class="col-xs-6 text-center" style="padding-left: 0px;">
+                               <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.efundraising.com/@publicEventBranding.Redirect" onclick="ga('send', 'social', 'Facebook', 'Share', '/@publicEventBranding.Redirect');" target="_blank">
+                                   <img src="/Content/images/groups/amountRaisedIndicator/icon_fb.jpg" border="0"  alt="Share on Facebook" />
+                               </a>
+                           </div>*@
+                      
+                 
+               </div>
+
+           </div>
+       </footer>
+    </div>
+    @RenderSection("scripts", false)
+   @if (bool.Parse(ConfigurationManager.AppSettings["showChatProviderCode"]))
+   {
+   <!--Start of Zendesk Chat Script-->
+   <script type="text/javascript">
+	   window.$zopim || (function (d, s) {
+		   var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+			                                                  d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+			   z.set.
+				   _.push(o)
+		   }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+		   $.src = "https://v2.zopim.com/?4PAzjvVQt7v9pN2vyypOIT5kFW768OdB"; z.t = +new Date; $.
+			   type = "text/javascript"; e.parentNode.insertBefore($, e)
+	   })(document, "script");
+
+	   $zopim(function () {
+		   $zopim.livechat.departments.setVisitorDepartment('EFundraising');
+	   });
+   </script>
+   <!--End of Zendesk Chat Script-->
+   }
+    <!-- Affiliate Window Master Tag -->
+    <script src="https://www.dwin1.com/5458.js" type="text/javascript" defer="defer"> </script>
+    <!-- Affiliate Window Master Tag code end -->
+    <!-- post affiliate script begin all pages-->
+    <script type="text/javascript"><!--
+	    document.write(unescape("%3Cscript id='pap_x2s6df8d' src='" + (("https:" == document.location.protocol) ? "https://" : "http://") + "fundraising.postaffiliatepro.com/scripts/trackjs.js' type='text/javascript'%3E%3C/script%3E"));//-->
+    </script>
+    <script type="text/javascript"><!--
+	    PostAffTracker.setAccountId('default1');
+	    try {
+		    PostAffTracker.track();
+	    } catch (err) { }
+	    //-->
+    </script>
+    <!-- post affiliate script end -->
+    <!-- Starts Google Analytics -->
+    <script>
+	    (function (i, s, o, g, r, a, m) {
+		    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			    (i[r].q = i[r].q || []).push(arguments)
+		    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+			    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+	    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+	    ga('require', 'linker');
+	    ga('linker:autoLink', ['efundraising.com', 'fundraising411.com', 'juniorleaguefundraising.com', '1stfundraisers.com', 'ssgfundraising.com', 'usafundraising.com', 'schoolsfundraising.com', 'gamefundraising.com', 'fundraisingsolution.om', 'fundraisingnews.com', 'fundraisingclub.com', 'emailfundraising.com', 'scratchandsave.com', 'canadafundraising.com', 'raising-fund.com', 'tshirtfundraising.com', 'snacksfundraising.com', 'lollipopfundraisers.om', 'chocolatefundraisers.com', 'fund-raising.com', 'nhscamagagazines.com', 'lgfundraising.com', 'fastpitchsoftballmags.com', 'chocolatefundraiser.com', 'fundraisingsearch.com', 'online-fundraising.com', 'cdfundraising.com', 'discoveryschoolfundraising.com', 'onlyfundraising.com', 'efundraisingcorp.com', 'universalfundraising.net', 'teamcheerfundraising.com', 'efundraisingsuperstore.com', 'asafundraising.om', 'e-fundraising.com', 'mystore.fundraising.com']);
+	    ga('create', '@ConfigurationManager.AppSettings["GoogleAnalyticsTrackingId"]', 'auto', {'allowLinker': true});
+	    ga('send', 'pageview');
+
+    </script>
+<!-- Ends Google Analytics -->
+<script>
+	$(function() {
+		$('[data-toggle="popover"]').popover();
+	});
+</script>
+</body>
+</html>

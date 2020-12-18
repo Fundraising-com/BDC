@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://efundraising" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rpc.xml.coldfusion" xmlns:impl="http://efundraising" targetNamespace="http://efundraising" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rpc.xml.coldfusion">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="CFCInvocationException">
+        <xsd:sequence />
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getRosterByPersonTypeRequest">
+    <wsdl:part name="webServiceUserUsername" type="xsd:string" />
+    <wsdl:part name="webServiceUserPassword" type="xsd:string" />
+    <wsdl:part name="grid" type="xsd:string" />
+    <wsdl:part name="personType" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getGroupInfoRequest">
+    <wsdl:part name="webServiceUserUsername" type="xsd:string" />
+    <wsdl:part name="webServiceUserPassword" type="xsd:string" />
+    <wsdl:part name="grid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRosterByPersonTypeResponse">
+    <wsdl:part name="getRosterByPersonTypeReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="CFCInvocationException">
+    <wsdl:part name="fault" type="tns1:CFCInvocationException" />
+  </wsdl:message>
+  <wsdl:message name="getGroupInfoResponse">
+    <wsdl:part name="getGroupInfoReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="EFundraising">
+    <wsdl:operation name="getGroupInfo" parameterOrder="webServiceUserUsername webServiceUserPassword grid">
+      <wsdl:input name="getGroupInfoRequest" message="impl:getGroupInfoRequest" />
+      <wsdl:output name="getGroupInfoResponse" message="impl:getGroupInfoResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRosterByPersonType" parameterOrder="webServiceUserUsername webServiceUserPassword grid personType">
+      <wsdl:input name="getRosterByPersonTypeRequest" message="impl:getRosterByPersonTypeRequest" />
+      <wsdl:output name="getRosterByPersonTypeResponse" message="impl:getRosterByPersonTypeResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="eFundraising.cfcSoapBinding" type="impl:EFundraising">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getGroupInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getGroupInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://efundraising" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getGroupInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://efundraising" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://efundraising" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRosterByPersonType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRosterByPersonTypeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://efundraising" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getRosterByPersonTypeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://efundraising" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://efundraising" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EFundraisingService">
+    <wsdl:port name="eFundraising.cfc" binding="impl:eFundraising.cfcSoapBinding">
+      <wsdlsoap:address location="http://services.eteamz.com/eFundraising/eFundraising.cfc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

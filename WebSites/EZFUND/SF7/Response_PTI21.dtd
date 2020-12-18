@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	*********************************************************************************
+	Paymentech Auth/Capture, Void, Refund and Batch Response DTD 
+	Version 21.0  Date: February 10, 2003 
+	*********************************************************************************
+-->
+<!--
+	Request consists of Refund, Void or Authorisation/Capture Request.
+-->
+<!ELEMENT Response (BatchResponse | QuickResponse | UnmarkResponse | RefundResponse | VoidResponse | ACResponse)>
+<!ELEMENT BatchResponse (MerchantID, TerminalID, ProcStatus, StatusMsg?, RespTime, (SettleRejectHoldingBin | SettleOpenBatch)?, BatchSeqNum?)>
+<!-- 
+	Message Type: Indicates what sort of action is being requested:
+		B = batch/end-of-day
+-->
+<!ATTLIST BatchResponse
+	MessageType (B) "B"
+	Version CDATA #REQUIRED
+>
+<!-- 
+	A list of batch sequence numbers separated by a '/' character, e.g. 24/25/26
+	Each batch sequence number in the list represents a sub-batch into which the batch request has been split.
+-->
+<!ELEMENT BatchSeqNum (#PCDATA)>
+<!--
+	The presence of this element indicates that the merchant wished to settle those transactions in the reject holding bin.
+-->
+<!ELEMENT SettleRejectHoldingBin EMPTY>
+<!-- 
+	The absence of this element indicates that the merchant wished to settle those transactions in the open batch.
+-->
+<!ELEMENT SettleOpenBatch EMPTY>
+<!--
+	Quick Response: Used when the authorization center was not contacted in the request, e.g. format error on the request, request for a deferred auth, offline capture request, etc.
+-->
+<!ELEMENT QuickResponse (MerchantID?, TerminalID?, ProcStatus?, StatusMsg?, ApprovalStatus?, TxRefIdx?, TxRefNum?, OrderNumber?, AccountNum?, POSEntryMode?, CardType1?, RespTime?)>
+<!-- 		
+	Message Type:
+		FR = Response to Full Refund request
+		PR = Response to Partial Refund request
+		V = Void
+		A = Auth only
+		C= Capture only
+		UC= Unmark for Capture
+		AC = Auth and Capture
+		U = Unable to determine
+				
+	CapStatus:
+		0 = Not marked for capture.
+		1 = Marked for capture.
+		2 = Single message authorised.
+		3 = Captured, batch closed.
+		4 = Captured, batch open.
+		5 = Captured, batch out of balance.
+		6 = Captured, outstanding amount to be captured.
+		7 = Voided before capture.
+-->
+<!ATTLIST QuickResponse
+	HcsTcsInd (T | H) "T"
+	MessageType (FR | PR | V | A | AC | C | B | UC | U) #IMPLIED
+	Version NMTOKEN #FIXED "2"
+	CapStatus (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7) #IMPLIED
+	LangInd (00 | 01 | 02 | 03 | 04 | 05 | 06 | 07) "00"
+	TzCode CDATA #IMPLIED
+>
+<!ELEMENT CardType1 (#PCDATA)>
+<!--
+	Unmark Response
+-->
+<!ELEMENT UnmarkResponse (MerchantID, TerminalID, OrderNumber, TxRefNum, TxRefIdx, ProcStatus?, StatusMsg?, RespTime)>
+<!-- 		
+	Message Type:
+		UC= Unmark for Capture
+				
+	CapStatus:
+		0 = Not marked for capture.
+		1 = Marked for capture.
+		2 = Single message authorised.
+		3 = Captured, batch closed.
+		4 = Captured, batch open.
+		5 = Captured, batch out of balance.
+		6 = Captured, outstanding amount to be captured.
+		7 = Voided before capture.
+-->
+<!ATTLIST UnmarkResponse
+	HcsTcsInd (T | H) "T"
+	MessageType (UC) #REQUIRED
+	Version NMTOKEN #FIXED "2"
+	CapStatus (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7) "0"
+	LangInd (00 | 01 | 02 | 03 | 04 | 05 | 06 | 07) "00"
+	TzCode CDATA #REQUIRED
+>
+<!--
+	Refund Response
+-->
+<!ELEMENT RefundResponse (TxRefIdx, TxRefNum, ProcStatus, StatusMsg?, ApprovalStatus?, MerchantID, TerminalID, OrderNumber, AccountNum?, POSEntryMode?, RespDate?, RespTime, CardType1, ExpDate1?, AuthID?, ActualRespCd?, DBEBTTrace?, AuthNetwkID?, HostErrBitNum?, HostErrSubtagVal?, TransErrNum?, ResponseCodes)>
+<!-- 		
+	Message Type:
+		FR = Response to Full Refund request
+		PR = Response to Partial Refund request
+-->
+<!ATTLIST RefundResponse
+	HcsTcsInd (T | H) "T"
+	MessageType (FR | PR) #REQUIRED
+	Version NMTOKEN #FIXED "2"
+	CapStatus (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7) "1"
+	LangInd (00 | 01 | 02 | 03 | 04 | 05 | 06 | 07) "00"
+	TzCode CDATA #REQUIRED
+>
+<!ELEMENT ExpDate1 (#PCDATA)>
+<!--
+	Void Response
+-->
+<!ELEMENT VoidResponse (TxRefIdx, TxRefNum, RespTime, ProcStatus, StatusMsg?, ApprovalStatus?, MerchantID, TerminalID, OrderNumber, AccountNum?, OutstandingAmt?, ResponseCodes)>
+<!-- 		
+	Message Type:
+		V = Void
+		
+	CapStatus:
+		0 = Not marked for capture.
+		1 = Marked for capture.
+		2 = Single message authorised.
+		3 = Captured, batch closed.
+		4 = Captured, batch open.
+		5 = Captured, batch out of balance.
+		6 = Captured, outstanding amount to be captured.
+		7 = Voided before capture.
+
+-->
+<!ATTLIST VoidResponse
+	HcsTcsInd (T | H) "T"
+	MessageType (V) "V"
+	Version NMTOKEN #FIXED "2"
+	CapStatus (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7) "1"
+	LangInd (00 | 01 | 02 | 03 | 04 | 05 | 06 | 07) "00"
+	TzCode CDATA #REQUIRED
+>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ACResponse
+
+-->
+<!--
+	Authorisation/Capture Response:
+			Comprised of CommonDataResponse element followed by
+			either an AuthResponse element or a CaptureResponse element or both.
+-->
+<!ELEMENT ACResponse (CommonDataResponse, (AuthResponse | CapResponse | (AuthResponse, CapResponse)))>
+<!ELEMENT CommonDataResponse (CommonMandatoryResponse, CommonOptionalResponse?)>
+<!ELEMENT AuthResponse (AuthMandatoryResponse, AuthOptionalResponse?)>
+<!ELEMENT CapResponse (CapMandatoryResponse, CapOptionalResponse?)>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - CommonMandatoryResponse
+
+-->
+<!-- 
+	********************************************************
+	Response Data common to both Authorisations 
+	and Captures for all merchant types 
+	********************************************************
+-->
+<!ELEMENT CommonMandatoryResponse (MerchantID, TerminalID, TxRefNum, TxRefIdx, OrderNumber, RespTime, ProcStatus, StatusMsg?, ApprovalStatus?, ResponseCodes)>
+<!-- 		
+	Message Type:
+		A = Auth only
+		C= Capture only
+		AC = Auth and Capture
+-->
+<!ATTLIST CommonMandatoryResponse
+	HcsTcsInd (T | H) "T"
+	MessageType (A | C | AC) #REQUIRED
+	LangInd (00 | 01 | 02 | 03 | 04 | 05 | 06 | 07) "00"
+	TzCode CDATA #REQUIRED
+	Version NMTOKEN #FIXED "2"
+>
+<!--
+	Merchant ID - up to 15 digits
+-->
+<!ELEMENT MerchantID (#PCDATA)>
+<!--
+	Terminal ID - up to 4 digits
+-->
+<!ELEMENT TerminalID (#PCDATA)>
+<!-- 
+	Authorisation reference codes 
+-->
+<!ELEMENT TxRefNum (#PCDATA)>
+<!ELEMENT TxRefIdx (#PCDATA)>
+<!-- 
+	Merchant generated trace 
+-->
+<!ELEMENT OrderNumber (#PCDATA)>
+<!-- 
+	General Status of request message 
+-->
+<!ELEMENT ProcStatus (#PCDATA)>
+<!-- 
+	Textual  Status of request message if ProcStatus non-sero 
+-->
+<!ELEMENT StatusMsg (#PCDATA)>
+<!ATTLIST StatusMsg
+	StatusMsgLth NMTOKEN #REQUIRED
+>
+<!-- 
+	Approval Status of request message 
+-->
+<!ELEMENT ApprovalStatus (#PCDATA)>
+<!ELEMENT ResponseCodes (RespMsg?, AuthCode?, RespCode, HostRespCode?, CVV2RespCode?, HostCVV2RespCode?, AVSRespCode?, HostAVSRespCode?, FraudRespCode?, HostFraudRespCode?, FraudRespMsg?)>
+<!--
+	Message that may accompany response
+-->
+<!ELEMENT RespMsg (#PCDATA)>
+<!ELEMENT AuthCode (#PCDATA)>
+<!ELEMENT RespCode (#PCDATA)>
+<!ELEMENT HostRespCode (#PCDATA)>
+<!ELEMENT CVV2RespCode (#PCDATA)>
+<!ELEMENT HostCVV2RespCode (#PCDATA)>
+<!--
+	Response to AVS/AAV request
+-->
+<!ELEMENT AVSRespCode (#PCDATA)>
+<!ELEMENT HostAVSRespCode (#PCDATA)>
+<!--
+	Fraud related responses
+-->
+<!ELEMENT FraudRespCode (#PCDATA)>
+<!ELEMENT HostFraudRespCode (#PCDATA)>
+<!-- 
+	Textual  Status of fraud message
+-->
+<!ELEMENT FraudRespMsg (#PCDATA)>
+<!ATTLIST FraudRespMsg
+	FraudRespMsgLth NMTOKEN #REQUIRED
+>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -CommonOptionalResponse
+
+-->
+<!-- 
+	********************************************************
+	Response Data common to both Authorisations 
+	and Captures for merchant type1 
+	********************************************************
+-->
+<!ELEMENT CommonOptionalResponse (AccountNum?, RespDate?, CardType?, ExpDate?, CurrencyCd?)>
+<!ELEMENT AccountNum (#PCDATA)>
+<!ELEMENT RespDate (#PCDATA)>
+<!--
+ Values: 
+	AE/AX-American Express,
+	BE(Tampa)-Best Petroleum,
+	BN-(Salem"BE")-Beneficial,
+	CB-Carte Blanche,
+	CC-Club Card,
+	CF-Citifinancial,
+	DB-Debit, DC-Diner's Club,
+	DS/DI-Discover, EB-EBT,
+	EC(Tampa)-Ecard,
+	CK(Salem"EC")-Electronic Check,
+	EN-Enmark,
+	GC-GasCard,
+	GE-GECC, GP-Gate Petrolium,
+	IA-International Automated,
+	IG-In good taste,
+	JC-JCB,
+	MC-MasterCard,
+	PH-PH&H,
+	ST-Site oil,
+	SV-Stored value,
+	SW-Switch/Solo,
+	TI-Tinadre,
+	VI-Visa,
+	VY-Voyager,
+	WX-Wright Express
+-->
+<!ELEMENT CardType (#PCDATA)>
+<!ELEMENT ExpDate (#PCDATA)>
+<!--
+ Valid Values: 840-U.S. dollars, etc
+-->
+<!ELEMENT CurrencyCd (#PCDATA)>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -AuthMandatoryResponse
+
+-->
+<!-- 
+	********************************************************
+	Authorisation specific mandatory response data  
+	for all merchant types 
+	********************************************************
+-->
+<!ELEMENT AuthMandatoryResponse EMPTY>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -AuthOptionalResponse
+
+-->
+<!-- 
+	********************************************************
+	Authorisation specific optional response data  
+	for all merchant types 
+	********************************************************
+-->
+<!ELEMENT AuthOptionalResponse (CardSecResp?, POSEntryMode?, MISCData?, NetworkData?, (VisaCard | MCCard | SVCard | EBTCard | GasCard)?)>
+<!--
+ Valid Values: M-CVV matched,N-CVV not matched, P-Not processed, S-Should be on the card, U-Unsupported by the issuer, I-Invalid, ' '-blank if not Visa
+-->
+<!ELEMENT CardSecResp EMPTY>
+<!-- 
+	VISA CVV2 indicator for the reason that the data is unavailable
+	Card Security Response:
+		M = CVV matched
+		N = CVV not matched
+		P = not processed
+		S = should be on the card
+		U = unsupported by the issuer
+		I = invalid
+		blank if not VISA 
+-->
+<!ATTLIST CardSecResp
+	CSRI CDATA #REQUIRED
+>
+<!--
+ Positions 1-2: Values 01-Manual Entry, 02-Mag stripe unaltered constraints not provided, 04-OCR/MICR coding read, 81-MC manually entered PAN on ecommerce trans, 90-Mag stripe read fully unaltered. Position 3: Values 0 - Unknown, 1-Terminal can accept PINs, 2-Terminal cannot accept PINs, 8-Terminal PIN pad is down
+-->
+<!ELEMENT POSEntryMode (#PCDATA)>
+<!--
+ Code issued by Paymentech indicating the result of the transaction. 000-Salem No answer, 100-Salem approved, 101-Salem validated, 102-Salem verified, 103-Salem prenoted, 201-Salem invalid CC number, 202-Salem bad amount, 204-Salem other error, 225-Salem invalid field data, 227-Salem missing companion data, 231-Salem invalid merchant ID, 233-Salem does not match MOP, 234-Salem duplicate order number, 236-Salem auth recycle host system down, 238-Salem invalid currency, 239-Salem invalid MOP for merc, 243-Salem invalid purchasing level III, 251-Salem invalid start date, 252-Salem invalid issue number, 260-Salem soft AVS, 301-Salem issuer unavailable, 302-Salem credit floor, 303-Salem processor decline, 401-Salem call, 402-Salem default call, 501-Salem pickup, 502-Salem lost/stolen, 519-Salem on negative file, 522-Salem card is expired, 530-Salem do not honor, 531-CVV2 failure, 591-Salem invalid CC number, 592-Salem bad amount, 594-Salem other error, 602-Salem invalid institution code, 605-Salem invalid exp. date, 606-Salem invalid tran type, 607-Salem invalid amount, 750-Salem RT, 751-Salem invalid routing no. , 752-Salem missing name, 753-Salem invalid account type, 754-Salem account closed, 755-Salem no account, 756-Salem account holder deceased, 757-Salem beneficiary deceased, 758-Salem account frozen, 759-Salem customer opt-out, 760-Salem non participate ACH, 763-Salem invalid account number, 764-Salem auth revoked by consumer, 765-Salem customer not authorized, 766-Salem invalid CECP action code, 767-Salem invalid account number format, 768-Salem bad account no. data, 802-Salem positive ID, 806-Salem restraint, 811-Salem invalid SEC code, 813-Salem invalid PIN, 825-Salem no account, 833-Salem invalid merchant, 834-Salem unauthorized user, 1000-tampa appr., 1001-Tampa refer to card issuer, 1002-Tampa refer to card issuer's special conditions, 1003-Tampa invalid merc/term, 1004-Tampa pickup, 1005-Tampa do not honor, 1006-Tampa error, 1008-Tampa approved auth,honor with ID, 1011-Tampa approved, VIP approval, 1012-Tampa invalid trans, 1013-Tampa invalid amt, 1014-Tampa invalid card number, 1019-Tampa re-enter trans, 1030-Tampa format error, 1033-Tampa expired card, 1040-Tampa requested func. not supported, 1041-Tampa lost card, 1043-Tampa stolen card/pick up, 1058-Tampa trans not permitted on term, 1099-Tampa unable to send trans to be auth by issuer 
+-->
+<!ELEMENT RespTime (#PCDATA)>
+<!ELEMENT MISCData (MerchantSIC?, AuthID?, ActualRespCd?, DBEBTTrace?, SecurityCntl?, TransErrNum?)>
+<!--
+ Code that describes Merchant's business
+-->
+<!ELEMENT MerchantSIC (#PCDATA)>
+<!--
+ Populated for Visa incremental and reversal auths as well as EBT voice auths
+-->
+<!ELEMENT AuthID (#PCDATA)>
+<!--
+	Authorizing network response code - Only the first 2 bytes are used 
+-->
+<!ELEMENT ActualRespCd (#PCDATA)>
+<!--
+ Internally generated Trace number for debit/ebt transaction
+-->
+<!ELEMENT DBEBTTrace (#PCDATA)>
+<!--
+ Working key or sequence for PIN translation
+-->
+<!ELEMENT SecurityCntl (#PCDATA)>
+<!--
+ Paymentech internal error number for this transaction
+-->
+<!ELEMENT TransErrNum (#PCDATA)>
+<!ELEMENT NetworkData (AuthNetwkID?, HostErrBitNum?, HostErrSubtagVal?)>
+<!--
+ Code indicating network that processed the transaction
+-->
+<!ELEMENT AuthNetwkID (#PCDATA)>
+<!--
+ On error transaction, first bit containing error
+-->
+<!ELEMENT HostErrBitNum (#PCDATA)>
+<!--
+ On error transaction, first subtag containing error
+-->
+<!ELEMENT HostErrSubtagVal (#PCDATA)>
+<!--
+      Visa Card Details
+-->
+<!ELEMENT VisaCard (VAmount?, TransID?, CPSData?, MSDI?, LodgeAutoRentData?, AuthSource?, VisaCommCard?, CAVVRespCode?)>
+<!ELEMENT VAmount (OrigAuthAmt?, TotAuthAmt?)>
+<!--
+ Amount used for first authorization to Visa
+-->
+<!ELEMENT OrigAuthAmt (#PCDATA)>
+<!--
+ Net amount for all authorizations for this Visa transaction
+-->
+<!ELEMENT TotAuthAmt (#PCDATA)>
+<!--
+ Visa generated identifier for each original auth request
+-->
+<!ELEMENT TransID (#PCDATA)>
+<!ELEMENT CPSData (AuthCharInd?, ValidationCd?)>
+<!--
+ Code issued by Visa for CPS evaluation
+-->
+<!ELEMENT AuthCharInd (#PCDATA)>
+<!--
+ Validation code supplied by Visa for CPS qualification
+-->
+<!ELEMENT ValidationCd (#PCDATA)>
+<!--
+ Response for Verified-By-Visa 
+-->
+<!ELEMENT CAVVRespCode (#PCDATA)>
+<!--
+ Market specific data indicator. Valid Values : A-Autorental, H-Hotel, N-Transaction cannot receive industry related interchange rate
+-->
+<!ELEMENT MSDI EMPTY>
+<!ATTLIST MSDI
+	MSDInd (A | H | N) #REQUIRED
+>
+<!ELEMENT LodgeAutoRentData (RentalDuration?, DownGradeReason?)>
+<!--
+ Indicates expected duration for lodging or auto rental
+-->
+<!ELEMENT RentalDuration (#PCDATA)>
+<!ELEMENT DownGradeReason EMPTY>
+<!ATTLIST DownGradeReason
+	DGR (AN | AV | CK | CN | CV | CX | ED | EM | IC | IM | IP | IS | MC | NA | NP | NS | NT | NV | TA | TD | T1 | 02 | 18 | 22 | 42 | 59) "59"
+>
+<!--
+ Visa code indicating how authorization was performed
+-->
+<!ELEMENT AuthSource EMPTY>
+<!ATTLIST AuthSource
+	AuthSrc (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | D | E | F | G) "0"
+>
+<!--
+ Valid values
+	B-Business Card,
+	R-Corporate Card,
+	S-Purchasing Card
+-->
+<!ELEMENT VisaCommCard EMPTY>
+<!ATTLIST VisaCommCard
+	VCC (B | R | S) "B"
+>
+<!--
+      MCard Details
+-->
+<!ELEMENT MCCard (MCInterchangeInd?, BankNetRefNum?, BankNetDate?, CVCErrorInd?, POSValidCd?, MCPurchCardInd?, MagStripeQualInd?, RecurringAdviceCd?)>
+<!--
+ Valid values: 
+	A-Interchange compliance data,BankNet date and reference number was provided by MC for this tran,
+	P-Authorization met the requirements for MC TIPS processing
+-->
+<!ELEMENT MCInterchangeInd EMPTY>
+<!ATTLIST MCInterchangeInd
+	MCIInd (A | P) #REQUIRED
+>
+<!--
+ MasterCard generated identifier for each original auth request
+-->
+<!ELEMENT BankNetRefNum (#PCDATA)>
+<!--
+ MC generated date
+-->
+<!ELEMENT BankNetDate (#PCDATA)>
+<!--
+ 	Y-CVC is incorrect,
+	N-there was no problem
+-->
+<!ELEMENT CVCErrorInd EMPTY>
+<!ATTLIST CVCErrorInd
+	CVCEI (Y | N) "N"
+>
+<!--
+ 	Y-indicates MC changed the POS entry mode from 90 to 02,
+	N-indicates there was no problem
+-->
+<!ELEMENT POSValidCd EMPTY>
+<!ATTLIST POSValidCd
+	POSVCd (Y | N) "N"
+>
+<!ELEMENT MCPurchCardInd EMPTY>
+<!--
+ Valid Values:P-Purchasing Card, B-Business/Corporate Card
+-->
+<!ATTLIST MCPurchCardInd
+	MCPI (P | B) #REQUIRED
+>
+<!--
+ Valid Values: 
+	' '-no quality problem,
+	A-track 1 or 2 not present,
+	B-track 1 and 2 present,
+	C-PAN != PAN in track data, 
+	D-Exp. date != Exp. date in track data, 
+	E-invalid Service code,
+	F-invalid Field seperators,
+	G-a field in track exceeds maximum length,
+	H-transaction catg. code is 'T',
+	I-POS customer presence indicator is 1,2,3,4,5,
+	J-POS card presence indicator is 1
+-->
+<!ELEMENT MagStripeQualInd EMPTY>
+<!ATTLIST MagStripeQualInd
+	MSQI (A | B | C | D | E | F | G | H | I | J) #IMPLIED
+>
+<!-- 
+      Recurring Advise Indicator		
+-->
+<!ELEMENT RecurringAdviceCd (#PCDATA)>
+
+<!--
+      SVCard Details
+-->
+<!ELEMENT SVCard (SVBalAmtInd?, SVAccBalType?, SVBalInfoElement?, SVAccBalAmt?)>
+<!--
+ number of occurrences of balance information
+-->
+<!ELEMENT SVBalAmtInd (#PCDATA)>
+<!ELEMENT SVAccBalType EMPTY>
+<!--
+ Valid Values: 
+	CSV =Current stored value balance,
+	CMR-Current merchandise return balance,
+	PSV-prio stored value balance,
+	PMR-Prior merchandise return balance,
+	COA-Cash out amount
+-->
+<!ATTLIST SVAccBalType
+	SVABT (CSV | CMR | PSV | PMR | COA) "CSV"
+>
+<!--
+ Values provided by authorizing network
+-->
+<!ELEMENT SVBalInfoElement (#PCDATA)>
+<!ELEMENT SVAccBalAmt (#PCDATA)>
+<!--
+      EBTCard Details
+-->
+<!ELEMENT EBTCard (EBTBalAmtInd?, EBTBAlInfoElement?, EBTAccBalType?, EBTAccBalAmt?)>
+<!--
+ Number of occurences of balance information
+-->
+<!ELEMENT EBTBalAmtInd (#PCDATA)>
+<!--
+ Values provided by authorizing network
+-->
+<!ELEMENT EBTBAlInfoElement (#PCDATA)>
+<!--
+ Valid values: 
+	FSL-Food stamp ledger balance,
+	FSA-food stamp available balance,
+	BBL-beginning balance,
+	CLB-Cash ledger balance,
+	CAB- Cash available balance,
+	CBB-Cash beginning balance
+-->
+<!ELEMENT EBTAccBalType EMPTY>
+<!ATTLIST EBTAccBalType
+	EBTABT (FSL | FSA | BBL | CLB | CAB | CBB) "CAB"
+>
+<!ELEMENT EBTAccBalAmt (#PCDATA)>
+<!--
+      Gas Card Details
+-->
+<!ELEMENT GasCard (GCAuthUnitNum?, GCOilLimit?, GCPartSrvLimit?, GCFuelPrintInd?, GCPrintText?, GCMiscLimit?)>
+<!--
+ Gas card maximum units approved
+-->
+<!ELEMENT GCAuthUnitNum (#PCDATA)>
+<!--
+	Indicator as to the unit representation:
+		1 = gallons
+		2 = liters
+		3 = pounds
+		4 = kilos
+		5 = imperial kilos
+		' ' = not applicable 
+-->
+<!ATTLIST GCAuthUnitNum
+	GCAuthUnitInd CDATA "1"
+>
+<!--
+ Maximum oil dollar value for a transaction
+-->
+<!ELEMENT GCOilLimit (#PCDATA)>
+<!--
+ Max parts and service amount approved
+-->
+<!ELEMENT GCPartSrvLimit (#PCDATA)>
+<!--
+ 	Y-price per units to be printed on receipt,
+	N-price not to be printed on receipt
+-->
+<!ELEMENT GCFuelPrintInd EMPTY>
+<!ATTLIST GCFuelPrintInd
+	GCFPI (Y | N) "Y"
+>
+<!ELEMENT GCPrintText (#PCDATA)>
+<!--
+ Max misc. dollar value approved
+-->
+<!ELEMENT GCMiscLimit (#PCDATA)>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -CapMandatoryResponse
+
+-->
+<!-- 
+	********************************************************
+	Capture specific response data for all 
+	merchant types 
+	********************************************************
+-->
+<!ELEMENT CapMandatoryResponse EMPTY>
+<!-- 
+	0 = Not marked for capture.
+	1 = Marked for capture.
+	2 = Single message authorised.
+	3 = Captured, batch closed.
+	4 = Captured, batch open.
+	5 = Captured, batch out of balance.
+	6 = Captured, outstanding amount to be captured.
+	7 = Voided before capture.
+-->
+<!ATTLIST CapMandatoryResponse
+	CapStatus (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7) "1"
+>
+<!-- 
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -CapOptionalResponse
+
+-->
+<!-- 
+	********************************************************
+	Capture specific response data for 
+	merchant type1 
+	********************************************************
+-->
+<!ELEMENT CapOptionalResponse (OutstandingAmt?, TranType?, Amount?, FraudCardSecVal?)>
+<!ELEMENT OutstandingAmt (#PCDATA)>
+<!ELEMENT TranType (#PCDATA)>
+<!ELEMENT Amount (#PCDATA)>
+<!ELEMENT FraudCardSecVal (#PCDATA)>
+<!-- -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -END OF FILE -->
+<!-- -->

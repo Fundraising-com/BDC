@@ -1,0 +1,93 @@
+@model int
+<div   >
+   <div class="row">
+        
+        <div class="col-md-12" ng-controller="KitRequestController as kitRequestCtrl" ng-init="kitRequestCtrl.KitRequestLanding = @Model;">
+           
+                <form name="kitRequestForm" id="kitRequestForm" role="form" ng-submit="kitRequestForm.$submitted && kitRequestForm.$valid && kitRequestCtrl.Send();">
+                   <div class="form-group" ng-cloak>
+                      <label for="kit.RequestTypeSelect" class="control-label" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}">How do you want your guide?</label>
+                      <label for="kit.RequestTypeSelect" class="control-label" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}">Request your Digital guide?</label>
+                      <select ng-model="kitRequestCtrl.kit.RequestType" id="kit.RequestTypeSelect" class="form-control" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}">
+                         <option value="1">Digital</option>
+                      </select>
+                      <select ng-model="kitRequestCtrl.kit.RequestType" id="kit.RequestTypeSelect" class="form-control" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}">
+                         <option value="2">Mail + Digital</option>
+                         <option value="1">Digital</option>
+                      </select>
+                   </div>
+                                        
+                    <div class="form-group">
+                        <label for="kit.FirstName" class="control-label">Name *</label>
+                        <input type="text" class="form-control" placeholder="i.e. John Smith" id="kit.FirstName" ng-required="true" ng-model="kitRequestCtrl.kit.FirstName" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="kit.Email" class="control-label">Email *</label>
+                        <input type="email" class="form-control" placeholder="i.e. john.smith@gmail.com" id="kit.Email" ng-required="true" ng-model="kitRequestCtrl.kit.Email" maxlength="50">
+                    </div>
+                    <div class="form-group" ng-hide="kitRequestCtrl.hidePhone">
+                        <label for="kit.Phone" class="control-label">Phone *</label>
+                        <input type="text" ui-mask="{{kitRequestCtrl.phoneMask}}" class="form-control" id="kit.Phone" ng-required="true" ng-model="kitRequestCtrl.kit.Phone" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="kit.Group" class="control-label">Group Name</label>
+                        <input type="text" class="form-control" placeholder="i.e. Girls Scout of America" id="kit.Group" ng-required="false" ng-model="kitRequestCtrl.kit.Group" maxlength="100">
+                    </div>
+                    <div class="form-group" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+                        <label for="kit.Address.Address1" class="control-label">Address *</label>
+                        <input type="text" class="form-control" placeholder="i.e. 33 Main St" id="kit.Address.Address1" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.Address1" maxlength="100">
+                    </div>
+                    <div class="form-group" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+                        <label for="kit.Address.City" class="control-label">City *</label>
+                        <input type="text" class="form-control" placeholder="i.e. Chicago" id="kit.Address.City" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.City" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="kit.Address.Region" class="control-label">Select a State/Province *</label>
+                        <select class="form-control" id="kit.Address.Region" ng-model="kitRequestCtrl.kit.Address.Region" ng-required="true" ng-options="state as state.Name for state in kitRequestCtrl.states track by state.Code">
+                            <option value="">--- Please select State/Province ---</option> 
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kit.Address.Country" class="control-label">Country *</label>
+                        <select class="form-control" id="kit.Address.Country" ng-model="kitRequestCtrl.kit.Address.Country" ng-required="true" ng-change="kitRequestCtrl.UpdateStates();" ng-options="country as country.Name for country in kitRequestCtrl.countries track by country.Code"></select>
+                    </div>
+                    <div class="form-group" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+                        <label for="kit.Address.PostCode" class="control-label">ZIP *</label>
+                        <input type="text" class="form-control" placeholder="i.e. 12345" id="kit.Address.PostCode" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.PostCode" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="kit.TellMore" class="control-label">Care to Tell us More?</label>
+                        <select ng-model="kitRequestCtrl.kit.TellMore" id="kit.TellMore" class="form-control">
+                            <option value="1">Yes</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-show="kitRequestCtrl.kit.TellMore == 1">
+                        <label for="kit.NumberOfMembers" class="control-label">Number of Members</label>
+                        <input type="number" class="form-control" placeholder="i.e. 15" id="kit.NumberOfMembers" ng-model="kitRequestCtrl.kit.NumberOfMembers">
+                    </div>
+                    <div class="form-group" ng-show="kitRequestCtrl.kit.TellMore == 1">
+                        <label for="kit.Website" class="control-label">Group Website</label>
+                        <input type="text" class="form-control" placeholder="i.e. http://www.google.com" id="kit.Website" ng-model="kitRequestCtrl.kit.Website" maxlength="50">
+                    </div>
+                    <div class="form-group" ng-cloak>
+                        @*<button type="button" class="btn btn-warning form-control" ng-show="kitRequestCtrl.ActionState != 1 && !kitRequestForm.$valid" ng-disabled="true">Please fill all required Fields</button>*@
+                        <button type="submit" class="btn btn-warning form-control" >Submit</button>
+                        <span class="text-info" ng-show="kitRequestCtrl.ActionState == 1">
+                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+                            <progressbar class="progress-striped" max="100" value="kitRequestCtrl.progress" type="warning" animate="true"></progressbar>
+                        </span>
+                        <div class="alert alert-danger" role="alert" ng-show="kitRequestCtrl.ActionState == 3">
+                            <strong>{{kitRequestCtrl.error.Message}}</strong>
+                            <ul class="text-danger" ng-show="kitRequestCtrl.ActionState == 3">
+                                <li ng-repeat="e in kitRequestCtrl.error.ModelStateErrors">
+                                    {{e}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>

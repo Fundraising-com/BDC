@@ -1,0 +1,61 @@
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="ReportsController as reportsCtrl">
+    <form name="report" id="report" class="hidden-print">
+        <div layout="column">
+            <div layout="row">
+                <div>
+                    <h1 class="text-md-primary md-title">Gross Profit Report</h1>
+                </div>
+                <div flex></div>
+                <div>
+                    <md-button href="/Reports"><md-icon>arrow_back</md-icon>Go Back</md-button>
+                </div>
+            </div>
+            <br>
+            <div layout="row" layout-padding>
+                <md-input-container class="md-block" flex="19">
+                    <label>From Date 1</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date1Start" md-max-date="reportsCtrl.parameters.Date1End" md-placeholder="Start 1" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+                <md-input-container class="md-block" flex="19">
+                    <label>To Date 1</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date1End" md-min-date="reportsCtrl.parameters.Date1Start" md-placeholder="End 1" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+                <md-divider flex="0"></md-divider>
+                <md-input-container class="md-block" flex="19">
+                    <label>From Date 2</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date2Start" md-max-date="reportsCtrl.parameters.Date2End" md-placeholder="Start 2" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+                <md-input-container class="md-block" flex="19">
+                    <label>To Date 2</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date2End" md-min-date="reportsCtrl.parameters.Date2Start" md-placeholder="End 2" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-padding>
+                <div flex></div>
+                <md-button ng-click="reportsCtrl.ResetReportParameters();" class="md-raised" ng-cloak ng-hide="reportsCtrl.executing">Reset</md-button>
+                <md-button ng-click="reportsCtrl.ExecuteGrossProfit()" class="md-raised md-primary" ng-cloak ng-hide="reportsCtrl.executing" ng-disabled="!report.$valid">Submit</md-button>
+                <md-button ng-csv="reportsCtrl.CsvData" filename="{{reportsCtrl.fileName}}" csv-header="reportsCtrl.GetGrossProfitReportHeader()" class="md-raised md-primary" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.CsvData != undefined">Download</md-button>
+            </div>
+            <div layout="row" layout-padding>
+                <div flex></div>
+                <div class="md-caption" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">The report was ran on <strong>{{reportsCtrl.executedOn | date: 'short' : '-05:00'}}</strong> and it took <strong>{{reportsCtrl.executionTime}}</strong> seconds.</div>
+            </div>
+            <div layout="row" ng-show="reportsCtrl.executing" ng-cloak>
+                <div flex></div>
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                <div flex></div>
+            </div>
+            <div layout="row" layout-padding>
+                <div flex>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+    </form>   
+</div>

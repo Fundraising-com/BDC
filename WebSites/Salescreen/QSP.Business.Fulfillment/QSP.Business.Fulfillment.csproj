@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4E55EB19-53BC-4A27-991F-31B1DEEF896B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QSP.Business.Fulfillment</RootNamespace>
+    <AssemblyName>QSP.Business.Fulfillment</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\..\..\..\packages\Castle.Core.1.2.0\lib\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\..\..\..\..\packages\Castle.DynamicProxy.2.2.0\lib\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.log4netIntegration">
+      <HintPath>..\..\..\..\..\..\packages\Castle.Core.1.2.0\lib\Castle.Services.Logging.log4netIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.NLogIntegration">
+      <HintPath>..\..\..\..\..\..\packages\Castle.Core.1.2.0\lib\Castle.Services.Logging.NLogIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\..\..\packages\log4net.2.0.3\lib\net35-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\..\..\..\..\..\packages\Npgsql.2.2.4.3\lib\net35\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Mapping.Attributes, Version=3.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Mapping.Attributes.3.2.0.0\lib\NHibernate.Mapping.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\..\..\packages\NLog.1.0.0.505\lib\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\..\..\..\..\..\packages\Npgsql.2.2.4.3\lib\net35\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.Entity.cs" />
+    <Compile Include="AccountAttribute.Entity.cs" />
+    <Compile Include="AccountCollection.Entity.cs" />
+    <Compile Include="AccountSearch.Entity.cs" />
+    <Compile Include="AccountStatus.cs" />
+    <Compile Include="AccountStatus.Entity.cs" />
+    <Compile Include="AccountStatusChange.Entity.cs" />
+    <Compile Include="AccountTransfers.Entity.cs" />
+    <Compile Include="AccountTransfersExportDestination.Entity.cs" />
+    <Compile Include="AccountTransfersTerritory.Entity.cs" />
+    <Compile Include="AccountType.Entity.cs" />
+    <Compile Include="ADDRESSSYNCLOG.Entity.cs" />
+    <Compile Include="Adjustment.Entity.cs" />
+    <Compile Include="AdjustmentInvoice.Entity.cs" />
+    <Compile Include="AdjustmentType.Entity.cs" />
+    <Compile Include="As400giftmaster.Entity.cs" />
+    <Compile Include="As400giftmasterIncoming.Entity.cs" />
+    <Compile Include="Attribute.Entity.cs" />
+    <Compile Include="AuditAccountAttribute.Entity.cs" />
+    <Compile Include="BankCheck.Entity.cs" />
+    <Compile Include="Batch.Entity.cs" />
+    <Compile Include="BusinessCalendar.cs" />
+    <Compile Include="BusinessCalendar.Entity.cs" />
+    <Compile Include="BusinessDivision.Entity.cs" />
+    <Compile Include="BusinessException.Entity.cs" />
+    <Compile Include="BusinessNotification.Entity.cs" />
+    <Compile Include="BusinessNotificationType.Entity.cs" />
+    <Compile Include="BusinessRule.Entity.cs" />
+    <Compile Include="BusinessTask.Entity.cs" />
+    <Compile Include="CACCOUNTORGANIZATIONSYNCLOG.Entity.cs" />
+    <Compile Include="Campaign.cs" />
+    <Compile Include="Campaign.Entity.cs" />
+    <Compile Include="Campaign20060920JLCBACK.Entity.cs" />
+    <Compile Include="CampaignGroup.Entity.cs" />
+    <Compile Include="Catalog.Entity.cs" />
+    <Compile Include="CatalogGroup.Entity.cs" />
+    <Compile Include="CatalogGroupCatalog.Entity.cs" />
+    <Compile Include="CatalogItem.cs" />
+    <Compile Include="CatalogItem.Entity.cs" />
+    <Compile Include="CatalogItemAttribute.Entity.cs" />
+    <Compile Include="CatalogItemCategory.cs" />
+    <Compile Include="CatalogItemCategory.Entity.cs" />
+    <Compile Include="CatalogItemCategoryCatalogItem.cs" />
+    <Compile Include="CatalogItemCategoryCatalogItem.Entity.cs" />
+    <Compile Include="CatalogItemCategoryCatelogItem.cs" />
+    <Compile Include="CatalogItemDetail.cs" />
+    <Compile Include="CatalogItemDetail.Entity.cs" />
+    <Compile Include="CatalogItemStatus.Entity.cs" />
+    <Compile Include="CatalogItemStatusChange.Entity.cs" />
+    <Compile Include="Charge.cs" />
+    <Compile Include="Charge.Entity.cs" />
+    <Compile Include="ChargeTo.cs" />
+    <Compile Include="ChargeTo.Entity.cs" />
+    <Compile Include="CityTaxExempt.Entity.cs" />
+    <Compile Include="ClientAccount.cs" />
+    <Compile Include="ClientAccount.Entity.cs" />
+    <Compile Include="CMAppItems.cs" />
+    <Compile Include="CMAppItems.Entity.cs" />
+    <Compile Include="CMAppItemsDetailItems.Entity.cs" />
+    <Compile Include="CMAppItemsFAQ.Entity.cs" />
+    <Compile Include="CMAppItemsRoles.Entity.cs" />
+    <Compile Include="CMDetailItems.Entity.cs" />
+    <Compile Include="CMDetailTypes.Entity.cs" />
+    <Compile Include="CMExportType.Entity.cs" />
+    <Compile Include="CMFAQ.Entity.cs" />
+    <Compile Include="CMRoles.Entity.cs" />
+    <Compile Include="CMRolesPermissions.Entity.cs" />
+    <Compile Include="CMSections.Entity.cs" />
+    <Compile Include="Commission.cs" />
+    <Compile Include="Commission.Entity.cs" />
+    <Compile Include="CommissionRate.Entity.cs" />
+    <Compile Include="CommissionType.Entity.cs" />
+    <Compile Include="Contact.Entity.cs" />
+    <Compile Include="ContactAccount.Entity.cs" />
+    <Compile Include="ContactCampaign.Entity.cs" />
+    <Compile Include="ContactOrganization.Entity.cs" />
+    <Compile Include="ContactType.Entity.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="DeliveryDateType.Entity.cs" />
+    <Compile Include="DeliveryMethod.cs" />
+    <Compile Include="DeliveryService.cs" />
+    <Compile Include="DeliveryService.Entity.cs" />
+    <Compile Include="DeliveryServiceType.Entity.cs" />
+    <Compile Include="Domain\AccountData.cs" />
+    <Compile Include="Domain\CampaignData.cs" />
+    <Compile Include="Domain\InvoiceData.cs" />
+    <Compile Include="Domain\OrderData.cs" />
+    <Compile Include="Domain\OrderDetailData.cs" />
+    <Compile Include="EmailAccount.cs" />
+    <Compile Include="FieldSalesManager.cs" />
+    <Compile Include="Country.Entity.cs" />
+    <Compile Include="CountyTaxExempt.Entity.cs" />
+    <Compile Include="Coupon.Entity.cs" />
+    <Compile Include="CouponGroup.Entity.cs" />
+    <Compile Include="CreditApplication.Entity.cs" />
+    <Compile Include="CreditApplicationStatus.Entity.cs" />
+    <Compile Include="CreditApplicationType.Entity.cs" />
+    <Compile Include="CreditCard.Entity.cs" />
+    <Compile Include="CreditCardAuthorization.Entity.cs" />
+    <Compile Include="CreditCardType.Entity.cs" />
+    <Compile Include="CrossSell.Entity.cs" />
+    <Compile Include="Customer.Entity.cs" />
+    <Compile Include="Definition.Entity.cs" />
+    <Compile Include="DefinitionAttribute.Entity.cs" />
+    <Compile Include="DeliveryMethod.Entity.cs" />
+    <Compile Include="Discount.Entity.cs" />
+    <Compile Include="DiscountAttribute.Entity.cs" />
+    <Compile Include="DiscountCatalogItem.Entity.cs" />
+    <Compile Include="DiscountCatalogItemCategory.Entity.cs" />
+    <Compile Include="DiscountClass.Entity.cs" />
+    <Compile Include="DiscountClassType.Entity.cs" />
+    <Compile Include="DiscountOrder.Entity.cs" />
+    <Compile Include="DiscountProgram.Entity.cs" />
+    <Compile Include="DiscountProgramDiscountClass.Entity.cs" />
+    <Compile Include="DiscountRule.Entity.cs" />
+    <Compile Include="DiscountRuleDefault.Entity.cs" />
+    <Compile Include="DiscountRuleType.Entity.cs" />
+    <Compile Include="DiscountStatus.Entity.cs" />
+    <Compile Include="Document.Entity.cs" />
+    <Compile Include="DocumentAccount.Entity.cs" />
+    <Compile Include="DocumentCreditApplication.Entity.cs" />
+    <Compile Include="DocumentType.Entity.cs" />
+    <Compile Include="Dtproperties.Entity.cs" />
+    <Compile Include="DTSNewFulfAccountID.Entity.cs" />
+    <Compile Include="DTSNewOrganizations.Entity.cs" />
+    <Compile Include="DuplicateAccountOverride.Entity.cs" />
+    <Compile Include="Email.Entity.cs" />
+    <Compile Include="EmailAccount.Entity.cs" />
+    <Compile Include="EmailCampaign.Entity.cs" />
+    <Compile Include="EmailContact.Entity.cs" />
+    <Compile Include="EmailCustomer.Entity.cs" />
+    <Compile Include="EmailOrganization.Entity.cs" />
+    <Compile Include="EmailProgramAgreement.Entity.cs" />
+    <Compile Include="EmailType.Entity.cs" />
+    <Compile Include="EntityException.Entity.cs" />
+    <Compile Include="EntityType.Entity.cs" />
+    <Compile Include="EpiEdsBatch.Entity.cs" />
+    <Compile Include="EpiFile.Entity.cs" />
+    <Compile Include="EpiFileStatus.Entity.cs" />
+    <Compile Include="EpiFileType.Entity.cs" />
+    <Compile Include="EpiOrder.Entity.cs" />
+    <Compile Include="EpiTempOrc.Entity.cs" />
+    <Compile Include="EpiTempPae.Entity.cs" />
+    <Compile Include="ExceptionType.Entity.cs" />
+    <Compile Include="ExternalSource.Entity.cs" />
+    <Compile Include="FavoriteLogo.Entity.cs" />
+    <Compile Include="Field.Entity.cs" />
+    <Compile Include="FieldEntityType.Entity.cs" />
+    <Compile Include="FieldSalesManager.Entity.cs" />
+    <Compile Include="FieldType.Entity.cs" />
+    <Compile Include="Form.cs" />
+    <Compile Include="Form.Entity.cs" />
+    <Compile Include="FormCatalogGroup.Entity.cs" />
+    <Compile Include="FormDeliveryDateType.cs" />
+    <Compile Include="FormDeliveryDateType.Entity.cs" />
+    <Compile Include="FormDeliveryMethod.Entity.cs" />
+    <Compile Include="FormDetail.Entity.cs" />
+    <Compile Include="FormGroup.Entity.cs" />
+    <Compile Include="FormOrderType.Entity.cs" />
+    <Compile Include="FormPermission.cs" />
+    <Compile Include="FormPermission.Entity.cs" />
+    <Compile Include="FormPermissionRegion.cs" />
+    <Compile Include="FormPermissionRegion.Entity.cs" />
+    <Compile Include="FormProfitRate.cs" />
+    <Compile Include="FormProfitRate.Entity.cs" />
+    <Compile Include="FormSection.cs" />
+    <Compile Include="FormSection.Entity.cs" />
+    <Compile Include="FormSectionType.Entity.cs" />
+    <Compile Include="FulfillmentHouse.Entity.cs" />
+    <Compile Include="FulfillmentStatus.Entity.cs" />
+    <Compile Include="ImportFile.Entity.cs" />
+    <Compile Include="ImportFileStatus.Entity.cs" />
+    <Compile Include="ImportFileType.Entity.cs" />
+    <Compile Include="Installment.Entity.cs" />
+    <Compile Include="InstallmentPlan.Entity.cs" />
+    <Compile Include="Invoice.Entity.cs" />
+    <Compile Include="InvoiceDetail.Entity.cs" />
+    <Compile Include="LogicalOperator.Entity.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Order.Entity.cs" />
+    <Compile Include="OrderCharge.cs" />
+    <Compile Include="OrderCharge.Entity.cs" />
+    <Compile Include="OrderDetail.cs" />
+    <Compile Include="OrderDetail.Entity.cs" />
+    <Compile Include="OrderDetailHistory.Entity.cs" />
+    <Compile Include="OrderDetailReturn.Entity.cs" />
+    <Compile Include="OrderDetailTax.cs" />
+    <Compile Include="OrderDetailTax.Entity.cs" />
+    <Compile Include="OrderException.Entity.cs" />
+    <Compile Include="OrderExportErrorCode.Entity.cs" />
+    <Compile Include="OrderExportTracking.Entity.cs" />
+    <Compile Include="OrderGroup.Entity.cs" />
+    <Compile Include="OrderHistory.Entity.cs" />
+    <Compile Include="OrderPayment.Entity.cs" />
+    <Compile Include="OrderPaymentCollectionStatus.Entity.cs" />
+    <Compile Include="OrderPaymentMethod.Entity.cs" />
+    <Compile Include="OrderStatus.cs" />
+    <Compile Include="OrderStatus.Entity.cs" />
+    <Compile Include="OrderStatusChange.Entity.cs" />
+    <Compile Include="OrderType.Entity.cs" />
+    <Compile Include="Organization.Entity.cs" />
+    <Compile Include="OrganizationLevel.Entity.cs" />
+    <Compile Include="OrganizationType.Entity.cs" />
+    <Compile Include="Participant.Entity.cs" />
+    <Compile Include="ParticipantCampaignGroup.Entity.cs" />
+    <Compile Include="Payment.Entity.cs" />
+    <Compile Include="PaymentAssignmentType.Entity.cs" />
+    <Compile Include="PaymentCode.Entity.cs" />
+    <Compile Include="PaymentInvoice.Entity.cs" />
+    <Compile Include="PaymentInvoiceDetail.Entity.cs" />
+    <Compile Include="PaymentMethod.Entity.cs" />
+    <Compile Include="PaymentType.Entity.cs" />
+    <Compile Include="PhoneNumber.cs" />
+    <Compile Include="PhoneNumber.Entity.cs" />
+    <Compile Include="PhoneNumberAccount.cs" />
+    <Compile Include="PhoneNumberAccount.Entity.cs" />
+    <Compile Include="PhoneNumberCampaign.cs" />
+    <Compile Include="PhoneNumberCampaign.Entity.cs" />
+    <Compile Include="PhoneNumberContact.Entity.cs" />
+    <Compile Include="PhoneNumberCustomer.Entity.cs" />
+    <Compile Include="PhoneNumberOrganization.Entity.cs" />
+    <Compile Include="PhoneNumberProgramAgreement.Entity.cs" />
+    <Compile Include="PhoneNumberType.Entity.cs" />
+    <Compile Include="PostalAddress.Entity.cs" />
+    <Compile Include="PostalAddressAccount.cs" />
+    <Compile Include="PostalAddressAccount.Entity.cs" />
+    <Compile Include="PostalAddressCampaign.cs" />
+    <Compile Include="PostalAddressCampaign.Entity.cs" />
+    <Compile Include="PostalAddressContact.Entity.cs" />
+    <Compile Include="PostalAddressControlCharacterIssue.Entity.cs" />
+    <Compile Include="PostalAddressCustomer.Entity.cs" />
+    <Compile Include="PostalAddressOrganization.Entity.cs" />
+    <Compile Include="PostalAddressProgramAgreement.Entity.cs" />
+    <Compile Include="PostalAddressType.cs" />
+    <Compile Include="PostalAddressType.Entity.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Product.Entity.cs" />
+    <Compile Include="ProductAttribute.Entity.cs" />
+    <Compile Include="ProductLine.Entity.cs" />
+    <Compile Include="ProductStatus.Entity.cs" />
+    <Compile Include="ProductStatusChange.Entity.cs" />
+    <Compile Include="ProductType.Entity.cs" />
+    <Compile Include="ProductTypeProgramType.Entity.cs" />
+    <Compile Include="ProfitRate.Entity.cs" />
+    <Compile Include="Program.Entity.cs" />
+    <Compile Include="ProgramAgreement.Entity.cs" />
+    <Compile Include="ProgramAgreementCampaign.cs" />
+    <Compile Include="ProgramAgreementCampaign.Entity.cs" />
+    <Compile Include="ProgramAgreementStatus.Entity.cs" />
+    <Compile Include="ProgramAgreementStatusChange.Entity.cs" />
+    <Compile Include="ProgramType.cs" />
+    <Compile Include="ProgramType.Entity.cs" />
+    <Compile Include="ProgramTypeCatalogGroup.Entity.cs" />
+    <Compile Include="Promotion.Entity.cs" />
+    <Compile Include="PromotionGroup.Entity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QSPCOMMONAccountTableFix.Entity.cs" />
+    <Compile Include="QSPCommonDailyTransaction.Entity.cs" />
+    <Compile Include="QSPFormAccountStatus.Entity.cs" />
+    <Compile Include="QSPFormFormat.Entity.cs" />
+    <Compile Include="QSPFormImageCategory.Entity.cs" />
+    <Compile Include="QSPFormLogo.Entity.cs" />
+    <Compile Include="QSPFormLogoSubdivision.Entity.cs" />
+    <Compile Include="QSPFormOrderStatus.Entity.cs" />
+    <Compile Include="QSPFormPaymentAssignmentType.Entity.cs" />
+    <Compile Include="QSPFormPromo.Entity.cs" />
+    <Compile Include="QSPFormPromoCoupon.Entity.cs" />
+    <Compile Include="QSPFormPromoCouponSubdivision.Entity.cs" />
+    <Compile Include="QSPFormPromoImage.Entity.cs" />
+    <Compile Include="QSPFormPromoLogo.Entity.cs" />
+    <Compile Include="QSPFormPromoLogoSubdivision.Entity.cs" />
+    <Compile Include="QSPFormPromoLogoText.Entity.cs" />
+    <Compile Include="QSPFormPromoSubdivision.Entity.cs" />
+    <Compile Include="QSPFormPromoText.Entity.cs" />
+    <Compile Include="QSPFormPromoTextSubdivision.Entity.cs" />
+    <Compile Include="QSPFormPromotion.Entity.cs" />
+    <Compile Include="QSPFormXAccount.Entity.cs" />
+    <Compile Include="QSPFormXAccountSalesHistory.Entity.cs" />
+    <Compile Include="QxtrakAux.Entity.cs" />
+    <Compile Include="Registry.Entity.cs" />
+    <Compile Include="ShipmentGroup.cs" />
+    <Compile Include="ShipmentGroup.Entity.cs" />
+    <Compile Include="Source.cs" />
+    <Compile Include="Source.Entity.cs" />
+    <Compile Include="SourceGroup.Entity.cs" />
+    <Compile Include="SourceGroupCatalogGroup.Entity.cs" />
+    <Compile Include="SqlSessionManager.cs" />
+    <Compile Include="StatusCategory.Entity.cs" />
+    <Compile Include="StatusReason.Entity.cs" />
+    <Compile Include="Subdivision.Entity.cs" />
+    <Compile Include="Supporter.Entity.cs" />
+    <Compile Include="Task.Entity.cs" />
+    <Compile Include="TaskType.Entity.cs" />
+    <Compile Include="TaxCalculationMethod.Entity.cs" />
+    <Compile Include="TaxLevel.Entity.cs" />
+    <Compile Include="TaxType.Entity.cs" />
+    <Compile Include="Temp092206.Entity.cs" />
+    <Compile Include="TemplateEmail.Entity.cs" />
+    <Compile Include="ToDo.Entity.cs" />
+    <Compile Include="TradeClass.Entity.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="User.Entity.cs" />
+    <Compile Include="UserRole.cs" />
+    <Compile Include="UserRole.Entity.cs" />
+    <Compile Include="Vendor.Entity.cs" />
+    <Compile Include="VendorType.Entity.cs" />
+    <Compile Include="View\OrderChargeList.cs" />
+    <Compile Include="View\OrderChargeList.Entity.cs" />
+    <Compile Include="Warehouse.cs" />
+    <Compile Include="Warehouse.Entity.cs" />
+    <Compile Include="WarehouseBusinessCalendar.Entity.cs" />
+    <Compile Include="WarehouseStatus.Entity.cs" />
+    <Compile Include="WarehouseZipPrefixLeadtime.cs" />
+    <Compile Include="WarehouseZipPrefixLeadtime.Entity.cs" />
+    <Compile Include="XaccountAttributesWeb.Entity.cs" />
+    <Compile Include="ZipPrefix.cs" />
+    <Compile Include="ZipPrefix.Entity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

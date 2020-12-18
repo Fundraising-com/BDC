@@ -1,0 +1,220 @@
+﻿<md-dialog>
+   <form name="form" id="form">
+      <md-dialog-content>
+         <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">
+               <h2>Promotion Code</h2>
+               <span flex></span>
+            </div>
+         </md-toolbar>
+         <md-content>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Name</label>
+                     <input type="text" name="name" ng-model="ctrl.promotionCode.Name" required md-maxlength="25">
+                     <div class="hint">The name of the Promotion Code.</div>
+                     <div ng-messages="form.name.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="md-maxlength">This has to be less than 25 characters long.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Code</label>
+                     <input type="text" name="code" ng-model="ctrl.promotionCode.Code" required md-maxlength="20" trim>
+                     <div class="hint">Code for the Promotion Code, this is what the Client is going to enter.</div>
+                     <div ng-messages="form.code.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="md-maxlength">This has to be less than 20 characters long.</div>
+                        <div ng-message="trim">This can't contain white spaces.</div>
+                     </div>
+                  </md-input-container>
+               </div>
+            </div>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="100">
+                     <label>Description</label>
+                     <input type="text" name="description" ng-model="ctrl.promotionCode.Description" required md-maxlength="200">
+                     <div class="hint">The description of the Promotion Code.</div>
+                     <div ng-messages="form.description.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="md-maxlength">This has to be less than 200 characters long.</div>
+                     </div>
+                  </md-input-container>                  
+               </div>
+            </div>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Country</label>
+                     <md-select ng-model="ctrl.promotionCode.Country" name="country" required ng-disabled="ctrl.countries.length == 0" ng-model-options="{trackBy: '$value.Code'}">
+                        <md-option ng-repeat="country in ctrl.countries" ng-value="country">
+                           {{country.Name}}
+                        </md-option>
+                     </md-select>
+                     <div class="hint">Country to which this is going to be applied</div>
+                     <div ng-messages="form.country.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50">
+                     <md-switch ng-model="ctrl.promotionCode.IsEnabled">
+                        Is Enabled
+                     </md-switch>
+                  </md-input-container>
+               </div>
+            </div>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>                  
+                  <md-input-container class="md-block" flex="50">
+                     <label>Scope</label>
+                     <md-select ng-model="ctrl.promotionCode.ScopeType" name="scopeType" required ng-change="ctrl.GetProducts()" ng-disabled="ctrl.promotionCode.DiscountType == 3">
+                        <md-option ng-repeat="type in ctrl.scopeTypes" ng-value="type.Id">
+                           {{type.Name}}
+                        </md-option>
+                     </md-select>
+                     <div class="hint">If Shopping Cart, the Promotion Code will apply to all of it. If Products, it will apply to the Products that match.</div>
+                     <div ng-messages="form.scopeType.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.ScopeType == 2">
+                     <label>Products</label>
+                     <md-select ng-model="ctrl.promotionCode.Products" name="products" ng-required="ctrl.promotionCode.ScopeType == 2" multiple ng-model-options="{trackBy: '$value.Id'}" ng-disabled="ctrl.products.length == 0">
+                        <md-option ng-repeat="product in ctrl.products | orderBy: 'Name'" ng-value="product">
+                           {{product.Name}}
+                        </md-option>
+                     </md-select>
+                     <div class="hint">Select which products will apply to this Promotion Code</div>
+                     <div ng-messages="form.products.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+               </div>
+            </div>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Partner Scope</label>
+                     <md-select ng-model="ctrl.promotionCode.PartnerScopeType" name="partnerType" required>
+                        <md-option ng-repeat="type in ctrl.partnerTypes" ng-value="type.Id">
+                           {{type.Name}}
+                        </md-option>
+                     </md-select>
+                     <div ng-messages="form.partnerType.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.PartnerScopeType == 2" ng-cloak>
+                     <label>Partner</label>
+                     <md-select ng-model="ctrl.promotionCode.Partner" name="partnerType" ng-required="ctrl.promotionCode.PartnerScopeType == 2" ng-model-options="{trackBy: '$value.Id'}" ng-disabled="ctrl.partners.length == 0">
+                        <md-option ng-repeat="partner in ctrl.partners | orderBy: 'Name'" ng-value="partner">
+                           {{partner.Name}}
+                        </md-option>
+                     </md-select>
+                     <div class="hint">If a Partner is selected, the Promotion Code will apply only to it.</div>
+                     <div ng-messages="form.partnerType.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+               </div>
+            </div>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Limit</label>
+                     <md-select ng-model="ctrl.promotionCode.LimitType" name="limitType" required>
+                        <md-option ng-repeat="type in ctrl.limitTypes" ng-value="type.Id">
+                           {{type.Name}}
+                        </md-option>
+                     </md-select>
+                     <div class="hint">If Date, Promotion Code will be available until the Date provided. If Quantity, it will be available until the amount of Codes redemeed is reached.</div>
+                     <div ng-messages="form.limitType.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.LimitType == 2" ng-cloak>
+                     <label>Date Limit</label>
+                     <md-datepicker ng-model="ctrl.promotionCode.DateLimit" name="dateLimit" ng-required="ctrl.promotionCode.LimitType == 2" md-placeholder="Date Limit"></md-datepicker>
+                     <div ng-messages="form.dateLimit.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.LimitType == 3" ng-cloak>
+                     <label>Quantity Limit</label>
+                     <input type="number" name="quantityLimit" ng-model="ctrl.promotionCode.QuantityLimit" ng-required="ctrl.promotionCode.LimitType == 3">
+                     <div ng-messages="form.quantityLimit.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+               </div>
+            </div>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Discount Type</label>
+                     <md-select ng-model="ctrl.promotionCode.DiscountType" name="discountType" required ng-change="ctrl.DiscountTypeChanged()">
+                        <md-option ng-repeat="type in ctrl.discountTypes" ng-value="type.Id">
+                           {{type.Name}}
+                        </md-option>
+                     </md-select>
+                     <div ng-messages="form.discountType.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.DiscountType == 1" ng-cloak>
+                     <label>Amount Discount</label>
+                     <input type="number" name="amountDiscount" ng-model="ctrl.promotionCode.AmountDiscount" ng-required="ctrl.promotionCode.DiscountType == 1">
+                     <div ng-messages="form.amountDiscount.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.DiscountType == 2" ng-cloak>
+                     <label>Percentage Discount</label>
+                     <input type="number" name="percentageDiscount" ng-model="ctrl.promotionCode.PercentageDiscount" ng-required="ctrl.promotionCode.DiscountType == 2">
+                     <div ng-messages="form.percentageDiscount.$error">
+                        <div ng-message="required">This is required.</div>
+                     </div>
+                  </md-input-container>
+               </div>
+            </div>
+         <div layout="column" flex="98">
+            <div layout="row" layout-padding>
+               <md-input-container class="md-block" flex="50">
+                  <label>Minimum Requirement</label>
+                  <md-select ng-model="ctrl.promotionCode.MinimumRequirementType" name="minimumRequirementType" required>
+                     <md-option ng-repeat="type in ctrl.minimumRequirementTypes" ng-value="type.Id">
+                        {{type.Name}}
+                     </md-option>
+                  </md-select>
+                  <div ng-messages="form.minimumRequirementType.$error">
+                     <div ng-message="required">This is required.</div>
+                  </div>
+               </md-input-container>
+               <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.MinimumRequirementType == 2" ng-cloak>
+                  <label>Minimum Quantity</label>
+                  <input type="number" name="minimumQuantity" ng-model="ctrl.promotionCode.MinimumQuantity" ng-required="ctrl.promotionCode.MinimumRequirementType == 2">
+                  <div ng-messages="form.minimumQuantity.$error">
+                     <div ng-message="required">This is required.</div>
+                  </div>
+               </md-input-container>
+               <md-input-container class="md-block" flex="50" ng-show="ctrl.promotionCode.MinimumRequirementType == 3" ng-cloak>
+                  <label>Minimum Amount</label>
+                  <input type="number" name="minimumAmount" ng-model="ctrl.promotionCode.MinimumAmount" ng-required="ctrl.promotionCode.MinimumRequirementType == 3">
+                  <div ng-messages="form.minimumAmount.$error">
+                     <div ng-message="required">This is required.</div>
+                  </div>
+               </md-input-container>
+            </div>
+         </div>
+         </md-content>
+      </md-dialog-content>
+      <md-dialog-actions>
+         <div layout="row" layout-fill layout-align="end center" flext="95">
+            <md-button ng-click="ctrl.save()" ng-disabled="!form.$valid" class="md-primary md-raised">Save</md-button>
+            <md-button ng-click="ctrl.cancel()" class="md-primary md-raised">Cancel</md-button>
+         </div>
+      </md-dialog-actions>
+   </form>
+</md-dialog>

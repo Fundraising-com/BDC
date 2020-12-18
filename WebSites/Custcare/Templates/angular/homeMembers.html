@@ -1,0 +1,200 @@
+﻿<div role="tabpanel" class="tab-pane fade in active" id="members" aria-labelledby="members-tab">
+    <div class="bs-bg">
+        <p class="bg-info">
+            <span>Members Info</span>
+            <span class="pull-right">
+                <button type="button" class="btn btn-success btn-xs" ng-click="refresh()">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh
+                </button>
+            </span>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <p>Total Participant: {{participants.length}}</p>
+        </div>
+        <div class="col-lg-5" style="margin-bottom: 10px">
+            <form class="form-inline">
+                <div class="form-group has-success">
+                    <label class="control-label" for="inputSearch">SEARCH :</label>
+                    <input name="inputSearch" type="text" class="form-control" ng-change="search('part')" data-ng-model="queryPart" placeholder="search" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive x-overflow-hidden">
+        <div class="row">
+            <div class="col-lg-10">
+                <form name="participantsInfoForm" class="form-horizontal" novalidate data-ng-submit="saveMembers('PARTICIPANTS')">
+                    <div class="bg-primary padd-light">
+                        <h3 class="no-margin">Participants</h3>
+                    </div>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th><a href="" ng-click="partSortBy('name')">Name</a></th>
+                                <th><a href="" ng-click="partSortBy('emailAddress')">Email</a></th>
+                                <th><a href="" ng-click="partSortBy('password')">Password</a></th>
+                                <th><a href="" ng-click="partSortBy('numOfSubs')">Qty Sold</a></th>
+                                <th><a href="" ng-click="partSortBy('amountSold')">Amount</a></th>
+                                <th><a href="" ng-click="partSortBy('createDate')">Creation</a></th>
+                                <th class="text-center">Unsub.</th>
+                                <th class="text-center">Movie</th>
+                                <th class="text-center">Deleted</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <div class="text-center">
+                                        <ul class="pagination">
+                                            <li ng-class="{disabled: currentPartPage == 0}">
+                                                <a href="" ng-click="partPrevPage()"><< Prev</a>
+                                            </li>
+                                            <li ng-repeat="n in range(partPagedItems.length)" ng-class="{active: n == currentPartPage}"
+                                                ng-click="setPartPage()">
+                                                <a href="" ng-bind="n + 1">1</a>
+                                            </li>
+                                            <li ng-class="{disabled: currentPartPage == partPagedItems.length - 1}">
+                                                <a href="" ng-click="partNextPage()">Next >></a>
+                                            </li>
+                                        </ul>
+                                        <span class="pull-right">
+                                            <button type="submit" class="btn btn-default" data-ng-disabled="participantsInfoForm.$invalid || participants.length == 0">
+                                                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="participant in partPagedItems[currentPartPage] | orderBy:partSortingOrder:partReverse">
+                                <td><a href="" ng-click="selectParticipant(participant.memberHierarchyId, participant.name)">{{participant.name}}</a></td>
+                                <td>{{participant.emailAddress}}</td>
+                                <td>{{participant.password}}</td>
+                                <td>{{participant.numOfSubs}}</td>
+                                <td>{{participant.amountSold | currency}}</td>
+                                <td>{{participant.createDate | date:'medium'}}</td>
+                                <td class="text-center"><input type="checkbox" id="inputUnsubscribed" ng-model="participant.unsubscribed" ng-true-value="true" ng-false-value="false"></td>
+                                <td class="text-center">
+                                    <a href="" data-toggle="modal" data-target="#movieTicketModal" ng-hide="participant.movieTicket == 'No'"
+                                       ng-click="getEarnedMovieTicket(participant.eventParticipationId)">
+                                        {{participant.movieTicket}}
+                                    </a>
+                                    <span ng-hide="participant.movieTicket == 'Yes'">{{participant.movieTicket}}</span>
+                                </td>
+                                <td class="text-center"><input type="checkbox" id="inputDeleted" ng-model="participant.deleted" ng-true-value="true" ng-false-value="false"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="movieTicketModal" tabindex="-1" role="dialog" aria-labelledby="movieTicketModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="movieTicketModalLabel">Movie Ticket Detail</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <label for="item-code" class="control-label">Item Code:</label>
+                                        <input type="text" class="form-control" id="item-code" value="{{prizeItemCode}}" readonly>
+                                    </div>
+                                    <div>
+                                        <label for="date-issued" class="control-label">Date Issued:</label>
+                                        <input type="datetime-local" class="form-control" id="date-issued" value="{{dateIssued | date:'medium'}}" readonly>
+                                    </div>
+                                    <div>
+                                        <label for="expiry-date" class="control-label">Expiry Date:</label>
+                                        <input type="datetime-local" class="form-control" id="expiry-date" value="{{expirationDate | date:'medium'}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                    <button type="button" class="btn btn-primary" ng-click="issueNewMovieTicket()">Issue New Ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <p>Total Supporters: {{supporters.length}}</p>
+        </div>
+        <div class="col-lg-5" style="margin-bottom: 10px">
+            <form class="form-inline">
+                <div class="form-group has-success">
+                    <label class="control-label" for="inputSuppSearch">SEARCH :</label>
+                    <input name="inputSuppSearch" type="text" class="form-control" ng-change="search('supp')" data-ng-model="querySupp" placeholder="search" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive x-overflow-hidden">
+        <div class="row">
+            <div class="col-lg-10">
+                <form name="supportersInfoForm" class="form-horizontal" novalidate data-ng-submit="saveMembers('SUPPORTERS')">
+                    <div class="bg-primary padd-light">
+                        <h3 class="no-margin">Supporters for: {{selectedParticipant}}</h3>
+                    </div>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th><a href="" ng-click="suppSortBy('name')">Name</a></th>
+                                <th><a href="" ng-click="suppSortBy('emailAddress')">Email</a></th>
+                                <th><a href="" ng-click="suppSortBy('bounced')">Bounced</a></th>
+                                <th><a href="" ng-click="suppSortBy('numOfSubs')">Qty Sold</a></th>
+                                <th><a href="" ng-click="suppSortBy('amountSold')">Amount</a></th>
+                                <th><a href="" ng-click="suppSortBy('createDate')">Creation</a></th>
+                                <th class="text-center">Unsub.</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <div class="text-center">
+                                        <ul class="pagination">
+                                            <li ng-class="{disabled: currentSuppPage == 0}">
+                                                <a href="" ng-click="suppPrevPage()"><< Prev</a>
+                                            </li>
+                                            <li ng-repeat="n in range(suppPagedItems.length)" ng-class="{active: n == currentSuppPage}"
+                                                ng-click="setSuppPage()">
+                                                <a href="" ng-bind="n + 1">1</a>
+                                            </li>
+                                            <li ng-class="{disabled: currentSuppPage == suppPagedItems.length - 1}">
+                                                <a href="" ng-click="suppNextPage()">Next >></a>
+                                            </li>
+                                        </ul>
+                                        <span class="pull-right">
+                                            <button type="submit" class="btn btn-default" data-ng-disabled="supportersInfoForm.$invalid || supporters.length == 0">
+                                                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="supporter in suppPagedItems[currentSuppPage] | orderBy:suppSortingOrder:suppReverse">
+                                <td>{{supporter.name}}</td>
+                                <td>{{supporter.emailAddress}}</td>
+                                <td>{{supporter.bounced}}</td>
+                                <td>{{supporter.numOfSubs}}</td>
+                                <td>{{supporter.amountSold | currency}}</td>
+                                <td>{{supporter.createDate | date:'medium'}}</td>
+                                <td class="text-center"><input type="checkbox" id="inputSuppUnsubscribed" ng-model="supporter.unsubscribed" ng-true-value="true" ng-false-value="false"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+    </div>
+</div>

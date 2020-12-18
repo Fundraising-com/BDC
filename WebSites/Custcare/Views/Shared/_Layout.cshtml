@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-ng-app="@ViewBag.InitModule">
+<head>
+    <title>@ViewBag.Title - Custcare</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Jiro Hidaka">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/template/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Content/template/css/sb-admin.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="~/Content/template/css/plugins/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/Content/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="layoutController">
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("eSubs Customer Service", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <span class="nav navbar-left navbar-brand" style="color: red !important" ng-show="isTestEnv">
+                TEST ENVIRONMENT
+            </span>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown" style="display:none; visibility:hidden">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" style="display:none; visibility:hidden">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.Name <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li style="display:none; visibility:hidden">
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li style="display:none; visibility:hidden">
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse" data-ng-controller="@ViewBag.InitController">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="/index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#search"><i class="fa fa-fw fa-search"></i> Search <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="search" class="collapse in">
+                            <li>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Event ID" data-ng-model="eventId" required>
+                                    <span class="input-group-addon clickable" data-ng-click="loadEventById()"><i class=" fa fa-caret-right fa-fw"></i></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Event Name" data-ng-model="eventName">
+                                    <span class="input-group-addon clickable" data-ng-click="loadEventsByName()"><i class="fa fa-caret-right fa-fw"></i></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Email Address" data-ng-model="email">
+                                    <span class="input-group-addon clickable" data-ng-click="loadEventsByEmail()"><i class="fa fa-caret-right fa-fw"></i></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Member Name" data-ng-model="memberName">
+                                    <span class="input-group-addon clickable" data-ng-click="loadEventsBySponsorName()"><i class="fa fa-caret-right fa-fw"></i></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Lead ID" data-ng-model="leadId">
+                                    <span class="input-group-addon clickable" data-ng-click="loadEventByLeadId()"><i class="fa fa-caret-right fa-fw"></i></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    @RenderSection("featured", required: false)
+                    <section>
+                        @RenderBody()
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="/Scripts/jquery-2.1.3.js"></script>
+
+    <!-- AngularJS -->
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="/Scripts/angular-ui-router.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Scripts/bootstrap.min.js"></script>
+
+    <!-- app -->
+    <script src="/Scripts/app/services.js"></script>
+    <script src="/Scripts/app/layout.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

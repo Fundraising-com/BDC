@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ExportOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Request" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FilterType"  maxOccurs="1" minOccurs="1" >
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="Standard" /><!-- Returns all new orders since last               
+                    standard request /-->                    
+                    <xs:enumeration value="OrderNumber" /><!-- Returns the order with the order 
+                    number that matches attribute1 /-->
+                    <xs:enumeration value="DateRange" /><!-- Returns all orders with the order 
+                    date from attribute1 to attribute2 /-->
+                    <xs:enumeration value="Customer" /><!-- Returns all orders with the customer number of attribute1 / -->
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="attribute1" type="xs:string" />
+            <xs:attribute name="attribute2" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="SchemaVersion" type="xs:decimal" use="required" fixed="1.0" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
