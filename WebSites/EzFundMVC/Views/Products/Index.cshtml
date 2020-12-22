@@ -1,0 +1,40 @@
+﻿@using GA.BDC.Shared.Entities
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.UseAngularJSMetaData = true;
+}
+<div class="container product-description-container" ng-controller="CategoryIndexController as categoryIndexCtrl">
+    <div class="row hidden-xs">
+        <div class="col-sm-12">
+            <ul class="breadcrumb" style="background-color: transparent;">
+                <li id="breadcrumb.root"><a href="/">Home</a></li>
+                <li id="breadcrumb.products" class="active">All fundraisers</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <h1 ng-cloak>Top Fundraising Ideas from EZFund.com!</h1>
+
+        <div style="padding-left:5px; padding-right:5px">
+            Welcome to EZFund. We have easy fundraising ideas with quality products and services. Our programs work well for schools, churches, PTA, sports teams or any other group fundraising projects. EZfund has 20 years of fundraising expertise and provides the best products with full support to make your fundraiser successful!<br><br>
+            We offer a wide variety of food product fundraisers such as cookie dough, pretzels,
+            funnel cakes and dessert bars. If you are looking for a quick idea, try our In-Hand Sellers
+            like Smencils, gourmet lollipops, and candy. We also offer Brochure Programs
+            such as seasonal flowers, holiday shoppers, and candles.
+            <br><br>We want your next fundraising program to be successful!! Our fundraising
+            consultants will help you every step of the way! Look over our products
+            and let us help you meet your goals!
+        </div>
+        
+        <br />
+        <br />
+
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 text-center" ng-repeat="category in categoryIndexCtrl.categories" ng-cloak>
+            <a ng-href="/products/{{::category.Url}}" class="thumbnail product-thumbnail">
+                <img ng-src="/Content/external{{category.Image.Url}}" alt="{{::category.AlternativeText}}" class="img-responsive" />
+                <h5>{{::category.Name}}</h5>
+            </a>
+        </div>
+        
+    </div>
+</div>

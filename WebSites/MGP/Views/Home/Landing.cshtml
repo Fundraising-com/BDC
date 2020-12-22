@@ -1,0 +1,113 @@
+﻿@using GA.BDC.Web.MGP.Models.Views
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@model LandingPage
+@{
+   Layout = "~/Views/Shared/_public.cshtml";
+   var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+   ViewBag.Title = partnerBranding.Name;
+   ViewBag.Keywords = string.Concat("magazine fundraising, support, online fundraiser, ", partnerBranding.Name);
+   var groupId = int.Parse(ViewBag.GroupId.ToString());
+   var routeValues = groupId > 0 ? new {groupId } : null;
+}
+<br/>
+<div id="landingPartnerPage">
+    <div class="row">
+        <div class="col-sm-4 hidden-xs">
+            <img src="@Model.SideBarImageUrl" class="img-responsive"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="small">
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">@Html.Partial("Shared/_SupportBox", ViewBag.SupportBox as SupportBox)</div>
+    </div>
+   <div class="row hidden-xs equal">
+      <div class="col-sm-4">
+         @if (Model.ShowFindGroups)
+         {
+            <div class="panel panel-default" id="findAnEventBox" style="width: 100%">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Find a @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</h3>
+               </div>
+               <div class="panel-body">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <span class="small">You can support the @partnerBranding.Name @partnerBranding.GroupDisplay.ToLower() or participant of your choice by making a purchase or you can create your own fundraising page for a chosen @partnerBranding.GroupDisplay.ToLower().
+                                </span>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">&nbsp;</div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12 col-lg-@(partnerBranding.CanNotCreateEvent ? "12" : "6") text-center">
+                        <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("FindAGroup", routeValues)'">Join a @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</button>
+                     </div>
+                     <div class="col-md-12 col-lg-6 text-center @(partnerBranding.CanNotCreateEvent ? "hidden" : string.Empty)">
+                        <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("Register", routeValues)'">Create a @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         }
+      </div>
+      <div class="col-sm-4">
+         @if (Model.ShowFeaturedGroups)
+         {
+            @Html.Partial("Shared/_FeaturedGroups", ViewBag.TopEvents as IList<FeaturedGroup>)
+         }
+      </div>
+      <div class="col-sm-4">
+         @if (Model.ShowTopParticipants)
+         {
+            @Html.Partial("Shared/_TopParticipants", ViewBag.TopParticipants as IList<TopParticipant>)
+         }
+      </div>
+   </div>
+   <div class="row visible-xs">
+      <div class="col-xs-12">
+         @if (Model.ShowFindGroups)
+         {
+            <div class="panel panel-default" id="findAnEventBox" style="width: 100%">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Find a @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</h3>
+               </div>
+               <div class="panel-body">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <span class="small">
+                           You can support the @partnerBranding.Name @partnerBranding.GroupDisplay.ToLower() or participant of your choice by making a purchase or you can create your own fundraising page for a chosen @partnerBranding.GroupDisplay.ToLower().
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">&nbsp;</div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12 col-lg-@(partnerBranding.CanNotCreateEvent ? "12" : "6") text-center">
+                        <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("FindAGroup", routeValues)'">Join a @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</button>
+                     </div>
+                     <div class="col-md-12 col-lg-6 text-center @(partnerBranding.CanNotCreateEvent ? "hidden" : string.Empty)">
+                        <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("Register", routeValues)'">Create a @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         }
+      </div>
+      <div class="col-xs-12">
+         @if (Model.ShowFeaturedGroups)
+         {
+            @Html.Partial("Shared/_FeaturedGroups", ViewBag.TopEvents as IList<FeaturedGroup>)
+         }
+      </div>
+      <div class="col-xs-12">
+         @if (Model.ShowTopParticipants)
+         {
+            @Html.Partial("Shared/_TopParticipants", ViewBag.TopParticipants as IList<TopParticipant>)
+         }
+      </div>
+   </div>
+
+</div>

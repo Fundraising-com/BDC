@@ -1,0 +1,22 @@
+﻿@model GA.BDC.Web.MGP.Models.Views.OAuth
+@{
+   ViewBag.Title = "OAuthCallback";
+   Layout = "~/Views/Shared/_campaignmanager.cshtml";
+}
+<div id="oauth">
+   <div class="blankCover"></div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+       $(document).ready(function () {
+           if ("@Model.ErrorMessage") {
+               window.opener.receiveContactsFromPopup(null, "@Model.ErrorMessage");
+           }
+           else if ("@Model.ContactsLoaded" == "True") {
+               window.opener.receiveContactsFromPopup("@Model.ContactsJsonList".split('&quot;').join('"'), null);
+           }
+           window.close();
+       });
+    </script>
+}

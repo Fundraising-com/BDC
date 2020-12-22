@@ -1,0 +1,16 @@
+@using MvcSiteMapProvider.Web.Html
+@{
+    ViewBag.Title = "Sitemap - Fundraising.com";
+    ViewBag.Description = "Contact us with your questions.  Our Customer Service and Fundraising consultants are available to help you.";
+    ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("Sitemap", "AboutUs");
+}
+<div style="margin-top:125px">
+   <h1>Site map</h1>
+   <div class="row">
+      <div class="col-sm-12">
+         @Html.MvcSiteMap().SiteMap()
+      </div>
+   </div>
+</div>

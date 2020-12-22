@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="XMLResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Product" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Error" type="xs:string" maxOccurs="unbounded" />
+						</xs:sequence>
+						<xs:attribute name="Code" type="xs:positiveInteger" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Code" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

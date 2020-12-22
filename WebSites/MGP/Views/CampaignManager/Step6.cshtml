@@ -1,0 +1,89 @@
+@using System.Configuration
+@using GA.BDC.Web.MGP.Models.Branding
+@model GA.BDC.Web.MGP.Models.Views.Personalization
+@{
+   ViewBag.Title = "Fundraising Online, Registration - Step 6";
+   ViewBag.Description = "My.Fundraising.com : Register your Fundraising Online Campaign";
+   ViewBag.Keywords = "online fundraising register, sign up EfundraisingOnline.com, start your online fundraising campaign, begin fundraising, register online fundraising campaign, start fundraising campaign online, register, EfundraisingOnline.com, My.Fundraising.com";
+	ViewBag.HideTopMenu = true;
+   Layout = "~/Views/Shared/_public2.cshtml";
+   var eventBranding = ViewBag.Event as Event;
+}
+<div class="registration-steps" id="step-6" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;">
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <h1>Step 6</h1>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 text-center registration-subtitle">
+         <span>it's time to share on social media</span>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <img src="/Content/images/public/content/separator.png" class="img-responsive" />
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 text-center">
+         <span class="small text-muted">Share your campaign via your favorite social media platforms.<br />Your friends and family would love to help.</span>
+      </div>
+   </div>
+   <br />
+   <div class="row">
+      <div class="col-xs-12 col-md-offset-2 col-md-8">
+         <div class="panel">
+            <div class="panel-body text-center">
+               <div class="row">
+                  <div class="hidden-xs hidden-sm col-md-5">
+                     <img src="@Model.PersonalizationImages[0].ImageURL" class="img-responsive"/>
+                  </div>
+                  <div class="col-sm-12 col-lg-offset-2 col-lg-4 text-center">
+                     <div class="row">
+                        <br/>
+                        <a id="facebook-share" href="http://www.facebook.com/dialog/feed?app_id=@ConfigurationManager.AppSettings["facebookAppID"]&link=@Url.Encode($"http://{Request.Url.Host}/{Model.Redirect}")&picture=@Url.Encode($"http://{Request.Url.Host}/{@Model.PersonalizationImages[0].ImageURL}")&name=@Url.Encode(eventBranding.Name)&caption=@Url.Encode("efundraising.com")&display=page&description=" target="_blank" class="btn btn-facebook btn-lg form-control"><span class="fa fa-facebook"></span> SHARE ON FACEBOOK</a>
+                        <br/><br/>
+                        <a id="twitter-share" href="https://twitter.com/intent/tweet?url=@Url.Encode($"http://{Request.Url.Host}/{Model.Redirect}")&hashtags=@Url.Encode("fundraisingcom,fundraising")&text=" target="_blank" class="btn btn-twitter btn-lg form-control"><span class="fa fa-twitter"></span> SHARE ON TWITTER</a>
+                        <br/><br/>
+                        <a href="/CampaignManager?participantId=@eventBranding.ParticipantId">SKIP</a>
+                     </div>
+                  </div>                  
+               </div>
+               <br/>
+               <br/>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <br/>
+   <div class="row">
+      <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 text-center" ng-hide="executingAction">
+         <a href="/CampaignManager?participantId=@eventBranding.ParticipantId" class="btn btn-lg btn-facebook form-control">Finish</a>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12" ng-hide="executingAction">
+         <a href="/registration/step-5?participantId=@eventBranding.ParticipantId" class="small text-muted">Go Back</a>
+      </div>
+   </div>   
+</div>
+<br />
+<br />
+<script>
+   $(document).ready(function() {
+      $("#facebook-share").click(function(e) {
+         e.preventDefault();
+         var url = $("a#facebook-share").prop('href') + encodeURI($("#customMessage").val());
+         window.open(url, '_blank');
+         return false;
+      });
+      $("#twitter-share").click(function (e) {
+         e.preventDefault();
+         var url = $("a#twitter-share").prop('href') + encodeURI($("#customMessage").val());
+         window.open(url, '_blank');
+         return false;
+      });
+   });
+</script>

@@ -1,0 +1,203 @@
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Models.Views
+@using Event = GA.BDC.Web.MGP.Models.Branding.Event
+@{
+    var eventBranding = ViewBag.Event as Event;
+    var userBranding = ViewBag.User as User;
+    var partner = ViewBag.Partner as Partner;
+    var amountRaisedIndicator = ViewBag.AmountRaisedIndicator as AmountRaisedIndicator;
+    ViewBag.Title = "Campaign Manager of " + eventBranding.Name;
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var hideCreateCampaign = (bool)ViewBag.HideCreateCampaign;
+}
+<div id="campaignIndex" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;">
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="alert alert-warning alert-dismissible @((bool)ViewBag.HasInvalidContacts ? "" : "hidden")" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Warning!</strong> You have invalid contacts. <a href="@Url.Action("InvalidContacts","CampaignManager", new {eventId = eventBranding.Id, participantId = userBranding.EventParticipationId})" class="alert-link" onclick="ga('send', 'event', 'Campaign Manager', 'Invalid Contacts Link');">Click here to update them.</a>
+         </div>
+         <div class="alert alert-info alert-dismissible @(ViewBag.NumberOfContactsBeingCreated > 0 ? string.Empty : "hidden")" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Due to a high demand We're currently processing the Contacts you just uploaded. We're still processing the last <strong>@ViewBag.NumberOfContactsBeingCreated</strong> Contact(s)
+         </div>
+         <div class="alert alert-warning alert-dismissible @(ViewBag.HasContactsFlagged ? string.Empty : "hidden")" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Due to the amount of Contacts that you've created, We need to verify that everything is OK. Please give us a couple of hours.</strong>
+         </div>
+         <div class="alert alert-info alert-dismissible @(!(bool)ViewBag.HasImportedContacts ? "" : "hidden")" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Import your contacts!</strong> Did you know that if you import your contacts you will have twice the chances to achieve your goal?. <a href="@Url.Action("SendNewMessage","CampaignManager", new {eventId = eventBranding.Id, participantId = userBranding.EventParticipationId, messageType = 2, showImportContacts = 1})" class="alert-link" onclick="ga('send', 'event', 'Campaign Manager', 'Import Contacts Link');">Click here to import them.</a>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12">
+         <h2 id="campaignTitle"><strong>@eventBranding.Name</strong> <small class="text-@(eventBranding.Status ? "success" : "danger")"><strong>@(eventBranding.Status ? "Active" : "Inactive")</strong></small></h2>
+         <p>Web address: <a target="_blank" href="@string.Concat("http://", Request.Url.Host, "/", eventBranding.Redirect)">@string.Concat(Request.Url.Host, "/", eventBranding.Redirect)</a></p>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12" id="statsPanel">
+         <div class="panel panel-info">
+            <div class="panel-heading">
+               <strong><span class="glyphicon glyphicon-stats"></span> Your Stats</strong>
+            </div>
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-xs-12 col-sm-4 text-center stat">
+                     <div id="title">GOAL</div>
+                     <div id="value">
+                        <a href="@Url.Action("Page", "CampaignManager", new {participantId= eventBranding.ParticipantId })">
+                           @amountRaisedIndicator.Goal.ToString("C2")
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-4  text-center @(partner.ProductOffer == ProductOffer.DonationOnly ? "hidden" : "stat")">
+                     <div id="title">AMOUNT RAISED</div>
+                     <div id="value">
+                        <a href="@Url.Action("CampaignReport", "CampaignManager", new {participantId= eventBranding.ParticipantId })">
+                           @((partner.ShowTotalAmountInThermometer ? eventBranding.TotalAmount : eventBranding.TotalProfit).ToString("C2"))
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-4  text-center @(partner.ProductOffer == ProductOffer.DonationOnly ? "hidden" : string.Empty)">
+                     <div id="title">ITEMS SOLD</div>
+                     <div id="value">
+                        <a href="@Url.Action("CampaignReport", "CampaignManager", new {participantId= eventBranding.ParticipantId })">
+                           @eventBranding.TotalNumberOfItemSold.ToString("F0")
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-4  text-center @(partner.ProductOffer != ProductOffer.DonationOnly ? "hidden" : string.Empty)">
+                     <div id="title">TOTAL DONATIONS</div>
+                     <div id="value">
+                        <a href="@Url.Action("CampaignReport", "CampaignManager", new {participantId= eventBranding.ParticipantId })">
+                           @eventBranding.TotalDonationAmount.ToString("C2")
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12" id="shortcutsPanel">
+         <div class="panel panel-info">
+            <div class="panel-heading">
+               <strong><span class="glyphicon glyphicon-pushpin"></span> Important Shortcuts</strong>
+            </div>
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-xs-6 col-sm-3 text-center @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                     <a href="@Url.Action("Campaigns")" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-th-list"></div>
+                        <div class="shortcutDescription">View All @(partner.GroupDisplay.ToLower().FirstLetterUpper())s</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                     <a href="#" data-toggle="modal" data-target="#endCampaignModal" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-check"></div>
+                        <div class="shortcutDescription">End @(partner.GroupDisplay.ToLower().FirstLetterUpper())</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                     <a href="@Url.Action("Create")" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-new-window"></div>
+                        <div class="shortcutDescription">New @(partner.GroupDisplay.ToLower().FirstLetterUpper())</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                     <a href="@Url.Action("Relaunch", new { participantId = eventBranding.ParticipantId })" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-share"></div>
+                        <div class="shortcutDescription">Relaunch @(partner.GroupDisplay.ToLower().FirstLetterUpper())</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center">
+                     <a href="#" class="well well-sm thumbnail" ng-click="defaultRedirectToStore(@eventBranding.Id,@eventBranding.ParticipantId)" onclick="return false">
+                        <div class="glyphicon glyphicon-piggy-bank"></div>
+                        <div class="shortcutDescription">Shop for your Cause</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center @(userBranding.IsParticipant || eventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "hidden" : string.Empty)">
+                     <a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 1 })" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-heart-empty"></div>
+                        <div class="shortcutDescription">Invite Members</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center">
+                     <a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 2 })" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-globe"></div>
+                        <div class="shortcutDescription">Invite Supporters</div>
+                     </a>
+                  </div>
+                  <div class="col-xs-6 col-sm-3 text-center">
+                     <a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 3 })" class="well well-sm thumbnail">
+                        <div class="glyphicon glyphicon-envelope"></div>
+                        <div class="shortcutDescription">Send an Update</div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="endCampaignModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+               <h4 class="modal-title" id="myModalLabel">End @partner.GroupDisplay.ToLower().FirstLetterUpper()</h4>
+            </div>
+            <div class="modal-body">
+               <span class="description_text">Are you sure you want to end this @partner.GroupDisplay.ToLower().FirstLetterUpper()? Your Page and all associated data and reporting will be deleted. This action cannot be undone.</span>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+               <button type="button" class="btn btn-danger" ng-click="end()">End @partner.GroupDisplay.ToLower().FirstLetterUpper()</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="facebookLikeModal" tabindex="-1" role="dialog" aria-labelledby="facebookLikeModal" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header text-center" style="background-color: #E5E7E9">
+               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+               <img src="/Content/images/common/hand.png" style="width: 50px;"/><h3 class="modal-title" style="font-family: 'Yellowtail', cursive"><strong>Hooray</strong></h3>
+            </div>
+            <div class="modal-body" style="background-color: #1C3A72; color: white;">
+               <div class="row">
+                  <div class="col-sm-12 text-center">
+                     <strong>
+                        Your fundraising campaign is ready to go.<br />
+                        Don't forget to invite your friends and family to support you.
+                     </strong>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div id="fb-root"></div>
+@section scripts{
+   <script>
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=470107796453192&version=v2.0";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+   <script type="text/javascript">
+	   $(document).ready(function () {
+		   if ("1" == "@ViewBag.ShowFacebookLikeModal") {
+            $('#facebookLikeModal').modal('show');
+         }
+      });
+   </script>
+}
+

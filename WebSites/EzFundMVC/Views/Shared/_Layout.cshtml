@@ -1,0 +1,558 @@
+@using System.Configuration
+
+<!DOCTYPE html>
+<html lang="en" ng-app="ezfund">
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   @if (ViewBag.UseAngularJSMetaData != null && bool.Parse(ViewBag.UseAngularJSMetaData.ToString()))
+   {
+      <title ng-bind="MetaService.metaTitle()"></title>
+      <meta name="description" content="{{ MetaService.metaDescription() }}" />
+      <meta name="keywords" content="{{ MetaService.metaKeywords() }}" />
+      <meta name="canonicalUrl" content="{{ MetaService.metaCanonicalUrl() }}" />
+   }
+   else
+   {
+      <title>@ViewBag.Title</title>
+      <meta name="description" content="@ViewBag.Description" />
+      <meta name="keywords" content="@ViewBag.Keywords" />
+   }
+
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+   @Styles.Render("~/bootstrap", "~/ezfund/styles", "~/ezfund/styles/slick")
+
+
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.css" />
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+
+   <!-- Facebook Pixel Code -->
+   <script>
+      !function (f, b, e, v, n, t, s) {
+         if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+         };
+         if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+         n.queue = []; t = b.createElement(e); t.async = !0;
+         t.src = v; s = b.getElementsByTagName(e)[0];
+         s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+         'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '2375363319393072');
+          fbq('track', 'PageView');
+   </script>
+   <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=2375363319393072&ev=PageView&noscript=1" />
+   </noscript>
+   <!-- End Facebook Pixel Code -->
+</head>
+<body>
+
+
+   <header ng-controller="ShoppingCartController as shoppingCartCtrl" ng-cloak>
+      <div class="container-fluid">
+         
+         <div class="row hidden-xs" style="background:rgb(229,229,229); color:rgb(62,62,62);">
+            <div class="container">
+               <div class="row">
+                  <div class="hidden-sm col-md-3">
+                     <a ng-href="/"><img alt="ezfundlogo" class="img-responsive" style="padding-top:5px" ng-src="~/content/images/public/ezfundlogo.png" /></a>
+                  </div>
+                  <div class="col-sm-9 col-md-6 text-center top-menu-style" style="padding-top:20px;">
+                     <div class="row">
+                        <ul class="list-inline" id="navmenu">
+                           @*<li style="padding-right:30px" class="hidden-sm hidden-md"><a ng-href="/" onclick="highlite(this);">HOME</a></li>*@
+                           <li style="padding-right:25px;"><a ng-href="/products/cookie-dough-fundraisers/cookie-dough" onclick="highlite(this);">COOKIE DOUGH</a></li>
+                           <li style="padding-right:25px"><a ng-href="/products/in-hand-sellers" onclick="highlite(this);">IN-HAND-SELLERS</a></li>
+                           <li style="padding-right:25px"><a ng-href="/products/" onclick="highlite(this);">ALL FUNDRAISERS</a></li>
+                           <li style="padding-right:5px"><a ng-href="https://www.ezfund.com/myezfund/Default.asp">MY EZFUND</a></li>
+
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="hidden-sm col-md-1" style="padding-top:15px;">
+                     @*<a href="/request-a-kit" class="btn btn-success btn-sm" style="color:white; float:none">ORDER FREE GUIDE</a>*@
+                     <a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" class="btn btn-primary btn-sm" style="color:white; float:none">ORDER FREE GUIDE</a>
+                  </div>
+                  <div class="col-sm-2 top-menu-style" ng-cloak style="padding-top:20px;">
+                     <a ng-href="/shopping-cart/index" style="text-decoration:none;">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        <span style="color: #087A92; right:17px; bottom:15px; position:relative;" class="circled-text" ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length > 0">{{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}}</span>
+                     </a>
+                     <a ng-href="" ng-click="showme=true" data-toggle="modal" data-target="#SearchModal">
+                        <span class="glyphicon glyphicon-search"></span>
+                     </a>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div ng-controller="CollapsedHeaderMenuController as collapsedHeaderMenuCtrl" class="row visible-xs">
+            <nav class="navbar navbar-default top-collapsed-menu-style" role="navigation">
+               <!-- Brand and toggle get grouped for better mobile display -->
+               <div class="navbar-header" style="background:rgb(229,229,229); color:rgb(62,62,62);">
+                  <button type="button" class="navbar-toggle" ng-init="collapsedHeaderMenuCtrl.navCollapsed = true" ng-click="collapsedHeaderMenuCtrl.navCollapsed = !collapsedHeaderMenuCtrl.navCollapsed">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                  </button>
+                  <a ng-href="/">
+                     <img alt="ezFundLogo" style="padding-top:5px" ng-src="~/Content/images/public/ezfundlogo-MB.png" />
+                  </a>
+                  <a ng-href="" ng-click="showme=true" data-toggle="modal" data-target="#SearchModal">
+                     <span class="glyphicon glyphicon-search"></span>
+                  </a>
+                  <a ng-href="/shopping-cart/index">
+                     <span class="glyphicon glyphicon-shopping-cart"></span>
+                  </a>
+               </div>
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse" ng-class="!collapsedHeaderMenuCtrl.navCollapsed && 'in'" ng-click="collapsedHeaderMenuCtrl.navCollapsed=true">
+                  <ul class="nav navbar-nav">
+                     <li style="padding-right:30px"><a ng-href="/products/cookie-dough-fundraisers/cookie-dough" onclick="highlite(this);">COOKIE DOUGH</a></li>
+                     <li style="padding-right:30px"><a ng-href="/products/in-hand-sellers" onclick="highlite(this);">IN-HAND-SELLERS</a></li>
+                     <li style="padding-right:30px"><a ng-href="/products/" onclick="highlite(this);">ALL FUNDRAISERS</a></li>
+                     <li style="padding-right:30px"><a ng-href="/request-a-kit" onclick="highlite(this);">REQUEST FREE GUIDE</a></li>
+                     <li style="padding-right:30px"><a ng-href="https://www.ezfund.com/myezfund/Default.asp">MY EZFUND</a></li>
+                  </ul>
+               </div><!-- /.navbar-collapse -->
+            </nav>
+         </div>
+      </div>
+   </header>
+
+   @RenderBody()
+
+   <footer class="hidden-print footerContainer" ng-controller="FooterController as footerCtrl">
+      <div class="container-fluid">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-3 hidden-xs">
+                  <div class="text-left">
+                     <ul>
+                        <li>
+                           <span class="col-title gradient-line">About Us</span>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/about-us" title="About Us" class="new-bottomlink-color">About Us</a>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/contact-us" title="Contact Us" class="new-bottomlink-color">Contact Us</a>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/" title="Resources" class="new-bottomlink-color">Resources</a>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/site-map" title="Site Map" class="new-bottomlink-color">Site Map</a>
+                        </li>
+                        <li>
+                           <a ng-href="/request-a-kit" title="Fundraising Guide" class="new-bottomlink-color">Fundraising Guide</a>
+                        </li>
+                        <li>
+                           <a ng-href="/request-selling-kit" title="Fundraising selling Kit" class="new-bottomlink-color">Fundraising Selling Kit</a>
+                        </li>
+                        <li>
+                           <br /><br />
+                           <form name="newsletterSubscriptionForm" id="newsletterSubscriptionForm" role="search" ng-submit="footerCtrl.Subscribe();">
+                              <div class="input-group add-on">
+                                 <span>Want to receive our Newsletter?</span>
+                                 <br>
+                                 <div class="input-group col-md-12">
+                                    <input class="form-control" placeholder="Your Email here" name="email-newsletter" id="email-newsletter" type="email" ng-model="footerCtrl.newsletterSubscription.Email" ng-required="true" maxlength="100">
+                                    <div class="input-group-btn" style="padding-left:5px;">
+                                       <button class="btn btn-primary" type="submit">Submit</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </form>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="col-xs-12 visible-xs">
+                  <span ng-click="footerCtrl.aboutUs = !footerCtrl.aboutUs" class="gradient-line collapsed-col-title">About Us<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': !footerCtrl.aboutUs, 'glyphicon-chevron-down': footerCtrl.aboutUs}"></i></span>
+                  <div uib-collapse="footerCtrl.aboutUs" class="text-left">
+                     <ul>
+                        <li>
+                           <a ng-href="/resources/about-us" title="About Us" class="new-bottomlink-color">About Us</a>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/contact-us" class="new-bottomlink-color">Contact Us</a>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/" class="new-bottomlink-color">Resources</a>
+                        </li>
+                        <li>
+                           <a ng-href="/resources/site-map" title="Site Map" class="new-bottomlink-color">Site Map</a>
+                        </li>
+                        <li>
+                           <a ng-href="/request-a-kit" title="Fundraising Guide" class="new-bottomlink-color">Fundraising Guide</a>
+                        </li>
+                        <li>
+                           <a ng-href="/request-selling-kit" title="Fundraising selling Kit" class="new-bottomlink-color">Fundraising Selling Kit</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="col-sm-3 hidden-xs">
+                  <div class="text-left">
+                     <ul>
+                        <li>
+                           <span class="col-title gradient-line">Products</span>
+                        </li>
+                        <li>
+                           <a ng-href="/products/in-hand-sellers" title="In-Hand Sellers" class="new-bottomlink-color">In-Hand Sellers</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/cookie-dough-fundraisers/cookie-dough" title="Order-Takers" class="new-bottomlink-color">Cookie Dough</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/magazines-fundraisers" title="Magazines" class="new-bottomlink-color">Magazines</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/group-fundraising/top-fundraising-ideas-for-all-size-groups" title="Group Offerings" class="new-bottomlink-color">Group Offerings</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/holiday-fundraisers" title="Holiday Store" class="new-bottomlink-color">Holiday Store</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/prize-incentives/prize-incentives-programs" title="Prize Incentives" class="new-bottomlink-color">Prize Incentives</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/custom/customized-Fundraising-Products" title="Customized Products" class="new-bottomlink-color">Customized Products</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products" title="View All Fundraisers" class="new-bottomlink-color">View All Fundraisers</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="col-xs-12 visible-xs">
+                  <span ng-click="footerCtrl.products = !footerCtrl.products" class="gradient-line collapsed-col-title">Products<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': !footerCtrl.products, 'glyphicon-chevron-down': footerCtrl.products}"></i></span>
+                  <div uib-collapse="footerCtrl.products" class="text-left">
+                     <ul>
+                        <li>
+                           <a ng-href="/products/in-hand-sellers" title="In-Hand Sellers" class="new-bottomlink-color">In-Hand Sellers</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/cookie-dough-fundraisers/cookie-dough" title="Order-Takers" class="new-bottomlink-color">Cookie Dough</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/magazines-fundraisers" title="Magazines" class="new-bottomlink-color">Magazines</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/group-fundraising/top-fundraising-ideas-for-all-size-groups" title="Group Offerings" class="new-bottomlink-color">Group Offerings</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/holiday-fundraisers" title="Holiday Store" class="new-bottomlink-color">Holiday Store</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/prize-incentives/prize-incentives-programs" title="Prize Incentives" class="new-bottomlink-color">Prize Incentives</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products/custom/customized-Fundraising-Products" title="Customized Products" class="new-bottomlink-color">Customized Products</a>
+                        </li>
+                        <li>
+                           <a ng-href="/products" title="View All Fundraisers" class="new-bottomlink-color">View All Fundraisers</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="col-sm-3 hidden-xs">
+                  <div class="text-left">
+                     <ul>
+                        <li>
+                           <span class="col-title gradient-line">Fundraising Ideas Blog</span>
+                        </li>
+                        <li>
+                           <a href="/blog/Sports-Teams-fundraisers" title="Sports Teams: Personalize your Fundraiser" class="new-bottomlink-color">Sports Teams Fundraiser</a>
+                        </li>
+                        <li>
+                           <a href="/blog/4-Fundraising-Ideas-Middle-School-Coaches" title="4 Fundraising Ideas for Middle School Coaches" class="new-bottomlink-color">Fundraising Ideas for Middle School Coaches</a>
+                        </li>
+                        <li>
+                           <a href="/blog/3-Ways-to-Get-the-Word-Out" title="3 Ways to Get the Word Out About Your Next Fundraiser" class="new-bottomlink-color">3 Ways to Get the Word Out</a>
+                        </li>
+                        <li>
+                           <a href="/blog/4-Tips-Eco-Friendly-Fundraisers" title="4 Tips Eco-Friendly Fundraisers for your School" class="new-bottomlink-color">Eco-Friendly Fundraisers for your School</a>
+                        </li>
+                        <li>
+                           <a href="/blog/4-Tips-to-Sell-More" title="4 Tips to Sell More at your Fundraiser" class="new-bottomlink-color">Tips to Sell More at your Fundraiser</a>
+                        </li>
+                        <li>
+                           <a href="/blog/Football-Fundraisers" title="Football Fundraisers Guaranteed To Make You Money" class="new-bottomlink-color">Football Fundraisers To Make You Money</a>
+                        </li>
+
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="col-xs-12 visible-xs">
+                  <span ng-click="footerCtrl.fundraisingIdeas = !footerCtrl.fundraisingIdeas" class="gradient-line collapsed-col-title">Fundraising Ideas Blog<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': !footerCtrl.fundraisingIdeas, 'glyphicon-chevron-down': footerCtrl.fundraisingIdeas}"></i></span>
+                  <div uib-collapse="footerCtrl.fundraisingIdeas" class="text-left">
+                     <ul>
+                        <li>
+                           <a href="/blog/Sports-Teams-fundraisers" title="Sports Teams: Personalize your Fundraiser" class="new-bottomlink-color">Sports Teams Fundraiser</a>
+                        </li>
+                        <li>
+                           <a href="/blog/4-Fundraising-Ideas-Middle-School-Coaches" title="4 Fundraising Ideas for Middle School Coaches" class="new-bottomlink-color">Fundraising Ideas for Middle School Coaches</a>
+                        </li>
+                        <li>
+                           <a href="/blog/3-Ways-to-Get-the-Word-Out" title="3 Ways to Get the Word Out About Your Next Fundraiser" class="new-bottomlink-color">3 Ways to Get the Word Out</a>
+                        </li>
+                        <li>
+                           <a href="/blog/4-Tips-Eco-Friendly-Fundraisers" title="4 Tips Eco-Friendly Fundraisers for your School" class="new-bottomlink-color">Eco-Friendly Fundraisers for your School</a>
+                        </li>
+                        <li>
+                           <a href="/blog/4-Tips-to-Sell-More" title="4 Tips to Sell More at your Fundraiser" class="new-bottomlink-color">Tips to Sell More at your Fundraiser</a>
+                        </li>
+                        <li>
+                           <a href="/blog/Football-Fundraisers" title="Football Fundraisers Guaranteed To Make You Money" class="new-bottomlink-color">Football Fundraisers To Make You Money</a>
+                        </li>
+
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="col-sm-3 hidden-xs">
+                  <div class="text-left">
+                     <ul>
+                        <li>
+                           <span class="col-title gradient-line">Reach Us</span>
+                        </li>
+                        <li>
+                           156 Lawrence Paquette
+                        </li>
+                        <li>
+                           Industrial Drive PMW #5
+                        </li>
+                        <li>
+                           Champlain, NY 12919
+                        </li>
+                        <li>
+                           Phone: 1-800-991-8779 (Toll-Free)
+                        </li>
+                        <li>
+                           Fax: 1-877-275-8664
+                        </li>
+                        <li>
+                           Email: <a href="mailto:HelpDesk@ezfund.com" class="new-bottomlink-color">HelpDesk@ezfund.com</a>
+                        </li>
+                        <li>
+                           <br />
+                           <img alt="ezFundLogo" ng-src="~/Content/images/public/footerEzFund.png" style="width:80%;" />
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="col-xs-12 visible-xs">
+                  <span ng-click="footerCtrl.reachUs = !footerCtrl.reachUs" class="gradient-line collapsed-col-title">Reach Us<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': !footerCtrl.reachUs, 'glyphicon-chevron-down': footerCtrl.reachUs}"></i></span>
+                  <div uib-collapse="footerCtrl.reachUs" class="text-left">
+                     <ul>
+                        <li>
+                           156 Lawrence Paquette
+                        </li>
+                        <li>
+                           Industrial Drive PMW #5
+                        </li>
+                        <li>
+                           Champlain, NY 12919
+                        </li>
+                        <li>
+                           Phone: 1-800-991-8779 (Toll-Free)
+                        </li>
+                        <li>
+                           Fax: 1-877-275-8664
+                        </li>
+                        <li>
+                           Email: <a href="mailto:HelpDesk@ezfund.com" class="new-bottomlink-color">HelpDesk@ezfund.com</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <br /><br />
+               <div class="col-xs-12 visible-xs">
+                  <form role="none" class="collapsed-footer-newletter">
+                     <div class="input-group add-on">
+
+                        <span>Want to receive our Newsletter?</span>
+                        <br>
+                        <div class="input-group col-md-12">
+                           <input class="form-control" placeholder="Your Email here" name="email-newsletter" id="email-newsletter" type="email">
+                           <div class="input-group-btn" style="padding-left:5px;">
+                              <button class="btn btn-primary" type="submit">Submit</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="row footerBottom">
+            <div class="container">
+               <div class="col-sm-9">
+                  <span>
+                     Copyright &copy;2017, EZFund.com, Houston,TX. All Rights Reserved. Unauthorized duplication is expressly prohibited
+                  </span>
+               </div>
+               <div class="col-sm-3 text-center">
+                  <a ng-href="/resources/privacy-policy" title="Privacy Policy" class="new-bottomlink-color">Privacy Policy</a>
+                  <span> | </span>
+                  <a href="#" title="Privacy Policy" class="new-bottomlink-color">Terms of Use</a>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      @*Newsletter info modal*@
+      <div class="newsletter-info-modal" ng-show="footerCtrl.showModal">
+         <script type="text/ng-template" id="NewsletterInfoModal.cshtml">
+            <div class="modal-product">
+               <div class="modal-header modal-product-header">
+                  <button type="button" class="close" ng-click="modalCtrl.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="modal-title">{{modalCtrl.title}}</h4>
+               </div>
+               <div class="modal-body" id="modal-body">
+                  {{modalCtrl.body}}
+               </div>
+               <div class="modal-footer">
+                  <button class="btn btn-primary" type="button" ng-click="modalCtrl.CloseModal()">Close</button>
+               </div>
+            </div>
+         </script>
+      </div>
+   </footer>
+   @*Search button modal*@
+   <div class="modal fade" id="SearchModal" tabindex="-1" role="dialog" aria-labelledby="SearchModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-product">
+            <div class="modal-header modal-product-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="modal-title">Search</h4>
+            </div>
+            <div class="modal-body">
+               @Html.Partial("_Search", 1)
+            </div>
+
+         </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
+
+
+    @*Kit button modal*@
+   <div class="modal fade" id="kit-request-modal-New" tabindex="-1" role="dialog" aria-labelledby="kit-request-modal-label" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header" align="right" style="background-color:#174871; height:70px">
+               <div style="float:left; margin-top:5px; color:#fff; font-size:20px" class="hidden-sm hidden-xs">FREE FUNDRAISING GUIDE</div>
+               <div style="float:right; margin-top:5px; color:#fff; font-size:20px">
+                  <a href="tel:+18009918779" style="color:#fff">1-800-991-8779</a>&nbsp;&nbsp;&nbsp;
+                  <a data-dismiss="modal" aria-label="Close" style="cursor:pointer;">
+                     <span aria-hidden="true" align="right" class="text-muted">x</span>
+                  </a>
+               </div>
+
+               
+
+            </div>
+            <div class="modal-body" style="padding-bottom:5px; height:auto;width:100%; overflow:hidden">
+               @Html.Partial("_NewKit")
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   @Scripts.Render("~/angular", "~/bootstrap-ui", "~/application")
+   @RenderSection("scripts", required: false)
+
+
+   @*<script language="JavaScript" type="text/javascript">
+      $(document).ready(function(){
+          $('.carousel-example-generic').carousel({
+          interval: 3000
+        })
+      });
+        </script>*@
+   @if (bool.Parse(@ConfigurationManager.AppSettings["showGoogleAnalyticsCode"]))
+   {
+      <!--Start of Google Analytics-->
+      <script>
+         (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+               (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+               m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+         ga('create', 'UA-1536999-1', 'auto', { 'allowLinker': true });
+         ga('require', 'ec');
+         ga('set', 'dimension3', 'EzFund');
+         ga('send', 'pageview');
+
+      </script>
+      <!--End of Google Analytics-->
+   }
+
+   @if (bool.Parse(ConfigurationManager.AppSettings["showChatProviderCode"]))
+   {
+   <!--Start of Zendesk Chat Script-->
+   <script type="text/javascript">
+      window.$zopim || (function (d, s) {
+         var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+               z.set.
+                  _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+         $.src = "https://v2.zopim.com/?59r0x12pTqHHCR1Y6ovIEaCcMFKILphM"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+      })(document, "script");
+
+      $zopim(function () {
+         $zopim.livechat.departments.setVisitorDepartment('EZFund');
+      });
+
+      $zopim(function () {
+         $zopim.livechat.button.setOffsetHorizontalMobile(1);
+      });
+
+      $zopim(function () {
+         $zopim.livechat.button.setOffsetVerticalMobile(1);
+      });
+
+   </script>
+   <!--End of Zendesk Chat Script-->
+   }
+   <script type="text/javascript">
+        (function () {
+            'use strict';
+            var app = angular.module('ezfund');
+            app.constant('hosts',
+            {
+                webApiCoreBaseUrl: '@ConfigurationManager.AppSettings["core.webapi.host"]',
+                webApiFundraisingBaseUrl: '@ConfigurationManager.AppSettings["fundraising.webapi.host"]',
+                webApiSecurityBaseUrl: '@ConfigurationManager.AppSettings["security.webapi.host"]',
+                webApiReportsBaseUrl: '@ConfigurationManager.AppSettings["reports.webapi.host"]',
+                webApiEzFundBaseUrl: '@ConfigurationManager.AppSettings["ezfund.webapi.host"]',
+                clientId: 'lisa',
+                topMenuItem: '@ViewBag.TopMenuItem'
+            });
+            app.constant('referral',
+            {
+                domain: '@Session["ReferralDomain"]'
+            });
+        })();
+   </script>
+
+
+</body>
+</html>

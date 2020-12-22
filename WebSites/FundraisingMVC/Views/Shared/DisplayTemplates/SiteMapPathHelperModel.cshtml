@@ -1,0 +1,13 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.SiteMapPathHelperModel
+@using System.Web.Mvc.Html
+@using System.Linq
+@using MvcSiteMapProvider.Web.Html.Models
+@{ var nodeIndex = 1;}
+@foreach (var node in Model)
+{
+    <span id="breadcrumb.@nodeIndex" itemscope itemtype="https://schema.org/BreadcrumbList" @(!node.IsRootNode ? "itemprop=\"child\"" : string.Empty) @(node != Model.Last() ? "itemref=\"breadcrumb."+(++nodeIndex)+"\"" : string.Empty)>@Html.DisplayFor(m => node)</span>
+    if (node != Model.Last())
+    {
+        <text> / </text>
+    }
+}

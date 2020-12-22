@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>efundraising.Email</name>
+    </assembly>
+    <members>
+        <member name="T:efundraising.Email.SmtpServer">
+            <summary>
+            Hold SMTP connection information.
+            </summary>
+            <example>
+            Create a new SmtpServer container.
+            <code>
+            SmtpServer s = new SmtpServer();
+            s.Host = "mail.efundraising.com";
+            s.Port = 25;
+            </code>
+            </example>
+        </member>
+        <member name="M:efundraising.Email.SmtpServer.#ctor">
+            <summary>
+             Class to hold information on Smtp server.
+            </summary>
+        </member>
+        <member name="M:efundraising.Email.SmtpServer.ToString">
+            <summary>
+            Get the string representation of the SmtpServer configuration.
+            </summary>
+            <returns>SmtpServer string.</returns>
+        </member>
+        <member name="P:efundraising.Email.SmtpServer.Host">
+            <summary>
+            Get or set the host for this server.
+            </summary>
+        </member>
+        <member name="P:efundraising.Email.SmtpServer.Port">
+            <summary>
+            Get or set the port number for this server.
+            </summary>
+        </member>
+        <member name="P:efundraising.Email.SmtpServer.Username">
+            <summary>
+            Get or set the username used to authenticate access to the SMTP server.
+            </summary>
+        </member>
+        <member name="P:efundraising.Email.SmtpServer.Password">
+            <summary>
+            Get or set the password used to authenticate access to the SMTP server.
+            </summary>
+        </member>
+        <member name="P:efundraising.Email.SmtpServer.ConnectionTimeout">
+            <summary>
+            Get or set the maximum amount of time in seconds to wait before timing out.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:efundraising.Email.SendMail" -->
+        <member name="M:efundraising.Email.SendMail.AsyncSend(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail asynchronously.
+            </summary>
+            <param name="smtpServerString"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="bcc"></param>
+            <param name="replyTo"></param>
+            <param name="returnPath"></param>
+            <param name="subject"></param>
+            <param name="textBody"></param>
+            <param name="htmlBody"></param>
+        </member>
+        <member name="M:efundraising.Email.SendMail.AsyncSend(efundraising.Email.SmtpServer,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail asynchronously.
+            </summary>
+            <param name="smtpServer"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="bcc"></param>
+            <param name="replyTo"></param>
+            <param name="returnPath"></param>
+            <param name="subject"></param>
+            <param name="textBody"></param>
+            <param name="htmlBody"></param>
+        </member>
+        <member name="M:efundraising.Email.SendMail.AsyncSend(efundraising.Email.SmtpServer,System.String,System.String[],System.String[],System.String[],System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail asynchronously.
+            </summary>
+            <param name="smtpServer"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="bcc"></param>
+            <param name="replyTo"></param>
+            <param name="returnPath"></param>
+            <param name="subject"></param>
+            <param name="textBody"></param>
+            <param name="htmlBody"></param>
+        </member>
+        <member name="M:efundraising.Email.SendMail.AsyncSend(System.String,System.String,System.String[],System.String[],System.String[],System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail asynchronously.
+            </summary>
+            <param name="smtpServerString"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="bcc"></param>
+            <param name="replyTo"></param>
+            <param name="returnPath"></param>
+            <param name="subject"></param>
+            <param name="textBody"></param>
+            <param name="htmlBody"></param>
+        </member>
+        <member name="M:efundraising.Email.SendMail.Send(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail by SMTP.
+            </summary>
+            <param name="smtpServerString">SmtpServer connection string in URI format "user:password@host:port". 
+            An empty string will default to "localhost:25".</param>
+            <param name="from">
+            Sender address using the following format: "Name" &lt;name@example.com&gt;
+            </param>
+            <param name="to">
+            Recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="cc">
+            CC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="bcc">
+            BCC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="replyTo">
+            Reply back address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="returnPath">
+            Bounce mail address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="subject">Mail subject.</param>
+            <param name="textBody">Email body in plain text.</param>
+            <param name="htmlBody">Email body in HTML.</param>
+            <remarks>
+            The from, to, subject and textBody or htmlBody parameters must be set to send mail.
+            The other parameters can be set to an empty string "".
+            
+            You are not required to specify the name for an address. 
+            For example: name@example.com and &lt;name@example.com&gt; are functionally equivalent to "" &lt;name@example.com&gt;.
+            
+            The Return-Path may not work depending on the Smtp server employed. Certain Smtp servers
+            will automatically overwrite the Return-path with the From header information. The Return-Path class
+            has been known to work on Sendmail, Postfix and IIS.
+            </remarks>
+        </member>
+        <member name="M:efundraising.Email.SendMail.Send(System.String,System.String,System.String[],System.String[],System.String[],System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail by SMTP.
+            </summary>
+            <param name="smtpServerString">SmtpServer connection string in URI format "user:password@host:port". 
+            An empty string will default to "localhost:25".</param>
+            <param name="from">
+            Sender address using the following format: "Name" &lt;name@example.com&gt;
+            </param>
+            <param name="to">
+            Array of recipient address using the following format: "Name" &lt;name@example.com&gt;.
+            </param>
+            <param name="cc">
+            Array of CC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="bcc">
+            Array of BCC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="replyTo">
+            Reply back address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="returnPath">
+            Bounce mail address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="subject">Mail subject.</param>
+            <param name="textBody">Email body in plain text.</param>
+            <param name="htmlBody">Email body in HTML.</param>
+            <remarks>
+            The from, to, subject and textBody or htmlBody parameters must be set to send mail.
+            The other parameters can be set to an empty string "".
+            
+            You are not required to specify the name for an address. 
+            For example: name@example.com and &lt;name@example.com&gt; are functionally equivalent to "" &lt;name@example.com&gt;.
+            
+            The Return-Path may not work depending on the Smtp server employed. Certain Smtp servers
+            will automatically overwrite the Return-path with the From header information. The Return-Path class
+            has been known to work on Sendmail, Postfix and IIS.
+            </remarks>
+        </member>
+        <member name="M:efundraising.Email.SendMail.Send(efundraising.Email.SmtpServer,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail by SMTP.
+            </summary>
+            <param name="smtpServer">SmtpServer connection info object.</param>
+            <param name="from">
+            Sender address using the following format: "Name" &lt;name@example.com&gt;
+            </param>
+            <param name="to">
+            Recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            Multiple addresses can be specified by separating each address 
+            with a comma: "Name1" &lt;name1@example.com&gt;, "Name2" &lt;name2@example.com&gt;
+            </param>
+            <param name="cc">
+            CC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            Multiple addresses can be specified by separating each address 
+            with a comma: "Name1" &lt;name1@example.com&gt;, "Name2" &lt;name2@example.com&gt;
+            </param>
+            <param name="bcc">
+            BCC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            Multiple addresses can be specified by separating each address 
+            with a comma: "Name1" &lt;name1@example.com&gt;, "Name2" &lt;name2@example.com&gt;
+            </param>
+            <param name="replyTo">
+            Reply back address using the following format: "Name" &lt;name@example.com&gt;. 
+            Multiple addresses can be specified by separating each address 
+            with a comma: "Name1" &lt;name1@example.com&gt;, "Name2" &lt;name2@example.com&gt;
+            </param>
+            <param name="returnPath">
+            Bounce mail address using the following format: "Name" &lt;name@example.com&gt;. 
+            Multiple addresses can be specified by separating each address 
+            with a comma: "Name1" &lt;name1@example.com&gt;, "Name2" &lt;name2@example.com&gt;.
+            </param>
+            <param name="subject">Mail subject.</param>
+            <param name="textBody">Email body in plain text.</param>
+            <param name="htmlBody">Email body in HTML.</param>
+            <remarks>
+            The from, to, subject and textBody or htmlBody parameters must be set to send mail.
+            The other parameters can be set to an empty string "".
+            
+            You are not required to specify the name for an address. 
+            For example: name@example.com and &lt;name@example.com&gt; are functionally equivalent to "" &lt;name@example.com&gt;.
+            
+            The Return-Path may not work depending on the Smtp server employed. Certain Smtp servers
+            will automatically overwrite the Return-path with the From header information. The Return-Path class
+            has been known to work on Sendmail, Postfix and IIS.
+            </remarks>
+        </member>
+        <member name="M:efundraising.Email.SendMail.Send(efundraising.Email.SmtpServer,System.String,System.String[],System.String[],System.String[],System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Send mail by SMTP.
+            </summary>
+            <param name="smtpServer">SmtpServer object.</param>
+            <param name="from">
+            Sender address using the following format: "Name" &lt;name@example.com&gt;
+            </param>
+            <param name="to">
+            Array of recipient address using the following format: "Name" &lt;name@example.com&gt;.
+            </param>
+            <param name="cc">
+            Array of CC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="bcc">
+            Array of BCC recipient address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="replyTo">
+            Reply back address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="returnPath">
+            Bounce mail address using the following format: "Name" &lt;name@example.com&gt;. 
+            </param>
+            <param name="subject">Mail subject.</param>
+            <param name="textBody">Email body in plain text.</param>
+            <param name="htmlBody">Email body in HTML.</param>
+            <remarks>
+            The from, to, subject and textBody or htmlBody parameters must be set to send mail.
+            The other parameters can be set to an empty string "".
+            
+            You are not required to specify the name for an address. 
+            For example: name@example.com and &lt;name@example.com&gt; are functionally equivalent to "" &lt;name@example.com&gt;.
+            
+            The Return-Path may not work depending on the Smtp server employed. Certain Smtp servers
+            will automatically overwrite the Return-path with the From header information. The Return-Path class
+            has been known to work on Sendmail, Postfix and IIS.
+            </remarks>
+        </member>
+        <member name="M:efundraising.Email.SendMail.CreateEmailAddress(System.String)">
+            <summary>
+            Extract the name and email parts from: "Name" &lt;email&gt;
+            </summary>
+            <param name="nameAddress">The name address pair in the form of "name" &lt;email&gt;</param>
+            <returns>EmailAddress object.</returns>
+        </member>
+        <member name="M:efundraising.Email.SendMail.CreateEmailAddress(System.String[])">
+            <summary>
+            Create EmailAddressCollection from an array of name/email addresses.
+            </summary>
+            <param name="nameAddress">Name address array</param>
+            <returns>EmailAddressCollection</returns>
+        </member>
+        <member name="M:efundraising.Email.SendMail.FormatAddress(System.String,System.String)">
+            <summary>
+            Format the name and email into a valid string ready for mailing.
+            </summary>
+            <param name="name">Name</param>
+            <param name="email">Email address</param>
+            <returns>A string formatted as "name" &lt;email&gt;</returns>
+        </member>
+        <member name="T:efundraising.Email.SmtpServerCollection">
+            <summary>
+            Summary description for EmailCollection.
+            </summary>
+        </member>
+        <member name="M:efundraising.Email.SmtpServerCollection.#ctor">
+            <summary>
+            Create a collection of SmtpServers.
+            </summary>
+        </member>
+        <member name="M:efundraising.Email.SmtpServerCollection.Add(efundraising.Email.SmtpServer)">
+            <summary>
+            Add object to collection.
+            </summary>
+            <param name="s">SmtpServer object.</param>
+            <returns>Index of the newly added object.</returns>
+        </member>
+        <member name="M:efundraising.Email.SmtpServerCollection.Remove(efundraising.Email.SmtpServer)">
+            <summary>
+            Remove object from collection.
+            </summary>
+            <param name="s">SmtpServer object.</param>
+        </member>
+        <member name="M:efundraising.Email.SmtpServerCollection.Contains(efundraising.Email.SmtpServer)">
+            <summary>
+            Check if object is in collection.
+            </summary>
+            <param name="s">SmtpServer object</param>
+            <returns>True if object is in collection, else false.</returns>
+        </member>
+        <member name="M:efundraising.Email.SmtpServerCollection.IndexOf(efundraising.Email.SmtpServer)">
+            <summary>
+            Get the index associated with the object in collection.
+            </summary>
+            <param name="s">SmtpServer object.</param>
+            <returns>The index of the object.</returns>
+        </member>
+        <member name="M:efundraising.Email.SmtpServerCollection.Insert(System.Int32,efundraising.Email.SmtpServer)">
+            <summary>
+            Insert object into collection at the specified index.
+            </summary>
+            <param name="index">The location to insert object.</param>
+            <param name="s">SmtpServer object.</param>
+        </member>
+        <member name="P:efundraising.Email.SmtpServerCollection.Item(System.Int32)">
+            <summary>
+            Get or set the object at specified index.
+            </summary>
+        </member>
+    </members>
+</doc>

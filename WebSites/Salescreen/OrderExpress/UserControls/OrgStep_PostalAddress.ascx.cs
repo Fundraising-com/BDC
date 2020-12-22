@@ -1,0 +1,111 @@
+using System;
+using System.Data;
+using System.Drawing;
+using System.Web;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.Text;
+using QSPForm.Common.DataDef;
+using dataDef = QSPForm.Common.DataDef.PostalAddressEntityTable;
+using QSP.OrderExpress.Web.Code;
+
+namespace QSP.OrderExpress.Web.UserControls {
+    /// <summary>
+    ///		Summary description for OrganizationDetail.
+    /// </summary>
+    public partial class OrgStep_PostalAddress : BaseOrganizationFormStep {
+        private int c_OrgID = 0;
+        protected dataDef dTblPostalAddress;
+        protected System.Web.UI.HtmlControls.HtmlTableRow trCommentRow;
+        private CommonUtility clsUtil = new CommonUtility();
+
+        protected void Page_Load(object sender, System.EventArgs e) {
+            // Put user code to initialize the page here
+            if (!IsPostBack) {
+            }
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e) {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitControl();
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        ///		Required method for Designer support - do not modify
+        ///		the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            this.DataBinding += new System.EventHandler(this.Page_DataBinding);
+        }
+        #endregion
+
+        private void InitControl() {
+            this.PreviousAppItem = QSPForm.Business.AppItem.OrgForm_Step2;
+            this.StepItem = QSPForm.Business.AppItem.OrgForm_Step3;
+            this.NextAppItem = QSPForm.Business.AppItem.OrgForm_Step4;
+            this.ImageButtonBack = imgBtnBack;
+            this.ImageButtonNext = imgBtnNext;
+        }
+
+        private void LoadData() {
+            //			dtblOrganization = orgSys.SelectOne(c_OrgID);
+            //			base.LoadData ();
+        }
+
+        protected void Page_DataBinding(object sender, System.EventArgs e) {
+            try {
+                //retreive data detail item for db					
+                BindForm();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public int OrganizationID {
+            get {
+                return c_OrgID;
+            }
+            set {
+                c_OrgID = value;
+            }
+        }
+
+        public dataDef DataSource {
+            get {
+                return dTblPostalAddress;
+            }
+            set {
+                dTblPostalAddress = value;
+                PostalAddressForm_Org.DataSource = dTblPostalAddress;
+            }
+        }
+
+        public override void BindForm() {
+            PostalAddressForm_Org.ParentID = 0;
+            PostalAddressForm_Org.ParentType = QSPForm.Common.EntityType.TYPE_ORGANIZATION;
+            PostalAddressForm_Org.DataSource = dTblPostalAddress;
+            PostalAddressForm_Org.HideTypeAddress = true;
+            PostalAddressForm_Org.HideButton = true;
+            PostalAddressForm_Org.DataBind();
+        }
+
+        public override bool Update() {
+            bool IsSuccess = false;
+
+            PostalAddressForm_Org.ParentID = 0;
+            PostalAddressForm_Org.ParentType = QSPForm.Common.EntityType.TYPE_ORGANIZATION;
+            PostalAddressForm_Org.DataSource = dTblPostalAddress;
+            IsSuccess = PostalAddressForm_Org.UpdateDataSource();
+
+            return IsSuccess;
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e) {
+        }
+    }
+}

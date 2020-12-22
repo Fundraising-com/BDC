@@ -1,0 +1,44 @@
+﻿<div class="splash-content text-center">
+   <h2 ng-bind="header"></h2>
+   <h3 ng-show="showEditFields">What's your correct address?</h3>
+   <span ng-show="!showEditFields" style="text-transform: capitalize" ng-cloak>
+      {{address.Address1}}<br />
+      {{address.City}}<br />
+      {{address.Region.Code}}<br />
+      {{address.PostCode}}<br />
+      {{address.Country.Name}}<br />
+   </span>
+   <div class="form-horizontal" ng-cloak>
+      <div class="form-group" ng-show="showEditFields">
+         <label for="address" class="col-sm-4 control-label">Address</label>
+         <div class="col-sm-8">
+            <input type="text" class="form-control" name="address" id="address" placeholder="i.e. 125 Main Street" ng-model="address.Address1" style="color: black; text-transform: capitalize" ng-required="true" maxlength="100" ng-focus="showEditFields">
+         </div>
+      </div>
+      <div class="form-group" ng-show="showEditFields">
+         <label for="city" class="col-sm-4 control-label">City</label>
+         <div class="col-sm-8">
+            <input type="text" class="form-control" name="city" id="city" placeholder="i.e. Nasvhille" ng-model="address.City" style="color: black;" ng-required="true" maxlength="50">
+         </div>
+      </div>
+      <div class="form-group" ng-show="showEditFields">
+         <label for="state" class="col-sm-4 control-label">State</label>
+         <div class="col-sm-8">
+            <select class="form-control" id="state" ng-required="true" name="state" ng-options="state as state.Name for state in states" ng-model="address.Region"></select>
+         </div>
+      </div>
+      <div class="form-group" ng-show="showEditFields">
+         <label for="zip" class="col-sm-4 control-label">Zip Code</label>
+         <div class="col-sm-8">
+            <input type="text" name="zip" class="form-control" id="zip" placeholder="i.e. 12345" ng-model="address.PostCode" style="color: black;" ng-required="true" maxlength="20">
+         </div>
+      </div>
+   </div>
+   <h3 ng-show="!showEditFields">Is this Address correct?</h3>
+   <div class="form-group">
+      <button class="btn btn-warning" ng-click="$close(address)" ng-show="showEditFields">Accept</button>
+      <button class="btn btn-warning" ng-click="$close(address)" ng-show="!showEditFields">Yes</button>
+      <button class="btn btn-warning" ng-click="showEditFields = true;" ng-show="!showEditFields">No</button>
+      <button class="btn btn-default" ng-click="$dismiss('cancel')">Cancel</button>
+   </div>
+</div>

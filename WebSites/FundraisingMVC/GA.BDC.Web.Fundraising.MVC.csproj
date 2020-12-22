@@ -1,0 +1,1240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7FB8E670-07E7-49E7-94C6-09C579E3D8C8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Web.Fundraising.MVC</RootNamespace>
+    <AssemblyName>GA.BDC.Web.Fundraising.MVC</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.Primitives.4.0.1\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.Registry.AccessControl.4.5.0\lib\net461\Microsoft.Win32.Registry.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.SystemEvents, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Win32.SystemEvents.4.5.0\lib\net461\Microsoft.Win32.SystemEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider, Version=4.6.22.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\MvcSiteMapProvider.MVC5.Core.4.6.22\lib\net45\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider.WebActivator, Version=4.6.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\MvcSiteMapProvider.MVC5.4.6.22\lib\net45\MvcSiteMapProvider.WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Conventions.3.3.0\lib\net45\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Logging.3.3.0\lib\net45\Ninject.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging.Log4net, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Logging.Log4net.3.3.0\lib\net45\Ninject.Extensions.Logging.Log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Web.Common.3.3.0\lib\net45\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Web.Common.WebHost.3.3.0\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.MVC5.3.3.0\lib\net45\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Sentry, Version=2.1.6.0, Culture=neutral, PublicKeyToken=fba2ec45388e2af0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Sentry.2.1.6\lib\net461\Sentry.dll</HintPath>
+    </Reference>
+    <Reference Include="Sentry.PlatformAbstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=fba2ec45388e2af0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Sentry.PlatformAbstractions.1.1.1\lib\net471\Sentry.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sentry.Protocol, Version=2.1.6.0, Culture=neutral, PublicKeyToken=fba2ec45388e2af0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Sentry.Protocol.2.1.6\lib\net46\Sentry.Protocol.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Odbc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Data.Odbc.4.5.0\lib\net461\System.Data.Odbc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.5.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Data.SqlClient.4.6.1\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Diagnostics.DiagnosticSource.4.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.EventLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Diagnostics.EventLog.4.5.0\lib\net461\System.Diagnostics.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.PerformanceCounter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Diagnostics.PerformanceCounter.4.5.0\lib\net461\System.Diagnostics.PerformanceCounter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.4.1.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.FileSystem.AccessControl.4.5.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.Packaging.4.5.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipes.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.Pipes.AccessControl.4.5.1\lib\net461\System.IO.Pipes.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Ports, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.IO.Ports.4.5.0\lib\net461\System.IO.Ports.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Net.Http.4.1.1\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Runtime.4.1.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Algorithms.4.2.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Cng, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Cng.4.5.0\lib\net47\System.Security.Cryptography.Cng.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Encoding.4.0.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=4.0.3.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Pkcs.4.5.2\lib\net461\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Primitives.4.0.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.ProtectedData.4.5.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.X509Certificates.4.1.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Security.Principal.Windows.4.5.1\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.ServiceModel.Duplex, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Duplex.4.5.3\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Http.4.5.3\lib\net461\System.ServiceModel.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.NetTcp.4.5.3\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Primitives.4.5.3\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Security, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Security.4.5.3\lib\net461\System.ServiceModel.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Syndication, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceModel.Syndication.4.5.0\lib\net461\System.ServiceModel.Syndication.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.ServiceProcess.ServiceController, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ServiceProcess.ServiceController.4.5.0\lib\net461\System.ServiceProcess.ServiceController.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Text.Encoding.CodePages.4.5.1\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Threading.AccessControl.4.5.0\lib\net461\System.Threading.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.WorkflowServices" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApiContrib.IoC.Ninject, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\WebApiContrib.IoC.Ninject.0.9.3.0\lib\net40\WebApiContrib.IoC.Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdeasController.cs" />
+    <Compile Include="Controllers\NewslettersController.cs" />
+    <Compile Include="Controllers\OnlineFundraisingController.cs" />
+    <Compile Include="Controllers\PartnersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\PromotionController.cs" />
+    <Compile Include="Controllers\RepresentativesController.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
+    <Compile Include="Controllers\ShoppingCartsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Data\States.cs" />
+    <Compile Include="Helpers\DynamicNodeProviders\CanadaProductsDynamicNodeProvider.cs" />
+    <Compile Include="Helpers\DynamicNodeProviders\BlogPostsDynamicNodeProvider.cs" />
+    <Compile Include="Helpers\DynamicNodeProviders\NewslettersDynamicNodeProvider.cs" />
+    <Compile Include="Helpers\HTMLHelpers.cs" />
+    <Compile Include="Helpers\DynamicNodeProviders\USAProductsDynamicNodeProvider.cs" />
+    <Compile Include="Helpers\Routes\Filters\CustomRequireHttpsAttribute.cs" />
+    <Compile Include="Helpers\Routes\Filters\ExceptionHandlerAttribute.cs" />
+    <Compile Include="Helpers\Routes\Filters\RequireWWWAttribute.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Branding\Partner.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Views\BlogFeed.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\fundraisingideas\allyoucaneat.jpg" />
+    <Content Include="Content\images\fundraisingideas\Banner-blog.jpg" />
+    <Content Include="Content\images\fundraisingideas\Banner-fundraisers.jpg" />
+    <Content Include="Content\images\fundraisingideas\Banner-fundraisingguide.jpg" />
+    <Content Include="Content\images\fundraisingideas\bannermobile-blog.jpg" />
+    <Content Include="Content\images\fundraisingideas\bannermobile-guide.jpg" />
+    <Content Include="Content\images\fundraisingideas\bannermobile-products.jpg" />
+    <Content Include="Content\images\fundraisingideas\brazil.jpg" />
+    <Content Include="Content\images\fundraisingideas\cooking.jpg" />
+    <Content Include="Content\images\fundraisingideas\dance.jpg" />
+    <Content Include="Content\images\fundraisingideas\environment.jpg" />
+    <Content Include="Content\images\fundraisingideas\filmnight.jpg" />
+    <Content Include="Content\images\fundraisingideas\gamestournament.jpg" />
+    <Content Include="Content\images\fundraisingideas\hockey.jpg" />
+    <Content Include="Content\images\fundraisingideas\icewater.jpg" />
+    <Content Include="Content\images\fundraisingideas\junk.jpg" />
+    <Content Include="Content\images\fundraisingideas\karaoke.jpg" />
+    <Content Include="Content\images\fundraisingideas\Limbo.jpg" />
+    <Content Include="Content\images\fundraisingideas\Marathon.jpg" />
+    <Content Include="Content\images\fundraisingideas\mustache.jpg" />
+    <Content Include="Content\images\fundraisingideas\Nature.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\105-Fundraising-Ideas_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\15-School-Fundraisers_Main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\15-School-Fundraisers_main2.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\15-School-Fundraisers_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\3-Canada-Themed-Fundraising-Ideas-_main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\3-Elements-of-Good-School-Branding_main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\3-Tips-to-Fire-Up-your-Face-to-Face-Fundraising-Efforts_main.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\3-Ways-to-Get-Teachers-Involved-in-your-School-Fundraiser_main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\A-TO-Z-Fundraising-Ideas_main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\A-TO-Z-Fundraising-Ideas_main2.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\A-TO-Z-Fundraising-Ideas_main3.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\A-TO-Z-Fundraising-Ideas_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\banner_fundraisingideas.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\banner_mobile_fundraisingideas.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Canadian-Fundraisers_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\CONSEJOS-DE-MARKETING_exactmats.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\CONSEJOS-DE-MARKETING_main.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Face-to-Face-Fundraisers_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Fundraisers-for-Kids_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\How-to-Deliver-a-Great-Fundraising-Pitch_main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\How-to-Go-From-Order-Taker-to-Order-Maker_main.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\How-to-Tell-A-Persuasive-Fundraising-Story_Main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Ideas-for-College-Fundraising_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Monthly-Fundraising-Ideas_main1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Monthly-Fundraising-Ideas_main2.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Monthly-Fundraising-Ideas_main3.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Monthly-Fundraising-Ideas_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Non-Profit-Fundraising.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_beefjerky.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_cookies.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_lollipops.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_online.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_online.png" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_scratchcard.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\Popular-Fundraising-Products_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\t-shirt_partner.png" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-105-Fundraising-Ideas_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-15-School-Fundraisers_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-A-TO-Z-Fundraising-Ideas_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-Canadian-Fundraisers_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-Face-to-Face-Fundraisers_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-Fundraisers-for-Kids_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-Ideas-for-College-Fundraising_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-Monthly-Fundraising-Ideas_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumb-Popular-Fundraising-Products_thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\1.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\10.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\11.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\12.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\13.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\14.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\15.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\16.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\17.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\18.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\19.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\2.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\20.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\3.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\4.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\5.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\6.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\7.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\8.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\9.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\Sneakers4Funds-thumb.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\thumbs\tips.jpg" />
+    <Content Include="Content\images\fundraisingideas\new\UNA-FORMA-CLARA-DE-DUPLICAR-LAS-GANANCIAS_main.jpg" />
+    <Content Include="Content\images\fundraisingideas\Origami.jpg" />
+    <Content Include="Content\images\fundraisingideas\Pants.jpg" />
+    <Content Include="Content\images\fundraisingideas\Quiz.jpg" />
+    <Content Include="Content\images\fundraisingideas\Rap.jpg" />
+    <Content Include="Content\images\fundraisingideas\section-105.jpg" />
+    <Content Include="Content\images\fundraisingideas\section-AtoZ.jpg" />
+    <Content Include="Content\images\fundraisingideas\section-month.jpg" />
+    <Content Include="Content\images\fundraisingideas\Shakespear.jpg" />
+    <Content Include="Content\images\fundraisingideas\Training.jpg" />
+    <Content Include="Content\images\fundraisingideas\Uglyface.jpg" />
+    <Content Include="Content\images\fundraisingideas\Volleyball.jpg" />
+    <Content Include="Content\images\fundraisingideas\Water.jpg" />
+    <Content Include="Content\images\fundraisingideas\Xmark.jpg" />
+    <Content Include="Content\images\fundraisingideas\Yoyo.jpg" />
+    <Content Include="Content\images\fundraisingideas\Zoo.jpg" />
+    <Content Include="Content\images\partners\kitRequest\2159.jpg" />
+    <Content Include="Content\images\partners\kitRequest\28.jpg" />
+    <Content Include="Content\images\partners\kitRequest\50.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5623.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5646.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5666.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5668.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5755.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5889.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5894.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5910.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5912.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5917.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5919.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5929.jpg" />
+    <Content Include="Content\images\partners\kitRequest\5930.jpg" />
+    <Content Include="Content\images\partners\kitRequest\6002.jpg" />
+    <Content Include="Content\images\partners\kitRequest\6005.jpg" />
+    <Content Include="Content\images\partners\kitRequest\6020.jpg" />
+    <Content Include="Content\images\partners\kitRequest\6021.jpg" />
+    <Content Include="Content\images\partners\kitRequest\603.jpg" />
+    <Content Include="Content\images\partners\kitRequest\634.jpg" />
+    <Content Include="Content\images\partners\kitRequest\646.jpg" />
+    <Content Include="Content\images\partners\kitRequest\665.jpg" />
+    <Content Include="Content\images\partners\kitRequest\668.jpg" />
+    <Content Include="Content\images\partners\kitRequest\678.jpg" />
+    <Content Include="Content\images\partners\kitRequest\685.jpg" />
+    <Content Include="Content\images\partners\kitRequest\686.jpg" />
+    <Content Include="Content\images\partners\kitRequest\696.jpg" />
+    <Content Include="Content\images\partners\kitRequest\717.jpg" />
+    <Content Include="Content\images\partners\kitRequest\720.jpg" />
+    <Content Include="Content\images\partners\kitRequest\749.jpg" />
+    <Content Include="Content\images\partners\kitRequest\8.jpg" />
+    <Content Include="Content\images\partners\kitRequest\84.jpg" />
+    <Content Include="Content\images\partners\kitRequest\867.jpg" />
+    <Content Include="Content\images\public\3fundraisingformulastonet2k-01.jpg" />
+    <Content Include="Content\images\public\3fundraisingformulastonet2k-04.jpg" />
+    <Content Include="Content\images\public\3fundraisingformulastonet2k-05.jpg" />
+    <Content Include="Content\images\public\3fundraisingformulastonet2kjb.jpg" />
+    <Content Include="Content\images\public\Active.jpg" />
+    <Content Include="Content\images\public\affiliateProgram.jpg" />
+    <Content Include="Content\images\public\allaboutdance.jpg" />
+    <Content Include="Content\images\public\amex.png" />
+    <Content Include="Content\images\public\asa.jpg" />
+    <Content Include="Content\images\public\athletic-fundraising.jpg" />
+    <Content Include="Content\images\public\banners\0_xs_spring2015kit01.jpg" />
+    <Content Include="Content\images\public\banners\0_xs_spring2015kit02.jpg" />
+    <Content Include="Content\images\public\banners\0_xs_spring2015kit03.jpg" />
+    <Content Include="Content\images\public\banners\banner-springguide-can.jpg" />
+    <Content Include="Content\images\public\banners\NEWbanner_guide.jpg" />
+    <Content Include="Content\images\public\banner_armored.jpg" />
+    <Content Include="Content\images\public\beefjerky.jpg" />
+    <Content Include="Content\images\public\blogShareEmail.png" />
+    <Content Include="Content\images\public\blogShareFacebook.png" />
+    <Content Include="Content\images\public\blogSharePinterest.png" />
+    <Content Include="Content\images\public\blogShareTwitter.png" />
+    <Content Include="Content\images\public\bottom_facebook.png" />
+    <Content Include="Content\images\public\bottom_instagram.png" />
+    <Content Include="Content\images\public\bottom_phone.png" />
+    <Content Include="Content\images\public\bottom_pinterest.png" />
+    <Content Include="Content\images\public\bottom_twitter.png" />
+    <Content Include="Content\images\public\brochures\flowerpower\1.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\2.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\3.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\4.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\5.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\6.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\7.jpg" />
+    <Content Include="Content\images\public\brochures\flowerpower\8.jpg" />
+    <Content Include="Content\images\public\b_register.gif" />
+    <Content Include="Content\images\public\can-grey.png" />
+    <Content Include="Content\images\public\canada-flag.png" />
+    <Content Include="Content\images\public\canadaFlag.png" />
+    <Content Include="Content\images\public\canada_blackbar.jpg" />
+    <Content Include="Content\images\public\can_flag_active.jpg" />
+    <Content Include="Content\images\public\can_flag_nonactive.jpg" />
+    <Content Include="Content\images\public\charity-fundraising.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-01.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-02.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-03.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-04.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-05.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-06.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-08.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-09.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-11.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-12.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-14.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-15.jpg" />
+    <Content Include="Content\images\public\CHEER-PAGE-16.jpg" />
+    <Content Include="Content\images\public\cheerdancecombo.jpg" />
+    <Content Include="Content\images\public\cheerdeals.gif" />
+    <Content Include="Content\images\public\cheerleaders-fundraising.jpg" />
+    <Content Include="Content\images\public\cheerleading-company-banner.jpg" />
+    <Content Include="Content\images\public\church-fundraisers03.gif" />
+    <Content Include="Content\images\public\church-fundraisers07.gif" />
+    <Content Include="Content\images\public\church-fundraisers11.gif" />
+    <Content Include="Content\images\public\citys.jpg" />
+    <Content Include="Content\images\public\coupon.jpg" />
+    <Content Include="Content\images\public\discover.png" />
+    <Content Include="Content\images\public\donationsidepanel_01.jpg" />
+    <Content Include="Content\images\public\donationsidepanel_03.jpg" />
+    <Content Include="Content\images\public\donationsidepanel_05.jpg" />
+    <Content Include="Content\images\public\donation_06.jpg" />
+    <Content Include="Content\images\public\donation_08.jpg" />
+    <Content Include="Content\images\public\egg_cotton_candy_tail.png" />
+    <Content Include="Content\images\public\egg_crocodill_pickle.png" />
+    <Content Include="Content\images\public\egg_dinosour_apple.png" />
+    <Content Include="Content\images\public\egg_kangarootbeer.png" />
+    <Content Include="Content\images\public\egg_mint_chocolate_chipmunk.png" />
+    <Content Include="Content\images\public\egg_orange-utan.png" />
+    <Content Include="Content\images\public\egg_panda_pear.png" />
+    <Content Include="Content\images\public\egg_pink_llamanade.png" />
+    <Content Include="Content\images\public\enjoycity_08.jpg" />
+    <Content Include="Content\images\public\envision-testimonial.jpg" />
+    <Content Include="Content\images\public\envision.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-01.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-02.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-03.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-04.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-05.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-06.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-07.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-08.jpg" />
+    <Content Include="Content\images\public\ENVISION-page-09.jpg" />
+    <Content Include="Content\images\public\facebook-likeus-freefundraiser-03.jpg" />
+    <Content Include="Content\images\public\facebook-likeus-freefundraiser-06.jpg" />
+    <Content Include="Content\images\public\facebook-likeus-freefundraiser-07.jpg" />
+    <Content Include="Content\images\public\facebook-likeus-freefundraiser-08.jpg" />
+    <Content Include="Content\images\public\facebook-likeus-freefundraiser-09.jpg" />
+    <Content Include="Content\images\public\facebook-likeus-freefundraiser-10.jpg" />
+    <Content Include="Content\images\public\facebook_likeus_freefundraiser_01.jpg" />
+    <Content Include="Content\images\public\fb-icon.png" />
+    <Content Include="Content\images\public\featured_cokatutti_frutti.png" />
+    <Content Include="Content\images\public\featured_cubcake.png" />
+    <Content Include="Content\images\public\featured_porcupineapple.png" />
+    <Content Include="Content\images\public\flag-can-active.png" />
+    <Content Include="Content\images\public\flag-can-notactive.png" />
+    <Content Include="Content\images\public\flag-usa-active.png" />
+    <Content Include="Content\images\public\flag-usa-notactive.png" />
+    <Content Include="Content\images\public\FR-valentinepage-01.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-02.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-03.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-04.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-05.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-06.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-07.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-08.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-09.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-10.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-11.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-12.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-13.jpg" />
+    <Content Include="Content\images\public\FR-valentinepage-14.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-01.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-02.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-03.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-04.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-05.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-06.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-07.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-08.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-09.jpg" />
+    <Content Include="Content\images\public\FR-cheerpage-10.jpg" />
+    <Content Include="Content\images\public\fundIP.jpg" />
+    <Content Include="Content\images\public\fundIP.png" />
+    <Content Include="Content\images\public\fundraisingideas.jpg" />
+    <Content Include="Content\images\public\fundraising_logo.png" />
+    <Content Include="Content\images\public\fundraising_sportdecals_03.jpg" />
+    <Content Include="Content\images\public\fundraising_sportdecals_04.jpg" />
+    <Content Include="Content\images\public\fundraising_tips-FB.jpg" />
+    <Content Include="Content\images\public\fundraising_tips_01.jpg" />
+    <Content Include="Content\images\public\fundraising_tips_03.jpg" />
+    <Content Include="Content\images\public\fundraising_tips_05.jpg" />
+    <Content Include="Content\images\public\fundraising_tips_07.jpg" />
+    <Content Include="Content\images\public\fundraising_tips_09.jpg" />
+    <Content Include="Content\images\public\GAO-App-Offers-Preview-Overview.jpg" />
+    <Content Include="Content\images\public\ggg.gif" />
+    <Content Include="Content\images\public\grantsalert.gif" />
+    <Content Include="Content\images\public\home_facebook.png" />
+    <Content Include="Content\images\public\home_horizontal_banner.png" />
+    <Content Include="Content\images\public\home_horizontal_banner_blog.png" />
+    <Content Include="Content\images\public\home_horizontal_banner_resources.png" />
+    <Content Include="Content\images\public\home_instagram.png" />
+    <Content Include="Content\images\public\home_pinterest.png" />
+    <Content Include="Content\images\public\home_twitter.png" />
+    <Content Include="Content\images\public\howitworks-page_03.jpg" />
+    <Content Include="Content\images\public\howitworks-page_05.jpg" />
+    <Content Include="Content\images\public\howitworks-page_07.jpg" />
+    <Content Include="Content\images\public\howitworks-page_12.jpg" />
+    <Content Include="Content\images\public\howitworks-page_15.jpg" />
+    <Content Include="Content\images\public\HowItWorksPage01.jpg" />
+    <Content Include="Content\images\public\HowItWorksPage02.jpg" />
+    <Content Include="Content\images\public\icon_cockatutti_frutti.png" />
+    <Content Include="Content\images\public\icon_cotton_candy_tail.png" />
+    <Content Include="Content\images\public\icon_crocodill_pickle.png" />
+    <Content Include="Content\images\public\icon_dinosour_apple.png" />
+    <Content Include="Content\images\public\icon_kangarootbeer.png" />
+    <Content Include="Content\images\public\icon_mint_chocolate_chipmunk.png" />
+    <Content Include="Content\images\public\icon_orange-utan.png" />
+    <Content Include="Content\images\public\icon_panda_pear.png" />
+    <Content Include="Content\images\public\icon_pink_llamanade.png" />
+    <Content Include="Content\images\public\icon_porcupineapple.png" />
+    <Content Include="Content\images\public\icon_strawberry_cubcake.png" />
+    <Content Include="Content\images\public\instagram-icon.png" />
+    <Content Include="Content\images\public\inviteToRegister.jpg" />
+    <Content Include="Content\images\public\kitbutton.jpg" />
+    <Content Include="Content\images\public\kitRequest.jpg" />
+    <Content Include="Content\images\public\kitRequestConfirmationGuy.jpg" />
+    <Content Include="Content\images\public\kitRequestConfirmationMGP.jpg" />
+    <Content Include="Content\images\public\llu.jpg" />
+    <Content Include="Content\images\public\logo-with-website.png" />
+    <Content Include="Content\images\public\logo.png" />
+    <Content Include="Content\images\public\lollipopsINFO.jpg" />
+    <Content Include="Content\images\public\m-howitworks-page_03.jpg" />
+    <Content Include="Content\images\public\MADD1.PNG" />
+    <Content Include="Content\images\public\mastercard.png" />
+    <Content Include="Content\images\public\mobile_frcdn_cookie.png" />
+    <Content Include="Content\images\public\mobile_frcdn_kit.png" />
+    <Content Include="Content\images\public\mobile_fr_cdn_logo_03.png" />
+    <Content Include="Content\images\public\mobile_kit.jpg" />
+    <Content Include="Content\images\public\mobile_online.jpg" />
+    <Content Include="Content\images\public\montage_tees.jpg" />
+    <Content Include="Content\images\public\motnage_scratchcard.jpg" />
+    <Content Include="Content\images\public\movember-page-01.jpg" />
+    <Content Include="Content\images\public\movember-page-02.jpg" />
+    <Content Include="Content\images\public\movember-page-03.jpg" />
+    <Content Include="Content\images\public\movember-page-04.jpg" />
+    <Content Include="Content\images\public\movember-page-05.jpg" />
+    <Content Include="Content\images\public\movember-page-06.jpg" />
+    <Content Include="Content\images\public\movember-page-07.jpg" />
+    <Content Include="Content\images\public\movember-page-08.jpg" />
+    <Content Include="Content\images\public\movember-page-09.jpg" />
+    <Content Include="Content\images\public\movember-page-10.jpg" />
+    <Content Include="Content\images\public\movember-page-11.jpg" />
+    <Content Include="Content\images\public\movember-page-12.jpg" />
+    <Content Include="Content\images\public\newAmerica.jpg" />
+    <Content Include="Content\images\public\newCanada.jpg" />
+    <Content Include="Content\images\public\newCart.jpg" />
+    <Content Include="Content\images\public\newSearch.jpg" />
+    <Content Include="Content\images\public\non-profit-03.gif" />
+    <Content Include="Content\images\public\non-profit-03.png" />
+    <Content Include="Content\images\public\non-profit-07.gif" />
+    <Content Include="Content\images\public\non-profit-07.png" />
+    <Content Include="Content\images\public\nutssnacks.jpg" />
+    <Content Include="Content\images\public\online-fundraising-products.jpg" />
+    <Content Include="Content\images\public\online-fundraising-products2.jpg" />
+    <Content Include="Content\images\public\online-fundraising-products3.jpg" />
+    <Content Include="Content\images\public\online-fundraising-products4.jpg" />
+    <Content Include="Content\images\public\online-fundraising-products6.jpg" />
+    <Content Include="Content\images\public\online-fundrasing-features.jpg" />
+    <Content Include="Content\images\public\pinterest-icon.png" />
+    <Content Include="Content\images\public\powerproducts-02.jpg" />
+    <Content Include="Content\images\public\powerproducts-04.jpg" />
+    <Content Include="Content\images\public\powerproducts-05.jpg" />
+    <Content Include="Content\images\public\powerproductskt-02.jpg" />
+    <Content Include="Content\images\public\powerproductskt-04.jpg" />
+    <Content Include="Content\images\public\powerproducts-01.jpg" />
+    <Content Include="Content\images\public\powerproducts-07.jpg" />
+    <Content Include="Content\images\public\powerproducts-09.jpg" />
+    <Content Include="Content\images\public\product_page_armored.jpg" />
+    <Content Include="Content\images\public\product_share_email.png" />
+    <Content Include="Content\images\public\product_share_facebook.png" />
+    <Content Include="Content\images\public\product_share_pinterest.png" />
+    <Content Include="Content\images\public\product_share_twitter.png" />
+    <Content Include="Content\images\public\profitcharts.jpg" />
+    <Content Include="Content\images\public\rep_portal\efundraising.jpg" />
+    <Content Include="Content\images\public\rep_portal\full_sellsheet.jpg" />
+    <Content Include="Content\images\public\rep_portal\gaschoolstore.jpg" />
+    <Content Include="Content\images\public\rep_portal\repportal_header_desktop.jpg" />
+    <Content Include="Content\images\public\rep_portal\repportal_header_mobile.jpg" />
+    <Content Include="Content\images\public\savingspass_nsc_logos.jpg" />
+    <Content Include="Content\images\public\school-fundraising.jpg" />
+    <Content Include="Content\images\public\schoolfundraising101-1.jpg" />
+    <Content Include="Content\images\public\schoolfundraising101-2.jpg" />
+    <Content Include="Content\images\public\schoolfundraising101-3.jpg" />
+    <Content Include="Content\images\public\schoolfundraising101-4.jpg" />
+    <Content Include="Content\images\public\schoolfundraising101-5.jpg" />
+    <Content Include="Content\images\public\schoolfundraising101-6.jpg" />
+    <Content Include="Content\images\public\scout-fundraising.jpg" />
+    <Content Include="Content\images\public\scratchcardbanner.jpg" />
+    <Content Include="Content\images\public\scratchcard_howitworks.jpg" />
+    <Content Include="Content\images\public\shopping_bag.jpg" />
+    <Content Include="Content\images\public\sports-fundraising.jpg" />
+    <Content Include="Content\images\public\referralProgram.jpg" />
+    <Content Include="Content\images\public\sportdecals.gif" />
+    <Content Include="Content\images\public\SPRING-page-01.jpg" />
+    <Content Include="Content\images\public\SPRING-page-02.jpg" />
+    <Content Include="Content\images\public\SPRING-page-03.jpg" />
+    <Content Include="Content\images\public\SPRING-page-04.jpg" />
+    <Content Include="Content\images\public\SPRING-page-05.jpg" />
+    <Content Include="Content\images\public\SPRING-page-06.jpg" />
+    <Content Include="Content\images\public\SPRING-page-07.jpg" />
+    <Content Include="Content\images\public\SPRING-page-08.jpg" />
+    <Content Include="Content\images\public\SPRING-page-09.jpg" />
+    <Content Include="Content\images\public\SPRING-page-10.jpg" />
+    <Content Include="Content\images\public\teamcheer.gif" />
+    <Content Include="Content\images\public\teamsnap_logo.png" />
+    <Content Include="Content\images\public\theySignedUp.jpg" />
+    <Content Include="Content\images\public\to-remember-this.jpg" />
+    <Content Include="Content\images\public\twitter-icon.png" />
+    <Content Include="Content\images\public\usa-flag.png" />
+    <Content Include="Content\images\public\usa-football-04.jpg" />
+    <Content Include="Content\images\public\usa-football-05.jpg" />
+    <Content Include="Content\images\public\usa-football-10.jpg" />
+    <Content Include="Content\images\public\usa-football-logo.jpg" />
+    <Content Include="Content\images\public\usa-football_06.jpg" />
+    <Content Include="Content\images\public\usa-grey.png" />
+    <Content Include="Content\images\public\usafundraisng_01.jpg" />
+    <Content Include="Content\images\public\usa_flag_active.jpg" />
+    <Content Include="Content\images\public\usa_flag_nonactive.jpg" />
+    <Content Include="Content\images\public\visa.png" />
+    <Content Include="Content\images\public\yboa.jpg" />
+    <Content Include="Content\kit\css\materialize.css" />
+    <Content Include="Content\kit\css\materialize.min.css" />
+    <Content Include="Content\kit\css\style.css" />
+    <Content Include="Content\kit\img\animal.png" />
+    <Content Include="Content\kit\img\apparel.png" />
+    <Content Include="Content\kit\img\beefjerky.png" />
+    <Content Include="Content\kit\img\brochure.png" />
+    <Content Include="Content\kit\img\cheer.png" />
+    <Content Include="Content\kit\img\chocolate.png" />
+    <Content Include="Content\kit\img\choir.png" />
+    <Content Include="Content\kit\img\church.png" />
+    <Content Include="Content\kit\img\college.png" />
+    <Content Include="Content\kit\img\cookies.png" />
+    <Content Include="Content\kit\img\daycare.png" />
+    <Content Include="Content\kit\img\dinnercard.jpg" />
+    <Content Include="Content\kit\img\discount.png" />
+    <Content Include="Content\kit\img\EQUIPMENT.png" />
+    <Content Include="Content\kit\img\fees.png" />
+    <Content Include="Content\kit\img\fguide.jpg" />
+    <Content Include="Content\kit\img\icons.png" />
+    <Content Include="Content\kit\img\lollipops.png" />
+    <Content Include="Content\kit\img\other.png" />
+    <Content Include="Content\kit\img\other1.png" />
+    <Content Include="Content\kit\img\PLAYGROUND.png" />
+    <Content Include="Content\kit\img\pretzel.png" />
+    <Content Include="Content\kit\img\rainydays.png" />
+    <Content Include="Content\kit\img\school.png" />
+    <Content Include="Content\kit\img\smencils.png" />
+    <Content Include="Content\kit\img\sports.png" />
+    <Content Include="Content\kit\img\step5_banner.jpg" />
+    <Content Include="Content\kit\img\step6_banner.jpg" />
+    <Content Include="Content\kit\img\supplies.png" />
+    <Content Include="Content\kit\img\travel.png" />
+    <Content Include="Content\kit\img\tumbler.png" />
+    <Content Include="Content\kit\img\uniforms.png" />
+    <Content Include="Content\kit\img\upkeep.png" />
+    <Content Include="Content\kit\js\index.js" />
+    <Content Include="Content\kit\js\materialize.js" />
+    <Content Include="Content\kit\js\materialize.min.js" />
+    <Content Include="Content\spinner.big.gif" />
+    <Content Include="Content\styles\angular\angular.css" />
+    <Content Include="Content\styles\angular\animate.css" />
+    <Content Include="Content\styles\angular\validation.css" />
+    <Content Include="Content\styles\bootstrap\bootstrap-social.css" />
+    <Content Include="Content\styles\bootstrap\dropdown-submenu.css" />
+    <Content Include="Content\styles\bootstrap\font-awesome.css" />
+    <Content Include="Content\styles\bootstrap\glyphicon.css" />
+    <Content Include="Content\styles\bootstrap\navbar.css" />
+    <Content Include="Content\styles\brochureflipbook\images\arrow-next.png" />
+    <Content Include="Content\styles\brochureflipbook\images\arrow-prev.png" />
+    <Content Include="Content\styles\brochureflipbook\images\closedhand.cur" />
+    <Content Include="Content\styles\brochureflipbook\images\openhand.cur" />
+    <Content Include="Content\styles\brochureflipbook\images\shadow-top-back.png" />
+    <Content Include="Content\styles\brochureflipbook\images\shadow-top-forward.png" />
+    <Content Include="Content\styles\brochureflipbook\images\shadow.png" />
+    <Content Include="Content\styles\brochureflipbook\jquery.booklet.latest.css" />
+    <Content Include="Content\styles\core.css" />
+    <Content Include="Content\styles\angular\splash.css" />
+    <Content Include="Content\styles\footer.css" />
+    <Content Include="Content\styles\menu-min.css" />
+    <Content Include="Content\styles\menu.css" />
+    <Content Include="Content\styles\slickJs\ajax-loader.gif" />
+    <Content Include="Content\styles\slickJs\slick-min.css" />
+    <Content Include="Content\styles\slickJs\slick-theme-min.css" />
+    <Content Include="Content\styles\slickJs\slick-theme.css" />
+    <Content Include="Content\styles\slickJs\slick.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\angularUI\angular-ui.js" />
+    <Content Include="Scripts\angularUI\carouselFix.js" />
+    <Content Include="Scripts\angularUI\ui-bootstrap-0.13.4.min.js" />
+    <Content Include="Scripts\angular\angular-slick.js" />
+    <Content Include="Scripts\app\core\helpers\helpersControllers.js" />
+    <Content Include="Scripts\app\core\helpers\helpersModules.js" />
+    <Content Include="Scripts\app\core\helpers\helpersServices.js" />
+    <Content Include="Scripts\app\core\leads\leadsControllers.js" />
+    <Content Include="Scripts\app\core\leads\leadsModules.js" />
+    <Content Include="Scripts\app\core\leads\leadsServices.js" />
+    <Content Include="Scripts\app\core\notifications\notificationsControllers.js" />
+    <Content Include="Scripts\app\core\notifications\notificationsModules.js" />
+    <Content Include="Scripts\app\core\notifications\notificationsServices.js" />
+    <Content Include="Scripts\app\core\partners\partnersControllers.js" />
+    <Content Include="Scripts\app\core\partners\partnersModules.js" />
+    <Content Include="Scripts\app\core\partners\partnersServices.js" />
+    <Content Include="Scripts\app\core\representatives\representativesControllers.js" />
+    <Content Include="Scripts\app\core\representatives\representativesModules.js" />
+    <Content Include="Scripts\app\core\representatives\representativesServices.js" />
+    <Content Include="Scripts\app\core\sales\salesControllers.js" />
+    <Content Include="Scripts\app\core\sales\salesModules.js" />
+    <Content Include="Scripts\app\core\sales\salesServices.js" />
+    <Content Include="Scripts\app\core\templates\addressHygieneModalTemplateMultiple.html" />
+    <Content Include="Scripts\app\fundraising\categories\categoriesControllers.js" />
+    <Content Include="Scripts\app\fundraising\categories\categoriesModules.js" />
+    <Content Include="Scripts\app\fundraising\categories\categoriesServices.js" />
+    <Content Include="Scripts\app\fundraising\content\contentControllers.js" />
+    <Content Include="Scripts\app\fundraising\content\contentDirectives.js" />
+    <Content Include="Scripts\app\fundraising\content\contentModules.js" />
+    <Content Include="Scripts\app\fundraising\content\contentServices.js" />
+    <Content Include="Scripts\app\fundraising\products\productsControllers.js" />
+    <Content Include="Scripts\app\fundraising\products\productsDirectives.js" />
+    <Content Include="Scripts\app\fundraising\products\productsModules.js" />
+    <Content Include="Scripts\app\fundraising\products\productsServices.js" />
+    <Content Include="Scripts\app\core\templates\addressHygieneModalTemplate.html" />
+    <Content Include="Scripts\app\core\templates\addressHygieneWindowTemplate.html" />
+    <Content Include="Scripts\app\fundraising\templates\bannerRotatorTemplate.html" />
+    <Content Include="Scripts\app\fundraising\templates\bannerRotatorImageTemplate.html" />
+    <Content Include="Scripts\app\fundraising\templates\reviewsTemplate.html" />
+    <Content Include="Scripts\app\modules.js" />
+    <Content Include="Content\pdf\public\FundraisingPartnerUpStarterGuide.pdf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\pdf\public\schoolfundraising101.pdf" />
+    <Content Include="Content\pdf\public\CHEER-proposal.pdf" />
+    <Content Include="Content\pdf\public\envision_checklist.pdf" />
+    <Content Include="Content\pdf\public\envision_onlinetips.pdf" />
+    <Content Include="Content\pdf\public\envision_online_howitworks.pdf" />
+    <Content Include="Content\pdf\public\movember_booklet.pdf" />
+    <Content Include="Content\pdf\public\movember_handbook.pdf" />
+    <Content Include="Content\pdf\public\movember_lollipopstaches.pdf" />
+    <Content Include="Content\pdf\public\movember_moduo.pdf" />
+    <Content Include="Content\pdf\public\movember_mowrappers.pdf" />
+    <Content Include="Content\pdf\public\movember_pickamo.pdf" />
+    <Content Include="Content\pdf\public\movember_pinthestache.pdf" />
+    <Content Include="Content\pdf\public\the%24475profitfundraiserguide.pdf" />
+    <Content Include="Content\pdf\public\SPRINGCLEAN.pdf" />
+    <Content Include="Content\pdf\public\SPRINGISSCENTSATIONAL.pdf" />
+    <Content Include="Content\pdf\public\SWEETITSSPRING.pdf" />
+    <Content Include="Content\pdf\public\candygrams.pdf" />
+    <Content Include="Content\pdf\public\lollipopcutouts.pdf" />
+    <Content Include="Content\pdf\public\pretzelrodcutouts.pdf" />
+    <Content Include="Content\pdf\public\3fundraisingformulas.pdf" />
+    <Content Include="Content\pdf\public\powerproducts.pdf" />
+    <Content Include="Content\pdf\kits\kit.pdf" />
+    <Content Include="Content\pdf\public\ChocolatiersnutritionFacts.pdf" />
+    <Content Include="Content\pdf\public\CookieDoughNutritional_IngredientListing.pdf" />
+    <Content Include="Content\pdf\public\guidelines_tshirts.pdf" />
+    <Content Include="Content\pdf\public\jewelry.pdf" />
+    <Content Include="Content\pdf\public\NutritionalFactsBars.pdf" />
+    <Content Include="Content\pdf\public\Popcorn.pdf" />
+    <Content Include="Content\pdf\public\skinnycow_nutritionfacts.pdf" />
+    <Content Include="Content\pdf\public\Smanimal_order_taker.pdf" />
+    <Content Include="Content\pdf\public\Snackolades.pdf" />
+    <Content Include="Content\pdf\public\TopTen.pdf" />
+    <Content Include="Content\pdf\public\TumblersMidwest.pdf" />
+    <Content Include="Content\pdf\public\TumblersNortheast.pdf" />
+    <Content Include="Content\pdf\public\TumblersSoutheast.pdf" />
+    <Content Include="Content\pdf\public\TumblersSouthwest.pdf" />
+    <Content Include="Content\pdf\public\TumblersUpperMidwest.pdf" />
+    <Content Include="Content\pdf\public\TumblersWest.pdf" />
+    <Content Include="Content\pdf\public\NutritionalInformationPretzelRods.pdf" />
+    <Content Include="Content\pdf\public\CookieDoughIngredients.pdf" />
+    <Content Include="Content\pdf\public\tastybattercanada.pdf" />
+    <Content Include="Content\pdf\public\TaylorsCandle.pdf" />
+    <Content Include="Content\pdf\public\sellsheet_FR_Entertainment.pdf" />
+    <Content Include="Scripts\angular\mask.js" />
+    <Content Include="Scripts\flipbook\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\flipbook\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\flipbook\jquery.booklet.latest.css" />
+    <Content Include="Scripts\flipbook\jquery.booklet.latest.js" />
+    <Content Include="Scripts\flipbook\jquery.booklet.latest.min.js" />
+    <Content Include="Scripts\flipbook\jquery.easing.1.3.js" />
+    <Content Include="Scripts\Kit\multi-step-modal.js" />
+    <Content Include="Scripts\slick-carousel.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\Kit\package.json" />
+    <None Include="..\..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk">
+      <Link>SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</Link>
+    </None>
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Views\Home\index2.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\AboutUs\OurCompany.cshtml" />
+    <Content Include="Views\AboutUs\ShippingPolicies.cshtml" />
+    <Content Include="Views\AboutUs\Guarantees.cshtml" />
+    <Content Include="Views\AboutUs\ReferralProgram.cshtml" />
+    <Content Include="Views\AboutUs\Testimonials.cshtml" />
+    <Content Include="Views\AboutUs\PrivacyPolicy.cshtml" />
+    <Content Include="Views\AboutUs\ContactUs.cshtml" />
+    <Content Include="Views\AboutUs\Sitemap.cshtml" />
+    <Content Include="Views\Partners\OurPartners.cshtml" />
+    <Content Include="Views\Partners\AffiliateProgram.cshtml" />
+    <Content Include="Views\Partners\DonationFundraising.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Category.cshtml" />
+    <Content Include="Views\Products\Product.cshtml" />
+    <Content Include="Views\Ideas\HealthyFundraisers.cshtml" />
+    <Content Include="Views\Ideas\Tips.cshtml" />
+    <Content Include="Views\Ideas\Events.cshtml" />
+    <Content Include="Views\Ideas\News.cshtml" />
+    <Content Include="Views\Ideas\Ideas.cshtml" />
+    <Content Include="Views\Ideas\EasyFundraisers.cshtml" />
+    <Content Include="Views\OnlineFundraising\HowItWorks.cshtml" />
+    <Content Include="Views\OnlineFundraising\Features.cshtml" />
+    <Content Include="Views\OnlineFundraising\Products.cshtml" />
+    <Content Include="Views\Shared\_representativePortal.cshtml" />
+    <Content Include="Views\Representatives\Index.cshtml" />
+    <Content Include="Views\ShoppingCarts\Index.cshtml" />
+    <Content Include="Views\ShoppingCarts\CheckOut.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\pdf\kits\kitCan.pdf" />
+    <Content Include="Views\Shared\_KitRequestForm.cshtml" />
+    <Content Include="Views\Home\KitRequestConfirmation.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BootstrapNavPill.cshtml" />
+    <Content Include="Views\Resources\Consultants.cshtml" />
+    <Content Include="Views\Resources\activities.cshtml" />
+    <Content Include="Views\Resources\sports.cshtml" />
+    <Content Include="Views\Promotion\promotions.cshtml" />
+    <Content Include="Views\Resources\fundraising101.cshtml" />
+    <Content Include="Views\Resources\girlscout.cshtml" />
+    <Content Include="Views\Resources\FundraisingResources.cshtml" />
+    <Content Include="Views\Resources\boyscout.cshtml" />
+    <Content Include="Views\Resources\Checklist.cshtml" />
+    <Content Include="Views\Resources\schools.cshtml" />
+    <Content Include="Views\Resources\CandyFaqs.cshtml" />
+    <Content Include="Views\Resources\LollipopFaqs.cshtml" />
+    <Content Include="Views\Resources\CookieDoughFaq.cshtml" />
+    <Content Include="Views\Resources\Charity.cshtml" />
+    <Content Include="Views\Resources\ChurchFundraising101.cshtml" />
+    <Content Include="Views\Resources\Cheer.cshtml" />
+    <Content Include="Views\Resources\League.cshtml" />
+    <Content Include="Views\Resources\Coupon.cshtml" />
+    <Content Include="Views\Partners\EnvisionFundraising.cshtml" />
+    <Content Include="Views\Partners\Cheerleading.cshtml" />
+    <Content Include="Views\Promotion\Movember.cshtml" />
+    <Content Include="Views\Resources\Spring.cshtml" />
+    <Content Include="Views\Resources\Valentines.cshtml" />
+    <Content Include="Views\Resources\FundraisingFormulas.cshtml" />
+    <Content Include="Views\Resources\PowerProducts.cshtml" />
+    <Content Include="Views\Shared\_Blank.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\ShoppingCarts\RegistrationInvitation.cshtml" />
+    <Content Include="Views\Resources\CheerFundraising.cshtml" />
+    <Content Include="Views\Representatives\RequestInformation.cshtml" />
+    <Content Include="Views\Representatives\MyCampaigns.cshtml" />
+    <Content Include="Views\Representatives\ThankYou.cshtml" />
+    <Content Include="Views\Representatives\Fundraisers.cshtml" />
+    <Content Include="Views\Representatives\Categories.cshtml" />
+    <Content Include="Views\Representatives\Product.cshtml" />
+    <Content Include="Views\Representatives\Testimonials.cshtml" />
+    <Content Include="Views\ShoppingCarts\PaypalConfirmation.cshtml" />
+    <Content Include="Views\ShoppingCarts\Confirmation.cshtml" />
+    <Content Include="Views\Partners\usafootball.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Post.cshtml" />
+    <Content Include="Views\Promotion\fundraisingpromotion.cshtml" />
+    <Content Include="Views\Errors\ResourceNotFound.cshtml" />
+    <Content Include="Views\Products\SubCategory.cshtml" />
+    <Content Include="Views\Blog\Category.cshtml" />
+    <Content Include="Views\Blog\All.cshtml" />
+    <Content Include="Views\Blog\Tag.cshtml" />
+    <Content Include="Views\Shared\Blog\_lastPosts.cshtml" />
+    <Content Include="Views\Shared\Blog\_categories.cshtml" />
+    <Content Include="Views\Shared\Blog\_tagCloud.cshtml" />
+    <Content Include="Views\Errors\ServerError.cshtml" />
+    <Content Include="Views\Ideas\FundraisingIdeasAZ.cshtml" />
+    <Content Include="Views\Shared\_coreJSFiles.cshtml" />
+    <Content Include="Views\Shared\_coreJSFiles.min.cshtml" />
+    <Content Include="Views\Ideas\FundraisingIdeas105.cshtml" />
+    <Content Include="Views\Partners\aboutasa.cshtml" />
+    <Content Include="Views\Partners\girlsgotgame.cshtml" />
+    <Content Include="Views\Partners\sportdecals.cshtml" />
+    <Content Include="Views\Partners\teamcheer.cshtml" />
+    <Content Include="Views\Partners\usafundraising.cshtml" />
+    <Content Include="Views\Partners\cheerdeals.cshtml" />
+    <Content Include="Views\Shared\_BrochureFlipBook.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\styles\slickJs\fonts\slick.ttf" />
+    <Content Include="Content\styles\slickJs\fonts\slick.woff" />
+    <Content Include="Content\kit\scss\style.scss" />
+    <Content Include="Views\Ideas\Test.cshtml" />
+    <Content Include="Views\Home\KitRequestPopUpConfirmation.cshtml" />
+    <None Include="Properties\PublishProfiles\GAWEBP01.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBP02.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBP03.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBP04.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBT01.pubxml" />
+    <None Include="Properties\PublishProfiles\GAWEBT02.pubxml" />
+    <Content Include="Views\Home\KitRequestCanada.cshtml" />
+    <Content Include="Views\Home\KitRequestConfirmationCanada.cshtml" />
+    <Content Include="Views\Home\KitRequestPopUpConfirmationCanada.cshtml" />
+    <Content Include="Views\Partners\swrealestate.cshtml" />
+    <Content Include="Views\Home\KitRequest.cshtml" />
+    <Content Include="Views\Shared\_partialNewKit.cshtml" />
+    <Content Include="Views\Home\OrdertakerConfirmation.cshtml" />
+    <Content Include="Views\Resources\SchoolFundraising101.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <None Include="Web.1.DEV.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.3.PROD.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.2.TEST.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\images\newkit\" />
+    <Folder Include="Helpers\Routes\Attributes\" />
+    <Folder Include="Mobile\" />
+    <Folder Include="Views\Canada\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GA.BDC.Shared.csproj">
+      <Project>{e284cab1-4979-40d7-bb94-4238f1d487a7}</Project>
+      <Name>GA.BDC.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '1.DEV|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>CS8002</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '2.TEST|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>CS8002</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '3.PROD|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>CS8002</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53529</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://local.fundraising.com</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

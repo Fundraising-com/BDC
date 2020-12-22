@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.expressia.net/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://www.expressia.net/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.expressia.net/">
+      <s:element name="GetVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetVersionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSubVersionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRevision">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRevisionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRevisionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sleepsSeconds" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MTestResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTiboByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTiboByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTiboByIDResult" type="s0:TiboSystem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TiboSystem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TiboId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtraInformation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoLink" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProjectId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProjectName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProjectDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectLink" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectSerializated" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ObjectType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreateDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTibos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTibosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTibosResult" type="s0:ArrayOfTiboSystem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTiboSystem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TiboSystem" nillable="true" type="s0:TiboSystem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTibosByLastID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTibosByLastIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTibosByLastIDResult" type="s0:ArrayOfTiboSystem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="s0:TiboUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TiboUser">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProjects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectsResult" type="s0:ArrayOfProject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Project" nillable="true" type="s0:Project" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Project">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProjectId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTibosSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="top" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="objectType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTibosSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTibosSearchResult" type="s0:ArrayOfTiboSystem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertTIBO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="displayName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="extraInformation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="infoLink" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectLink" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="objectSerializated" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="objectType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertTIBOResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="GetVersionSoapIn">
+    <part name="parameters" element="s0:GetVersion" />
+  </message>
+  <message name="GetVersionSoapOut">
+    <part name="parameters" element="s0:GetVersionResponse" />
+  </message>
+  <message name="GetSubVersionSoapIn">
+    <part name="parameters" element="s0:GetSubVersion" />
+  </message>
+  <message name="GetSubVersionSoapOut">
+    <part name="parameters" element="s0:GetSubVersionResponse" />
+  </message>
+  <message name="GetRevisionSoapIn">
+    <part name="parameters" element="s0:GetRevision" />
+  </message>
+  <message name="GetRevisionSoapOut">
+    <part name="parameters" element="s0:GetRevisionResponse" />
+  </message>
+  <message name="MTestSoapIn">
+    <part name="parameters" element="s0:MTest" />
+  </message>
+  <message name="MTestSoapOut">
+    <part name="parameters" element="s0:MTestResponse" />
+  </message>
+  <message name="GetTiboByIDSoapIn">
+    <part name="parameters" element="s0:GetTiboByID" />
+  </message>
+  <message name="GetTiboByIDSoapOut">
+    <part name="parameters" element="s0:GetTiboByIDResponse" />
+  </message>
+  <message name="GetTibosSoapIn">
+    <part name="parameters" element="s0:GetTibos" />
+  </message>
+  <message name="GetTibosSoapOut">
+    <part name="parameters" element="s0:GetTibosResponse" />
+  </message>
+  <message name="GetTibosByLastIDSoapIn">
+    <part name="parameters" element="s0:GetTibosByLastID" />
+  </message>
+  <message name="GetTibosByLastIDSoapOut">
+    <part name="parameters" element="s0:GetTibosByLastIDResponse" />
+  </message>
+  <message name="LoginSoapIn">
+    <part name="parameters" element="s0:Login" />
+  </message>
+  <message name="LoginSoapOut">
+    <part name="parameters" element="s0:LoginResponse" />
+  </message>
+  <message name="GetProjectsSoapIn">
+    <part name="parameters" element="s0:GetProjects" />
+  </message>
+  <message name="GetProjectsSoapOut">
+    <part name="parameters" element="s0:GetProjectsResponse" />
+  </message>
+  <message name="GetTibosSearchSoapIn">
+    <part name="parameters" element="s0:GetTibosSearch" />
+  </message>
+  <message name="GetTibosSearchSoapOut">
+    <part name="parameters" element="s0:GetTibosSearchResponse" />
+  </message>
+  <message name="InsertTIBOSoapIn">
+    <part name="parameters" element="s0:InsertTIBO" />
+  </message>
+  <message name="InsertTIBOSoapOut">
+    <part name="parameters" element="s0:InsertTIBOResponse" />
+  </message>
+  <portType name="ServiceSoap">
+    <operation name="GetVersion">
+      <input message="s0:GetVersionSoapIn" />
+      <output message="s0:GetVersionSoapOut" />
+    </operation>
+    <operation name="GetSubVersion">
+      <input message="s0:GetSubVersionSoapIn" />
+      <output message="s0:GetSubVersionSoapOut" />
+    </operation>
+    <operation name="GetRevision">
+      <input message="s0:GetRevisionSoapIn" />
+      <output message="s0:GetRevisionSoapOut" />
+    </operation>
+    <operation name="MTest">
+      <input message="s0:MTestSoapIn" />
+      <output message="s0:MTestSoapOut" />
+    </operation>
+    <operation name="GetTiboByID">
+      <input message="s0:GetTiboByIDSoapIn" />
+      <output message="s0:GetTiboByIDSoapOut" />
+    </operation>
+    <operation name="GetTibos">
+      <input message="s0:GetTibosSoapIn" />
+      <output message="s0:GetTibosSoapOut" />
+    </operation>
+    <operation name="GetTibosByLastID">
+      <input message="s0:GetTibosByLastIDSoapIn" />
+      <output message="s0:GetTibosByLastIDSoapOut" />
+    </operation>
+    <operation name="Login">
+      <input message="s0:LoginSoapIn" />
+      <output message="s0:LoginSoapOut" />
+    </operation>
+    <operation name="GetProjects">
+      <input message="s0:GetProjectsSoapIn" />
+      <output message="s0:GetProjectsSoapOut" />
+    </operation>
+    <operation name="GetTibosSearch">
+      <input message="s0:GetTibosSearchSoapIn" />
+      <output message="s0:GetTibosSearchSoapOut" />
+    </operation>
+    <operation name="InsertTIBO">
+      <input message="s0:InsertTIBOSoapIn" />
+      <output message="s0:InsertTIBOSoapOut" />
+    </operation>
+  </portType>
+  <binding name="ServiceSoap" type="s0:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="GetVersion">
+      <soap:operation soapAction="http://www.expressia.net/GetVersion" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetSubVersion">
+      <soap:operation soapAction="http://www.expressia.net/GetSubVersion" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetRevision">
+      <soap:operation soapAction="http://www.expressia.net/GetRevision" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="MTest">
+      <soap:operation soapAction="http://www.expressia.net/MTest" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTiboByID">
+      <soap:operation soapAction="http://www.expressia.net/GetTiboByID" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTibos">
+      <soap:operation soapAction="http://www.expressia.net/GetTibos" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTibosByLastID">
+      <soap:operation soapAction="http://www.expressia.net/GetTibosByLastID" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Login">
+      <soap:operation soapAction="http://www.expressia.net/Login" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetProjects">
+      <soap:operation soapAction="http://www.expressia.net/GetProjects" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTibosSearch">
+      <soap:operation soapAction="http://www.expressia.net/GetTibosSearch" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="InsertTIBO">
+      <soap:operation soapAction="http://www.expressia.net/InsertTIBO" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="ServiceSoap12" type="s0:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+    <operation name="GetVersion">
+      <soap12:operation soapAction="http://www.expressia.net/GetVersion" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetSubVersion">
+      <soap12:operation soapAction="http://www.expressia.net/GetSubVersion" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetRevision">
+      <soap12:operation soapAction="http://www.expressia.net/GetRevision" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="MTest">
+      <soap12:operation soapAction="http://www.expressia.net/MTest" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetTiboByID">
+      <soap12:operation soapAction="http://www.expressia.net/GetTiboByID" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetTibos">
+      <soap12:operation soapAction="http://www.expressia.net/GetTibos" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetTibosByLastID">
+      <soap12:operation soapAction="http://www.expressia.net/GetTibosByLastID" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="Login">
+      <soap12:operation soapAction="http://www.expressia.net/Login" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetProjects">
+      <soap12:operation soapAction="http://www.expressia.net/GetProjects" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="GetTibosSearch">
+      <soap12:operation soapAction="http://www.expressia.net/GetTibosSearch" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+    <operation name="InsertTIBO">
+      <soap12:operation soapAction="http://www.expressia.net/InsertTIBO" style="document" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      <input>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </input>
+      <output>
+        <soap12:body use="literal" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Service">
+    <port name="ServiceSoap" binding="s0:ServiceSoap">
+      <soap:address location="http://tibo.norbera.com/Service.asmx" />
+    </port>
+    <port name="ServiceSoap12" binding="s0:ServiceSoap12">
+      <soap12:address location="http://tibo.norbera.com/Service.asmx" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" />
+    </port>
+  </service>
+</definitions>

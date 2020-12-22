@@ -1,0 +1,95 @@
+﻿@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Models.Views
+@{
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_donation.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+}
+<div id="donation" ng-controller="donationController" ng-init="donationView = @serializedModel">
+    <div class="row"><div class="col-sm-12">&nbsp;</div></div>
+    <div class="row">
+        <div class="col-sm-6 text-left">
+            <div class="panel panel-info">
+                <div class="panel-heading form-header">
+                    <h3 class="panel-title">Confirmation</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">                        
+                        <div class="col-sm-12">
+                            Thank you for your support!
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            Your confirmation number is:&nbsp;&nbsp;<strong>@Model.ConfirmationNumber</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            Please print or save for your records.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 blue">
+                            Your Donation will benefit:&nbsp;&nbsp;@Model.Detail1
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Donation Amount:</strong>&nbsp;&nbsp;@string.Format("{0:C}", Model.DonationAmount)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Billing Information:</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Model.CardName<br />
+                            @string.Concat(Model.Address1, " ", Model.Address2).Trim()<br />
+                            @string.Concat(Model.City, ", ", Model.State, " ", Model.ZipCode)<br />
+                            @Model.Country
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            Credit card Information:&nbsp;&nbsp;@string.Concat(Model.CardTypeName, " ", Model.CreditCardDisplay)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

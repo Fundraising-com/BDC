@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "Spider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="ReportsController as reportsCtrl">
+   <form name="report" id="report">
+      <div layout="column">
+         <div layout="row" >
+            <div>
+               <h1 class="text-md-primary md-title">Spider Report</h1>
+            </div>
+            <div flex></div>
+            <div>
+               <md-button href="/Reports"><md-icon>arrow_back</md-icon>Go Back</md-button>
+            </div>
+         </div>
+         <div layout="row" layout-padding>
+            <md-input-container class="md-block" flex="19">
+               <label>Sale Id</label>
+               <input type="number" ng-model="reportsCtrl.parameters.SaleId" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Lead Id</label>
+               <input type="number" ng-model="reportsCtrl.parameters.LeadId" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Promotion Id</label>
+               <input type="number" ng-model="reportsCtrl.parameters.PromotionId" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Partner Id</label>
+               <input type="number" ng-model="reportsCtrl.parameters.PartnerId" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Scratchbook Id</label>
+               <input type="number" ng-model="reportsCtrl.parameters.ScratchbookId" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+         </div>
+         <div layout="row" layout-padding>
+            <md-input-container class="md-block" flex="19">
+               <label>Email</label>
+               <input type="email" ng-model="reportsCtrl.parameters.Email" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>ZIP Code</label>
+               <input type="text" ng-model="reportsCtrl.parameters.ZIPCode" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Day Phone</label>
+               <input type="text" ng-model="reportsCtrl.parameters.DayPhone" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Evening Phone</label>
+               <input type="text" ng-model="reportsCtrl.parameters.EveningPhone" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Total Amount</label>
+               <input type="number" ng-model="reportsCtrl.parameters.TotalAmount" ng-disabled="reportsCtrl.executing">
+            </md-input-container>
+         </div>
+         <div layout="row" layout-padding>
+            <md-input-container class="md-block" flex="19">
+               <label>Country</label>
+               <md-autocomplete md-selected-item="reportsCtrl.parameters.Country" md-search-text="countrySearched" md-items="item in reportsCtrl.GetCountryMatches(countrySearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" md-selected-item-change="reportsCtrl.GetRegions()" ng-disabled="reportsCtrl.countries.length == 0">
+                  <md-item-template>
+                     <span md-highlight-text="countrySearched">{{item.Name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                     No matches found.
+                  </md-not-found>
+               </md-autocomplete>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>State</label>
+               <md-autocomplete md-selected-item="reportsCtrl.parameters.Region" md-search-text="regionSearched" md-items="item in reportsCtrl.GetRegionMatches(regionSearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" ng-disabled="reportsCtrl.parameters.Country == undefined || reportsCtrl.parameters.Country == null || reportsCtrl.regions.length == 0">
+                  <md-item-template>
+                     <span md-highlight-text="regionSearched">{{item.Name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                     No matches found.
+                  </md-not-found>
+               </md-autocomplete>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Consultant</label>
+               <md-autocomplete md-selected-item="reportsCtrl.parameters.Consultant" md-search-text="consultantSearched" md-items="item in reportsCtrl.GetConsultantMatches(consultantSearched)" md-item-text="item.Name" md-input-minlength="0">
+                  <md-item-template>
+                     <span md-highlight-text="consultantSearched">{{item.Name}}</span>
+                  </md-item-template>
+               </md-autocomplete>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Organization Type</label>
+               <md-autocomplete md-selected-item="reportsCtrl.parameters.OrganizationType" md-search-text="organizationTypeSearched" md-items="item in reportsCtrl.GetOrganizationTypesMatches(organizationTypeSearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" ng-disabled="reportsCtrl.organizationTypes.length == 0">
+                  <md-item-template>
+                     <span md-highlight-text="organizationTypeSearched">{{item.Name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                     No matches found.
+                  </md-not-found>
+               </md-autocomplete>
+            </md-input-container>
+
+             <md-input-container class="md-block" flex="19">
+                 <label>Group Type</label>
+                 <md-autocomplete md-selected-item="reportsCtrl.parameters.GroupType" md-search-text="groupTypeSearched" md-items="item in reportsCtrl.GetGroupTypesMatches(groupTypeSearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" ng-disabled="reportsCtrl.groupTypes.length == 0">
+                     <md-item-template>
+                         <span md-highlight-text="groupTypeSearched">{{item.Name}}</span>
+                     </md-item-template>
+                     <md-not-found>
+                         No matches found.
+                     </md-not-found>
+                 </md-autocomplete>
+             </md-input-container>
+
+            <md-input-container class="md-block" flex="19">
+               <label>Product Class</label>
+               <md-autocomplete md-selected-item="reportsCtrl.parameters.ProductClass" md-search-text="productClassSearched" md-items="item in reportsCtrl.GetProductClassesMatches(productClassSearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" ng-disabled="reportsCtrl.productClasses.length == 0">
+                  <md-item-template>
+                     <span md-highlight-text="productClassSearched">{{item.Name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                     No matches found.
+                  </md-not-found>
+               </md-autocomplete>
+            </md-input-container>
+         </div>
+         <div layout="row" layout-padding>
+            <md-input-container class="md-block" flex="19">
+               <label>Actual Ship Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.ShipDateStart" md-max-date="reportsCtrl.parameters.ShipDateEnd" md-placeholder="Start" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Actual Ship Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.ShipDateEnd" md-min-date="reportsCtrl.parameters.ShipDateStart" md-placeholder="End" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Fundraiser Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.FundraiserStart" md-max-date="reportsCtrl.parameters.FundraiserEnd" md-placeholder="Start" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Fundraiser Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.FundraiserEnd" md-min-date="reportsCtrl.parameters.FundraiserStart" md-placeholder="End" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+         </div>
+         <div layout="row" layout-padding>
+            <md-input-container class="md-block" flex="19">
+               <label>Sales Confirm Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.SalesConfirmStart" md-max-date="reportsCtrl.parameters.SalesConfirmEnd" md-placeholder="Start" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Sales Confirm Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.SalesConfirmEnd" md-min-date="reportsCtrl.parameters.SalesConfirmStart" md-placeholder="End" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Leads Entry Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.LeadsEntryStart" md-max-date="reportsCtrl.parameters.LeadsEntryEnd" md-placeholder="Start" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex="19">
+               <label>Leads Entry Date</label>
+               <md-datepicker ng-model="reportsCtrl.parameters.LeadsEntryEnd" md-min-date="reportsCtrl.parameters.LeadsEntryStart" md-placeholder="End" ng-disabled="reportsCtrl.executing"></md-datepicker>
+            </md-input-container>
+         </div>
+         <div layout="row" layout-padding>
+            <div flex></div>
+            <md-button ng-click="reportsCtrl.ResetReportParameters();" class="md-raised" ng-cloak ng-hide="reportsCtrl.executing">Reset</md-button>
+            <md-button ng-click="reportsCtrl.ExecuteReportSpider()" class="md-raised md-primary" ng-cloak ng-hide="reportsCtrl.executing" ng-disabled="report.$pristine">Submit</md-button>
+            <md-button ng-csv="reportsCtrl.results" filename="{{reportsCtrl.fileName}}" csv-header="reportsCtrl.GetSpiderReportHeader()" class="md-raised md-primary" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">Download</md-button>
+         </div>
+         <div layout="row" layout-padding>
+            <div flex></div>
+            <div class="md-caption" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">The report was ran on <strong>{{reportsCtrl.executedOn | date: 'short' : '-05:00'}}</strong> and it took <strong>{{reportsCtrl.executionTime}}</strong> seconds.</div>
+         </div>
+         <div layout="row" ng-show="reportsCtrl.executing" ng-cloak>
+            <div flex></div>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <div flex></div>
+         </div>  
+         <div layout="row" layout-padding>
+            <div flex>
+               <br/>
+               <br/>
+            </div>            
+         </div>
+      </div>
+   </form>
+</div>

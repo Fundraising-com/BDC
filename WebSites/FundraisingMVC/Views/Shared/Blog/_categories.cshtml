@@ -1,0 +1,12 @@
+@model IList<GA.BDC.Shared.Entities.BlogCategory>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Categories</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var category in Model.OrderBy(p => p.Name))
+        {
+            <p style="border-bottom: solid 1px #EEE;"><a ng-href="/blog/category/@category.Url" style="font-family:karla">@category.Name</a></p>
+        }
+    </div>
+</div>

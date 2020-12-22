@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Custcare";
+    ViewBag.SubTitle = "<small>Search Results</small>";
+    ViewBag.BreadCrumb = "Admin tabs";
+    ViewBag.InitModule = "homeIndexModule";
+    ViewBag.InitController = "homeIndexController";
+    ViewBag.Message = "Welcome to your new Custcare!";
+}
+@section featured {
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @ViewBag.Title @Html.Raw(ViewBag.SubTitle)
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> @ViewBag.BreadCrumb                    
+                </li>
+            </ol>
+        </div>
+    </div>
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i>  <strong>@ViewBag.Message</strong>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+<div class="bs-tabs" role="tabpanel" data-example-id="togglable-tabs" ng-controller="tabsController">
+    <div class="progress" ng-class="{hidden: !isBusy()}">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    </div>
+    <ul id="myTab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a id="home-tab" role="tab" data-toggle="tab" aria-controls="home" ui-sref="index">Home</a></li>
+        <li role="presentation"><a role="tab" id="results-tab" data-toggle="tab" aria-controls="results" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Results</a></li>
+        <li role="presentation"><a role="tab" id="sponsors-tab" data-toggle="tab" aria-controls="sponsor" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Sponsor</a></li>
+        <li role="presentation"><a role="tab" id="account-tab" data-toggle="tab" aria-controls="account" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Account</a></li>
+        <li role="presentation"><a role="tab" id="members-tab" data-toggle="tab" aria-controls="members" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Members</a></li>
+        <li role="presentation"><a role="tab" id="orders-tab" data-toggle="tab" aria-controls="orders" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Orders</a></li>
+        <li role="presentation"><a role="tab" id="links-tab" data-toggle="tab" aria-controls="links" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Links</a></li>
+        <li role="presentation"><a role="tab" id="tools-tab" data-toggle="tab" aria-controls="tools" ng-disabled="!dataLoaded()" ng-class="{disabled: !dataLoaded()}" class="pointer-cursor" ng-click="changeTab($event)">Tools</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <ui-view></ui-view>
+    </div>
+</div>
+
+@section scripts {
+    <script src="/Scripts/app/home.js"></script>
+}

@@ -1,0 +1,184 @@
+using System;
+using System.Data;
+using System.Drawing;
+using System.Web;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.Text;
+using QSPForm.Common.DataDef;
+using dataDef = QSPForm.Common.DataDef.AccountTable;
+using QSP.OrderExpress.Web.Code;
+
+namespace QSP.OrderExpress.Web.UserControls {
+    /// <summary>
+    ///		Summary description for AccountStep_Detail.
+    /// </summary>
+    public partial class AccountStep_Detail : BaseAccountFormStep {
+        private int c_AccountID = 0;
+        protected dataDef dtblAccount = new dataDef();
+        protected DataTable dtblAccountType = new DataTable();
+        protected System.Web.UI.WebControls.Label lblLabelAccountID;
+        protected System.Web.UI.WebControls.TextBox txtAccountID;
+        QSPForm.Business.AccountSystem orgSys = new QSPForm.Business.AccountSystem();
+        private CommonUtility clsUtil = new CommonUtility();
+
+        protected void Page_Load(object sender, System.EventArgs e) {
+            // Put user code to initialize the page here
+            if (!IsPostBack) {
+                clsUtil.SetJScriptForOpenSelector(imgBtnSelect, txtFMID, txtFMName, QSPForm.Business.AppItem.FMSelector, 0, 0);
+            }
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e) {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitControl();
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        ///		Required method for Designer support - do not modify
+        ///		the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            this.DataBinding += new System.EventHandler(this.Page_DataBinding);
+        }
+        #endregion
+
+        private void InitControl() {
+            this.PreviousAppItem = QSPForm.Business.AppItem.AccountForm_Step1;
+            this.StepItem = QSPForm.Business.AppItem.AccountForm_Step2;
+            this.NextAppItem = QSPForm.Business.AppItem.AccountForm_Step3;
+            this.ImageButtonNext = imgBtnNext;
+            this.ImageButtonBack = imgBtnBack;
+        }
+
+        private void LoadData() {
+            //			dtblAccount = orgSys.SelectOne(c_AccountID);
+            //			base.LoadData ();
+        }
+
+        protected void Page_DataBinding(object sender, System.EventArgs e) {
+            try {
+                //retreive data detail item for db					
+                BindForm();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public int AccountID {
+            get {
+                return c_AccountID;
+            }
+            set {
+                c_AccountID = value;
+            }
+        }
+
+        public dataDef DataSource {
+            get {
+                return dtblAccount;
+            }
+            set {
+                dtblAccount = value;
+            }
+        }
+
+        public override void BindForm() {
+            LoadData();
+            FillList();
+            if (dtblAccount.Rows.Count > 0) {
+                DataRow row;
+                row = dtblAccount.Rows[0];
+
+                if (row[dataDef.FLD_FULF_ACCOUNT_ID] != System.DBNull.Value)
+                    txtEDSAccount.Text = row[dataDef.FLD_FULF_ACCOUNT_ID].ToString();
+
+                ListItem lstItem;
+                if (row[dataDef.FLD_ACCOUNT_TYPE_ID] != System.DBNull.Value) {
+                    lstItem = ddlType.Items.FindByValue(row[dataDef.FLD_ACCOUNT_TYPE_ID].ToString());
+                    if (lstItem != null) {
+                        ddlType.ClearSelection();
+                        lstItem.Selected = true;
+                    }
+                }
+                if (row[dataDef.FLD_FM_ID] != System.DBNull.Value) {
+                    txtFMID.Text = row[dataDef.FLD_FM_ID].ToString();
+                    //clsUtil.SetJScriptForOpenDetail(imgBtnDetail, QSPForm.Business.AppItem.FM_Detail,"FMID",txtFMID.Text.Trim(),700,600);
+                    clsUtil.SetJScriptForOpenDetailNoCMS(imgBtnDetail, "FMInfo.aspx?", "FMID", txtFMID.Text.Trim(), 700, 600);
+
+                    if (row["fm_name"] != System.DBNull.Value) {
+                        txtFMName.Text = row["fm_name"].ToString();
+                    }
+                }
+                if (row[dataDef.FLD_TAX_EXEMPTION_NO] != System.DBNull.Value)
+                    txtTaxExemptionNumber.Text = row[dataDef.FLD_TAX_EXEMPTION_NO].ToString();
+                if (row[dataDef.FLD_TAX_EXEMPTION_EXP_DATE] != System.DBNull.Value)
+                    txtTaxExemptionNumber.Text = Convert.ToDateTime(row[dataDef.FLD_TAX_EXEMPTION_EXP_DATE]).ToShortDateString();
+                if (row[dataDef.FLD_CREDIT_LIMIT] != System.DBNull.Value)
+                    txtCreditLimit.Text = Convert.ToDecimal(row[dataDef.FLD_CREDIT_LIMIT]).ToString("F");
+                if (row[dataDef.FLD_COMMENTS] != System.DBNull.Value)
+                    txtComments.Text = row[dataDef.FLD_COMMENTS].ToString();
+            }
+        }
+
+        public override bool Update() {
+            bool IsSuccess = false;
+            // get edited row values in grid
+            DataRow row = dtblAccount.Rows[0];
+            row[dataDef.FLD_ACCOUNT_TYPE_ID] = ddlType.SelectedValue;
+            row[dataDef.FLD_ACCOUNT_TYPE_NAME] = ddlType.SelectedItem.Text;
+            row[dataDef.FLD_FULF_ACCOUNT_ID] = txtEDSAccount.Text;
+            row[dataDef.FLD_FM_ID] = txtFMID.Text;
+            row[dataDef.FLD_FM_NAME] = txtFMName.Text;
+            row[dataDef.FLD_TAX_EXEMPTION_NO] = txtTaxExemptionNumber.Text;
+            TextBox txt = txtTaxExemptionExpirationDate;
+            if (txt.Text.Length > 0)
+                row[dataDef.FLD_TAX_EXEMPTION_EXP_DATE] = Convert.ToDateTime(txt.Text);
+            else
+                row[dataDef.FLD_TAX_EXEMPTION_EXP_DATE] = System.DBNull.Value;
+            txt = txtCreditLimit;
+            if (txt.Text.Length > 0)
+                row[dataDef.FLD_CREDIT_LIMIT] = Convert.ToDecimal(txt.Text);
+            else
+                row[dataDef.FLD_CREDIT_LIMIT] = System.DBNull.Value;
+
+            row[dataDef.FLD_COMMENTS] = txtComments.Text;
+
+            if (c_AccountID <= 0) {
+                row[dataDef.FLD_CREATE_USER_ID] = Page.UserID;
+            }
+            else {
+                row[dataDef.FLD_UPDATE_USER_ID] = Page.UserID;
+            }
+
+            IsSuccess = true;
+
+            return IsSuccess;
+        }
+
+        private void FillList() {
+            try {
+                //Campaign Type
+                QSPForm.Business.CommonSystem comSys = new QSPForm.Business.CommonSystem();
+                dtblAccountType = comSys.SelectAllAccountType();
+                ddlType.DataSource = dtblAccountType;
+                ddlType.DataBind();
+
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e) {
+            txtFMID.Enabled = (this.Page.Role > 2);
+            imgBtnDetail.Visible = (this.Page.Role > 2);
+            imgBtnSelect.Visible = (this.Page.Role > 2);
+        }
+    }
+}

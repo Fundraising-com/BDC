@@ -1,0 +1,546 @@
+﻿@{
+        ViewBag.Title = "Scratch Card Fundraisers. The most profitable fundraiser for non-profit organizations";
+        ViewBag.Description = "Our fundraisers have helped groups reach their charity fundraising goals time and time again.  No other fundraising program offers such superior products, as well as years of experience in planning and implementing a wide variety of fundraisers!";
+        ViewBag.Keywords = "Fundraisers, fund raisers, fundraiser, school fundraising, fund-raising ideas, scratchcards, scratch card, non profit organizations,  nonprofit, public schools, high school sports, charity, donations, raise money, coupons, funds, grants, profitable, teams, products, services, funding, baseball, football, bands, soccer, cheerleading, PTA, PTO, scouts, fraternities, sororities, civic groups, hockey, gymnastics";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<script>
+function myFunction() {
+
+    var participants = parseInt(document.getElementById('calc.participants').value);
+    if (participants < 10) {
+        document.getElementById('calc.raise').value = '';
+        document.getElementById('calc.profits').value = '';
+        return;
+    }
+    else {
+        var price = 20;
+        var profitPotential = 100;
+        var freeCards = participants * 0.1;
+        var totalCost = participants * price;
+        var raise = profitPotential * (participants + freeCards)
+        document.getElementById('calc.raise').value = raise.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        document.getElementById('calc.profits').value = (raise - totalCost).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        return false;
+    }
+    
+
+    
+
+}
+</script>
+
+
+<header style="background-image: url('../../Content/images/public/banner1.jpg');">
+   <div class="intro-text">
+
+            <div class="intro-heading">Scratchcards</div>
+            <div class="intro-lead-in">NOW UP TO 90% PROFIT. CALL 1.877.305.4126</div>
+       <br />
+            <a href="#categories" class="page-scroll btn btn-xl">See Categories</a>
+
+      
+        </div>
+
+</header>
+
+
+
+<div class="row">
+    <div class="col-lg-12" style="background-color:#f5f5f3; font-weight:bold; padding:50px">
+        "On behalf of the White Plains High School soccer program, we would like to thank you for the wonderful opportunity of having used your Scratchcards fund raiser. The top rate customer service and immediate delivery enabled us to raise over $4,000 in only two weeks. With this large sum of money we were able to purchase warm-ups and travel bags for our entire team. Not only did your 90% profit guarantee become a reality, but your Scratchcards, more than any other fund raiser we have used in the past, brought our team closer together. We are currently enjoying one of our finest seasons in many years, and are already looking forward to next year's fund raising effort. I cannot imagine why others would not want to use this program, they would simply be missing out!"
+        <br /><br />
+<div style="float:right; font-style:italic">
+<strong>Coach Marcel Galligani<br />
+Boys Varsity Soccer</strong></div>
+    </div>
+
+</div>
+
+<div class="row" id="categories">
+    <div class="col-lg-12" style="font-weight:bold; font-size:40px;" align="center">
+    <hr style="width:30%; border-color:black; margin:0px 0px 30px 0px" />
+        Categories
+    </div>
+</div>
+
+<!-- Portfolio Grid Section -->
+<section id="portfolio" style="padding-top:50px; padding-bottom:50px">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="/products/church" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="~/Content/images/public/church.jpg" class="img-responsive" alt=""/>
+                </a>
+
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="/products/school" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+
+                    </div>
+                    <img src="~/Content/images/public/school.jpg" class="img-responsive" alt="" />
+                </a>
+
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="/products/sports" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="~/Content/images/public/sports.jpg" class="img-responsive" alt=""/>
+                </a>
+
+            </div>
+
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="/products/dance" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="~/Content/images/public/dance.jpg" class="img-responsive" alt="" />
+                </a>
+
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="/products/cheerleading" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="~/Content/images/public/cheer.jpg" class="img-responsive" alt="" />
+                </a>
+
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="/products/others" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="~/Content/images/public/other.jpg" class="img-responsive" alt="" />
+                </a>
+
+            </div>
+
+            </div>
+      
+    </div>
+</section>
+
+<div class="row" id="how">
+    <div class="col-lg-12" style="font-weight:bold; font-size:40px;" align="center">
+        <hr style="width:30%; border-color:black; margin:30px 0px 0px 0px" />
+
+    </div>
+</div>
+
+
+<div class="row" >
+    <div class="col-lg-12" style="background-color:#f5f5f3; padding:40px; font-size:20px; font-weight:bold; text-align:center">
+        <h1>How It Works</h1><br />
+        EARN UP TO 90% PROFIT WITH SCRATCHCARDS!<br />
+        SO QUICK, SO EASY, SO PROFITABLE, SIMPLY THE MOST PROFITABLE<br />
+        FUNDRAISER PRODUCT AVAILABLE!
+        <br /><br />
+        <span style="color:#950a03">RAISE UP TO $100 PER CARD, HASSLE-FREE. HERE'S HOW:</span>
+
+    </div>
+
+</div>
+
+
+<div class="row" style="margin:40px 0; font-size:17px; color:#950a03">
+    <div class="col-lg-4" style="text-align:center; padding:0 40px 0 40px">
+        <img src="~/Content/images/public/sc1.jpg" /><br /><br />
+        Every participant in your group is given one scratchcard. Each card has the potential to raise $100.
+        <br /><br />
+    </div>
+    <div class="col-lg-4" style="text-align:center; padding:0 40px 0 40px">
+        <img src="~/Content/images/public/sc2.jpg" /><br /><br />
+        Participants invite supporters to scratch off one or more of the colored circles(s) on the card that will reveal the amount they'll donate
+        <br /><br />
+    </div>
+    <div class="col-lg-4" style="text-align:center; padding:0 40px 0 40px">
+        <img src="~/Content/images/public/sc3.jpg" /><br /><br />
+       Each support is given a national brand name coupon sheet as thanks
+        <br /><br />
+    </div>
+</div>
+
+
+
+
+
+<div class="row" id="about">
+    <div class="col-lg-12" style="font-weight:bold; font-size:40px;" align="center">
+        <hr style="width:30%; border-color:black; margin:50px 0px 30px 0px" />
+        About the Product<br /><br />
+    </div>
+</div>
+
+<div class="row" style="font-size:17px;">
+    <div class="col-lg-6 col-lg-offset-1" align="center">
+        <img src="~/Content/images/public/aboutprod1.jpg" class="img-responsive"/>
+    </div>
+    <div class="col-lg-3" align="left" style="margin-left:50px; margin-right:50px">
+        <h2>A CLASSIC</h2>
+        This Fundraising Program is so QUICK and EASY that
+        everyone will love it! And with up to $100 raised per card, you can increase your profits hassle-free. Here's why:
+        <br /><br />
+        <span style="color:#b01802; font-size:15px">
+            <li>Up to 90% Profit</li>
+            <li>National Brand Name Sponsor Coupon Sheets for Every Donation</li>
+            <li>Personalized Cards Available for any Group</li>
+            <li>Delivery within 4-5 Business Days</li>
+            <li>10% Free Bonus Cards</li>
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="row" style="font-size:17px; background-color:#f5f5f3; padding:20px 0 20px 0">
+    <div class="col-md-2"></div>
+        <div class="col-md-3" style="margin-left:50px; margin-right:50px">
+            <img src="~/Content/images/public/aboutprod2.jpg" class="img-responsive  center-block" /><br />
+            <h4>Guarantee</h4>
+            Our Scratchcards are always good!
+            We will replace any expired coupon pads with new up-to-date coupons pads, absolutely free of charge. <br /><br />
+        </div>
+
+        <div class="col-md-3" style="margin-left:50px; margin-right:50px">
+            <img src="~/Content/images/public/aboutprod3.jpg" class="img-responsive  center-block" /><br />
+            <h4>Few Main Features</h4>
+            Each Scratchcard is made up of 2 flaps, which are folded up into a 4" by 6" card that can easily be carried in your pocket! Customization is FREE!<br />
+        </div>
+
+    </div>
+
+
+<div class="row" style="margin:0px 0px 30px 0px; background-color:#b2bdc3;">
+    <div class="col-lg-6">
+         <img src="~/Content/images/public/couponpartners.jpg" alt="scratchcard coupon partners" class="img-responsive  center-block" /><br />
+    </div>
+    <div class="col-lg-6" style="padding-right:50px; padding-left:50px; padding-bottom:20px" align="center">
+        <h1>Coupons</h1>
+        <span style="color:#940a03">It's easy to have supporters scratch off a circle when they can save in return!</span><br /><br />
+        Every donor receives a valuable brand name coupon sheet. Our national sponsors were carefully selected to ensure that your supporters are encouraged to help your group have a successful fundraising campaign. Each card contains 30 coupon sheets.
+    </div>
+
+
+</div>
+    <div class="row" id="calc" style="font-size:15px; text-align:center; margin:0px 0px 30px 0px">
+        <div class="col-lg-12" style="padding-left:50px; padding-right:50px">
+            <div style="font-weight:bold;" align="center">
+                <hr style="width:30%; border-color:black; " />
+                <h1>Calculator</h1><br />
+            </div>
+            How much can you earn? More than you can imagine!<br />
+            Check out the amazing profit levels using the Scratchcard Profit Chart and then use our Profit Calculator to calculate how much you can earn depending on the number of participants in your group. Now more profitable than any other fundraiser product with up to 90% profit!
+        </div>
+
+    </div>
+
+
+    <div class="row" style="margin:0px 0px 30px 0px">
+
+        <div class="col-lg-4 col-lg-offset-1">
+            <img src="~/Content/images/public/scprofit.jpg" class="img-responsive center-block" />
+        </div>
+        <div class="col-lg-4 center-block" style="padding-left:40px;">
+            <form onsubmit="return false">
+                <table align="center" style="border-collapse:separate; border-spacing:15px 15px">
+                    <tr>
+                        <td style="color:red; font-size:20px"># OF PARTICIPANTS:</td>
+                        <td style="padding-left:15px"><input type="number" min="10" max="5000" required value="10" class="form-control" id="calc.participants" style="width:100px"></td>
+                        <td style="padding-left:30px"><input type="submit" class="btn btn-large btn-success" value="Calculate" onclick="myFunction();"></td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-size:15px;">YOU RAISE $</td>
+                        <td style="padding-left:15px"><input type="text" readonly="readonly" class="form-control" id="calc.raise" style="width:100px"></td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-size:15px;">YOUR PROFITS $</td>
+                        <td style="padding-left:15px;"><input type="text" readonly="readonly" class="form-control" id="calc.profits" style="width:100px; "></td>
+                    </tr>
+                </table>
+                </form>
+</div>
+
+    </div>
+    <!----------------->
+
+    <div class="row" id="kit">
+        <header style="background-image: url('../../Content/images/public/freeguideimage.jpg'); ">
+            <div class="intro-text" style="padding-left:20px; padding-right:20px">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 style="font-size:50px">Order your free kit now</h1><br />
+                    </div>
+                </div>
+
+            </div>
+        </header>
+    </div>
+    <div class="row" id="kit">
+
+        <div class="col-md-10 col-md-offset-1" style="padding:50px 100px 25px 100px">
+            Request your FREE INFO GUIDE today and get everything you need for a successful fundraising campaign, including other great fundraising ideas from eFundraising! It contains product descriptions, pricing and profit charts, fundraising tips and more!
+            <br /><br />
+            Simply fill out the form below or call 1.866.342.3863 to get your kit.<br />
+            <span style="color:#940a03">You are under no obligation to buy and your information will not be sold or rented to any other company.</span>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1" style="padding:50px 100px 50px 100px" ng-controller="KitRequestController as kitRequestCtrl" ng-init="kitRequestCtrl.GetGeolocation();">
+
+
+            <form name="kitRequestForm" id="kitRequestForm" role="form" ng-submit="kitRequestForm.$submitted && kitRequestForm.$valid && kitRequestCtrl.Send();">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="kit.FirstName" class="control-label">Name *</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="i.e. John Smith" id="kit.FirstName" ng-required="true" ng-model="kitRequestCtrl.kit.FirstName" maxlength="50">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="kit.Group" class="control-label">Group Name *</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="i.e. Girls Scout of America" id="kit.Group" ng-required="true" ng-model="kitRequestCtrl.kit.Group" maxlength="100">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="kit.Address.Address1" class="control-label">Address *</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Street Address -- i.e. 33 Main St" id="kit.Address.Address1" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.Address1" maxlength="100">
+                            <br />
+                            <input type="text" class="form-control" placeholder="City -- i.e. Chicago" id="kit.Address.City" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.City" maxlength="50">
+                            <br />
+                            <input type="text" class="form-control" placeholder="Zip Code -- i.e. 12345" id="kit.Address.PostCode" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.PostCode" maxlength="10">
+                            <br />
+                            <select class="form-control" id="kit.Address.Region" ng-init="kitRequestCtrl.KitRequest();" ng-model="kitRequestCtrl.kit.Address.Region" ng-required="true" ng-options="state as state.Name for state in kitRequestCtrl.states track by state.Code"></select>
+                            <br />
+                            <select class="form-control" id="kit.Address.Country" ng-model="kitRequestCtrl.kit.Address.Country" ng-required="true" ng-change="kitRequestCtrl.UpdateStates();" ng-options="country as country.Name for country in kitRequestCtrl.countries track by country.Code"></select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="kit.Email" class="control-label">Email *</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="email" class="form-control" placeholder="i.e. john.smith@gmail.com" id="kit.Email" ng-required="true" ng-model="kitRequestCtrl.kit.Email" maxlength="50">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-hide="kitRequestCtrl.hidePhone">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="kit.Phone" class="control-label">Phone *</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" ui-mask="{{kitRequestCtrl.phoneMask}}" class="form-control" id="kit.Phone" ng-required="true" ng-model="kitRequestCtrl.kit.Phone" maxlength="20">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-cloak>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-warning form-control" ng-show="kitRequestCtrl.ActionState != 1 && !kitRequestForm.$valid" ng-disabled="true">Please fill all required Fields</button>
+                            <button type="submit" class="btn btn-warning form-control" ng-show="kitRequestCtrl.ActionState != 1 && kitRequestForm.$valid" ng-disabled="kitRequestCtrl.ActionState == 4">Submit</button>
+                            <span class="text-info" ng-show="kitRequestCtrl.ActionState == 1">
+                                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+                                <progressbar class="progress-striped" max="100" value="kitRequestCtrl.progress" type="warning" animate="true"></progressbar>
+                            </span>
+                            <div class="success" role="alert" ng-show="kitRequestCtrl.ActionState == 4">
+                                <strong class="alert-success">Your Request has been Submitted</strong>
+                                
+                            </div>
+                            <div class="alert alert-danger" role="alert" ng-show="kitRequestCtrl.ActionState == 3">
+                                <strong>{{kitRequestCtrl.error.Message}}</strong>
+                                <ul class="text-danger" ng-show="kitRequestCtrl.ActionState == 3">
+                                    <li ng-repeat="e in kitRequestCtrl.error.ModelStateErrors">
+                                        {{e}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </form>
+
+        </div>
+
+    </div>
+
+<div class="row">
+    <div class="col-lg-12" style="font-weight:bold; font-size:40px;" align="center">
+        <hr style="width:30%; border-color:black; margin:0px 0px 30px 0px" />
+        Our Partners<br />
+        <span style="font-size:20px;">...Including some of the world's top brands and businesses.</span>
+        <br /><br />
+
+    </div>
+</div>
+<div class="row" style="padding-left:50px; margin-bottom:40px">
+    <div class="col-lg-2" align="center">
+        <img src="/Content/images/public/partners_18.jpg" class="img-responsive" alt="firestone partner image" />
+    </div>
+    <div class="col-lg-2" align="center">
+        <img src="/Content/images/public/partners_20.jpg" class="img-responsive" alt="avis partner image" />
+    </div>
+    <div class="col-lg-3" align="center">
+        <a href="http://fundraising.com" target="_blank">
+            <img src="/Content/images/public/grey_fundraising.jpg" class="img-responsive" style="border:none" alt="fundraising.com partner image" />
+        </a>
+    </div>
+    <div class="col-lg-2" align="center">
+        <img src="/Content/images/public/partners_23.jpg" class="img-responsive" alt="disneyland partner image" />
+    </div>
+    <div class="col-lg-2" align="center">
+        <img src="/Content/images/public/partners_25.jpg" class="img-responsive" alt="budget partner image" />
+    </div>
+</div>
+
+
+    <div class="row" style="font-size:15px; text-align:center; margin:0px 0px 30px 0px">
+        <div class="col-lg-12" style="padding-left:50px; padding-right:50px">
+            <div style="font-weight:bold;" align="center">
+                <hr style="width:30%; border-color:black; margin:0px 0px 30px 0px" />
+                <h1>About Us</h1>
+            </div>
+
+            The Scratchcard program is a safe, simple and profitable fundraiser that focuses on building long-term relationships with members, parents and supporters, and on making it a fun and educational experience.
+            <br /><br />
+            Established as the Universal Fundraising Group in 1991, Scratchcard.com is now a leading figure in the North American fundraising industry. It was created for the purpose of providing non-profit groups with quality fundraising products at competitive prices, helping them to raise money quickly and easily.
+            <br /><br />
+            A member of the AFRDS (Association of Fundraising Distributors and Sellers - the national association for fundraising in the United States), Scratchcard.com, together with its affiliates, has helped non-profit groups raise over $3 billion since 1964.
+        </div>
+
+    </div>
+
+
+
+    <div class="row" id="contact">
+        <header style="background-image: url('../../Content/images/public/map.jpg'); ">
+            <div class="container">
+                <div class="intro-text" style="padding-left:20px; padding-right:20px">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h1 style="font-size:50px">Get In Touch With Us</h1><br /><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-offset-1 text-left" style="padding-bottom:20px; padding-left:50px">
+
+                            CANADA<br />
+                            33 Prince Street, Suite 200<br />
+                            Montreal, Quebec<br />
+                            H3C 2M7<br>
+                            <a href="https://www.fundraising.com/canada" target="_blank" title="Visit our Canadian Website">Visit our Canadian website for more fundraising ideas</a>
+                            <hr style="color:#FFFFFF; width:50%;" align="left" />
+                            UNITED STATES<br />
+                            156 Lawrence Paquette Ind'l Drive (PMW# 5)<br />
+                            Champlain, NY, 12919<br /><br />
+                            PHONE. 1-877-305-4126<br />
+                            <a href="mailto:info@scratchcard.com">info@scratchcard.com</a>
+</div>
+                        <div class="col-lg-5 text-left" style="padding-left:50px">
+
+                            Subscribe now to receive exclusive News and more...<br />
+
+                            <div ng-controller="NewsletterSubscriptionController as newsletterSubscriptionCtrl">
+                                <form name="newsletterForm" ng-submit="newsletterSubscriptionCtrl.Send();">
+
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Email" ng-required="true" aria-describedby="sizing-addon2" ng-model="newsletterSubscriptionCtrl.newsletterSubscription.Email" maxlength="50" style="width:300px; background-color:transparent; color:#ffffff">
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-warning" style="border-radius: 4px" ng-disabled="!newsletterForm.$valid">Submit</button>
+
+                                        </div>
+                                        <span class="text-info" ng-show="newsletterSubscriptionCtrl.ActionState == 1" style="color: white;">
+                                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>
+                                        </span>
+                                        <span class="text-info" ng-show="newsletterSubscriptionCtrl.ActionState == 3" style="color: white;">
+                                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" style="color: white"></span>
+                                        </span>
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+                            <div>
+                                <br />
+                                <h4>Follow Us</h4>  
+                                <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/scratchcarddotcom" target="_blank">
+                                    <span class="fa fa-facebook"></span>
+                                </a>&nbsp;&nbsp;
+                                <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/scratchcard_com" target="_blank">
+                                    <span class="fa fa-twitter"></span>
+                                </a>
+                               
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+
+
+
+
+
+
+
+    </div>

@@ -1,0 +1,23 @@
+<PUBLIC:COMPONENT tagName="rollover">
+	<PUBLIC:PROPERTY NAME="href" />
+	<PUBLIC:ATTACH EVENT="onmouseover" FOR="element" ONEVENT="SetImageOn()" />
+	<PUBLIC:ATTACH EVENT="onmouseout" FOR="element" ONEVENT="SetImageOff()" />
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	function SetImageOn()
+	{
+		re = /_off/gi;
+		element.src = element.src.replace(re,"_on");
+	}
+
+	function SetImageOff()
+	{
+		re = /_on/gi;
+		element.src = element.src.replace(re,"_off");
+		
+	}
+
+</SCRIPT>
+

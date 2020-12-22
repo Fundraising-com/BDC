@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Customer List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="ReportsController as reportsCtrl">
+   <form name="report" id="report">
+      <div layout="column">
+         <div layout="row" >
+            <div>
+                <h1 class="text-md-primary md-title">Customer List</h1>
+            </div>
+            <div flex></div>
+            <div>
+               <md-button href="/Reports"><md-icon>arrow_back</md-icon>Go Back</md-button>
+            </div>
+         </div>
+         
+         <div layout="row" layout-padding>
+             <md-input-container class="md-block" flex="19">
+                 <label>Sales Confirm Date</label>
+                 <md-datepicker ng-model="reportsCtrl.parameters.SalesConfirmStart" md-max-date="reportsCtrl.parameters.SalesConfirmEnd" md-placeholder="Start" ng-disabled="reportsCtrl.executing"></md-datepicker>
+             </md-input-container>
+             <md-input-container class="md-block" flex="19">
+                 <label>Sales Confirm Date</label>
+                 <md-datepicker ng-model="reportsCtrl.parameters.SalesConfirmEnd" md-min-date="reportsCtrl.parameters.SalesConfirmStart" md-placeholder="End" ng-disabled="reportsCtrl.executing"></md-datepicker>
+             </md-input-container>
+
+         </div>
+      
+         <div layout="row" layout-padding>
+            <div flex></div>
+            <md-button ng-click="reportsCtrl.ResetReportParameters();" class="md-raised" ng-cloak ng-hide="reportsCtrl.executing">Reset</md-button>
+            <md-button ng-click="reportsCtrl.ExecuteReportCustomerList()" class="md-raised md-primary" ng-cloak ng-hide="reportsCtrl.executing" >Submit</md-button>
+            <md-button ng-csv="reportsCtrl.results" filename="{{reportsCtrl.fileName}}" csv-header="reportsCtrl.GetCustomerListReportHeader()" class="md-raised md-primary" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">Download</md-button>
+         </div>
+         <div layout="row" layout-padding>
+            <div flex></div>
+            <div class="md-caption" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">The report was ran on <strong>{{reportsCtrl.executedOn | date: 'short' : '-05:00'}}</strong> and it took <strong>{{reportsCtrl.executionTime}}</strong> seconds.</div>
+         </div>
+         <div layout="row" ng-show="reportsCtrl.executing" ng-cloak>
+            <div flex></div>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <div flex></div>
+         </div>  
+         <div layout="row" layout-padding>
+            <div flex>
+               <br/>
+               <br/>
+            </div>            
+         </div>
+      </div>
+   </form>
+</div>

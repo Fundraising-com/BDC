@@ -1,0 +1,2 @@
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="EfunBottom.ascx.cs" Inherits="efundraising.RecaudarFondosWeb.Components.User.Partner.EfunBottom" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
+<a href="http://www.fundraising.com" class="FooterLink" runat="server" id="EfrLink" >English</a>

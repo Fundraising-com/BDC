@@ -1,0 +1,74 @@
+﻿@using System.Web.Script.Serialization
+@model GA.BDC.Web.MGP.Models.Views.Unsubscribe
+@{
+    ViewBag.Title = "Unsubscribe";
+    Layout = "~/Views/Shared/_public.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+}
+<div id="unsubscribe" ng-app="mgp" ng-controller="homeController" ng-init="view = @serializedModel">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Manage My Email Preferences</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            Below is a list of emails you are currently subscribed to. To unsubscribe, simply remove the check from the appropriate box:
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+    <div class="row" ng-show="!executingAction">
+        <div class="col-md-8">
+            <form name="unsubscribeForm" class="form-inline" ng-submit="unsubscribe()">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th class="text-center">Subscribed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>All email correspondance from the Online Fundraising Program</td>
+                            <td class="text-center"><input type="checkbox" ng-model="view.MemberSubscribed" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Emails about the following online fundraiser:</td>
+                        </tr>
+                        <tr ng-repeat="c in view.Campaigns">
+                            <td style="border-top-style:none">
+                                <span class="col-xs-offset-1">{{c.CampaignName}}</span>
+                            </td>
+                            <td class="text-center" style="border-top-style:none">
+                                <input type="checkbox" data-ev-id="{{c.EventId}}" data-mh-id="{{c.MemberHierarchyId}}" 
+                                                       ng-model="c.MemberHierarchySubscribed" ng-click="setCheckBoxDirty($event)"
+                                                       ng-disabled="!view.MemberSubscribed" />
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td colspan="2"><button type="submit" class="btn btn-info" ng-disabled="executingAction">Submit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="col-md-4">&nbsp;</div>
+    </div>
+    <div class="row" ng-show="executingAction">
+        <div class="col-md-12 text-center">
+            <img src="/Content/images/public/content/loading.gif" alt="Loading" />
+        </div>
+    </div>
+    <div class="row" ng-show="resultFailed">
+        <div class="col-md-12">
+            <span class="text-danger">{{responseText}}</span>
+        </div>
+    </div>
+    <div class="row" ng-show="!resultFailed">
+        <div class="col-md-12">
+            <span class="text-success">{{responseText}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+   <mvcSiteMapNode title="Home" key="Root" action="Index" controller="Home" protocol="https">
+      <mvcSiteMapNode title="Blog" url="/blog" key="Blog" protocol="https">
+         <mvcSiteMapNode title="" key="BlogPost" dynamicNodeProvider="GA.BDC.Web.Fundraising.MVC.Helpers.DynamicNodeProviders.BlogPostsDynamicNodeProvider, GA.BDC.Web.Fundraising.MVC"/>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Fundraising Products" url="/products" key="USAProducts" protocol="https">
+         <mvcSiteMapNode title="" key="USAProduct" dynamicNodeProvider="GA.BDC.Web.Fundraising.MVC.Helpers.DynamicNodeProviders.USAProductsDynamicNodeProvider, GA.BDC.Web.Fundraising.MVC"/>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Canadian Products" url="/canada" key="CanadaProducts" protocol="https">
+         <mvcSiteMapNode title="" key="CanadaProduct" dynamicNodeProvider="GA.BDC.Web.Fundraising.MVC.Helpers.DynamicNodeProviders.CanadaProductsDynamicNodeProvider, GA.BDC.Web.Fundraising.MVC"/>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Ideas" url="/ideas/fundraising-ideas" key="Ideas" protocol="https">
+         <!--<mvcSiteMapNode title="News" url="/ideas/newsletters" key="Newsletters" protocol="https">
+            <mvcSiteMapNode title="" key="Newsletter" dynamicNodeProvider="GA.BDC.Web.Fundraising.MVC.Helpers.DynamicNodeProviders.NewslettersDynamicNodeProvider, GA.BDC.Web.Fundraising.MVC"/>
+         </mvcSiteMapNode>-->
+      </mvcSiteMapNode>
+   </mvcSiteMapNode>
+</mvcSiteMap>

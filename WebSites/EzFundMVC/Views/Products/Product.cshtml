@@ -1,0 +1,165 @@
+@model GA.BDC.Shared.Entities.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.UseAngularJSMetaData = true;
+}
+<div ng-controller="ProductsController as productCtrl">
+    <div class="container-fluid">
+        <div class="row nav-section">
+            <div class="container">
+                <div class="row" >
+                    <ul class="breadcrumb">
+                        <li id="breadcrumb.root"><a ng-href="/">Home</a></li>
+                        <li id="breadcrumb.products"><a ng-href="/Products">All fundraisers</a></li>
+                        <li id="breadcrumb.category" ng-cloak><a ng-href="/products/{{productCtrl.product.Category.Parent.Url}}">{{productCtrl.product.Category.Parent.Name}}</a></li>
+                        @*<li id="breadcrumb.subCategory" ng-cloak><a ng-href="/products/{{productCtrl.product.Category.Parent.Url}}/{{productCtrl.product.Category.Url}}">{{productCtrl.product.Category.Name}}</a></li>*@
+                        <li id="breadcrumb.product" class="active" ng-cloak>{{productCtrl.product.Name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container product-description-container" ng-cloak>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <h3><span class="product-name-color">{{productCtrl.product.Name}}</span></h3>
+            </div>
+        </div>
+        <div class="row row-padding-lg" ng-show="productCtrl.product.BannerImage.Url" ng-cloak>
+            <div class="col-xs-12">
+                <img alt="{{productCtrl.product.Image.AlternativeText}}" ng-src="/Content/external/direct/images/{{productCtrl.product.BannerImage.Url}}" style="width:100%" ng-cloak />
+            </div>
+        </div>
+
+        <div class="row row-padding-sm">
+            <div class="col-xs-12 col-sm-6" ng-show="productCtrl.product.ExtraInformation">
+                <h4>
+                    <span class="product-description-color">PRODUCT DESCRIPTION</span>
+                </h4>
+                <div ng-bind-html="productCtrl.scope.$sce.trustAsHtml(productCtrl.product.Description)">
+                </div>
+
+                <div class="row row-padding-sm">
+                   
+                        <div class="col-md-6 col-sm-10 col-element-margin-sm visible-xs" ng-show="productCtrl.product.CanBePurchased" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+                            <form class="form-inline" ng-controller="ShoppingCartController as shoppingCartCtrl" ng-submit="googleAnalyticsCtrl.ProductAdded(productCtrl.product);shoppingCartCtrl.AddItem(productCtrl.product);" style="width: 100%;">
+                                <div class="well" ng-show="shoppingCartCtrl.AddingItemToCart"><span><strong>We're taking you to your Shopping Cart</strong></span></div>
+                                <div class="form-group" ng-hide="shoppingCartCtrl.AddingItemToCart" style="width: inherit;">
+                                    <button class="btn btn-warning btn-lg form-control" type="submit" color white;" style="width: inherit;" ng-disabled="productCtrl.DisableAddToCardButton"><span class="glyphicon glyphicon-shopping-cart"></span> ORDER NOW</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    <div class="col-md-6 col-sm-10 col-element-margin-sm">
+                        <a href="/request-a-kit" class="btn btn-primary btn-lg form-control">ORDER FREE GUIDE</a>
+                    </div>
+                    <div class="col-md-6 col-sm-10 col-element-margin-sm">
+                        <button type="button" class="btn btn-primary btn-lg form-control" ng-click="productCtrl.OpenModal()" ng-show="productCtrl.productLoaded && productCtrl.product.FeaturedInformation">VIEW FUN FACTS</button>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-6" ng-show="productCtrl.product.ExtraInformation">
+                <h4>
+                    <span class="product-order-info-color">ORDER INFORMATION</span>
+                </h4>
+                <div ng-show="productCtrl.product.SubProducts.length > 1 && !productCtrl.product.IsStackedProduct">
+                    <select class="form-control input-lg" ng-required="true" ng-model="productCtrl.productOptSelected" ng-options="opt.Name for opt in productCtrl.product.SubProducts" ng-change="productCtrl.UpdateItem();" ng-cloak></select>
+                </div>
+                <div class="row" ng-show="!productCtrl.product.IsStackedProduct && productCtrl.product.CanBePurchased">
+                    <div class="col-xs-6">
+                        <h4><span class="product-price-color">Quantity</span></h4>
+                    </div>
+                    <div class="col-xs-6">
+                        <select id="quantity" class="form-control" ng-model="productCtrl.productOptSelected.SelectedQuantity" ng-change="productCtrl.SetCalculatedPrice();" ng-options="o as o for o in [productCtrl.product.MinimumQuantity, 120] | makeRange"></select>    
+                    </div>
+                </div>
+                <h4 ng-show="productCtrl.product.CanBePurchased && !productCtrl.product.IsStackedProduct">
+                    <span class="product-price-color">{{productCtrl.productPriceTxt}}</span>
+                </h4>
+                <h4 ng-show="productCtrl.product.CanBePurchased && !productCtrl.product.IsStackedProduct">
+                    <span class="product-profit-color">Up To Profit: {{productCtrl.productProfitTxt}}</span>
+                </h4>
+                <div ng-bind-html="productCtrl.scope.$sce.trustAsHtml(productCtrl.product.ExtraInformation)">
+                </div>
+
+                <div class="row row-padding-sm hidden-xs" ng-show="productCtrl.product.CanBePurchased">
+                    <div class="col-md-6  col-element-margin-sm" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+                        <form class="form-inline" ng-controller="ShoppingCartController as shoppingCartCtrl" ng-submit="googleAnalyticsCtrl.ProductAdded(productCtrl.product);shoppingCartCtrl.AddItem(productCtrl.product);" style="width: 100%;">
+                            <div class="well" ng-show="shoppingCartCtrl.AddingItemToCart"><span><strong>We're taking you to your Shopping Cart</strong></span></div>
+                            <div class="form-group" ng-hide="shoppingCartCtrl.AddingItemToCart" style="width: inherit;">
+                                <button class="btn btn-warning btn-lg form-control" type="submit" color white;" style="width: inherit;" ng-disabled="productCtrl.DisableAddToCardButton"><span class="glyphicon glyphicon-shopping-cart"></span> ORDER NOW</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                
+            </div>
+            <div class="col-xs-12 row-padding-sm" ng-show="productCtrl.product.SubProducts.length > 1 && productCtrl.product.IsStackedProduct && productCtrl.DisableAddToCardButton">
+                Total amount of buckets/carriers ordered should be divisible by 10.
+            </div>
+                
+            <div class="col-xs-12" ng-show="productCtrl.product.SubProducts.length > 1 && productCtrl.product.IsStackedProduct">
+                <table class="table table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr style="text-transform: uppercase; font-weight: bold; color: #087a92">
+                            <td>Item Name</td>
+                            <td>Your Cost <span style="font-size:10px">per unit</span></td>
+                            <td>Profit</td>
+                            <td>Quantity</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in productCtrl.product.SubProducts track by $index">
+                            <td>{{::item.Name}}</td>
+                            <td>{{::item.Price | currency}}</td>
+                            <td>{{productCtrl.CalculateProfit(productCtrl.product.SubProducts[$index], productCtrl.product.SuggestedPrice)}}%</td>
+                            <td><input type="number" ng-model="item.SelectedQuantity" min="0" ng-change="productCtrl.UpdateItem();" class="form-control" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row row-padding-sm" ng-show="productCtrl.banners.length > 0 && !productCtrl.executing">
+                <div class="col-xs-12">
+                    <h5 class="middle-line-bg product-related-format"><span>YOU MAY ALSO LIKE</span></h5>
+                </div>
+            </div>
+            <!--related products banner rotator-->
+            <div class="row" ng-show="!productCtrl.executing">
+                <div class="col-xs-12 banner-rotator-container">
+                    <div id="related-products-rotator-slick" ng-cloak>
+                        <div class="text-center" ng-repeat="banner in productCtrl.banners | limitTo: 4">
+                            <div class="center banner-style banner-style-md">
+                                <a href="{{banner.Url}}">
+                                    <img ng-src="/Content/external{{banner.Image.Url}}" alt="{{banner.Image.AlternativeText}}">
+                                </a>
+                                <a ng-href="{{banner.Url}}">
+                                    <p>{{banner.Name}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*featured info modal*@
+            <div class="featured-info-modal" ng-show="productCtrl.productLoaded">
+                <script type="text/ng-template" id="FeaturedInfoModal.cshtml">
+                    <div class="modal-product">
+                        <div class="modal-header modal-product-header">
+                            <button type="button" class="close" ng-click="modalCtrl.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="modal-title">Fun Facts About {{modalCtrl.product.Name}}</h4>
+                        </div>
+                        <div class="modal-body" id="modal-body" ng-bind-html="modalCtrl.$sce.trustAsHtml(modalCtrl.product.FeaturedInformation)">
+                        </div>
+                        
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

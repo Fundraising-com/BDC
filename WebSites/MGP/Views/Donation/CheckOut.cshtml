@@ -1,0 +1,372 @@
+@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Models.Views
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_donation.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+}
+<div id="donation" ng-controller="donationController" ng-init="LoadYearChoices(); donationView = @serializedModel">
+    <div class="row"><div class="col-sm-12">&nbsp;</div></div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form ng-submit="donate()" name="donationForm">
+                <div class="panel panel-info">
+                    <div class="panel-heading form-header">
+                        <h3 class="panel-title">My Donation</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="donationAmount">Donation</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="number" name="donationAmount" class="form-control" required ng-model="donationView.DonationAmount" placeholder="i.e. 10$ USD" />
+                                </div>
+                            </div>
+                            <!-- RECURRING TYPE IS DISABLED: SEPTEMBER 2014 -->
+                            <div class="col-sm-7 hide">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label style="font-weight: normal">
+                                            <input type="radio" name="donationType" value="1" checked="checked" ng-model="donationView.RecurringType" />
+                                            One time
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group marginPullLeft30">
+                                        <label style="font-weight: normal">
+                                            <input type="radio" name="donationType" value="2" ng-model="donationView.RecurringType" />
+                                            Recurring
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group marginPullLeft50">
+                                        <select class="form-control" name="recurring" ng-model="donationView.RecurringState" ng-disabled="donationView.RecurringType == 1" >
+                                            <option value="2" selected>Monthly</option>
+                                            <option value="1">Quarterly</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END RECURRING TYPE -->
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="firstName" class="form-control" required ng-model="donationView.FirstName" placeholder="i.e. John" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="lastName" class="form-control" required ng-model="donationView.LastName" placeholder="i.e. Smith" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 marginPullLeft10">&nbsp;</div>
+                            <div class="col-sm-10">                                
+                                <div class="form-group">
+                                    <label style="font-weight: normal">
+                                        <input type="checkbox" name="hideName" ng-model="donationView.HideName" value="false" />
+                                        Hide my name from the fundraising page 
+                                    </label>
+                                    <span class="tip text-info" data-toggle="tooltip" data-placement="top" title="Choose this option if you have group members helping with the fundraiser. Each member can create their own fundraising profile linked to your group fundraising page, adding their own picture and message so family and friends will be more likely to buy.">
+                                        What’s this?
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="comment">My Comment</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="comment" class="form-control" ng-model="donationView.Comment" maxlength="55" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-right marginPullLeft10">
+                                Max 55 characters
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading form-header">
+                        <h3 class="panel-title">My Details</h3>
+                    </div>
+                    <div class="panel-body">                    
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control" required ng-model="donationView.Email" placeholder="i.e. my.mail@provider.com" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="address1">Address 1</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="address1" class="form-control" required ng-model="donationView.Address1" placeholder="i.e. 555 First Avenue" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="address2">Address 2</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="address2" class="form-control" ng-model="donationView.Address2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="city" class="form-control" required ng-model="donationView.City" placeholder="i.e. Nashville" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="zipCode">Zip</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 marginPullLeft40">
+                                <div class="form-group">
+                                    <input type="text" name="zipCode" class="form-control" required ng-model="donationView.ZipCode" placeholder="i.e. 90210" style="width:117px" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="state" ng-show="donationView.Country == 'US'" ng-hide="donationView.Country == 'CA'">State</label>
+                                    <label for="province" ng-show="donationView.Country == 'CA'" ng-hide="donationView.Country == 'US'">Province</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <select class="form-control" name="state" required style="width:450px"
+                                            ng-show="donationView.Country == 'US'" ng-hide="donationView.Country == 'CA'"
+                                            ng-model="donationView.State" ng-options="state.id as state.name for state in USASubdivisionCodes">
+                                    </select>
+                                    <select class="form-control" name="province" required style="width:450px"
+                                            ng-show="donationView.Country == 'CA'" ng-hide="donationView.Country == 'US'"
+                                            ng-model="donationView.State" ng-options="province.id as province.name for province in CanadaSubdivisionCodes">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <select class="form-control" name="country" style="width:185px" ng-model="donationView.Country" ng-change="stateSelectChange()">
+                                        <option value="CA">Canada</option>
+                                        <option value="US">United States</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading form-header">
+                        <h3 class="panel-title">My Payment Information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="cardType">Type of card</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <select class="form-control" required ng-model="donationView.CardType" name="cardType" style="width:185px">
+                                        <option value="5" selected>Mastercard</option>
+                                        <option value="6">VISA</option>
+                                        <option value="7">Discover</option>
+                                        <option value="8">American Express</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="cardName">Name of card</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="cardName" class="form-control" required ng-model="donationView.CardName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 marginPullLeft10">
+                                <div class="form-group">
+                                    <input type="text" name="cardNumber" class="form-control" required ng-model="donationView.CardNumber" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="cardExpMonth">Expiration date</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 marginPullLeft50">
+                                <div class="form-group">
+                                    <select class="form-control" required ng-model="donationView.CardExpiryMonth" name="cardExpMonth" style="width:65px;display:inline">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>&nbsp;
+                                    <select class="form-control" name="cardExpYear" required style="width:90px;display:inline"
+                                            ng-model="donationView.CardExpiryYear" ng-options="year for year in YearChoices">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                Need Help? Call customer service at: 1.800.561.8388
+                            </div>
+                            <div class="col-sm-5 text-right">
+                                <div class="row" ng-show="executingAction">
+                                    <div class="col-sm-12">
+                                        <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="resultFailed">
+                                    <div class="col-sm-12">
+                                        <span class="text-danger">{{responseText}}</span>
+                                    </div>
+                                </div>
+                                <div class="row" ng-hide="executingAction">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-info">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="panel panel-info">
+                        <div class="panel-heading form-header2">
+                            <h3 class="panel-title">Donation Details</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <small>Thank you for supporting <strong>@(Model.MemberNameToSupport)!</strong></small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <small>Your donation will benefit:</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12" style="padding-left:45px">
+                                    <small>@Model.Detail1</small><br /><small>@Model.Detail2</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <small>Did you want to make a donation to a specific participant or group?<br />@Html.ActionLink("Search for a participant or group page", "FindAGroup", "Home", new {}, null)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".tip").tooltip({});
+        });
+    </script>
+}

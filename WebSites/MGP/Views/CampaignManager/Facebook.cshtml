@@ -1,0 +1,90 @@
+﻿@model String
+@{
+    ViewBag.Title = "Facebook Post";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var eventBranding = ViewBag.Event as GA.BDC.Web.MGP.Models.Branding.Event;
+}
+<div id="information"  ng-controller="campaignManagerController" ng-init="facebookPost = '@ViewBag.Code'">
+    <div class="row" ng-init="participantId = @eventBranding.ParticipantId;">
+        <div class="col-sm-12">
+            <h1>Facebook Post</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <small>Add a Facebook post in your Page and tell them what are you doing! @@Call your friends!</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-body">                                        
+                    <form role="form" ng-submit="saveFacebookPost()" name="facebookForm" id="facebookForm">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="code">Code:</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <textarea name="code" class="form-control" required ng-model="facebookPost"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row" ng-show="executingAction">
+                            <div class="col-sm-12">
+                                <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="resultFailed">
+                            <div class="col-sm-12">
+                                <span class="text-danger">{{responseText}}</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="success">
+                            <div class="col-sm-12">
+                                <span class="text-success">{{responseText}}</span>
+                            </div>
+                        </div>
+                        <div class="row" ng-hide="executingAction">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info">Save changes</button>
+                                    <button type="button" class="btn btn-danger" ng-click="deleteFacebookPost()">Delete the Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <span class="description_title"><strong>Instructions</strong></span>
+            <br/>
+            <span class="description_text">
+                <ol>
+                    <li>Go to your <a href="https://www.facebook.com" target="_blank">Facebook</a> page.</li>
+                    <li>Click the <strong>right corner</strong> arrow above the Post you want to embed.</li>
+                    <li>Click the <strong>Embed Post</strong> link.</li>
+                    <li>Copy the code and paste it in the <strong>Code</strong> text area in your Campaign Manager page.</li>
+                    <li class="text-info">In order to Embed a Post, it should be <strong>Public</strong>.</li>
+                </ol>
+            </span>
+        </div>
+    </div>    
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

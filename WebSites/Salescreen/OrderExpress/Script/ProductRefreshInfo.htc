@@ -1,0 +1,44 @@
+<PUBLIC:COMPONENT tagName="ProductRefreshInfo">
+	<PUBLIC:ATTACH EVENT="onchange" FOR="element" ONEVENT="RefreshInfo()" />		
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	function RefreshInfo()
+	{		
+		var oSource = window.event.srcElement;			
+		if(oSource.selectedIndex  > 0) {
+		
+			//find prefix for the current grid lines					
+			var linePrefix = '';
+			var sCodeID = '';
+			var sNbUnitID = '';
+			var sPriceID = '';			
+			var iIndex = -1;
+			
+			iIndex = oSource.id.indexOf('ddl');
+			if (iIndex != -1) {
+				linePrefix = oSource.id.slice(0,iIndex)
+				//alert(linePremiumPrefix);
+				sCodeID = linePrefix + 'lblCatalogItemCode';
+				sNbUnitID = linePrefix + 'lblUnit';
+				sPriceID = linePrefix + 'txtPrice';
+				
+				//now we have All the ID to get all the element needed
+				
+				var oCode = window.document.getElementById(sCodeID);
+				var oNbUnit = window.document.getElementById(sNbUnitID);
+				var oPrice = window.document.getElementById(sPriceID);
+				
+				oCode.innerHTML = arrProductCode[oSource.selectedIndex];
+				oNbUnit.innerHTML = arrProductNbUnit[oSource.selectedIndex];
+				oPrice.value = arrProductPrice[oSource.selectedIndex];
+				//Fire the evnt for reclaculation				
+				
+			}
+		}
+		
+	}
+
+
+</SCRIPT>

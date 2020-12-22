@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s1="http://order.commerce.readersdigest.com" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="OrderGateway" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="OrderGateway" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="OrderGateway">
+      <s:import namespace="http://order.commerce.readersdigest.com" />
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="ArrayOf_xsd_anyType">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute wsdl:arrayType="s:anyType[]" ref="soapenc:arrayType" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOf_tns2_OrderItem">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute wsdl:arrayType="s1:OrderItem[]" ref="soapenc:arrayType" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOf_tns2_OrderItemGroup">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute wsdl:arrayType="s1:OrderItemGroup[]" ref="soapenc:arrayType" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SimpleOrder">
+        <s:sequence>
+          <s:element name="DPSProfileId" type="s:string" />
+          <s:element name="accountNumber" type="s:string" />
+          <s:element name="address1" type="s:string" />
+          <s:element name="address2" type="s:string" />
+          <s:element name="address3" type="s:string" />
+          <s:element name="address4" type="s:string" />
+          <s:element name="amount" type="s:double" />
+          <s:element name="authorizingAgentId" type="s:int" />
+          <s:element name="billingIsShipping" type="s:boolean" />
+          <s:element name="cardMask" type="s:string" />
+          <s:element name="cardNumber" type="s:string" />
+          <s:element name="city" type="s:string" />
+          <s:element name="clientIPAddress" type="s:string" />
+          <s:element name="comments" type="s:string" />
+          <s:element name="country" type="s:string" />
+          <s:element name="countryId" type="soapenc:int" />
+          <s:element name="creditCardId" type="soapenc:int" />
+          <s:element name="creditCardTypeId" type="s:int" />
+          <s:element name="divisionId" type="soapenc:int" />
+          <s:element name="email" type="s:string" />
+          <s:element name="emailOptOut" type="s:string" />
+          <s:element name="expMonth" type="s:int" />
+          <s:element name="expYear" type="s:int" />
+          <s:element name="faxNumber" type="s:string" />
+          <s:element name="firstName" type="s:string" />
+          <s:element name="fulfillmentChannelId" type="s:int" />
+          <s:element name="gender" type="s:string" />
+          <s:element name="isRenewal" type="soapenc:boolean" />
+          <s:element name="lastErrorCode" type="s:string" />
+          <s:element name="lastName" type="s:string" />
+          <s:element name="merchantMessage" type="s:string" />
+          <s:element name="middleName" type="s:string" />
+          <s:element name="nameOnCard" type="s:string" />
+          <s:element name="offerPackageId" type="soapenc:int" />
+          <s:element name="optStatusTransactionId" type="soapenc:int" />
+          <s:element name="oracleId" type="s:string" />
+          <s:element name="orderAmount" type="s:double" />
+          <s:element name="orderCalculationMethodId" type="soapenc:int" />
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="orderStatus" type="soapenc:int" />
+          <s:element name="orderType" type="s:int" />
+          <s:element name="payStatusId" type="s:int" />
+          <s:element name="paymentId" type="soapenc:int" />
+          <s:element name="paymentTypeId" type="s:int" />
+          <s:element name="phone" type="s:string" />
+          <s:element name="phoneExt" type="s:string" />
+          <s:element name="pipelineStepId" type="soapenc:int" />
+          <s:element name="postalCode" type="s:string" />
+          <s:element name="prefix" type="s:string" />
+          <s:element name="productId" type="s:string" />
+          <s:element name="promoKey" type="s:string" />
+          <s:element name="province" type="s:string" />
+          <s:element name="quantity" type="soapenc:int" />
+          <s:element name="securityCode" type="s:string" />
+          <s:element name="isSecurityCheck" type="soapenc:boolean" />
+          <s:element name="sourceOrderId" type="s:string" />
+          <s:element name="specialInstructionCode" type="s:string" />
+          <s:element name="state" type="s:string" />
+          <s:element name="statusId" type="soapenc:int" />
+          <s:element name="submittedInstallmentPlanId" type="soapenc:int" />
+          <s:element name="submittedPrice" type="soapenc:double" />
+          <s:element name="submittedProductTypeId" type="soapenc:int" />
+          <s:element name="submittedShippingPrice" type="soapenc:double" />
+          <s:element name="submittedTerm" type="soapenc:int" />
+          <s:element name="suffix" type="s:string" />
+          <s:element name="trackingId" type="s:string" />
+          <s:element name="fax" type="s:string" />
+          <s:element name="isBillProfile" type="soapenc:boolean" />
+          <s:element name="isShipProfile" type="soapenc:boolean" />
+          <s:element name="authorizationCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderServiceRequest">
+        <s:sequence>
+          <s:element name="DPSProfileId" type="s:string" />
+          <s:element name="accountNumber" type="s:string" />
+          <s:element name="action" type="s:string" />
+          <s:element name="address1" type="s:string" />
+          <s:element name="address2" type="s:string" />
+          <s:element name="address3" type="s:string" />
+          <s:element name="address4" type="s:string" />
+          <s:element name="amount" type="s:double" />
+          <s:element name="authorizingAgentId" type="s:int" />
+          <s:element name="billingIsShipping" type="s:boolean" />
+          <s:element name="cardMask" type="s:string" />
+          <s:element name="cardNumber" type="s:string" />
+          <s:element name="city" type="s:string" />
+          <s:element name="clientIPAddress" type="s:string" />
+          <s:element name="comments" type="s:string" />
+          <s:element name="country" type="s:string" />
+          <s:element name="countryId" type="soapenc:int" />
+          <s:element name="creditCardId" type="soapenc:int" />
+          <s:element name="creditCardTypeId" type="s:int" />
+          <s:element name="divisionId" type="soapenc:int" />
+          <s:element name="email" type="s:string" />
+          <s:element name="emailOptOut" type="s:string" />
+          <s:element name="expMonth" type="s:int" />
+          <s:element name="expYear" type="s:int" />
+          <s:element name="faxNumber" type="s:string" />
+          <s:element name="firstName" type="s:string" />
+          <s:element name="fulfillmentChannelId" type="s:int" />
+          <s:element name="gender" type="s:string" />
+          <s:element name="isRenewal" type="soapenc:boolean" />
+          <s:element name="lastErrorCode" type="s:string" />
+          <s:element name="lastName" type="s:string" />
+          <s:element name="merchantMessage" type="s:string" />
+          <s:element name="middleName" type="s:string" />
+          <s:element name="nameOnCard" type="s:string" />
+          <s:element name="offerPackageId" type="soapenc:int" />
+          <s:element name="optStatusTransactionId" type="soapenc:int" />
+          <s:element name="oracleId" type="s:string" />
+          <s:element name="order" type="s1:Order" />
+          <s:element name="orderAmount" type="s:double" />
+          <s:element name="orderCalculationMethodId" type="soapenc:int" />
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="orderStatus" type="soapenc:int" />
+          <s:element name="orderType" type="s:int" />
+          <s:element name="password" type="s:string" />
+          <s:element name="payStatusId" type="s:int" />
+          <s:element name="paymentId" type="soapenc:int" />
+          <s:element name="paymentTypeId" type="s:int" />
+          <s:element name="phone" type="s:string" />
+          <s:element name="phoneExt" type="s:string" />
+          <s:element name="pipelineStepId" type="soapenc:int" />
+          <s:element name="postalCode" type="s:string" />
+          <s:element name="prefix" type="s:string" />
+          <s:element name="productId" type="s:string" />
+          <s:element name="promoKey" type="s:string" />
+          <s:element name="province" type="s:string" />
+          <s:element name="quantity" type="soapenc:int" />
+          <s:element name="securityCode" type="s:string" />
+          <s:element name="isSecurityCheck" type="soapenc:boolean" />
+          <s:element name="simpleOrder" type="tns:SimpleOrder" />
+          <s:element name="sourceOrderId" type="s:string" />
+          <s:element name="specialInstructionCode" type="s:string" />
+          <s:element name="state" type="s:string" />
+          <s:element name="statusId" type="soapenc:int" />
+          <s:element name="submittedInstallmentPlanId" type="soapenc:int" />
+          <s:element name="submittedPrice" type="soapenc:double" />
+          <s:element name="submittedProductTypeId" type="soapenc:int" />
+          <s:element name="submittedShippingPrice" type="soapenc:double" />
+          <s:element name="submittedTerm" type="soapenc:int" />
+          <s:element name="suffix" type="s:string" />
+          <s:element name="trackingId" type="s:string" />
+          <s:element name="userId" type="s:string" />
+          <s:element name="fax" type="s:string" />
+          <s:element name="isBillProfile" type="soapenc:boolean" />
+          <s:element name="isShipProfile" type="soapenc:boolean" />
+          <s:element name="authorizationCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderServiceResponse">
+        <s:sequence>
+          <s:element name="authCode" type="s:string" />
+          <s:element name="message" type="s:string" />
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="paymentId" type="soapenc:int" />
+          <s:element name="resultCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://order.commerce.readersdigest.com">
+      <s:import namespace="OrderGateway" />
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="OrderItem">
+        <s:sequence>
+          <s:element name="groupId" type="soapenc:int" />
+          <s:element name="isRenewal" type="soapenc:boolean" />
+          <s:element name="itemListNumber" type="soapenc:int" />
+          <s:element name="oracleId" type="s:string" />
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="productId" type="s:string" />
+          <s:element name="promoKey" type="s:string" />
+          <s:element name="quantity" type="soapenc:int" />
+          <s:element name="specialInstructionCode" type="s:string" />
+          <s:element name="statusId" type="soapenc:int" />
+          <s:element name="submittedInstallmentPlanId" type="soapenc:int" />
+          <s:element name="submittedPrice" type="soapenc:double" />
+          <s:element name="submittedProductTypeId" type="soapenc:int" />
+          <s:element name="submittedShippingPrice" type="soapenc:double" />
+          <s:element name="submittedTerm" type="soapenc:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Profile">
+        <s:sequence>
+          <s:element name="DPSProfileId" type="s:string" />
+          <s:element name="accountNumber" type="s:string" />
+          <s:element name="address1" type="s:string" />
+          <s:element name="address2" type="s:string" />
+          <s:element name="address3" type="s:string" />
+          <s:element name="address4" type="s:string" />
+          <s:element name="birthDay" type="s:dateTime" />
+          <s:element name="city" type="s:string" />
+          <s:element name="country" type="s:string" />
+          <s:element name="countryId" type="soapenc:int" />
+          <s:element name="createDate" type="s:dateTime" />
+          <s:element name="email" type="s:string" />
+          <s:element name="emailOptOut" type="s:string" />
+          <s:element name="faxNumber" type="s:string" />
+          <s:element name="firstName" type="s:string" />
+          <s:element name="gender" type="s:string" />
+          <s:element name="isBillProfile" type="soapenc:boolean" />
+          <s:element name="isShipProfile" type="soapenc:boolean" />
+          <s:element name="lastName" type="s:string" />
+          <s:element name="middleName" type="s:string" />
+          <s:element name="phone" type="s:string" />
+          <s:element name="phoneExt" type="s:string" />
+          <s:element name="phoneWithExt" type="s:string" />
+          <s:element name="postalCode" type="s:string" />
+          <s:element name="prefix" type="s:string" />
+          <s:element name="profileId" type="soapenc:int" />
+          <s:element name="province" type="s:string" />
+          <s:element name="state" type="s:string" />
+          <s:element name="suffix" type="s:string" />
+          <s:element name="fax" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderItemGroup">
+        <s:sequence>
+          <s:element name="groupId" type="soapenc:int" />
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="orderItemArrayList" type="tns:ArrayOf_xsd_anyType" />
+          <s:element name="orderItems" type="tns:ArrayOf_tns2_OrderItem" />
+          <s:element name="shipStatus" type="s:int" />
+          <s:element name="shippingMethodId" type="s:int" />
+          <s:element name="shippingProfile" type="s1:Profile" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EBTInfo">
+        <s:sequence>
+          <s:element name="EBTInfoId" type="soapenc:int" />
+          <s:element name="bankAccountName" type="s:string" />
+          <s:element name="bankAccountNumber" type="s:string" />
+          <s:element name="bankCode" type="s:string" />
+          <s:element name="bankLocation" type="s:string" />
+          <s:element name="bankName" type="s:string" />
+          <s:element name="countryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CreditCard">
+        <s:sequence>
+          <s:element name="cardMask" type="s:string" />
+          <s:element name="cardNumber" type="s:string" />
+          <s:element name="creditCardId" type="soapenc:int" />
+          <s:element name="creditCardTypeId" type="s:int" />
+          <s:element name="expMonth" type="s:int" />
+          <s:element name="expYear" type="s:int" />
+          <s:element name="nameOnCard" type="s:string" />
+          <s:element name="securityCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PaymentInfo">
+        <s:sequence>
+          <s:element name="EBTInfo" type="s1:EBTInfo" />
+          <s:element name="amount" type="s:double" />
+          <s:element name="authorizationCode" type="s:string" />
+          <s:element name="authorizationDate" type="s:dateTime" />
+          <s:element name="authorizingAgentId" type="s:int" />
+          <s:element name="billingProfile" type="s1:Profile" />
+          <s:element name="creditCard" type="s1:CreditCard" />
+          <s:element name="payStatusId" type="s:int" />
+          <s:element name="paymentId" type="soapenc:int" />
+          <s:element name="paymentTypeId" type="s:int" />
+          <s:element name="ebtInfo" type="s1:EBTInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReturnInfo">
+        <s:sequence>
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="reasonCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Order">
+        <s:sequence>
+          <s:element name="billingIsShipping" type="s:boolean" />
+          <s:element name="clientIPAddress" type="s:string" />
+          <s:element name="comments" type="s:string" />
+          <s:element name="createDate" type="s:dateTime" />
+          <s:element name="divisionId" type="soapenc:int" />
+          <s:element name="fulfillmentChannelId" type="s:int" />
+          <s:element name="lastErrorCode" type="s:string" />
+          <s:element name="merchantMessage" type="s:string" />
+          <s:element name="modifyDate" type="s:dateTime" />
+          <s:element name="offerPackageId" type="soapenc:int" />
+          <s:element name="optStatusTransactionId" type="soapenc:int" />
+          <s:element name="orderAmount" type="s:double" />
+          <s:element name="orderCalculationMethodId" type="soapenc:int" />
+          <s:element name="orderId" type="soapenc:int" />
+          <s:element name="orderItemGroupArrayList" type="tns:ArrayOf_xsd_anyType" />
+          <s:element name="orderItemGroups" type="tns:ArrayOf_tns2_OrderItemGroup" />
+          <s:element name="orderStatus" type="soapenc:int" />
+          <s:element name="orderType" type="s:int" />
+          <s:element name="paymentInfo" type="s1:PaymentInfo" />
+          <s:element name="pipelineStepId" type="soapenc:int" />
+          <s:element name="returnInfo" type="s1:ReturnInfo" />
+          <s:element name="shippingProfileId" type="soapenc:int" />
+          <s:element name="sourceOrderId" type="s:string" />
+          <s:element name="trackingId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="processOrderRequest">
+    <wsdl:part name="in0" type="tns:OrderServiceRequest" />
+  </wsdl:message>
+  <wsdl:message name="processOrderResponse">
+    <wsdl:part name="processOrderReturn" type="tns:OrderServiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OrderService">
+    <wsdl:operation name="processOrder" parameterOrder="in0">
+      <wsdl:input name="processOrderRequest" message="tns:processOrderRequest" />
+      <wsdl:output name="processOrderResponse" message="tns:processOrderResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderGatewaySoapBinding" type="tns:OrderService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="processOrder">
+      <soap:operation soapAction="" />
+      <wsdl:input name="processOrderRequest">
+        <soap:body use="encoded" namespace="OrderGateway" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="processOrderResponse">
+        <soap:body use="encoded" namespace="OrderGateway" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderServiceService">
+    <wsdl:port name="OrderGateway" binding="tns:OrderGatewaySoapBinding">
+      <soap:address location="https://epipe.rd.com/axis/services/OrderGateway" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

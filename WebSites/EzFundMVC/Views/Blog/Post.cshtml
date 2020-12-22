@@ -1,0 +1,62 @@
+﻿@using GA.BDC.Shared.Entities
+@{
+    ViewBag.HideBaseOGTag = true;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.UseAngularJSMetaData = true;
+}
+<div ng-controller="BlogPostController as blogPostCtrl">
+    <meta property="og:url" content="https://www.fundraising.com/blog/post/{{::blogPostCtrl.post.Url}}" />
+    <meta property="og:title" content="{{::blogPostCtrl.post.Title}}" />
+    <meta property="og:description" content="{{::blogPostCtrl.post.Text | limitTo:80}}" />
+    <meta property="og:image" content="https://www.fundraising.com/Content/external/blog/{{::blogPostCtrl.post.ImageUrl}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale " content="en_US" />
+    <meta property="og:site_name " content="EzFund.com" />
+
+    <div class="row" >
+        <div class="col-sm-12" itemscope itemtype="http://schema.org/NewsArticle" ng-cloak>
+            <h1 itemprop="headline" ng-cloak>{{::blogPostCtrl.post.Title}}</h1>
+            <span>
+                Published: <span itemprop="datePublished" ng-cloak>{{::blogPostCtrl.post.Published | date:'MM/dd/yyyy'}}</span>
+            </span>
+            <div class="col-lg-12">
+                <img ng-src="/Content/external/blog/{{::blogPostCtrl.post.ImageUrl}}" alt="{{::blogPostCtrl.post.Title}}" class="img-responsive" itemprop="image" />
+                <br />
+            </div>
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-9">
+            <div ng-bind-html="blogPostCtrl.scope.$sce.trustAsHtml(blogPostCtrl.post.Text)"></div>
+                <div ng-repeat="tag in blogPostCtrl.post.Tags" ng-cloak>
+                    <span class="label label-info"><a ng-href="/blog/tag/{{::tag.Url}}" title="{{::tag.Name}}" style="color:white">{{::tag.Name}}</a></span>
+                </div>
+                <br /><br />
+                <span><strong>SHARE</strong></span>
+                <br />
+                <span>
+                    <a ng-target="_blank" ng-href="mailto:?subject={{::blogPostCtrl.shareUrl}}"><img src="/Content/images/public/blogShareEmail.png" style="width: 45px; height: 45px;" alt="Share it on your Email" /></a>
+                    <a ng-target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{::blogPostCtrl.shareUrl}}"><img src="/Content/images/public/blogShareFacebook.png" style="width: 45px; height: 45px;" alt="Share it on Facebook" /></a>
+                    <a ng-target="_blank" ng-href="http://pinterest.com/pin/create/button/?url={{::blogPostCtrl.shareUrl}}&media=https://www.fundraising.com/Content/external/blog/{{::blogPostCtrl.post.ImageUrl}}&description={{::blogPostCtrl.shareUrl}}"><img src="/Content/images/public/blogSharePinterest.png" style="width: 45px; height: 45px;" alt="Share it on Pinterest" /></a>
+                    <a ng-target="_blank" ng-href="https://twitter.com/intent/tweet?text={{::blogPostCtrl.shareUrl}}"><img src="/Content/images/public/blogShareTwitter.png" style="width: 45px; height: 45px;" alt="Share it on Twitter" /></a>
+                </span>
+                <br /><br />
+                <strong class="hidden-xs hidden-sm" ng-show="blogPostCtrl.randomPosts" ng-cloak>You may also like:</strong>
+                <div class="row hidden-xs hidden-sm">
+                    <div class="col-md-3 text-center" ng-repeat="randomPost in blogPostCtrl.randomPosts" ng-cloak>
+                        <a ng-href="/blog/post/{{::randomPost.Url}}" class="thumbnail">
+                            <img src="/Content/external/blog/{{::randomPost.ThumbnailUrl}}" alt="{{::randomPost.Title}}" class="img-responsive" />
+                            <span>{{::randomPost.Title}}</span>
+                            <br />
+                            <span style="text-decoration: none; color: black">{{::randomPost.Summary}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <div class="hidden-xs col-sm-12 col-md-3">
+            @Html.Partial("Blog/_lastPosts")
+            @Html.Partial("Blog/_categories")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<!------------------------------------------------------------------------
+//
+//  File:         calendar.htm
+//
+//  Description:  The calendar behavior provides an easy, declarative way
+//                to add a standard calendar control to web pages and html
+//                based applications.  It provides a variety of properties
+//                to customize the look and feel along with a strong set 
+//                events and functionality.
+//
+//	Author:		  Venkata Karthikeyan - GE Power Systems, Bently Nevada
+//
+//----------------------------------------------------------------------->
+
+<HTML XMLNS:VenkataKarthikeyan_Calendar>
+	<HEAD>
+		<title>Select Date</title>
+		<STYLE> VenkataKarthikeyan_Calendar\:Calendar {behavior: url(calendar.htc)} </STYLE>
+	</HEAD>
+	<BODY bgcolor="orange">
+		<VenkataKarthikeyan_Calendar:CALENDAR id="cal" style="cal--dayTitle-background-color:white; cal--dayTitle-color:black; cal--dayTitle-font-family:verdana; cal--dayTitle-font-size:7pt; cal--dayTitle-font-weight:normal; cal--offMonth-background-color:white; cal--offMonth-color:LightGrey; cal--offMonth-font-family:verdana; cal--offMonth-font-size:7pt; cal--offMonth-font-weight:normal; cal--offMonth-text-align:center; cal--currentMonth-background-color:white; cal--currentMonth-color:black; cal--currentMonth-font-family:verdana; cal--currentMonth-font-size:7pt; cal--currentMonth-font-weight:normal; cal--currentMonth-text-align:center; cal--selectedDay-background-color:orange; cal--selectedDay-color:white; cal--selectedDay-font-family:verdana; cal--selectedDay-font-size:7pt; cal--selectedDay-font-weight:normal; cal--selectedDay-text-align:center; cal--title-background-color:orange; cal--title-color:white; cal--title-font-family:verdana; cal--title-font-size:10px; cal--title-font-weight:normal"></VenkataKarthikeyan_Calendar:CALENDAR>
+		<SCRIPT event="onload" for="window">
+			
+			//Convert date string to DD/MM/YYYY format. Because our htc component interprets in this format only
+			if (self.dialogArguments.length > 0)
+			{
+				var oDate = new Date(self.dialogArguments)				
+				cal.value = oDate.getDate() + '/' + (oDate.getMonth()+1) + '/' + oDate.getFullYear()
+				if (cal.value != 'undefined') {
+					//set return value. In case, if user clicks cancel, he will get this.
+					self.returnValue = self.dialogArguments
+				}
+				self.focus();
+			}
+		
+		</SCRIPT>
+	</BODY>
+</HTML>

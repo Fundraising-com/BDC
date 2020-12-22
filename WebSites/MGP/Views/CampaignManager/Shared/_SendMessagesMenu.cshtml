@@ -1,0 +1,13 @@
+@using GA.BDC.Web.MGP.Models.Branding
+@model Int32
+@{
+    var userBranding = ViewBag.User as User;
+    var eventBranding = ViewBag.Event as Event;
+}
+<ul class="nav nav-pills nav-stacked">
+    <li class="@(Model == 1 ? "active" : "")"><a href="@Url.Action("SendMessages", new { eventId = eventBranding.Id, participantId = userBranding.EventParticipationId })"><span class="glyphicon glyphicon-chevron-right"></span> Create New Email</a></li>
+    <li class="@(Model == 2 ? "active" : "")"><a href="@Url.Action("SentEmails", new { eventId = eventBranding.Id, participantId = userBranding.EventParticipationId })"><span class="glyphicon glyphicon-chevron-right"></span> Emails Sent<span class="badge pull-right @((int)ViewBag.NumberOfProcessedEmails == 0 ? "invisible" : "")">@ViewBag.NumberOfProcessedEmails</span></a></li>
+    <li class="@(Model == 3 ? "active" : "")"><a href="@Url.Action("PendingEmails", new { eventId = eventBranding.Id, participantId = userBranding.EventParticipationId })"><span class="glyphicon glyphicon-chevron-right"></span> Pending Emails<span class="badge pull-right @((int)ViewBag.NumberOfPendingEmails == 0 ? "invisible" : "")">@ViewBag.NumberOfPendingEmails</span></a></li>
+    <li class="@(Model == 4 ? "active" : "")"><a href="@Url.Action("Contacts", new { eventId = eventBranding.Id, participantId = userBranding.EventParticipationId })"><span class="glyphicon glyphicon-chevron-right"></span> Contacts<span class="badge pull-right @((int)ViewBag.NumberOfValidContacts == 0 ? "invisible" : "")">@ViewBag.NumberOfValidContacts</span></a></li>
+    <li class="@(Model == 5 ? "active" : "")"><a href="@Url.Action("InvalidContacts", new { eventId = eventBranding.Id, participantId = userBranding.EventParticipationId })"><span class="glyphicon glyphicon-chevron-right"></span> Invalid Contacts<span class="badge pull-right @((int)ViewBag.NumberOfInvalidContacts == 0 ? "invisible" : "")">@ViewBag.NumberOfInvalidContacts</span></a></li>
+</ul>

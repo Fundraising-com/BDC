@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ProductItem" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Description" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="ItemCode" type="xs:string" maxOccurs="1" minOccurs="1" />
+							<xs:element name="Category" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="SubCategory1" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="SubCategory2" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="SubCategory3" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Price" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Cost" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Quantity" type="xs:integer" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Weight" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+							<xs:element name="SalePrice" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+							<xs:element name="OnSale" type="xs:boolean" maxOccurs="1" minOccurs="0" />
+							<xs:element name="TaxType" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="SmallImage" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="LargeImage" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="LongDescription" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Manufacturer" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Vendor" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="ProductName" type="xs:string" maxOccurs="1" minOccurs="0" />
+							<xs:element name="ShipProduct" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+							<xs:element name="ShipFromVendor" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+							<xs:element name="TrackInventory" type="xs:boolean" maxOccurs="1" minOccurs="0" />
+							<xs:element name="AllowBackOrder" type="xs:boolean" maxOccurs="1" minOccurs="0" />
+							<xs:element name="SendLowStockNotice" type="xs:boolean" maxOccurs="1" minOccurs="0" />
+							<xs:element name="ShowBackOrderStatus" type="xs:boolean" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Height" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+							<xs:element name="Width" type="xs:decimal" maxOccurs="1" minOccurs="0" />
+						</xs:sequence>
+						<xs:attribute name="SequenceNumber" type="xs:positiveInteger" />
+						<xs:attribute name="Operation" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="Add" />
+									<xs:enumeration value="Update" />
+									<xs:enumeration value="Remove" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="NumberOfProducts" type="xs:positiveInteger" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

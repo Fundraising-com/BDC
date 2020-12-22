@@ -1,0 +1,226 @@
+
+@{
+    ViewBag.Title = "Request a Free Kit - EzFund.com";
+    ViewBag.Description = "Your good cause deserves a great fundraiser! Traditional and online fundraising ideas for schools, sports teams, churches and non-profits. Get our free kit now! ";
+    ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row nav-section">
+    <input type="hidden" id="kit.ReferralUrl">
+
+    <div class="container">
+        <div class="row">
+            <ul class="breadcrumb">
+                <li><a ng-href="/">Home</a></li>
+                <li class="active">Request a Free Fundraising Guide</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container request-form" ng-controller="KitRequestFormController as kitRequestCtrl">
+    <form name="kitRequestForm" id="kitRequestForm" role="form" ng-submit="kitRequestForm.$submitted && kitRequestForm.$valid && kitRequestCtrl.Send();">
+        <div class="row row-padding-lg">
+            <div class="col-xs-12">
+                <h3>Request Your FREE Fundraising Guide</h3>
+            </div>
+        </div>
+        <div class="row row-padding-lg">
+           <div class="col-xs-12">
+              <h4>Ready to start a fundraiser TODAY? Click <a href="/request-selling-kit" title="selling kit">HERE</a> for a Free Selling Kit!</h4>
+                </div>
+        </div>
+
+        <div class="row row-padding-lg visible-xs">
+            <div class="col-xs-12">
+                <label for="kit.RequestTypeSelect" class="control-label">How do you want your guide?</label>
+                <select ng-model="kitRequestCtrl.kit.RequestType" id="kit.RequestTypeSelect" class="form-control">
+                    <option value="2">Hardcopy + Digital</option>
+                    <option value="1">Digital Only</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row row-padding-lg visible-sm visible-md visible-lg">
+        <div class="col-xs-4">
+            <label for="kit.RequestTypeSelect" class="control-label">How do you want your guide?</label>
+            <select ng-model="kitRequestCtrl.kit.RequestType" id="kit.RequestTypeSelect" class="form-control">
+                <option value="2">Hardcopy + Digital</option>
+                <option value="1">Digital Only</option>
+            </select>
+        </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h4>ABOUT YOUR FUNDRAISER</h4>
+        <hr />
+    </div>
+</div>
+<div class="row row-padding-sm">
+    <div class="col-xs-12">
+        <label>Products you are interested in selling</label>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-4 col-element-margin-sm">
+            <select class="form-control input-lg" ng-required="true" ng-model="kitRequestCtrl.productOptOneSelected" ng-options="opt.Name for opt in kitRequestCtrl.productOptions" ng-cloak>
+                <option value="">Option 1*</option>
+            </select>
+        </div>
+        <div class="col-sm-4 col-element-margin-sm">
+            <select class="form-control input-lg" ng-model="kitRequestCtrl.productOptTwoSelected" ng-options="opt.Name for opt in kitRequestCtrl.productOptions" ng-cloak>
+                <option value="">Option 2</option>
+            </select>
+
+        </div>
+        <div class="col-sm-4 col-element-margin-sm">
+            <select class="form-control input-lg" ng-model="kitRequestCtrl.productOptThreeSelected" ng-options="opt.Name for opt in kitRequestCtrl.productOptions" ng-cloak>
+                <option value="">Option 3</option>
+            </select>
+        </div>
+    </div>
+</div>
+<hr class="bold-line" />
+<div class="row">
+    <div class="col-sm-12 col-element-margin-sm">
+        <input type="text" class="form-control input-lg" placeholder="Name*" id="kit.FirstName" ng-required="true" ng-model="kitRequestCtrl.kit.FirstName" maxlength="40">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-element-margin-sm" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+        <input type="text" class="form-control input-lg" placeholder="Street Address*" id="kit.Address" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.Address1" maxlength="40">
+    </div>
+
+
+    <div class="col-sm-6 col-element-margin-sm" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+        <input type="text" class="form-control input-lg" placeholder="City*" id="kit.City" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.City" maxlength="30">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-element-margin-sm" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+        <input type="text" class="form-control input-lg" placeholder="Apt. or Suite" id="kit.AptSuite" ng-model="kitRequestCtrl.kit.Address.Address2" maxlength="40">
+    </div>
+    <div class="col-sm-6 col-element-margin-sm" ng-hide="kitRequestCtrl.kit.RequestType == 1">
+        <input type="text" ui-mask="99999" class="form-control input-lg" ui-mask-placeholder placeholder="Zip Code*" id="kit.PostCode" ng-required="kitRequestCtrl.kit.RequestType != 1" ng-model="kitRequestCtrl.kit.Address.PostCode" maxlength="10">
+    </div>
+
+
+</div>
+
+
+
+<div class="row">
+    <div class="col-sm-6 col-element-margin-sm">
+        <select class="form-control input-lg" id="kit.Address.Region" ng-model="kitRequestCtrl.kit.Address.Region" ng-required="true" ng-options="state as state.Name for state in kitRequestCtrl.states track by state.Code">
+            <option value="">Select State*</option>
+        </select>
+    </div>
+    <div class="col-sm-6 col-element-margin-sm">
+        <input type="text" class="form-control input-lg" placeholder="Organization Name" id="kit.Group" ng-model="kitRequestCtrl.kit.Group" maxlength="40">
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6 col-element-margin-sm">
+        <input type="email" class="form-control input-lg" placeholder="Email*" id="kit.Email" ng-required="true" ng-model="kitRequestCtrl.kit.Email" maxlength="60">
+    </div>
+    <div class="col-sm-6 col-element-margin-sm">
+        <input type="text" ui-mask="(999) 999-9999" class="form-control input-lg" placeholder="Phone (Optional)" ui-mask-placeholder id="kit.Phone" ng-model="kitRequestCtrl.kit.Phone" maxlength="25">
+    </div>
+</div>
+
+<div class="row row-padding-sm">
+    <div class="col-xs-12">
+        <h4>Care to Tell us More?</h4>
+    </div>
+</div>
+<div class="row row-padding-sm">
+    <div class="col-xs-4">
+        <select ng-model="kitRequestCtrl.kit.TellMore" id="kit.TellMore" class="form-control">
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+    </div>
+    <br /><br />
+    <hr />
+</div>
+<div class="row row-padding-xm" ng-show="kitRequestCtrl.kit.TellMore == 1">
+    <div class="col-sm-6 col-element-margin-sm">
+        <input type="number" min="0" class="form-control input-lg" placeholder="Number of members in your organization" ng-model="kitRequestCtrl.kit.NumberOfMembers" maxlength="64">
+    </div>
+    <div class="col-sm-6 col-element-margin-sm">
+        <input type="number" min="0" class="form-control input-lg" placeholder="How much money are you trying to raise" ng-model="kitRequestCtrl.kit.AmountToRaise">
+    </div>
+</div>
+
+<div class="row row-padding-sm" ng-show="kitRequestCtrl.kit.TellMore == 1">
+    <div class="col-sm-8 label-style">When are you planning to start your sales?</div>
+    <div class="col-sm-4">
+        <select class="form-control input-lg" ng-model="kitRequestCtrl.kit.StartRange" ng-options="opt.StartMessage as opt.StartMessage for opt in kitRequestCtrl.startDateOptions" ng-cloak>
+            <option value="">Select one</option>
+        </select>
+    </div>
+    <br />
+    <div class="col-sm-12">
+        <hr />
+    </div>
+</div>
+
+<div class="row row-padding-xs" ng-show="kitRequestCtrl.kit.TellMore == 1">
+    <div class="col-sm-8 label-style">How did you learn about our web site?</div>
+    <div class="col-sm-4">
+        <select class="form-control input-lg" ng-model="kitRequestCtrl.kit.ReferralCode" ng-options="opt.ReferralCode as opt.ReferralTxt for opt in kitRequestCtrl.learnAboutUsOptions" ng-cloak>
+            <option value="">Select one</option>
+        </select>
+    </div>
+    <br />
+    <div class="col-sm-12">
+        <hr />
+    </div>
+</div>
+
+<div class="row row-padding-xs" ng-show="kitRequestCtrl.kit.TellMore == 1">
+    <div class="col-xs-12">
+        <p class="label-style">Any comments or other information would be appreciated:</p>
+        <textarea class="form-control" rows="3" ng-required="false" ng-model="kitRequestCtrl.kit.Comments" maxlength="4000"></textarea>
+    </div>
+</div>
+<div class="form-group" ng-cloak>
+    <div class="row row-padding-sm">
+        <div class="col-xs-12 text-center btn-padding" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+            @*<button type="button" class="btn btn-primary btn-lg btn-request" ng-show="kitRequestCtrl.ActionState != 1 && !kitRequestForm.$valid" ng-disabled="true">Please fill all required Fields</button>*@
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="googleAnalyticsCtrl.KitSubmitClicked();">Submit</button>
+        </div>
+    </div>
+    <div class="row text-center">
+        <span class="text-info" ng-show="kitRequestCtrl.ActionState == 1">
+            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+            <uib-progressbar class="progress-striped" max="100" value="kitRequestCtrl.progress" type="warning" animate="true"></uib-progressbar>
+        </span>
+    </div>
+    <div class="row">
+        <div class="alert alert-danger" role="alert" ng-show="kitRequestCtrl.ActionState == 3">
+            <strong>{{kitRequestCtrl.error.Message}}</strong>
+            <ul class="text-danger" ng-show="kitRequestCtrl.ActionState == 3">
+                <li ng-repeat="e in kitRequestCtrl.error.ModelStateErrors">
+                    {{e}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        ga('send', 'event', 'EZFUND Kit Request', 'EZFUND KIT PAGE OPEN');
+    </script>
+}
+

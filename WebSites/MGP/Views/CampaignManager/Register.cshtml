@@ -1,0 +1,256 @@
+﻿@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@model GA.BDC.Web.MGP.Models.Views.Personalization
+@{
+    var userBranding = ViewBag.User as User;
+    var eventBranding = ViewBag.Event as Event;
+    var partnerBranding = ViewBag.Partner as Partner;
+    ViewBag.Title = string.Concat(eventBranding.Name, " - Step 2: Setup your Web Page");
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+}
+@section scripts
+{
+   <style>
+      @@media (min-width: 600px) {
+         .cropArea {
+            overflow: hidden;
+            width: 500px;
+            height: 500px;
+         }
+      }
+
+      @@media (max-width: 599px) {
+         .cropArea {
+            overflow: hidden;
+            width: 350px;
+            height: 350px;
+         }
+      }
+   </style>
+}
+<div id="registration" ng-app="mgp" ng-controller="campaignManagerController" ng-init="eventId = @eventBranding.Id; participantId = @eventBranding.ParticipantId; registerView = @serializedModel">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Personalize your page so your supporters recognize you!</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <nav>
+                <ul class="pagination" style="width: 100%; background-color: white;">
+                    <li class="disabled text-center"><a href="#" style="width: 33%; background-color: #E5F2FF; color: #777 !important;">Step 1: Registration</a></li>
+                    <li class="text-center active"><a href="#" style="width: 33%">Step 2: Customize your @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()'s Page</a></li>
+                    <li class="text-center disabled"><a href="#" style="width: 34%; background-color: #E5F2FF; color: #777 !important;">Step 3: Spread the word!</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="small">
+                Your online fundraising campaign for @eventBranding.Name has been created. Personalize it now.
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-0 col-lg-8">
+            <div class="panel panel-success">
+                <form name="pageCustomizationForm" id="pageCustomizationForm">
+                    <input type="hidden" name="personalizationId" ng-model="registerView.Id" ng-value="registerView.Id = @Model.Id" required />
+                    <input type="hidden" name="userType" ng-model="registerView.UserType" ng-value="registerView.UserType = @((int)userBranding.UserTypeInfo)" />
+                    <input type="hidden" name="registerView.personalizePageName" ng-model="registerView.personalizePageName" ng-value="registerView.personalizePageName = 'Register'" />
+                   <div class="panel-body">
+                      <div class="row ">
+                         <div class="col-sm-12">
+                            <label>Web Address</label>
+                         </div>
+                      </div>
+                      <div class="row ">
+                         <div class="col-sm-3">
+                            <input type="text" class="form-control" name="eventRedirect" ng-model="registerView.Redirect" required />
+                         </div>
+                         <div class="col-sm-3">
+                            <button type="button" class="btn btn-default" ng-click="checkEventRedirectAvailability()" ng-hide="executingAction">Check availability</button>
+                         </div>
+                         <div class="col-sm-6" ng-cloak>
+                            @if (userBranding.IsSponsor)
+                            {
+                               <span class="text-info">@Request.Url.Host/{{registerView.Redirect}}</span>
+                            }
+                            @if (userBranding.IsParticipant)
+                            {
+                               <span class="text-info">@string.Concat(Request.Url.Host, "/", ViewBag.SponsorRedirect, "/"){{registerView.Redirect}}</span>
+                            }
+                         </div>
+                      </div>
+                      <div class="row" ng-cloak>
+                         <div class="col-sm-12 text-success" ng-show="!executingAction && isAvailable == 2">The web address is available.</div>
+                         <div class="col-sm-12 text-warning" ng-show="!executingAction && isAvailable == 1">The web address is not available</div>
+                      </div>
+                      <div class="row  @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                         <div class="col-sm-12">&nbsp;</div>
+                      </div>
+                      <div class="row  @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                         <div class="col-sm-12">
+                            <label>Message</label>
+                         </div>
+                      </div>
+                      <div class="row @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                         <div class="col-sm-12">
+                            <span class="small">
+                               This is the welcome message that will appear at the top of your fundraising page. You may want to include a brief description of your @partnerBranding.GroupDisplay.ToLower() and the reason for your fundraising campaign. (MAX 2000 CHARACTERS)
+                            </span>
+                         </div>
+                      </div>
+                      <div class="row  @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                         <div class="col-sm-12">
+                            <ng-wig ng-model="registerView.Body" required name="message"></ng-wig>
+                         </div>
+                      </div>
+                      <div class="row  @(userBranding.IsSponsor ? string.Empty : "hidden")">
+                         <div class="col-sm-12">&nbsp;</div>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <label>Goal</label>
+                         </div>                         
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-4">
+                            <input type="number" class="form-control input-lg" name="goal" ng-model="registerView.Goal" required />
+                         </div>
+                         <div class="col-sm-8">
+                            <span class="small">
+                               The goal is the amount of money your group needs to raise. Setting a goal will motivate supporters to give and allows them to assess the impact of their contribution.
+                            </span>
+                         </div>
+                      </div>
+                      <br/>
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <label>Picture</label>
+                         </div>
+                         <div class="col-sm-12">
+                            <span class="small">
+                               You have more chances of reaching your Goal when you upload a picture of your @partnerBranding.GroupDisplay.ToLower()
+                            </span>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-12 text-center" ng-init="registerView.CroppedImage=''">
+                            <img ng-src="{{registerView.Image ? registerView.CroppedImage : registerView.PersonalizationImages[0].ImageURL}}" class="img-rounded" />
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-12 text-center">
+                            <br />
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#uploadPictureModal" ng-click="resultFailed = false; success = false;"><span class="glyphicon glyphicon-picture"></span> Upload Picture</button>
+                            <button type="button" class="btn btn-default btn-sm" ng-show="!registerView.PersonalizationImages[0].IsGalleryImage" ng-click="deletePersonalizationImage(registerView.PersonalizationImages[0].ImageId); resultFailed = false; success = false;"><span class="glyphicon glyphicon-floppy-remove"></span> Remove Picture</button> <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#galleryModal" ng-click="getGalleryImages(); resultFailed = false; success = false;"><span class="glyphicon glyphicon-th-large"></span> Select Picture from our Gallery</button>
+                         </div>
+                      </div>
+                      <div class="modal fade text-left" id="uploadPictureModal" tabindex="-1" role="dialog" aria-labelledby="uploadPictureModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
+                            <div class="modal-content">
+                               <div class="modal-body">
+                                  <div class="row">
+                                     <div class="col-xs-12 text-center">
+                                        <button class="btn btn-lg btn-default" ngf-select ng-model="registerView.Image" accept="image/*">
+                                           <span class="glyphicon glyphicon glyphicon-picture"></span> Select Picture
+                                        </button>
+                                     </div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-xs-12 text-center">
+                                        <div ngf-drop ngf-capture="'camera'" ng-model="registerView.Image" ngf-pattern="image/*" class="cropArea" ng-show="registerView.Image">
+                                           <img-crop image="registerView.Image  | ngfDataUrl" result-image="registerView.CroppedImage" area-type="square" area-min-size="320" result-image-size="320" result-image-format="image/png" result-image-quality="0.7"></img-crop>
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-xs-12 text-center" ng-show="registerView.Image">
+                                        <small class="text-info"><strong>Final Picture</strong></small>
+                                        <br />
+                                        <img ng-src="{{registerView.CroppedImage}}" />
+                                     </div>
+                                  </div>
+                               </div>
+                               <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal" ng-show="registerView.Image">Accept</button>
+                                  <button type="button" class="btn btn-default" ng-click="registerView.Image = undefined;" data-dismiss="modal">Cancel</button>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   <div class="modal fade text-left" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="galleryModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                               <h4 class="modal-title" id="galleryModalLabel">Choose a picture</h4>
+                            </div>
+                            <div class="modal-body">
+                               <div class="row">
+                                  <div class="col-sm-2 text-center image-item" ng-repeat="img in galleryImages|filter:{CategoryName:selectedCategory}">
+                                     <a href="#" class="" ng-click="selectImageFromGallery(img)" onclick="$('#galleryModal').modal('hide')">
+                                        <img ng-src="{{img.FullFilePath}}" class="img-responsive img-rounded img-thumbnail" /><br />
+                                     </a>
+                                  </div>
+                               </div>
+                            </div>
+                            <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                    </div>
+                    
+                    <div class="panel-body">
+                        <div class="row" ng-hide="executingAction">
+                            <div class="col-sm-12">
+                                <button type="button" ng-click="register()" class="btn btn-success form-control">Save and continue</button>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="executingAction">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="resultFailed">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <span class="text-danger">{{responseText}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 text-center hidden-xs hidden-sm hidden-md">
+            <a href="#">
+                <img src="/Content/images/public/content/@(!string.IsNullOrEmpty(partnerBranding.DemoPageImage) ? partnerBranding.DemoPageImage : "groupPagePreview.jpg")" ng-click="pagePreview()" style="width: 100%" alt="Preview your Page" />
+            </a>
+            <a href="#" ng-click="pagePreview()">
+                <span class="text-success">
+                    <strong>
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        Click here to preview your page
+                    </strong>
+                </span>
+            </a>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <a href="@Url.Action("KickOff", new { participantId = eventBranding.ParticipantId })" onclick="ga('send', 'event', 'Campaign Manager', 'Skip Step', 'Group Customization');">Skip this step</a>
+        </div>
+    </div>
+</div>

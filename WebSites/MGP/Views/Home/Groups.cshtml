@@ -1,0 +1,63 @@
+﻿@using System.Text.RegularExpressions
+@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Models.Views
+@model IList<GA.BDC.Web.MGP.Models.Views.GroupViewModel>
+   @{
+      var partner = ViewBag.Partner as Partner;
+      var landingPage = ViewBag.LandingPage as LandingPage;
+      ViewBag.Title = partner.Name;
+      Layout = "~/Views/Shared/_public.cshtml";
+      var serializedModel = new JavaScriptSerializer().Serialize(Model);
+      serializedModel = Regex.Replace(serializedModel, @"\""\\/Date\((-?\d+)\)\\/\""", "$1");
+   }
+   <div ng-controller="homeController as homeCtrl" ng-init="homeCtrl.landingGroups = @serializedModel" id="groupsPage">
+      <br />
+      <div class="row">
+         <div class="col-xs-12">
+            <img src="@landingPage.ImageTopUrl" class="img-responsive img-rounded" />
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 text-center">
+            <h1 style="font-weight: 600">@partner.Name.ToUpper()</h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12" style="@(!partner.ShowTotalAmountInThermometer ? "margin-bottom: 25px;" : string.Empty)">
+            <span>@Html.Raw(landingPage.Description)</span>
+         </div>
+      </div>
+      <div class="row @(partner.ShowTotalAmountInThermometer ? string.Empty : "hidden")">
+         <div class="col-xs-12 text-center" style="margin-bottom: 15px; border-bottom: solid 1px lightgray;">
+            <h1 style="font-size: 80px; font-weight: bolder;">@landingPage.AmountRaised.ToString("C0") <small>RAISED</small></h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12">
+            <div class="form-group">
+               <div class="input-group">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                  <input class="form-control input-lg" type="text" placeholder="Search" ng-model="homeCtrl.landingGroupsSearch">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="group in homeCtrl.landingGroups | filter: homeCtrl.landingGroupsSearch" ng-cloak>
+            <div>
+               <a ng-href="/Home/Landing?p=@(partner.Id)&groupId={{group.Id}}">
+                  <img ng-src="{{group.Image}}" class="img-responsive img-rounded" />
+                  <span style="color: white; text-shadow: 0 2px 4px rgba(0, 0, 0, .5); position: absolute; top: 7px; left: 20px; font-weight: 700; font-family: Lato, Arial, sans-serif; font-size: x-large" ng-bind="group.Name"></span>
+               </a>
+            </div>
+            <div class="progress" style="position: relative; top: -5px; z-index: -1; margin-bottom: 0px;">
+               <div class="progress-bar progress-bar-{{group.BootstrapClass}}" role="progressbar" aria-valuenow="{{group.PercentageAdvanced}}" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': '{{group.PercentageAdvanced}}%'}">
+               </div>
+            </div>
+            <div class="text-center" style="font-size: x-large">Raised <strong>{{group.AmountRaised | currency : '$' : 0}}</strong></div>
+            <div class="text-center" ng-show="group.EventDate" style="font-size: large">{{group.EventDate | toDate | date: 'yyyy-MM-dd'}}</div>
+         </div>
+      </div>
+   </div>

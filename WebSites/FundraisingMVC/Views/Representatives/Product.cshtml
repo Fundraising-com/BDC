@@ -1,0 +1,76 @@
+@{
+    Layout = "~/Views/Shared/_representativePortal.cshtml";
+}
+@section header
+{
+   <title>Product - {{::representativeCtrl.Representative.Name}}</title>
+   <meta name="description" content="Fundraisings {{::representativeCtrl.Representative.Name}} personal website for Fundraising.com" />
+   <meta property="og:title" content="{{::representativeCtrl.Representative.Name}}" />
+   <meta name="keywords" content="fundraising, fundraising ideas, representative fundraiser, {{::representativeCtrl.Representative.Name}}" />
+}
+<div ng-init="representativeCtrl.GetFundraiserProduct(@ViewBag.ProductId);" style="margin-top:125px">
+   <div class="row">
+       <div class="col-sm-12">
+           <span itemscope itemtype="https://schema.org/Breadcrumb">
+               <a itemprop="url" href="@Url.Action("Index")">
+                   <span itemprop="title">Home</span>
+               </a> &gt;
+           </span>
+           <span itemscope itemtype="https://schema.org/Breadcrumb">
+               <a itemprop="url" href="@Url.Action("Fundraisers")">
+                   <span itemprop="title">Available Fundraisers</span>
+               </a> &gt;
+           </span>
+           <span itemscope itemtype="https://schema.org/Breadcrumb">
+               <a itemprop="name">
+                   <span itemprop="title"><strong>{{::representativeCtrl.FundraiserProduct.Name}}</strong></span>
+               </a>
+           </span>
+       </div>
+   </div>
+   <h1 ng-cloak>{{::representativeCtrl.FundraiserProduct.Name}}</h1>
+    @*<div class="row" ng-show="representativeCtrl.FundraiserProduct.Id == 11" ng-cloak>
+        <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+            <h3>Enjoy up to $4,500 in savings!</h3>
+            </div>
+
+    </div>*@
+    
+        @*<div class="row">
+            <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="row" ng-show="representativeCtrl.FundraiserProduct.HasSellSheet" ng-cloak>
+                            <div class="col-xs-12">
+                                <a href="@Url.Action("DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}}&representativeExt={{::representativeCtrl.Representative.ExternalId}}&representativePartnerId={{::representativeCtrl.Representative.PartnerId}}&representativeName={{::representativeCtrl.Representative.Name}}&email={{::representativeCtrl.Representative.Email}}&phone={{::representativeCtrl.Representative.Phone}}&fileName={{::representativeCtrl.FundraiserProduct.SellSheetPath}}&redirect={{::representativeCtrl.Representative.Redirect}}&outputName={{::representativeCtrl.FundraiserProduct.Name}}" target="_blank" class="btn btn-success btn-lg" style="width: 100%;">Download<br />Sellsheet</a>
+                                <br /><br />
+                            </div>
+                        </div>
+                        <div class="row" ng-show="representativeCtrl.FundraiserProduct.HasNutritionInformationSheet" ng-cloak>
+                            <div class="col-xs-12">
+                                <a href="/Content/external/rep/nutritioninformationsheets/{{::representativeCtrl.FundraiserProduct.NutritionInformationSheetPath}}" target="_blank" class="btn btn-success btn-lg" style="width: 100%;">Download<br />Nutrition Information</a>
+                                <br /><br />
+                            </div>
+                        </div>
+                        <div class="row" ng-show="representativeCtrl.FundraiserProduct.IsPurchasable" ng-cloak>
+                            <div class="col-xs-12">
+                                <a href="/products/{{::representativeCtrl.FundraiserProduct.StoreUrl}}?representativeId={{::representativeCtrl.Representative.Id}}" target="_blank" class="btn btn-danger btn-lg" style="width: 100%;">Buy<br />Now</a>
+                                <br /><br />
+                            </div>
+                        </div>
+                        <div class="row" ng-show="!representativeCtrl.FundraiserProduct.IsPurchasable" ng-cloak>
+                            <div class="col-xs-12">
+                                <span class="text-info" style="font-size: x-large">This program is loaded with options! Call me for complete details or <a href="@Url.Action("RequestInformation")"><strong>request our free fundraising guide.</strong></a> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <img style="width: 100%;" alt="{{::representativeCtrl.FundraiserProduct.Name}}" ng-src="/Content/external/rep/fundraisers/{{::representativeCtrl.FundraiserProduct.Image}}" ng-cloak />
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    </div>
+
+

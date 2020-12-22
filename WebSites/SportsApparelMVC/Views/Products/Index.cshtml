@@ -1,0 +1,57 @@
+@using GA.BDC.Shared.Entities
+@using GA.BDC.Web.Fundraising.MVC.Helpers
+@model Category
+@{
+   ViewBag.Title = "Products - Fundraising.com";
+   Layout = "~/Views/Shared/_layout.cshtml";
+   ViewBag.Description = "High Profit Fundraising Products for Sports teams, schools, churches and all types of groups, Fundraising.com offers all kind of fundraising ideas to help you reach your goals.";
+   ViewBag.Keywords = "Fundraising Products, Sports Teams, Schools, Fundraising Ideas";
+   ViewBag.CanonicalUrl = string.Format("/{0}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId));
+
+}
+<div class="container">
+   <div ng-controller="DetectCountryController as detectCountryCtrl">
+
+      <div class="row visible-xs">
+         <div class="col-sm-12">
+            <ol class="breadcrumb" style="background-color: transparent;">
+               <li id="breadcrumb.root" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemref="breadcrumb.products"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></li>
+               <li id="breadcrumb.products" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" class="active"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)" itemprop="url"><span itemprop="title"><strong>Products</strong></span></a></li>
+            </ol>
+         </div>
+      </div>
+      <div class="row">
+         <h1><span ng-show="detectCountryCtrl.country === 1">canadian fundraisers</span><span ng-show="detectCountryCtrl.country === 0">fundraising products</span></h1>
+
+         <div style="padding-left:5px; padding-right:5px">
+            From schools to sports teams, there are plenty of groups who need help raising money. Thankfully, our enjoyable fundraising campaigns make it easy to get the money you need with products that everyone loves.<br /><br />
+            Food is always a well-liked choice for a fundraiser, and there are several different options from which to choose. Your supporters will love the convenience of pre-made cookie dough.
+            Chocolate is another hit; easy, 50% profit, and who doesn’t like chocolate anyway! As a low-cost product that everyone loves, lollipops also make great fundraiser. You can even sell novelty lollipops for holidays or find a theme that suits your group type.
+         </div>
+         <br /><br />
+         <div ng-show="detectCountryCtrl.country === 1">
+
+         </div>
+         <br />
+         <br />
+         <div ng-controller="CategoriesController as categoryCtrl">
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 text-center" ng-repeat="category in categoryCtrl.categories| orderBy:'Order'">
+               <a ng-href="/{{::categoryCtrl.categoryPath}}/{{::category.Url}}" class="thumbnail product-thumbnail">
+                  <img ng-src="/Content/external/products/cover/{{::category.Id}}.jpg" alt="{{::category.Name}}" class="img-responsive" />
+                  <h4>{{::category.Name}}</h4>
+               </a>
+            </div>
+         </div>
+
+         PROD
+         <div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.Get(@Model.Id);">
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 text-center" ng-repeat="category in categoryCtrl.categories| orderBy:'Order'">
+               <a ng-href="/{{::categoryCtrl.categoryPath}}/{{::category.Url}}" class="thumbnail product-thumbnail">
+                  <img ng-src="/Content/external/products/cover/{{::category.Id}}.jpg" alt="{{::category.Name}}" class="img-responsive" />
+                  <h4>{{::category.Name}}</h4>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

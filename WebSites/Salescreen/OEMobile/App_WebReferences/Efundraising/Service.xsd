@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.datacontract.org/2004/07/QSP.WebService.OrderExpress.Efundraising">
+	<xs:import schemaLocation="http://localhost:16014/EfundraisingServices/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/QSP.WebService.OrderExpress.Efundraising" />
+	<xs:element name="GetProgramType">
+		<xs:complexType>
+			<xs:sequence />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetProgramTypeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="GetProgramTypeResult" nillable="true" type="q1:ArrayOfProgramType" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetForm">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="ProgramTypeID" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetFormResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="GetFormResult" nillable="true" type="q1:ArrayOfForm" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetCatalogItem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="FormID" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetCatalogItemResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="GetCatalogItemResult" nillable="true" type="q1:ArrayOfCatalogItem" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CreateOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="Order" nillable="true" type="q1:Order" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CreateOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="CreateOrderResult" nillable="true" type="q1:Response" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetQSPOrderStatus">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="QSPOrderID" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetQSPOrderStatusResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="GetQSPOrderStatusResult" nillable="true" type="q1:OrderStatus" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetEDSOrderStatus">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="EDSOrderID" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetEDSOrderStatusResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="GetEDSOrderStatusResult" nillable="true" type="q1:OrderStatus" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

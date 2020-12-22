@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>efundraising.Utilities.Encryption.DES</name>
+    </assembly>
+    <members>
+        <member name="T:efundraising.Utilities.Encryption.DES.TripleDES">
+            <summary>
+            Class that encrypt and decrypt data.
+            </summary>
+            <example>
+            <code>
+            	using efundraising.Utilities.DES;
+            	
+            	TripleDES tripleDES = new TripleDES();
+            	string organizationIdEncrypted = tripleDES.Encrypt(organizationID.ToString(), "ThisIsMyKey");
+            	Response.Redirect("Logged.aspx?orgID=" + organizationIdEncrypted);
+            	
+            	//..........
+            	string organizationIdDecrypted = trupleDES.Decrypt(Request["orgID"], "ThisIsMyKey");
+            	
+            	
+            </code>
+            </example>
+            <remarks>
+            Might need special format in order to be used throw url. (eg. System.Utility.UrlEncode)
+            </remarks>
+        </member>
+        <member name="M:efundraising.Utilities.Encryption.DES.TripleDES.#ctor">
+            <summary>
+            TribleDES constructor
+            </summary>
+        </member>
+        <member name="M:efundraising.Utilities.Encryption.DES.TripleDES.Encrypt(System.String,System.String)">
+            <summary>
+            Encrypt data
+            </summary>
+            <param name="encryptData">Data to be encrypted</param>
+            <param name="keyData">Encryption Key</param>
+            <returns>Encrypted Data</returns>
+            <remarks>By default, the CipherMode is ECB (Electronic Codebook)</remarks>
+        </member>
+        <member name="M:efundraising.Utilities.Encryption.DES.TripleDES.Encrypt(System.String,System.String,System.Security.Cryptography.CipherMode)">
+            <summary>
+            Encrypt data
+            </summary>
+            <param name="encryptData">Data to be encrypted</param>
+            <param name="keyData">Encryption key</param>
+            <param name="cipherMode">Cipher Mode</param>
+            <returns>Data Encrypted</returns>
+        </member>
+        <member name="M:efundraising.Utilities.Encryption.DES.TripleDES.Decrypt(System.String,System.String)">
+            <summary>
+            Decrypt data
+            </summary>
+            <param name="encrypedData">Data encrypted</param>
+            <param name="keyData">Encryption Key</param>
+            <returns>Data decrypted</returns>
+            <remarks>By default, the CipherMode is ECB (Electronic Codebook)</remarks>
+        </member>
+        <member name="M:efundraising.Utilities.Encryption.DES.TripleDES.Decrypt(System.String,System.String,System.Security.Cryptography.CipherMode)">
+            <summary>
+            Decrypt data
+            </summary>
+            <param name="encrypedData">Data encrypted</param>
+            <param name="keyData">Encryption Key</param>
+            <param name="cipherMode">Cipher Mode</param>
+            <returns>Data decrypted</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,40 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public partial class WS : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // Put user code to initialize the page here
+        QSPFormWebService.Personalization svc = new QSPFormWebService.Personalization();
+        //QSPFormWebServices.Personalization svc = new Test.QSPFormWebServices.Personalization();
+        svc.LogonUser("award", "vision");
+
+        // Asset Management Image
+        /*
+        byte[] x = svc.AssetMgmt_Image(1,1,1);
+        System.Drawing.Image xz;
+        System.IO.MemoryStream z = new System.IO.MemoryStream(x);
+        xz = System.Drawing.Image.FromStream(z);
+        */
+
+        // Update orderID
+        string[] personalizeDetail = new string[] { "603044;1", "603047;1" };
+        /*
+         *  order detail	 order id
+         *	603044			447833
+            603047			447833
+         * */
+        string x = "" + svc.UpdatePersonalization(447833, personalizeDetail);
+
+        Response.Write(x);
+    }
+}

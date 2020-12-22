@@ -1,0 +1,429 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F43D94AB-3FBB-4E55-A48E-2D06E62CAE99}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>QSPForm.Business</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>QSPForm.Business</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <WebReference_EnableProperties>true</WebReference_EnableProperties>
+    <WebReference_EnableSQLTypes>false</WebReference_EnableSQLTypes>
+    <WebReference_EnableLegacyEventingModel>true</WebReference_EnableLegacyEventingModel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="QSPForm.SystemFramework, Version=1.0.3342.27353, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EfundraisingCRMWeb\bin\QSPForm.SystemFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="QSPForm_DataRepository, Version=1.0.3342.27357, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EfundraisingCRMWeb\bin\QSPForm_DataRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\QSP.Business.Fulfillment\QSP.Business.Fulfillment.csproj">
+      <Project>{4E55EB19-53BC-4A27-991F-31B1DEEF896B}</Project>
+      <Name>QSP.Business.Fulfillment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QSP.OrderExpress.Common\QSP.OrderExpress.Common.csproj">
+      <Name>QSP.OrderExpress.Common</Name>
+      <Project>{23CCC929-2B4A-486B-A86D-3A031CF05089}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\QSP.OrderExpress.Data\QSP.OrderExpress.Data.csproj">
+      <Project>{CE91AFF3-4BF2-4048-969A-DBCE64EE4F19}</Project>
+      <Name>QSP.OrderExpress.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Address.cs" />
+    <Compile Include="AddressSystem.cs" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AuthSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessCalendarSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessExceptionSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessFieldSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessNotificationSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessRuleSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessTaskSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CampaignSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CatalogGroupCatalogSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CatalogGroupSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CatalogItemCategorySystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CatalogItemDetailSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CatalogItemSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CatalogSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChargeSystem.cs" />
+    <Compile Include="CommonSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Communication\Notification.cs" />
+    <Compile Include="Communication\Notification.Generic.cs" />
+    <Compile Include="Communication\Notifications.cs" />
+    <Compile Include="ContentManagerSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\AccountController.cs" />
+    <Compile Include="Controller\CampaignController.cs" />
+    <Compile Include="Controller\OrderController.cs" />
+    <Compile Include="CreditApplicationSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CreditCardSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DisplayMode.cs" />
+    <Compile Include="DocumentEntitySystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentSystem.cs" />
+    <Compile Include="Entity\AccountList.cs" />
+    <Compile Include="Entity\OrganizationList.cs" />
+    <Compile Include="FiscalYearSystem.cs" />
+    <Compile Include="FormPermissionRegionSystem.cs" />
+    <Compile Include="FormPermissionSystem.cs" />
+    <Compile Include="Linq\Dynamic.cs" />
+    <Compile Include="Linq\OrderExpress.cs">
+      <DependentUpon>OrderExpress.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Linq\OrderExpress.designer.cs">
+      <DependentUpon>OrderExpress.dbml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Linq\QSPCommon.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QSPCommon.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="OutputAddress.cs" />
+    <Compile Include="FMAccountTransferSystem.cs" />
+    <Compile Include="ProgramSystem.cs" />
+    <Compile Include="ProgramAgreementSystem.cs" />
+    <Compile Include="CryptoSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CUserSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CustomerSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EmailAddressSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EntityExceptionSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FormSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LogoSubdivisionSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LogoSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MDRSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderDetailSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderDetailTaxSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderGroupSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrganizationSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PhoneNumberSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PostaAddressSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProductSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SearchSettings.cs" />
+    <Compile Include="ShipmentGroupSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StatusSystem.cs" />
+    <Compile Include="Subdivision.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SubdivisionCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SubdivisionSystem.cs" />
+    <Compile Include="TaskSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TaxSystem.cs" />
+    <Compile Include="TemplateEmailSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\AccountValidation.cs" />
+    <Compile Include="Validation\CampaignValidation.cs" />
+    <Compile Include="Validation\DocumentValidation.cs" />
+    <Compile Include="Validation\OrderValidation.cs" />
+    <Compile Include="Validation\OrganizationValidation.cs" />
+    <Compile Include="Validation\PostalAddressValidation.cs" />
+    <Compile Include="VendorSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WarehouseSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web References\com.qsp.ws.AccountFinderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\com.ses.ws.AddressHygieneService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <WebReferenceUrl Include="http://ws.qsp.com/SES.AddressHygieneStaging/AddressHygieneContract.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.ses.ws.AddressHygieneService\</RelPath>
+      <UpdateFromURL>http://ws.qsp.com/SES.AddressHygieneStaging/AddressHygieneContract.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AddressHygieneWSUrl</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://ws.qsp.com/QSP.AccountFinderStaging/AccountFinder.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.qsp.ws.AccountFinderService\</RelPath>
+      <UpdateFromURL>http://ws.qsp.com/QSP.AccountFinderStaging/AccountFinder.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AccountFinderWSUrl</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\com.qsp.ws.AccountFinderService\AccountFinder.disco" />
+    <None Include="Web References\com.qsp.ws.AccountFinderService\AccountFinder.wsdl" />
+    <None Include="Web References\com.qsp.ws.AccountFinderService\AccountFinderMessageResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.qsp.ws.AccountFinderService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Linq\OrderExpress.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>OrderExpress.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\com.ses.ws.AddressHygieneService\AddressHygieneContract.disco" />
+    <None Include="Web References\com.ses.ws.AddressHygieneService\AddressHygieneContract.wsdl" />
+    <None Include="Web References\com.ses.ws.AddressHygieneService\AddressHygieneMessageResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.ses.ws.AddressHygieneService\AddressHygieneSingleMessageResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.ses.ws.AddressHygieneService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Linq\OrderExpress.dbml.layout">
+      <DependentUpon>OrderExpress.dbml</DependentUpon>
+    </None>
+    <None Include="Linq\QSPCommon.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>QSPCommon.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Linq\QSPCommon.dbml.layout">
+      <DependentUpon>QSPCommon.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://webservices.efundraising.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://webservices.efundraising.com" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://webservices.efundraising.com">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogoutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsLoggedIn">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsLoggedInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsLoggedInResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewLead">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pZip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pDayPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEveningPhone" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pGroupSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pOrganizationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pPromotionID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEveningPhoneExt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pDayPhoneExt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pBestTimeToCall" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pOrganizationTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pGroupTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pFundraisingDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pDecisionMaker" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="pProductsInterestIn" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pOnEmailList" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="pComments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewLeadResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLeadsReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pStartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEndDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLeadsReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLeadsReportResult" type="s0:ArrayOfFundraiser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFundraiser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Fundraiser" nillable="true" type="s0:Fundraiser" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Fundraiser">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:Person">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrganizationType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GroupType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="GroupSize" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Sale" type="s0:Sales" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Person" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DayPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EveningPhone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Sales">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TotalAmount" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SalesID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalProduct" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductClassDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConfirmDateSales" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateSales" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSalesReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pStartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEndDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSalesReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSalesReportResult" type="s0:ArrayOfFundraiser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastError">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLastErrorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLastErrorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="LoginSoapIn">
+    <part name="parameters" element="s0:Login" />
+  </message>
+  <message name="LoginSoapOut">
+    <part name="parameters" element="s0:LoginResponse" />
+  </message>
+  <message name="LogoutSoapIn">
+    <part name="parameters" element="s0:Logout" />
+  </message>
+  <message name="LogoutSoapOut">
+    <part name="parameters" element="s0:LogoutResponse" />
+  </message>
+  <message name="IsLoggedInSoapIn">
+    <part name="parameters" element="s0:IsLoggedIn" />
+  </message>
+  <message name="IsLoggedInSoapOut">
+    <part name="parameters" element="s0:IsLoggedInResponse" />
+  </message>
+  <message name="AddNewLeadSoapIn">
+    <part name="parameters" element="s0:AddNewLead" />
+  </message>
+  <message name="AddNewLeadSoapOut">
+    <part name="parameters" element="s0:AddNewLeadResponse" />
+  </message>
+  <message name="GetLeadsReportSoapIn">
+    <part name="parameters" element="s0:GetLeadsReport" />
+  </message>
+  <message name="GetLeadsReportSoapOut">
+    <part name="parameters" element="s0:GetLeadsReportResponse" />
+  </message>
+  <message name="GetSalesReportSoapIn">
+    <part name="parameters" element="s0:GetSalesReport" />
+  </message>
+  <message name="GetSalesReportSoapOut">
+    <part name="parameters" element="s0:GetSalesReportResponse" />
+  </message>
+  <message name="GetLastErrorSoapIn">
+    <part name="parameters" element="s0:GetLastError" />
+  </message>
+  <message name="GetLastErrorSoapOut">
+    <part name="parameters" element="s0:GetLastErrorResponse" />
+  </message>
+  <portType name="eFundDataSoap">
+    <operation name="Login">
+      <documentation>Provide your Username and Password to Login on WebService.efundraising.com</documentation>
+      <input message="s0:LoginSoapIn" />
+      <output message="s0:LoginSoapOut" />
+    </operation>
+    <operation name="Logout">
+      <documentation>Provide the way to Logout of webservice.efundraising.com</documentation>
+      <input message="s0:LogoutSoapIn" />
+      <output message="s0:LogoutSoapOut" />
+    </operation>
+    <operation name="IsLoggedIn">
+      <documentation>Get if the current user is authenticate</documentation>
+      <input message="s0:IsLoggedInSoapIn" />
+      <output message="s0:IsLoggedInSoapOut" />
+    </operation>
+    <operation name="AddNewLead">
+      <documentation>Add New lead on www.efundraising.com Web Site</documentation>
+      <input message="s0:AddNewLeadSoapIn" />
+      <output message="s0:AddNewLeadSoapOut" />
+    </operation>
+    <operation name="GetLeadsReport">
+      <input message="s0:GetLeadsReportSoapIn" />
+      <output message="s0:GetLeadsReportSoapOut" />
+    </operation>
+    <operation name="GetSalesReport">
+      <documentation>Get a Listing of Users ...</documentation>
+      <input message="s0:GetSalesReportSoapIn" />
+      <output message="s0:GetSalesReportSoapOut" />
+    </operation>
+    <operation name="GetLastError">
+      <documentation>Get the Lastest errors encounted on your Web Service session</documentation>
+      <input message="s0:GetLastErrorSoapIn" />
+      <output message="s0:GetLastErrorSoapOut" />
+    </operation>
+  </portType>
+  <binding name="eFundDataSoap" type="s0:eFundDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="Login">
+      <soap:operation soapAction="http://webservices.efundraising.com/Login" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Logout">
+      <soap:operation soapAction="http://webservices.efundraising.com/Logout" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="IsLoggedIn">
+      <soap:operation soapAction="http://webservices.efundraising.com/IsLoggedIn" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AddNewLead">
+      <soap:operation soapAction="http://webservices.efundraising.com/AddNewLead" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetLeadsReport">
+      <soap:operation soapAction="http://webservices.efundraising.com/GetLeadsReport" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetSalesReport">
+      <soap:operation soapAction="http://webservices.efundraising.com/GetSalesReport" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetLastError">
+      <soap:operation soapAction="http://webservices.efundraising.com/GetLastError" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="eFundData">
+    <documentation>Web Service for eFundraising.com Web Site</documentation>
+    <port name="eFundDataSoap" binding="s0:eFundDataSoap">
+      <soap:address location="http://webservices.efundraising.com/efunddata.asmx" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,71 @@
+@{
+   ViewBag.Title = "Order Confirmation - Fundraising.com";
+   Layout = "~/Views/Shared/_layout3.cshtml";
+}
+<div ng-controller="ConfirmationController as confirmationCtrl" style="margin-top:125px">
+   <h1 class="hidden-print">Order Confirmation</h1>
+   <div class="row hidden-print">
+      <div class="col-sm-12">
+         <span>
+            Thank you for shopping at Fundraising.com.<br />
+            Your order is being processed. You will receive a confirmation shortly at your registered email address.
+         </span>
+      </div>
+   </div>
+   <div class="row hidden-print">
+      <div class="col-sm-12">
+         <strong>(Please print this page for your records)</strong>
+      </div>
+   </div>
+   <br /><br />
+   <div class="row">
+      <div class="col-xs-12 col-lg-offset-2 col-lg-8" ng-cloak>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h3 class="panel-title">Order Number: {{::confirmationCtrl.Sales[0].Client.Id}}</h3>
+            </div>
+            <div class="panel-body">
+               <span class="text-muted">
+                  <strong>Payment Method:</strong>
+                  <span ng-show="confirmationCtrl.Sales[0].PaymentMethod == 1" ng-cloak>Credit Card</span>
+                  <span ng-show="confirmationCtrl.Sales[0].PaymentMethod == 2" ng-cloak>Purchase Order</span>
+                  <span ng-show="confirmationCtrl.Sales[0].PaymentMethod == 3" ng-cloak>Paypal</span>
+               </span><br /><br />
+               <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                     <tr style="text-transform: uppercase; font-weight: bold; color: #087a92"><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
+                  </thead>
+                  <tbody>
+                     <tr ng-repeat="item in confirmationCtrl.ShoppingCart.Items">
+                        <td>{{::item.Product.Name}}</td>
+                        <td>{{::item.Quantity}}</td>
+                        <td>{{item.Product.CalculatedPrice | currency}}</td>
+                        <td>{{item.Product.CalculatedPrice * item.Quantity | currency}}</td>
+                     </tr>
+                  </tbody>
+                  <tfoot>
+                     <tr ng-show="confirmationCtrl.ShippingFee > 0"><td colspan="3">Subtotal:</td><td>{{confirmationCtrl.SubTotal | currency}}</td></tr>
+                     <tr ng-show="confirmationCtrl.ShippingFee > 0"><td colspan="3">Shipping Fee:</td><td>{{confirmationCtrl.ShippingFee | currency}}</td></tr>
+                     <tr ng-show="confirmationCtrl.ShoppingCart.PromotionCode"><td colspan="3">PROMOTION CODE: {{confirmationCtrl.ShoppingCart.PromotionCode.Name}}</td><td>- {{confirmationCtrl.ShoppingCart.PromotionCode.DiscountedAmount | currency}}</td></tr>
+                     <tr ng-repeat="tax in confirmationCtrl.Taxes"><td colspan="3">{{tax.Code}}</td><td>{{tax.Amount | currency}}</td></tr>
+                     <tr style="font-weight: bold;"><td colspan="3">Total:</td><td>{{confirmationCtrl.TotalAmount | currency}}</td></tr>
+                  </tfoot>
+               </table>
+            </div>
+            <div class="panel-footer text-right hidden-print"><a href="#" onclick="window.print();" class="btn btn-default">Print Receipt</a></div>
+         </div>
+      </div>
+   </div>
+   <div class="row hidden-print">
+      <div class="col-xs-12" ng-show="confirmationCtrl.Sales[0].PaymentMethod == 3">
+         <div class="alert alert-info" role="alert">
+            <span><strong>Important note: </strong> Your Paypal payment order with Store.Fundraising.com is being processed and will be shipped as quickly as the Paypal payment received and approved. Please review the shipping information and order details below. If any changes need to be made, please contact our customer service department at 1-800-443-5353.</span>
+         </div>
+      </div>
+      <div class="col-xs-12" ng-show="confirmationCtrl.Sales[0].PaymentMethod == 2">
+         <div class="alert alert-info" role="alert">
+            <span><strong>Important note: </strong> To complete your order via PO / Bill Me Later,  kindly send us a single copy of a Purchased Order from your school or organization to <a href="mailto:CustomerService.EFR@fundraising.com"><strong>CustomerService.EFR@fundraising.com</strong></a>.<br />Once received and validated, we will process your order and you will be billed for your fundraising order.<br />Payment, in full, is due following 30 days.</span>
+         </div>
+      </div>
+   </div>
+</div>

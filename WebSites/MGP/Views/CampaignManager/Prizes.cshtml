@@ -1,0 +1,194 @@
+﻿@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Models.Views
+@{
+   var userBranding = ViewBag.User as User;
+   var eventBranding = ViewBag.Event as GA.BDC.Web.MGP.Models.Branding.Event;
+   ViewBag.Title = "Prizes";
+   Layout = "~/Views/Shared/_campaignmanager.cshtml";
+   var prizeEarned = ViewBag.PrizeEarned as List<ParticipantPrize>;
+   var prizeNotEarned = ViewBag.PrizeNotEarned as List<ParticipantPrize>;
+}
+
+<div id="information" ng-controller="campaignManagerController" ng-init="participantId = @userBranding.EventParticipationId">
+   <div class="row">
+      <div class="col-sm-12">
+         <h1>The Prizes</h1>
+      </div>
+   </div>
+   @if (userBranding.IsSponsor)
+   {
+      <div class="row">
+         <div class="col-sm-12">
+            We keep fundraising FUN by providing built-in prizing. This not only motivates group members to participate in your campaign, but gives them goals to work<br />toward and serves as a 'thank you' for their involvement!
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">&nbsp;</div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            <h4>GA National Saving Pass</h4>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            Members who invite 12 people to view your online campaign and make just one sale receive a <strong><a href="https://www.fundraising.com/products/discount-fundraisers/all-discount-fundraisers/national-savings-card" target="_blank">GA Savings Pass</a></strong>.
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">&nbsp;</div>
+      </div>
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="prize-list">
+               <div class="row text-center">
+                  <div class="col-sm-12">Members that received their &#171;Pass&#187;</div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th>Name</th>
+                              <th># of Emails Sent</th>
+                              <th># of Items Sold</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           @foreach (var item in prizeEarned)
+                           {
+                              <tr>
+                                 <td>@item.Name</td>
+                                 <td class="text-center">@item.NumberOfEmail</td>
+                                 <td class="text-center">@item.NumberOfSubscriptionSold</td>
+                              </tr>
+                           }
+                        </tbody>
+                        <tfoot>
+                           <tr><td class="text-center" colspan="3"><a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 3 })">Send Personal Note >></a></td></tr>
+                        </tfoot>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="prize-list">
+               <div class="row text-center">
+                  <div class="col-sm-12">Members on their way to receiving their &#171;Pass&#187;</div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th>Name</th>
+                              <th># of Emails Sent</th>
+                              <th># of Items Sold</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           @foreach (var item in prizeNotEarned)
+                           {
+                              <tr>
+                                 <td>@item.Name</td>
+                                 <td class="text-center">@item.NumberOfEmail</td>
+                                 <td class="text-center">@item.NumberOfSubscriptionSold</td>
+                              </tr>
+                           }
+                        </tbody>
+                        <tfoot>
+                           <tr><td class="text-center" colspan="3"><a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 1 })">Send Reminder Email >></a></td></tr>
+                        </tfoot>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   }
+   @if (userBranding.IsParticipant)
+   {
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="row">
+               <div class="col-sm-12">
+                  Getting involved and supporting your group feels great...and so does winning prizes!
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-7">
+                  <h4>GA National Saving Pass</h4>
+                  Invite 12 people to view your online campaign and make just one sale, and you&#39;ll receive a <strong>free <a href="https://www.fundraising.com/products/discount-fundraisers/all-discount-fundraisers/national-savings-card" target="_blank">GA Savings Pass</a> code</strong> redeemable online.<br />
+               </div>
+               <div class="col-sm-5 prize-img hidden-xs">
+                  <img src="~/Content/images/common/gasavingpass.jpg" class="img-responsive" />
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            <h4>Do you qualify for the Pass?</h4>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-4 prize-qualify @(ViewBag.PrizeQualifyLevel == 1 ? string.Empty : "hidden")">
+            <div class="row">
+               <div class="col-sm-12">
+                  @Html.Raw(ViewBag.PrizeQualifyText)
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-12">&nbsp;</div>
+            </div>
+            <div class="row">
+               <div class="col-sm-12">
+                  <a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 1 })">Email Contacts</a>&nbsp;&nbsp;<span style="color:#428bca">|</span>&nbsp;&nbsp;
+                  <a href="@Url.Action("SendNewMessage", new { participantId = eventBranding.ParticipantId, messageType = 3 })">Send Personal Note</a>&nbsp;&nbsp;<span style="color:#428bca">|</span>&nbsp;&nbsp;
+                  <a href="#" ng-click="defaultRedirectToStore(@eventBranding.Id, @eventBranding.ParticipantId)">Browse the store</a>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-4 prize-qualify @(ViewBag.PrizeQualifyLevel == 2 ? string.Empty : "hidden")">
+            <div class="row">
+               <div class="col-sm-12 qualify2">
+                  @Html.Raw(ViewBag.PrizeQualifyText)
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">&nbsp;</div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12 redeem">
+                     <a href="" ng-click="redeemPrize()"><img src="~/Content/images/common/redeem.png" alt="redeem" /></a>
+                  </div>
+               </div>
+               <div class="row error" ng-show="resultFailed" ng-cloak>
+                  <div class="col-sm-12">
+                     <div class="form-group">
+                        <span class="text-danger">{{responseText}}</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-4 prize-qualify @(ViewBag.PrizeQualifyLevel == 3 ? string.Empty : "hidden")">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h4>Congratulations! Redeem your prizes now</h4>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-6">
+                  <div class="row">
+                     <div class="col-sm-12 qualify3">
+                        Your code is <strong>@ViewBag.GASavingPass</strong> <br />
+                        Click <a href="http://gasavingspass.com/" target='_blank'>here</a> to activate your pass.
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   }
+</div>

@@ -1,0 +1,419 @@
+﻿@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Views.Localization
+@model GA.BDC.Web.MGP.Models.Views.KickOff
+@{
+    var eventBranding = ViewBag.Event as Event;
+    var userBranding = ViewBag.User as GA.BDC.Web.MGP.Models.Branding.User;
+   var partnerBranding = ViewBag.Partner as Partner;
+    ViewBag.Title = string.Concat(eventBranding.Name, " - Step 3: Send Emails");
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+}
+<div id="kickoff" ng-app="mgp" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;  registerView = @serializedModel">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Invite your friends to help you</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <nav>
+                <ul class="pagination" style="width: 100%; background-color: white;">
+                    <li class="disabled text-center"><a href="#" style="width: 33%; background-color: #E5F2FF; color: #777 !important;">Step 1: Registration</a></li>
+                    <li class="text-center disabled"><a href="#" style="width: 33%; background-color: #E5F2FF; color: #777 !important;">Step 2: Customize your @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()'s Page</a></li>
+                    <li class="text-center active"><a href="#" style="width: 34%">Step 3: Spread the word!</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <form name="kickoffForm" id="kickoffForm" ng-submit="kickoff()">
+            <div class="col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-0 col-lg-8">
+                <div class="panel panel-success">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <strong>Import your contacts</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <a href="#">
+                                        <img src="/Content/images/public/content/signin_google.png" alt="Google" class="tip oauth_provider_link" data-provider="Google" data-toggle="tooltip" data-placement="bottom" title="Import your contacts from Gmail" style="width: 24px;" />
+                                    </a>
+                                    <a href="#">
+                                        <img src="/Content/images/public/content/signin_yahoo.png" alt="Yahoo" class="tip oauth_provider_link" data-provider="Yahoo" data-toggle="tooltip" data-placement="bottom" title="Import your contacts from Yahoo" style="width: 24px;" />
+                                    </a>
+                                    <a href="#" data-toggle="modal" data-target="#csvUploadModal" onclick="SetCSVImportInstructions('@Html.Raw(Resources.DefaultCSVImportInstructions)')">
+                                        <img src="/Content/images/public/content/excel.png" alt="Excel file" class="tip" data-provider="CSV" data-toggle="tooltip" data-placement="bottom" title="Import your contacts from an Excel file" style="width: 24px;" />
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade text-left" id="csvUploadModal" tabindex="-1" role="dialog" aria-labelledby="csvUploadModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="csvUploadModalLabel">Browse for a CSV File</h4>
+                                                </div>
+                                                <div class="modal-body" ng-controller="CsvFileUploadController">
+                                                    <div class="row">
+                                                        <div class="selectImportFileParagraph"></div>
+                                                    </div>
+                                                    <input type="file" class="invisible" id="fileUpload" ng-model="CsvFile" ng-file-select="onFileSelect($files)" />
+                                                    <div class="modal-footer">
+                                                        <span ng-show="fileUploadAction" class="text-info">Sending {{percentUploaded}}%</span>
+                                                        <span ng-show="fileUploadFailed" class="text-danger">{{responseText}}</span>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary" onclick=' $("#fileUpload").click() ' ng-hide="fileUploadAction">Browse</button>
+                                                        <button type="button" class="btn btn-warning" ng-click="abortUpload()" ng-show="fileUploadAction">Cancel Upload</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Recipients</label>
+                                <span style="font-size: 1.4em; font-weight: bold;">[<a href="#" ng-click="openContactsModal()">Manage my contacts</a>]</span><br />
+                                <small>Use commas (,) to separate the emails</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="recipientsTextArea" ng-blur="manageContacts()" ng-model="recipients" name="recipients" required rows="5" placeholder="i.e. John Smith jsmith@yahoo.com, Amy amy@aol.com, james23@gmail.com"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Subject <small>{{registerView.Subject.length}} out of 100 characters</small></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" ng-model="registerView.Subject" required ng-maxlength="100" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row hidden-xs">
+                            <div class="col-sm-12">
+                                <label>Message <small>{{registerView.CustomMessage.length}} out of 4000 characters</small></label>
+                            </div>
+                        </div>
+                        <div class="row hidden-xs">
+                            <div class="col-sm-12">
+                               <div class="form-group">
+                                  <ng-wig ng-model="registerView.CustomMessage" required name="customMessage" ng-maxlength="4000"></ng-wig>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="row hidden-xs @(Model.Reminders.Any() ? "" : "hidden")">
+                            <div class="col-sm-12">
+                                <label>Reminders</label>
+                            </div>
+                        </div>
+                        <div class="row @(Model.Reminders.Any() ? "" : "hidden")">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="description_text">Send reminder emails every: </span>
+                                <select name="reminderRepetition" class="form-control" style="width: 30%; display: inline;" ng-model="registerView.ReminderRecurrency">
+                                    <option value="3">3 days</option>
+                                    <option value="5">5 days</option>
+                                    <option value="7">7 days</option>
+                                    <option value="10">10 days</option>
+                                </select>
+                                <a href="" class="small" data-toggle="modal" data-target="#remindersModal">[Edit Reminders]</a>
+                            </div>
+                        </div>
+                        <div class="row hidden">
+                            <div class="col-sm-12">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="description_text">Send reminder emails every: </span>
+                                <select name="reminderRepetition" class="form-control" style="width: 30%; display: inline;" ng-model="registerView.ReminderRecurrency">
+                                    <option value="3">3 days</option>
+                                    <option value="5">5 days</option>
+                                    <option value="7">7 days</option>
+                                    <option value="10">10 days</option>
+                                </select>
+                                <br />
+                                <br />
+                                @if (Model.Reminders.Any())
+                                {
+                                    <ul class="nav nav-tabs">
+                                        @for (int i = 0; i < Model.Reminders.Length; i++)
+                                        {
+                                            <li class="@(i == 0 ? "active" : "")"><a id="editor@(i + 1)" href="#reminderContent@(i + 1)" data-toggle="tab">Reminder @(i + 1)</a></li>
+                                        }
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade" ng-class="{in: $first, active: $first}" id="reminderContent{{$index + 1}}" ng-repeat="reminder in registerView.Reminders track by $index">
+                                            <input type="hidden" name="Reminders[{{$index}}].CreationChannelManual" ng-model="registerView.Reminders[$index].CreationChannelManual" />
+                                            <input type="hidden" name="Reminders[{{$index}}].CreationChannelImport" ng-model="registerView.Reminders[$index].CreationChannelImport" />
+                                            <input type="hidden" name="Reminders[{{$index}}].BusinessRuleId" ng-model="registerView.Reminders[$index].BusinessRuleId" />
+                                            <div class="well">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Subject</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <input type="text" name="Reminders[{{$index}}].Subject" class="form-control" ng-model="registerView.Reminders[$index].Subject" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Message</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <textarea ng-model="registerView.Reminders[$index].CustomMessage" class="form-control" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Do not send this reminder</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                       <div class="row">
+                          <div class="col-sm-12">
+                             &nbsp;
+                          </div>
+                       </div>                       
+                        <div class="row" ng-hide="executingAction" ng-cloak>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success form-control">Send emails and continue</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="executingAction" ng-cloak>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <span class="text-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="resultFailed" ng-cloak>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <span class="text-danger">{{responseText}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 hidden-xs hidden-sm hidden-md">
+                <div class="jumbotron">
+                    <h2>2 out of 3 Campaigns reach their goals by sending emails.</h2>
+                   <p class="@(eventBranding.UserType == UserType.PARTICIPANT ? "" : "hidden")">Plus you get a <a href="https://www.fundraising.com/products/discount-fundraisers/all-discount-fundraisers/national-savings-card" target="_blank">GA Savings Pass</a>!</p>
+                    <button  type="button" class="btn btn-primary btn-lg @(eventBranding.UserType == UserType.PARTICIPANT ? "" : "hidden")" data-toggle="modal" data-target="#moreInfoModal">
+                        More information
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row hidden">
+        <div class="col-sm-12 text-right">
+            <a href="@Url.Action("Index", new {participantId = eventBranding.ParticipantId})" onclick=" ga('send', 'event', 'Campaign Manager', 'Skip Step', 'Kickoff'); ">Skip this step</a>
+        </div>
+    </div>
+    <div class="modal fade" id="remindersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Reminders</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" ng-repeat="reminder in registerView.Reminders track by $index">
+                        <div class="col-xs-4">
+                            <div class="checkbox">
+                                <label>Reminder {{$index + 1}}</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="true" name="Reminders[{{$index}}].DeleteReminder" ng-model="registerView.Reminders[$index].DeleteReminder" /> Don't send this reminder
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="importContactsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Invite your friends <small>Ask your friends help to reach your goal.</small></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <strong>Import your contacts from:</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button type="button" class="btn btn-default btn-lg oauth_provider_link" data-provider="Google">
+                                    <img src="/Content/images/public/content/import_google.png" alt="Google" />
+                                </button><br />
+                                <span class="text-info description_title">Gmail contacts</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button class="btn btn-default btn-lg oauth_provider_link" data-provider="Yahoo">
+                                    <img src="/Content/images/public/content/import_yahoo.png" alt="Yahoo" />
+                                </button><br />
+                                <span class="text-info description_title">Yahoo contacts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 text-center">
+                        <span>Fundraising really is better with friends (for lots of reasons!). Invite them to help your cause by importing their emails.</span>
+                        <img src="/Content/images/public/content/inviteFriends.jpg" alt="Invite your friends" style="width: 100%" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="moreInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Prizes</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    We keep fundraising FUN by providing built-in prizing. This not only motivates group members to participate in your campaign, but gives them goals to work
+                    toward and serves as a 'thank you' for their involvement!
+                </p>
+                <p>
+                    Members who invite <strong>12 people</strong> to view your online campaign and make just <strong>one sale</strong> receive a <strong><a href="https://www.fundraising.com/products/discount-fundraisers/all-discount-fundraisers/national-savings-card" target="_blank">GA Savings Pass</a></strong>.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h4 class="modal-title">Manage your recipients</h4>
+    </div>
+    <div class="modal-body">
+        <span class="text-description">To <strong>edit</strong> a contact, double click on the cell. After you have done your changes, click on <strong>Save and close</strong> button.</span>
+        <br />
+        <div class="gridStyle" ng-grid="gridOptions"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-info" ng-click="ok()">Save and close</button>
+    </div>
+</script>
+@section scripts
+{
+    <link href="/Content/ng-grid.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '470107796453192',
+                xfbml: true,
+                version: 'v2.1'
+            });
+        };
+
+        function SetCSVImportInstructions(text) {
+            $(".selectImportFileParagraph").html(text);
+        }
+        $(document).ready(function () {
+            var providerName = '';
+
+            
+            $(".tip").tooltip({});
+
+            $(".oauth_provider_link").click(function () {
+                $("#importContactsModal").modal("hide");
+                var aHref = '@Url.Action("OAuthCallback", "CampaignManager")';
+                var myWindow = window.open(aHref + "?provider=" + $(this).data("provider"), 'popup', 'width=600,height=600,location=0,menubar=0,resizeable=0,scrollbars=0,toolbar=0');
+                providerName = $(this).data("provider");
+                myWindow.focus();
+                return false;
+            });
+            window.receiveContactsFromPopup = function (data, error) {
+                if (error != undefined) {
+                    angular.element("#kickoff").scope().responseText = error;
+                    angular.element("#kickoff").scope().resultFailed = true;
+                }
+                else {
+                    var importedContacts = new Array();
+                    var jsonContactList = $.parseJSON(data);
+                    var recipients = "";
+                    $.each(jsonContactList.Contacts, function (k, v) {
+                        recipients += ", " + v.FirstName + " " + v.LastName + " " + v.EmailAddress;
+                    });
+                    if (recipients.substring(0, 2) === ", ")
+                        recipients = recipients.substring(2, recipients.length);
+                    if ($("#recipientsTextArea").val() == "")
+                        $("#recipientsTextArea").val(recipients);
+                    else
+                        $("#recipientsTextArea").val($("#recipientsTextArea").val() + ", " + recipients);
+                    angular.element("#kickoff").scope().manageImportedContacts(recipients, providerName);
+                    //
+                }
+            };
+
+            $("#importContactsModal").modal({});
+        });
+    </script>
+}

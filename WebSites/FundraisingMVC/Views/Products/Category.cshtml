@@ -1,0 +1,206 @@
+@using GA.BDC.Shared.Entities
+@using GA.BDC.Web.Fundraising.MVC.Helpers
+@model Category
+@{
+
+    ViewBag.Title = string.IsNullOrEmpty(Model.METATitle) ? Model.Name + " Fundraisers " : Model.METATitle;
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.Description = string.IsNullOrEmpty(Model.METADescription) ? "High Profit Fundraising Products for Sports teams, schools, churches and all types of groups, Fundraising.com offers all kind of fundraising ideas to help you reach your goals." : Model.METADescription;
+    ViewBag.Keywords = string.IsNullOrEmpty(Model.METAKeywords) ? "Fundraising Products, Sports Teams, Schools, Fundraising Ideas," + Model.Name : Model.METAKeywords;
+    ViewBag.CanonicalUrl = string.Format("/{0}/{1}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId), Model.Url);
+}
+
+<style>
+    .embed-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+        .embed-container iframe, .embed-container object, .embed-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+</style>
+<div class="container" style="margin-top:125px;no-wrap">
+    <div class="row" border="1" style="no-wrap">
+        <div class="col-sm-12" style="no-wrap">
+            <span itemscope itemtype="https://schema.org/Breadcrumb">
+                <a itemprop="url" href="/">
+                    <span itemprop="title">Home</span>
+                </a> &gt;
+            </span>
+            <span itemscope itemtype="https://schema.org/Breadcrumb">
+                <a itemprop="url" ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)">
+                    <span itemprop="title">Products</span>
+                </a> &gt;
+            </span>
+            <span itemscope itemtype="https://schema.org/Breadcrumb">
+                <a itemprop="url" ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Url">
+                    <span itemprop="title"><strong>@Model.Name</strong></span>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="row" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.ProductTypes.push(@Model.Id); productsCtrl.GetFilteredProducts();">
+        <div class="hidden-xs col-sm-3 col-md-2 small hidden-sm hidden-md hidden-lg">
+            <div class="panel panel-info">
+                <div class="panel-heading">Filter</div>
+                <div class="panel-body">
+                    <div class="form-group-sm">
+                        <strong>Price (per case)</strong>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="price" value="0" ng-model="productsCtrl.Price" ng-change="productsCtrl.GetFilteredProducts();" /> No filter
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="price" value="50" ng-model="productsCtrl.Price" ng-change="productsCtrl.GetFilteredProducts();" /> Up to $50
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="price" value="100" ng-model="productsCtrl.Price" ng-change="productsCtrl.GetFilteredProducts();" /> Up to $100
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="price" value="200" ng-model="productsCtrl.Price" ng-change="productsCtrl.GetFilteredProducts();" /> Up to $200
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="price" value="300" ng-model="productsCtrl.Price" ng-change="productsCtrl.GetFilteredProducts();" /> Up to $300
+                        </label>
+                    </div>
+                    <div class="form-group-sm">
+                        <strong>Profit % (per case)</strong>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="profit" value="0" ng-model="productsCtrl.Profit" ng-change="productsCtrl.GetFilteredProducts();" /> No filter
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="profit" value="20" ng-model="productsCtrl.Profit" ng-change="productsCtrl.GetFilteredProducts();" /> Up to 20%
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="profit" value="30" ng-model="productsCtrl.Profit" ng-change="productsCtrl.GetFilteredProducts();" /> Up to 30%
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="profit" value="40" ng-model="productsCtrl.Profit" ng-change="productsCtrl.GetFilteredProducts();" /> Up to 40%
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="profit" value="50" ng-model="productsCtrl.Profit" ng-change="productsCtrl.GetFilteredProducts();" /> Up to 50%
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 id="title">@Model.Name</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <span>@Html.Raw(Model.Description)</span>
+                </div>
+            </div>
+            @*<div class="row" ng-show="productsCtrl.SubCategories.length > 1" ng-cloak>
+                   <div class="col-sm-12">
+                      <select class="form-control" id="subcategory_select">
+                         <option disabled value="">Jump to...</option>
+                         <option ng-repeat="n in productsCtrl.SubCategories" value="{{n}}">--> {{::n}}</option>
+                      </select>
+                      <br />
+                   </div>
+                </div>*@
+
+            <div class="row" ng-repeat="(key, value) in productsCtrl.Products | groupBy:'Category.Name' | orderBy:Category.Name | toArray:true" ng-cloak>
+                <div class="row" ng-show="productsCtrl.SubCategories.length > 1" ng-cloak>
+                    <div class="col-xs-12 col-sm-10">
+                        <h2 style="color: #f5b54b; padding-left: 13px;" id="{{::key}}">
+                            <a style="color: #f5b54b;" ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{value[0].Category.Parent.Url}}/{{value[0].Category.Url}}">{{value[0].Category.Name}}</a>
+                        </h2>
+                    </div>
+                    <div class="hidden-xs col-sm-2 text-right">
+                        <a href="#title" style="font-size: x-small; color: black; vertical-align: super;" onclick="scrollTo(this);"><span class="glyphicon glyphicon-chevron-up"></span>Back to Top</a>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 products-list" ng-repeat="product in value track by $index">
+                    <div class="thumbnail text-center product-thumbnail" ng-init="googleAnalyticsCtrl.ProductShowed(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products');">
+                        <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><img ng-src="/Content/external/productcategory/{{::product.Image.Url}}" alt="{{::product.Name}}" class="img-responsive" /></a>
+                        <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><h6>{{::product.Name}}</h6></a>
+                        @*<a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')">
+                                <h3 style="margin-top: 10px;" ng-show="product.Price > 0">{{::product.Price|currency}}</h3>
+                            </a>*@
+                        @*<span class="small"><span ng-show="product.ProfitPercentage > 0">Profit: {{::product.ProfitPercentage | percentage: 0}}</span><br /></span>
+                            <span class="small" ng-show="product.RetailPrice > 0">Retail Price: <strong>{{::product.RetailPrice|currency}}</strong></span>
+                            <rating class="text-danger" ng-show="product.Rating > 0" ng-model="product.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating>
+                            <span ng-show="product.Rating == 0">&nbsp;</span>*@
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 text-center" ng-show="productsCtrl.ActionState == 1">
+                <img src="/Content/spinner.big.gif" alt="Loading..." />
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <span>@Html.Raw(Model.Description2)</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+@section scripts
+{
+    <script>
+        function scrollTo(anchor) {
+            var target = anchor.hash;
+            var $target = $(target);
+            $('#subcategory_select').val('');
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top
+            }, 900, 'swing', function () {
+                window.location.hash = target;
+            });
+        }
+
+        $('#subcategory_select').on('change', function () {
+            var $target = $("h2[id='" + this.value + "']");
+
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top
+            }, 900, 'swing', function () {
+                //window.location.hash = target;
+            });
+        });
+    </script>
+}

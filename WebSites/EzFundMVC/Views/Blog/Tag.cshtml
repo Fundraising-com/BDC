@@ -1,0 +1,23 @@
+﻿@using GA.BDC.Shared.Entities
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.UseAngularJSMetaData = true;
+}
+<div class="row" ng-controller="BlogTagController as blogTagCtrl">
+    <div class="col-sm-12 col-md-9">
+        <h1>{{::blogTagCtrl.tag.Title}}</h1>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 text-center" ng-repeat="post in blogTagCtrl.posts" ng-cloak>
+                <a ng-href="/blog/post/{{::post.Url}}" class="thumbnail">
+                    <img ng-src="/Content/external/blog/{{::post.ThumbnailUrl}}" alt="{{::post.Title}}" class="img-responsive" />
+                    <h5>{{::post.Title}}</h5>
+                    <span style="text-decoration: none; color: black">{{::post.Summary}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        @Html.Partial("Blog/_lastPosts")
+        @Html.Partial("Blog/_categories")
+    </div>
+</div>

@@ -1,0 +1,472 @@
+@*@using GA.BDC.Shared.Entities*@
+@{
+   ViewBag.Title = "EZFund.com - Blog de Ideas para recaudacion de fondos";
+   ViewBag.Description = "EzFund En este blog encontraras ideas para recaudar fondos de manera facil y rapida";
+   ViewBag.Keywords = "fundraising, fundraisers, recaudacion de fondos, fundraising tips en Espa&ntilde;ol, ideas para recaudar fondos, recaudacion de fondos con cookie dough, recauda fondos con chocolate, blog de ideas para fundraising";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+   ViewBag.CanonicalUrl = "/blog";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+   $(document).ready(function () {
+      $('body').append('<div id="toTop" class="btn btn-info"><i class="glyphicon glyphicon-chevron-up"></i>&nbsp;Volver al inicio</div>');
+      $(window).scroll(function () {
+         if ($(this).scrollTop() != 0) {
+            $('#toTop').fadeIn();
+         } else {
+            $('#toTop').fadeOut();
+         }
+      });
+      $('#toTop').click(function () {
+         $("html, body").animate({ scrollTop: 0 }, 600);
+         return false;
+      });
+   });
+
+</script>
+
+<style>
+   #toTop {
+      position: fixed;
+      bottom: 60px;
+      right: 10px;
+      cursor: pointer;
+      display: none;
+      margin-right: 5px;
+   }
+
+   .anchor {
+      display: block;
+      height: 115px; /*same height as header*/
+      margin-top: -115px; /*same height as header*/
+      visibility: hidden;
+   }
+</style>
+
+<script type="text/javascript">
+
+   $('.back-to-top').click(function () {
+      $("html, body").animate({
+         scrollTop: 0
+      }, 400);
+      return false;
+   });
+
+   $(window).scroll(function () {
+      var height = $('body').height(),
+         scrollTop = $(window).scrollTop();
+      if (scrollTop > 100) {
+         $('.back-to-top').css({ 'position': 'fixed', 'bottom': '50px', 'display': 'block' });
+      }
+      else {
+         $('.back-to-top').css({ 'position': 'absolute', 'bottom': '-50px', 'display': 'none' });
+      }
+   });
+
+
+</script>
+
+<div class="container" style="margin-top:20px">
+   <div class="row row-padding-lg">
+      <div class="col-lg-12 hidden-xs" style="text-align:center">
+         <img src="~/Content/images/public/2019bannerspanish.jpg" class="img-responsive" style="border:none" />
+      </div>
+      <div class="col-lg-12 visible-xs" style="text-align:center">
+         <img src="~/Content/images/public/2019bannerspanish-mobile.jpg" class="img-responsive" style="border:none" />
+      </div>
+   </div>
+
+
+   <div class="row row-padding-lg">
+
+      <div class="col-lg-12" style="text-align:center">
+         <h3>Haga clic en los enlaces a continuaci&oacute;n para leer sobre algunas excelentes ideas para recaudar fondos para su pr&oacute;ximo evento de recaudaci&oacute;n de fondos.</h3>
+      </div>
+   </div>
+
+
+   <div class="row">
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#b" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Equipos deportivos: personalicen su recaudaci&oacute;n de fondos.
+         </a><br />
+         <a href="#b">
+
+            <img src="~/Content/images/public/blogsports.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Al tratar de recaudar fondos para su equipo, usar el nombre, el logotipo o las im&aacute;genes de los jugadores de su equipo atraer&aacute;la atenci&oacute;n de sus posibles compradores. Cualquier persona que... sea...miembro
+            <br /><a href="#b" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#c" style="text-decoration:none; font-size:17px; color:#347ab6">
+            4 ideas de recaudaci&oacute;n de fondos<br />
+         </a><br />
+         <a href="#c">
+            <img src="~/Content/images/public/blogsellmore.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Al entrenar a un equipo, muchas veces el entrenador quiere ayudar a los ni&ntilde;os a recaudar fondos para uniformes o viajes. Entre algunos de los recaudadores de fondos escolares m&aacute;s populares...
+            <br /><a href="#c" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+
+
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#football" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Recaudaciones de fondos garantizadas para tu equipo de f&uacute;tbol
+         </a><br />
+         <a href="#football">
+            <img src="~/Content/images/public/blogfootball.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Los equipos deportivos a menudo tienen que lanzar campa&ntilde;as de recaudaci&oacute;n de fondos y le mostramos seis eventos s&oacute;lidos para recaudar fondos de f&uacute;tbol para que comiences. Si necesita un equipo nuevo...
+            <br /><a href="#football" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+
+   </div>
+   <br /><br />
+   <div class="row row-padding-lg">
+
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#a" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Consejos De Marketing Para Su Recaudaci&oacute;n De Fondos
+         </a><br />
+         <a href="#a">
+            <img src="~/Content/images/public/blogtyping.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            El marketing es un elemento esencial de la recaudaci&oacute;n de fondos con el que algunas personas pueden tener problemas. Usted podr&iacute;a estar recaudando dinero para una causa muy importante, pero las...<br />
+            <a href="#a" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#a" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Ideas de Recaudaci&oacute;n de Fondos de Bajo Costo o hasta Sin Costo
+         </a><br />
+         <a href="#lowcost">
+            <img src="~/Content/images/public/bloglowcost.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Esta es muy conocida, pero se sigue usando porque es una de las formas m&aacute;s f&aacute;ciles y baratas de recaudar fondos. Solo se necesita comprar un rollo de tickets de sorteo en una tienda de fiestas y empezar a venderlos. El sorteo es muy bueno en eventos de comunidades...<br />
+            <a href="#lowcost" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#blogfun" style="text-decoration:none; font-size:17px; color:#347ab6">
+            Como hacer la Recaudaci&oacute;n de Fondos Divertida
+         </a><br />
+         <a href="#blogfun">
+            <img src="~/Content/images/public/blogfun.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            La recaudaci&oacute;n de fondos es un trabajo duro. Toma de mucha planificaci&oacute;n, esfuerzo y coordinaci&oacute;n de toda la gente involucrada. El hacer todo esto m&aacute;s divertido ayudar&iacute;a en el proceso. Hay muchas maneras de que la recaudaci&oacute;n...<br />
+            <a href="#blogfun" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+
+   </div>
+   <br /><br />
+   <div class="row row-padding-lg">
+
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#blogwordout" style="text-decoration:none; font-size:17px; color:#347ab6">
+            3 Maneras de que se Corra La Voz Sobre tu Siguiente Recaudaci&oacute;n de Fondos
+         </a><br />
+         <a href="#blogwordout">
+            <img src="~/Content/images/public/blogwordout.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Cuando se trata de recaudaci&oacute;n de fondos, es importante correr la voz sobre tu evento para que se obtenga un buen resultado. Aqu&iacute; hay algunas ideas para que te ayuden a llegar a una audiencia m&aacute;s grande y saques el m&aacute;ximo de tu evento...<br />
+            <a href="#blogwordout" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+      <div class="visible-xs" style="height: 30px;"></div>
+      <div class="col-sm-4">
+         <a href="#blogeco" style="text-decoration:none; font-size:17px; color:#347ab6">
+            4 Maneras Ecol&oacute;gicas de Recaudar Fondos para tu Escuela
+         </a><br />
+         <a href="#blogeco">
+            <img src="~/Content/images/public/blogeco.jpg" class="img-responsive" style="border:none" />
+         </a>
+         <br />
+         <div style="height:100px;">
+            Todo el mundo quiere vivir en vecindario limpio, y en estos tiempos a la mayor&iacute;a de la gente le importa el medio ambiente...<br />
+            <a href="#blogeco" style="font-size:18px;">Contin&uacute;a la lectura</a>
+         </div>
+      </div>
+
+
+   </div>
+
+
+
+
+
+
+   <br /><br />
+
+   <a name="lowcost"></a>
+   <br /><br />
+   <img ng-src="~/Content/images/public/blog_lowcost.jpg" alt="Ideas de Recaudaci&oacute;n de Fondos" title="Ideas de Recaudaci&oacute;n de Fondos" class="img-responsive center" style="border:none" />
+   <span style="text-decoration:none; font-size:24px;">
+      Ideas de Recaudaci&oacute;n de Fondos de Bajo Costo o hasta Sin Costo
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         <strong>1. Sorteo 50/50</strong>
+         <br />
+         Esta es muy conocida, pero se sigue usando porque es una de las formas m&aacute;s f&aacute;ciles y baratas de recaudar fondos. Solo se necesita comprar un rollo de tickets de sorteo en una tienda de fiestas y empezar a venderlos. El sorteo es muy bueno en eventos de comunidades donde se tiene acceso a mucha gente a la vez.
+         <br /><br />
+         <strong>2.	Recaudaci&oacute;n de Fondos con Vestidos de Fiesta de Fin de Curso  </strong>
+         <br />
+         Esta campa&ntilde;a es muy &uacute;til para recaudar fondos para grupos que no tienen una gran fuerza de ventas. Consigue a gente que done los vestidos de Fiesta de Fin de Curso que ya no usaran. Si lo promueves bien y avisas con tiempo, puede hacerte de buen dinero. Esta es una campa&ntilde;a que puedes hacer cada a&ntilde;o cuando las fiestas de fin de curso se acaben. Tambi&eacute;n hay otros dos momentos en el a&ntilde;o cuando la puedes hacer; primero, al principio del a&ntilde;o ya que la temporada de vacaciones de diciembre acaba de terminar. La segunda es cuando la temporada de limpieza de primera llega, la gente limpia sus closets y muchos prefieren donar a una causa en vez de pensar que van hacer con la ropa que ya no usaran. Para promover las donaciones puedes usar una p&aacute;gina de internet, el bolet&iacute;n de noticias de la escuela, una tienda de vestidos, o un puesto en tu escuela. &iexcl;Planea el evento de ventas e invita a toda tu comunidad!
+         <br /><br />
+         <strong>3. Venta de Garage Comunitaria </strong>
+         <br /><br />
+         Este es un m&eacute;todo muy f&aacute;cil para recaudar fondos. Necesitas un espacio grande, promoci&oacute;n, varias mesas y cambio (para los billetes). Invita a personas para vengan y vendan sus cosas viejas o las cosas que ya no usen m&aacute;s. P&iacute;dele a gente por una peque&ntilde;a tarifa en la entrada. Todos los fondos que consigas son tuyos, mientras que la gente es feliz vendiendo sus cosas que ya no usan y haciendo dinero. Es muy importante que no olvides lo siguiente, &iexcl;Promover el evento!
+
+      </div>
+   </div>
+
+
+
+
+   <br /><br />
+
+   <a name="blogfun"></a>
+   <br /><br />
+   <img ng-src="~/Content/images/public/blog_funfundraisers.jpg" alt="Ideas de Recaudaci&oacute;n de Fondos" title="Ideas de Recaudaci&oacute;n de Fondos" class="img-responsive center" style="border:none" />
+   <span style="text-decoration:none; font-size:24px;">
+      Como hacer la Recaudaci&oacute;n de Fondos Divertida
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         La recaudaci&oacute;n de fondos es un trabajo duro. Toma de mucha planificaci&oacute;n, esfuerzo y coordinaci&oacute;n de toda la gente involucrada. El hacer todo esto m&aacute;s divertido ayudar&iacute;a en el proceso. Hay muchas maneras de que la recaudaci&oacute;n de fondos sea efectiva que pueden ser muy divertidas para todos los involucrados: aqu&iacute; hay algunas ideas para darle diversi&oacute;n a la recaudaci&oacute;n de fondos.
+         <br /><br />
+         <strong>Cocinar</strong>
+         <br />
+         La comida nos acerca a todos, cualquier manera de hacer una recaudaci&oacute;n enfocada en comida seguramente generara un buen tiempo para todos. La venta de reposter&iacute;a o asados son muy f&aacute;ciles de organizar, y no deber&iacute;a ser muy dif&iacute;cil de convencer gente que compre tu comida reci&eacute;n hecha. Si quieres hacer una venta de reposter&iacute;a, puedes comprar <a href="/products/cookie-dough-fundraisers/cookie-dough" title="cookie dough">
+            masa para galletas
+         </a>. Las cenas con Panqueques o cenas con Espagueti siempre son una oportunidad de juntarse y reforzar el sentimiento de comunidad.
+         <br /><br />
+         <strong>Competencias amistosas</strong>
+         <br />
+         Las competencias atl&eacute;ticas como los eventos deportivos y torneos re&uacute;nen a la gente con el esp&iacute;ritu deportivo. Es muy importante enfatizar con cualquier evento de recaudaci&oacute;n de fondos con tema deportivo, que no importa el ganador. Los verdaderos ganadores son las personas para las que est&aacute;n recaudando fondos.
+         <br /><br />
+         <strong>Que los Juegos Comiencen</strong>
+         <br /><br />
+         No todo tiene que ser una competencia. Los juegos de feria como disparar al blanco, golpea al topo, inflables y 'dunk-tanks' tambi&eacute;n funcionan bien. Puedes buscar rentar estos juegos o puedes hacerlos t&uacute; mismo y divertirte en el proceso creativo. Estos eventos involucran cierta log&iacute;stica incluyendo como montar todo. Si t&uacute; decides contratar a una compa&ntilde;&iacute;a de rentas, vas a encontrar una gran variedad de juegos de donde escoger y puede que tambi&eacute;n te proporcionen con gente para montar todo, la cual facilitara el proceso. Pero recuerda solo si tu presupuesto lo permite.
+      </div>
+   </div>
+
+
+
+   <br /><br />
+
+   <a name="blogwordout"></a>
+   <br /><br />
+   <img ng-src="~/Content/images/public/word.jpg" alt="3 Maneras de que se Corra La Voz Sobre tu Siguiente Recaudaci&oacute;n de Fondos " title="3 Maneras de que se Corra La Voz Sobre tu Siguiente Recaudaci&oacute;n de Fondos " class="img-responsive center" style="border:none" />
+   <span style="text-decoration:none; font-size:24px;">
+      3 Maneras de que se Corra La Voz Sobre tu Siguiente Recaudaci&oacute;n de Fondos
+   </span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Cuando se trata de recaudaci&oacute;n de fondos, es importante correr la voz sobre tu evento para que se obtenga un buen resultado. Aqu&iacute; hay algunas ideas para que te ayuden a llegar a una audiencia m&aacute;s grande y saques el m&aacute;ximo de tu evento.
+         <br /><br />
+         <strong>Que se corra la voz </strong>
+         <br />
+         Muchas veces la gente se le olvida la forma m&aacute;s b&aacute;sica de compartir informaci&oacute;n: Que se corra la voz. Habla con familiares, amigos, gente de la comunidad o en tu trabajo sobre tu recaudaci&oacute;n de fondos, ellos pueden hacer que la informaci&oacute;n se propague. La gente necesita saber tu historia para que les importe, decirle a la gente cara a cara te da la oportunidad de conectar con ellos.
+         <br /><br />
+         <strong>Noticias Locales</strong>
+         <br />
+         Las noticias locales siempre est&aacute;n buscando de una nueva gran historia, &iexcl;Cu&eacute;ntales la tuya! Ac&eacute;rcate a tu peri&oacute;dico local, estaciones de radio, y canales de noticias para promocionar tu evento. La gente le gusta apoyar a la comunidad, especialmente cuando se trata de escuelas. Las noticias locales contaran tu historia a la gente de tu comunidad que est&eacute; dispuesta a ayudar.
+         <br /><br />
+         <strong>Redes Sociales</strong>
+         <br />
+         La mejor manera de llegar al grupo m&aacute;s grande de gente es por las redes sociales. La recaudaci&oacute;n de fondos en las redes sociales se est&aacute; volviendo muy grande, no esperes y empieza a postear sobre tu recaudaci&oacute;n en todas las plataformas que puedas, desde Facebook, Twitter hasta Pinterest. Todas son grandes maneras de compartir tu historia.
+         <br /><br />
+         Estas solo son algunas grandes ideas para correr la voz sobre tu siguiente evento de recaudaci&oacute;n de fondos. Para m&aacute;s consejos y ayuda, ll&aacute;manos al 1-800-991-8779
+      </div>
+   </div>
+
+
+
+
+
+
+   <br /><br />
+
+   <a name="a"></a>
+   <img ng-src="/Content/images/public/marketingtip.jpg" alt="CONSEJOS DE MARKETING PARA SU RECAUDACI&oacute;N DE FONDOS" title="CONSEJOS DE MARKETING PARA SU RECAUDACI&oacute;N DE FONDOS" class="img-responsive center" style="border:none" />
+   <span title="CONSEJOS DE MARKETING PARA SU RECAUDACI&oacute;N DE FONDOS" style="text-decoration:none; font-size:24px">Consejos De Marketing Para Su Recaudaci&oacute;n De Fondos</span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         El marketing es un elemento esencial de la recaudaci&oacute;n de fondos con el que algunas personas pueden tener problemas. Usted podr&iacute;a estar recaudando dinero para una causa muy importante, pero las personas necesitan saber qu&eacute; est&aacute; haciendo y deben saber qu&eacute; impacto tendr&aacute;n sus donaciones. La direcci&oacute;n que tome depender&aacute; de la naturaleza de su organizaci&oacute;n y los datos demogr&aacute;ficos a los que se dirige, pero para las organizaciones sin fines de lucro locales hay algunos consejos generales que facilitan las cosas.
+         <br /><br />
+         <strong>
+            Crear una lista de correo electr&oacute;nico
+         </strong>
+         <br /><br />
+         El email marketing es un m&eacute;todo de marketing muy poderoso, especialmente para la recaudaci&oacute;n de fondos. La mejor manera de construir su lista de correo electr&oacute;nico es utilizar la participaci&oacute;n de las redes sociales para dirigir a las personas al sitio web de recaudaci&oacute;n de fondos y solicitarles que se registren para recibir el bolet&iacute;n informativo. Cada nuevo suscriptor podr&iacute;a convertirse en donante en el futuro.
+         <br /><br />
+         <strong>
+            Cuente historias de impacto
+         </strong>
+         <br /><br />
+         En todo su contenido, ya sea en el bolet&iacute;n informativo, en el sitio web o en las redes sociales, las historias de impacto son una mina de oro. Busque historias personales que demuestren c&oacute;mo su caridad ha marcado la diferencia. Testimonios, videos, infograf&iacute;as y entrevistas son todos formatos posibles para contar la historia. Cuando las personas vean la diferencia que realmente ha hecho su caridad, se les puede persuadir para que env&iacute;en una donaci&oacute;n.
+         <br /><br />
+         <strong>
+            Mantenga un concurso divertido
+         </strong>
+         <br /><br />
+         Una buena manera de generar algo de inter&eacute;s para su recaudaci&oacute;n de fondos es mediante la celebraci&oacute;n de un concurso a trav&eacute;s de las redes sociales. Por ejemplo, si tiene una organizaci&oacute;n ben&eacute;fica de deportes, puede solicitar a las participantes que env&iacute;en sus mejores videos de ellos/ellas en acci&oacute;n, y los tres mejores recibir&aacute;n un premio. Ese es solo un ejemplo, pero el concurso que elijas ejecutar debe ser algo relacionado con tu causa. &iexcl;De esa manera puede proporcionar una transici&oacute;n f&aacute;cil a su recaudaci&oacute;n de fondos donde pueda solicitar donaciones con una historia de impacto convincente!
+
+         <br /><br />
+      </div>
+   </div>
+
+   <br /><br />
+
+   <a name="b"></a>
+   <img ng-src="/Content/images/public/blog_personalizesports.jpg" alt="Equipos deportivos: personalicen su recaudaci&oacute;n de fondos." title="Equipos deportivos: personalicen su recaudaci&oacute;n de fondos." class="img-responsive center" style="border:none" />
+   <span title="Equipos deportivos: personalicen su recaudaci&oacute;n de fondos." style="text-decoration:none; font-size:24px">Equipos deportivos: personalicen su recaudaci&oacute;n de fondos.</span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Al tratar de recaudar fondos para su equipo, usar el nombre, el logotipo o las im&aacute;genes de los jugadores de su equipo atraer&aacute; la atenci&oacute;n de sus posibles compradores. Cualquier persona que sea miembro de la familia o amigo de un miembro del equipo estar&aacute; interesado en aportar dinero para la causa porque pueden conservar un art&iacute;culo que les recuerda al equipo cada vez que lo ven. Adem&aacute;s, los jugadores que sol&iacute;an pertenecer al equipo estar&aacute;n encantados de tener un elemento que les d&eacute; un poco de nostalgia. &iexcl;Aqu&iacute; hay algunos eventos de recaudaci&oacute;n de fondos personalizados para grupos deportivos que te ayudar&aacute;n a recaudar fondos y traer alegr&iacute;a!
+         <br /><br />
+         <strong>Tarjetas de rasca y gana</strong>
+         <br />
+         Estas tarjetas son divertidas para las personas que disfrutan probar su suerte en sorteos. Funciona de la siguiente manera: el comprador decidir&aacute; cu&aacute;ntos puntos quieren rascar; al rascar, pueden descubrir cu&aacute;l es la cantidad a donar. Tu grupo puede recaudar hasta $100. Es un juego de azar divertido para ver cu&aacute;nto puede aportar cada persona para su grupo. Adem&aacute;s, puede animar a los participantes ya que la cantidad m&aacute;s alta es de $5. Tambi&eacute;n puedes realizar peque&ntilde;os juegos donde los ganadores recibir&aacute;n un premio y los perdedores tendr&aacute;n que rascar un punto adicional. Estas tarjetas vienen con un cup&oacute;n de descuento en restaurantes y tiendas locales, un elemento que motiva a tus donadores a apoyar tu causa. Pueden utilizar un dise&ntilde;o deportivo de nuestro cat&aacute;logo, pero tambi&eacute;n pueden personalizarlo con la imagen o el logotipo de su equipo.
+         <br /><br />
+         <strong>Camisetas personalizadas</strong>
+         <br />
+         Las camisetas pueden ser un gran &eacute;xito al tener una recaudaci&oacute;n de fondos en equipo. Una camiseta de alta calidad con el logo de su equipo es f&aacute;cil de comprar entre la familia, los amigos y los fan&aacute;ticos que estar&aacute;n encantados de mostrar un poco de orgullo por el equipo. Puede elegir entre una variedad de colores y ubicaciones para sus dise&ntilde;os, solo dir&iacute;jase a la p&aacute;gina <a href="/products/custom/customized-Fundraising-Products/custom-t-shirts" title="Custom T-Shirts">
+            Custom T-shirts
+         </a> o ll&aacute;menos al 1-800-991-8779.
+         <br /><br />
+         <strong>Mangas de brazo personalizadas</strong>
+         <br />
+         Sus seguidores tambi&eacute;n disfrutar&aacute;n la idea de <a href="/products/custom/customized-Fundraising-Products/custom-spirit-sleeves" title="Custom Spirit Sleeves">
+            mangas de brazo
+         </a> que pueden ser muy &uacute;tiles para una caminata temprana o un entrenamiento al aire libre. Un dise&ntilde;o moderno o divertido asegurar&aacute; que las personas estar&aacute;n felices de usarlas en los juegos, pero tambi&eacute;n en su d&iacute;a a d&iacute;a.<br /><br />
+
+         <br /><br />
+      </div>
+   </div>
+   <br /><br />
+   <a name="c"></a>
+   <img ng-src="/Content/images/public/tipssellmore.jpg" alt="4 ideas de recaudaci&oacute;n de fondos para entrenadores de escuela secundaria." title="4 ideas de recaudaci&oacute;n de fondos para entrenadores de escuela secundaria." class="img-responsive center" style="border:none" />
+   <span title="4 ideas de recaudaci&oacute;n de fondos para entrenadores de escuela secundaria." style="text-decoration:none; font-size:24px">4 ideas de recaudaci&oacute;n de fondos para entrenadores de escuela secundaria.</span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Al entrenar a un equipo, muchas veces el entrenador quiere ayudar a los ni&ntilde;os a recaudar fondos para uniformes o viajes. Entre algunos de los recaudadores de fondos escolares m&aacute;s populares est&aacute;n las ventas de pasteles y los lavados de autos, y aunque esas ideas son probadas y verdaderas, &iquest;por qu&eacute; no intentar nuevas ideas para atraer a sus partidarios? Sabemos que algunos preferir&aacute;n ir a eventos de recaudaci&oacute;n de fondos que han sido exitosos, as&iacute; que reunimos un poco de ambos mundos, algunos de los cuales es posible que hayas escuchado, y algunos que probablemente nunca has intentado.
+         <br /><br />
+         <strong>Renta-un-Atleta</strong>
+         <br />
+         &iexcl;La recaudaci&oacute;n de fondos de Renta-un-Atleta es s&uacute;per f&aacute;cil de hacer! Estos eventos para recaudar fondos involucran a todo el equipo, y la mejor parte es que hay un 100% de ganancia. Ofrezca "alquilar a sus atletas" a las familias para cortar el c&eacute;sped, pasear al perro o cualquier otro trabajo que alguien pueda necesitar. Anunciar esta recaudaci&oacute;n de fondos llama mucho la atenci&oacute;n y le da al equipo una sensaci&oacute;n de logro y comunidad.
+         <br /><br />
+         <strong>Tatuajes temporales</strong>
+         <br />
+         Los tatuajes temporales son un gran sustituto de una venta de pasteles para una recaudaci&oacute;n de fondos de la escuela secundaria. Pueden obtener tatuajes hechos a medida con el logotipo de su equipo y obtener grandes ganancias a bajo costo para sus seguidores. Adem&aacute;s, &iquest;qui&eacute;n no ama un tatuaje de esp&iacute;ritu de equipo?, &iquest;verdad?.
+         <br /><br />
+         <strong>Pega al entrenador a la pared</strong>
+         <br />
+         Esta es una gran idea para recaudar fondos que ha existido desde hace un tiempo, pero los estudiantes contin&uacute;an divirti&eacute;ndose al hacerla. Otra ventaja es que se realiza en la escuela, lo que facilita la log&iacute;stica. Ofrezca una tira de cinta aislante por $ 1 y deje que los ni&ntilde;os peguen con cinta adhesiva a su entrenador en la pared del gimnasio. Esta es una oportunidad perfecta para participar en la recaudaci&oacute;n de fondos, ya que si usted es el entrenador, puede ofrecerse como v&iacute;ctima. &iexcl;Recauda fondos de manera divertida, y el &uacute;nico gasto es la cinta adhesiva!
+         <br /><br />
+         <strong>Barras de chocolate</strong>
+         <br />
+         Esta es una idea cl&aacute;sica de recaudaci&oacute;n de fondos y con raz&oacute;n. Vender barras de chocolate de $1 es una forma segura de obtener ganancias. Es muy f&aacute;cil &iexcl;Simplemente seleccione la barra One Dollar, compre en l&iacute;nea y empiece a recaudar fondos!
+         <br /><br />
+      </div>
+   </div>
+
+
+   <br /><br />
+   <a name="football"></a>
+   <img ng-src="/Content/images/public/footballfundraisers.jpg" alt="Recaudaciones de fondos garantizadas para tu equipo de f&uacute;tbol" title="Recaudaciones de fondos garantizadas para tu equipo de f&uacute;tbol" class="img-responsive center" style="border:none" />
+   <span title="Recaudaciones de fondos garantizadas para tu equipo de f&uacute;tbol" style="text-decoration:none; font-size:24px">Recaudaciones de fondos garantizadas para tu equipo de f&uacute;tbol</span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Los equipos deportivos a menudo tienen que lanzar campa&ntilde;as de recaudaci&oacute;n de fondos y le mostramos seis eventos s&oacute;lidos para recaudar fondos de f&uacute;tbol para que comiences. Si necesita un equipo nuevo, uniformes o un autob&uacute;s para ir a los juegos, considere estos eventos para recaudar fondos para su equipo.<br /><br />
+         <strong>Competencia Punt, Pass and Kick</strong>
+         <br />
+         La competencia Punt, Pass and Kick de la Liga Nacional de F&uacute;tbol Americano ha sido un &eacute;xito rotundo durante a&ntilde;os, as&iacute; que &iquest;por qu&eacute; no montar tu propia versi&oacute;n? La forma en que funciona esta recaudaci&oacute;n de fondos es bastante sencilla: los jugadores pagan una tarifa para unirse a la competencia en la que compiten en patear, pasar y patear. Hay diferentes divisiones de edad para mantener el orden. Por ejemplo, puede tener uno para ni&ntilde;os de 5-7 a&ntilde;os, otro para ni&ntilde;os de 8-10 a&ntilde;os, otro para ni&ntilde;os de 11-12 a&ntilde;os, y as&iacute; sucesivamente.
+         <br /><br />
+         Recaudar fondos puede ser un desaf&iacute;o, pero tambi&eacute;n puede ser muy divertido si mantiene a su grupo comprometido y su objetivo a la vista.
+         <br /><br />
+         <strong>Fiesta del Sal&oacute;n de la Fama</strong>
+         <br />
+         Organice una cena divertida y asequible en un sal&oacute;n de banquetes e invite a los exjugadores y entrenadores, as&iacute; como a las personas que integran el equipo. Pida una tarifa modesta y deje en claro en la invitaci&oacute;n que se trata de un evento de recaudaci&oacute;n de fondos para el equipo. Ser&aacute; una gran oportunidad para que las personas conozcan a exjugadores, intercambien historias y tal vez incluso hagan nuevos amigos. Seguramente ser&aacute; una noche divertida para todos.
+         <br /><br />
+         <strong>Puestos de venta</strong>
+         <br />
+         &iquest;Qu&eacute; es la noche de juegos sin bebidas y refrigerios para disfrutar mientras animas al equipo? Vea si puede conseguir un negocio local que lo ayude brindando caf&eacute;, papas fritas, salchichas y cualquier otra cosa que considere que sea f&aacute;cil de vender a los fan&aacute;ticos. Probablemente tendr&aacute; que darle a su socio comercial una peque&ntilde;a parte de los ingresos para que valga la pena, pero todo se puede destinar a sus esfuerzos de recaudaci&oacute;n de fondos. Puede colocar su puesto de venta en la entrada y configurarlo con el tema de un deporte. Las opciones son infinitas, desde piruletas de f&uacute;tbol hasta camisetas personalizadas, puedes tener una buena variedad para cubrir diferentes gustos y presupuestos. Tenemos productos geniales para tu puesto de comida, as&iacute; que no dudes en llamarnos y obtener buenos consejos de nuestros consultores de recaudaci&oacute;n de fondos.
+         <br /><br />
+         <strong>Colecci&oacute;n del equipo</strong>
+         <br />
+         Las camisas, los sombreros y las camisetas son un pilar para los equipos deportivos profesionales, y su equipo puede tener su propia indumentaria deportiva y accesorios personalizados con el logotipo o nombre de su equipo.
+         <br /><br />
+         <strong>F&uacute;tbol 101</strong>
+         <br />
+         Haga que algunos de sus jugadores se ofrezcan a ense&ntilde;ar f&uacute;tbol a los ni&ntilde;os de la zona por una peque&ntilde;a tarifa. Las clases de F&uacute;tbol 101 se pueden ofrecer en un parque con un campo de f&uacute;tbol abierto al p&uacute;blico. Coloca algunos carteles y volantes alrededor de la ciudad para atraer la atenci&oacute;n antes del gran d&iacute;a. Las redes sociales son otra buena forma de generar expectaci&oacute;n para esta recaudaci&oacute;n de fondos.
+         <br /><br />
+         <strong>Touchdowns patrocinados</strong>
+         <br />
+         Esta recaudaci&oacute;n de fondos de f&uacute;tbol es buena porque inspirar&aacute; a los jugadores a jugar duro y jugar para ganar. P&iacute;dales que recopilen una lista de patrocinadores de la comunidad que aceptar&aacute;n enviar una donaci&oacute;n cada vez que un jugador anote un touchdown. Por un peque&ntilde;o incentivo adicional, tambi&eacute;n puede ofrecer un premio al jugador que logre recaudar la mayor cantidad de dinero. Lo mismo podr&iacute;a hacerse con capturas del mariscal de campo, pases completos, intercepciones u objetivos de campo en lugar de touchdowns.
+         <br /><br />
+         Con suerte, al menos una de estas ideas de recaudaci&oacute;n de fondos funcionar&aacute; para su equipo. Si necesita ayuda para que su recaudaci&oacute;n de fondos despegue, &iexcl;no dude en llamarnos o enviarnos un correo electr&oacute;nico!
+      </div>
+   </div>
+
+
+
+
+   <br /><br />
+   <a name="blogeco"></a>
+   <img ng-src="/Content/images/public/ecofriendlyfundraisers.jpg" alt="Maneras Ecol&oacute;gicas de Recaudar Fondos para tu Escuela" class="img-responsive center" style="border:none" />
+   <span title="Maneras Ecol&oacute;gicas de Recaudar Fondos para tu Escuela" style="text-decoration:none; font-size:24px">4 Maneras Ecol&oacute;gicas de Recaudar Fondos para tu Escuela</span>
+   <div class="row row-padding-lg">
+      <div class="col-sm-12">
+         Todo el mundo quiere vivir en vecindario limpio, y en estos tiempos a la mayor&Iacute;a de la gente le importa el medio ambiente. Por eso aqu&Iacute; hay algunas recaudaciones de fondos ecol&oacute;gicas que puedes aprovechar. Haz tu parte para ayudar al medio ambiente y has ganancias con estas recaudaciones sustentables.<br /><br />
+         <strong>Limpia el Vecindario </strong>
+         <br />
+         Una limpia al medio ambiente local es una gran recaudaci&oacute;n verde que los estudiantes seguramente van amar porque los sacara del sal&oacute;n al aire libre por un momento. Pregunta por donaciones a la gente y a cambio limpia la basura en el vecindario o los parques m&aacute;s cercanos. No solo los estudiantes amaran el aire fresco, pero igual a los residentes les gustara tener un vecindario bonito y limpio que puedan llamar casa.
+         <br /><br />
+         <strong>Smencils</strong>
+         <br />
+         Los estudiantes siempre necesitan un l&aacute;piz, &iquest;Verdad? Entonces puedes hacer una recaudaci&oacute;n de fondos vendiendo Smencils. Estos son l&aacute;pices aromatizados y hechos de materiales reciclados, de los que cuales siempre tenemos muchos de diferentes colores y temas.
+         <br /><br />
+         <strong>Venta de Arboles J&oacute;venes </strong>
+         <br />
+         La primera y el oto&ntilde;o son las temporadas perfectas para vender arboles j&oacute;venes y semillas, hay muy pocas cosas m&aacute;s ecol&oacute;gicas que plantar &aacute;rboles.  Esta es otra recaudaci&oacute;n de fondos para escuelas que sacara a los estudiantes al vecindario y los involucrara con la comunidad. Para encontrar las semillas y los arboles j&oacute;venes intenta preguntarles a los invernaderos locales si tienen algunos de sobra, o ve si te ofrecen una oferta por comprar en cantidades grandes.
+         <br /><br />
+         <strong>Colecci&oacute;n de Botellas y Latas</strong>
+         <br />
+         Siempre es una pena ver botellas y latas vac&Iacute;as ensuciando las calles y parques donde vives. Convierte eso en una recaudaci&oacute;n de fondos verde &iexcl;dando una vuelta de colecci&oacute;n de botellas! Dile a la gente que traigan sus botellas y latas vac&Iacute;as, o busca patrocinadores que est&eacute;n dispuestos a pagar a los estudiantes de tu escuela para que exploren el vecindario en busca de botellas y latas. Al final del d&Iacute;a, todos esos dep&oacute;sitos de 10 centavos pueden juntarse &iexcl;Y hacer algo grande!
+         <br /><br />
+         La mayor&Iacute;a de los estudiantes aman el chance de salir de clase por un rato, y estas recaudaciones de fondo, no solo consiguen dinero para tu causa, pero ayudan al medio ambiente. Al final del d&Iacute;a, todos se benefician de estas recaudaciones ecol&oacute;gicas.
+      </div>
+   </div>
+
+
+
+

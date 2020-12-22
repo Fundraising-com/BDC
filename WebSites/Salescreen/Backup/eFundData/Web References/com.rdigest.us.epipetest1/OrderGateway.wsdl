@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://order.commerce.readersdigest.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="OrderGateway" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="OrderGateway" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://order.commerce.readersdigest.com">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="CreditCard">
+        <s:sequence>
+          <s:element name="cardMask" nillable="true" type="s:string" />
+          <s:element name="cardNumber" nillable="true" type="s:string" />
+          <s:element name="creditCardId" nillable="true" type="s:int" />
+          <s:element name="creditCardTypeId" type="s:int" />
+          <s:element name="expMonth" type="s:int" />
+          <s:element name="expYear" type="s:int" />
+          <s:element name="nameOnCard" nillable="true" type="s:string" />
+          <s:element name="securityCode" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Profile">
+        <s:sequence>
+          <s:element name="DPSProfileId" nillable="true" type="s:string" />
+          <s:element name="accountNumber" nillable="true" type="s:string" />
+          <s:element name="address1" nillable="true" type="s:string" />
+          <s:element name="address2" nillable="true" type="s:string" />
+          <s:element name="address3" nillable="true" type="s:string" />
+          <s:element name="address4" nillable="true" type="s:string" />
+          <s:element name="birthDay" nillable="true" type="s:dateTime" />
+          <s:element name="city" nillable="true" type="s:string" />
+          <s:element name="country" nillable="true" type="s:string" />
+          <s:element name="countryId" nillable="true" type="s:int" />
+          <s:element name="createDate" nillable="true" type="s:dateTime" />
+          <s:element name="email" nillable="true" type="s:string" />
+          <s:element name="emailOptOut" nillable="true" type="s:string" />
+          <s:element name="faxNumber" nillable="true" type="s:string" />
+          <s:element name="firstName" nillable="true" type="s:string" />
+          <s:element name="gender" nillable="true" type="s:string" />
+          <s:element name="isBillProfile" nillable="true" type="s:boolean" />
+          <s:element name="isShipProfile" nillable="true" type="s:boolean" />
+          <s:element name="lastName" nillable="true" type="s:string" />
+          <s:element name="middleName" nillable="true" type="s:string" />
+          <s:element name="phone" nillable="true" type="s:string" />
+          <s:element name="phoneExt" nillable="true" type="s:string" />
+          <s:element name="phoneWithExt" nillable="true" type="s:string" />
+          <s:element name="postalCode" nillable="true" type="s:string" />
+          <s:element name="prefix" nillable="true" type="s:string" />
+          <s:element name="profileId" nillable="true" type="s:int" />
+          <s:element name="province" nillable="true" type="s:string" />
+          <s:element name="state" nillable="true" type="s:string" />
+          <s:element name="suffix" nillable="true" type="s:string" />
+          <s:element name="fax" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EBTInfo">
+        <s:sequence>
+          <s:element name="EBTInfoId" nillable="true" type="s:int" />
+          <s:element name="bankAccountName" nillable="true" type="s:string" />
+          <s:element name="bankAccountNumber" nillable="true" type="s:string" />
+          <s:element name="bankCode" nillable="true" type="s:string" />
+          <s:element name="bankLocation" nillable="true" type="s:string" />
+          <s:element name="bankName" nillable="true" type="s:string" />
+          <s:element name="countryCode" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReturnInfo">
+        <s:sequence>
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="reasonCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderItem">
+        <s:sequence>
+          <s:element name="groupId" nillable="true" type="s:int" />
+          <s:element name="isRenewal" nillable="true" type="s:boolean" />
+          <s:element name="itemListNumber" nillable="true" type="s:int" />
+          <s:element name="oracleId" nillable="true" type="s:string" />
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="productId" nillable="true" type="s:string" />
+          <s:element name="promoKey" nillable="true" type="s:string" />
+          <s:element name="quantity" nillable="true" type="s:int" />
+          <s:element name="specialInstructionCode" nillable="true" type="s:string" />
+          <s:element name="statusId" nillable="true" type="s:int" />
+          <s:element name="submittedInstallmentPlanId" nillable="true" type="s:int" />
+          <s:element name="submittedPrice" nillable="true" type="s:double" />
+          <s:element name="submittedProductTypeId" nillable="true" type="s:int" />
+          <s:element name="submittedShippingPrice" nillable="true" type="s:double" />
+          <s:element name="submittedTerm" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderItemGroup">
+        <s:sequence>
+          <s:element name="groupId" nillable="true" type="s:int" />
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="orderItemArrayList" nillable="true" type="tns:ArrayOf_xsd_anyType" />
+          <s:element name="orderItems" nillable="true" type="tns:ArrayOf_tns2_OrderItem" />
+          <s:element name="shipStatus" type="s:int" />
+          <s:element name="shippingMethodId" type="s:int" />
+          <s:element name="shippingProfile" nillable="true" type="s0:Profile" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PaymentInfo">
+        <s:sequence>
+          <s:element name="EBTInfo" nillable="true" type="s0:EBTInfo" />
+          <s:element name="amount" type="s:double" />
+          <s:element name="authorizationCode" nillable="true" type="s:string" />
+          <s:element name="authorizationDate" nillable="true" type="s:dateTime" />
+          <s:element name="authorizingAgentId" type="s:int" />
+          <s:element name="billingProfile" nillable="true" type="s0:Profile" />
+          <s:element name="creditCard" nillable="true" type="s0:CreditCard" />
+          <s:element name="payStatusId" type="s:int" />
+          <s:element name="paymentId" nillable="true" type="s:int" />
+          <s:element name="paymentTypeId" type="s:int" />
+          <s:element name="ebtInfo" nillable="true" type="s0:EBTInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Order">
+        <s:sequence>
+          <s:element name="billingIsShipping" type="s:boolean" />
+          <s:element name="clientIPAddress" nillable="true" type="s:string" />
+          <s:element name="comments" nillable="true" type="s:string" />
+          <s:element name="createDate" nillable="true" type="s:dateTime" />
+          <s:element name="divisionId" nillable="true" type="s:int" />
+          <s:element name="fulfillmentChannelId" type="s:int" />
+          <s:element name="lastErrorCode" nillable="true" type="s:string" />
+          <s:element name="merchantMessage" nillable="true" type="s:string" />
+          <s:element name="modifyDate" nillable="true" type="s:dateTime" />
+          <s:element name="offerPackageId" nillable="true" type="s:int" />
+          <s:element name="optStatusTransactionId" nillable="true" type="s:int" />
+          <s:element name="orderAmount" type="s:double" />
+          <s:element name="orderCalculationMethodId" nillable="true" type="s:int" />
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="orderItemGroupArrayList" nillable="true" type="tns:ArrayOf_xsd_anyType" />
+          <s:element name="orderItemGroups" nillable="true" type="tns:ArrayOf_tns2_OrderItemGroup" />
+          <s:element name="orderStatus" nillable="true" type="s:int" />
+          <s:element name="orderType" type="s:int" />
+          <s:element name="paymentInfo" nillable="true" type="s0:PaymentInfo" />
+          <s:element name="pipelineStepId" nillable="true" type="s:int" />
+          <s:element name="returnInfo" nillable="true" type="s0:ReturnInfo" />
+          <s:element name="shippingProfileId" nillable="true" type="s:int" />
+          <s:element name="sourceOrderId" nillable="true" type="s:string" />
+          <s:element name="trackingId" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="OrderGateway">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="SimpleOrder">
+        <s:sequence>
+          <s:element name="DPSProfileId" nillable="true" type="s:string" />
+          <s:element name="accountNumber" nillable="true" type="s:string" />
+          <s:element name="address1" nillable="true" type="s:string" />
+          <s:element name="address2" nillable="true" type="s:string" />
+          <s:element name="address3" nillable="true" type="s:string" />
+          <s:element name="address4" nillable="true" type="s:string" />
+          <s:element name="amount" type="s:double" />
+          <s:element name="authorizingAgentId" type="s:int" />
+          <s:element name="billingIsShipping" type="s:boolean" />
+          <s:element name="cardMask" nillable="true" type="s:string" />
+          <s:element name="cardNumber" nillable="true" type="s:string" />
+          <s:element name="city" nillable="true" type="s:string" />
+          <s:element name="clientIPAddress" nillable="true" type="s:string" />
+          <s:element name="comments" nillable="true" type="s:string" />
+          <s:element name="country" nillable="true" type="s:string" />
+          <s:element name="countryId" nillable="true" type="s:int" />
+          <s:element name="creditCardId" nillable="true" type="s:int" />
+          <s:element name="creditCardTypeId" type="s:int" />
+          <s:element name="divisionId" nillable="true" type="s:int" />
+          <s:element name="email" nillable="true" type="s:string" />
+          <s:element name="emailOptOut" nillable="true" type="s:string" />
+          <s:element name="expMonth" type="s:int" />
+          <s:element name="expYear" type="s:int" />
+          <s:element name="faxNumber" nillable="true" type="s:string" />
+          <s:element name="firstName" nillable="true" type="s:string" />
+          <s:element name="fulfillmentChannelId" type="s:int" />
+          <s:element name="gender" nillable="true" type="s:string" />
+          <s:element name="isRenewal" nillable="true" type="s:boolean" />
+          <s:element name="lastErrorCode" nillable="true" type="s:string" />
+          <s:element name="lastName" nillable="true" type="s:string" />
+          <s:element name="merchantMessage" nillable="true" type="s:string" />
+          <s:element name="middleName" nillable="true" type="s:string" />
+          <s:element name="nameOnCard" nillable="true" type="s:string" />
+          <s:element name="offerPackageId" nillable="true" type="s:int" />
+          <s:element name="optStatusTransactionId" nillable="true" type="s:int" />
+          <s:element name="oracleId" nillable="true" type="s:string" />
+          <s:element name="orderAmount" type="s:double" />
+          <s:element name="orderCalculationMethodId" nillable="true" type="s:int" />
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="orderStatus" nillable="true" type="s:int" />
+          <s:element name="orderType" type="s:int" />
+          <s:element name="payStatusId" type="s:int" />
+          <s:element name="paymentId" nillable="true" type="s:int" />
+          <s:element name="paymentTypeId" type="s:int" />
+          <s:element name="phone" nillable="true" type="s:string" />
+          <s:element name="phoneExt" nillable="true" type="s:string" />
+          <s:element name="pipelineStepId" nillable="true" type="s:int" />
+          <s:element name="postalCode" nillable="true" type="s:string" />
+          <s:element name="prefix" nillable="true" type="s:string" />
+          <s:element name="productId" nillable="true" type="s:string" />
+          <s:element name="promoKey" nillable="true" type="s:string" />
+          <s:element name="province" nillable="true" type="s:string" />
+          <s:element name="quantity" nillable="true" type="s:int" />
+          <s:element name="securityCode" nillable="true" type="s:string" />
+          <s:element name="isSecurityCheck" nillable="true" type="s:boolean" />
+          <s:element name="sourceOrderId" nillable="true" type="s:string" />
+          <s:element name="specialInstructionCode" nillable="true" type="s:string" />
+          <s:element name="state" nillable="true" type="s:string" />
+          <s:element name="statusId" nillable="true" type="s:int" />
+          <s:element name="submittedInstallmentPlanId" nillable="true" type="s:int" />
+          <s:element name="submittedPrice" nillable="true" type="s:double" />
+          <s:element name="submittedProductTypeId" nillable="true" type="s:int" />
+          <s:element name="submittedShippingPrice" nillable="true" type="s:double" />
+          <s:element name="submittedTerm" nillable="true" type="s:int" />
+          <s:element name="suffix" nillable="true" type="s:string" />
+          <s:element name="trackingId" nillable="true" type="s:string" />
+          <s:element name="fax" nillable="true" type="s:string" />
+          <s:element name="isBillProfile" nillable="true" type="s:boolean" />
+          <s:element name="isShipProfile" nillable="true" type="s:boolean" />
+          <s:element name="authorizationCode" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOf_xsd_anyType">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute wsdl:arrayType="s:anyType[]" ref="soapenc:arrayType" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOf_tns2_OrderItem">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute wsdl:arrayType="s0:OrderItem[]" ref="soapenc:arrayType" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOf_tns2_OrderItemGroup">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute wsdl:arrayType="s0:OrderItemGroup[]" ref="soapenc:arrayType" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="OrderServiceRequest">
+        <s:sequence>
+          <s:element name="DPSProfileId" nillable="true" type="s:string" />
+          <s:element name="accountNumber" nillable="true" type="s:string" />
+          <s:element name="action" nillable="true" type="s:string" />
+          <s:element name="address1" nillable="true" type="s:string" />
+          <s:element name="address2" nillable="true" type="s:string" />
+          <s:element name="address3" nillable="true" type="s:string" />
+          <s:element name="address4" nillable="true" type="s:string" />
+          <s:element name="amount" type="s:double" />
+          <s:element name="authorizingAgentId" type="s:int" />
+          <s:element name="billingIsShipping" type="s:boolean" />
+          <s:element name="cardMask" nillable="true" type="s:string" />
+          <s:element name="cardNumber" nillable="true" type="s:string" />
+          <s:element name="city" nillable="true" type="s:string" />
+          <s:element name="clientIPAddress" nillable="true" type="s:string" />
+          <s:element name="comments" nillable="true" type="s:string" />
+          <s:element name="country" nillable="true" type="s:string" />
+          <s:element name="countryId" nillable="true" type="s:int" />
+          <s:element name="creditCardId" nillable="true" type="s:int" />
+          <s:element name="creditCardTypeId" type="s:int" />
+          <s:element name="divisionId" nillable="true" type="s:int" />
+          <s:element name="email" nillable="true" type="s:string" />
+          <s:element name="emailOptOut" nillable="true" type="s:string" />
+          <s:element name="expMonth" type="s:int" />
+          <s:element name="expYear" type="s:int" />
+          <s:element name="faxNumber" nillable="true" type="s:string" />
+          <s:element name="firstName" nillable="true" type="s:string" />
+          <s:element name="fulfillmentChannelId" type="s:int" />
+          <s:element name="gender" nillable="true" type="s:string" />
+          <s:element name="isRenewal" nillable="true" type="s:boolean" />
+          <s:element name="lastErrorCode" nillable="true" type="s:string" />
+          <s:element name="lastName" nillable="true" type="s:string" />
+          <s:element name="merchantMessage" nillable="true" type="s:string" />
+          <s:element name="middleName" nillable="true" type="s:string" />
+          <s:element name="nameOnCard" nillable="true" type="s:string" />
+          <s:element name="offerPackageId" nillable="true" type="s:int" />
+          <s:element name="optStatusTransactionId" nillable="true" type="s:int" />
+          <s:element name="oracleId" nillable="true" type="s:string" />
+          <s:element name="order" nillable="true" type="s0:Order" />
+          <s:element name="orderAmount" type="s:double" />
+          <s:element name="orderCalculationMethodId" nillable="true" type="s:int" />
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="orderStatus" nillable="true" type="s:int" />
+          <s:element name="orderType" type="s:int" />
+          <s:element name="password" nillable="true" type="s:string" />
+          <s:element name="payStatusId" type="s:int" />
+          <s:element name="paymentId" nillable="true" type="s:int" />
+          <s:element name="paymentTypeId" type="s:int" />
+          <s:element name="phone" nillable="true" type="s:string" />
+          <s:element name="phoneExt" nillable="true" type="s:string" />
+          <s:element name="pipelineStepId" nillable="true" type="s:int" />
+          <s:element name="postalCode" nillable="true" type="s:string" />
+          <s:element name="prefix" nillable="true" type="s:string" />
+          <s:element name="productId" nillable="true" type="s:string" />
+          <s:element name="promoKey" nillable="true" type="s:string" />
+          <s:element name="province" nillable="true" type="s:string" />
+          <s:element name="quantity" nillable="true" type="s:int" />
+          <s:element name="securityCode" nillable="true" type="s:string" />
+          <s:element name="isSecurityCheck" nillable="true" type="s:boolean" />
+          <s:element name="simpleOrder" nillable="true" type="tns:SimpleOrder" />
+          <s:element name="sourceOrderId" nillable="true" type="s:string" />
+          <s:element name="specialInstructionCode" nillable="true" type="s:string" />
+          <s:element name="state" nillable="true" type="s:string" />
+          <s:element name="statusId" nillable="true" type="s:int" />
+          <s:element name="submittedInstallmentPlanId" nillable="true" type="s:int" />
+          <s:element name="submittedPrice" nillable="true" type="s:double" />
+          <s:element name="submittedProductTypeId" nillable="true" type="s:int" />
+          <s:element name="submittedShippingPrice" nillable="true" type="s:double" />
+          <s:element name="submittedTerm" nillable="true" type="s:int" />
+          <s:element name="suffix" nillable="true" type="s:string" />
+          <s:element name="trackingId" nillable="true" type="s:string" />
+          <s:element name="userId" nillable="true" type="s:string" />
+          <s:element name="fax" nillable="true" type="s:string" />
+          <s:element name="isBillProfile" nillable="true" type="s:boolean" />
+          <s:element name="isShipProfile" nillable="true" type="s:boolean" />
+          <s:element name="authorizationCode" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderServiceResponse">
+        <s:sequence>
+          <s:element name="authCode" nillable="true" type="s:string" />
+          <s:element name="message" nillable="true" type="s:string" />
+          <s:element name="orderId" nillable="true" type="s:int" />
+          <s:element name="paymentId" nillable="true" type="s:int" />
+          <s:element name="resultCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="processOrderRequest">
+    <wsdl:part name="in0" type="tns:OrderServiceRequest" />
+  </wsdl:message>
+  <wsdl:message name="processOrderResponse">
+    <wsdl:part name="processOrderReturn" type="tns:OrderServiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OrderService">
+    <wsdl:operation name="processOrder" parameterOrder="in0">
+      <wsdl:input name="processOrderRequest" message="tns:processOrderRequest" />
+      <wsdl:output name="processOrderResponse" message="tns:processOrderResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderGatewaySoapBinding" type="tns:OrderService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="processOrder">
+      <soap:operation soapAction="" />
+      <wsdl:input name="processOrderRequest">
+        <soap:body use="encoded" namespace="OrderGateway" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="processOrderResponse">
+        <soap:body use="encoded" namespace="OrderGateway" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderServiceService">
+    <wsdl:port name="OrderGateway" binding="tns:OrderGatewaySoapBinding">
+      <soap:address location="http://epipetest.us.rdigest.com/axis/services/OrderGateway" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,355 @@
+<html>
+<head>
+<SCRIPT name="JavaScript">
+<!--
+var SC_appletWindow = "";
+
+window.name="SC_APPLETWINDOW";
+function SC_ShowApplet(orderID, grandTotal) {
+
+		var name = document.forms["Form1"].CARD_NAME.value
+		var company = document.forms["Form1"].COMPANY.value
+		var address1 = document.forms["Form1"].ADDRESS_1.value
+		var address2 = document.forms["Form1"].ADDRESS_2.value
+		var city = document.forms["Form1"].CITY.value
+		var state = document.forms["Form1"].State.value
+		var country = document.forms["Form1"].COUNTRY.value
+		var zip = document.forms["Form1"].ZIP.value
+		var phone = document.forms["Form1"].PHONE.value
+		var fax = document.forms["Form1"].FAX.value
+		var email = document.forms["Form1"].E_MAIL.value
+		var mail = document.forms["Form1"].MailSubscribed.value
+		var shipName = document.forms["Form1"].SHIP_NAME.value
+		var shipCompany = document.forms["Form1"].SHIP_COUNTRY.value
+		var shipAddress1 = document.forms["Form1"].SHIP_ADDRESS_1.value
+		var shipAddress2 = document.forms["Form1"].SHIP_ADDRESS_2.value
+		var shipCity = document.forms["Form1"].SHIP_CITY.value
+		var shipState = document.forms["Form1"].SHIP_STATE.value
+		var shipCountry = document.forms["Form1"].SHIP_COUNTRY.value
+		var shipZip = document.forms["Form1"].SHIP_ZIP.value
+		var shipPhone = document.forms["Form1"].SHIP_TELEPHONE.value
+		var shipMessage = document.forms["Form1"].SHIP_MESSAGE.value
+		var shipMethod = document.forms["Form1"].ShipMeth.value
+		var prmShip = document.forms["Form1"].PrmShip.value
+		var shipMethod = document.forms["Form1"].ShipMeth.value
+						
+		var postString = "?ORDER_ID=" + orderID
+		postString = postString + "&GRAND_TOTAL=" + escape(grandTotal)
+		postString = postString + "&CARD_NAME=" + escape(name)
+		postString = postString + "&COMPANY=" + escape(company)
+		postString = postString + "&ADDRESS_1=" + escape(address1)
+		postString = postString + "&ADDRESS_2=" + escape(address2)
+		postString = postString + "&CITY=" + escape(city)
+		postString = postString + "&STATE=" + escape(state)
+		postString = postString + "&COUNTRY=" + escape(country)
+		postString = postString + "&ZIP=" + escape(zip)
+		postString = postString + "&PHONE=" + escape(phone)
+		postString = postString + "&FAX=" + escape(fax)
+		postString = postString + "&E_MAIL=" + escape(email)
+		postString = postString + "&MailSubscribed=" + escape(mail)
+		postString = postString + "&SHIP_NAME=" + escape(shipName)
+		postString = postString + "&SHIP_COMPANY=" + escape(shipCompany)
+		postString = postString + "&SHIP_ADDRESS_1=" + escape(shipAddress1)
+		postString = postString + "&SHIP_ADDRESS_2=" + escape(shipAddress2)
+		postString = postString + "&SHIP_CITY=" + escape(shipCity)
+		postString = postString + "&SHIP_STATE=" + escape(shipState)
+		postString = postString + "&SHIP_COUNTRY=" + escape(shipCountry)
+		postString = postString + "&SHIP_ZIP=" + escape(shipZip)
+		postString = postString + "&SHIP_TELEPHONE=" + escape(shipPhone)
+		postString = postString + "&SHIP_MESSAGE=" + escape(shipMessage)
+        postString = postString + "&ShipMeth=" + escape(shipMethod)
+        postString = postString + "&PrmShip=" + escape(prmShip)
+        postString = postString + "&PaymentMethod=INTERNETCASH"
+         
+        if(SC_appletWindow && SC_appletWindow.closed) SC_appletWindow ="";
+        if (SC_appletWindow)
+                SC_appletWindow.close();
+        SC_appletWindow = window.open("SCApplet.asp" + postString,"SC_AppletWindow","width=400,height=320,menubar=no,directories=no,location=no,resizable=no,scrollbars=no,status=no,titlebar=no,toolbar=no");
+        SC_appletWindow.focus();
+}
+
+function Validate(theForm)
+{
+
+  if (theForm.CARD_NAME.value == "")
+  {
+    alert("Please enter a value for the \"Name\" field.");
+    theForm.CARD_NAME.focus();
+    return (false);
+  }
+
+  if (theForm.ADDRESS_2.value == "")
+  {
+    alert("Please enter a value for the \"Address\" field.");
+    theForm.ADDRESS_2.focus();
+    return (false);
+  }
+
+  if (theForm.CITY.value == "")
+  {
+    alert("Please enter a value for the \"City\" field.");
+    theForm.CITY.focus();
+    return (false);
+  }
+
+  if (theForm.CITY.value.length < 2)
+  {
+    alert("Please enter at least 2 characters in the \"City\" field.");
+    theForm.CITY.focus();
+    return (false);
+  }
+
+  if (theForm.State.selectedIndex < 0)
+  {
+    alert("Please select one of the \"State\" options.");
+    theForm.State.focus();
+    return (false);
+  }
+
+  if (theForm.COUNTRY.selectedIndex < 0)
+  {
+    alert("Please select one of the \"Country\" options.");
+    theForm.COUNTRY.focus();
+    return (false);
+  }
+
+  
+  if (theForm.PHONE.value == "")
+  {
+    alert("Please enter a value for the \"PHONE\" field.");
+    theForm.PHONE.focus();
+    return (false);
+  }
+
+  if (theForm.E_MAIL.value == "")
+  {
+    alert("Please enter a value for the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+
+  if (theForm.E_MAIL.value.length < 5)
+  {
+    alert("Please enter at least 5 characters in the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+
+  var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzƒŠŒŽšœžŸÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ0123456789-@.-_";
+  var checkStr = theForm.E_MAIL.value;
+  var allValid = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("Please enter only letter, digit and \"@.-_\" characters in the \"E-Mail Address\" field.");
+    theForm.E_MAIL.focus();
+    return (false);
+  }
+  return (true);
+}
+function strip(number) {
+ var sOut = '';
+ mask = '1234567890';
+ for(count = 0; count <= number.length; count++) {
+ 	if(mask.indexOf(number.substring(count, count+1),0) != -1 ) sOut += number.substring(count,count+1);
+ }
+ 
+ return sOut;
+}
+
+// -->
+</SCRIPT>
+</head>
+
+<%
+'Generate Credit Card List
+Do While NOT RSCC.EOF
+		ccOption = ccOption & vbCrLf & "<option value=" & Trim(RSCC("CARD_ABB")) & ">" & Trim(RSCC("CARD_NAME")) & "</option>"		      
+		RSCC.MoveNext
+Loop
+%>	
+<%
+'Generate State List
+Do While NOT RSState.EOF
+		stateOption = stateOption & vbCrLf & "<option value=" & RSState("State_Abb")& ">" & RSState("State") & "</option>"
+		RSState.MoveNext
+Loop
+%>	
+<%
+'Generate Country List
+Do While NOT RSCountry.EOF
+		countryOption = countryOption & vbCrLf & "<option value=" & RSCountry("Country_Abb") & ">" & RSCountry("Country") & "</option>"
+		RSCountry.MoveNext
+Loop
+%>
+<body>
+<form method="POST" onSubmit="return Validate(this);" name="Form1" action="javascript:SC_ShowApplet(<%= Request("Order_ID") %>, <% =GrandTotal%>);" name="CreditValidate">
+ 
+<input type="hidden" name="PrmShip" value="<% If PrmShip = "1" Then %>1<%Else %>0<% End If %>"> 
+<input type="hidden" name="ShipMeth" value="<%= ShipMeth %>">
+<input type="hidden" name="PaymentMethod" value="<%= PaymentMethod %>">
+ 
+  <table border="0" cellpadding="0" cellspacing="0" width="95%">
+  
+      <tr align="center">
+        <td align="right">
+            
+          
+          <p>&nbsp;</td>
+        <td height="25" align="left"> </td>
+      </tr>
+      <tr align="center">
+        <td align="right" colspan="2"><div align="center"><center><p><small><font color="#CC0033"><strong>PURCHASER INFORMATION</strong></font></small></p>
+            </div></center></td>
+        </tr>
+        <tr align="center">
+          <td align="right">
+            <p align="right"><font size="2"><b>Name:</b></font></td>
+          <td align="left" height="25"><input type="text" size="30" name="CARD_NAME" value="<%=P_NAME%>"><small><small><strong>( Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Company:</b></font></td>
+          <td align="left" height="25"><input type="text" size="30" name="COMPANY" value="<%=P_COMPANY%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Street Address:</b></font></td>
+          <td align="left" height="25"><input type="text" size="30" name="ADDRESS_2" value="<%=P_ADDRESS_2%>"> <small><small><strong>(
+      Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><strong>Apt. or Suite:</strong></font></td>
+          <td align="left" height="25"><input type="text" size="20" name="ADDRESS_1" value="<%=P_ADDRESS_1%>"> </td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>City:</b></font></td>
+          <td align="left"><input type="text" size="20" name="CITY" value="<%=P_CITY%>"> <strong><small><small>(
+      Required )</small></small></strong></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>State:</b></font></td>
+          <td align="left"><select name="State" size="1">
+              <option value="<%= RSSelState("STATE_ABB") %>" selected><%= RSSelState("STATE") %></option>
+				<%
+			Response.Write stateOption
+				%>	
+            </select> <small><small><strong>( Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Country</b></font></td>
+          <td align="left"><select name="COUNTRY" size="1">
+              <option value="<%= RSSelCountry("COUNTRY_ABB") %>" selected><%= RSSelCountry("COUNTRY") %></option>
+				<%
+			Response.Write countryOption
+				%>	
+            </select><small><small><strong> ( Required )</strong></small></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Zip:</b></font></td>
+          <td align="left"><input type="text" size="10" name="ZIP" value="<%=P_ZIP%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Telephone: </b></font></td>
+          <td align="left"><input type="text" size="20" name="PHONE" value="<%=P_PHONE%>"><font size="1"><strong>( Required )</strong></font></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Fax: </b></font></td>
+          <td align="left"><input type="text" size="20" name="FAX" value="<%=P_FAX%>"> </td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>E-Mail: </b></font></td>
+          <td align="left"><input type="text" size="20" name="E_MAIL" value="<%=P_EMAIL%>"> <small><small><strong>( Required )</strong></small></small></td>
+        </tr>
+        <% If SubscribeMail = "1" Then %>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Add to Mailing List: </b></font></td>
+          <td align="left"><input type="checkbox" checked name="MailSubscribed" value="1"></td>
+        </tr> 
+        <% Else %>
+        <input type="hidden" name="MailSubscribed" value="1">     
+        <% End If %>  
+        <tr align="center">
+          <td align="center" colspan="2"><small><b><font color="#CC0033">SHIPPING
+      INFORMATION</font></b></small></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><div align="right"><p><font size="2"><strong>Name:</strong></font></p>
+            </div></td>
+          <td align="left"><input type="text" size="30" name="SHIP_NAME" value="<%=P_SHIP_NAME%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><div align="right"><p><font size="2"><strong>Company:</strong></font></p>
+            </div></td>
+          <td align="left"><input type="text" size="30" name="SHIP_COMPANY" value="<%=P_SHIP_COMPANY%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><div align="right"><p><font size="2"><strong>Address:</strong></font></p>
+            </div></td>
+          <td align="left"><input type="text" size="30" name="SHIP_ADDRESS_2" value="<%=P_SHIP_ADDRESS_2%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><div align="right"><p><font size="2"><strong>Apt. or Suite:</strong></font></p>
+            </div></td>
+          <td align="left"><input type="text" size="30" name="SHIP_ADDRESS_1" value="<%=P_SHIP_ADDRESS_1%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><div align="right"><p><font size="2"><strong>City:</strong></font></p>
+            </div></td>
+          <td align="left"><input type="text" size="20" name="SHIP_CITY" value="<%=P_SHIP_CITY%>"></td>
+        </tr>
+        <tr align="center">
+          <td align="right" valign="top"><font size="2"><strong>State:</strong></font></td>
+          <td align="left" valign="top"><div align="left"><p><font size="2"><select name="SHIP_STATE" size="1">
+                <option selected><%=P_SHIP_STATE%></option>
+                <%
+			Response.Write stateOption
+				%>	
+              </select></font></p>
+            </div></td>
+        </tr>
+        <tr align="center">
+          <td align="right"><font size="2"><b>Country:</b></font></td>
+          <td align="left"><select name="SHIP_COUNTRY" size="1">
+              <option selected><%=P_SHIP_COUNTRY%></option>
+				<%
+			Response.Write countryOption
+				%>	
+			</select></td>
+        </tr>
+        <tr align="center">
+          <td align="right" valign="top"><font size="2"><strong>Zip:</strong></font></td>
+          <td align="left" valign="top"><input type="text" size="10" name="SHIP_ZIP" value="<%=P_SHIP_ZIP%>"> </td>
+        </tr>
+        <tr align="center">
+          <td align="right" valign="top"><font size="2"><strong>Telephone:</strong>:</font></td>
+          <td align="left" valign="top"><input type="text" size="20" name="SHIP_TELEPHONE" value="<%=P_SHIP_TELEPHONE%>"></td>
+        </tr>
+        <tr>
+          <td align="right" colspan="2"><font size="2"><div align="center"><center><p></font><small><b><font color="#CC0033">SPECIAL INSTRUCTIONS</font></b></small><font size="2"></font></p>
+            </div></td>
+          </tr>
+          <tr align="center">
+            <td align="right" valign"top"></td>
+            <td align="left" valign="top"><textarea name="SHIP_MESSAGE" rows="2" cols="47"></textarea></td>
+          </tr>
+          <tr align="center">
+            <td align="right"></td>
+		  </tr>
+          <tr align="center">
+           <td align="right" valign"top"></td>
+           <td align="right" valign="top"><input type="submit" value="Complete Order" name="Submit"></td>
+          </tr>
+         </table>
+        </form>
+       </body>
+      </html>

@@ -1,0 +1,225 @@
+<PUBLIC:COMPONENT tagName="GridRecalculation">
+	<PUBLIC:ATTACH EVENT="onchange" FOR="element" ONEVENT="HandleChange()" />	
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	function FormatToCurrency(num, WithDollarSign) {
+		var i,l,d;
+		var nums;
+		var ret;
+		nums = String(Math.round(num*100));
+		while (nums.length <3) nums = "0" + nums;
+		l = nums.length-3;
+		ret = "." + nums.charAt(l+1) + nums.charAt(l+2);
+		d=0;
+		for (i=l; i>=0; i--) {
+			ret = nums.charAt(i) + ret;
+			d++;
+			if (d==3 && i>0) {
+			ret="," + ret;
+			d=0;
+			}
+		}
+		if (WithDollarSign == true)
+			ret = "$" + ret;
+		return ret;
+	}
+
+
+	function HandleChange()
+	{
+		var oSource = window.event.srcElement;	
+		var sSourcePrefix = '';	
+		var linePrefix = '';
+		var iIndex = -1;
+			
+		if(oSource.type == "select-one") {
+			sSourcePrefix = 'ddl';					 			
+		} else {
+			sSourcePrefix = 'txt';
+		}
+		
+		iIndex = oSource.id.indexOf(sSourcePrefix);
+		if (iIndex != -1) {
+			linePrefix = oSource.id.slice(0,iIndex);
+			
+			if(oSource.type == "select-one") {
+				RefreshInfo(linePrefix);
+				RecalculateLine(linePrefix);					 			
+			} else {
+				RecalculateLine(linePrefix);
+			}
+		}
+		
+		
+	}
+
+	function RefreshInfo(linePrefix)
+	{		
+		var oSource = window.event.srcElement;			
+		if(oSource.selectedIndex  > 0) {
+		
+			//find prefix for the current grid lines					
+			var sCodeID = '';
+			var sNbUnitID = '';
+			var sPriceID = '';			
+			var iIndex = -1;
+			
+			sCodeID = linePrefix + 'lblCatalogItemCode';
+			sNbUnitID = linePrefix + 'lblUnit';
+			sPriceID = linePrefix + 'txtPrice';
+			sPriceLabelID = linePrefix + 'lblPrice';
+			
+			//now we have All the ID to get all the element needed
+			
+			var oCode = window.document.getElementById(sCodeID);
+			var oNbUnit = window.document.getElementById(sNbUnitID);
+			var oPrice = window.document.getElementById(sPriceID);
+			var oPriceLabel = window.document.getElementById(sPriceLabelID);
+			
+			if (linePrefix.indexOf('DetailList') > -1)
+			{
+				oCode.innerHTML = arrProductCode[oSource.selectedIndex];
+				if (oNbUnit != null)
+					oNbUnit.innerHTML = arrProductNbUnit[oSource.selectedIndex];
+				if (oPrice != null)
+					oPrice.value = FormatToCurrency(arrProductPrice[oSource.selectedIndex], false);
+				if (oPriceLabel != null)
+					oPriceLabel.innerHTML = FormatToCurrency(arrProductPrice[oSource.selectedIndex], true);
+			} else {
+				oCode.innerHTML = arrSupplyCode[oSource.selectedIndex];
+			}
+		}
+		
+	}
+
+	function RecalculateLine(linePrefix){
+		
+		
+		var txtCtrl = window.event.srcElement;	
+		
+		//find prefix for the current grid lines							
+		var sQuantityID = '';
+		var sAdjQuantityID = '';
+		var sPriceID = '';
+		var sPriceLabelID = '';
+		var sAmountID = '';
+		var sAdjAmountID = '';	
+		var rExp = /\$/gi;
+		var rExp1 = /,/gi;	
+
+		sQuantityID = linePrefix + 'txtQuantity';
+		sAdjQuantityID = linePrefix + 'txtAdjustmentQuantity';
+		sPriceID = linePrefix + 'txtPrice';
+		sPriceLabelID = linePrefix + 'lblPrice';
+		sAmountID = linePrefix + 'lblAmount';
+		sAdjAmountID = linePrefix + 'lblAdjAmount';
+		//now we have All the ID to get all the lement needed
+		
+		var oQuantity = window.document.getElementById(sQuantityID);
+		var oAdjQuantity = window.document.getElementById(sAdjQuantityID);
+		var oPrice = window.document.getElementById(sPriceID);
+		var oPriceLabel = window.document.getElementById(sPriceLabelID);
+		var oAmount = window.document.getElementById(sAmountID);
+		var oAdjAmount = window.document.getElementById(sAdjAmountID);
+		//alert(oQuantity);
+		//get the Quantity
+		var qty = 0;
+		if (oQuantity != null)					
+			qty = (isNaN(parseInt(oQuantity.value)) ? 0 : parseInt(oQuantity.value));
+		//get the Adj Quantity
+		var adjQty = 0;		
+		if (oAdjQuantity != null)			
+			adjQty = (isNaN(parseInt(oAdjQuantity.value)) ? 0 : parseInt(oAdjQuantity.value));
+		//get the price
+		var price = 0.00;
+		if (oPrice != null)					
+			price = (isNaN(parseFloat(oPrice.value)) ? 0 : parseFloat(oPrice.value));
+		if (oPriceLabel != null)					
+			price = (isNaN(parseInt(oPriceLabel.innerHTML.replace(rExp,'').replace(rExp1,''))) ? 0 : parseFloat(oPriceLabel.innerHTML.replace(rExp,'').replace(rExp1,'')));
+		
+		var amt = 0.00;
+		var adjAmt = 0.00;
+		
+		amt = qty * price;
+		adjAmt = (qty - adjQty) * price;
+		
+		if (oAmount != null)	
+			oAmount.innerHTML = FormatToCurrency(amt, true);
+		if (oAdjAmount != null)	
+			oAdjAmount.innerHTML = FormatToCurrency(adjAmt, true);
+		
+		ReCalculateGrid(linePrefix);						
+		
+		
+	}
+	
+	function ReCalculateGrid(linePrefix){
+		//DetailList_dtgOrderDetail__ctl2_
+		//DetailList_dtgOrderDetail__ctl2_txtQuantity
+		var iIndex = -1;		
+		var GridPrefix = '';
+		var CountOfQty = 0;
+		var CountOfAdjAmount = 0;
+		var CountOfAmount = 0;
+		var oQuantity;
+		var oAmount;
+		var oAdjAmount;
+		var oTotalQuantity;
+		var oTotalAmount;
+		var oTotalAdjAmount;
+		var numValue =0;
+		var sTestValue = '';		
+		var rExp = /\$/gi;
+		var rExp1 = /,/gi;
+
+		iIndex = linePrefix.indexOf('__ctl');
+		if (iIndex != -1) {
+			GridPrefix = linePrefix.slice(0,iIndex)	
+			for (i=1; i < window.document.body.all.length; i++){	
+				if (window.document.body.all[i].id.indexOf(GridPrefix) != -1) {
+					
+					if (window.document.body.all[i].id.indexOf('txtQuantity') != -1) {
+						oQuantity = window.document.body.all[i];										
+						numValue = 0;					
+						numValue = (isNaN(parseInt(oQuantity.value)) ? 0 : parseInt(oQuantity.value));
+						CountOfQty = CountOfQty + numValue;					
+					}
+					if (window.document.body.all[i].id.indexOf('lblAmount') != -1) {
+						oAmount = window.document.body.all[i];										
+						numValue = 0;					
+						numValue = (isNaN(parseInt(oAmount.innerHTML.replace(rExp,'').replace(rExp1,''))) ? 0 : parseInt(oAmount.innerHTML.replace(rExp,'').replace(rExp1,'')));
+						CountOfAmount = CountOfAmount + numValue;						
+					}
+					if (window.document.body.all[i].id.indexOf('lblAdjAmount') != -1) {
+						oAdjAmount = window.document.body.all[i];						
+						numValue = 0;					
+						numValue = (isNaN(parseInt(oAdjAmount.innerHTML.replace(rExp,'').replace(rExp1,''))) ? 0 : parseInt(oAdjAmount.innerHTML.replace(rExp,'').replace(rExp1,'')));
+						CountOfAdjAmount = CountOfAdjAmount + numValue;	
+					}
+					//When this is the total Line
+					if (window.document.body.all[i].id.indexOf('lblTotalQuantity') != -1) {
+						oTotalQuantity = window.document.body.all[i];
+						oTotalQuantity.innerHTML = CountOfQty;				
+					}
+					if (window.document.body.all[i].id.indexOf('lblTotalAdjAmount') != -1) {
+						oTotalAdjAmount = window.document.body.all[i];
+						oTotalAdjAmount.innerHTML = FormatToCurrency(CountOfAdjAmount, true);
+					}
+					if (window.document.body.all[i].id.indexOf('lblTotalAmount') != -1) {
+						oTotalAmount = window.document.body.all[i];
+						oTotalAmount.innerHTML = FormatToCurrency(CountOfAmount, true);						
+					}
+					
+				}					
+				
+			}		
+			
+		}
+	}
+	
+	
+
+
+</SCRIPT>

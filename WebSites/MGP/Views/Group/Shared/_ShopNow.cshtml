@@ -1,0 +1,61 @@
+@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Models.Views
+@model IList<PopularItem>
+   @{
+      var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+      var bootstrapColumns = Model.Count > 3 ? 4 : Model.Count > 1 ? 6 : 12;
+   }
+   <script type="text/javascript">
+    $(document).ready(function () {
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            @:angular.element("#popularItems").scope().addToPopularStoreItems('@Model[i].Name', '@Model[i].ImagePath', '@Model[i].EntityId', '@Model[i].StorefrontCategoryId');
+        }
+
+
+
+       @if (ViewBag.IsPreview != null)
+       {
+          @:angular.element("#popularItems").scope().isPreview = "@ViewBag.IsPreview.ToString()" === "True";
+       }
+
+          angular.element("#popularItems").scope().safeApply();
+       });
+   </script>
+   @if (Model.Count > 0)
+   {
+      <input type="hidden" id="popularItemsEventId" name="popularItemsEventId" value="@Model[0].EventId" />
+      <input type="hidden" id="popularItemsParticipantId" name="popularItemsParticipantId" value="@Model[0].ParticipantId" />
+   }
+      <div class="row" id="popularItems">
+         @*<div class="col-md-12 text-center @(partnerBranding.ShowPopularItemsBanner ? string.Empty : "hidden")" style="margin-bottom:5%">
+            <a href="" ng-click="!isPreview && popularStoreItemsRedirectToStore($event, @((!ViewBag.IsParticipant && partnerBranding.Id == 143) ? "true" : "false"))" eid="" scid="904" class="popularItemsImage">
+               <img src="/Content/images/groups/magazinesbanner.jpg" eid="" scid="904" alt="Magazines" class="img-responsive"/>
+               {{item.Name}}
+            </a>
+         </div>*@
+         <div class="col-sm-3" ng-repeat="item in popularStoreItems" style="margin-left: auto; margin-right: auto;">
+            <a href="" ng-click="!isPreview && popularStoreItemsRedirectToStore($event, @((!ViewBag.IsParticipant && partnerBranding.Id == 143) ? "true" : "false"))" eid="{{item.EntityId}}" scid="{{item.StorefrontCategoryId}}" class="popularItemsImage">
+               <img ng-src="{{item.ImagePath}}" eid="{{item.EntityId}}" scid="{{item.StorefrontCategoryId}}" class="img-responsive" style="margin-left: auto; margin-right: auto;"/>
+               <span style="font-weight:bold; text-align:center; color:dimgray">{{item.Name}}</span>
+</a>
+         </div>
+      </div>
+      <script type="text/ng-template" id="select-participant-modal.html">
+         <div class="modal-body text-center">
+            <h3>Do you wish to support the @partnerBranding.GroupDisplay or a Member?</h3>
+         </div>
+         <div class="modal-body text-center">
+            <h3>Please note - all orders will appear on member's page within 24 hours</h3>
+         </div>
+         <div class="modal-footer">
+            <div class="row">
+               <div class="col-xs-12 col-sm-6">
+                  <button type="button" class="btn btn-default form-control" ng-click="$ctrl.ok();">I want to support a Member</button>
+               </div>
+               <div class="col-xs-12 col-sm-6">
+                  <button type="button" class="btn btn-primary form-control" ng-click="$ctrl.cancel();">I want to support the @partnerBranding.GroupDisplay</button>
+               </div>
+            </div>
+         </div>
+      </script>

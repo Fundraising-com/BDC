@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Do you want to register? - EzFund.com";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>woo<strong>hoo!</strong></h1>
+<div class="row">
+    <div class="col-md-12">
+        <span class="text-muted" style="font-weight: bold;">YOU'RE WELL ON YOUR WAY TO A SUCCESSFUL FUNDRAISER <span style="color: #087A92">CONGRATS!</span></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <span class="text-muted">
+            If you've already got an account with us, go ahead and sign in.<br /><br />
+            Don't have one yet? Create one! It'll help us keep track of your past purchases and give you access to special promotions.<br /><br />
+            Don't care to do either? Proceed right ahead to checkout.<br /><br />
+        </span>
+        @Html.ActionLink("Sign in with My Account", "Login", "Account", new { returnUrl = Url.Action("Checkout", "ShoppingCarts") }, new { @class = "btn btn-warning form-control" })
+        <br /><br />
+        @Html.ActionLink("Create an Account", "Register", "Account", new { returnUrl = Url.Action("Checkout", "ShoppingCarts") }, new { @class = "btn btn-warning form-control" })
+        <br /><br />
+        <a href="@Url.Action("Checkout", "ShoppingCarts")/false" class="btn btn-primary btn-lg" style="width: 100%;">Take Me to the Checkout</a>
+    </div>
+    <div class="hidden-xs col-sm-6">
+        <img src="/Content/images/public/inviteToRegister.jpg" alt="Registration" style="width: 100%;" />
+    </div>
+</div>

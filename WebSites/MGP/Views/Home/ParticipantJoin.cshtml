@@ -1,0 +1,69 @@
+﻿@using System.Web.Script.Serialization
+@using GA.BDC.Web.MGP.Models.Views
+@model JoinParticipant
+@{
+   var publicEventBranding = ViewBag.PublicEvent as GA.BDC.Web.MGP.Models.Branding.PublicEvent;
+   var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+   ViewBag.Title = "Fundraising Online, Sign In !";
+   ViewBag.Description = "My.Fundraising.com : Start Online fundraising !!";
+   ViewBag.Keywords = "online fundraising prizes, Win, online fundraising campaign, Free online fundraising campaign, free ga savings pass,  fundraising online, fundraise for group to win, Prizes, fundraising online, fundraising bonuses, online magazine fundraising prize, fundraising campaign online, magazine fundraisers online";
+   Layout = "~/Views/Shared/_public2.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("ParticipantJoin", "Home");
+   var serializedModel = new JavaScriptSerializer().Serialize(Model);
+}
+<div id="signIn" ng-controller="loginController" ng-init="eventId = @publicEventBranding.Id; registerView = @serializedModel">
+   <div class="row">
+      <div class="col-sm-12 text-center">
+         <h1>Join the @Html.ActionLink(publicEventBranding.Name, "Index", "Group", new { eventId = publicEventBranding.Id }, new { target = "_blank" }) online @partnerBranding.GroupDisplay.ToLower()</h1>
+      </div>
+   </div>
+    <br/>
+   <div class="row">
+      <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+         <div class="panel panel-success">
+            <div class="panel-body">
+               <form id="participantJoinForm" name="participantJoinForm" ng-submit="participantJoin()">
+                  <div class="form-group">
+                     <label for="email" class="sr-only">Email address</label>
+                     <input ng-model="registerView.Username" type="email" id="email" name="email" required class="form-control input-lg" placeholder="Email Address"/>
+                  </div>
+                  <div class="form-group">
+                     <label for="password" class="sr-only">Password</label>
+                     <input ng-model="registerView.Password" type="password" name="password" id="password" required class="form-control input-lg" placeholder="Password" />
+                  </div>
+                  <div class="checkbox">
+                     <label style="font-weight: normal">
+                        <input type="checkbox" id="terms" name="terms" value="1" required ng-model="registerView.Terms" />
+                        I have read and agree to the @Html.ActionLink("terms of service", "PrivacyPolicy", "Home", null, new { target = "_blank" })
+                     </label>
+                  </div>
+                  <div class="checkbox">
+                     <label>
+                        <input ng-model="registerView.RememberMe" type="checkbox" value="false">
+                        Remember Me
+                     </label>
+                  </div>
+                  <div class="form-group">
+                     <span class="text-info" ng-show="executingAction" ng-cloak>
+                                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Sending your information...<br />
+                            </span>
+                     <span class="text-danger" ng-show="resultFailed" ng-cloak>
+                                {{responseText}}<br />
+                            </span>
+                     <button class="btn btn-odnoklassniki btn-lg form-control" ng-hide="executingAction"><span class="glyphicon glyphicon-envelope"></span> Join the campaign</button>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        Don't have an account? <a href="@Url.Action("ParticipantRegister", "Home", new { eventId = publicEventBranding.Id })"><strong>CLICK HERE</strong></a>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+</div>
+@section scripts
+{
+}

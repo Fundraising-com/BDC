@@ -1,0 +1,144 @@
+@{
+    ViewBag.Title = "Your shopping cart - Fundraising.com";
+    ViewBag.Description = "High Profit Fundraising Products for Sports teams, schools, churches and all types of groups, Fundraising.com offers all kind of fundraising ideas to help you reach your goals. Checkout Main Page";
+    ViewBag.Keywords = "Fundraising Products, Sports Teams, Schools, Fundraising Ideas";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+}
+
+<div class="row" ng-controller="ShoppingCartController as shoppingCartCtrl" style="margin-top:110px">
+   <div ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length > 0">
+      <div class="col-xs-12 col-sm-9" ng-cloak>
+         <h1>
+            <strong>SHOPPING</strong> CART
+         </h1>
+         <div class="row hidden-xs">
+            <div class="col-sm-8">&nbsp;</div>
+            <div class="col-sm-2 text-center"><span class="text-muted">Price</span></div>
+            <div class="col-sm-2 text-center"><span class="text-muted">Quantity</span></div>
+         </div>
+         <div class="row" ng-repeat="item in shoppingCartCtrl.scope.$storage.ShoppingCart.Items track by $index" style="border-top: solid 1px #A1A29D; padding-bottom: 5px;" ng-cloak>
+            <div class="col-xs-2" style="padding-top: 5px;">
+               <a ng-href="/products/{{item.Product.Category.Parent.Url}}/{{item.Product.Category.Url}}/{{item.Product.Url}}">
+                  <img ng-src="/content/external/products/{{item.Product.Image.Url}}" alt="{{item.Product.Name}}" style="width: 100%;" />
+               </a>
+            </div>
+            <div class="col-xs-10" style="padding-top: 5px;">
+               <div class="row">
+                  <div class="col-xs-7">
+                     <h4 style="font-weight: bold;"><a ng-href="/products/{{item.Product.Category.Parent.Url}}/{{item.Product.Category.Url}}/{{item.Product.Url}}">{{item.Product.Name}}</a></h4>
+                  </div>
+                  <div class="col-xs-3">
+                     <h4 style="font-weight: bold;">{{item.Product.CountryCode | toCurrencyCode}} {{item.Product.CalculatedPrice | currency}}</h4>
+                  </div>
+                  <div class="col-xs-2">
+                     <select class="input-sm" ng-model="item.Quantity" ng-change="shoppingCartCtrl.UpdateItem();" ng-options="o as o for o in [item.Product.MinimumQuantity, 100] | makeRange"></select>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xs-12">
+                     <span class="text-muted" ng-show="item.Product.Price - item.Product.CalculatedPrice > 0"> You are saving {{item.Product.Price - item.Product.CalculatedPrice | currency }} per product.<br /></span>
+                     <span class="text-muted" ng-show="item.Product.ShippingFee === 0">Free Shipping Fee!</span>
+                     @*<span class="text-muted" ng-show="item.Product.ShippingFee > 0">Shipping Fee: {{item.Product.ShippingFee|currency}}</span>*@
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xs-12">
+                     <a ng-controller="GoogleAnalyticsController as googleanalyticsCtrl" href="#" ng-click="googleanalyticsCtrl.ProductRemoved(item.Product.Id, item.Product.Name, item.Product.Category.Parent.Name, item.Product.Category.Name, item.Product.CalculatedPrice, item.Quantity); shoppingCartCtrl.RemoveItem($index);" class="small">Delete</a>
+                  </div>
+               </div>
+            </div>
+            <br />
+         </div>
+         <br/>
+         <div class="row" style="border-top: solid 1px #A1A29D;" ng-hide="shoppingCartCtrl.scope.$storage.ShoppingCart.HasProductsFromDifferentCountries">
+            <div class="col-xs-12 col-sm-offset-8 col-sm-4 text-right" style="padding-top: 10px;" ng-cloak>
+               <h4 ng-show="shoppingCartCtrl.ShippingFee > 0">
+                  <strong>Subtotal: {{shoppingCartCtrl.SubTotal | currency}}</strong>
+               </h4>
+               <h4 ng-show="shoppingCartCtrl.ShippingFee > 0">
+                  <strong>Shipping Fee: {{shoppingCartCtrl.ShippingFee | currency}}</strong>
+               </h4>
+               <h4>
+                  <strong>Total ({{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}} items): {{shoppingCartCtrl.TotalAmount | currency}}</strong>
+               </h4>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-xs-12" ng-cloak ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.HasProductsFromDifferentCountries">
+               <div class="alert alert-danger" role="alert">You have a mix of products from different countries, please update them to pick only one country per sale.</div>
+            </div>
+         </div>
+      </div>
+      <div class="visible-xs col-xs-12">
+         <a ng-href="@Url.Action("CheckOut", "ShoppingCarts")" title="Checkout" class="btn btn-primary form-control" ng-class="{disabled:shoppingCartCtrl.scope.$storage.ShoppingCart.HasProductsFromDifferentCountries}">Checkout</a><br /><br />
+      </div>
+      <div class="visible-xs col-xs-12">
+         <a href="/products" class="btn btn-default form-control">Keep Shopping</a>
+      </div>
+      <div class="hidden-xs col-sm-3" ng-cloak>
+         <div class="row">
+            <div class="col-xs-12">
+               <span style="padding-top: 8px; margin-bottom: 20px; display: block;">
+                  <strong style="color: #087A92;">SHARE</strong>&nbsp;&nbsp;<a href="mailto:?subject=Check this incredible Fundraiser!&body=http://www.fundraising.com" onclick=" ga('send', 'social', 'Email', 'Share'); "><img src="/Content/images/public/product_share_email.png" alt="Email" /></a>&nbsp;<a href="https://www.facebook.com/sharer/sharer.php?u=http://www.fundraising.com" target="_blank"><img src="/Content/images/public/product_share_facebook.png" alt="Facebook" onclick=" ga('send', 'social', 'Facebook', 'Share'); " /></a>&nbsp;<a href="https://twitter.com/intent/tweet?text=http://www.fundraising.com" target="_blank" onclick=" ga('send', 'social', 'Twitter', 'Share'); "><img src="/Content/images/public/product_share_twitter.png" alt="Twitter" /></a>&nbsp;<a href="http://pinterest.com/pin/create/button/?url=http://www.fundraising.com" target="_blank" onclick=" ga('send', 'social', 'Pinterest', 'Share'); "><img src="/Content/images/public/product_share_pinterest.png" alt="Pinterest" /></a>
+               </span>
+            </div>
+         </div>
+         <br />
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-xs-12 text-center">
+                     <span style="font-weight: bold; font-size: large;" ng-cloak>
+                        Total ({{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}} items)<br />
+                        {{shoppingCartCtrl.TotalAmount | currency}}
+                     </span>
+                  </div>
+               </div>
+               <br />
+               <div class="row">
+                  <div class="col-xs-12">
+                     <a ng-href="@Url.Action("CheckOut", "ShoppingCarts")" title="Checkout" class="btn btn-primary btn-lg" style="width: 100%;" ng-class="{disabled:shoppingCartCtrl.scope.$storage.ShoppingCart.HasProductsFromDifferentCountries}">Checkout</a>
+                  </div>
+               </div>
+               <hr />
+               <div class="row">
+                  <div class="col-xs-12">
+                     <a href="/products" class="btn btn-default form-control">Keep Shopping</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-xs-12 text-center" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.GetSuggestedProducts(0, 0, 2);">
+                     <span><strong>Others Also Bought</strong></span><br />
+                     <span class="text-info" ng-show="ActionState == 1">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> Loading suggestions for you...<br />
+                     </span>
+                     <div class="row products-list" ng-repeat="p in productsCtrl.SuggestedProducts track by $index" ng-cloak ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+                        <div class="col-xs-12" ng-init="googleAnalyticsCtrl.ProductShowed(p.Id, p.Name, p.Category.Parent.Name, p.Category.Name, p.Price, $index + 1, 'All Products');">
+                           <a ng-href="/products/{{::p.Category.Parent.Url}}/{{::p.Category.Url}}/{{::p.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(p.Id, p.Name, p.Category.Parent.Name, p.Category.Name, p.Price, $index + 1, 'Suggested Products')">
+                              <img ng-src="/Content/external/products/{{::p.Image.Url}}" alt="{{::p.Name}}" style="width: 100%;" />
+                           </a>
+                           <a class="small" ng-href="/products/{{::p.Category.Parent.Url}}/{{::p.Category.Url}}/{{::p.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(p.Id, p.Name, p.Category.Parent.Name, p.Category.Name, p.Price, $index + 1, 'Suggested Products')">
+                              {{::p.Name}}
+                           </a>
+                           <hr ng-show="!$last" />
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row" ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length === 0" ng-cloak>
+      <div class="col-sm-12 text-center">
+         <h2>Your shopping cart is empty.</h2>
+      </div>
+   </div>
+</div>
+
+
+

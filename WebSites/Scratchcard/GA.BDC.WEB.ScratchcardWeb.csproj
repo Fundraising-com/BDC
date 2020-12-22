@@ -1,0 +1,1446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9B769125-A5AC-4695-A5F8-818DE352312B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>GA.BDC.Web.ScratchcardWeb</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GA.BDC.Web.ScratchcardWeb</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>%24/Southwestern-Fundraising/1.DEV/GA/BDC/Web/Scratchcard</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://tfs.swgao.net:8080/tfs/sourcecode</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetOpenMail">
+      <Name>DotNetOpenMail</Name>
+      <HintPath>..\..\[Shared Dependencies]\DotNetOpenMail.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <Name>log4net</Name>
+      <HintPath>..\ExternalDLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\..\Core\AddressBooks\GA.BDC.Core.AddressBooks.csproj">
+      <Project>{5559a75b-ad10-4ec1-892a-e099ff48bab9}</Project>
+      <Name>GA.BDC.Core.AddressBooks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\BusinessBase\GA.BDC.Core.BusinessBase.csproj">
+      <Project>{0adbed77-f9fc-4c21-aab4-3237e9fba59f}</Project>
+      <Name>GA.BDC.Core.BusinessBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Collections\GA.BDC.Core.Collections.csproj">
+      <Project>{3d20f27e-c4ca-423f-9af7-0434cb169927}</Project>
+      <Name>GA.BDC.Core.Collections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Configuration\GA.BDC.Core.Configuration.csproj">
+      <Project>{6965b4f7-9da8-4e80-9421-0481d939a0aa}</Project>
+      <Name>GA.BDC.Core.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Database\Scratchcard\GA.BDC.Core.Database.Scratchcard.csproj">
+      <Project>{5f03b05e-0107-4ea7-8f47-091cfeec8bad}</Project>
+      <Name>GA.BDC.Core.Database.Scratchcard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Data\Sql\GA.BDC.Core.Data.Sql.csproj">
+      <Project>{ae2242a6-a643-4a6c-a4e0-7d30b23eab65}</Project>
+      <Name>GA.BDC.Core.Data.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Diagnostics\GA.BDC.Core.Diagnostics.csproj">
+      <Name>GA.BDC.Core.Diagnostics</Name>
+      <Project>{626D15D6-C03F-4054-85C3-86B331CCF087}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\EFundraisingCRM\GA.BDC.Core.EFundraisingCRM.csproj">
+      <Name>GA.BDC.Core.EFundraisingCRM</Name>
+      <Project>{920EA03B-53BE-4089-8A3D-B43C1D3A8A26}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\efundraisingCore\GA.BDC.Core.efundraisingCore.csproj">
+      <Name>GA.BDC.Core.efundraisingCore</Name>
+      <Project>{93841639-D58E-417A-8C41-BFD615BC0A96}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\eFundraisingStore\GA.BDC.Core.eFundraisingStore.csproj">
+      <Project>{c971de14-9138-41aa-bccb-179d681f83f9}</Project>
+      <Name>GA.BDC.Core.eFundraisingStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Email\GA.BDC.Core.Email.csproj">
+      <Project>{fa7f2bde-a04c-45d7-86a4-1cf446c534b6}</Project>
+      <Name>GA.BDC.Core.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\EnterpriseComponents\GA.BDC.Core.EnterpriseComponents.csproj">
+      <Project>{1060fdbe-9c62-4f62-ae5d-0018c5a9026f}</Project>
+      <Name>GA.BDC.Core.EnterpriseComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Parsers\GA.BDC.Core.Parsers.csproj">
+      <Name>GA.BDC.Core.Parsers</Name>
+      <Project>{83421DA2-B385-4572-97E5-0E5D50174B79}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Tracking\GA.BDC.Core.Tracking.csproj">
+      <Name>GA.BDC.Core.Tracking</Name>
+      <Project>{6663D5FB-C681-4452-B887-EE1C210D78C8}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Utilities\CookieHandler\GA.BDC.Core.Utilities.CookieHandler.csproj">
+      <Name>GA.BDC.Core.Utilities.CookieHandler</Name>
+      <Project>{61C850FF-BFB4-488F-BD29-1E124AD7EF2C}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Utilities\IO\GA.BDC.Core.Utilities.IO.csproj">
+      <Name>GA.BDC.Core.Utilities.IO</Name>
+      <Project>{439B506F-592A-4B5C-B04B-50D02F0BAB45}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Utilities\NET\GA.BDC.Core.Utilities.NET.csproj">
+      <Name>GA.BDC.Core.Utilities.NET</Name>
+      <Project>{672184FB-4BA1-45BB-A409-BB49FEE3F05E}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Utilities\Reflection\GA.BDC.Core.Utilities.Reflection.csproj">
+      <Project>{0c96c134-ec64-4a3a-8303-f7646b41908a}</Project>
+      <Name>GA.BDC.Core.Utilities.Reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Web\UI\InputControls\GA.BDC.Core.Web.UI.InputControls.csproj">
+      <Project>{05abe4b7-95cf-4db8-9252-5c8b10e5dcab}</Project>
+      <Name>GA.BDC.Core.Web.UI.InputControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Web\UI\MasterPages\GA.BDC.Core.Web.UI.MasterPages.csproj">
+      <Name>GA.BDC.Core.Web.UI.MasterPages</Name>
+      <Project>{1A626F43-2D38-4B16-9CD2-4BDBC1427494}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Web\UI\UIControls\GA.BDC.Core.Web.UI.UIControls.csproj">
+      <Name>GA.BDC.Core.Web.UI.UIControls</Name>
+      <Project>{67BEB2EE-308B-45C5-AF22-ED0C1B6EFD90}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\WebTracking\GA.BDC.Core.WebTracking.csproj">
+      <Name>GA.BDC.Core.WebTracking</Name>
+      <Project>{A574911A-4C98-422C-8BC4-476234513838}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="301Redirect.xml" />
+    <Content Include="404Handler.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="AboutUs.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="AboutUs.aspx.xml" />
+    <Content Include="BusinessOpportunity.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="BusinessOpportunityConfirm.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Components\User\AddressHygene\AddressHygiene.ascx" />
+    <Content Include="Components\User\AddressHygene\ExplicitAddressConfirmation.ascx" />
+    <Content Include="Components\User\Controls\Common\DidYouKnow.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Common\DidYouKnow.ascx.xml" />
+    <Content Include="Components\User\Controls\Common\Newsletter.ascx" />
+    <Content Include="Components\User\Controls\Common\Newsletter.ascx.xml" />
+    <Content Include="Components\User\Controls\Common\ScratchcardsTop.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Common\Scratchcards_Grid.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Common\SuccessStory.ascx" />
+    <Content Include="Components\User\Controls\Common\SuccessStory.ascx.xml" />
+    <Content Include="Components\User\Controls\Menu\Footer\Footer.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Menu\Footer\Footer.ascx.xml" />
+    <Content Include="Components\User\Controls\Menu\Footer\FooterGroupType.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Menu\Footer\FooterGroupType.ascx.xml" />
+    <Content Include="Components\User\Controls\Menu\Left\CreditCards.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Menu\Left\CreditCards.ascx.xml" />
+    <Content Include="Components\User\Controls\Menu\Left\LeftMenu.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Menu\Left\LeftMenu.ascx.xml" />
+    <Content Include="Components\User\Controls\Menu\Left\LeftMenuSplit.ascx" />
+    <Content Include="Components\User\Controls\Menu\Left\LeftMenuSplit.ascx.xml" />
+    <Content Include="Components\User\Controls\Menu\Top\Top.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Menu\Top\Top.ascx.xml" />
+    <Content Include="Components\User\Controls\Products\ProductCategories.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Products\ProductCategorySummary.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Products\ProductSubCategory.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Sections\BusinessOpportunity.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Sections\BusinessOpportunity.ascx.xml" />
+    <Content Include="Components\User\Controls\Sections\HowItWorks.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Sections\HowItWorks.ascx.xml" />
+    <Content Include="Components\User\Controls\Sections\SampleKit.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Sections\SampleKit.ascx.xml" />
+    <Content Include="Components\User\Controls\Sections\SampleKitShort.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Components\User\Controls\Sections\SampleKitShort.ascx.xml" />
+    <Content Include="ContactUs.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="ContactUs.aspx.xml" />
+    <Content Include="Coupons.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Coupons.aspx.xml" />
+    <Content Include="Coupons_CA.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Coupons_CA.aspx.xml" />
+    <Content Include="Default.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Default.aspx.xml" />
+    <Content Include="Error.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Error404.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Faqs.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Faqs.aspx.xml" />
+    <Content Include="get_aspx_ver.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Global.asax">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="Guarantee.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Guarantee.aspx.xml" />
+    <Content Include="HomeSplit.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="HomeSplit.aspx.xml" />
+    <Content Include="HowItWorks.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="HowItWorks.aspx.xml" />
+    <Content Include="MasterPage\SiteTemplate1.ascx">
+      <SubType>UserControl</SubType>
+    </Content>
+    <Content Include="Newsletter.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="NewsletterConfirmation.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="NewsletterConfirmation.aspx.xml" />
+    <Content Include="package.xml" />
+    <Content Include="PageNotFound.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PaymentShipping.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PaymentShipping.aspx.xml" />
+    <Content Include="PopUp\aboutus\Alexandre.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Alexandre.aspx.xml" />
+    <Content Include="PopUp\aboutus\Eric.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Eric.aspx.xml" />
+    <Content Include="PopUp\aboutus\Gary.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Gary.aspx.xml" />
+    <Content Include="PopUp\aboutus\Kim.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Kim.aspx.xml" />
+    <Content Include="PopUp\aboutus\Marc.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Marc.aspx.xml" />
+    <Content Include="PopUp\aboutus\Sebastien.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Sebastien.aspx.xml" />
+    <Content Include="PopUp\aboutus\Steve.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Steve.aspx.xml" />
+    <Content Include="PopUp\aboutus\Team.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PopUp\aboutus\Team.aspx.xml" />
+    <Content Include="PopUp\PopCoupons.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PrivacyPolicy.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="PrivacyPolicy.aspx.xml" />
+    <Content Include="Products.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="ProfitCalculator.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="ProfitCalculator.aspx.xml" />
+    <Content Include="Resources\css\_ScratchcardWeb_\classic\en-US\Standard.css" />
+    <Content Include="Resources\EmailTemplate\EN-ca\default_freekit_en_ca.htm" />
+    <Content Include="Resources\EmailTemplate\EN-ca\llu_freekit_en_ca.htm" />
+    <Content Include="Resources\EmailTemplate\EN-us\default_freekit_en_us.htm" />
+    <Content Include="Resources\EmailTemplate\EN-us\llu_freekit_en_us.htm" />
+    <Content Include="Resources\EmailTemplate\NewLead\NewLead.htm" />
+    <Content Include="Resources\EmailTemplate\NewLead\NewLeadTxt.txt" />
+    <Content Include="Resources\EmailTemplate\NewLead\Test.txt" />
+    <Content Include="Resources\images\gym.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\card.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\bands.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\baseball.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\basket.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\bowling.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\canada.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\card.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\cheer.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\chrismas.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\church_c.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\church_nonc.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\dance.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\elementary.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\flag.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\foot.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\footandcheer.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\general.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\girl_basket.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\gym.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\highschool.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\hockey.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\lacrosse.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\martialart.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\music.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\nature.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\school.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\scouts.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\skylimit.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\soccer.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\softball.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\swimming.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\trackandfield.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\university.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\volley.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\winter.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutproduct\smallcards\wrestling.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\alex.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\anastasia.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\board.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\eric.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\gary.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\kim.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\marc.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\aboutus\steve.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\busop\submit_sc.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\busop\top.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\b_ordernow.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\canada.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\didyouknow.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\dotedline_small.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\dot_top.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\error.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\espaceur.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\fond.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_baseball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_basket.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_bowling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_cheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_church.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_elementary.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_foot.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_highschool.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_hockey.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_other.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_soccer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_softball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_university.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\B_volley.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_baseball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_basket.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_bowling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_cheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_church.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_elementary.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_foot.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_highschool.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_hockey.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_other.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_soccer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_softball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_university.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\icones\S_volley.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\aboutproduct.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\b_online.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\coupons.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\freekit_button.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\freekit_split.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\freesamplekit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\guarantee.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\howitworks.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\join.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\ordernow.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\profitcalcul.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\profitcalculator.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\specialoffer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\leftmenu\submit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\logo_creditcards.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\middle.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\profit_chart.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\sc_google.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\sc_overture.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\successstory.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\doted_line.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_aboutproduct.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_aboutus.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_businessopp.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_contactus.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_coupons.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_faqs.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_freekit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_guarantee.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_order.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_payment.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_policyprivacy.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_profitcalcul.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_sitemap.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_specialoffer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_testimonials.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_tips.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\Title\t_works.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\top_logo.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\top_logo_brl.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\top_right.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\common\whattype.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\contactus\email.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\contactus\fax.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\contactus\mail.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\contactus\phone.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\aw.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\blimpie.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\blockbuster.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\checkers.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\click_coupon.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\coupon_usa.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\esportonline.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\ftd.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\godfather.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\jcpenney.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\jiffylube.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\logos_sponsor.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\movie.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\mrsfields.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\pizzahut.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\tcby.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\coupons\tell3.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\forms\f_aboutcampaign.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\forms\f_aboutyou.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\forms\f_submit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\forms\sc_form.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\forms\sponsors.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\home\board.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\home\pictures.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\home\sponsors.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\home\successstories.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\home\tips.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\howitworks\123.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\howitworks\card.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\profitcalculator\b_calculate.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\back_pannel.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\back_pannel_inside.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\bands.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\baseball.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\basket.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\bowling.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\canada.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\cheer.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\chrismas.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\church_c.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\church_nonc.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\dance.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\elementary.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\flag.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\foot.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\footandcheer.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\general.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\girl_basket.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\gym.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\highschool.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\hockey.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\lacrosse.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\martialart.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\music.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\nature.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\school.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\scouts.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\skylimit.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\soccer.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\softball.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\swimming.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\trackandfield.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\university.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\volley.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\winter.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\bigcards\wrestling.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\doted_line_GT.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_bands.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_baseball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_basket.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_bowling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_canada.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_cheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_chrismas.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_church_nonc.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_dance.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_elementary.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_flag.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_foot.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_footandcheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_general.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_gym.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_highschool.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_hockey.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_lacrosse.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_martialart.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_music.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_nature.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_school.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_scouts.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_skylimit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_soccer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_softball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_swimming.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_trackandfield.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_university.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_volley.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_winter.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\icone_title\it_wrestling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\inside.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\logohere.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\profit_chart.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\s_coupon.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_bands.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_baseball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_basket.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_bowling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_canada.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_cheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_chrismas.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_church_nonc.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_dance.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_elementary.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_flag.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_foot.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_footandcheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_general.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_gym.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_highschool.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_hockey.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_lacrosse.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_martialart.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_music.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_nature.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_school.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_scouts.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_skylimit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_soccer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_softball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_swimming.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_trackandfield.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_university.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_volley.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_winter.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\title\t_wrestling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_bands.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_baseball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_basket.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_bowling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_canada.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_cheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_chrismas.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_church_nonc.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_dance.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_elementary.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_flag.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_foot.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_footandcheer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_general.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_girlbasket.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_gym.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_highschool.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_hockey.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_lacrosse.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_martialart.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_music.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_music.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_nature.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_school.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_scouts.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_skylimit.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_soccer.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_softball.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_swimming.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_trackandfield.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_university.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_volley.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_winter.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\Scratchcards\topright\top_wrestling.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\specialoffer\special2.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\specialoffer\special_1.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\testimonials\note.gif" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\testimonials\photos.jpg" />
+    <Content Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\tips\prof.gif" />
+    <Content Include="Resources\jsScript\eFundWeb.js" />
+    <Content Include="Resources\jsScript\scratchcarddev_s_code.js" />
+    <Content Include="Resources\jsScript\scratchcard_s_code.js" />
+    <Content Include="Resources\xml\EmailTemplate.xml" />
+    <Content Include="Resources\xml\OmnitureSettings.xml" />
+    <Content Include="Resources\xml\Webpage301Redirect.xml" />
+    <Content Include="SampleKit.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="SampleKitConfirmation.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="SampleKitConfirmation.aspx.xml" />
+    <Content Include="Scratchcard.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Scratchcard.aspx.xml" />
+    <Content Include="SiteMap.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="SiteMap.aspx.xml" />
+    <Content Include="SpecialOffer.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="SpecialOffer.aspx.xml" />
+    <Content Include="Splitter.aspx" />
+    <Content Include="Splitter.aspx.xml" />
+    <Content Include="Test.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Test2.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="test3.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Testimonials.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Testimonials.aspx.xml" />
+    <Content Include="Tips.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="Tips.aspx.xml" />
+    <Content Include="Web.config" />
+    <Content Include="_AboutProduct.aspx">
+      <SubType>Form</SubType>
+    </Content>
+    <Compile Include="404Handler.aspx.cs">
+      <DependentUpon>404Handler.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AboutUs.aspx.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessOpportunity.aspx.cs">
+      <DependentUpon>BusinessOpportunity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessOpportunityConfirm.aspx.cs">
+      <DependentUpon>BusinessOpportunityConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Server\AppConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Server\EmailSender\eNewsLetter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Server\EmailSender\SendMailThread.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Server\EmailTemplate\EmailTemplateBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Server\Omniture\ScratchcardOmniture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Server\SEO\Webpage301Redirect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Server\UIFactories\Panel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygene\AddressHygiene.ascx.cs">
+      <DependentUpon>AddressHygiene.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygene\AddressHygieneErrorCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\User\AddressHygene\ExplicitAddressConfirmation.ascx.cs">
+      <DependentUpon>ExplicitAddressConfirmation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Common\DidYouKnow.ascx.cs">
+      <DependentUpon>DidYouKnow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Common\Newsletter.ascx.cs">
+      <DependentUpon>Newsletter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Common\ScratchcardsTop.ascx.cs">
+      <DependentUpon>ScratchcardsTop.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Common\Scratchcards_Grid.ascx.cs">
+      <DependentUpon>Scratchcards_Grid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Common\SuccessStory.ascx.cs">
+      <DependentUpon>SuccessStory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Menu\Footer\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Menu\Footer\FooterGroupType.ascx.cs">
+      <DependentUpon>FooterGroupType.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Menu\Left\CreditCards.ascx.cs">
+      <DependentUpon>CreditCards.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Menu\Left\LeftMenu.ascx.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Menu\Left\LeftMenuSplit.ascx.cs">
+      <DependentUpon>LeftMenuSplit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Menu\Top\Top.ascx.cs">
+      <DependentUpon>Top.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Products\ProductCategories.ascx.cs">
+      <DependentUpon>ProductCategories.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Products\ProductCategorySummary.ascx.cs">
+      <DependentUpon>ProductCategorySummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Products\ProductSubCategory.ascx.cs">
+      <DependentUpon>ProductSubCategory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Sections\BusinessOpportunity.ascx.cs">
+      <DependentUpon>BusinessOpportunity.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Sections\HowItWorks.ascx.cs">
+      <DependentUpon>HowItWorks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Sections\SampleKit.ascx.cs">
+      <DependentUpon>SampleKit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Controls\Sections\SampleKitShort.ascx.cs">
+      <DependentUpon>SampleKitShort.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactUs.aspx.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Coupons.aspx.cs">
+      <DependentUpon>Coupons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Coupons_CA.aspx.cs">
+      <DependentUpon>Coupons_CA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error404.aspx.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Faqs.aspx.cs">
+      <DependentUpon>Faqs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="get_aspx_ver.aspx.cs">
+      <DependentUpon>get_aspx_ver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Guarantee.aspx.cs">
+      <DependentUpon>Guarantee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomeSplit.aspx.cs">
+      <DependentUpon>HomeSplit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HowItWorks.aspx.cs">
+      <DependentUpon>HowItWorks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\SiteTemplate1.ascx.cs">
+      <DependentUpon>SiteTemplate1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Newsletter.aspx.cs">
+      <DependentUpon>Newsletter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsletterConfirmation.aspx.cs">
+      <DependentUpon>NewsletterConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PackageProductTemplateUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageNotFound.aspx.cs">
+      <DependentUpon>PageNotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentShipping.aspx.cs">
+      <DependentUpon>PaymentShipping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Alexandre.aspx.cs">
+      <DependentUpon>Alexandre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Eric.aspx.cs">
+      <DependentUpon>Eric.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Gary.aspx.cs">
+      <DependentUpon>Gary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Kim.aspx.cs">
+      <DependentUpon>Kim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Marc.aspx.cs">
+      <DependentUpon>Marc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Sebastien.aspx.cs">
+      <DependentUpon>Sebastien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Steve.aspx.cs">
+      <DependentUpon>Steve.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\aboutus\Team.aspx.cs">
+      <DependentUpon>Team.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUp\PopCoupons.aspx.cs">
+      <DependentUpon>PopCoupons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrivacyPolicy.aspx.cs">
+      <DependentUpon>PrivacyPolicy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Products.aspx.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfitCalculator.aspx.cs">
+      <DependentUpon>ProfitCalculator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SampleKit.aspx.cs">
+      <DependentUpon>SampleKit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SampleKitConfirmation.aspx.cs">
+      <DependentUpon>SampleKitConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scratchcard.aspx.cs">
+      <DependentUpon>Scratchcard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ScratchCardProductBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ScratchcardWebBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMap.aspx.cs">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SpecialOffer.aspx.cs">
+      <DependentUpon>SpecialOffer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Splitter.aspx.cs">
+      <DependentUpon>Splitter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test2.aspx.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test3.aspx.cs">
+      <DependentUpon>test3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Testimonials.aspx.cs">
+      <DependentUpon>Testimonials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tips.aspx.cs">
+      <DependentUpon>Tips.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_AboutProduct.aspx.cs">
+      <DependentUpon>_AboutProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <EmbeddedResource Include="404Handler.aspx.resx">
+      <DependentUpon>404Handler.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutUs.aspx.resx">
+      <DependentUpon>AboutUs.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessOpportunity.aspx.resx">
+      <DependentUpon>BusinessOpportunity.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessOpportunityConfirm.aspx.resx">
+      <DependentUpon>BusinessOpportunityConfirm.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\AddressHygene\AddressHygiene.ascx.resx">
+      <DependentUpon>AddressHygiene.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\AddressHygene\ExplicitAddressConfirmation.ascx.resx">
+      <DependentUpon>ExplicitAddressConfirmation.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Common\DidYouKnow.ascx.resx">
+      <DependentUpon>DidYouKnow.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Common\Newsletter.ascx.resx">
+      <DependentUpon>Newsletter.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Common\ScratchcardsTop.ascx.resx">
+      <DependentUpon>ScratchcardsTop.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Common\Scratchcards_Grid.ascx.resx">
+      <DependentUpon>Scratchcards_Grid.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Common\SuccessStory.ascx.resx">
+      <DependentUpon>SuccessStory.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Menu\Footer\Footer.ascx.resx">
+      <DependentUpon>Footer.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Menu\Footer\FooterGroupType.ascx.resx">
+      <DependentUpon>FooterGroupType.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Menu\Left\CreditCards.ascx.resx">
+      <DependentUpon>CreditCards.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Menu\Left\LeftMenu.ascx.resx">
+      <DependentUpon>LeftMenu.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Menu\Left\LeftMenuSplit.ascx.resx">
+      <DependentUpon>LeftMenuSplit.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Menu\Top\Top.ascx.resx">
+      <DependentUpon>Top.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Products\ProductCategories.ascx.resx">
+      <DependentUpon>ProductCategories.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Products\ProductCategorySummary.ascx.resx">
+      <DependentUpon>ProductCategorySummary.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Products\ProductSubCategory.ascx.resx">
+      <DependentUpon>ProductSubCategory.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Sections\BusinessOpportunity.ascx.resx">
+      <DependentUpon>BusinessOpportunity.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Sections\HowItWorks.ascx.resx">
+      <DependentUpon>HowItWorks.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Sections\SampleKit.ascx.resx">
+      <DependentUpon>SampleKit.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Controls\Sections\SampleKitShort.ascx.resx">
+      <DependentUpon>SampleKitShort.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactUs.aspx.resx">
+      <DependentUpon>ContactUs.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Coupons.aspx.resx">
+      <DependentUpon>Coupons.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Coupons_CA.aspx.resx">
+      <DependentUpon>Coupons_CA.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Error.aspx.resx">
+      <DependentUpon>Error.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Error404.aspx.resx">
+      <DependentUpon>Error404.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Faqs.aspx.resx">
+      <DependentUpon>Faqs.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="get_aspx_ver.aspx.resx">
+      <DependentUpon>get_aspx_ver.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Global.asax.resx">
+      <DependentUpon>Global.asax.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Guarantee.aspx.resx">
+      <DependentUpon>Guarantee.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomeSplit.aspx.resx">
+      <DependentUpon>HomeSplit.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HowItWorks.aspx.resx">
+      <DependentUpon>HowItWorks.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterPage\SiteTemplate1.ascx.resx">
+      <DependentUpon>SiteTemplate1.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Newsletter.aspx.resx">
+      <DependentUpon>Newsletter.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewsletterConfirmation.aspx.resx">
+      <DependentUpon>NewsletterConfirmation.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageNotFound.aspx.resx">
+      <DependentUpon>PageNotFound.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentShipping.aspx.resx">
+      <DependentUpon>PaymentShipping.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Alexandre.aspx.resx">
+      <DependentUpon>Alexandre.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Eric.aspx.resx">
+      <DependentUpon>Eric.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Gary.aspx.resx">
+      <DependentUpon>Gary.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Kim.aspx.resx">
+      <DependentUpon>Kim.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Marc.aspx.resx">
+      <DependentUpon>Marc.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Sebastien.aspx.resx">
+      <DependentUpon>Sebastien.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Steve.aspx.resx">
+      <DependentUpon>Steve.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\aboutus\Team.aspx.resx">
+      <DependentUpon>Team.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\PopCoupons.aspx.resx">
+      <DependentUpon>PopCoupons.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivacyPolicy.aspx.resx">
+      <DependentUpon>PrivacyPolicy.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products.aspx.resx">
+      <DependentUpon>Products.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfitCalculator.aspx.resx">
+      <DependentUpon>ProfitCalculator.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SampleKit.aspx.resx">
+      <DependentUpon>SampleKit.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SampleKitConfirmation.aspx.resx">
+      <DependentUpon>SampleKitConfirmation.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SiteMap.aspx.resx">
+      <DependentUpon>SiteMap.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialOffer.aspx.resx">
+      <DependentUpon>SpecialOffer.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Splitter.aspx.resx">
+      <DependentUpon>Splitter.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test.resx">
+      <DependentUpon>Test.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test2.aspx.resx">
+      <DependentUpon>Test2.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="test3.aspx.resx">
+      <DependentUpon>test3.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Testimonials.aspx.resx">
+      <DependentUpon>Testimonials.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tips.aspx.resx">
+      <DependentUpon>Tips.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_AboutProduct.aspx.resx">
+      <DependentUpon>_AboutProduct.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="AboutUs.aspx.bin" />
+    <None Include="Components\User\Controls\Common\DidYouKnow.ascx.bin" />
+    <None Include="Components\User\Controls\Common\Newsletter.ascx.bin" />
+    <None Include="Components\User\Controls\Common\SuccessStory.ascx.bin" />
+    <None Include="Components\User\Controls\Menu\Footer\Footer.ascx.bin" />
+    <None Include="Components\User\Controls\Menu\Footer\FooterGroupType.ascx.bin" />
+    <None Include="Components\User\Controls\Menu\Left\CreditCards.ascx.bin" />
+    <None Include="Components\User\Controls\Menu\Left\LeftMenu.ascx.bin" />
+    <None Include="Components\User\Controls\Menu\Left\LeftMenuSplit.ascx.bin" />
+    <None Include="Components\User\Controls\Menu\Top\Top.ascx.bin" />
+    <None Include="Components\User\Controls\Sections\BusinessOpportunity.ascx.bin" />
+    <None Include="Components\User\Controls\Sections\HowItWorks.ascx.bin" />
+    <None Include="Components\User\Controls\Sections\SampleKit.ascx.bin" />
+    <None Include="Components\User\Controls\Sections\SampleKitShort.ascx.bin" />
+    <None Include="ContactUs.aspx.bin" />
+    <None Include="Coupons.aspx.bin" />
+    <None Include="Coupons_CA.aspx.bin" />
+    <None Include="Default.aspx.bin" />
+    <None Include="Faqs.aspx.bin" />
+    <None Include="Guarantee.aspx.bin" />
+    <None Include="HomeSplit.aspx.bin" />
+    <None Include="HowItWorks.aspx.bin" />
+    <None Include="NewsletterConfirmation.aspx.bin" />
+    <None Include="PaymentShipping.aspx.bin" />
+    <None Include="PopUp\aboutus\Alexandre.aspx.bin" />
+    <None Include="PopUp\aboutus\Eric.aspx.bin" />
+    <None Include="PopUp\aboutus\Gary.aspx.bin" />
+    <None Include="PopUp\aboutus\Kim.aspx.bin" />
+    <None Include="PopUp\aboutus\Marc.aspx.bin" />
+    <None Include="PopUp\aboutus\Sebastien.aspx.bin" />
+    <None Include="PopUp\aboutus\Steve.aspx.bin" />
+    <None Include="PopUp\aboutus\Team.aspx.bin" />
+    <None Include="PrivacyPolicy.aspx.bin" />
+    <None Include="ProfitCalculator.aspx.bin" />
+    <None Include="SampleKitConfirmation.aspx.bin" />
+    <None Include="Scratchcard.aspx.bin" />
+    <None Include="SiteMap.aspx.bin" />
+    <None Include="SpecialOffer.aspx.bin" />
+    <None Include="Splitter.aspx.bin" />
+    <None Include="Testimonials.aspx.bin" />
+    <None Include="Tips.aspx.bin" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.DEV.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.PROD.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.TEST.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\images\_ScratchcardWeb_\_classic_\en-US\sampleKit\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TEST|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PROD|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEV|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57065</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

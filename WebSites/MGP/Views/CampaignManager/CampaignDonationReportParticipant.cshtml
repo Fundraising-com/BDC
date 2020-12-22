@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Campaign Donation Report Participant";
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+    var eventBranding = ViewBag.Event as GA.BDC.Web.MGP.Models.Branding.Event;
+}
+<div id="report" ng-controller="campaignManagerController">
+    <div class="row" ng-init="participantId = @eventBranding.ParticipantId; searchType='all'; findCampaignDonationReportParticipant();">
+        <div class="col-sm-12">
+            <h1 id="title">My Campaign Report</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h1>{{totalAmount | currency}} <small>donation</small></h1>
+            </div>
+        </div>
+        <div class="col-sm-6 @(partnerBranding.HideProfit ? "hidden" : string.Empty)">
+            <div class="jumbotron">
+                <h1>{{totalProfit | currency}} <small>profit</small></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="executingAction">
+        <div class="col-md-12 text-center">
+            <img src="/Content/images/public/content/loading.gif" alt="Loading" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">            
+            <table class="table table-bordered table-condensed table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Supporter</th>
+                        <th class="text-center">Donations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in data">
+                        <td>{{row.SupporterName}}</td>
+                        <td class="text-center">{{row.Donations | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+}

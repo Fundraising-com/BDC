@@ -1,0 +1,5 @@
+﻿<div ng-repeat="slide in slides" class="item" ng-class="{active: $first}" ng-cloak>   
+   <a href="{{::slide.Url}}" ng-click="googleAnalyticsCtrl.BannerClicked(slide.Url, slide.Id);" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+      <img ng-src="/Content/external/banners/{{::slide.Image}}" alt="{{::slide.AlternativeText}}" style="margin: auto; width: 100%;">
+   </a>
+</div>

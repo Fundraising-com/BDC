@@ -1,0 +1,104 @@
+﻿@model GA.BDC.Web.MGP.Models.Views.SupportBox
+@using GA.BDC.Web.MGP.Models.Branding
+@{
+    var partnerBranding = ViewBag.Partner as GA.BDC.Web.MGP.Models.Branding.Partner;
+}
+<div class="panel">
+    <div class="panel-heading support-header">
+        <h3 class="panel-title">Total Raised</h3>
+    </div>
+    <div class="panel-body support-middle">
+        <div class="row">
+            <div class="col-sm-12"><h2>@string.Format("{0:C}", Model.TotalRaised)</h2></div>           
+        </div>
+        <div class="row">
+            <div class="col-sm-12 @(Model.Goal == 0 ? "hidden" : "")">Help us reach our goal<br /><h3>@string.Format("{0:C}", Model.Goal)</h3></div>
+        </div>
+        <div class="row">
+            <div>
+                @if (partnerBranding.ProductOffer == ProductOffer.DonationOnly) {
+                    //DONATE LINK
+                    <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("RedirectToStoreDirect", "Group", new { eventId = Model.DefaultEventId })'">Donate</button>
+                }
+                else
+                {
+                    <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("FindAGroup")'">Support Us >></button>
+                }                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br />@Model.TotalNumberOfSupporters people have given their support
+            </div>
+        </div>
+        @if (Model.ShowImageMotivator)
+        {
+            <div class="row">
+                <div id="donarCommentsRotator" class="carousel slide carousel-fade" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @if (Model.DonarComments != null)
+                        {
+                            var commentCounter = 1;
+                            foreach (var comment in Model.DonarComments)
+                            {
+                                <div class="item text-center @(commentCounter == 1 ? "active" : "")">
+                                    <span class="name">@comment.Name  @string.Format("{0:C}", comment.Amount)</span><br />
+                                    <span class="comment">@comment.Comment</span>
+                                </div>                                
+                                {
+                                    commentCounter++;
+                                }
+                            }
+                        }
+                     </div>
+                </div>
+            </div>
+        }
+        @if (partnerBranding.ProductOffer == ProductOffer.DonationOnly)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="support-txt">Create your own fundraising page</div>
+                    <div class="support-btn">
+                        <button class="btn btn-default btn-lg" onclick="window.location.href='@Url.Action("FindAGroup")'">Raise Funds</button>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.LearnMoreText))
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="learn-more">
+                        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Learn More</h4>
+                      </div>
+                      <div class="modal-body text-left">
+                        @Html.Raw(Model.LearnMoreText)
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $("#donarCommentsRotator").carousel();
+    </script>
+}

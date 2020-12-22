@@ -1,0 +1,1 @@
+<%@ Page Language="vb" AutoEventWireup="false" Codebehind="RMSOutput.aspx.vb" Inherits="StoreFront.StoreFront.RMSOutput" %>

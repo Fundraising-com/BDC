@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FAD7B446-22F5-4A5B-B54B-CA2A52EE1ED4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdminSection</RootNamespace>
+    <AssemblyName>AdminSection</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="efundraising.Collections, Version=1.0.3321.26418, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Configuration, Version=1.0.3057.19587, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="efundraising.Core, Version=1.0.3321.26426, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Data.Sql, Version=1.0.3350.21905, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.Data.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Diagnostics, Version=1.0.3321.26446, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.efundraisingCore, Version=0.0.3321.26457, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.efundraisingCore.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.eFundraisingStore, Version=1.0.4210.7371, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="efundraising.EnterpriseComponents, Version=1.1.3321.26436, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.EnterpriseComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Utilities.CookieHandler, Version=1.0.3321.26455, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EfundraisingCRMWeb\bin\efundraising.Utilities.CookieHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Web.UI.InputControls, Version=1.0.3321.26472, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\efundraising.Web.UI.InputControls.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Web.UI.MasterPages, Version=1.0.3321.26481, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EfundraisingCRMWeb\bin\efundraising.Web.UI.MasterPages.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.Web.UI.UIControls, Version=1.0.3321.26454, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\efundraising\Source\EfundraisingSolution\eFundraisingWeb\bin\efundraising.Web.UI.UIControls.dll</HintPath>
+    </Reference>
+    <Reference Include="efundraising.WebTracking, Version=1.0.3321.26442, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EfundraisingCRMWeb\bin\efundraising.WebTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdministrationPackageEdit.aspx" />
+    <Content Include="AdministrationPackageNew.aspx" />
+    <Content Include="AdministrationPackageProductEdit.aspx" />
+    <Content Include="AdministrationPackageProductNew.aspx" />
+    <Content Include="AdministrationProductEdit.aspx" />
+    <Content Include="AdministrationProductImport.aspx" />
+    <Content Include="AdministrationProductNew.aspx" />
+    <Content Include="AdministrationProductPackage.aspx" />
+    <Content Include="Components\User\Administration\PackageDescInfo.ascx" />
+    <Content Include="Components\User\Administration\PackageInfo.ascx" />
+    <Content Include="Components\User\Administration\PackageProductLinkInfo.ascx" />
+    <Content Include="Components\User\Administration\ProductInfo.ascx" />
+    <Content Include="Components\User\Administration\RelationsDatagrid.ascx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Login.aspx" />
+    <Content Include="Resources\Images\add_11.gif" />
+    <Content Include="Resources\Images\bodyBg2.jpg" />
+    <Content Include="Resources\Images\close_11.gif" />
+    <Content Include="Resources\Images\Continue4.gif" />
+    <Content Include="Resources\Images\Continue5.gif" />
+    <Content Include="Resources\Images\Edit2.gif" />
+    <Content Include="Resources\Images\exclam.gif" />
+    <Content Include="Resources\Images\help_11.gif" />
+    <Content Include="Resources\Images\indicator.gif" />
+    <Content Include="Resources\Images\internet.gif" />
+    <Content Include="Resources\Images\loupe.gif" />
+    <Content Include="Resources\Images\noImage.jpg" />
+    <Content Include="Resources\Images\order.gif" />
+    <Content Include="Resources\Images\package.gif" />
+    <Content Include="Resources\Images\report2.gif" />
+    <Content Include="Resources\Images\ReportServer.gif" />
+    <Content Include="Resources\Images\Search.gif" />
+    <Content Include="Resources\Images\Search2.gif" />
+    <Content Include="Resources\Images\SmallRemove.gif" />
+    <Content Include="Resources\Images\track.gif" />
+    <Content Include="Resources\Images\UserControls\icon_calendar.gif" />
+    <Content Include="Resources\Images\wait.gif" />
+    <Content Include="Resources\Images\work.gif" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdministrationBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationPackageEdit.aspx.cs">
+      <DependentUpon>AdministrationPackageEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationPackageNew.aspx.cs">
+      <DependentUpon>AdministrationPackageNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationPackageProductEdit.aspx.cs">
+      <DependentUpon>AdministrationPackageProductEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationPackageProductNew.aspx.cs">
+      <DependentUpon>AdministrationPackageProductNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationProductEdit.aspx.cs">
+      <DependentUpon>AdministrationProductEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationProductImport.aspx.cs">
+      <DependentUpon>AdministrationProductImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationProductNew.aspx.cs">
+      <DependentUpon>AdministrationProductNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrationProductPackage.aspx.cs">
+      <DependentUpon>AdministrationProductPackage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Server\Administration\AdministrationPackageProduct.cs" />
+    <Compile Include="Components\User\Administration\PackageDescInfo.ascx.cs">
+      <DependentUpon>PackageDescInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Administration\PackageInfo.ascx.cs">
+      <DependentUpon>PackageInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Administration\PackageProductLinkInfo.ascx.cs">
+      <DependentUpon>PackageProductLinkInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Administration\ProductInfo.ascx.cs">
+      <DependentUpon>ProductInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\User\Administration\RelationsDatagrid.ascx.cs">
+      <DependentUpon>RelationsDatagrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DataAccess\_efundraisingStoreInterface.cs" />
+    <Compile Include="Default.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="eFundWebPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PackageProductBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AdministrationPackageEdit.aspx.resx">
+      <DependentUpon>AdministrationPackageEdit.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdministrationPackageNew.aspx.resx">
+      <DependentUpon>AdministrationPackageNew.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdministrationProductEdit.aspx.resx">
+      <DependentUpon>AdministrationProductEdit.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdministrationProductNew.aspx.resx">
+      <DependentUpon>AdministrationProductNew.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdministrationProductPackage.aspx.resx">
+      <DependentUpon>AdministrationProductPackage.aspx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Administration\PackageDescInfo.ascx.resx">
+      <DependentUpon>PackageDescInfo.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Administration\PackageInfo.ascx.resx">
+      <DependentUpon>PackageInfo.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Administration\PackageProductLinkInfo.ascx.resx">
+      <DependentUpon>PackageProductLinkInfo.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Administration\ProductInfo.ascx.resx">
+      <DependentUpon>ProductInfo.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\User\Administration\RelationsDatagrid.ascx.resx">
+      <DependentUpon>RelationsDatagrid.ascx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Global.asax.resx">
+      <DependentUpon>Global.asax.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFundraisingCRM\EFundraisingCRM.csproj">
+      <Project>{920EA03B-53BE-4089-8A3D-B43C1D3A8A26}</Project>
+      <Name>EFundraisingCRM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\logo\_svn\entries" />
+    <None Include="Resources\Images\logo\_svn\format" />
+    <None Include="Resources\Images\UserControls\_svn\dir-prop-base" />
+    <None Include="Resources\Images\UserControls\_svn\entries" />
+    <None Include="Resources\Images\UserControls\_svn\format" />
+    <None Include="Resources\Images\UserControls\_svn\prop-base\icon_calendar.gif.svn-base" />
+    <None Include="Resources\Images\UserControls\_svn\text-base\icon_calendar.gif.svn-base" />
+    <None Include="Resources\Images\_svn\dir-prop-base" />
+    <None Include="Resources\Images\_svn\entries" />
+    <None Include="Resources\Images\_svn\format" />
+    <None Include="Resources\Images\_svn\prop-base\add_11.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\close_11.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\Continue4.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\Continue5.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\Edit2.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\help_11.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\indicator.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\internet.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\loupe.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\order.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\package.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\report2.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\ReportServer.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\Search.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\Search2.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\SmallRemove.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\track.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\wait.gif.svn-base" />
+    <None Include="Resources\Images\_svn\prop-base\work.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\add_11.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\close_11.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\Continue4.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\Continue5.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\Edit2.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\help_11.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\indicator.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\internet.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\loupe.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\order.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\package.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\report2.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\ReportServer.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\Search.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\Search2.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\SmallRemove.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\track.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\wait.gif.svn-base" />
+    <None Include="Resources\Images\_svn\text-base\work.gif.svn-base" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Components\User\AddressHygene\" />
+    <Folder Include="Components\User\Breadcrumbs\_svn\prop-base\" />
+    <Folder Include="Components\User\Breadcrumbs\_svn\props\" />
+    <Folder Include="Components\User\Breadcrumbs\_svn\text-base\" />
+    <Folder Include="Components\User\Breadcrumbs\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\Breadcrumbs\_svn\tmp\props\" />
+    <Folder Include="Components\User\Breadcrumbs\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\30\images\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\30\images\_svn\props\" />
+    <Folder Include="Components\User\brochures\30\images\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\30\images\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\30\images\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\30\images\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\30\mp3\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\30\mp3\_svn\props\" />
+    <Folder Include="Components\User\brochures\30\mp3\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\30\mp3\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\30\mp3\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\30\mp3\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\30\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\30\_svn\props\" />
+    <Folder Include="Components\User\brochures\30\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\30\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\30\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\30\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\31\images\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\31\images\_svn\props\" />
+    <Folder Include="Components\User\brochures\31\images\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\31\images\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\31\images\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\31\images\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\31\mp3\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\31\mp3\_svn\props\" />
+    <Folder Include="Components\User\brochures\31\mp3\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\31\mp3\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\31\mp3\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\31\mp3\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\31\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\31\_svn\props\" />
+    <Folder Include="Components\User\brochures\31\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\31\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\31\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\31\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\32\images\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\32\images\_svn\props\" />
+    <Folder Include="Components\User\brochures\32\images\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\32\images\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\32\images\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\32\images\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\32\mp3\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\32\mp3\_svn\props\" />
+    <Folder Include="Components\User\brochures\32\mp3\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\32\mp3\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\32\mp3\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\32\mp3\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\32\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\32\_svn\props\" />
+    <Folder Include="Components\User\brochures\32\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\32\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\32\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\32\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\33\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\33\_svn\props\" />
+    <Folder Include="Components\User\brochures\33\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\33\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\33\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\33\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\35\images\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\35\images\_svn\props\" />
+    <Folder Include="Components\User\brochures\35\images\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\35\images\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\35\images\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\35\images\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\35\mp3\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\35\mp3\_svn\props\" />
+    <Folder Include="Components\User\brochures\35\mp3\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\35\mp3\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\35\mp3\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\35\mp3\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\35\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\35\_svn\props\" />
+    <Folder Include="Components\User\brochures\35\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\35\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\35\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\35\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\36\images\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\36\images\_svn\props\" />
+    <Folder Include="Components\User\brochures\36\images\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\36\images\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\36\images\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\36\images\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\36\mp3\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\36\mp3\_svn\props\" />
+    <Folder Include="Components\User\brochures\36\mp3\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\36\mp3\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\36\mp3\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\36\mp3\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\36\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\36\_svn\props\" />
+    <Folder Include="Components\User\brochures\36\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\36\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\36\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\36\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\37\images\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\37\images\_svn\props\" />
+    <Folder Include="Components\User\brochures\37\images\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\37\images\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\37\images\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\37\images\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\37\mp3\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\37\mp3\_svn\props\" />
+    <Folder Include="Components\User\brochures\37\mp3\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\37\mp3\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\37\mp3\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\37\mp3\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\37\_svn\prop-base\" />
+    <Folder Include="Components\User\brochures\37\_svn\props\" />
+    <Folder Include="Components\User\brochures\37\_svn\text-base\" />
+    <Folder Include="Components\User\brochures\37\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\brochures\37\_svn\tmp\props\" />
+    <Folder Include="Components\User\brochures\37\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\brochures\45\images\" />
+    <Folder Include="Components\User\brochures\45\mp3\" />
+    <Folder Include="Components\User\brochures\ambiance\images\" />
+    <Folder Include="Components\User\brochures\ambiance\mp3\" />
+    <Folder Include="Components\User\brochures\chocolate\images\" />
+    <Folder Include="Components\User\brochures\chocolate\mp3\" />
+    <Folder Include="Components\User\brochures\deluxe\images\" />
+    <Folder Include="Components\User\brochures\deluxe\mp3\" />
+    <Folder Include="Components\User\brochures\easter\images\" />
+    <Folder Include="Components\User\brochures\easter\mp3\" />
+    <Folder Include="Components\User\brochures\gourmet\images\" />
+    <Folder Include="Components\User\brochures\gourmet\mp3\" />
+    <Folder Include="Components\User\brochures\homegift\images\" />
+    <Folder Include="Components\User\brochures\homegift\mp3\" />
+    <Folder Include="Components\User\brochures\pizza\images\" />
+    <Folder Include="Components\User\brochures\pizza\mp3\" />
+    <Folder Include="Components\User\brochures\popcorn\images\" />
+    <Folder Include="Components\User\brochures\popcorn\mp3\" />
+    <Folder Include="Components\User\brochures\PrizeProgram\images\" />
+    <Folder Include="Components\User\brochures\PrizeProgram\mp3\" />
+    <Folder Include="Components\User\brochures\springcelebration\images\" />
+    <Folder Include="Components\User\brochures\springcelebration\mp3\" />
+    <Folder Include="Components\User\Footer\_svn\prop-base\" />
+    <Folder Include="Components\User\Footer\_svn\props\" />
+    <Folder Include="Components\User\Footer\_svn\text-base\" />
+    <Folder Include="Components\User\Footer\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\Footer\_svn\tmp\props\" />
+    <Folder Include="Components\User\Footer\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\French\Footer\_svn\prop-base\" />
+    <Folder Include="Components\User\French\Footer\_svn\props\" />
+    <Folder Include="Components\User\French\Footer\_svn\text-base\" />
+    <Folder Include="Components\User\French\Footer\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\French\Footer\_svn\tmp\props\" />
+    <Folder Include="Components\User\French\Footer\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\French\_svn\prop-base\" />
+    <Folder Include="Components\User\French\_svn\props\" />
+    <Folder Include="Components\User\French\_svn\text-base\" />
+    <Folder Include="Components\User\French\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\French\_svn\tmp\props\" />
+    <Folder Include="Components\User\French\_svn\tmp\text-base\" />
+    <Folder Include="Components\User\H1\_svn\prop-base\" />
+    <Folder Include="Components\User\H1\_svn\props\" />
+    <Folder Include="Components\User\H1\_svn\text-base\" />
+    <Folder Include="Components\User\H1\_svn\tmp\prop-base\" />
+    <Folder Include="Components\User\H1\_svn\tmp\props\" />
+    <Folder Include="Components\User\H1\_svn\tmp\text-base\" />
+    <Folder Include="Resources\Images\logo\_svn\prop-base\" />
+    <Folder Include="Resources\Images\logo\_svn\props\" />
+    <Folder Include="Resources\Images\logo\_svn\text-base\" />
+    <Folder Include="Resources\Images\logo\_svn\tmp\prop-base\" />
+    <Folder Include="Resources\Images\logo\_svn\tmp\props\" />
+    <Folder Include="Resources\Images\logo\_svn\tmp\text-base\" />
+    <Folder Include="Resources\Images\UserControls\_svn\props\" />
+    <Folder Include="Resources\Images\UserControls\_svn\tmp\prop-base\" />
+    <Folder Include="Resources\Images\UserControls\_svn\tmp\props\" />
+    <Folder Include="Resources\Images\UserControls\_svn\tmp\text-base\" />
+    <Folder Include="Resources\Images\_svn\props\" />
+    <Folder Include="Resources\Images\_svn\tmp\prop-base\" />
+    <Folder Include="Resources\Images\_svn\tmp\props\" />
+    <Folder Include="Resources\Images\_svn\tmp\text-base\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64217</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

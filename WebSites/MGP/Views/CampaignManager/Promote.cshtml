@@ -1,0 +1,225 @@
+﻿@model GA.BDC.Web.MGP.Models.Views.Promote
+@using GA.BDC.Web.MGP.Models.Branding
+@using System.Web.Script.Serialization
+@{
+    var userBranding = ViewBag.User as User;
+    var eventBranding = ViewBag.Event as Event;
+   var partnerBranding = ViewBag.Partner as Partner;
+    ViewBag.Title = "Campaign Manager of " + eventBranding.Name;
+    Layout = "~/Views/Shared/_campaignmanager.cshtml";
+    var serializedModel = new JavaScriptSerializer().Serialize(Model);
+}
+<div id="information" ng-controller="campaignManagerController" ng-init="participantId = @eventBranding.ParticipantId;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Tools to promote your online fundraising @partnerBranding.GroupDisplay.ToLower()</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span>Share Link</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @if (userBranding.IsSponsor && eventBranding.EventType != EventTypeInfo.INDIVIDUAL_FUNDRAISER)
+                            {
+                                <span class="description_text">Use this link to promote your fundraising @partnerBranding.GroupDisplay.ToLower() and to share with group members, friends and family.</span>
+                            }
+                            else
+                            {
+                                <span class="description_text">Use this link to promote your fundraising @partnerBranding.GroupDisplay.ToLower() and to share with friends and family.</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3 style="word-wrap: break-word">http://www.efundraising.com/@eventBranding.Redirect</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span class="description_text">Here are a few ways you can use this link:
+                                <ul>
+                                    <li>Tell everyone you know the link to your online fundraising @partnerBranding.GroupDisplay.ToLower().
+                                    </li>
+                                    <li class="@(userBranding.IsParticipant || eventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "hidden" : string.Empty)">Include the link in all printed materials that can be handed out.
+                                    </li>
+                                    <li>Paste the link on all related web sites, blogs and/or social networks.
+                                    </li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info" ng-controller="campaignManagerController" ng-init="registerView = @serializedModel">
+                <div class="panel-heading">
+                    <span>Post a Banner</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <img src="~/Content/images/groups/banners/banner_468x60_small.jpg" alt="468x60" style="width: 100%;" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="radio" id="1" name="BannerImage" ng-model="registerView.selectedRadio" ng-click="bannerLink(1, @userBranding.EventParticipationId)" value="468px X 60px" style="font-weight: bold;" />
+                            <span class="description_text">468px X 60px</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <img src="~/Content/images/groups/banners/banner_234x60.jpg" alt="234x60" style="width: 100%;" />
+                        </div>
+                        <div class="col-xs-4">
+                            <img src="~/Content/images/groups/banners/banner_120x120.jpg" alt="120x120" style="width: 100%;" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <input type="radio" id="2" name="BannerImage" ng-model="registerView.selectedRadio" ng-click="bannerLink(2, @userBranding.EventParticipationId)" value="234px X 60px" style="font-weight: bold;" />
+                            <span class="description_text">234px X 60px</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="radio" id="4" name="BannerImage" ng-model="registerView.selectedRadio" ng-click="bannerLink(3, @userBranding.EventParticipationId)" value="120px X 120px" style="font-weight: bold;" />
+                            <span class="description_text">120px X 120px</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="radio" id="3" name="BannerImage" ng-model="registerView.selectedRadio" ng-click="bannerLink(4, @userBranding.EventParticipationId)" value="Text Link" style="font-weight: bold;" />
+                            <span class="description_text">Text Link</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span class="description_text">Now copy the following link and paste it in your web site’s HTML code or on your social network’s page.(ask your webmaster for help if you’re not sure what to do):
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <textarea class="form-control">{{registerView.link}}</textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span>Downloadable Tools</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a href="@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 1 })" target="_blank">
+                                <img src="/Content/images/groups/downloadTools/emailcollect_thum.gif" alt="Email collection page" />
+                            </a>
+                        </div>
+                        <div class="col-xs-8">
+                            <span><strong>Email Collection Page</strong><br />
+                                @if (userBranding.IsSponsor && eventBranding.EventType != EventTypeInfo.INDIVIDUAL_FUNDRAISER)
+                                {
+                                    <span>Download this page and bring it to your next group meeting to collect your group members’ email addresses. You can then enter them
+                                        here online.</span>
+                               
+                                }
+                                else if (userBranding.IsParticipant)
+                                {
+                                    <span>Download this page to collect your friends and family’s email addresses. You can then enter them here online.</span>
+                                }
+                            </span>
+                        </div>
+                    </div>                    
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-8">
+                            <button class="btn btn-sm btn-warning form-control" onclick="window.open('@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 1 })')">Download</button>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row @(userBranding.IsParticipant || eventBranding.EventType == EventTypeInfo.INDIVIDUAL_FUNDRAISER ? "hidden" : string.Empty)">
+                        <div class="col-xs-4 text-center">
+                            <a target="_blank" href="@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 4 })">
+                                <img src="/Content/images/groups/downloadTools/lettergroup_thumb.gif" alt="Letter to group members" />
+                            </a>
+                        </div>
+                        <div class="col-xs-8">
+                            <span><strong>Letter to Group Members</strong><br />
+                                Download this letter and hand it out to your group members to promote your fundraising campaign other than by email, or to help increase your participation rate.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-8">
+                            <button class="btn btn-sm btn-warning form-control" onclick="window.open('@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 4 })')">Download</button>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a target="_blank" href="@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 3 })">
+                                <img src="/Content/images/groups/downloadTools/lettersupp_thumb.gif" alt="Letter to supporters" />
+                            </a>
+                        </div>
+                        <div class="col-xs-8">
+                            <span><strong>Letter to Supporters</strong><br />
+                                @if (userBranding.IsSponsor && eventBranding.EventType != EventTypeInfo.INDIVIDUAL_FUNDRAISER)
+                                {
+                                
+                                    <span>Download this letter and hand it out to friends and family to let them know how they can purchase magazine subscriptions on your online store to help support your cause.</span>
+                                
+                                }
+                                else if (userBranding.IsParticipant)
+                                {
+                                    <span>Download this letter and hand it out to friends and family to let them know how they can purchase magazine subscriptions on your group’s online store to help support your cause.</span>
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-8">
+                            <button class="btn btn-sm btn-warning form-control" onclick="window.open('@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 3 })')">Download</button></div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a target="_blank" href="@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 2 })">
+                                <img src="/Content/images/groups/downloadTools/listmag_thumb.gif" alt="Letter of available magazines" />
+                            </a>
+                        </div>
+                        <div class="col-xs-8">
+                            <span><strong>List of Available Magazine Titles</strong><br />
+                                @if (userBranding.IsSponsor && eventBranding.EventType != EventTypeInfo.INDIVIDUAL_FUNDRAISER)
+                                {
+                                
+                                    <span>Download this list to see all the magazine titles available on your online store or to hand out to people who wish to help but do not have an email address.</span>
+                                
+                                }
+                                else if (userBranding.IsParticipant)
+                                {
+                                    <span>Download this list to see all the magazine titles available on your group’s online store or to hand out to people who wish to help but do not have an email address.</span>
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-8">
+                            <button class="btn btn-sm btn-warning form-control" onclick="window.open('@Url.Action("DownloadTool", new { participantId = eventBranding.ParticipantId, type = 2 })')">Download</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

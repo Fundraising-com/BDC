@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_representativePortal.cshtml";
+}
+@section header
+{
+   <title>My Campaigns - {{::representativeCtrl.Representative.Name}}</title>
+   <meta name="description" content="Request Information to {{::representativeCtrl.Representative.Name}}" />
+   <meta property="og:title" content="{{::representativeCtrl.Representative.Name}}" />
+   <meta name="keywords" content="fundraising, fundraising ideas, representative fundraiser, {{::representativeCtrl.Representative.Name}}" />
+}
+   <div class="col-sm-12" style="margin-top:125px">
+       <span itemscope itemtype="https://schema.org/Breadcrumb">
+           <a itemprop="url" href="/">
+               <span itemprop="title">Home</span>
+           </a> &gt;
+       </span>
+
+       <span itemscope itemtype="https://schema.org/Breadcrumb">
+           <a itemprop="name">
+               <span itemprop="title"><strong>My Campaigns</strong></span>
+           </a>
+       </span>
+   </div>
+<h1>Where are you running your campaign with us?</h1>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-offset-1 col-lg-4 text-center">
+        <a href="http://www.gaschoolstore.com/" target="_blank"><img src="/Content/images/public/rep_portal/gaschoolstore.jpg" style="width: 100%;" /></a>
+        <h2><a href="http://www.gaschoolstore.com/" target="_blank">www.gaschoolstore.com</a></h2>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-lg-offset-1 col-lg-4 text-center">
+       <a href="http://www.efundraising.com/Home/SignIn?p={{::representativeCtrl.scope.$storage.Partner.Id}}&fcextid={{::representativeCtrl.Representative.ExternalId}}" target="_blank">
+          <img src="/Content/images/public/rep_portal/efundraising.jpg" style="width: 100%;" />
+       </a>
+        <h2><a href="http://www.efundraising.com/Home/SignIn?p={{::representativeCtrl.scope.$storage.Partner.Id}}&fcextid={{::representativeCtrl.Representative.ExternalId}}" target="_blank">www.efundraising.com</a></h2>
+    </div>
+</div>
+

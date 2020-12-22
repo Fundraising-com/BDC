@@ -1,0 +1,24 @@
+@using GA.BDC.Shared.Entities
+@model IList<Product>
+@{
+   ViewBag.Title = "Fundraising.com - Fundraising ideas and products to raise money";
+   ViewBag.Description = "Your good cause deserves a great fundraiser! Traditional and online fundraising ideas for schools, sports teams, churches and non-profits.";
+   ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers";
+   Layout = "~/Views/Shared/_layout3.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("Index", "Home");
+}
+
+
+<script type="text/javascript">
+   $(document).ready(function () {
+      $('.homepage-mobile-banner').slick({
+         dots: true,
+         infinite: true,
+         speed: 300,
+         slidesToShow: 1,
+         slidesToScroll: 1,
+         autoplaySpeed: 3000,
+         autoplay: true,
+      });
+   });
+</script>

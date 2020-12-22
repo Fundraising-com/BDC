@@ -1,0 +1,36 @@
+<PUBLIC:COMPONENT tagName="rollover">
+	<PUBLIC:PROPERTY NAME="href" />
+	<PUBLIC:ATTACH EVENT="onmouseover" FOR="element" ONEVENT="HideDropDowns()" />
+	<PUBLIC:ATTACH EVENT="onmouseout" FOR="element" ONEVENT="ShowDropDowns()" />
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	function HideDropDowns(){
+		var j = 0;
+		if ( document.forms.length > 0 ){
+			var LEN = document.forms[0].elements.length;
+			for (i = 0; i < LEN; i++){			
+				if(document.forms[0].elements[i].type == 'select-one' && j < 35){
+					j++;
+					document.forms[0].elements[i].style.visibility='hidden';
+				}
+			}
+		}
+	}
+
+	function ShowDropDowns(){
+		var j = 0;
+		if ( document.forms.length > 0 ){
+			var LEN = document.forms[0].elements.length;
+			for (i = 0; i < LEN; i++){
+				if(document.forms[0].elements[i].type == 'select-one' && j < 35){
+					j++;
+					document.forms[0].elements[i].style.visibility='visible';
+				}
+			}
+		}
+	}
+
+</SCRIPT>
+

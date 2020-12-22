@@ -1,0 +1,123 @@
+﻿@model GA.BDC.Web.MGP.Models.Views.AmountRaisedIndicator
+@using GA.BDC.Web.MGP.Models.Branding
+@using GA.BDC.Web.MGP.Helpers
+@{
+    var eventBranding = ViewBag.Event as Event;
+    var partnerBranding = ViewBag.Partner as Partner;
+    var isMobile = (bool)ViewBag.IsMobile;
+    var amount = partnerBranding.ShowTotalAmountInThermometer ? eventBranding.TotalAmount : eventBranding.TotalProfit;
+}
+<div class="row @(partnerBranding.HideGoal ? "hidden" : string.Empty)">
+    @if (!isMobile)
+    {
+        <div class="col-sm-4 text-center hidden-xs">
+            @if (Model.ThermometerFullIndexCount == 10)
+            {
+                <img src="~/Content/images/groups/amountRaisedIndicator/therm_top_full.gif" class="align-bottom" alt="" />
+            }
+            else
+            {
+                <img src="~/Content/images/groups/amountRaisedIndicator/therm_top_empty.gif" class="align-bottom" alt="" />
+            }
+            @for (int i = Model.ThermometerFullIndexCount; i < 10; i++)
+            {
+                <img src="~/Content/images/groups/amountRaisedIndicator/therm_empty.gif" class="align-bottom" alt="" />
+            }
+            @for (int i = 0; i < Model.ThermometerFullIndexCount; i++)
+            {
+                <img src="~/Content/images/groups/amountRaisedIndicator/therm_full.gif" class="align-bottom" alt="" />
+            }
+            <img src="~/Content/images/groups/amountRaisedIndicator/therm_bottom.gif" class="align-bottom" alt="" />
+        </div>
+    }
+    <div class="col-sm-8">
+        @if (partnerBranding.ProductOffer == ProductOffer.DonationOnly)
+        {
+            <br />
+            <br />
+            <a href="@Url.Action("RedirectToStoreDirect", "Group", new { eventId = eventBranding.Id, participantId = eventBranding.ParticipantId })">
+                <img src="@Url.Content("/Content/images/groups/amountRaisedIndicator/donate_button.png")" alt="Donate" />
+            </a>
+        }
+        else if (Model.IsGroupPageView && eventBranding.EventType != EventTypeInfo.INDIVIDUAL_FUNDRAISER)
+        {
+            <br />
+            <br />
+            <a href="@Url.Action(Constants.PARTICIPANT_REGISTER_PAGE, "Home", new { eventId = eventBranding.Id })">
+                <img src="@Url.Content("/Content/images/groups/amountRaisedIndicator/join_button.png")" alt="Spread the Word" style='width:100%;' /></a>
+        }
+        <div class="inner-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <br />
+                    <strong>@(eventBranding.UserType == UserType.SPONSOR ? "Group" : "My") Goal :</strong> <span ng-hide="isGoalInEditMode" ng-model="goal" ng-init="goal = @Model.Goal">{{goal | currency}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 goal">
+                    <a href="" ng-click="enableGoalEditMode()" ng-hide="isGoalInEditMode">Change</a>
+                    <input type="number" class="form-control" name="goal" ng-show="isGoalInEditMode" ng-model="goal" ng-init="goal = @Model.Goal" />
+                    <a href="" ng-click="cancelGoalEditMode()" ng-show="isGoalInEditMode">Cancel</a>&nbsp;&nbsp;
+                    <a href="" ng-click="changeGoal()" ng-show="isGoalInEditMode">Save</a><span ng-show="resultFailed" class="text-danger"><br />
+                        <br />
+                        {{responseText}}</span>
+                </div>
+            </div>
+            <div class="row @(partnerBranding.ProductOffer == ProductOffer.DonationOnly ? "hidden" : string.Empty)">
+                <div class="col-sm-12">
+                    <strong>Amount @(eventBranding.UserType == UserType.PARTICIPANT ? "I" : string.Empty) Raised :</strong><br />
+                    <span class="s28-strong">@string.Format("{0:C}", amount)</span>
+                </div>
+            </div>
+            <div class="row @(partnerBranding.ProductOffer == ProductOffer.DonationOnly ? "hidden" : string.Empty)">
+                <div class="col-sm-12">
+                    <br />@(eventBranding.UserType == UserType.PARTICIPANT ? "My" : string.Empty) Total Items Sold: @eventBranding.TotalNumberOfItemSold
+                </div>
+            </div>
+            <div class="row @(partnerBranding.ProductOffer != ProductOffer.DonationOnly ? "hidden" : string.Empty)">
+                <div class="col-sm-12">
+                    @(eventBranding.UserType == UserType.PARTICIPANT ? "My" : string.Empty) Total Donations: @string.Format("{0:C}", eventBranding.TotalDonationAmount)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 report">
+                    @Html.ActionLink("View Reports", "CampaignReport", new { participantId = eventBranding.ParticipantId })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">&nbsp;</div>
+</div>
+<div class="row visible-sm visible-md visible-lg">
+    <div class="col-sm-7 text-center">
+        <img src="/Content/images/groups/amountRaisedIndicator/spread_the_word_1.gif" />
+    </div>
+    <div class="col-sm-5 text-center">
+        <div class="row">
+            <div class="col-sm-6 text-center" style="padding-right: 0px;">
+                <a href="mailto:?subject=A cause worth supporting&body=I am spreading a word of a worthwhile cause I think you may want to suppport: http://www.efundraising.com/@eventBranding.Redirect" onclick="ga('send', 'social', 'Email', 'Share', '/@eventBranding.Redirect');" target="_blank">
+                    <img src="/Content/images/groups/amountRaisedIndicator/spread_the_word_2.gif" border="0" />
+                </a>
+            </div>
+            <div class="col-sm-6 text-center" style="padding-left: 0px;">
+                <a href="https://twitter.com/intent/tweet?text=Fundraising online: http://www.efundraising.com/@eventBranding.Redirect" onclick="ga('send', 'social', 'Twitter', 'Share', '/@eventBranding.Redirect');" target="_blank">
+                    <img src="/Content/images/groups/amountRaisedIndicator/spread_the_word_3.gif" border="0" />
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center" style="padding-right: 0px;">
+                <a href="http://pinterest.com/pin/create/button/?url=http://www.efundraising.com/@eventBranding.Redirect&media=http://www.efundraising.com/Content/images/public/content/square_logo.jpg&description=Help us with our online Fundraising!" onclick="ga('send', 'social', 'Pinterest', 'Share', '/@eventBranding.Redirect');" target="_blank">
+                    <img src="/Content/images/groups/amountRaisedIndicator/spread_the_word_4.gif" border="0" />
+                </a>
+            </div>
+            <div class="col-sm-6 text-center" style="padding-left: 0px;">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.efundraising.com/@eventBranding.Redirect" onclick="ga('send', 'social', 'Facebook', 'Share', '/@eventBranding.Redirect');" target="_blank">
+                    <img src="/Content/images/groups/amountRaisedIndicator/spread_the_word_5.gif" border="0" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

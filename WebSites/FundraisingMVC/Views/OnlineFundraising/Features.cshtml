@@ -1,0 +1,49 @@
+﻿@using System.Configuration
+
+@{
+    ViewBag.Title = "Features of a Fundraising.com Online Fundraiser - Fundraising.com";
+    ViewBag.Description = "A Fundraising.com Online Fundraiser allows you to customize a personal fundraising page where supporters can shop for magazines and more in support of your cause. You earn up to 40% profit of each sale";
+    ViewBag.Keywords = "online fundraiser, online fundraising campaign, online fundraising page, online fundraising store";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("Features", "OnlineFundraising");
+}
+
+<h1>Online Fundraising Features</h1>
+<div class="row">
+    <div class="col-sm-12">
+        Here are some of the main features you’ll enjoy when you kick-off your online fundraising campaign:
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-5">
+        <img class="img-responsive" src="~/Content/images/public/online-fundrasing-features.jpg" />
+    </div>
+    <div class="col-sm-7">
+        <h3>Online Fundraising Page:</h3>
+        <ul>
+            <li>The ability to customize with your own logo, photos and text</li>
+            <li>An online fundraising store offering 1500+ products like magazines, discount cards, gift items and more. Items ship direct to your supporters!</li>
+            <li>The ability to customize with your own logo, photos and text</li>
+        </ul>
+        <h3>Email system:</h3>
+        <ul>
+            <li>Invite group members by email to participate</li>
+            <li>Invite supporters by email to visit your fundraising store</li>
+            <li>Share your store’s link on Facebook, Twitter, etc.</li>
+        </ul>
+        <h3>Prize Program:</h3>
+        <ul>
+            <li>Motivate your members to participate with great prizes</li>
+            <li>Movie tickets, Restaurant.com e-certificates, cash prizes, and more</li>
+        </ul>
+        <h3>Campaign Manager:</h3>
+        <ul>
+            <li>Edit your group's info, page design, etc.</li>
+            <li>Send messages to your group</li>
+            <li>Access reporting on sales made and profits earned.</li>
+        </ul>
+        <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/Home/Register?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" target="_blank" title="online fundraising"><img src="~/Content/images/public/b_register.gif" style="border:none"/></a>
+    </div>
+</div>
+

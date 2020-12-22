@@ -1,0 +1,139 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="ReportsController as reportsCtrl">
+    <form name="report" id="report" class="hidden-print">
+        <div layout="column">
+            <div layout="row">
+                <div>
+                    <h1 class="text-md-primary md-title">Repeated Business Report</h1>
+                </div>
+                <div flex></div>
+                <div>
+                    <md-button href="/Reports"><md-icon>arrow_back</md-icon>Go Back</md-button>
+                </div>
+            </div>
+            <br>
+            <div layout="row" layout-padding>
+                <md-input-container class="md-block" flex="19">
+                    <label>From Date 1</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date1Start" md-max-date="reportsCtrl.parameters.Date1End" md-placeholder="Start 1" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+                <md-input-container class="md-block" flex="19">
+                    <label>To Date 1</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date1End" md-min-date="reportsCtrl.parameters.Date1Start" md-placeholder="End 1" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+                <md-divider flex="0"></md-divider>
+                <md-input-container class="md-block" flex="19">
+                    <label>From Date 2</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date2Start" md-max-date="reportsCtrl.parameters.Date2End" md-placeholder="Start 2" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+                <md-input-container class="md-block" flex="19">
+                    <label>To Date 2</label>
+                    <md-datepicker ng-model="reportsCtrl.parameters.Date2End" md-min-date="reportsCtrl.parameters.Date2Start" md-placeholder="End 2" ng-disabled="reportsCtrl.executing" ng-required="true"></md-datepicker>
+                </md-input-container>
+            </div>
+           <div layout="row" layout-padding>
+              <md-input-container class="md-block" flex="20">
+                 <label>Country</label>
+                 <md-autocomplete md-selected-item="reportsCtrl.parameters.Country" md-search-text="countrySearched" md-items="item in reportsCtrl.GetCountryMatches(countrySearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" md-selected-item-change="reportsCtrl.GetRegions()" ng-disabled="reportsCtrl.countries.length == 0">
+                    <md-item-template>
+                       <span md-highlight-text="countrySearched">{{item.Name}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                       No matches found.
+                    </md-not-found>
+                 </md-autocomplete>
+              </md-input-container>
+              <md-input-container class="md-block" flex="20">
+                 <label>State</label>
+                 <md-autocomplete md-selected-item="reportsCtrl.parameters.Region" md-search-text="regionSearched" md-items="item in reportsCtrl.GetRegionMatches(regionSearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" ng-disabled="reportsCtrl.parameters.Country == undefined || reportsCtrl.parameters.Country == null || reportsCtrl.regions.length == 0">
+                    <md-item-template>
+                       <span md-highlight-text="regionSearched">{{item.Name}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                       No matches found.
+                    </md-not-found>
+                 </md-autocomplete>
+              </md-input-container>
+              <md-switch class="md-primary" md-no-ink aria-label="FCs only" ng-model="reportsCtrl.parameters.ShowFCs" ng-init="reportsCtrl.parameters.ShowFCs = false;">
+                 Show FCs Results Only
+              </md-switch>
+           </div>
+            <div layout="row" layout-padding>
+                <div flex></div>
+                <md-button ng-click="reportsCtrl.ResetReportParameters();" class="md-raised" ng-cloak ng-hide="reportsCtrl.executing">Reset</md-button>
+                <md-button ng-click="reportsCtrl.ExecuteReportRepeatedBusiness()" class="md-raised md-primary" ng-cloak ng-hide="reportsCtrl.executing" ng-disabled="!report.$valid">Submit</md-button>
+                <md-button ng-csv="reportsCtrl.CsvData" filename="{{reportsCtrl.fileName}}" csv-header="reportsCtrl.GetRepeatedBusinessReportHeader()" class="md-raised md-primary" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">Download</md-button>
+            </div>
+            <div layout="row" layout-padding>
+                <div flex></div>
+                <div class="md-caption" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">The report was ran on <strong>{{reportsCtrl.executedOn | date: 'short' : '-05:00'}}</strong> and it took <strong>{{reportsCtrl.executionTime}}</strong> seconds.</div>
+            </div>
+            <div layout="row" ng-show="reportsCtrl.executing" ng-cloak>
+                <div flex></div>
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                <div flex></div>
+            </div>
+            <div layout="row" layout-padding>
+                <div flex>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+    </form>
+    <div layout="row" layout-align="center center" ng-hide="reportsCtrl.repeatedBusinessConsultants === undefined">
+        <div flex="100">
+            <canvas id="bar" class="chart chart-bar" chart-data="reportsCtrl.reportBarChartData" chart-labels="reportsCtrl.reportBarChartLabels" chart-colors="reportsCtrl.reportBarChartColors" chart-series="reportsCtrl.reportBarChartSeries" chart-options="reportsCtrl.reportBarChartOptions" chart-dataset-override="reportsCtrl.reportBarChartDatasetOverride"></canvas>
+        </div>
+    </div>
+    <br>
+    <div flex="100" layout-align="center center" ng-hide="reportsCtrl.repeatedBusinessConsultants === undefined" ng-cloak>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <span>Consultants Repeated Business</span>
+                </div>
+            </md-toolbar>
+            <md-table-container>
+                <table md-table>
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column ng-style="{'padding':'10px','text-align': 'left'}"><span>Consultant</span></th>
+                            <th md-column md-numeric ng-style="{'padding':'10px','text-align': 'center'}"><span>Leads T1</span></th>
+                            <th md-column md-numeric ng-style="{'padding':'10px','text-align': 'center'}"><span>Repeated Leads T2</span></th>
+                            <th md-column md-numeric ng-style="{'padding':'10px','text-align': 'center'}"><span>Repeated Leads</span></th>
+                            <th md-column md-numeric ng-style="{'padding':'10px','text-align': 'center'}"><span>Amount Sold T1</span></th>
+                            <th md-column md-numeric ng-style="{'padding':'10px','text-align': 'center'}"><span>Repeated Amount Sold T2</span></th>
+                            <th md-column md-numeric ng-style="{'padding':'10px','text-align': 'center'}"><span>Repeated Amount</span></th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row ng-repeat="consultant in reportsCtrl.repeatedBusinessConsultants">
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'left'}">{{consultant.name}}</td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}">{{consultant.leadsT1}}</td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}">{{consultant.leadsT2}}</td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}">{{consultant.leadsDifference | percentage:2}}%</td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}">{{consultant.totalAmountT1 | currency: '$' : 0}}</td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}">{{consultant.totalAmountT2 | currency: '$' : 0}}</td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}">{{consultant.amountDifference | percentage:2}}%</td>
+                        </tr>
+                    </tbody>
+                    <tfoot md-foot>
+                        <tr md-row>
+                            <td md-cell><strong>Total</strong></td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}"><strong>{{reportsCtrl.Totals.LeadsT1}}</strong></td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}"><strong>{{reportsCtrl.Totals.LeadsT2}}</strong></td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}"><strong>{{reportsCtrl.Totals.LeadsDifference | percentage:2}}%</strong></td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}"><strong>{{reportsCtrl.Totals.AmountT1 | currency: '$' : 0}}</strong></td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}"><strong>{{reportsCtrl.Totals.AmountT2 | currency: '$' : 0}}</strong></td>
+                            <td md-cell ng-style="{'padding':'10px','text-align': 'center'}"><strong>{{reportsCtrl.Totals.AmountDifference | percentage:2}}%</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </md-table-container>
+
+    </div> 
+</div>

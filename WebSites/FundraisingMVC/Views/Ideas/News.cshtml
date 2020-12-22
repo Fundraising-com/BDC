@@ -1,0 +1,25 @@
+﻿@using GA.BDC.Web.Fundraising.MVC.Helpers
+@using GA.BDC.Shared.Entities
+@using System.Web.Mvc
+@model IEnumerable<Newsletter>
+
+@{
+    ViewBag.Title = "Newsletters featuring fundraising ideas and fundraiser promotions - Fundraising.com";
+    ViewBag.Description = "The official fundraising newsletters of Fundraising.com. Featuring fundraising ideas and exclusive fundraiser promotions for our newsletter subscribers";
+    ViewBag.Keywords = "fundraising news,fundraising ideas,fundraiser promotions,free fundraising guide,thanksgiving fundraiser,cookie dough fundraising,easy fundraising, fundraising products,fundraising season,online fundraising,fundraising success";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("News", "Ideas");
+}
+<h1>Fundraising News</h1>
+<div class="row">
+    <div class="col-sm-12">
+        <ul>
+            @foreach (var newsletter in Model)
+            {
+                <li><a href="/newsletters/@newsletter.Url">@newsletter.Title</a></li>
+            }
+        </ul>
+
+    </div>
+</div>
+

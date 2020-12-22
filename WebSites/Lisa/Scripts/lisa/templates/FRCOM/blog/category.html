@@ -1,0 +1,43 @@
+﻿<md-dialog>
+   <form name="categoryForm" id="categoryForm">
+      <md-dialog-content>
+         <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">
+               <h2>Category</h2>
+               <span flex></span>
+            </div>
+         </md-toolbar>
+         <md-content>
+            <div layout="column" flex="98">
+               <div layout="row" layout-padding>
+                  <md-input-container class="md-block" flex="50">
+                     <label>Name</label>
+                     <input type="text" name="name" ng-model="ctrl.category.Name" required md-maxlength="255">
+                     <div class="hint">The name of the Category.</div>
+                     <div ng-messages="categoryForm.name.$error">
+                        <div ng-message="required">Name is required.</div>
+                        <div ng-message="md-maxlength">The name has to be less than 255 characters long.</div>
+                     </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="50">
+                     <label>URL</label>
+                     <input type="text" name="url" ng-model="ctrl.category.Url" required md-maxlength="255" trim>
+                     <div class="hint">Clean URL for the Category. It can't contain white spaces or special characters.</div>
+                     <div ng-messages="categoryForm.url.$error">
+                        <div ng-message="required">URL is required.</div>
+                        <div ng-message="md-maxlength">The URL has to be less than 255 characters long.</div>
+                        <div ng-message="trim">The URL can't contain white spaces.</div>
+                     </div>
+                  </md-input-container>
+               </div>
+            </div>
+         </md-content>
+      </md-dialog-content>
+      <md-dialog-actions>
+         <div layout="row" layout-fill layout-align="end center" flext="95">
+            <md-button ng-click="ctrl.save()" ng-disabled="!categoryForm.$valid" class="md-primary md-raised">Save</md-button>
+            <md-button ng-click="ctrl.cancel()" class="md-primary md-raised">Cancel</md-button>
+         </div>
+      </md-dialog-actions>
+   </form>
+</md-dialog>

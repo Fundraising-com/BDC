@@ -1,0 +1,322 @@
+@using GA.BDC.Shared.Entities
+@using GA.BDC.Web.Fundraising.MVC.Helpers
+@model Product
+@{
+   ViewBag.HideBaseOGTag = true;
+   ViewBag.Title = string.IsNullOrEmpty(Model.METATitle) ? string.Format("{0} | {1} | Sports Apparel ", Model.Name, Model.Category.Parent.Name) : Model.METATitle;
+   Layout = "~/Views/Shared/_layout.cshtml";
+   ViewBag.Description = string.IsNullOrEmpty(Model.METADescription) ? "" : Model.METADescription;
+   ViewBag.Keywords = string.IsNullOrEmpty(Model.METAKeywords) ? "" + Model.Name : Model.METAKeywords;
+   ViewBag.CanonicalUrl = string.IsNullOrEmpty(Model.CanonicalUrl) ? string.Format("/{0}/{1}/{2}/{3}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId), Model.Category.Parent.Url, Model.Category.Url, Model.Url) : Model.CanonicalUrl;
+}
+
+<div class="container">
+   <div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.Get(@Model.Id);">
+
+      <div class="row">
+         <div class="col-sm-12 col-lg-10">
+            <ol class="breadcrumb" style="background-color: transparent; padding-left:5px">
+               <li id="breadcrumb.root" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemref="breadcrumb.products"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></li>
+               <li id="breadcrumb.products" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" itemref="breadcrumb.category"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)" itemprop="url"><span itemprop="title">Products</span></a></li>
+               <li id="breadcrumb.category" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" itemref="breadcrumb.brand"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url" itemprop="url"><span itemprop="title">@Model.Category.Parent.Name</span></a></li>
+               <li id="breadcrumb.brand" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" itemref="breadcrumb.product"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url" itemprop="url"><span itemprop="title">@Model.Category.Name</span></a></li>
+               <li id="breadcrumb.product" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" class="active"><a itemprop="url" href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url/@Model.Url"><span itemprop="title"><strong>@Model.Name</strong></span></a></li>
+            </ol>
+         </div>
+         <div class="col-sm-3 col-lg-2">
+            <span style="padding-top: 8px; margin-bottom: 20px; display: block;">
+               <strong style="color: #087A92;">SHARE</strong>&nbsp;&nbsp;<a href="mailto:?subject=Check this incredible Fundraiser!&body=http://www.fundraising.com/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url/@Model.Url" onclick="ga('send', 'social', 'Email', 'Share', '@Model.Id');"><img src="/Content/images/public/product_share_email.png" alt="Email" /></a>&nbsp;<a href="https://www.facebook.com/sharer/sharer.php?u=http://www.fundraising.com/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url/@Model.Url" target="_blank"><img src="/Content/images/public/product_share_facebook.png" alt="Facebook" onclick="ga('send', 'social' , 'Facebook' , 'Share' , '@Model.Id' );" /></a>&nbsp;<a href="https://twitter.com/intent/tweet?text=http://www.fundraising.com/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url/@Model.Url" target="_blank" onclick="ga('send', 'social', 'Twitter', 'Share', '@Model.Id');"><img src="/Content/images/public/product_share_twitter.png" alt="Twitter" /></a>&nbsp;<a href="http://pinterest.com/pin/create/button/?url=http://www.fundraising.com/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url/@Model.Url" target="_blank" onclick="ga('send', 'social', 'Pinterest', 'Share', '@Model.Id');"><img src="/Content/images/public/product_share_pinterest.png" alt="Pinterest" /></a>
+            </span>
+         </div>
+      </div>
+      <div class="row" itemscope itemtype="http://schema.org/Product">
+         <div class="col-xs-12 col-sm-9 col-lg-9">
+            <div class="row">
+               <div class="col-sm-12 col-md-5" ng-hide="productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                  <span class="hidden" itemprop="sku" ng-bind="productsCtrl.Product.Id"></span>
+                  <a href="#" data-toggle="modal" data-target="#product-image-modal">
+                     <img ng-src="/Content/external/products/{{::productsCtrl.Product.Image.Url}}" alt="{{::productsCtrl.Product.AlternativeText}}" style="width: 100%;" itemprop="image">
+                  </a>
+                  <div class="small text-muted text-center">Click to open the expanded view</div>
+               </div>
+               <div class="col-sm-12 col-md-5" ng-show="productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                  <span class="hidden" itemprop="sku" ng-bind="productsCtrl.Product.Id"></span>
+
+                  <img ng-src="/Content/external/products/{{::productsCtrl.Product.Image.Url}}" alt="{{::productsCtrl.Product.AlternativeText}}" style="width: 100%;" itemprop="image">
+
+               </div>
+               <div class="col-sm-12 col-md-7">
+                  <h1 style="font-weight: bold; font-size: x-large; color: black; text-transform: none;" itemprop="name">{{::productsCtrl.Product.Name}}</h1>
+                  <span ng-show="productsCtrl.Product.CalculatedPrice > 0">
+                     <span style="font-size: large" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        Price: {{productsCtrl.Product.CountryCode | toCurrencyCode}} <span style="font-size: x-large; color: #b12704" itemprop="price" ng-bind="productsCtrl.Product.CalculatedPrice | currency"> @Model.Price</span> <span ng-show="productsCtrl.Product.ShippingFee == 0">& <strong>FREE Shipping</strong></span> <meta itemprop="priceCurrency" content="USD" />
+                        <span ng-show="productsCtrl.Product.Price - productsCtrl.Product.CalculatedPrice > 0"><br />You save <span style="font-size: large; color: #b12704">{{productsCtrl.Product.Price - productsCtrl.Product.CalculatedPrice | currency}} ({{ 1 - (productsCtrl.Product.CalculatedPrice / productsCtrl.Product.Price) | percentage: 0}})</span></span>
+                     </span>
+                     <br />
+                  </span>
+                  <span ng-show="productsCtrl.Product.Rating > 0"><rating class="text-danger" ng-model="productsCtrl.Product.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating> <a href="#reviews" class="text-info small">({{productsCtrl.Product.Reviews.length}} customer reviews)</a><br /></span>
+                  <span ng-show="productsCtrl.Product.Rating == 0"><br /></span>
+                  <span ng-show="productsCtrl.Product.Description != ''">
+                     <strong>Description:</strong> <span itemprop="description" ng-bind-html="productsCtrl.Product.Description | to_trusted"></span><br />
+                  </span>
+                  <span ng-show="productsCtrl.Product.Flavors != ''">
+                     <strong>Flavors:</strong> <span ng-bind-html="productsCtrl.Product.Flavors | to_trusted"></span><br />
+                  </span>
+                  <span ng-show="productsCtrl.Product.Packaging != ''">
+                     <strong>Packaging:</strong> <span ng-bind-html="productsCtrl.Product.Packaging | to_trusted"></span><br />
+                  </span>
+               </div>
+            </div>
+            <br />
+            <div class="row" ng-show="productsCtrl.Product.Profits.length > 0">
+               <div class="col-xs-12">
+                  <table class="table table-striped table-bordered table-hover">
+                     <thead>
+                        <tr style="text-transform: uppercase; font-weight: bold; color: #087a92">
+                           <td>Number of Units</td>
+                           <td>Your Cost <span style="font-size:10px">per unit</span></td>
+                           <td>You collect <span style="font-size:10px">per unit</span></td>
+                           <td>Profit</td>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr ng-repeat="profit in productsCtrl.Product.Profits | orderBy: 'Min'" ng-class="{success: productsCtrl.Product.Profits.length > 1 && profit.Price == productsCtrl.Product.CalculatedPrice, super_strong: productsCtrl.Product.Profits.length > 1 && profit.Price == productsCtrl.Product.CalculatedPrice}">
+                           <td>{{::profit.Min}} <span ng-show="$last">+</span></td>
+                           <td>{{::profit.Price | currency}}</td>
+                           <td>{{::productsCtrl.Product.RaisingPotential | currency}}</td>
+                           <td>{{::(productsCtrl.Product.RaisingPotential - profit.Price)/productsCtrl.Product.RaisingPotential | percentage:0}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="row" ng-show="productsCtrl.Product.ExtraInformation != ''">
+               <div class="col-xs-12" ng-bind-html="productsCtrl.Product.ExtraInformation | to_trusted"></div>
+            </div>
+            <div class="row">
+               <div class="col-xs-12">
+                  <h3 class="text-info" id="reviews">Customer Reviews</h3>
+                  <button type="button" ng-click="productsCtrl.CreateNewReview();" class="btn btn-xs btn-success" data-toggle="modal" data-target="#createReview">Write a customer review</button>
+                  <br /><br />
+               </div>
+            </div>
+            <div class="row" ng-show="productsCtrl.Product.Reviews.length == 0">
+               <div class="col-xs-12">
+                  <strong>There are no customer reviews yet.</strong>
+               </div>
+            </div>
+            <div class="row" ng-show="productsCtrl.Product.Reviews.length > 0">
+               <div class="col-xs-12">
+                  <span reviews datasource="productsCtrl.Product.Reviews" max="3"></span>
+                  <div class="text-center" ng-show="productsCtrl.Product.Reviews.length > 3"><a href="" data-toggle="modal" data-target="#allReviews"><strong>View All Reviews</strong></a></div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-12 col-sm-3 col-lg-3 text-center">
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <div class="row" ng-show="productsCtrl.Product.CalculatedPrice > 0 && productsCtrl.Product.CanBePurchased">
+                     <div class="col-xs-12" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+                        <form class="form-inline" ng-controller="ShoppingCartController as shoppingCartCtrl" ng-submit="googleAnalyticsCtrl.ProductAdded(productsCtrl.Product.Id, productsCtrl.Product.Name, productsCtrl.Product.Category.Parent.Name, productsCtrl.Product.Category.Name, productsCtrl.Product.CalculatedPrice, productsCtrl.Quantity);shoppingCartCtrl.AddItem(productsCtrl.Product, productsCtrl.Quantity);">
+                           <div class="well" ng-show="shoppingCartCtrl.AddingItemToCart"><span><strong>We're taking you to your Shopping Cart</strong></span></div>
+                           <div class="form-group" ng-hide="shoppingCartCtrl.AddingItemToCart">
+                              <label class="" for="quantity">Qty: </label>
+                              <select id="quantity" class="form-control" ng-model="productsCtrl.Quantity" ng-change="productsCtrl.Calculate();" ng-options="o as o for o in [productsCtrl.Product.MinimumQuantity, 120] | makeRange"></select>
+                           </div>
+                           <br /><br />
+                           <div class="form-group" style="width: 100%;" ng-hide="shoppingCartCtrl.AddingItemToCart">
+                              <button class="btn btn-warning form-control" type="submit" style="width: 100%; color: black;"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <br />
+                  <div ng-show="productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                     <a href="#" class="btn btn-default form-control" data-toggle="modal" data-target="#contactUsModal">Call Us</a>
+                  </div>
+                  <div ng-show="!productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                     <a href="#" class="btn btn-default form-control" data-toggle="modal" data-target="#contactUsModal"><span ng-show="productsCtrl.Product.CanBePurchased">Call Us</span><span ng-show="!productsCtrl.Product.CanBePurchased">Want to Order?</span></a>
+                  </div>
+                  <br />
+                  <div ng-show="productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                     <a href="{{::productsCtrl.Product.AdvertisingOverride.add_to_cart_custom_url}}" onclick="ga('send', 'event', 'Advertiser button 1', 'learn more button');" class="btn btn-info form-control">Learn More</a>
+                  </div>
+
+                  <div ng-show="productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                     <br />
+                     <a ng-hide="productsCtrl.Product.AdvertisingOverride.kit_button_custom_url == null" href="{{::productsCtrl.Product.AdvertisingOverride.kit_button_custom_url}}" onclick="ga('send', 'event', 'Advertiser button 2', 'get started button');" class="btn btn-danger form-control">Get Started</a>
+                  </div>
+                  <div ng-hide="productsCtrl.Product.AdvertisingOverride.IsEnabled">
+                     <a href="@Url.Action("KitRequest", "Home")" onclick="ga('send', 'event', 'Kit Request', 'Open Kit Form Product page');" class="btn btn-info form-control">Request a FREE Kit</a>
+                  </div>
+               </div>
+            </div>
+            <div class="panel panel-default hidden-xs">
+               <div class="panel-body">
+                  <div class="row">
+                     <div class="col-xs-12" ng-init="productsCtrl.GetSuggestedProducts(@Model.Id, @ViewBag.CountryId, 3);">
+                        <span><strong>Others Also Bought</strong></span><br />
+                        <div class="row products-list" ng-repeat="p in productsCtrl.SuggestedProducts track by $index" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+                           <div class="col-xs-12" ng-init="googleAnalyticsCtrl.ProductShowed(p.Id, p.Name, p.Category.Parent.Name, p.Category.Name, p.Price, $index + 1, 'All Products');">
+                              <a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::p.Category.Parent.Url}}/{{::p.Category.Url}}/{{::p.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(p.Id, p.Name, p.Category.Parent.Name, p.Category.Name, p.Price, $index + 1, 'Suggested Products')">
+                                 <img ng-src="/Content/external/products/{{::p.Image.Url}}" alt="{{::p.Name}}" style="width: 100%;" />
+                              </a>
+                              <a class="small" href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::p.Category.Parent.Url}}/{{::p.Category.Url}}/{{::p.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(p.Id, p.Name, p.Category.Parent.Name, p.Category.Name, p.Price, $index + 1, 'All Products')">
+                                 {{::p.Name}}
+                              </a>
+                              <hr ng-show="!$last" />
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="product-image-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+               <img ng-src="/Content/external/products/{{::productsCtrl.Product.Image.Url}}" alt="{{::productsCtrl.Product.AlternativeText}}" style="width: 100%;">
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="allReviews" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">All Reviews</h4>
+            </div>
+            <div class="modal-body">
+               <span reviews datasource="productsCtrl.Product.Reviews" max="40"></span>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="createReview" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <form ng-submit="productsCtrl.Update()">
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label>Thank you for telling us how you feel!</label>
+                  </div>
+                  <div class="form-group" ng-hide="productsCtrl.UpdateActionState == 2">
+                     <label for="name">Name</label>
+                     <input type="text" class="form-control" id="name" placeholder="Name" ng-model="productsCtrl.NewReview.Name" ng-required="true">
+                  </div>
+                  <div class="form-group" ng-hide="productsCtrl.UpdateActionState == 2">
+                     <label for="name">Email Address</label>
+                     <input type="email" class="form-control" id="email" placeholder="Email Address" ng-model="productsCtrl.NewReview.Email" ng-required="true">
+                  </div>
+                  <div class="form-group" ng-hide="productsCtrl.UpdateActionState == 2">
+                     <label for="name">Rating</label>
+                     <select class="form-control" ng-required="true" ng-model="productsCtrl.NewReview.Rating">
+                        <option hidden value="">Select a Rating</option>
+                        <option value="5">5 - BEST</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0 - WORST</option>
+                     </select>
+                  </div>
+                  <div class="form-group" ng-hide="productsCtrl.UpdateActionState == 2">
+                     <label for="comments">Comments</label>
+                     <textarea class="form-control" id="comments" placeholder="Comments" ng-model="productsCtrl.NewReview.Comments" ng-required="true"></textarea>
+                  </div>
+                  <div class="form-group">
+                     <small class="text-muted">To submit a review and see it posted, you should be a fundraising.com customer who has done an actual purchase with a valid credit card; or by submitting through your Fundraising Consultant if the purchase was done off-line.<br />Please avoid using this space for customer service issues or inquiries. We'll be happy to help, just call us at  <a href="tel:+18004435353">1.800.443.5353</a></small>
+                  </div>
+                  <div class="form-group" ng-show="productsCtrl.UpdateActionState > 0">
+                     <div class="alert alert-success" role="alert" ng-show="productsCtrl.UpdateActionState == 2">Thank you for submitting a Review of this Product. It will be verified before posting.</div>
+                     <div class="alert alert-info" role="alert" ng-show="productsCtrl.UpdateActionState == 1">Sending your Review</div>
+                     <div class="alert alert-danger" role="alert" ng-show="productsCtrl.UpdateActionState == 3">Oops! Something happened and we're not able to submit your Review. Please try again later.</div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" ng-show="productsCtrl.UpdateActionState != 2">Cancel</button>
+                  <button type="submit" class="btn btn-primary" ng-show="productsCtrl.UpdateActionState != 2">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" ng-show="productsCtrl.UpdateActionState == 2">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
+
+   <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="contactUsModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-body">
+               <h1>
+                  want to <strong>order</strong>?
+               </h1>
+               <span style="font-size: x-large;" ng-show="productsCtrl.Product.AdvertisingOverride.phone_number == null ">
+                  Give us a call at <a href="tel:+18004435353" style="color: #087a92;"><strong>1.800.443.5353</strong></a> to place your order or to chat with a fundraising consultant - they're super smart and filled with fundraising wisdom.
+               </span>
+               <span style="font-size: x-large;" ng-show="productsCtrl.Product.AdvertisingOverride.phone_number != null">
+                  Give us a call at <a href="tel:+{{::productsCtrl.Product.AdvertisingOverride.phone_number}}" style="color: #087a92;"><strong>{{::productsCtrl.Product.AdvertisingOverride.phone_number}}</strong></a> to place your order or to chat with a fundraising consultant - they're super smart and filled with fundraising wisdom.
+               </span>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+         </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
+</div>
+
+
+
+
+@section Scripts {
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+   <script> window.jQuery || document.write('<script src="~/scripts/flipbook/jquery-2.1.0.min.js"><\/script>') </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+   <script> window.jQuery.ui || document.write('<script src="~/scripts/flipbook/jquery-ui-1.10.4.min.js"><\/script>') </script>
+   <script src="~/scripts/flipbook/jquery.easing.1.3.js"></script>
+   <script src="~/scripts/flipbook/jquery.booklet.latest.js"></script>
+   <script>
+            $(function () {
+                $("#mybook").booklet();
+            });
+   </script>
+
+
+
+
+   <meta property="og:url" content="http://www.fundraising.com/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Category.Parent.Url/@Model.Category.Url/@Model.Url" />
+   <meta property="og:title" content="@Model.Name Fundraiser at Fundraising.com" />
+   <meta property="og:description" content="@Model.METADescription" />
+   <meta property="og:image" content="http://www.fundraising.com/Content/external/products/@Model.Image.Url" />
+   <meta property="og:type" content="website" />
+   <meta property="og:locale " content="en_US" />
+   <meta property="og:site_name " content="Fundraising.com" />
+   <script type="text/javascript">
+            ga('ec:addProduct', {
+                'id': '@Model.Id',
+                'name': '@Model.Name',
+                'category': '@Model.Category.Parent.Name',
+                'brand': '@Model.Category.Name',
+                'price': '@Model.Price'
+            });
+
+            ga('ec:setAction', 'detail');
+   </script>
+
+
+
+
+}
+

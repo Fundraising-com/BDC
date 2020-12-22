@@ -1,0 +1,220 @@
+@using GA.BDC.Shared.Entities
+@using GA.BDC.Web.SportsApparel.MVC.Controllers
+@model IEnumerable<Product>
+@{
+    ViewBag.Title = "Create your own Catalogs";
+    ViewBag.Description = "Easy Apparel Create your own";
+    ViewBag.Keywords = "Create your own, fundraising ideas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("createyourown", "Catalog");
+    var products = ViewBag.Products as IEnumerable<Product>;
+
+}
+<style>
+
+   /* Extra small devices (phones, 600px and down) */
+   @@media only screen and (min-width: 320px) {
+      .btn-responsive {
+         padding: 5px 5px;
+         font-size: 18px;
+         line-height: 1;
+         border-radius: 0px;
+      }
+   }
+
+   /* Small devices (portrait tablets and large phones, 600px and up) */
+   @@media only screen and (min-width: 600px) {
+      .btn-responsive {
+         padding: 15px 15px;
+         font-size: 18px;
+         line-height: 1;
+         border-radius: 0px;
+      }
+   }
+
+   /* Medium devices (landscape tablets, 768px and up) */
+   @@media only screen and (min-width: 768px) {
+      .btn-responsive {
+         padding: 15px 15px;
+         font-size: 18px;
+         line-height: 1;
+         border-radius: 0px;
+      }
+   }
+
+   /* Medium devices (landscape tablets, 768px and up) */
+   @@media only screen and (min-width: 1024px) {
+      .btn-responsive {
+         padding: 20px 20px;
+         font-size: 40px;
+         line-height: 1;
+         border-radius: 0px;
+      }
+   }
+
+
+   @@media only screen and (min-width: 1300px) {
+      .btn-responsive {
+         padding: 50px 50px;
+         font-size: 40px;
+         line-height: 1;
+         border-radius: 0px;
+         width: 100%;
+      }
+   }
+
+   .btn-border {
+      padding: 10px 60px;
+      border: none;
+   }
+
+   .btn-borderLG {
+      padding: 20px 70px;
+      border: none;
+      border-radius: 0;
+   }
+
+
+
+   #exTab1 .tab-content {
+      color: black;
+      background-color: white;
+      padding: 5px 15px;
+      border: solid thin;
+      border-color: lightgrey;
+   }
+
+   #exTab2 h3 {
+      color: white;
+      background-color: #01c9c7;
+      padding: 5px 15px;
+   }
+
+   /* remove border radius for the tab */
+
+   #exTab1 .nav-pills > li > a {
+      border-radius: 0;
+   }
+
+   /* change border radius for the tab , apply corners on top*/
+
+   #exTab3 .nav-pills > li > a {
+      border-radius: 4px 4px 0 0;
+   }
+
+   #exTab3 .tab-content {
+      color: black;
+      background-color: white;
+      padding: 5px 15px;
+   }
+
+
+   .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+      color: #ffffff;
+      background-color: #01c9c7;
+   }
+</style>
+
+<div class="container-fluid" style="padding-left:0px; padding-right:0px" ng-controller="ProductsController as productsCtrl">
+   <div class="row">
+      <div class="col-lg-12" style="width:auto;overflow:hidden;">
+         <img class="img-responsive" src="~/Content/catalog/banner_brochures.jpg" style="position:relative;display: inline-block; width:100%" alt="CREATE YOUR OWN" title="CREATE YOUR OWN" />
+         <div style="position:absolute; top:30%; left:38%; font-size:2.5vw; color:#fff; text-align:center">BROCHURES<br /><span style="font-size:2.0vw;">CREATE YOUR OWN</span></div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="row pagination-centered" style="margin:15px">
+
+            <div class="col-lg-12">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <h4 style="color:black">
+                        PICK 10 ITEMS OF YOUR CHOICE
+                     </h4>
+
+                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 products-list" ng-repeat="product in productsCtrl.Products track by $index">
+                        <div class="thumbnail text-center product-thumbnail" ng-cloak>
+                           <img src="~/Content/catalog/createown_03.jpg" class="img-responsive" style="display:block; margin-left:auto;margin-right:auto;margin-bottom:20px" />
+                        </div>
+                     </div>
+
+                     @foreach (var product in products)
+                        {
+                     <div class="checkbox">
+                        <label>
+                           <input type="checkbox"
+                                  name="apparelItems"
+                                  value="@product.Name" /> @product.Image.Url <br />@product.Name 
+                              </label>
+                           </div>   
+                
+                                 }
+
+
+
+
+                     <img src="~/Content/catalog/createown_03.jpg" class="img-responsive" style="display:block; margin-left:auto;margin-right:auto;margin-bottom:20px" />
+                  </div>
+
+               </div>
+
+               <div class="row">
+                  <div class="col-lg-12" style="text-align:center;">
+                     <span data-toggle="collapse" data-target="#more" style="color:white; font-size:18px; cursor:pointer; text-decoration:underline">SEE MORE ITEMS</span>
+                     <br />
+                     <div id="more" class="collapse">
+                        <div class="row">
+                           <div class="col-lg-12">
+                              <h2>MORE ITEMS COMING SOON</h2>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+               <br /><br />
+
+               <div id="exTab1" class="container">
+                  <ul class="nav nav-pills">
+                     <li class="active">
+                        <a href="#1a" data-toggle="tab">PRODUCT DESCRIPTION</a>
+                     </li>
+                     <li>
+                        <a href="#2a" data-toggle="tab">ADDITIONAL INFORMATION</a>
+                     </li>
+                     <li>
+                        <a href="#3a" data-toggle="tab">PROFIT CHART</a>
+                     </li>
+
+                  </ul>
+
+                  <div class="tab-content clearfix">
+                     <div class="tab-pane active" id="1a">
+                        <h3>CREATE YOUR OWN</h3>
+                        <h4>
+                           - No miminum on individual items<br /><br />
+                           - Minimum 48 items must be sold (or surcharge of $6 per item sold applies)<br /><br />
+                           - You earn 10% profit on all items sold
+                        </h4>
+                        <a href="@Url.Action("getstarted", "home")" type="button" class="btn btn-default btn-lg btn-borderLG" style="border:none; margin-top:10px; color:white; background-color: #01c9c7 !important;" onclick="ga('send', 'event', 'GET STARTED', 'Click', 'GET STARTED');">GET STARTED</a>
+
+                     </div>
+                     <div class="tab-pane" id="2a">
+                        <h3>PLACEHOLDER</h3>
+                     </div>
+                     <div class="tab-pane" id="3a">
+                        <h3>PLACEHOLDER</h3>
+                     </div>
+
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>

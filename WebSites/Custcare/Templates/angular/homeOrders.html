@@ -1,0 +1,101 @@
+﻿<div role="tabpanel" class="tab-pane fade in active" id="orders" aria-labelledby="orders-tab">
+    <div class="bs-bg">
+        <p class="bg-success">
+            <span>Order Details</span>
+            <span class="pull-right">
+                <button type="button" class="btn btn-success btn-xs" ng-click="refresh()">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh
+                </button>
+            </span>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <p>{{orders.length}} order(s) found</p>
+        </div>
+        <div class="col-lg-7" style="margin-bottom: 10px">
+            <form class="form-inline">
+                <div class="form-group has-success">
+                    <label class="control-label" for="inputSearch">SEARCH :</label>
+                    <input name="inputSearch" type="text" class="form-control" data-ng-model="search" placeholder="search" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-lg-8">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th><a href="" ng-click="predicate='orderID'; reverse=!reverse">Order ID</a></th>
+                            <th><a href="" ng-click="predicate='memberName'; reverse=!reverse">Member</a></th>
+                            <th><a href="" ng-click="predicate='amount'; reverse=!reverse">Price</a></th>
+                            <th><a href="" ng-click="predicate='catalogItemTitle'; reverse=!reverse">Item</a></th>
+                            <th><a href="" ng-click="predicate='orderDate'; reverse=!reverse">Order Date</a></th>
+                            <th><a href="" ng-click="predicate='edsId'; reverse=!reverse">GA Order</a></th>
+                            <th><a href="" ng-click="predicate='customerName'; reverse=!reverse">Customer</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="order in orders | orderBy:predicate:reverse | filter:search">
+                            <td>{{order.orderID}}</td>
+                            <td><a href="" ng-click="setOrderTransfer($index)">{{order.memberName}}</a></td>
+                            <td>{{order.amount | currency}}</td>
+                            <td>{{order.catalogItemTitle}}</td>
+                            <td>{{order.orderDate | date:'medium'}}</td>
+                            <td>{{order.edsId}}</td>
+                            <td>{{order.customerName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profit Statement</h3>
+                    </div>
+                    <div class="panel-body">
+                        <a target="_blank" href="/Home/{{profitUrl}}">
+                            <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Download PDF
+                        </a>
+                    </div>
+                </div><br />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Select A Different Parent</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form name="orderTransferForm" class="form-horizontal" novalidate data-ng-submit="orderTransfer(orders[currentIndex].eventParticipationId, selectedParent.memberHierarchyId)">
+                            <div class="form-group">
+                                <label for="inputMemberName" class="col-sm-3 control-label">Member Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputMemberName" name="inputMemberName" ng-model="memberName" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCurrentParentName" class="col-sm-3 control-label">Current Parent Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputCurrentParentName" name="inputCurrentParentName" ng-model="currentParentName" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectNewParent" class="col-sm-3 control-label">New Parent Name:</label>
+                                <div class="col-sm-9">
+                                    <select name="selectNewParent" class="form-control" ng-model="selectedParent" ng-options="parent.selectDisplay for parent in parentUsers"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10 text-right">
+                                    <button type="submit" class="btn btn-default" data-ng-disabled="orderTransferForm.$invalid">
+                                        <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>Update
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

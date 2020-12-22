@@ -1,0 +1,44 @@
+﻿@model GA.BDC.Shared.Entities.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.UseAngularJSMetaData = true;
+}
+<div ng-controller="SubCategoriesController as subCategoriesCtrl">
+    <div class="row nav-section">
+        <div class="container">
+            <div class="row">
+                <ul class="breadcrumb">
+                    <li id="breadcrumb.root"><a ng-href="/">Home</a></li>
+                    <li id="breadcrumb.products"><a ng-href="/Products">All fundraisers</a></li>
+                    <li id="breadcrumb.category" ng-cloak><a ng-href="/products/{{subCategoriesCtrl.subCategory.Parent.Url}}">{{subCategoriesCtrl.subCategory.Parent.Name}}</a></li>
+                    @*<li id="breadcrumb.subCategory" class="active" ng-cloak>{{subCategoriesCtrl.subCategory.Name}}</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container product-description-container" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl" ng-cloak>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <h3>{{subCategoriesCtrl.subCategory.Name}}</h3>
+            </div>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+                <div ng-bind-html="subCategoriesCtrl.scope.$sce.trustAsHtml(subCategoriesCtrl.subCategory.Description)"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 text-center" ng-repeat="product in subCategoriesCtrl.products" ng-cloak>
+            <a ng-href="/products/{{::subCategoriesCtrl.subCategory.Parent.Url}}/{{::subCategoriesCtrl.subCategory.Url}}/{{::product.Url}}" class="thumbnail product-thumbnail" ng-init="googleAnalyticsCtrl.ProductShowed(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products');">
+                <img ng-src="/Content/external{{product.Image.Url}}" alt="{{product.Image.AlternativeText}}" class="img-responsive" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, $index + 1, 'All Products')"/>
+                <h5 ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, $index + 1, 'All Products')">{{::product.Name}}</h5>
+            </a>
+        </div>
+        <div class="row row-padding-sm">
+            <div class="col-xs-12">
+               <div ng-bind-html="subCategoriesCtrl.scope.$sce.trustAsHtml(subCategoriesCtrl.subCategory.Description2)"></div>
+            </div>
+        </div>
+    </div>
+</div>

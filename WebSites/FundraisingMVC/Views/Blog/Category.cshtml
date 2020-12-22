@@ -1,0 +1,31 @@
+@using GA.BDC.Shared.Entities
+@model BlogCategory
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Description = "Interested in " + Model.Name + "? We have all the articles, tips & tricks to help you make a success of your fundraising event!";
+    ViewBag.Keywords = "";
+    ViewBag.CanonicalUrl = string.Format("/blog/category/{0}", Model.Url);
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    var posts = ViewBag.Posts as IList<BlogPost>;
+}
+<div class="row">
+    <div class="col-sm-12 col-md-9" style="margin-top:125px">
+        <h1>@Model.Name</h1>
+        <div class="row">
+            @foreach (var post in posts)
+            {
+                <div class="col-sm-6 col-md-4 text-center">
+                    <a ng-href="/blog/post/@post.Url" class="thumbnail">
+                        <img ng-src="/Content/external/blog/@post.ThumbnailUrl" alt="@post.Title" class="img-responsive"/>
+                        <h5>@post.Title</h5>
+                        <span style="text-decoration: none; color: black">@post.Summary</span>
+                       </a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-3" style="margin-top:105px">
+        @{ Html.RenderPartial("Blog/_lastPosts", ViewBag.LastPosts as List<BlogPost>); }
+        @{ Html.RenderPartial("Blog/_categories", ViewBag.Categories as List<BlogCategory>); }
+    </div>
+</div>

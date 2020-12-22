@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="ReportsController as reportsCtrl">
+   <form name="report" id="report">
+      <div layout="column">
+         <div layout="row" >
+            <div>
+                <h1 class="text-md-primary md-title">Product List</h1>
+            </div>
+            <div flex></div>
+            <div>
+               <md-button href="/Reports"><md-icon>arrow_back</md-icon>Go Back</md-button>
+            </div>
+         </div>
+         
+          <div style="margin-top:15px">
+              <md-input-container class="md-block" flex="19">
+                  <label>Product Class (search by class or leave blank)</label>
+                  <md-autocomplete md-selected-item="reportsCtrl.parameters.ProductClass" md-search-text="productClassSearched" md-items="item in reportsCtrl.GetProductClassesMatches(productClassSearched)" md-item-text="item.Name" md-require-match="true" md-input-minlength="0" md-select-on-match="true" md-match-case-insensitive="true" md-no-cache="true" ng-disabled="reportsCtrl.productClasses.length == 0">
+                      <md-item-template>
+                          <span md-highlight-text="productClassSearched">{{item.Name}}</span>
+                      </md-item-template>
+                      <md-not-found>
+                          No matches found.
+                      </md-not-found>
+                  </md-autocomplete>
+              </md-input-container>
+         </div>
+      
+         <div layout="row" layout-padding>
+            <div flex></div>
+            <md-button ng-click="reportsCtrl.ResetReportParameters();" class="md-raised" ng-cloak ng-hide="reportsCtrl.executing">Reset</md-button>
+            <md-button ng-click="reportsCtrl.ExecuteReportProductList()" class="md-raised md-primary" ng-cloak ng-hide="reportsCtrl.executing" >Submit</md-button>
+            <md-button ng-csv="reportsCtrl.results" filename="{{reportsCtrl.fileName}}" csv-header="reportsCtrl.GetProductListReportHeader()" class="md-raised md-primary" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">Download</md-button>
+         </div>
+         <div layout="row" layout-padding>
+            <div flex></div>
+            <div class="md-caption" ng-cloak ng-show="!reportsCtrl.executing && reportsCtrl.results != undefined">The report was ran on <strong>{{reportsCtrl.executedOn | date: 'short' : '-05:00'}}</strong> and it took <strong>{{reportsCtrl.executionTime}}</strong> seconds.</div>
+         </div>
+         <div layout="row" ng-show="reportsCtrl.executing" ng-cloak>
+            <div flex></div>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <div flex></div>
+         </div>  
+         <div layout="row" layout-padding>
+            <div flex>
+               <br/>
+               <br/>
+            </div>            
+         </div>
+      </div>
+   </form>
+</div>

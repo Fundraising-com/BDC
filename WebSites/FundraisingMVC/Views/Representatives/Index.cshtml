@@ -1,0 +1,348 @@
+@using System.Configuration
+@{
+   Layout = "~/Views/Shared/_representativePortal.cshtml";
+}
+@section header
+{
+<title ng-bind="representativeCtrl.Representative.Name"></title>
+<meta name="description" content="Fundraisings {{representativeCtrl.Representative.Name}} personal website for Fundraising.com" />
+<meta property="og:title" content="{{representativeCtrl.Representative.Name}}" />
+<meta name="keywords" content="fundraising, fundraising ideas, representative fundraiser, {{representativeCtrl.Representative.Name}}" />
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Karla:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+   @*font-family: 'Lora', serif;*@
+}
+
+
+<div class="row" style="font-size:2em; color:#676767;">
+    <div class="col-md-12 center-block">
+        <div class="col-sm-12 visible-xs visible-sm" style="text-align:center">
+            <br />
+            <img ng-src="/Content/external/rep/{{representativeCtrl.Representative.Image}}" style="width: 80%;" alt="{{representativeCtrl.Representative.Name}}" />
+        </div>
+        <div class="col-sm-2 col-sm-offset-3 col-xs-offset-0 hidden-xs hidden-sm" style="text-align:center">
+            <br />
+            <img ng-src="/Content/external/rep/{{representativeCtrl.Representative.Image}}" style="width: 80%;" alt="{{representativeCtrl.Representative.Name}}" />
+        </div>
+        <div class="col-sm-5" style="text-align:left">
+            <br />
+            <span style="font-weight:bold">{{representativeCtrl.Representative.Name}}</span><br />
+            <span style="text-transform:uppercase">
+                {{representativeCtrl.Representative.City}} {{representativeCtrl.Representative.State}}<br />
+                {{representativeCtrl.Representative.Phone}}<br />
+                {{representativeCtrl.Representative.Email}}<br />
+            </span>
+        </div>
+    </div>
+</div>
+<br /><br />
+
+<div class="row">
+    <div class="col-sm-12" ng-cloak style="text-align:center; font-size:2em; color:#676767">
+        <hr style="width:25%; border-top:1px solid #676767;" />
+        <span style="font-weight:bold; color:#676767">
+            Welcome to my <strong>Fundraising Center</strong><br />
+            I've helped my groups raise a total of <strong>{{representativeCtrl.Representative.AmountRaised | currency}}</strong>
+            <br /><br />
+        </span>
+    </div>
+</div>
+
+
+
+<br /><br />
+<div class="row">
+    <div class="col-sm-12" ng-cloak style="text-align:center; font-size:2em;">
+        <span style="font-weight:bold;font-family: 'Lora', serif; ">
+            ORDER TAKERS<br /><br />
+        </span>
+    </div>
+</div>
+
+
+<div class="row" style="margin-bottom:20px">
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a ng-href="/products/chocolate/kathryn-beich/kathryn-Beich-katydids-Tin?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/kd_brochure.jpg" style="margin:auto; display: block;" alt="katydids banner" class="img-responsive" />
+            KATYDIDS<br />
+        </a>
+        <a ng-href="/products/chocolate/kathryn-beich/kathryn-Beich-katydids-Tin?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a ng-href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/order-taker_katydids_swf.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a ng-href="/products/tumblers?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/tumblers_brochure.jpg" style="margin:auto; display: block;" alt="tumbler banner" class="img-responsive" />
+            TUMBLERS<br />
+        </a>
+        <a ng-href="/products/tumblers?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/tumblers_brochure_single_page_sw.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a ng-href="/products/cookie-dough/all-cookie-dough/Mini-Cookies?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/minicookies_brochure.jpg" style="margin:auto; display: block;" alt="mini cookies banner" class="img-responsive" />
+            READY-TO-EAT-MINI COOKIES<br />
+        </a>
+        <a ng-href="/products/cookie-dough/all-cookie-dough/Mini-Cookies?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/minicookies_brochure_swf_compressed.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a ng-href="/products/order-takers/all-order-takers/earth-candle-brochures?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/candles_brochure.jpg" style="margin:auto; display: block;" alt="candles banner" class="img-responsive" />
+            HERITAGE CANDLES
+        </a><br />
+        <a ng-href="/products/order-takers/all-order-takers/earth-candle-brochures?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/Heritage Candles 2020_compressed.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/order-takers/all-order-takers/Snacking-Made-Simple?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/snackingmadesimple_brochure.jpg" style="margin:auto; display: block;" alt="snacking banner" class="img-responsive" />
+            SNACKING MADE SIMPLE
+        </a><br />
+        <a href="/products/order-takers/all-order-takers/Snacking-Made-Simple?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/snackingmadesimple.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/order-takers/all-order-takers/Smoke-Haus-Slow-Cooked-Snacks?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/smokedsnacks_brochure.jpg" style="margin:auto; display: block;" alt="smoked snacks banner" class="img-responsive" />
+            SLOW SMOKED SNACKS
+        </a><br />
+        <a href="/products/order-takers/all-order-takers/Smoke-Haus-Slow-Cooked-Snacks?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/slowSmokedSnacks_web_brochure.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/cookie-dough?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/neighbors_brochure.jpg" style="margin:auto; display: block;" alt="neighbors banner" class="img-responsive" />
+            NEIGHBORS COOKIE DOUGH
+        </a><br />
+        <a href="/products/cookie-dough?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/perfectlyPrePortioned.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/order-takers/all-order-takers/Mrs-Field-Cookies-Pretzels?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/mrsfields_brochures.jpg" style="margin:auto; display: block;" alt="mrsfields banner" class="img-responsive" />
+            MRS. FIELDS COOKIES
+        </a><br />
+        <a href="/products/order-takers/all-order-takers/Mrs-Field-Cookies-Pretzels?representativeId={{representativeCtrl.Representative.Id}}" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="~/Content/external/rep/NewRep/new2020/pdf/order-takers/brochure_mrsfields_SWF_compressed.pdf" target="_blank" style="text-decoration:underline; color:#48484a">
+            Brochure
+        </a>
+    </div>
+</div>
+
+
+
+<br /><br />
+<div class="row">
+    <div class="col-sm-12" ng-cloak style="text-align:center; font-size:2em;">
+        <span style="font-weight:bold;font-family: 'Lora', serif; ">
+            IN-HAND SELLERS<br /><br />
+        </span>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/pretzel-rods/all-pretzel-rods/Sweet-and-Salty-Pretzel-Rods?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/pretzelrods.jpg" style="margin:auto; display: block;" alt="pretzel rods banner" class="img-responsive" />
+            PRETZEL RODS
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=PretzelRods_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=PretzelRods_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/pretzel-rods/all-pretzel-rods/Sweet-and-Salty-Pretzel-Rods?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/chocolate/one-dollar-bar-variety-packs/americas-variety-dollar-bars?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/chocolate.jpg" style="margin:auto; display: block;" alt="chocolate banner" class="img-responsive" />
+            1$ AMERICA'S VARIETY BARS
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=1dollarschoco_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=1dollarschoco_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/chocolate/one-dollar-bar-variety-packs/americas-variety-dollar-bars?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/fortune-cookies/all-fortune-cookies/Famous-Fortune-Cookies?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/fortune_cookies.jpg" style="margin:auto; display: block;" alt="fortune cookies banner" class="img-responsive" />
+            FORTUNE COOKIES
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=fortunecookies_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=fortunecookies_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/fortune-cookies/all-fortune-cookies/Famous-Fortune-Cookies?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/smencils?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/smencils.jpg" style="margin:auto; display: block;" alt="smencils banner" class="img-responsive" />
+            SMENCILS
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=Smencils_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=Smencils_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/smencils?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+</div>
+
+
+
+<br /><br />
+<div class="row">
+    <div class="col-sm-12" ng-cloak style="text-align:center; font-size:2em;">
+        <span style="font-weight:bold;font-family: 'Lora', serif; ">
+            OTHER PROGRAMS<br /><br />
+        </span>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/lollipops/?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/lollipops.jpg" style="margin:auto; display: block;" alt="lollipops banner" class="img-responsive" />
+            LOLLIPOPS
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=Lollipops_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=Lollipops_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/lollipops/?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/beef-jerky?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/jacklinks.jpg" style="margin:auto; display: block;" alt="beefjerky banner" class="img-responsive" />
+            BEEF JERKY
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=jacklinks_Sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=jacklinks_Sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/beef-jerky?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/gummies/all-gummies/Main-Street-Gummies?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/gummies.jpg" style="margin:auto; display: block;" alt="gummies banner" class="img-responsive" />
+            GUMMIES
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=sellsheet_gummies.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=sellsheet_gummies.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/gummies/all-gummies/Main-Street-Gummies?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/restaurant-gift-cards?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/restaurantcom.jpg" style="margin:auto; display: block;" alt="restaurant banner" class="img-responsive" />
+            RESTAURANT.COM
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=restaurantcards_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=restaurantcards_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/restaurant-gift-cards?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/discount-fundraisers/all-discount-fundraisers/Dinner-Movie-Card?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/dinnermovie.jpg" style="margin:auto; display: block;" alt="dinner movie banner" class="img-responsive" />
+            DINNER AND MOVIE CARDS
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=dinnermoviecard_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=dinnermoviecard_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/discount-fundraisers/all-discount-fundraisers/Dinner-Movie-Card?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <a href="/products/order-takers/all-order-takers/popcorn-brochures?representativeId={{representativeCtrl.Representative.Id}}" style="font-weight:bold; text-decoration:none; color:#48484a">
+            <img src="~/Content/external/rep/NewRep/new2020/popcorn.jpg" style="margin:auto; display: block;" alt="popcorn banner" class="img-responsive" />
+            POPCORN
+        </a><br />
+        <a href="@Url.Action(" DownloadSellSheet")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=Popcorn_sellsheet.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=Popcorn_sellsheet.pdf" style="text-decoration:underline; color:#48484a">
+            Info Sheet
+        </a><br />
+        <a href="/products/order-takers/all-order-takers/popcorn-brochures?representativeId={{representativeCtrl.Representative.Id}}" target="_blank" style="text-decoration:underline; color:#48484a">
+            Shop
+        </a>
+    </div>
+    @*<div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <img src="~/Content/external/rep/NewRep/new2020/gummies.jpg" style="margin:auto; display: block;" alt="gummies banner" class="img-responsive" />
+    </div>
+    <div class="col-sm-3 col-xs-6" ng-cloak style="text-align:center; margin-bottom:10px">
+        <img src="~/Content/external/rep/NewRep/new2020/restaurantcom.jpg" style="margin:auto; display: block;" alt="restaurant banner" class="img-responsive" />
+    </div>*@
+</div>
+
+
+
+@*<div class="row" style="margin-top:25px">
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-5">
+        <a href="@Url.Action(" Fundraisers")" class="btn btn-primary btn-lg" style="color:#fff; margin-bottom:10px; width:100%; text-transform:uppercase;  font-size:large; background-color:#545456">Popular fundraisers you can buy online</a>
+    </div>
+    <div class="col-sm-5">
+        <a href="@Url.Action(" DownloadSellSheetFeatured")?representativeId={{::representativeCtrl.Representative.Id}} &representativeExt={{::representativeCtrl.Representative.ExternalId}} &representativePartnerId={{::representativeCtrl.Representative.PartnerId}} &representativeName={{::representativeCtrl.Representative.Name}} &email={{::representativeCtrl.Representative.Email}} &phone={{::representativeCtrl.Representative.Phone}} &fileName=featured_fundraisers_sellsheet_final.pdf&redirect ={{::representativeCtrl.Representative.Redirect}} &outputName=featuredfundraisers-sellsheet" class="btn btn-lg" style="color:#fff;margin-bottom: 10px; width: 100%;  text-transform:uppercase; font-size:large; background-color:#204d74" target="_blank">view the featured fundraisers sellsheet</a>
+    </div>
+
+</div>*@
+
+
+@*<div class="row">
+    <div class="col-xs-12">
+        <br />
+        <code class="text-info small" ng-repeat="testimonial in representativeCtrl.Representative.Testimonials track by $index" ng-show="$first" ng-cloak>"{{testimonial.Message}}" <a href="@Url.Action(" Testimonials")" class="small"><strong>[Read More Testimonials]</strong></a></code>
+    </div>
+</div>*@

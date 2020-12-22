@@ -1,0 +1,93 @@
+<%@ Master Language="C#" AutoEventWireup="true" Inherits="QSP.OrderExpress.Web.SecondaryMaster"
+    CodeBehind="SecondaryMaster.master.cs" %>
+
+<%@ Register Assembly="BusyBoxDotNet" Namespace="BusyBoxDotNet" TagPrefix="busyboxdotnet" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>QSP Order Express Main Page</title>
+    <meta content="Microsoft Visual Studio 7.0" name="GENERATOR">
+    <meta content="C#" name="CODE_LANGUAGE">
+    <meta content="JavaScript" name="vs_defaultClientScript">
+    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <link href="Css/MasterStyle.css" rel="stylesheet" type="text/css" />
+
+    <script>
+			var ToSetFocus;
+			function RefreshPage()
+			{
+				document.getElementById("hidRefresh").value = "1";
+				document.forms(0).submit();
+			}
+    </script>
+
+</head>
+<body runat="server" id="htmlBody" bottommargin="0" leftmargin="0" topmargin="0"
+    rightmargin="0" background="images/KidsJumpingYellow.gif">
+    <form id="form2" runat="server">
+    <ajaxtoolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+    </ajaxtoolkit:ToolkitScriptManager>
+    <div style="width: 100%; height: 45px; background-image: url(images/Header_PatternNew.gif);
+        border-bottom: #f9f0c7 2px solid; overflow: hidden;">
+        <asp:Image ID="Image9" ImageAlign="Top" runat="server" ImageUrl="~/images/Header_Left.gif"
+            Width="80px"></asp:Image><asp:Image ID="Image10" ImageAlign="Top" runat="server"
+                ImageUrl="~/images/Header_Middle1.gif" Width="97px"></asp:Image><asp:Image ID="Image11"
+                    ImageAlign="Top" runat="server" ImageUrl="~/images/Header_Middle2.gif" Width="133px">
+                </asp:Image><asp:Image ImageAlign="Top" runat="server" ImageUrl="~/images/Header_Right.gif"
+                    ID="Image12" Style="position: relative; left: 46%;"></asp:Image>
+    </div>
+    <div style="height: 20px; background-image: url(images/MenuBar_Pattern.gif);">
+        <asp:Image ID="Image4" runat="server" ImageUrl="~/images/MenuBar_Pattern.gif" Height="15px"
+            Width="100%" />
+    </div>
+    <div id="divContent" style="padding-top: 6px; padding-left: 20px; padding-right: 20px;">
+        <asp:ContentPlaceHolder ID="HeaderContentHolder" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ValidationSummary ID="ValSum" runat="server" HeaderText="<br>Correct the following error to proceed."
+            CssClass="LabelError"></asp:ValidationSummary>
+        <asp:Label ID="lblMessage1" runat="server" CssClass="LabelError" ForeColor="Red"></asp:Label>
+        <asp:ContentPlaceHolder ID="MainContentHolder" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div id="divFooter" class="FooterLabel" style="position: absolute; text-align: center;
+        width: 100%; padding-bottom: 21px;">
+        For Technical Support, please call QSP Help Desk at 1-866-238-3272, M-F, 9am to
+        5pm EST.
+        <br>
+        During non-business hours, call 1-866-238-3272 and leave a message.
+        <br>
+        For Non-Technical Support, please call QSP Field Support at 1-800-341-4454 and press
+        1 or email us at <a href="mailto:QDSFieldSupport@QSP.Com?subject=QSP%20Field%20Support:%20Order%20Express">
+            QDSFieldSupport@QSP.Com</a>.
+    </div>
+
+    <script type="text/javascript">
+            // Tweak to get the footer to vertically align at the bottom properly
+            var divContent = document.getElementById("divContent");
+	        var divFooter = document.getElementById("divFooter");
+	        
+	        if(document.documentElement.clientHeight - (divContent.offsetTop + divContent.offsetHeight) > divFooter.offsetHeight)
+	        {
+	            divFooter.style["bottom"] = 0;
+	        }
+	        else
+	        {
+	            divFooter.style["position"] = "relative";
+	        }
+    </script>
+
+    <busyboxdotnet:BusyBox ID="BusyBox1" runat="server" Image="GearsBig" OverlayOpacity="0"
+        ShowBusyBox="OnLeavingPage" Text="The server is processing your request." TextSize="10pt"
+        Title="Processing" TitleSize="15pt" BorderColor="Navy" BorderWidth="2px" TextFontName="arial, verdana"
+        TitleFontName="arial, verdana" ShowTimeout="60000" GZipCompression="false" />
+    </form>
+
+    <script>
+            if(ToSetFocus != null)
+	            ToSetFocus.focus();
+    </script>
+
+</body>
+</html>

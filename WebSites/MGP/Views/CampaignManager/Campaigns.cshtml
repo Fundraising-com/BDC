@@ -1,0 +1,87 @@
+﻿@using GA.BDC.Web.MGP.Helpers.Extensions
+@using GA.BDC.Web.MGP.Models.Branding
+@model IList<GA.BDC.Web.MGP.Models.Views.Event>
+@{
+   ViewBag.Title = "Your Campaigns";
+   Layout = "~/Views/Shared/_campaignmanager.cshtml";
+   var partnerBranding = ViewBag.Partner as Partner;
+   var hideCreateCampaign = (bool)ViewBag.HideCreateCampaign;
+}
+<div id="campaigns">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Welcome to your @partnerBranding.GroupDisplay.ToLower() manager</h1>
+            <small>Choose the campaign you want to access or create a new one.</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row @(hideCreateCampaign ? "hide" : string.Empty)">
+        <div class="col-sm-12">
+            <button class="btn btn-success" onclick="window.location.href='@Url.Action("Create")'">Create a new @partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-condensed table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>@partnerBranding.GroupDisplay.ToLower().FirstLetterUpper()</th>
+                        <th>Creation Date</th>
+                        <th>User Type</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var campaign in Model.OrderBy(p => p.Create))
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(campaign.Name, "Index", new {participantId = campaign.ParticipantId})
+                            </td>
+                            <td>@campaign.Create.ToString("d")</td>
+                            <td>@campaign.UserType</td>
+                            <td class="text-center">
+                                @if (campaign.ParticipantId > 0)
+                                {
+                                    <a href="@Url.Action("Participant", "Group", new {eventId = campaign.Id, participantId = campaign.ParticipantId})" target="_blank">
+                                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Index", "Group", new {eventId = campaign.Id})" target="_blank">
+                                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;View
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">You have @Model.Count @(partnerBranding.GroupDisplay.ToLower())(s).</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <small>* Administrator means that you created the @partnerBranding.GroupDisplay.ToLower(). Member means that you joined the @partnerBranding.GroupDisplay.ToLower() to help them.</small>
+        </div>
+    </div>
+</div>

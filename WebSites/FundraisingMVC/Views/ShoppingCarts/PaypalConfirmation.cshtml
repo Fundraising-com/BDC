@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Processing Payment - Fundraising.com";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+}
+<div class="row" ng-controller="SalesController as salesCtrl" ng-init="salesCtrl.FinishPaypal('@ViewBag.PaymentId', '@ViewBag.PayerId');">
+   <div class="col-lg-offset-3 col-lg-6">
+      <div class="jumbotron">
+         <h1>Processing your payment</h1>
+         <p><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> We are processing your Paypal payment, this may take a couple of seconds, please standby...</p>
+      </div>
+   </div>
+</div>

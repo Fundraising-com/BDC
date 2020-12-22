@@ -1,0 +1,129 @@
+<PUBLIC:COMPONENT lightweight="true">
+	<PUBLIC:ATTACH event="onsubmit" onevent="HandleWait()">
+	<PUBLIC:ATTACH event="onclick" onevent="HandleWait1()">
+</PUBLIC:COMPONENT>
+
+<SCRIPT language="javascript" >
+
+	function HandleWait()
+	{
+		try	{
+			
+			ShowWait();
+			
+		} catch(e) {
+			alert(e.message);
+			
+		}	
+			
+	}
+	
+	function HandleWait1()
+	{
+		try	{
+			
+			var oSource = window.event.srcElement;
+			if(oSource.type == "a") {
+				ShowWait();						 		
+			}
+			
+		} catch(e) {
+			alert(e.message);
+			
+		}	
+			
+	}
+	
+	/*function createDIV()
+	{
+		this.Display = document.createElement('div'); // create 
+		alert('dsadas');
+		this.Display.id = 'WaitingDIV';
+
+		document.body.appendChild(this.Display);
+
+		this.Display.style.position = 'absolute'; 
+
+		this.Display.innerHTML ='vcvxcvxcvxc';
+		
+		toggleLayer(this.Display.id);
+		
+		alert('dsadas');
+	}
+
+	function toggleLayer(whichLayer)
+	{
+		
+		if (document.getElementById) {
+			// this is the way the standards work			
+			var style2 = document.getElementById(whichLayer).style;
+			style2.display = style2.display? "":"block";
+		}
+		else if (document.all) {
+			// this is the way old msie versions work
+			var style2 = document.all[whichLayer].style;
+			style2.display = style2.display? "":"block";
+		}
+		else if (document.layers) {
+			// this is the way nn4 works
+			var style2 = document.layers[whichLayer].style;
+			style2.display = style2.display? "":"block";
+		}
+	}
+
+	
+	function createTOC()
+	{
+		if (top.bugRiddenCrashPronePieceOfJunk) return;
+		var x = document.body.childNodes;
+		var y = document.createElement('div');
+		y.id = 'toc';
+		var a = y.appendChild(document.createElement('span'));
+		a.onclick = showhideTOC;
+		a.innerHTML = 'Contents';
+		var z = y.appendChild(document.createElement('div'));
+		z.onclick = showhideTOC;
+		var toBeTOCced = new Array();
+		for (var i=0;i<x.length;i++)
+		{
+			if (x[i].nodeName.indexOf('H') != -1)
+				toBeTOCced.push(x[i])
+		}
+
+		if (toBeTOCced.length < 2) return;
+
+		for (var i=0;i<toBeTOCced.length;i++)
+		{
+			var tmp = document.createElement('a');
+			tmp.innerHTML = toBeTOCced[i].innerHTML;
+			tmp.href = '#link' + i;
+			tmp.className = 'page';
+			z.appendChild(tmp);
+			if (toBeTOCced[i].nodeName == 'H4')
+				tmp.className += ' indent';
+			var tmp2 = document.createElement('a');
+			tmp2.id = 'link' + i;
+			if (toBeTOCced[i].nodeName == 'H2')
+			{
+				tmp.innerHTML = 'Top';
+				tmp.href = '#top';
+				tmp2.id = 'top';
+			}
+			toBeTOCced[i].parentNode.insertBefore(tmp2,toBeTOCced[i]);
+		}
+		document.body.insertBefore(y,document.body.childNodes[2]);
+	}
+
+	var TOCstate = 'none';
+
+	function showhideTOC()
+	{
+		TOCstate = (TOCstate == 'none') ? 'block' : 'none';
+		document.getElementById('toc').lastChild.style.display = TOCstate;
+
+	}
+*/
+
+
+</SCRIPT>
+

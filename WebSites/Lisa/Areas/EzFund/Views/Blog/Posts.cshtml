@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="column" layout-margin ng-controller="EzBlogController as blogCtrl" id="posts">
+    <div>
+        <h1 class="text-md-primary md-title">Blog Posts</h1>
+    </div>
+    <div layout="column" layout-align="center center" flex="100">
+        <div ng-show="blogCtrl.executing" ng-cloak>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <br />
+        </div>
+    </div>
+    <div ng-hide="blogCtrl.executing" ng-cloak>
+        <div layout="column" style="height:700px">
+            <md-toolbar class="md-primary md-hue-1" md-scroll-shrink>
+                <div class="md-toolbar-tools">
+                    <h2><ng-md-icon icon="search" style="fill: white" size="16"></ng-md-icon> Search:</h2>
+                    <md-input-container md-no-float>
+                        <input type="text" name="filter" ng-model="blogCtrl.filter">
+                    </md-input-container>
+                    <span flex></span>
+                    <md-button class="md-raised" ng-click="blogCtrl.OpenPostDialog(null);">
+                        <md-icon>add</md-icon>
+                        Create new
+                    </md-button>
+                    <md-button ng-disabled="blogCtrl.postsSelected.length == 0" class="md-raised" ng-click="blogCtrl.DeletePosts()">
+                        <md-icon>delete</md-icon>
+                        Delete Selected(s)
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-content flex>
+                <md-list class="md-dense" ng-init="blogCtrl.GetPosts()">
+                    <md-list-item class="md-2-line" ng-repeat="post in blogCtrl.posts | filter: blogCtrl.filter | orderBy: '-Created'" ng-click="blogCtrl.OpenPostDialog(post);">
+                        <md-checkbox ng-model="post.Selected" ng-true-value="true" ng-false-value="false" ng-change="blogCtrl.PostCheckboxChanged(post)"></md-checkbox>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{post.Title}}</h3>
+                            <p>Created on {{post.Created | date : 'short'}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </div>
+    </div>
+</div>
+
+@section left_navigation_menu
+{
+    @Html.Partial("_menu")
+}
+
+
+

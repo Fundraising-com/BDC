@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.qsp.com/" xmlns:s1="http://www.qsp.com" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.qsp.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.qsp.com/">
+      <s:import namespace="http://www.qsp.com" />
+      <s:element name="AuthRealTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPostalCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerCountryCode" type="tns:CountryCode" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardType" type="s1:CardType" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="CountryCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="US" />
+          <s:enumeration value="CA" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AuthRealTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthRealTimeResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BPPSTxResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="authNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="avs_response" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ccNumberLast4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="csv_response" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientTransId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="refId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="responseCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="tranId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="tranRequestType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientPassThrough" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="tcs_transaction_id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="tranDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="tranResponseType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="tranAmount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="BPPS_Tx_Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthDepositRealTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPostalCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerCountryCode" type="tns:CountryCode" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardType" type="s1:CardType" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthDepositRealTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthDepositRealTimeResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthDepositRealTimeString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPostalCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCountryCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthDepositRealTimeStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthDepositRealTimeStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthDepositBatch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPostalCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerCountryCode" type="tns:CountryCode" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardType" type="s1:CardType" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthDepositBatchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthDepositBatchResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Deposit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ReferringBPPSTxId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DepositResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DepositResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ReferringBPPSTxId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchResponseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchResponseResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundPrevious">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ReferringBPPSTxId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundPreviousResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundPreviousResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Refund">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerStreet2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPostalCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerCountryCode" type="tns:CountryCode" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardType" type="s1:CardType" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CreditCardExpirationYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LineItemDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Descriptor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientTransactionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundResult" type="tns:BPPSTxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.qsp.com">
+      <s:simpleType name="CardType">
+        <s:restriction base="s:string">
+          <s:enumeration value="VISA" />
+          <s:enumeration value="MASTERCARD" />
+          <s:enumeration value="AMEX" />
+          <s:enumeration value="DISCOVER" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthRealTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthRealTime" />
+  </wsdl:message>
+  <wsdl:message name="AuthRealTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthRealTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthDepositRealTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthDepositRealTime" />
+  </wsdl:message>
+  <wsdl:message name="AuthDepositRealTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthDepositRealTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthDepositRealTimeStringSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthDepositRealTimeString" />
+  </wsdl:message>
+  <wsdl:message name="AuthDepositRealTimeStringSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthDepositRealTimeStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthDepositBatchSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthDepositBatch" />
+  </wsdl:message>
+  <wsdl:message name="AuthDepositBatchSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthDepositBatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="DepositSoapIn">
+    <wsdl:part name="parameters" element="tns:Deposit" />
+  </wsdl:message>
+  <wsdl:message name="DepositSoapOut">
+    <wsdl:part name="parameters" element="tns:DepositResponse" />
+  </wsdl:message>
+  <wsdl:message name="FetchResponseSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchResponse" />
+  </wsdl:message>
+  <wsdl:message name="FetchResponseSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="RefundPreviousSoapIn">
+    <wsdl:part name="parameters" element="tns:RefundPrevious" />
+  </wsdl:message>
+  <wsdl:message name="RefundPreviousSoapOut">
+    <wsdl:part name="parameters" element="tns:RefundPreviousResponse" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapIn">
+    <wsdl:part name="parameters" element="tns:Refund" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapOut">
+    <wsdl:part name="parameters" element="tns:RefundResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BatchPaymentSystemWebserviceSoap">
+    <wsdl:operation name="AuthRealTime">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authorizes a credit card in real time. The transaction is not marked for deposit. Primarily used by QSP.com where we need to settle the charge 3 days later.</wsdl:documentation>
+      <wsdl:input message="tns:AuthRealTimeSoapIn" />
+      <wsdl:output message="tns:AuthRealTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositRealTime">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authorizes a credit card in real time. Upon a successful authorization, transaction will be marked for deposit.</wsdl:documentation>
+      <wsdl:input message="tns:AuthDepositRealTimeSoapIn" />
+      <wsdl:output message="tns:AuthDepositRealTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositRealTimeString">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authorizes a credit card in real time. Upon a successful authorization, transaction will be marked for deposit. Returns a string for those classic ASP type apps.</wsdl:documentation>
+      <wsdl:input message="tns:AuthDepositRealTimeStringSoapIn" />
+      <wsdl:output message="tns:AuthDepositRealTimeStringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositBatch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authorizes a credit card in batch. Auth will be attempted by a sheduled process but not in real time to improve performance. Upon a successful authorization, transaction will be marked for deposit.</wsdl:documentation>
+      <wsdl:input message="tns:AuthDepositBatchSoapIn" />
+      <wsdl:output message="tns:AuthDepositBatchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This will mark a previously authorized transaction for deposit.</wsdl:documentation>
+      <wsdl:input message="tns:DepositSoapIn" />
+      <wsdl:output message="tns:DepositSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchResponse">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This will fetch the response record for a transaction request.</wsdl:documentation>
+      <wsdl:input message="tns:FetchResponseSoapIn" />
+      <wsdl:output message="tns:FetchResponseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RefundPrevious">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This will refund a previously authorized transaction.  Must have been previously processed by TCS/ePay</wsdl:documentation>
+      <wsdl:input message="tns:RefundPreviousSoapIn" />
+      <wsdl:output message="tns:RefundPreviousSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This will refund (CREDIT) a credit card without a previously authorized transaction. </wsdl:documentation>
+      <wsdl:input message="tns:RefundSoapIn" />
+      <wsdl:output message="tns:RefundSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BatchPaymentSystemWebserviceSoap" type="tns:BatchPaymentSystemWebserviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthRealTime">
+      <soap:operation soapAction="http://www.qsp.com/AuthRealTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositRealTime">
+      <soap:operation soapAction="http://www.qsp.com/AuthDepositRealTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositRealTimeString">
+      <soap:operation soapAction="http://www.qsp.com/AuthDepositRealTimeString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositBatch">
+      <soap:operation soapAction="http://www.qsp.com/AuthDepositBatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <soap:operation soapAction="http://www.qsp.com/Deposit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchResponse">
+      <soap:operation soapAction="http://www.qsp.com/FetchResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefundPrevious">
+      <soap:operation soapAction="http://www.qsp.com/RefundPrevious" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap:operation soapAction="http://www.qsp.com/Refund" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BatchPaymentSystemWebserviceSoap12" type="tns:BatchPaymentSystemWebserviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthRealTime">
+      <soap12:operation soapAction="http://www.qsp.com/AuthRealTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositRealTime">
+      <soap12:operation soapAction="http://www.qsp.com/AuthDepositRealTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositRealTimeString">
+      <soap12:operation soapAction="http://www.qsp.com/AuthDepositRealTimeString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDepositBatch">
+      <soap12:operation soapAction="http://www.qsp.com/AuthDepositBatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <soap12:operation soapAction="http://www.qsp.com/Deposit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchResponse">
+      <soap12:operation soapAction="http://www.qsp.com/FetchResponse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefundPrevious">
+      <soap12:operation soapAction="http://www.qsp.com/RefundPrevious" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap12:operation soapAction="http://www.qsp.com/Refund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BatchPaymentSystemWebservice">
+    <wsdl:port name="BatchPaymentSystemWebserviceSoap" binding="tns:BatchPaymentSystemWebserviceSoap">
+      <soap:address location="https://10.176.184.71/qpay/bpps.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BatchPaymentSystemWebserviceSoap12" binding="tns:BatchPaymentSystemWebserviceSoap12">
+      <soap12:address location="https://10.176.184.71/qpay/bpps.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

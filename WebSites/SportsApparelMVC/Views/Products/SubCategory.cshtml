@@ -1,0 +1,55 @@
+@using GA.BDC.Shared.Entities
+@using GA.BDC.Web.Fundraising.MVC.Helpers
+@model Category
+@{
+   ViewBag.Title = Model.Name + " Fundraisers";
+   Layout = "~/Views/Shared/_layout.cshtml";
+   ViewBag.Description = string.IsNullOrEmpty(Model.METADescription) ? "High Profit Fundraising Products for Sports teams, schools, churches and all types of groups, Fundraising.com offers all kind of fundraising ideas to help you reach your goals." : Model.METADescription;
+   ViewBag.Keywords = string.IsNullOrEmpty(Model.METAKeywords) ? "Fundraising Products, Sports Teams, Schools, Fundraising Ideas," + Model.Name : Model.METAKeywords;
+   ViewBag.CanonicalUrl = string.Format("/{0}/{1}/{2}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId), Model.Parent.Url, Model.Url);
+}
+<div class="container">
+
+   <div class="row">
+      <div class="col-sm-12">
+         <ol class="breadcrumb" style="background-color: transparent;">
+            <li id="breadcrumb.root" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemref="breadcrumb.products"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></li>
+            <li id="breadcrumb.products" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" itemref="breadcrumb.category"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)" itemprop="url"><span itemprop="title">Products</span></a></li>
+            <li id="breadcrumb.category" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" itemref="breadcrumb.subCategory"><span itemprop="title"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Parent.Url" itemprop="url">@Model.Parent.Name</a></span></li>
+            <li id="breadcrumb.subCategory" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child" class="active"><span itemprop="title"><a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/@Model.Parent.Url/@Model.Url" itemprop="url"><strong>@Model.Name</strong></a></span></li>
+         </ol>
+      </div>
+   </div>
+   <div class="row" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.GetProductsByCategory(@Model.Id);">
+      <div class="col-xs-12" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl">
+         <div class="row">
+            <div class="col-sm-12">
+               <h1>@Model.Name FUNDRAISER</h1>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-xs-12">
+               <span>@Html.Raw(Model.Description)</span>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 products-list" ng-repeat="product in productsCtrl.Products track by $index">
+            <div class="thumbnail text-center product-thumbnail" ng-init="googleAnalyticsCtrl.ProductShowed(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products');">
+               <a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><img ng-src="/Content/external/productcategory/{{::product.Image.Url}}" alt="{{::product.Name}}" class="img-responsive" /></a>
+               <a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><h6>{{::product.Name}}</h6></a>
+               <a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')">
+                  <h3 style="margin-top: 10px;" ng-show="product.Price > 0">{{::product.Price|currency}}</h3>
+               </a>
+               <span class="small"><span ng-show="product.ProfitPercentage > 0">Profit: {{::product.ProfitPercentage | percentage: 0}}</span><br /></span>
+               <span class="small" ng-show="product.RetailPrice > 0">Retail Price: <strong>{{::product.RetailPrice|currency}}</strong></span>
+               <rating class="text-danger" ng-show="product.Rating > 0" ng-model="product.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating>
+               <span ng-show="product.Rating == 0">&nbsp;</span>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-xs-12">
+               <span>@Html.Raw(Model.Description2)</span>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

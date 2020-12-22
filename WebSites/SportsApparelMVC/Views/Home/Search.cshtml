@@ -1,0 +1,41 @@
+
+@{
+   ViewBag.Title = "Search";
+   ViewBag.Description = "Easy Apparel Contact Us";
+   ViewBag.Keywords = "Search, fundraising ideas";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+   ViewBag.CanonicalUrl = Url.Action("Contact", "Home");
+
+}
+
+
+<h1>Search</h1>
+<div class="row"  ng-controller="SearchController as searchCtrl">
+   <div class="col-sm-12">
+      
+         <form name="searchForm" ng-submit="searchForm.$submitted && searchForm.$valid && searchCtrl.Search()">
+            
+               <input type="text" class="form-control" placeholder="Find anything here..." ng-model="searchCtrl.q" ng-required="true" style="width:100%" />
+           
+         </form>
+      
+   </div>
+</div>
+<div class="row">
+   <div class="col-sm-12">
+      <script>
+    (function () {
+        var cx = '001438748860699026052:fwhi3od-x8e';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+    })();
+      </script>
+      <gcse:searchresults-only></gcse:searchresults-only>
+   </div>
+</div>
+

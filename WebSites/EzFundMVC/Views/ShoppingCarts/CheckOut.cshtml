@@ -1,0 +1,423 @@
+@using System.Configuration
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Check out  - EzFund.com";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div ng-controller="ShoppingCartController as shoppingCartCtrl">
+        <form name="checkoutForm" class="form-horizontal" ng-controller="SalesController as salesCtrl" ng-submit="(salesCtrl.ActionState == 0 || salesCtrl.ActionState == 3) && checkoutForm.$submitted && checkoutForm.$valid && salesCtrl.Create();">
+            <h1>
+                <strong>CHECKOUT</strong>
+            </h1>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2>
+                                1. <strong>ORDER</strong> INFO
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Product</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>Quantity</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>Price</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>Total</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-repeat="item in salesCtrl.Sale.Items" ng-cloak>
+                                       <div class="col-xs-6 ng-hide" >{{::item.Product.Name}}</div>
+                                       <div class="col-xs-6">
+                                          <span ng-repeat="subProduct in item.Product.SubProducts" ng-show="subProduct.SelectedQuantity>0">{{::subProduct.Name}}
+                                             <span class="glyphicon glyphicon glyphicon-info-sign" ng-show="item.Product.IsStackedProduct" ng-click="salesCtrl.OpenModal(item.Product)"></span>
+                                          </span>
+                                         
+                                       </div>
+                                          <div class="col-xs-2">{{::item.Quantity}}</div>
+                                          <div class="col-xs-2">{{::item.Product.CalculatedPrice | currency}}</div>
+                                          <div class="col-xs-2" ng-disabled="item.Product.IsStackedProduct">{{::(item.Quantity * item.Product.CalculatedPrice) | currency}}</div>
+                                       </div>
+                                    <div class="row" ng-show="shoppingCartCtrl.ShippingFee > 0" ng-cloak>
+                                        <div class="col-xs-10">
+                                            <strong>Subtotal</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>{{shoppingCartCtrl.SubTotal | currency}}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="shoppingCartCtrl.ShippingFee > 0" ng-cloak>
+                                        <div class="col-xs-10">
+                                            <strong>Shipping Fee</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>{{shoppingCartCtrl.ShippingFee | currency}}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-repeat="tax in shoppingCartCtrl.Taxes" ng-cloak>
+                                        <div class="col-xs-10">
+                                            <strong>{{tax.Code}}</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>{{tax.Amount | currency}}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="shoppingCartCtrl.PromotionCode.DiscountedAmount > 0" ng-cloak>
+                                        <div class="col-xs-10">
+                                            <strong>PROMOTION CODE: {{shoppingCartCtrl.PromotionCode.Name}}</strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong>- {{shoppingCartCtrl.PromotionCode.DiscountedAmount | currency}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <strong>Total</strong>
+                                </div>
+                                <div class="col-xs-2" ng-cloak>
+                                    <strong>{{shoppingCartCtrl.TotalAmount | currency}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-cloak>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2>
+                                2. <strong>BILLING</strong> INFO
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="order.Client.FirstName" class="col-md-3">First Name <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="salesCtrl.Sale.Client.FirstName" id="order.Client.FirstName" class="form-control input-sm" ng-required="true" tabindex="1" />
+                                </div>
+                                <label for="order.Client.LastName" class="col-md-3">Last Name <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="salesCtrl.Sale.Client.LastName" id="order.Client.LastName" class="form-control input-sm" ng-required="true" tabindex="2" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Organization" class="col-md-3">Group Name <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="salesCtrl.Sale.Client.Organization" id="order.Client.Organization" class="form-control input-sm" ng-required="true" tabindex="3" />
+                                </div>
+                                <label for="order.Client.Phone" class="col-md-3">Phone <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input ui-mask="{{::salesCtrl.phoneMask}}" type="text" ng-model="salesCtrl.Sale.Client.Phone" id="order.Client.Phone" class="form-control input-sm" ng-required="true" tabindex="4" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Email" class="col-md-3" style="padding-right: 0;">Email <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input type="email" ng-model="salesCtrl.Sale.Client.Email" id="order.Client.Email" class="form-control input-sm" ng-required="true" tabindex="5" />
+                                </div>
+                                <label for="order.Client.Email2" class="col-md-3" style="padding-right: 0;">Confirm Email <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input type="email" ng-model="salesCtrl.Sale.Client.Email2" id="order.Client.Email2" class="form-control input-sm" ng-required="true" tabindex="6" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[0].Address1" class="col-md-3">Address <span class="mandatory-field">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" ng-model="salesCtrl.Sale.Client.Addresses[0].Address1" id="order.Client.Addresses[0].Address1" class="form-control input-sm" ng-required="true" tabindex="7" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[0].City" class="col-md-3">City <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="salesCtrl.Sale.Client.Addresses[0].City" id="order.Client.Addresses[0].City" class="form-control input-sm" ng-required="true" tabindex="8" />
+                                </div>
+                                <label for="order.Client.Addresses[0].Region" class="col-md-3">State <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <select class="form-control input-sm" ng-model="salesCtrl.Sale.Client.Addresses[0].Region" id="order.Client.Addresses[0].Region" ng-required="true" tabindex="9" ng-options="state as state.Name for state in salesCtrl.states track by state.Code" ng-change="salesCtrl.BroadcastRegionSelection();"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[0].PostCode" class="col-md-3">ZIP Code <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input ui-mask="{{::salesCtrl.postCodeMask}}" type="text" ng-model="salesCtrl.Sale.Client.Addresses[0].PostCode" id="order.Client.Addresses[0].PostCode" class="form-control input-sm" ng-required="true" tabindex="10" />
+                                </div>
+                                <label for="order.Client.Addresses[0].AddressZoneId" class="col-md-3">Address Type <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <select tabindex="11" class="form-control input-sm" ng-model="salesCtrl.Sale.Client.Addresses[0].AddressZoneId" id="order.Client.Addresses[0].AddressZoneId" ng-required="true">
+                                        <option value="1">Residential</option>
+                                        <option value="2">Commercial</option>
+                                        <option value="3">N/A</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2>
+                                3. <strong>SHIPPING</strong> INFO
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button tabindex="11" type="button" class="btn btn-info form-control" ng-click="salesCtrl.CopyAddress();"><span class="glyphicon glyphicon-download"></span> Copy the Billing Information into the Shipping Information</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-11 col-xs-offset-1">
+                                    <span class="text-muted">Due to delivery restrictions, we cannot ship your order to a P.O. Box. Please call for shipping information for orders shipping to elsewhere.</span>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[1].AttentionOf" class="col-md-3">Name <span class="mandatory-field">*</span></label>
+                                <div class="col-md-9">
+                                    <input tabindex="12" type="text" ng-model="salesCtrl.Sale.Client.Addresses[1].AttentionOf" id="order.Client.Addresses[1].AttentionOf" class="form-control input-sm" ng-required="true" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[1].Address1" class="col-md-3">Address <span class="mandatory-field">*</span></label>
+                                <div class="col-md-9">
+                                    <input tabindex="13" type="text" ng-model="salesCtrl.Sale.Client.Addresses[1].Address1" id="order.Client.Addresses[1].Address1" class="form-control input-sm" ng-required="true" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[1].City" class="col-md-3">City <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input tabindex="14" type="text" ng-model="salesCtrl.Sale.Client.Addresses[1].City" id="order.Client.Addresses[1].City" class="form-control input-sm" ng-required="true" />
+                                </div>
+                                <label for="order.Client.Addresses[1].Region" class="col-md-3">State <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <select tabindex="15" class="form-control input-sm" ng-model="salesCtrl.Sale.Client.Addresses[1].Region" id="order.Client.Addresses[1].Region" ng-required="true" ng-options="state as state.Name for state in salesCtrl.states track by state.Code"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="order.Client.Addresses[1].PostCode" class="col-md-3">ZIP Code <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <input ui-mask="{{::salesCtrl.postCodeMask}}" tabindex="16" type="text" ng-model="salesCtrl.Sale.Client.Addresses[1].PostCode" id="order.Client.Addresses[1].PostCode" class="form-control input-sm" ng-required="true" />
+                                </div>
+                                <label for="order.Client.Addresses[1].AddressZoneId" class="col-md-3">Address Type <span class="mandatory-field">*</span></label>
+                                <div class="col-md-3">
+                                    <select tabindex="17" class="form-control input-sm" ng-model="salesCtrl.Sale.Client.Addresses[1].AddressZoneId" id="order.Client.Addresses[1].AddressZoneId" ng-required="true">
+                                        <option value="1">Residential</option>
+                                        <option value="2">Commercial</option>
+                                        <option value="3">N/A</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-cloak>
+                <div class="col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2>
+                                4. <strong>PAYMENT</strong> INFO
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="order.PaymentMethod" class="col-sm-6">Payment Method <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-6">
+                                            <select tabindex="18" id="order.PaymentMethod" class="form-control" ng-model="salesCtrl.Sale.PaymentMethod">
+                                                <option value="1">Credit Card</option>
+                                                <option value="2">Purchase Order (Bill me later)</option>
+                                                @*<option value="3" ng-show="salesCtrl.Sale.Client.Addresses[0].Country.Code == 'US'">Paypal</option>*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 1">
+                                        <label for="order.InternalPaymentMethod" class="col-sm-6">Credit Card Type <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-4">
+                                            <select tabindex="19" id="order.InternalPaymentMethod" ng-model="salesCtrl.Sale.InternalPaymentMethod" class="form-control" ng-required="salesCtrl.Sale.PaymentMethod == 1">
+                                                <option value="8">American Express</option>
+                                                <option value="9">Discover</option>
+                                                <option value="3">Mastercard</option>
+                                                <option value="2">Visa</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <img src="/Content/images/public/visa.png" style="width: 80%;" ng-cloak ng-show="salesCtrl.Sale.InternalPaymentMethod == 2" />
+                                            <img src="/Content/images/public/amex.png" style="width: 80%;" ng-cloak ng-show="salesCtrl.Sale.InternalPaymentMethod == 8" />
+                                            <img src="/Content/images/public/discover.png" style="width: 80%;" ng-cloak ng-show="salesCtrl.Sale.InternalPaymentMethod == 9" />
+                                            <img src="/Content/images/public/mastercard.png" style="width: 80%;" ng-cloak ng-show="salesCtrl.Sale.InternalPaymentMethod == 3" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 1">
+                                        <label for="order.CreditCard.Number" class="col-sm-6">Credit Card Number <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-6">
+                                            <input ui-mask="{{::salesCtrl.creditCardNumberMask}}" tabindex="20" type="text" class="form-control" ng-model="salesCtrl.Sale.CreditCard.Number" id="order.CreditCard.Number" ng-required="salesCtrl.Sale.PaymentMethod == 1" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 1">
+                                        <label for="order.CreditCard.Holder" class="col-sm-6">Name on Credit Card <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-6">
+                                            <input tabindex="21" type="text" class="form-control" ng-model="salesCtrl.Sale.CreditCard.Holder" id="order.CreditCard.Holder" ng-required="salesCtrl.Sale.PaymentMethod == 1" placeholder="i.e. John Smith" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 1">
+                                        <label for="order.CreditCard.ExpirationDate" class="col-sm-6">Expiration Date (MMYY) <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-6">
+                                            <input ui-mask="{{::salesCtrl.creditCardExpirationDateMask}}" tabindex="22" type="text" class="form-control" ng-model="salesCtrl.Sale.CreditCard.ExpirationDate" id="order.CreditCard.ExpirationDate" ng-required="salesCtrl.Sale.PaymentMethod == 1" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 1">
+                                        <label for="order.CreditCard.CVV" class="col-sm-6">CVV2 <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-6">
+                                           @*<input ui-mask="{{::salesCtrl.creditCardCVVMask}}" tabindex="23" type="text" class="form-control" ng-model="salesCtrl.Sale.CreditCard.CVV" id="order.CreditCard.CVV" ng-required="salesCtrl.Sale.PaymentMethod == 1" />*@
+                                           <input ui-mask="{{::salesCtrl.creditCardCVVMask}}" tabindex="23" type="text" class="form-control"
+                                                  ng-model="salesCtrl.Sale.CreditCard.CVV" id="order.CreditCard.CVV"
+                                                  ng-required="salesCtrl.Sale.PaymentMethod == 1"
+                                                  ng-if="salesCtrl.Sale.InternalPaymentMethod != 8" />
+                                           <input ui-mask="{{::salesCtrl.creditCardCVVMaskAMEX}}" tabindex="23" type="text" class="form-control"
+                                                  ng-model="salesCtrl.Sale.CreditCard.CVV" id="order.CreditCard.CVV"
+                                                  ng-required="salesCtrl.Sale.PaymentMethod == 1"
+                                                  ng-if="salesCtrl.Sale.InternalPaymentMethod == 8" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="order.Comments" class="col-sm-6">Additional Comments</label>
+                                        <div class="col-sm-6">
+                                            <textarea tabindex="25" class="form-control" ng-model="salesCtrl.Sale.DeliveryComments" id="order.DeliveryComments" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 2">
+                                        <div class="col-xs-12">
+                                            <span class="text-danger">
+                                                To complete your order via PO / Bill Me Later, kindly send us a single copy of a Purchased Order from your school or organization to <a href="mailto:HelpDesk@ezfund.com">HelpDesk@ezfund.com</a> or via faxing to <a href="tel:17139738321">1-713-973-8321</a>.
+                                                <br /><br />
+                                                Once received and validated, we will process your order and you will be billed for your fundraising order.
+                                                <br /><br />
+                                                Payment, in full, is due following 30 days.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="salesCtrl.Sale.PaymentMethod == 3">
+                                        <div class="col-xs-12">
+                                            <span class="text-danger">
+                                                Once payment is validated, we will process your order.
+                                                <br /><br />
+                                                if you have any question please contact by email at <a href="mailto:salessupport.efr@gafundraising.com">salessupport.efr@gafundraising.com</a> or by phone at <a href="tel:+18006271854">1.800.627.1854</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="order.Referral" class="col-sm-6">How you learn about us? <span class="mandatory-field">*</span></label>
+                                        <div class="col-sm-6">
+                                            <select tabindex="24" id="order.ReferralCode" class="form-control" ng-model="salesCtrl.Sale.ReferralCode" ng-required="true" ng-options="opt.ReferralCode as opt.ReferralTxt for opt in salesCtrl.learnAboutUsOptions" ng-cloak>
+                                                <option value="">Select one*</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <h3>Subtotal:</h3>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h3 class="text-right">{{shoppingCartCtrl.SubTotal | currency}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-show="shoppingCartCtrl.ShippingFee > 0" ng-cloak>
+                                                <div class="col-xs-6">
+                                                    <h3>Shipping Fees:</h3>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h3 class="text-right">{{shoppingCartCtrl.ShippingFee | currency}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-repeat="tax in shoppingCartCtrl.Taxes" ng-cloak>
+                                                <div class="col-xs-6">
+                                                    <h3>{{tax.Code}}</h3>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h3 class="text-right">{{tax.Amount | currency}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-show="shoppingCartCtrl.PromotionCode.DiscountedAmount > 0" ng-cloak>
+                                                <div class="col-xs-6">
+                                                    <h3>PROMOTION CODE:<br />{{shoppingCartCtrl.PromotionCode.Name}}</h3>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h3 class="text-right">- {{shoppingCartCtrl.PromotionCode.DiscountedAmount | currency}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <h2>Total:</h2>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h2 class="text-right">{{shoppingCartCtrl.TotalAmount | currency}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-cloak>
+                <div class="col-xs-12">
+                    <button type="submit" tabindex="26" class="btn btn-warning form-control" ng-show="salesCtrl.ActionState == 0 || salesCtrl.ActionState == 3" ng-disabled="!checkoutForm.$valid">PLACE MY ORDER <span ng-show="!checkoutForm.$valid" style="color: red;"><strong>(Please fill all the mandatory fields <span class="glyphicon glyphicon-asterisk"></span> to place an order)</strong></span></button>
+                    <span class="text-info" ng-show="salesCtrl.ActionState == 1">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span> {{salesCtrl.progressMessage}}<br />
+                        <uib-progressbar class="progress-striped" max="100" value="salesCtrl.progress" type="warning" animate="true"></uib-progressbar>
+                    </span>
+                    <div class="alert alert-danger" role="alert" ng-show="salesCtrl.ActionState == 3 || salesCtrl.ActionState == 4">
+                        <strong>{{salesCtrl.error.Message}}</strong>
+                        <ul class="text-danger" ng-show="salesCtrl.ActionState == 3">
+                            <li ng-repeat="e in salesCtrl.error.ModelStateErrors">
+                                {{e}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    @*myoc info modal*@
+    <div class="myoc-info-modal">
+        <script type="text/ng-template" id="MYOCInfoModal.cshtml">
+            <div class="modal-product">
+                <div class="modal-header modal-product-header">
+                    <button type="button" class="close" ng-click="modalCtrl.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-title">{{modalCtrl.product.Name}}</h4>
+                </div>
+                <div class="row"  ng-repeat="subProduct in modalCtrl.product.SubProducts">
+                    <div class="col-xs-12" style="margin:10px;" ng-show="subProduct.SelectedQuantity>0">{{::subProduct.Name}} - {{::subProduct.SelectedQuantity}} item<span ng-show="subProduct.SelectedQuantity > 1">s</span></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="modalCtrl.CloseModal()">Close</button>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
