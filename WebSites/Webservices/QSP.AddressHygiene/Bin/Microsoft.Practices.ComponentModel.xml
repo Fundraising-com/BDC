@@ -1,0 +1,545 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Practices.ComponentModel</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Practices.ComponentModel.DescriptionResourceAttribute">
+            <summary>
+            Provides a description of a component that is localizable.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.DescriptionResourceAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Constructs the description attribute for localization.
+            </summary>
+            <param name="resourceBase">See <see cref="M:System.Resources.ResourceManager.#ctor(System.Type)"/> for the 
+            purpose of this parameter, which is the same passed to that constructor.</param>
+            <param name="resourceName">Name of the resource to use for the description.</param>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.ContainerComponent">
+            <summary>
+            Represents a container that can be a component in a parent 
+            container at the same time.
+            </summary>
+            <remarks>
+            This container automatically checks any <see cref="T:Microsoft.Practices.ComponentModel.ServiceDependencyAttribute"/> attributes 
+            on a component being added to it, so that an exception will be rised if the 
+            dependent service does not exist in this container or its parent if there is one.
+            <para>
+            Components that inherit from <see cref="T:Microsoft.Practices.ComponentModel.SitedComponent"/> will get the 
+            <see cref="M:Microsoft.Practices.ComponentModel.SitedComponent.OnMissingServiceDependency(System.Type)"/> method called whenever a missing 
+            service is detected, giving the component developer a chance to throw a more meaningful 
+            exception. 
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.Dispose(System.Boolean)">
+            <summary>
+            Disposes the container and all its child components.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.CreateSite(System.ComponentModel.IComponent,System.String)">
+            <summary>
+            Creates a <see cref="T:System.ComponentModel.ISite"/> for the given <see cref="T:System.ComponentModel.IComponent"/> and assigns the given name to the site.
+            </summary>
+            <param name="component">The <see cref="T:System.ComponentModel.IComponent"/> to create a site for.</param>
+            <param name="name">The name to assign to component; or <see langword="null"/> to skip the name assignment.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.GetService``1">
+            <summary>
+            Generic version of <see cref="M:Microsoft.Practices.ComponentModel.ContainerComponent.GetService``1"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.GetService``1(System.Boolean)">
+            <summary>
+            Generic version of <see cref="M:Microsoft.Practices.ComponentModel.ContainerComponent.GetService``1(System.Boolean)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.GetService(System.Type,System.Boolean)">
+            <summary>
+            Tries to retrieve services from this container or the parent ones, and 
+            optionally ensures that the service exists.
+            </summary>
+            <param name="service">The service to retrieve.</param>
+            <param name="ensureExists">If <see langword="true"/>, will check that the 
+            service exists and is not <see langword="null"/>, otherwise will 
+            throw an <see cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException"/>.</param>
+            <returns>The service or <see langword="null"/> if none exists.</returns>
+            <remarks>
+            Offers the same behavior as <see cref="M:System.IServiceProvider.GetService(System.Type)"/>, but 
+            if the <paramref name="ensureExists"/> is <see langword="true"/>, failure 
+            to retrieve an actual instance of the service will result in an 
+            <see cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException"/>.
+            </remarks>
+            <exception cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException">Exception thrown if 
+            a valid instance of the requested service is not found and the 
+            <paramref name="ensureExists"/> is <see langword="true"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.GetService(System.Type)">
+            <summary>
+            Tries to retrieve services from this container or the parent ones.
+            </summary>
+            <param name="service">The service to retrieve.</param>
+            <returns>The service or <see langword="null"/> if none exists.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ContainerComponent.OnSited">
+            <summary>
+            When implemented by a class, allows descendants to 
+            perform processing whenever the component is being sited.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Practices.ComponentModel.ContainerComponent.Disposed">
+            <summary>
+            Event rised when the component is being disposed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.ContainerComponent.Site">
+            <summary>
+            Provides a way to site the container in a parent container.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.ServiceAdapterDictionary">
+            <summary>
+            Adapts the <see cref="T:System.ComponentModel.Design.IDictionaryService"/> interface to the 
+            <see cref="T:System.Collections.IDictionary"/> one.
+            </summary>
+            <remarks>
+            This adapter only implements the read functionality of a dictionary, 
+            and throws <see cref="T:System.NotImplementedException"/> for all other members, 
+            including those that enumerate or retrieve all keys in the dictionary, 
+            as that functionality is not supported by the underlying <see cref="T:System.ComponentModel.Design.IDictionaryService"/>.
+            <para>
+            Supported methods are: <see cref="M:System.Collections.IDictionary.Contains(System.Object)"/> and <see cref="P:System.Collections.IDictionary.Item(System.Object)"/> (indexer 
+            only to retrieve a value).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceAdapterDictionary.#ctor(System.ComponentModel.Design.IDictionaryService)">
+            <summary>
+            Creates the adapter for the specified <see cref="T:System.ComponentModel.Design.IDictionaryService"/> service.
+            </summary>
+            <param name="serviceToAdapt">The service to adapt.</param>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.ServiceDependencyAttribute">
+            <summary>
+            Specifies the dependencies of a command on services that must be available at 
+            run-time to ensure proper functioning.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceDependencyAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes the dependency.
+            </summary>
+            <param name="serviceType">The service type required by the component.</param>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.ServiceDependencyAttribute.ServiceType">
+            <summary>
+            Gets the service type of the dependency.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.SitedComponent">
+            <summary>
+            Represents a component that wish to implement behavior when sited.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.SitedComponent.OnSited">
+            <summary>
+            When implemented by a class, allows descendants to 
+            perform processing whenever the component is being sited.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.SitedComponent.OnMissingServiceDependency(System.Type)">
+            <summary>
+            When implemented by a class, allows descendants to 
+            throw more meaningful exceptions when dependent services are not found.
+            </summary>
+            <param name="missingService">The type of the missing service.</param>
+            <exception cref="T:System.InvalidOperationException">
+            A dependent service was not found in the current component container.
+            </exception>
+            <remarks>
+            Descendents should throw an exception upon calls to this method if the 
+            component can not work without the missing dependency. If an exception is 
+            not thrown, the component will be sited and execution will continue.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.SitedComponent.GetService``1">
+            <summary>
+            Generic version of <see cref="M:Microsoft.Practices.ComponentModel.SitedComponent.GetService``1"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.SitedComponent.GetService``1(System.Boolean)">
+            <summary>
+            Tries to retrieve a service, and if it's not found, 
+            throws a <see cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException"/>.
+            </summary>
+            <exception cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException">The service was not found in the component site.</exception>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.SitedComponent.Site">
+            <summary>
+            Gets or sets the <see cref="T:System.ComponentModel.ISite"/> of the <see cref="T:System.ComponentModel.Component"/>.
+            </summary>
+            <value>
+            The <see cref="T:System.ComponentModel.ISite"/> of the <see cref="T:System.ComponentModel.Component"/>.
+            </value>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.CategoryResourceAttribute">
+            <summary>
+            Provides a category of a component that is localizable.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.CategoryResourceAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Constructs the category attribute for localization.
+            </summary>
+            <param name="resourceBase">See <see cref="M:System.Resources.ResourceManager.#ctor(System.Type)"/> for the 
+            purpose of this parameter, which is the same passed to that constructor.</param>
+            <param name="resourceName">Name of the resource to use for the category.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.CategoryResourceAttribute.GetLocalizedString(System.String)">
+            <summary>
+            See <see cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.ServiceContainer">
+            <summary>
+            Represents a container for components and services.
+            </summary>
+            <remarks>
+            This container automatically checks any <see cref="T:Microsoft.Practices.ComponentModel.ServiceDependencyAttribute"/> attributes 
+            on a component being added to it, so that an exception will be rised if the 
+            dependent service does not exist in this container.
+            <para>
+            Components that inherit from <see cref="T:Microsoft.Practices.ComponentModel.SitedComponent"/> will get the 
+            <see cref="M:Microsoft.Practices.ComponentModel.SitedComponent.OnMissingServiceDependency(System.Type)"/> method called whenever a missing 
+            service is detected, giving the component developer a chance to throw a more meaningful 
+            exception. 
+            </para>
+            Services added to the container that implement <see cref="T:System.ComponentModel.IComponent"/> are automatically 
+            sited on the container too.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Practices.ComponentModel.ServiceContainer.parentContainer">
+            <summary>
+            Reference to optional parent container service, so that services can 
+            be promoted.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.ComponentModel.ServiceContainer.promoted">
+            <summary>
+            List of promoted services, to perform demotion afterwards if necessary.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.ComponentModel.ServiceContainer.services">
+            <summary>
+            Services owned by this container.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.ComponentModel.ServiceContainer.isServiceContainer">
+            <summary>
+            Flag specifying whether components get access to the IServiceContainer service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.#ctor">
+            <summary>
+            Initialize a new instance of the <see cref="T:Microsoft.Practices.ComponentModel.ServiceContainer"/> class.
+            </summary>
+            <remarks>In order to let contained components to publish additional services, use 
+            the overload receiving the <c>exposeServiceContainerService</c> flag.</remarks>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.ComponentModel.ServiceContainer"/> class using the specified parent service provider.
+            </summary>
+            <param name="exposeServiceContainerService">Whether the <see cref="T:System.ComponentModel.Design.IServiceContainer"/> service 
+            for this container should be exposed, to allow contained component to publish new services.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.Finalize">
+            <summary>
+            Releases unmanaged resources and performs other cleanup operations before the <see cref="T:Microsoft.Practices.ComponentModel.ServiceContainer"/> is reclaimed by garbage collection. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources and performs other cleanup operations before the <see cref="T:Microsoft.Practices.ComponentModel.ServiceContainer"/> 
+            is reclaimed by garbage collection.
+            </summary>
+            <param name="disposing"><see langword="true"/> if we are disposing; 
+            otherwise, <see langword="false"/> which means the call is coming from our finalizer.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.AddService(System.Type,System.ComponentModel.Design.ServiceCreatorCallback,System.Boolean)">
+            <summary>
+            Adds the specified service to the service container, 
+            and optionally promotes the service to parent service containers.
+            </summary>
+            <param name="serviceType">The type of service to add.</param>
+            <param name="callback">A callback object that is used to create the service. This allows a service to be declared as available, but delays the creation of the object until the service is requested.</param>
+            <param name="promote"><see langword="true"/> to promote this request to any parent service containers; otherwise, <see langword="false"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Either <paramref name="serviceType"/> or <paramref name="callback"/> 
+            is a <see langword="null"/> reference.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.AddService(System.Type,System.ComponentModel.Design.ServiceCreatorCallback)">
+            <summary>
+            Adds the specified service to the service container.
+            </summary>  
+            <param name="serviceType">The type of service to add.</param>
+            <param name="callback">A callback object that is used to create the service. This allows a service to be declared as available, but delays the creation of the object until the service is requested.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Either <paramref name="serviceType"/> or <paramref name="callback"/> 
+            is a <see langword="null"/> reference.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.AddService(System.Type,System.Object,System.Boolean)">
+            <summary>
+            Adds the specified service to the service container, 
+            and optionally promotes the service to any parent service containers.
+            </summary>
+            <param name="serviceType">The type of service to add.</param>
+            <param name="serviceInstance">An instance of the service type to add. 
+            This object must implement or inherit from the type indicated by the serviceType parameter.</param>
+            <param name="promote"><see langword="true"/> to promote this request to any parent service containers; otherwise, <see langword="false"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Either <paramref name="serviceType"/> or <paramref name="callback"/> 
+            is a <see langword="null"/> reference.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.AddService(System.Type,System.Object)">
+            <summary>
+            Adds the specified service to the service container.
+            </summary>
+            <param name="serviceType">The type of service to add.</param>
+            <param name="serviceInstance">An instance of the service type to add. 
+            This object must implement or inherit from the type indicated by the serviceType parameter.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Either <paramref name="serviceType"/> or <paramref name="callback"/> 
+            is a <see langword="null"/> reference.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.GetService(System.Type)">
+            <summary>
+            Gets the requested service.
+            </summary>
+            <param name="serviceType">The type of service to retrieve.</param>
+            <returns>An instance of the service if it could be found, 
+            or a <see langword="null"/> reference if it could not be found.</returns>
+            <seealso cref="T:System.ComponentModel.Container"/>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.RemoveService(System.Type,System.Boolean)">
+            <summary>
+            Removes the specified service type from the service container.
+            </summary>
+            <param name="serviceType">The type of service to remove.</param>
+            <param name="promote"><see langword="true"/> to promote this request to any parent 
+            service containers; otherwise, <see langword="false"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="serviceType"/> is a <see langword="null"/> reference.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.RemoveService(System.Type)">
+            <summary>
+            Removes the specified service type from the service container.
+            </summary>
+            <param name="serviceType">The type of service to remove.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="serviceType"/> is a <see langword="null"/> reference.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.OnSited">
+            <summary>
+            When implemented by a class, allows descendants to 
+            perform processing whenever the component is being sited.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.SetupTemporaryService(System.Type,System.Object)">
+            <summary>
+            Temporarily adds a a service in the container.
+            </summary>
+            <param name="serviceType">Type of the service to replace.</param>
+            <param name="serviceInstance">The instance to use for the service.</param>
+            <remarks>
+            When the returned object is disposed, the container is brought back to its 
+            original state. This means that if the service was a new one, it will be removed, 
+            and if there was an existing one, the original is put back in the container and 
+            the new one removed.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceContainer.IsInvalidInstance(System.Type,System.Object)">
+            <summary>
+            Implements the same rules as ReflectionHelper.IsAssignableTo in Practices.Common. 
+            Not used here to avoid an unnecessary dependency.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.ServiceHelper">
+            <summary>
+            Performs service-related activities.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceHelper.CheckDependencies(System.ComponentModel.IComponent)">
+            <summary>
+            Checks that all declared dependencies for the object are present after 
+            it has been sited.
+            </summary>
+            <param name="component">The component to check dependencies on.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceHelper.CheckDependencies(System.Object,System.IServiceProvider)">
+            <summary>
+            Checks that all declared dependencies for the object are present based on 
+            the received provider. The object doesn't need to be an <see cref="T:System.ComponentModel.IComponent"/>.
+            </summary>
+            <param name="component">The component to check dependencies on.</param>
+            <param name="provider">The provider to use to query for services the component depends on.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceHelper.GetService(System.ComponentModel.IComponent,System.Type)">
+            <summary>
+            Tries to retrieve a service, and throws an <see cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException"/> 
+            if it doesn't exist on the <paramref name="component"/> container.
+            </summary>
+            <param name="component">The component that requests the service.</param>
+            <param name="serviceType">The service to retrieve.</param>
+            <returns>The service instance.</returns>
+            <exception cref="T:System.InvalidOperationException">The <paramref name="component"/> is not sited.</exception>
+            <exception cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException">The service was not found on the component <see cref="P:System.ComponentModel.IComponent.Site"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceHelper.GetService(System.IServiceProvider,System.Type,System.Object)">
+            <summary>
+            Tries to retrieve a service, and throws an <see cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException"/> 
+            if it doesn't exist on the <paramref name="component"/> container.
+            </summary>
+            <param name="serviceProvider">The service provider that holds services.</param>
+            <param name="serviceType">The service to retrieve.</param>
+            <param name="component">The object that needs the service.</param>
+            <returns>The service instance.</returns>
+            <exception cref="T:System.InvalidOperationException">The <paramref name="component"/> is not sited.</exception>
+            <exception cref="T:Microsoft.Practices.ComponentModel.ServiceMissingException">The service was not found on the component <see cref="P:System.ComponentModel.IComponent.Site"/>.</exception>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.Properties.Resources">
+            <summary>
+               A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ResourceManager">
+            <summary>
+               Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.Culture">
+            <summary>
+               Overrides the current thread's CurrentUICulture property for all
+               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ServiceContainer_InvalidServiceInstance">
+            <summary>
+               Looks up a localized string similar to "Service instance of type {0} is not assignable to service type {1}.".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ServiceContainer_ServiceExists">
+            <summary>
+               Looks up a localized string similar to "Service {0} already exists in the container.".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ServiceHelper_ComponentNotSited">
+            <summary>
+               Looks up a localized string similar to "Component {0} must be sited in a container in order to function properly.".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ServiceHelper_ComponentNull">
+            <summary>
+               Looks up a localized string similar to "The component can not be null.".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ServiceHelper_ProviderNull">
+            <summary>
+               Looks up a localized string similar to "The service provider to look for dependencies can not be null.".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Properties.Resources.ServiceMissingException_Message">
+            <summary>
+               Looks up a localized string similar to "Service {0}, required for component {1} is not available in the current container.".
+            </summary>
+        </member>
+        <member name="T:ThisGlobalAssembly">
+            <summary>
+            Provides easy access to global assembly-level attributes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.ServiceMissingException">
+            <summary>
+            Exception thrown when a required service doesn't exist in 
+            the component container.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceMissingException.#ctor">
+            <summary>
+            Initializes the exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceMissingException.#ctor(System.String)">
+            <summary>
+            Initializes the exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceMissingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes the exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceMissingException.#ctor(System.Type,System.Object)">
+            <summary>
+            Initializes the exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceMissingException.#ctor(System.Type,System.Object,System.Exception)">
+            <summary>
+            Initializes the exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.ServiceMissingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes the exception.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.ComponentModel.Site">
+            <summary>
+            Basic <see cref="T:System.ComponentModel.ISite"/> implementation that passes 
+            all service requests to the parent service provider.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.Site.#ctor(System.IServiceProvider,System.ComponentModel.IComponent,System.String)">
+            <summary>
+            Constructs a site.
+            </summary>
+            <param name="provider">The object providing services to this site.</param>
+            <param name="component">The component this site is being associated with.</param>
+            <param name="name">A name for the site.</param>
+        </member>
+        <member name="M:Microsoft.Practices.ComponentModel.Site.GetService(System.Type)">
+            <summary>
+            See <see cref="M:System.IServiceProvider.GetService(System.Type)"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Site.Component">
+            <summary>
+            See <see cref="P:System.ComponentModel.ISite.Component"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Site.Container">
+            <summary>
+            See <see cref="P:System.ComponentModel.ISite.Container"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Site.DesignMode">
+            <summary>
+            Always returns <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.ComponentModel.Site.Name">
+            <summary>
+            See <see cref="P:System.ComponentModel.ISite.Name"/>.
+            </summary>
+        </member>
+    </members>
+</doc>
