@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="esubs_global_v2" Class="SecurityDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SQLT08;Initial Catalog=esubs_global_v2;Integrated Security=True" SettingsObjectName="GA.BDC.Data.ESubs.Properties.Settings" SettingsPropertyName="esubs_global_v2ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.es_validate_login" Method="es_validate_login">
+    <Parameter Name="email_address" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_validate_loginResult">
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="fastfundraising" Class="FastFundraisingDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sqlt08;Initial Catalog=fastfundraising;Integrated Security=True" SettingsObjectName="GA.BDC.Data.Properties.Settings" SettingsPropertyName="fastfundraisingConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ffcookies" Member="ffcookies">
+    <Type Name="ffcooky">
+      <Column Name="cookieid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.fffeedback" Member="fffeedbacks">
+    <Type Name="fffeedback">
+      <Column Name="fbid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fbcustname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="fbemail" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="fbmessage" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="receiveddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="replystatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="replieddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ffitemprice" Member="ffitemprices">
+    <Type Name="ffitemprice">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tierid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tierminval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upperlimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ffitems" Member="ffitems">
+    <Type Name="ffitem">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="itemnmbr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imagepath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="descriptionpath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemuom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="peruom" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="enduserprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="baseprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="strikeprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="flavors" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="packaging" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="minimumqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.saleitemprice" Member="saleitemprices">
+    <Type Name="saleitemprice">
+      <Column Name="saleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tierid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tierminval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upperlimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.saleitems" Member="saleitems">
+    <Type Name="saleitem">
+      <Column Name="saleid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="imagepath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="descriptionpath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="baseprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateadded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="salestartdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="saleenddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.searchitems" Member="searchitems">
+    <Type Name="searchitem">
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="searchstring" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="destination" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ffcart" Member="ffcarts">
+    <Type Name="ffcart">
+      <Column Name="cookieid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ipaddr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itempriceapplied" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="totalcost" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="addtocartdatetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="extfmid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promotionid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.shipping_fee" Member="shipping_fees">
+    <Type Name="shipping_fee">
+      <Column Name="shipping_fee_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="sale_amt_min" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sale_amt_max" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shipping_fee" Member="shipping_fee1" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="shipping_fee_shipping_group" Member="shipping_groups" ThisKey="shipping_fee_id" OtherKey="shipping_fee_id" Type="shipping_group" />
+    </Type>
+  </Table>
+  <Table Name="dbo.shipping_group" Member="shipping_groups">
+    <Type Name="shipping_group">
+      <Column Name="shipping_group_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="shipping_fee_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[default]" Member="default" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="shipping_fee_shipping_group" Member="shipping_fee" ThisKey="shipping_fee_id" OtherKey="shipping_fee_id" Type="shipping_fee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.category" Member="categories">
+    <Type Name="category">
+      <Column Name="categoryname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="catdisplayitemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="displayitemimagepath" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shipping_group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FC" Member="FCs">
+    <Type Name="FC">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ext_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="active" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="login" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="state" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="esubs_parnter_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SAPAccountNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="profit_raised" Type="System.Decimal" DbType="Decimal(12,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.efr_store_delete_cart_by_cookieid" Method="efr_store_delete_cart_by_cookieid">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.efr_store_delete_cookie_by_cookieid_and_itemid" Method="efr_store_delete_cookie_by_cookieid_and_itemid">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fr_store_get_next_cart_id" Method="fr_store_get_next_cart_id">
+    <Parameter Name="cartid" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.efr_store_get_sum_qty_cost_from_ffcart_by_cookieid" Method="efr_store_get_sum_qty_cost_from_ffcart_by_cookieid">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_sum_qty_cost_from_ffcart_by_cookieidResult">
+      <Column Name="totalitems" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="totalamount" Type="System.Decimal" DbType="Decimal(6,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_saleitems_by_itemid" Method="efr_store_get_saleitems_by_itemid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_saleitems_by_itemidResult">
+      <Column Name="saleid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="imagepath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="descriptionpath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="baseprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateadded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="salestartdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="saleenddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_saleitemprice_by_itemid_saleid_tierid" Method="efr_store_get_saleitemprice_by_itemid_saleid_tierid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="saleid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tierid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_saleitemprice_by_itemid_saleid_tieridResult">
+      <Column Name="saleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tierid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tierminval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upperlimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_saleitemprice_by_itemid_saleid" Method="efr_store_get_saleitemprice_by_itemid_saleid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="saleid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_saleitemprice_by_itemid_saleidResult">
+      <Column Name="saleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tierid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tierminval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upperlimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_minimum_qty_by_itemid" Method="efr_store_get_minimum_qty_by_itemid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_minimum_qty_by_itemidResult">
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="minimumqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_minimum_qty_by_cookieid" Method="efr_store_get_minimum_qty_by_cookieid">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_minimum_qty_by_cookieidResult">
+      <Column Name="cookieid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ipaddr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itempriceapplied" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="totalcost" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="addtocartdatetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="minimumqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_max_tier_from_saleitemprice_by_itemid_saleid_qty" Method="efr_store_get_max_tier_from_saleitemprice_by_itemid_saleid_qty">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="saleid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="qty" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_max_tier_from_saleitemprice_by_itemid_saleid_qtyResult">
+      <Column Name="tcode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_max_tier_from_ffitemprice_by_itemid_qty" Method="efr_store_get_max_tier_from_ffitemprice_by_itemid_qty">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="qty" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_max_tier_from_ffitemprice_by_itemid_qtyResult">
+      <Column Name="tcode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_items_by_catid" Method="efr_store_get_items_by_catid">
+    <Parameter Name="catid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_items_by_catidResult">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="itemnmbr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imagepath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="descriptionpath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemuom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="peruom" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="enduserprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="baseprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="strikeprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="flavors" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="packaging" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="minimumqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="categoryname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_item_category_by_itemid" Method="efr_store_get_item_category_by_itemid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_item_category_by_itemidResult">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="categoryname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_item_by_itemid" Method="efr_store_get_item_by_itemid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_item_by_itemidResult">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="itemnmbr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imagepath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="descriptionpath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemuom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="peruom" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="enduserprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="baseprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="strikeprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="flavors" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="packaging" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="minimumqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="packing" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_ffitemprice_ffitems_by_itemid" Method="efr_store_get_ffitemprice_ffitems_by_itemid">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_ffitemprice_ffitems_by_itemidResult">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tierid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tierminval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upperlimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_ffitemprice_by_itemid_tiercode" Method="efr_store_get_ffitemprice_by_itemid_tiercode">
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tierid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_ffitemprice_by_itemid_tiercodeResult">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tierid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tierminval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="upperlimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_ffcart_ffitems_by_cookie_id" Method="efr_store_get_ffcart_ffitems_by_cookie_id">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_ffcart_ffitems_by_cookie_idResult">
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_category_by_catid" Method="efr_store_get_category_by_catid">
+    <Parameter Name="catid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_category_by_catidResult">
+      <Column Name="categoryname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_category" Method="efr_store_get_category">
+    <ElementType Name="efr_store_get_categoryResult">
+      <Column Name="categoryname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catdisplayitemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="displayitemimagepath" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_cart_by_cookie_itemid" Method="efr_store_get_cart_by_cookie_itemid">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_cart_by_cookie_itemidResult">
+      <Column Name="cookieid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ipaddr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itempriceapplied" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="totalcost" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="addtocartdatetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_get_cart_by_cookie_id" Method="efr_store_get_cart_by_cookie_id">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efr_store_get_cart_by_cookie_idResult">
+      <Column Name="cookieid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ipaddr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itempriceapplied" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="totalcost" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="addtocartdatetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_find_text_in_ffitems" Method="efr_store_find_text_in_ffitems">
+    <Parameter Name="searchtxt" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="efr_store_find_text_in_ffitemsResult">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="itemnmbr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imagepath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="descriptionpath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="itemuom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="peruom" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="enduserprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="baseprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="strikeprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="flavors" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="packaging" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="minimumqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efr_store_update_cart_by_cookieid_and_itemid" Method="efr_store_update_cart_by_cookieid_and_itemid">
+    <Parameter Name="newqty" Type="System.Int32" DbType="Int" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="totalcost" Type="System.Double" DbType="Float" />
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.efr_store_insert_cookie_info" Method="efr_store_insert_cookie_info">
+    <Parameter Name="cookieid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ipaddr" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="itemid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="itemname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="totalcost" Type="System.Double" DbType="Float" />
+    <Parameter Name="extfmid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="promotion" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fr_store_insert_representative" Method="fr_store_insert_representative">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Redirect" Parameter="redirect" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="STATE" Parameter="sTATE" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="ImageUrl" Parameter="imageUrl" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Phone" Parameter="phone" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Account" Parameter="account" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Ammount" Parameter="ammount" Type="System.Double" DbType="Float" />
+    <ElementType Name="fr_store_insert_representativeResult">
+      <Column Name="external_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

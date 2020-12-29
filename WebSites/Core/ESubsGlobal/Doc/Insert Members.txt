@@ -1,0 +1,23 @@
+#	Jean-Francois Buist
+#	Insert members.
+#	
+
+	CreationChannel creationChannel = new CreationChannel();
+	creationChannel.ID = 1;
+	creationChannel.Description = "test";
+	creationChannel.Name = "test";
+
+	Culture culture = new Culture();
+	culture.CultureName = "en-US";
+	culture.CountryCode = "US";
+
+	GA.BDC.Core.ESubsGlobal.Users.Sponsor user =
+		new GA.BDC.Core.ESubsGlobal.Users.Sponsor("JF", null, "Buist", "jfbuist@rrr.com","4r4r4r", "This is a test",
+		creationChannel, culture);
+
+	if(user.InsertIntoDatabase() == InsertMemberIntoDatabaseReturnValue.MEMBER_NAME_AND_EMAIL_ADDRESS_ALREADY_EXISTS) {
+		Response.Write("Member with this email and name already exists");
+	} else {
+		Response.Write("Done");
+	}			
+

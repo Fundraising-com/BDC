@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37511627-3C6D-4DC1-B6F7-45D1243B27DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Data.ESubs</RootNamespace>
+    <AssemblyName>GA.BDC.Data.ESubs</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LINQ\Security.cs">
+      <DependentUpon>Security.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LINQ\Security.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Security.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\action.cs" />
+    <Compile Include="Models\aoii_chapters.cs" />
+    <Compile Include="Models\aoii_chapters_2006.cs" />
+    <Compile Include="Models\audit_member.cs" />
+    <Compile Include="Models\audit_member_hierarchy.cs" />
+    <Compile Include="Models\audit_personalization_image.cs" />
+    <Compile Include="Models\audit_users.cs" />
+    <Compile Include="Models\bounce_to_transfer.cs" />
+    <Compile Include="Models\business_rule.cs" />
+    <Compile Include="Models\campaign_merges.cs" />
+    <Compile Include="Models\country.cs" />
+    <Compile Include="Models\creation_channel.cs" />
+    <Compile Include="Models\culture.cs" />
+    <Compile Include="Models\culture_country_name.cs" />
+    <Compile Include="Models\culture_subdivision_name.cs" />
+    <Compile Include="Models\custcare_comments.cs" />
+    <Compile Include="Models\custom_email_template.cs" />
+    <Compile Include="Models\C_tbd_partner.cs" />
+    <Compile Include="Models\C_tbd_partner_attribute.cs" />
+    <Compile Include="Models\C_tbd_partner_attribute_value.cs" />
+    <Compile Include="Models\C_tbd_partner_promotion.cs" />
+    <Compile Include="Models\C_tbd_partner_type.cs" />
+    <Compile Include="Models\C_tbd_partner_type_culture.cs" />
+    <Compile Include="Models\C_tbd_promotion.cs" />
+    <Compile Include="Models\C_tbd_promotion_destination.cs" />
+    <Compile Include="Models\C_tbd_promotion_type.cs" />
+    <Compile Include="Models\DataProvider.cs" />
+    <Compile Include="Models\default_email_template.cs" />
+    <Compile Include="Models\direct_mail.cs" />
+    <Compile Include="Models\direct_mail_info.cs" />
+    <Compile Include="Models\direct_mail_letter.cs" />
+    <Compile Include="Models\direct_mail_template.cs" />
+    <Compile Include="Models\display_product_type.cs" />
+    <Compile Include="Models\dm_image_approval_status.cs" />
+    <Compile Include="Models\dm_personalization_image.cs" />
+    <Compile Include="Models\dtproperty.cs" />
+    <Compile Include="Models\earned_prize.cs" />
+    <Compile Include="Models\efundraingtransaction_suppID_tranlation.cs" />
+    <Compile Include="Models\email_import_test.cs" />
+    <Compile Include="Models\email_template.cs" />
+    <Compile Include="Models\email_template_culture.cs" />
+    <Compile Include="Models\email_template_field.cs" />
+    <Compile Include="Models\email_template_tag.cs" />
+    <Compile Include="Models\email_template_type.cs" />
+    <Compile Include="Models\employee.cs" />
+    <Compile Include="Models\es_valid_orders_items.cs" />
+    <Compile Include="Models\es_valid_orders_items_staging.cs" />
+    <Compile Include="Models\event.cs" />
+    <Compile Include="Models\event_change.cs" />
+    <Compile Include="Models\event_facebook_visitor.cs" />
+    <Compile Include="Models\event_gasavingcard.cs" />
+    <Compile Include="Models\event_group.cs" />
+    <Compile Include="Models\event_participation.cs" />
+    <Compile Include="Models\event_profit_range.cs" />
+    <Compile Include="Models\event_status.cs" />
+    <Compile Include="Models\event_total_amount.cs" />
+    <Compile Include="Models\event_type.cs" />
+    <Compile Include="Models\ewnchapter.cs" />
+    <Compile Include="Models\ewnparticipant.cs" />
+    <Compile Include="Models\ewnpaticipant_possibleduplicate.cs" />
+    <Compile Include="Models\exception_type.cs" />
+    <Compile Include="Models\external_account.cs" />
+    <Compile Include="Models\external_account_action.cs" />
+    <Compile Include="Models\featured_event.cs" />
+    <Compile Include="Models\featured_event2.cs" />
+    <Compile Include="Models\generated_pass.cs" />
+    <Compile Include="Models\group.cs" />
+    <Compile Include="Models\group_group_status.cs" />
+    <Compile Include="Models\group_status.cs" />
+    <Compile Include="Models\group_type.cs" />
+    <Compile Include="Models\image_approval_status.cs" />
+    <Compile Include="Models\KAT.cs" />
+    <Compile Include="Models\kd_alumni.cs" />
+    <Compile Include="Models\kd_alumni_2006.cs" />
+    <Compile Include="Models\kd_fy08.cs" />
+    <Compile Include="Models\Kiwani.cs" />
+    <Compile Include="Models\kiwanischange.cs" />
+    <Compile Include="Models\kiwanisgroup.cs" />
+    <Compile Include="Models\kiwanismember.cs" />
+    <Compile Include="Models\kiwanis_phone_to_add.cs" />
+    <Compile Include="Models\language.cs" />
+    <Compile Include="Models\MD08.cs" />
+    <Compile Include="Models\MDImport.cs" />
+    <Compile Include="Models\member.cs" />
+    <Compile Include="Models\member_20110621.cs" />
+    <Compile Include="Models\member_hierarchy.cs" />
+    <Compile Include="Models\member_phone_number.cs" />
+    <Compile Include="Models\member_postal_address.cs" />
+    <Compile Include="Models\member_type.cs" />
+    <Compile Include="Models\opt_status.cs" />
+    <Compile Include="Models\order_profit.cs" />
+    <Compile Include="Models\order_profit_backup.cs" />
+    <Compile Include="Models\participant_total_amount.cs" />
+    <Compile Include="Models\participation_channel.cs" />
+    <Compile Include="Models\Partner_Activation_Commission.cs" />
+    <Compile Include="Models\Partner_Commission_Range.cs" />
+    <Compile Include="Models\partner_culture_link.cs" />
+    <Compile Include="Models\partner_email_template.cs" />
+    <Compile Include="Models\partner_payment_config.cs" />
+    <Compile Include="Models\partner_payment_info.cs" />
+    <Compile Include="Models\partner_product_offer.cs" />
+    <Compile Include="Models\Partner_Sales_Commission.cs" />
+    <Compile Include="Models\partner_store_template.cs" />
+    <Compile Include="Models\payment.cs" />
+    <Compile Include="Models\payment_batch.cs" />
+    <Compile Include="Models\payment_comment.cs" />
+    <Compile Include="Models\payment_exception_type.cs" />
+    <Compile Include="Models\payment_info.cs" />
+    <Compile Include="Models\payment_info_corr_20080908.cs" />
+    <Compile Include="Models\payment_info_corr_20080918.cs" />
+    <Compile Include="Models\payment_info_corr_20080918_2.cs" />
+    <Compile Include="Models\payment_item.cs" />
+    <Compile Include="Models\payment_payment_status.cs" />
+    <Compile Include="Models\payment_period.cs" />
+    <Compile Include="Models\payment_status.cs" />
+    <Compile Include="Models\payment_type.cs" />
+    <Compile Include="Models\personalization.cs" />
+    <Compile Include="Models\personalization_image.cs" />
+    <Compile Include="Models\phone_number.cs" />
+    <Compile Include="Models\phone_number_type.cs" />
+    <Compile Include="Models\postal_address.cs" />
+    <Compile Include="Models\postal_address_type.cs" />
+    <Compile Include="Models\precalculatedvalue.cs" />
+    <Compile Include="Models\prize.cs" />
+    <Compile Include="Models\prize_item.cs" />
+    <Compile Include="Models\prize_to_be_removed.cs" />
+    <Compile Include="Models\prize_type.cs" />
+    <Compile Include="Models\product_offer.cs" />
+    <Compile Include="Models\program.cs" />
+    <Compile Include="Models\program_partner.cs" />
+    <Compile Include="Models\program_partner_prize.cs" />
+    <Compile Include="Models\qsp_matching_code.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\stats_personalization.cs" />
+    <Compile Include="Models\stats_personalization_item.cs" />
+    <Compile Include="Models\stats_personalization_section.cs" />
+    <Compile Include="Models\Store.cs" />
+    <Compile Include="Models\store_template.cs" />
+    <Compile Include="Models\subdivision.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\tag.cs" />
+    <Compile Include="Models\tellafriend.cs" />
+    <Compile Include="Models\tellafriend_recipient.cs" />
+    <Compile Include="Models\temp_customer.cs" />
+    <Compile Include="Models\temp_group_member.cs" />
+    <Compile Include="Models\temp_member.cs" />
+    <Compile Include="Models\temp_member_bak.cs" />
+    <Compile Include="Models\temp_member_hierarchy.cs" />
+    <Compile Include="Models\temp_payment_info.cs" />
+    <Compile Include="Models\temp_phone_number.cs" />
+    <Compile Include="Models\temp_postal_address.cs" />
+    <Compile Include="Models\temp_touch_info.cs" />
+    <Compile Include="Models\test_table.cs" />
+    <Compile Include="Models\theme.cs" />
+    <Compile Include="Models\touch.cs" />
+    <Compile Include="Models\touch_action.cs" />
+    <Compile Include="Models\touch_archive.cs" />
+    <Compile Include="Models\touch_change_log.cs" />
+    <Compile Include="Models\touch_change_log_details.cs" />
+    <Compile Include="Models\touch_info.cs" />
+    <Compile Include="Models\touch_info_archive.cs" />
+    <Compile Include="Models\touch_not_to_send_20071212.cs" />
+    <Compile Include="Models\tpa_fy09.cs" />
+    <Compile Include="Models\Trace_leads.cs" />
+    <Compile Include="Models\unused_account_number.cs" />
+    <Compile Include="Models\user.cs" />
+    <Compile Include="Models\web_action.cs" />
+    <Compile Include="Models\xfactor_member.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LINQ\Security.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Security.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="LINQ\Security.dbml.layout">
+      <DependentUpon>Security.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

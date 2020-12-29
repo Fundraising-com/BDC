@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFD0A441-F536-46E7-8CCE-D8B261CD2634}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Data.Fundraising</RootNamespace>
+    <AssemblyName>GA.BDC.Data.Fundraising</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS8002</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS8002</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Dapper.Contrib.2.0.35\lib\net461\Dapper.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions, Version=5.0.1.27, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\DataAnnotationsExtensions.5.0.1.27\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\FluentValidation-Signed.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi, Version=6.2.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\FluentValidation.WebApi-Signed.6.2.1.0\lib\Net45\FluentValidation.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Conventions.3.3.0\lib\net45\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EFRCommon\Mappers\OAuthClientMapper.cs" />
+    <Compile Include="EFRCommon\Mappers\PartnerMapper.cs" />
+    <Compile Include="EFRCommon\Mappers\PromotionMapper.cs" />
+    <Compile Include="EFRCommon\Mappers\OAuthTokenMapper.cs" />
+    <Compile Include="EFRCommon\Repositories\OAuthClientRepository.cs" />
+    <Compile Include="EFRCommon\Repositories\PartnerRepository.cs" />
+    <Compile Include="EFRCommon\Repositories\PromotionRepository.cs" />
+    <Compile Include="EFRCommon\Repositories\OAuthTokenRepository.cs" />
+    <Compile Include="EFRCommon\StoredProcedures\DataProvider.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EFRCommon\Tables\advertising.cs" />
+    <Compile Include="EFRCommon\Tables\advertising_listing.cs" />
+    <Compile Include="EFRCommon\Tables\advertising_type.cs" />
+    <Compile Include="EFRCommon\Tables\DataProvider.cs" />
+    <Compile Include="EFRCommon\Tables\listing.cs" />
+    <Compile Include="EFRCommon\Tables\oauth_token.cs" />
+    <Compile Include="EFRCommon\Tables\package.cs" />
+    <Compile Include="EFRCommon\Tables\package_desc.cs" />
+    <Compile Include="EFRCommon\Tables\partner.cs" />
+    <Compile Include="EFRCommon\Tables\partner_attribute.cs" />
+    <Compile Include="EFRCommon\Tables\partner_attribute_value.cs" />
+    <Compile Include="EFRCommon\Tables\partner_profit.cs" />
+    <Compile Include="EFRCommon\Tables\partner_promotion.cs" />
+    <Compile Include="EFRCommon\Tables\partner_type.cs" />
+    <Compile Include="EFRCommon\Tables\partner_type_culture.cs" />
+    <Compile Include="EFRCommon\Tables\product.cs" />
+    <Compile Include="EFRCommon\Tables\product_desc.cs" />
+    <Compile Include="EFRCommon\Tables\product_package.cs" />
+    <Compile Include="EFRCommon\Tables\profit.cs" />
+    <Compile Include="EFRCommon\Tables\profit_group.cs" />
+    <Compile Include="EFRCommon\Tables\profit_range.cs" />
+    <Compile Include="EFRCommon\Tables\promotion.cs" />
+    <Compile Include="EFRCommon\Tables\promotion_destination.cs" />
+    <Compile Include="EFRCommon\Tables\promotion_type.cs" />
+    <Compile Include="EFRCommon\Tables\subdivision.cs" />
+    <Compile Include="EFRCommon\Tables\oauth_client.cs" />
+    <Compile Include="EFundraisingProd\Mappers\AppliedTaxMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\ClientMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\ConsultantMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\CountryMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\FundPassCouponMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\LeadMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\GroupTypeMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\OrganizationTypeMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\PaymentMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\ProductClassMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\PromotionCodeMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\RegionMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\SaleMapper.cs" />
+    <Compile Include="EFundraisingProd\Mappers\TaxMapper.cs" />
+    <Compile Include="EFundraisingProd\Repositories\ClientsRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\ConsultantRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\CountryRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\FundPassCouponRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\LeadsRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\GroupTypeRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\OrganizationTypeRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\PaymentsRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\ProductClassRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\RegionRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\SalesRepository.cs" />
+    <Compile Include="EFundraisingProd\StoredProcedures\ReportsRepository.cs" />
+    <Compile Include="EFundStore\Mappers\AdvertisingMapper.cs" />
+    <Compile Include="EFundStore\Mappers\HomePageRotatorMapper.cs" />
+    <Compile Include="EFundStore\Mappers\NotificationMapper.cs" />
+    <Compile Include="EFundStore\Mappers\ReviewMapper.cs" />
+    <Compile Include="EFundStore\Repositories\HomePageRotatorRepository.cs" />
+    <Compile Include="EFundStore\Repositories\NotificationRepository.cs" />
+    <Compile Include="EFundStore\Repositories\ReviewRepository.cs" />
+    <Compile Include="EFundStore\Tables\advertiser_products.cs" />
+    <Compile Include="EFundStore\Tables\follow_up_email_suggested_products.cs" />
+    <Compile Include="EFundStore\Tables\homepagerotator.cs" />
+    <Compile Include="EFundStore\Tables\notification.cs" />
+    <Compile Include="EFundStore\Tables\review.cs" />
+    <Compile Include="ESubs\Tables\DataProvider.cs" />
+    <Compile Include="Helpers\Tables\accounting_class.cs" />
+    <Compile Include="Helpers\Tables\accounting_class_shipping_fees.cs" />
+    <Compile Include="Helpers\Tables\Accounting_Period.cs" />
+    <Compile Include="Helpers\Tables\accounting_period_result.cs" />
+    <Compile Include="Helpers\Tables\address_zone.cs" />
+    <Compile Include="Helpers\Tables\Adjustment.cs" />
+    <Compile Include="Helpers\Tables\Adjustment_Audit.cs" />
+    <Compile Include="Helpers\Tables\advertisement.cs" />
+    <Compile Include="Helpers\Tables\Advertiser.cs" />
+    <Compile Include="Helpers\Tables\Advertiser_Partner.cs" />
+    <Compile Include="Helpers\Tables\Advertising_Support.cs" />
+    <Compile Include="Helpers\Tables\Advertising_Support_Contact.cs" />
+    <Compile Include="Helpers\Tables\Advertising_Support_Type.cs" />
+    <Compile Include="Helpers\Tables\Advertisment_Type.cs" />
+    <Compile Include="Helpers\Tables\Alias_Country_Code.cs" />
+    <Compile Include="Helpers\Tables\Alias_Promotion.cs" />
+    <Compile Include="Helpers\Tables\Alias_State.cs" />
+    <Compile Include="Helpers\Tables\Applicable_Adjustment_Tax.cs" />
+    <Compile Include="Helpers\Tables\Applicable_Tax.cs" />
+    <Compile Include="Helpers\Tables\Applicable_Tax_To_Add.cs" />
+    <Compile Include="Helpers\Tables\application.cs" />
+    <Compile Include="Helpers\Tables\ARDHISP.cs" />
+    <Compile Include="Helpers\Tables\Area_Manager.cs" />
+    <Compile Include="Helpers\Tables\AR_Activity.cs" />
+    <Compile Include="Helpers\Tables\AR_Activity_Type.cs" />
+    <Compile Include="Helpers\Tables\AR_Consultant.cs" />
+    <Compile Include="Helpers\Tables\AR_Status.cs" />
+    <Compile Include="Helpers\Tables\Associate_Mentor.cs" />
+    <Compile Include="Helpers\Tables\Associate_Mentor_Comment.cs" />
+    <Compile Include="Helpers\Tables\associate_mentor_commission.cs" />
+    <Compile Include="Helpers\Tables\Automaton.cs" />
+    <Compile Include="Helpers\Tables\Automaton_Function.cs" />
+    <Compile Include="Helpers\Tables\Automaton_Shipping_Status.cs" />
+    <Compile Include="Helpers\Tables\Automaton_State.cs" />
+    <Compile Include="Helpers\Tables\Automaton_Transition.cs" />
+    <Compile Include="Helpers\Tables\Automaton_Transition_Function.cs" />
+    <Compile Include="Helpers\Tables\Bank.cs" />
+    <Compile Include="Helpers\Tables\Bank_Account.cs" />
+    <Compile Include="Helpers\Tables\BeFree.cs" />
+    <Compile Include="Helpers\Tables\BeFree_History.cs" />
+    <Compile Include="Helpers\Tables\best_time_call.cs" />
+    <Compile Include="Helpers\Tables\best_time_call_desc.cs" />
+    <Compile Include="Helpers\Tables\Billing_Company.cs" />
+    <Compile Include="Helpers\Tables\Brand.cs" />
+    <Compile Include="Helpers\Tables\Brand_Coupon_Sheet.cs" />
+    <Compile Include="Helpers\Tables\brochures_images.cs" />
+    <Compile Include="Helpers\Tables\business_calendar.cs" />
+    <Compile Include="Helpers\Tables\Business_Rule.cs" />
+    <Compile Include="Helpers\Tables\campaign_reason.cs" />
+    <Compile Include="Helpers\Tables\campaign_reason_desc.cs" />
+    <Compile Include="Helpers\Tables\Cancelation_Reason.cs" />
+    <Compile Include="Helpers\Tables\carrier.cs" />
+    <Compile Include="Helpers\Tables\carrier_shipping_option.cs" />
+    <Compile Include="Helpers\Tables\carrier_shipping_status.cs" />
+    <Compile Include="Helpers\Tables\charge.cs" />
+    <Compile Include="Helpers\Tables\client.cs" />
+    <Compile Include="Helpers\Tables\client_activity.cs" />
+    <Compile Include="Helpers\Tables\client_activity_type.cs" />
+    <Compile Include="Helpers\Tables\client_address.cs" />
+    <Compile Include="Helpers\Tables\client_address_type.cs" />
+    <Compile Include="Helpers\Tables\client_sequence.cs" />
+    <Compile Include="Helpers\Tables\client_status.cs" />
+    <Compile Include="Helpers\Tables\Collection_Status.cs" />
+    <Compile Include="Helpers\Tables\Comment.cs" />
+    <Compile Include="Helpers\Tables\Commission_Earning.cs" />
+    <Compile Include="Helpers\Tables\Commission_Outstanding.cs" />
+    <Compile Include="Helpers\Tables\Commission_Outstanding_History.cs" />
+    <Compile Include="Helpers\Tables\Commission_Paid.cs" />
+    <Compile Include="Helpers\Tables\Commission_Rate.cs" />
+    <Compile Include="Helpers\Tables\Commission_Table.cs" />
+    <Compile Include="Helpers\Tables\Competitor.cs" />
+    <Compile Include="Helpers\Tables\Competitor_Advertising.cs" />
+    <Compile Include="Helpers\Tables\conciliation.cs" />
+    <Compile Include="Helpers\Tables\Confirmation_Method.cs" />
+    <Compile Include="Helpers\Tables\consultant.cs" />
+    <Compile Include="Helpers\Tables\consultant_address.cs" />
+    <Compile Include="Helpers\Tables\consultant_transfer_status.cs" />
+    <Compile Include="Helpers\Tables\Contact.cs" />
+    <Compile Include="Helpers\Tables\Conversion_Rate_Table.cs" />
+    <Compile Include="Helpers\Tables\cost_range.cs" />
+    <Compile Include="Helpers\Tables\country.cs" />
+    <Compile Include="Helpers\Tables\Country1.cs" />
+    <Compile Include="Helpers\Tables\country_names.cs" />
+    <Compile Include="Helpers\Tables\Coupon_Sheet.cs" />
+    <Compile Include="Helpers\Tables\Credit_Approval_Method.cs" />
+    <Compile Include="Helpers\Tables\credit_card_refund_request.cs" />
+    <Compile Include="Helpers\Tables\credit_card_refund_request_status.cs" />
+    <Compile Include="Helpers\Tables\credit_card_types.cs" />
+    <Compile Include="Helpers\Tables\credit_check_request.cs" />
+    <Compile Include="Helpers\Tables\credit_check_status.cs" />
+    <Compile Include="Helpers\Tables\crm_static_past3seasons_new.cs" />
+    <Compile Include="Helpers\Tables\crm_users.cs" />
+    <Compile Include="Helpers\Tables\culture.cs" />
+    <Compile Include="Helpers\Tables\culture1.cs" />
+    <Compile Include="Helpers\Tables\customer_status.cs" />
+    <Compile Include="Helpers\Tables\DataProvider.cs" />
+    <Compile Include="Helpers\Tables\Default_Consultant_Rate.cs" />
+    <Compile Include="Helpers\Tables\Department.cs" />
+    <Compile Include="Helpers\Tables\deposit.cs" />
+    <Compile Include="Helpers\Tables\Deposit_Item.cs" />
+    <Compile Include="Helpers\Tables\Destination.cs" />
+    <Compile Include="Helpers\Tables\Destinations2.cs" />
+    <Compile Include="Helpers\Tables\Detailed_Promotion.cs" />
+    <Compile Include="Helpers\Tables\division.cs" />
+    <Compile Include="Helpers\Tables\Double_Lead.cs" />
+    <Compile Include="Helpers\Tables\dtproperty.cs" />
+    <Compile Include="Helpers\Tables\EFO_Admin.cs" />
+    <Compile Include="Helpers\Tables\EFO_Campaign.cs" />
+    <Compile Include="Helpers\Tables\EFO_Campaign_Image.cs" />
+    <Compile Include="Helpers\Tables\EFO_Campaign_Status.cs" />
+    <Compile Include="Helpers\Tables\EFO_Catalog_Category.cs" />
+    <Compile Include="Helpers\Tables\EFO_Email_Type.cs" />
+    <Compile Include="Helpers\Tables\EFO_Group_Type.cs" />
+    <Compile Include="Helpers\Tables\EFO_Item.cs" />
+    <Compile Include="Helpers\Tables\EFO_Message.cs" />
+    <Compile Include="Helpers\Tables\EFO_Organizer.cs" />
+    <Compile Include="Helpers\Tables\EFO_Participant.cs" />
+    <Compile Include="Helpers\Tables\EFO_Sale.cs" />
+    <Compile Include="Helpers\Tables\EFO_Sale_Item.cs" />
+    <Compile Include="Helpers\Tables\EFO_Status.cs" />
+    <Compile Include="Helpers\Tables\EFO_Supporter.cs" />
+    <Compile Include="Helpers\Tables\EFO_Supporter_Email_Sent.cs" />
+    <Compile Include="Helpers\Tables\EFO_Tag.cs" />
+    <Compile Include="Helpers\Tables\eFR_Lead.cs" />
+    <Compile Include="Helpers\Tables\Efr_Lead_Activity.cs" />
+    <Compile Include="Helpers\Tables\Entry_Form.cs" />
+    <Compile Include="Helpers\Tables\Ext_sales_status.cs" />
+    <Compile Include="Helpers\Tables\Field_Sales_Manager.cs" />
+    <Compile Include="Helpers\Tables\Flag_Pole.cs" />
+    <Compile Include="Helpers\Tables\fr_pendingleads.cs" />
+    <Compile Include="Helpers\Tables\FSM_Address.cs" />
+    <Compile Include="Helpers\Tables\Fundpass_Coupons.cs" />
+    <Compile Include="Helpers\Tables\General_Comment.cs" />
+    <Compile Include="Helpers\Tables\GL_Table.cs" />
+    <Compile Include="Helpers\Tables\Grabber.cs" />
+    <Compile Include="Helpers\Tables\group_type.cs" />
+    <Compile Include="Helpers\Tables\group_type_desc.cs" />
+    <Compile Include="Helpers\Tables\harmony_list_transfer.cs" />
+    <Compile Include="Helpers\Tables\hear_about_us.cs" />
+    <Compile Include="Helpers\Tables\hear_about_us_desc.cs" />
+    <Compile Include="Helpers\Tables\IDGen_Table.cs" />
+    <Compile Include="Helpers\Tables\Inventory_Adjustment.cs" />
+    <Compile Include="Helpers\Tables\Inventory_Adjustment_Type.cs" />
+    <Compile Include="Helpers\Tables\Kit_Type.cs" />
+    <Compile Include="Helpers\Tables\language.cs" />
+    <Compile Include="Helpers\Tables\language_desc.cs" />
+    <Compile Include="Helpers\Tables\lead.cs" />
+    <Compile Include="Helpers\Tables\lead_activity.cs" />
+    <Compile Include="Helpers\Tables\Lead_Activity_Closing_Reason.cs" />
+    <Compile Include="Helpers\Tables\Lead_Activity_Type.cs" />
+    <Compile Include="Helpers\Tables\Lead_Channel.cs" />
+    <Compile Include="Helpers\Tables\Lead_Combinaisons.cs" />
+    <Compile Include="Helpers\Tables\Lead_Conditions.cs" />
+    <Compile Include="Helpers\Tables\Lead_Duplicates_Login.cs" />
+    <Compile Include="Helpers\Tables\lead_email_tracking.cs" />
+    <Compile Include="Helpers\Tables\lead_history.cs" />
+    <Compile Include="Helpers\Tables\lead_interest_product_class.cs" />
+    <Compile Include="Helpers\Tables\Lead_Priority.cs" />
+    <Compile Include="Helpers\Tables\Lead_Promotion.cs" />
+    <Compile Include="Helpers\Tables\lead_publipage_reconcile.cs" />
+    <Compile Include="Helpers\Tables\Lead_Qualification_Type.cs" />
+    <Compile Include="Helpers\Tables\Lead_Status.cs" />
+    <Compile Include="Helpers\Tables\Lead_Visit.cs" />
+    <Compile Include="Helpers\Tables\Local_Sponsor.cs" />
+    <Compile Include="Helpers\Tables\Local_Sponsor_Activity.cs" />
+    <Compile Include="Helpers\Tables\Local_Sponsor_Activity_Type.cs" />
+    <Compile Include="Helpers\Tables\Local_Sponsor_Sales_Item.cs" />
+    <Compile Include="Helpers\Tables\Local_Sponsor_Steps.cs" />
+    <Compile Include="Helpers\Tables\log_harmony_transfer_leads.cs" />
+    <Compile Include="Helpers\Tables\mag_lead.cs" />
+    <Compile Include="Helpers\Tables\Mailing_Code.cs" />
+    <Compile Include="Helpers\Tables\Mailing_Name.cs" />
+    <Compile Include="Helpers\Tables\mke_replication_test.cs" />
+    <Compile Include="Helpers\Tables\Newsletter.cs" />
+    <Compile Include="Helpers\Tables\orders_sale.cs" />
+    <Compile Include="Helpers\Tables\Organization.cs" />
+    <Compile Include="Helpers\Tables\Organization_Class.cs" />
+    <Compile Include="Helpers\Tables\Organization_Status.cs" />
+    <Compile Include="Helpers\Tables\organization_type.cs" />
+    <Compile Include="Helpers\Tables\organization_type_desc.cs" />
+    <Compile Include="Helpers\Tables\Package.cs" />
+    <Compile Include="Helpers\Tables\package1.cs" />
+    <Compile Include="Helpers\Tables\package_desc.cs" />
+    <Compile Include="Helpers\Tables\package_templates.cs" />
+    <Compile Include="Helpers\Tables\pap_client_type.cs" />
+    <Compile Include="Helpers\Tables\pap_partner_client_type_overide.cs" />
+    <Compile Include="Helpers\Tables\pap_partner_product_type_overide.cs" />
+    <Compile Include="Helpers\Tables\pap_product_category.cs" />
+    <Compile Include="Helpers\Tables\pap_product_type.cs" />
+    <Compile Include="Helpers\Tables\pap_scratchbook_campaign.cs" />
+    <Compile Include="Helpers\Tables\pap_suppressed_product_type.cs" />
+    <Compile Include="Helpers\Tables\pap_transaction.cs" />
+    <Compile Include="Helpers\Tables\participant.cs" />
+    <Compile Include="Helpers\Tables\partner_commission.cs" />
+    <Compile Include="Helpers\Tables\Partner_Commission_Range.cs" />
+    <Compile Include="Helpers\Tables\partner_contacts.cs" />
+    <Compile Include="Helpers\Tables\Partner_Fixed_Cost.cs" />
+    <Compile Include="Helpers\Tables\partner_from_esubs_20080414.cs" />
+    <Compile Include="Helpers\Tables\partner_group_types.cs" />
+    <Compile Include="Helpers\Tables\Partner_Lead_Commission.cs" />
+    <Compile Include="Helpers\Tables\partner_packages.cs" />
+    <Compile Include="Helpers\Tables\Partner_Sales_Commission.cs" />
+    <Compile Include="Helpers\Tables\partner_web_details.cs" />
+    <Compile Include="Helpers\Tables\party_type.cs" />
+    <Compile Include="Helpers\Tables\payment.cs" />
+    <Compile Include="Helpers\Tables\Payment_Audit.cs" />
+    <Compile Include="Helpers\Tables\Payment_Entry_Stop_Date.cs" />
+    <Compile Include="Helpers\Tables\payment_method.cs" />
+    <Compile Include="Helpers\Tables\Payment_status.cs" />
+    <Compile Include="Helpers\Tables\payment_term.cs" />
+    <Compile Include="Helpers\Tables\perfom_trace.cs" />
+    <Compile Include="Helpers\Tables\phone_number_tracking.cs" />
+    <Compile Include="Helpers\Tables\postal_address.cs" />
+    <Compile Include="Helpers\Tables\Postponed_Sale.cs" />
+    <Compile Include="Helpers\Tables\Postponed_Status.cs" />
+    <Compile Include="Helpers\Tables\po_status.cs" />
+    <Compile Include="Helpers\Tables\Price_Range.cs" />
+    <Compile Include="Helpers\Tables\Priority.cs" />
+    <Compile Include="Helpers\Tables\Production_Status.cs" />
+    <Compile Include="Helpers\Tables\products_packages.cs" />
+    <Compile Include="Helpers\Tables\product_business_rule.cs" />
+    <Compile Include="Helpers\Tables\product_business_rule_profit_range.cs" />
+    <Compile Include="Helpers\Tables\product_business_rule_shipping_fee.cs" />
+    <Compile Include="Helpers\Tables\product_class.cs" />
+    <Compile Include="Helpers\Tables\product_class_desc.cs" />
+    <Compile Include="Helpers\Tables\product_desc.cs" />
+    <Compile Include="Helpers\Tables\Product_Quantity.cs" />
+    <Compile Include="Helpers\Tables\profit_range.cs" />
+    <Compile Include="Helpers\Tables\promokit.cs" />
+    <Compile Include="Helpers\Tables\promotional_kit.cs" />
+    <Compile Include="Helpers\Tables\Promotion_Code.cs" />
+    <Compile Include="Helpers\Tables\Promotion_Cost.cs" />
+    <Compile Include="Helpers\Tables\Promotion_Group.cs" />
+    <Compile Include="Helpers\Tables\Promotion_Group_Promotion.cs" />
+    <Compile Include="Helpers\Tables\Promotion_old.cs" />
+    <Compile Include="Helpers\Tables\Proposal.cs" />
+    <Compile Include="Helpers\Tables\QSP_Program.cs" />
+    <Compile Include="Helpers\Tables\Question_Entry_Form.cs" />
+    <Compile Include="Helpers\Tables\Reason.cs" />
+    <Compile Include="Helpers\Tables\Referee.cs" />
+    <Compile Include="Helpers\Tables\Replication_Monitoring.cs" />
+    <Compile Include="Helpers\Tables\Req_Decision.cs" />
+    <Compile Include="Helpers\Tables\Req_Employees.cs" />
+    <Compile Include="Helpers\Tables\Req_Language.cs" />
+    <Compile Include="Helpers\Tables\Req_Priority.cs" />
+    <Compile Include="Helpers\Tables\Req_Project_Type.cs" />
+    <Compile Include="Helpers\Tables\Req_Request.cs" />
+    <Compile Include="Helpers\Tables\Req_Request_Type.cs" />
+    <Compile Include="Helpers\Tables\sale.cs" />
+    <Compile Include="Helpers\Tables\Sales_Change_Log.cs" />
+    <Compile Include="Helpers\Tables\sales_constraints.cs" />
+    <Compile Include="Helpers\Tables\sales_item.cs" />
+    <Compile Include="Helpers\Tables\Sales_Item_Coupon_Sheet.cs" />
+    <Compile Include="Helpers\Tables\sales_item_to_add.cs" />
+    <Compile Include="Helpers\Tables\Sales_Status.cs" />
+    <Compile Include="Helpers\Tables\Sale_Audit.cs" />
+    <Compile Include="Helpers\Tables\sale_carrier_shipping_status.cs" />
+    <Compile Include="Helpers\Tables\sale_to_add.cs" />
+    <Compile Include="Helpers\Tables\Sale_To_Local_Sponsor.cs" />
+    <Compile Include="Helpers\Tables\Sale_Zip_Code.cs" />
+    <Compile Include="Helpers\Tables\salutation.cs" />
+    <Compile Include="Helpers\Tables\salutation_desc.cs" />
+    <Compile Include="Helpers\Tables\Sample.cs" />
+    <Compile Include="Helpers\Tables\scratch_book.cs" />
+    <Compile Include="Helpers\Tables\scratch_book_commission.cs" />
+    <Compile Include="Helpers\Tables\scratch_book_price_info.cs" />
+    <Compile Include="Helpers\Tables\service_type.cs" />
+    <Compile Include="Helpers\Tables\shipping_fee.cs" />
+    <Compile Include="Helpers\Tables\Site.cs" />
+    <Compile Include="Helpers\Tables\special_offer.cs" />
+    <Compile Include="Helpers\Tables\Sponsor_Consultant.cs" />
+    <Compile Include="Helpers\Tables\Sponsor_Found_Stool.cs" />
+    <Compile Include="Helpers\Tables\Sport_Association.cs" />
+    <Compile Include="Helpers\Tables\SS_Drop_Box.cs" />
+    <Compile Include="Helpers\Tables\SS_Drop_Box_Package.cs" />
+    <Compile Include="Helpers\Tables\State.cs" />
+    <Compile Include="Helpers\Tables\State_Tax.cs" />
+    <Compile Include="Helpers\Tables\subdivision.cs" />
+    <Compile Include="Helpers\Tables\supplier.cs" />
+    <Compile Include="Helpers\Tables\Tag.cs" />
+    <Compile Include="Helpers\Tables\Targeted_Market.cs" />
+    <Compile Include="Helpers\Tables\targeted_market_type.cs" />
+    <Compile Include="Helpers\Tables\Tax_Table.cs" />
+    <Compile Include="Helpers\Tables\Template.cs" />
+    <Compile Include="Helpers\Tables\Template_Set.cs" />
+    <Compile Include="Helpers\Tables\territory.cs" />
+    <Compile Include="Helpers\Tables\Territory_Def.cs" />
+    <Compile Include="Helpers\Tables\title.cs" />
+    <Compile Include="Helpers\Tables\title_desc.cs" />
+    <Compile Include="Helpers\Tables\transfer_status.cs" />
+    <Compile Include="Helpers\Tables\Unassigned_Consultant.cs" />
+    <Compile Include="Helpers\Tables\Unassigned_Consultant_Sale.cs" />
+    <Compile Include="Helpers\Tables\UnAssignLogin.cs" />
+    <Compile Include="Helpers\Tables\Web_Site.cs" />
+    <Compile Include="EFundStore\Mappers\BannerMapper.cs" />
+    <Compile Include="EFundStore\Mappers\BlogCategoriesMapper.cs" />
+    <Compile Include="EFundStore\Mappers\BlogPostsMapper.cs" />
+    <Compile Include="EFundStore\Mappers\BlogTagsMapper.cs" />
+    <Compile Include="EFundStore\Mappers\CategoryMapper.cs" />
+    <Compile Include="EFundStore\Mappers\NewsletterMapper.cs" />
+    <Compile Include="EFundStore\Mappers\NewsletterSubscriptionMapper.cs" />
+    <Compile Include="EFundStore\Mappers\ProductMapper.cs" />
+    <Compile Include="EFundStore\Mappers\SessionMapper.cs" />
+    <Compile Include="EFundStore\Mappers\ShoppingCartMapper.cs" />
+    <Compile Include="EFundStore\Mappers\UserMapper.cs" />
+    <Compile Include="EFundStore\Mappers\ViewPortMapper.cs" />
+    <Compile Include="EFundStore\Repositories\BannersRepository.cs" />
+    <Compile Include="EFundStore\Repositories\BlogCategoryRepository.cs" />
+    <Compile Include="EFundStore\Repositories\BlogPostRepository.cs" />
+    <Compile Include="EFundStore\Repositories\BlogTagRepository.cs" />
+    <Compile Include="EFundStore\Repositories\CategoriesRepository.cs" />
+    <Compile Include="EFundStore\Repositories\NewsletterRepository.cs" />
+    <Compile Include="EFundStore\Repositories\NewsletterSubscriptionRepository.cs" />
+    <Compile Include="EFundraisingProd\Repositories\PromotionCodeRepository.cs" />
+    <Compile Include="EFundStore\Repositories\ReferralProgramRepository.cs" />
+    <Compile Include="EFundStore\Repositories\SessionRepository.cs" />
+    <Compile Include="EFundStore\Repositories\ShoppingCartRepository.cs" />
+    <Compile Include="EFundStore\Repositories\ProductRepository.cs" />
+    <Compile Include="EFundStore\Repositories\RouteMapperRepository.cs" />
+    <Compile Include="EFundStore\Repositories\UsersRepository.cs" />
+    <Compile Include="EFundStore\Repositories\ViewPortRepository.cs" />
+    <Compile Include="EFundStore\Tables\accounting_class.cs" />
+    <Compile Include="EFundStore\Tables\accounting_class_shipping_fee.cs" />
+    <Compile Include="EFundStore\Tables\blog_categories.cs" />
+    <Compile Include="EFundStore\Tables\blog_post.cs" />
+    <Compile Include="EFundStore\Tables\blog_post_tag.cs" />
+    <Compile Include="EFundStore\Tables\blog_tags.cs" />
+    <Compile Include="EFundStore\Tables\currency.cs" />
+    <Compile Include="EFundStore\Tables\user.cs" />
+    <Compile Include="EFundStore\Tables\banner.cs" />
+    <Compile Include="EFundStore\Tables\banner_view_port.cs" />
+    <Compile Include="EFundStore\Tables\best_time_call.cs" />
+    <Compile Include="EFundStore\Tables\best_time_call_desc.cs" />
+    <Compile Include="EFundStore\Tables\brochure_image.cs" />
+    <Compile Include="EFundStore\Tables\campaign_reason.cs" />
+    <Compile Include="EFundStore\Tables\campaign_reason_desc.cs" />
+    <Compile Include="EFundStore\Tables\carrier.cs" />
+    <Compile Include="EFundStore\Tables\carrier_shipping_option.cs" />
+    <Compile Include="EFundStore\Tables\choice.cs" />
+    <Compile Include="EFundStore\Tables\client.cs" />
+    <Compile Include="EFundStore\Tables\client_address.cs" />
+    <Compile Include="EFundStore\Tables\client_address_type.cs" />
+    <Compile Include="EFundStore\Tables\client_sequence.cs" />
+    <Compile Include="EFundStore\Tables\control_type.cs" />
+    <Compile Include="EFundStore\Tables\country.cs" />
+    <Compile Include="EFundStore\Tables\credit_card.cs" />
+    <Compile Include="EFundStore\Tables\credit_card_type.cs" />
+    <Compile Include="EFundStore\Tables\culture.cs" />
+    <Compile Include="EFundStore\Tables\culture_country.cs" />
+    <Compile Include="EFundStore\Tables\culture_subdivision.cs" />
+    <Compile Include="EFundStore\Tables\DataProvider.cs" />
+    <Compile Include="EFundStore\Tables\division.cs" />
+    <Compile Include="EFundStore\Tables\dtproperty.cs" />
+    <Compile Include="EFundStore\Tables\group_type.cs" />
+    <Compile Include="EFundStore\Tables\group_type_desc.cs" />
+    <Compile Include="EFundStore\Tables\hear_about_us.cs" />
+    <Compile Include="EFundStore\Tables\hear_about_us_desc.cs" />
+    <Compile Include="EFundStore\Tables\language.cs" />
+    <Compile Include="EFundStore\Tables\newsletter.cs" />
+    <Compile Include="EFundStore\Tables\newsletter_subscription.cs" />
+    <Compile Include="EFundStore\Tables\order.cs" />
+    <Compile Include="EFundStore\Tables\order_coupon.cs" />
+    <Compile Include="EFundStore\Tables\order_sale.cs" />
+    <Compile Include="EFundStore\Tables\organization_type.cs" />
+    <Compile Include="EFundStore\Tables\organization_type_desc.cs" />
+    <Compile Include="EFundStore\Tables\package.cs" />
+    <Compile Include="EFundStore\Tables\package_category.cs" />
+    <Compile Include="EFundStore\Tables\package_desc.cs" />
+    <Compile Include="EFundStore\Tables\package_exclusion.cs" />
+    <Compile Include="EFundStore\Tables\package_interest.cs" />
+    <Compile Include="EFundStore\Tables\package_package_category.cs" />
+    <Compile Include="EFundStore\Tables\page_route_mapper.cs" />
+    <Compile Include="EFundStore\Tables\partner_contact.cs" />
+    <Compile Include="EFundStore\Tables\partner_package.cs" />
+    <Compile Include="EFundStore\Tables\partner_web_detail.cs" />
+    <Compile Include="EFundStore\Tables\partner_web_form.cs" />
+    <Compile Include="EFundStore\Tables\product.cs" />
+    <Compile Include="EFundStore\Tables\product_class.cs" />
+    <Compile Include="EFundStore\Tables\product_class_desc.cs" />
+    <Compile Include="EFundStore\Tables\product_culture.cs" />
+    <Compile Include="EFundStore\Tables\product_desc.cs" />
+    <Compile Include="EFundStore\Tables\product_image.cs" />
+    <Compile Include="EFundStore\Tables\product_package.cs" />
+    <Compile Include="EFundStore\Tables\product_price_info.cs" />
+    <Compile Include="EFundStore\Tables\product_profit.cs" />
+    <Compile Include="EFundStore\Tables\program.cs" />
+    <Compile Include="EFundStore\Tables\program_partner.cs" />
+    <Compile Include="EFundStore\Tables\question.cs" />
+    <Compile Include="EFundStore\Tables\questions_entry_form.cs" />
+    <Compile Include="EFundStore\Tables\question_param_target.cs" />
+    <Compile Include="EFundStore\Tables\salutation.cs" />
+    <Compile Include="EFundStore\Tables\salutation_desc.cs" />
+    <Compile Include="EFundStore\Tables\session.cs" />
+    <Compile Include="EFundStore\Tables\session_item.cs" />
+    <Compile Include="EFundStore\Tables\shipping_fee.cs" />
+    <Compile Include="EFundStore\Tables\shipping_fee_detail.cs" />
+    <Compile Include="EFundStore\Tables\shopping_cart.cs" />
+    <Compile Include="EFundStore\Tables\shopping_cart_item.cs" />
+    <Compile Include="EFundStore\Tables\story.cs" />
+    <Compile Include="EFundStore\Tables\story_type.cs" />
+    <Compile Include="EFundStore\Tables\subdivision.cs" />
+    <Compile Include="EFundStore\Tables\supplier.cs" />
+    <Compile Include="EFundStore\Tables\survey.cs" />
+    <Compile Include="EFundStore\Tables\sysdiagram.cs" />
+    <Compile Include="EFundStore\Tables\template.cs" />
+    <Compile Include="EFundStore\Tables\temp_lead.cs" />
+    <Compile Include="EFundStore\Tables\title.cs" />
+    <Compile Include="EFundStore\Tables\title_desc.cs" />
+    <Compile Include="EFundStore\Tables\unsubscribe.cs" />
+    <Compile Include="EFundStore\Tables\user_profile.cs" />
+    <Compile Include="EFundStore\Tables\user_vote.cs" />
+    <Compile Include="EFundStore\Tables\view_port.cs" />
+    <Compile Include="EFundStore\Tables\website.cs" />
+    <Compile Include="EFundStore\Tables\web_form.cs" />
+    <Compile Include="EFundStore\Tables\web_form_question.cs" />
+    <Compile Include="EFundStore\Tables\web_form_type_desc.cs" />
+    <Compile Include="FastFundraising\Mappers\FundraiserCategoryMapper.cs" />
+    <Compile Include="FastFundraising\Mappers\FundraiserProductMapper.cs" />
+    <Compile Include="FastFundraising\Mappers\RepresentativeMapper.cs" />
+    <Compile Include="FastFundraising\Repositories\FundraiserCategoryRepository.cs" />
+    <Compile Include="FastFundraising\Repositories\FundraiserProductRepository.cs" />
+    <Compile Include="FastFundraising\Repositories\RepresentativeRepository.cs" />
+    <Compile Include="FastFundraising\Tables\category.cs" />
+    <Compile Include="FastFundraising\Tables\DataProvider.cs" />
+    <Compile Include="FastFundraising\Tables\dtproperty.cs" />
+    <Compile Include="FastFundraising\Tables\FC.cs" />
+    <Compile Include="FastFundraising\Tables\fc_testimonial.cs" />
+    <Compile Include="FastFundraising\Tables\fffeedback.cs" />
+    <Compile Include="FastFundraising\Tables\ffitem.cs" />
+    <Compile Include="FastFundraising\Tables\ffitemprice.cs" />
+    <Compile Include="FastFundraising\Tables\ffnewslettersignup.cs" />
+    <Compile Include="FastFundraising\Tables\ffquestion.cs" />
+    <Compile Include="FastFundraising\Tables\fftechsupport.cs" />
+    <Compile Include="FastFundraising\Tables\fundraiser_category.cs" />
+    <Compile Include="FastFundraising\Tables\fundraiser_product.cs" />
+    <Compile Include="FastFundraising\Tables\saleitem.cs" />
+    <Compile Include="FastFundraising\Tables\shipping_fee.cs" />
+    <Compile Include="FastFundraising\Tables\shipping_group.cs" />
+    <Compile Include="Helpers\Attributes\RequiredIfAttribute.cs" />
+    <Compile Include="Helpers\Exceptions\CreditCardChargeException.cs" />
+    <Compile Include="Helpers\Exceptions\CreditCardDeclinedException.cs" />
+    <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Helpers\Validators\IntegerValidator.cs" />
+    <Compile Include="Helpers\Validators\PhoneValidator.cs" />
+    <Compile Include="Helpers\Validators\ZIPValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk">
+      <Link>SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</Link>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EFRCommon\StoredProcedures\DataProvider.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProvider.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EFundStore\StoredProcedures\" />
+    <Folder Include="FastFundraising\StoredProcedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EFRCommon\StoredProcedures\DataProvider.dbml.layout">
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GA.BDC.Shared.csproj">
+      <Project>{e284cab1-4979-40d7-bb94-4238f1d487a7}</Project>
+      <Name>GA.BDC.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\packages\StrongNamer.0.2.5\build\StrongNamer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\StrongNamer.0.2.5\build\StrongNamer.targets'))" />
+  </Target>
+  <Import Project="..\..\..\..\packages\StrongNamer.0.2.5\build\StrongNamer.targets" Condition="Exists('..\..\..\..\packages\StrongNamer.0.2.5\build\StrongNamer.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

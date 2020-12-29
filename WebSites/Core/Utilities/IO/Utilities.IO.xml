@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>efundraising.Utilities.IO</name>
+    </assembly>
+    <members>
+        <member name="T:efundraising.Utilities.IO.FileHandler">
+            <summary>
+            This class provides an easy way to play with files.
+            </summary>
+            <remarks>Don't forget to try/catch</remarks>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FileHandler.ReadFile(System.String)">
+            <summary>
+            Reads a file
+            </summary>
+            <param name="fileName">The path of the file</param>
+            <returns>The file content</returns>
+            <exception cref="!:">System.Exeption</exception>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FileHandler.WriteFile(System.String,System.String,System.IO.FileMode)">
+            <summary>
+            Write data into file
+            </summary>
+            <param name="filename">File name</param>
+            <param name="content">Content</param>
+            <param name="fm">File Mode</param>
+            <exception cref="!:">System.Exception</exception>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FileHandler.CreateNewFile(System.String,System.String)">
+            <summary>
+            Create a file if and only if the file doesn't exists, then print data
+            ** See CreateFileAndWriteData()
+            </summary>
+            <param name="filename">File path</param>
+            <param name="content">Content</param>
+            <exception cref="!:">System.Exception</exception>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FileHandler.CreateFileAndWriteData(System.String,System.String)">
+            <summary>
+            If the file already exists, it will delete it and recreate it using the new content
+            </summary>
+            <param name="filename"></param>
+            <param name="content"></param>
+            <remarks>IF THE FILE EXISTS, IT WILL DELETE IT.</remarks>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FileHandler.AppendToFile(System.String,System.String)">
+            <summary>
+            Append text to a file
+            </summary>
+            <param name="filename">File name</param>
+            <param name="content">File Content</param>
+            <exception cref="!:">System.Exception</exception>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FileHandler.ReplaceIntoFile(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Replace data into a file
+            </summary>
+            <param name="filename">Filename</param>
+            <param name="oldString">Data to replace</param>
+            <param name="newString">New data</param>
+            <param name="caseSensitive">Is Case Sensitive?</param>
+            <exception cref="!:">System.Exception</exception>
+        </member>
+        <member name="T:efundraising.Utilities.IO.FilesExplorer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FilesExplorer.PerformAction(efundraising.Utilities.IO.ObjectType,efundraising.Utilities.IO.ActionType,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="pObjectType"></param>
+            <param name="pAction"></param>
+            <param name="pParams"></param>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FilesExplorer.AddNew(efundraising.Utilities.IO.ObjectType,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pObjectType"></param>
+            <param name="pSourceOfObject"></param>
+            <param name="pAddToPath"></param>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FilesExplorer.ReplaceObject(efundraising.Utilities.IO.ObjectType,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pObjectType"></param>
+            <param name="pOldObjectPath"></param>
+            <param name="pNewSourceObject"></param>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FilesExplorer.DeleteObject(efundraising.Utilities.IO.ObjectType,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pObjectType"></param>
+            <param name="pObjectPathToRemove"></param>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FilesExplorer.MoveTo(efundraising.Utilities.IO.ObjectType,System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="pObjectType"></param>
+            <param name="pPathToMove"></param>
+            <param name="pMoveObjectTo"></param>
+            <param name="pDeleteAfter"></param>
+        </member>
+        <member name="M:efundraising.Utilities.IO.FilesExplorer.CheckIfExist(efundraising.Utilities.IO.ObjectType,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pObjectType"></param>
+            <param name="pPathToCheck"></param>
+            <returns></returns>
+        </member>
+        <member name="T:efundraising.Utilities.IO.ObjectType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:efundraising.Utilities.IO.ActionType">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

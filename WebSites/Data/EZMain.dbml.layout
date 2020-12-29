@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.5, 22.125" name="EZMain">
+  <DataContextMoniker Name="/EZMainDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b52ec168-7cf0-454a-9a7c-9bf6f19b2f32" absoluteBounds="3, 0.625, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/EZMainDataContext/ORDR_ITEM_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2734ee5a-1934-4991-b868-797e90af1ef6" absoluteBounds="3.0149999999999997, 1.085, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0c425645-4268-4211-a159-40bd94ec7121" absoluteBounds="6.25, 0.75, 2, 5.0400211588541657">
+      <DataClassMoniker Name="/EZMainDataContext/ORDR_VEND_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f9190ce-f6f4-479a-8a10-100d3652e8bc" absoluteBounds="6.265, 1.21, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5 : 2.53445556640625); (6.25 : 2.53445556640625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/EZMainDataContext/ORDR_ITEM_TBL/ORDR_ITEM_TBL_ORDR_VEND_TBL" />
+      <nodes>
+        <classShapeMoniker Id="b52ec168-7cf0-454a-9a7c-9bf6f19b2f32" />
+        <classShapeMoniker Id="0c425645-4268-4211-a159-40bd94ec7121" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="d6aa5558-e883-484e-aaca-396d3f790a68" absoluteBounds="0.5, 0.5, 2, 12.539777018229165">
+      <DataClassMoniker Name="/EZMainDataContext/ORDR_INVOIC_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3448d5ee-3352-400c-b457-a027eb418694" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 11.979777018229166" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 4.65945556640625); (6.25 : 4.65945556640625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/EZMainDataContext/ORDR_INVOIC_TBL/ORDR_INVOIC_TBL_ORDR_VEND_TBL" />
+      <nodes>
+        <classShapeMoniker Id="d6aa5558-e883-484e-aaca-396d3f790a68" />
+        <classShapeMoniker Id="0c425645-4268-4211-a159-40bd94ec7121" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bda268bc-769a-42e9-9de2-a1dcc7dd4691" absoluteBounds="2.75, 7.875, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/EZMainDataContext/AR_TRNS_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a86dab36-5014-4824-9bb2-e7a03f0a53f1" absoluteBounds="2.7649999999999997, 8.335, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 9.81810628255208); (2.75 : 9.81810628255208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/EZMainDataContext/ORDR_INVOIC_TBL/ORDR_INVOIC_TBL_AR_TRNS_TBL" />
+      <nodes>
+        <classShapeMoniker Id="d6aa5558-e883-484e-aaca-396d3f790a68" />
+        <classShapeMoniker Id="bda268bc-769a-42e9-9de2-a1dcc7dd4691" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="10a4ed9e-a8ec-4af2-a604-b0ffe6c67668" absoluteBounds="3.25, 5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/EZMainDataContext/ORDR_DISC_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c0b5e467-dcdc-4c50-8b38-fdf89c42402b" absoluteBounds="3.2649999999999997, 5.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 6.27005126953125); (3.25 : 6.27005126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/EZMainDataContext/ORDR_INVOIC_TBL/ORDR_INVOIC_TBL_ORDR_DISC_TBL" />
+      <nodes>
+        <classShapeMoniker Id="d6aa5558-e883-484e-aaca-396d3f790a68" />
+        <classShapeMoniker Id="10a4ed9e-a8ec-4af2-a604-b0ffe6c67668" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="05476a13-176c-4877-bd0e-2fe3a0044f60" absoluteBounds="1.75, 14.125, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/EZMainDataContext/ORG_CTCT_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="07162db4-5afb-49dc-b467-29079d9e1522" absoluteBounds="1.7650000000000001, 14.585, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d58ce236-8a56-4c17-a8d5-bbb82572b801" absoluteBounds="9.25, 0.75, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/EZMainDataContext/ITEM_LKUP_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5af1b5b0-66a1-4104-863a-a17c537dc2b3" absoluteBounds="9.265, 1.21, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.25 : 0.75); (8.875 : 0.375); (5.375 : 0.375); (5.375 : 0.25); (5 : 0.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/EZMainDataContext/ITEM_LKUP_TBL/ITEM_LKUP_TBL_ORDR_ITEM_TBL" />
+      <nodes>
+        <classShapeMoniker Id="d58ce236-8a56-4c17-a8d5-bbb82572b801" />
+        <classShapeMoniker Id="b52ec168-7cf0-454a-9a7c-9bf6f19b2f32" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="57da78a3-20cd-46dd-bddf-f54d7fbc79cb" absoluteBounds="4.5, 11.875, 3.125, 10.0398583984375">
+      <DataClassMoniker Name="/EZMainDataContext/ORDR_INVOIC_TO_PROCESS_TBL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d0e3559b-476b-4e39-9c36-a0b6c3abefec" absoluteBounds="4.515, 12.335, 3.0949999999999998, 9.4798583984375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 12.4573885091146); (4.5 : 12.4573885091146)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/EZMainDataContext/ORDR_INVOIC_TBL/ORDR_INVOIC_TBL_ORDR_INVOIC_TO_PROCESS_TBL1" />
+      <nodes>
+        <classShapeMoniker Id="d6aa5558-e883-484e-aaca-396d3f790a68" />
+        <classShapeMoniker Id="57da78a3-20cd-46dd-bddf-f54d7fbc79cb" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

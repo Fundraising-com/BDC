@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E284CAB1-4979-40D7-BB94-4238F1D487A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Shared</RootNamespace>
+    <AssemblyName>GA.BDC.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\FluentValidation-Signed.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\Repositories\IBannersRepository.cs" />
+    <Compile Include="Data\Repositories\IBlogCategoryRepository.cs" />
+    <Compile Include="Data\Repositories\IBlogPostRepository.cs" />
+    <Compile Include="Data\Repositories\IBlogTagRepository.cs" />
+    <Compile Include="Data\Repositories\ICategoriesRepository.cs" />
+    <Compile Include="Data\Repositories\IClientsRepository.cs" />
+    <Compile Include="Data\Repositories\IConsultantRepository.cs" />
+    <Compile Include="Data\Repositories\ICountryRepository.cs" />
+    <Compile Include="Data\Repositories\IFundPassCouponRepositoryRepository.cs" />
+    <Compile Include="Data\Repositories\IFundraiserCategoryRepository.cs" />
+    <Compile Include="Data\Repositories\IFundraiserProductRepository.cs" />
+    <Compile Include="Data\Repositories\IHomePageRotator.cs" />
+    <Compile Include="Data\Repositories\IProspectRepository.cs" />
+    <Compile Include="Data\Repositories\IArTrnsTblRepository.cs" />
+    <Compile Include="Data\Repositories\ISellingKitLeadRepository.cs" />
+    <Compile Include="Data\Repositories\ILeadRepository.cs" />
+    <Compile Include="Data\Repositories\INewsletterRepository.cs" />
+    <Compile Include="Data\Repositories\INewsletterSubscriptionRepository.cs" />
+    <Compile Include="Data\Repositories\INotificationRepository.cs" />
+    <Compile Include="Data\Repositories\IOAuthClientRepository.cs" />
+    <Compile Include="Data\Repositories\IGroupTypeRepository.cs" />
+    <Compile Include="Data\Repositories\IOrganizationRepository.cs" />
+    <Compile Include="Data\Repositories\IOrganizationTypeRepository.cs" />
+    <Compile Include="Data\Repositories\IPartnerRepository.cs" />
+    <Compile Include="Data\Repositories\IPaymentsRepository.cs" />
+    <Compile Include="Data\Repositories\IProductClassRepository.cs" />
+    <Compile Include="Data\Repositories\IProductRepository.cs" />
+    <Compile Include="Data\Repositories\IPromotionCodeRepository.cs" />
+    <Compile Include="Data\Repositories\IPromotionRepository.cs" />
+    <Compile Include="Data\Repositories\IReferralRepository.cs" />
+    <Compile Include="Data\Repositories\IReferreralProgramRepository.cs" />
+    <Compile Include="Data\Repositories\IRegionRepository.cs" />
+    <Compile Include="Data\Repositories\IReportsRepository.cs" />
+    <Compile Include="Data\Repositories\IRepresentativeRepository.cs" />
+    <Compile Include="Data\Repositories\IReviewRepository.cs" />
+    <Compile Include="Data\Repositories\IRouteMapperRepository.cs" />
+    <Compile Include="Data\Repositories\ISalesRepository.cs" />
+    <Compile Include="Data\Repositories\ISessionRepository.cs" />
+    <Compile Include="Data\Repositories\IShoppingCartRepository.cs" />
+    <Compile Include="Data\Repositories\IOAuthTokenRepository.cs" />
+    <Compile Include="Data\Repositories\ISiteRefPcklLkupTblRepository.cs" />
+    <Compile Include="Data\Repositories\IPrimaryProgramRepository.cs" />
+    <Compile Include="Data\Repositories\IStartingDateRepository.cs" />
+    <Compile Include="Data\Repositories\ITestimonialsRepository.cs" />
+    <Compile Include="Data\Repositories\IUsersRepository.cs" />
+    <Compile Include="Data\Repositories\IViewPortRepository.cs" />
+    <Compile Include="Data\Repositories\IWorkflowRepository.cs" />
+    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\AdvertiserProducts.cs" />
+    <Compile Include="Entities\AppliedTax.cs" />
+    <Compile Include="Entities\ARStatus.cs" />
+    <Compile Include="Entities\ArTrnsTbl.cs" />
+    <Compile Include="Entities\Banner.cs" />
+    <Compile Include="Entities\BlogCategory.cs" />
+    <Compile Include="Entities\BlogPost.cs" />
+    <Compile Include="Entities\BlogTag.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\ClientActivity.cs" />
+    <Compile Include="Entities\ClientAddress.cs" />
+    <Compile Include="Entities\Consultant.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\CreditCard.cs" />
+    <Compile Include="Entities\EzFundContact.cs" />
+    <Compile Include="Entities\EzFundContactAddress.cs" />
+    <Compile Include="Entities\EzFundInternalPaymentMethod.cs" />
+    <Compile Include="Entities\EzFundOrganization.cs" />
+    <Compile Include="Entities\EzFundSale.cs" />
+    <Compile Include="Entities\EzFundSaleItem.cs" />
+    <Compile Include="Entities\BannerType.cs" />
+    <Compile Include="Entities\EzFundSaleStatus.cs" />
+    <Compile Include="Entities\EzFundSaleVendor.cs" />
+    <Compile Include="Entities\Friend.cs" />
+    <Compile Include="Entities\FundPassCoupon.cs" />
+    <Compile Include="Entities\FundraiserCategory.cs" />
+    <Compile Include="Entities\FundraiserProduct.cs" />
+    <Compile Include="Entities\HomePageRotator.cs" />
+    <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\InternalPaymentMethod.cs" />
+    <Compile Include="Entities\ItemVendor.cs" />
+    <Compile Include="Entities\ItemWarehouse.cs" />
+    <Compile Include="Entities\ProsNmadTbl.cs" />
+    <Compile Include="Entities\SellingKitLead.cs" />
+    <Compile Include="Entities\Lead.cs" />
+    <Compile Include="Entities\LeadActivityType.cs" />
+    <Compile Include="Entities\Login.cs" />
+    <Compile Include="Entities\Newsletter.cs" />
+    <Compile Include="Entities\NewsletterSubscription.cs" />
+    <Compile Include="Entities\Notification.cs" />
+    <Compile Include="Entities\NotificationType.cs" />
+    <Compile Include="Entities\OAuthClient.cs" />
+    <Compile Include="Entities\GroupType.cs" />
+    <Compile Include="Entities\OrganizationType.cs" />
+    <Compile Include="Entities\Partner.cs" />
+    <Compile Include="Entities\Payment.cs" />
+    <Compile Include="Entities\PaymentMethod.cs" />
+    <Compile Include="Entities\PaymentStatus.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductClass.cs" />
+    <Compile Include="Entities\Profit.cs" />
+    <Compile Include="Entities\Promotion.cs" />
+    <Compile Include="Entities\PromotionCode.cs" />
+    <Compile Include="Entities\PromotionCodeDiscountType.cs" />
+    <Compile Include="Entities\PromotionCodeLimitType.cs" />
+    <Compile Include="Entities\PromotionCodeMinimumRequirementType.cs" />
+    <Compile Include="Entities\PromotionCodePartnerScopeType.cs" />
+    <Compile Include="Entities\PromotionCodeScopeType.cs" />
+    <Compile Include="Entities\Referral.cs" />
+    <Compile Include="Entities\ReferralProgram.cs" />
+    <Compile Include="Entities\Region.cs" />
+    <Compile Include="Entities\Representative.cs" />
+    <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\Sale.cs" />
+    <Compile Include="Entities\SaleItem.cs" />
+    <Compile Include="Entities\SaleStatus.cs" />
+    <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\ShippingFee.cs" />
+    <Compile Include="Entities\ShoppingCart.cs" />
+    <Compile Include="Entities\ShoppingCartItem.cs" />
+    <Compile Include="Entities\ShoppingCartStatus.cs" />
+    <Compile Include="Entities\SiteRefPcklLkupTbl.cs" />
+    <Compile Include="Entities\SitePgmTbl.cs" />
+    <Compile Include="Entities\StartingDate.cs" />
+    <Compile Include="Entities\StateTax.cs" />
+    <Compile Include="Entities\SubProduct.cs" />
+    <Compile Include="Entities\Tax.cs" />
+    <Compile Include="Entities\Testimonial.cs" />
+    <Compile Include="Entities\OAuthToken.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\ViewPort.cs" />
+    <Compile Include="Entities\Workflow.cs" />
+    <Compile Include="Entities\WorkflowActivity.cs" />
+    <Compile Include="Entities\WorkflowProcess.cs" />
+    <Compile Include="Exceptions\CreditCardChargeException.cs" />
+    <Compile Include="Exceptions\CreditCardDeclinedException.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="Helpers\EncryptHelper.cs" />
+    <Compile Include="Helpers\HashHelper.cs" />
+    <Compile Include="Helpers\LevenshteinDistance.cs" />
+    <Compile Include="Helpers\PhoneHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Helpers\TokenHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\AddressValidator.cs" />
+    <Compile Include="Validators\AppliedTaxValidator.cs" />
+    <Compile Include="Validators\BannerValidator.cs" />
+    <Compile Include="Validators\BlogCategoryValidator.cs" />
+    <Compile Include="Validators\BlogPostValidator.cs" />
+    <Compile Include="Validators\BlogTagValidator.cs" />
+    <Compile Include="Validators\CategoryValidator.cs" />
+    <Compile Include="Validators\ClientAddressValidator.cs" />
+    <Compile Include="Validators\ClientValidator.cs" />
+    <Compile Include="Validators\CreditCardValidator.cs" />
+    <Compile Include="Validators\FriendValidator.cs" />
+    <Compile Include="Validators\FundraiserCategoryValidator.cs" />
+    <Compile Include="Validators\FundraiserProductValidator.cs" />
+    <Compile Include="Validators\HomePageRotatorValidator.cs" />
+    <Compile Include="Validators\LeadValidator.cs" />
+    <Compile Include="Validators\NewsletterValidator.cs" />
+    <Compile Include="Validators\NotificationValidator.cs" />
+    <Compile Include="Validators\OAuthClientValidator.cs" />
+    <Compile Include="Validators\OAuthTokenValidator.cs" />
+    <Compile Include="Validators\PartnerValidator.cs" />
+    <Compile Include="Validators\PaymentValidator.cs" />
+    <Compile Include="Validators\ProductValidator.cs" />
+    <Compile Include="Validators\PromotionCodeValidator.cs" />
+    <Compile Include="Validators\PromotionValidator.cs" />
+    <Compile Include="Validators\ReferralProgramValidator.cs" />
+    <Compile Include="Validators\RepresentativeValidator.cs" />
+    <Compile Include="Validators\ReviewValidator.cs" />
+    <Compile Include="Validators\Rules\IntegerValidator.cs" />
+    <Compile Include="Validators\Rules\PhoneValidator.cs" />
+    <Compile Include="Validators\Rules\ZIPValidator.cs" />
+    <Compile Include="Validators\SaleItemValidator.cs" />
+    <Compile Include="Validators\SaleValidator.cs" />
+    <Compile Include="Validators\SessionValidator.cs" />
+    <Compile Include="Validators\ShippingFeeValidator.cs" />
+    <Compile Include="Validators\ShoppingCartItemValidator.cs" />
+    <Compile Include="Validators\ShoppingCartValidator.cs" />
+    <Compile Include="Validators\TestimonialValidator.cs" />
+    <Compile Include="Validators\UserValidator.cs" />
+    <Compile Include="Validators\ViewPortValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk">
+      <Link>SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</Link>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,842 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6ADB716D-B34C-4D7A-9393-E30347F06A79}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Data.MGP</RootNamespace>
+    <AssemblyName>GA.BDC.Data.MGP</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EFRCommon\LINQ\DataProvider.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EFRCommon\Models\advertising.cs" />
+    <Compile Include="EFRCommon\Models\advertising_listing.cs" />
+    <Compile Include="EFRCommon\Models\advertising_type.cs" />
+    <Compile Include="EFRCommon\Models\DataProvider.cs" />
+    <Compile Include="EFRCommon\Models\listing.cs" />
+    <Compile Include="EFRCommon\Models\package.cs" />
+    <Compile Include="EFRCommon\Models\package_desc.cs" />
+    <Compile Include="EFRCommon\Models\partner.cs" />
+    <Compile Include="EFRCommon\Models\partner_attribute.cs" />
+    <Compile Include="EFRCommon\Models\partner_attribute_value.cs" />
+    <Compile Include="EFRCommon\Models\partner_profit.cs" />
+    <Compile Include="EFRCommon\Models\partner_promotion.cs" />
+    <Compile Include="EFRCommon\Models\partner_type.cs" />
+    <Compile Include="EFRCommon\Models\partner_type_culture.cs" />
+    <Compile Include="EFRCommon\Models\product.cs" />
+    <Compile Include="EFRCommon\Models\product_desc.cs" />
+    <Compile Include="EFRCommon\Models\product_package.cs" />
+    <Compile Include="EFRCommon\Models\profit.cs" />
+    <Compile Include="EFRCommon\Models\profit_group.cs" />
+    <Compile Include="EFRCommon\Models\profit_range.cs" />
+    <Compile Include="EFRCommon\Models\promotion.cs" />
+    <Compile Include="EFRCommon\Models\promotion_destination.cs" />
+    <Compile Include="EFRCommon\Models\promotion_type.cs" />
+    <Compile Include="EFRCommon\Models\subdivision.cs" />
+    <Compile Include="EFRCommon\Models\sysdiagram.cs" />
+    <Compile Include="EFREcommerce\LINQ\DataProvider.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EFREcommerce\Models\catalog.cs" />
+    <Compile Include="EFREcommerce\Models\country.cs" />
+    <Compile Include="EFREcommerce\Models\credit_card.cs" />
+    <Compile Include="EFREcommerce\Models\credit_card_authorization.cs" />
+    <Compile Include="EFREcommerce\Models\credit_card_type.cs" />
+    <Compile Include="EFREcommerce\Models\email.cs" />
+    <Compile Include="EFREcommerce\Models\DataProvider.cs" />
+    <Compile Include="EFREcommerce\Models\order.cs" />
+    <Compile Include="EFREcommerce\Models\order_comment.cs" />
+    <Compile Include="EFREcommerce\Models\order_detail.cs" />
+    <Compile Include="EFREcommerce\Models\phone_number.cs" />
+    <Compile Include="EFREcommerce\Models\postal_address.cs" />
+    <Compile Include="EFREcommerce\Models\product.cs" />
+    <Compile Include="EFREcommerce\Models\receipt.cs" />
+    <Compile Include="EFREcommerce\Models\recurrence_order_detail.cs" />
+    <Compile Include="EFREcommerce\Models\recurrence_plan.cs" />
+    <Compile Include="EFREcommerce\Models\shipment_group.cs" />
+    <Compile Include="EFREcommerce\Models\source.cs" />
+    <Compile Include="EFREcommerce\Models\status.cs" />
+    <Compile Include="EFREcommerce\Models\subdivision.cs" />
+    <Compile Include="EfundraisingProd\LINQ\DataProvider.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EfundraisingProd\Models\accounting_class.cs" />
+    <Compile Include="EfundraisingProd\Models\accounting_class_shipping_fees.cs" />
+    <Compile Include="EfundraisingProd\Models\Accounting_Period.cs" />
+    <Compile Include="EfundraisingProd\Models\accounting_period_result.cs" />
+    <Compile Include="EfundraisingProd\Models\address_zone.cs" />
+    <Compile Include="EfundraisingProd\Models\Adjustment.cs" />
+    <Compile Include="EfundraisingProd\Models\Adjustment_Audit.cs" />
+    <Compile Include="EfundraisingProd\Models\advertisement.cs" />
+    <Compile Include="EfundraisingProd\Models\Advertiser.cs" />
+    <Compile Include="EfundraisingProd\Models\Advertiser_Partner.cs" />
+    <Compile Include="EfundraisingProd\Models\Advertising_Support.cs" />
+    <Compile Include="EfundraisingProd\Models\Advertising_Support_Contact.cs" />
+    <Compile Include="EfundraisingProd\Models\Advertising_Support_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Advertisment_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Alias_Country_Code.cs" />
+    <Compile Include="EfundraisingProd\Models\Alias_Promotion.cs" />
+    <Compile Include="EfundraisingProd\Models\Alias_State.cs" />
+    <Compile Include="EfundraisingProd\Models\Applicable_Adjustment_Tax.cs" />
+    <Compile Include="EfundraisingProd\Models\Applicable_Tax.cs" />
+    <Compile Include="EfundraisingProd\Models\Applicable_Tax_To_Add.cs" />
+    <Compile Include="EfundraisingProd\Models\application.cs" />
+    <Compile Include="EfundraisingProd\Models\ARDHISP.cs" />
+    <Compile Include="EfundraisingProd\Models\Area_Manager.cs" />
+    <Compile Include="EfundraisingProd\Models\AR_Activity.cs" />
+    <Compile Include="EfundraisingProd\Models\AR_Activity_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\AR_Consultant.cs" />
+    <Compile Include="EfundraisingProd\Models\AR_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\Associate_Mentor.cs" />
+    <Compile Include="EfundraisingProd\Models\Associate_Mentor_Comment.cs" />
+    <Compile Include="EfundraisingProd\Models\associate_mentor_commission.cs" />
+    <Compile Include="EfundraisingProd\Models\Automaton.cs" />
+    <Compile Include="EfundraisingProd\Models\Automaton_Function.cs" />
+    <Compile Include="EfundraisingProd\Models\Automaton_Shipping_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\Automaton_State.cs" />
+    <Compile Include="EfundraisingProd\Models\Automaton_Transition.cs" />
+    <Compile Include="EfundraisingProd\Models\Automaton_Transition_Function.cs" />
+    <Compile Include="EfundraisingProd\Models\Bank.cs" />
+    <Compile Include="EfundraisingProd\Models\Bank_Account.cs" />
+    <Compile Include="EfundraisingProd\Models\BeFree.cs" />
+    <Compile Include="EfundraisingProd\Models\BeFree_History.cs" />
+    <Compile Include="EfundraisingProd\Models\best_time_call.cs" />
+    <Compile Include="EfundraisingProd\Models\best_time_call_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\Billing_Company.cs" />
+    <Compile Include="EfundraisingProd\Models\Brand.cs" />
+    <Compile Include="EfundraisingProd\Models\Brand_Coupon_Sheet.cs" />
+    <Compile Include="EfundraisingProd\Models\brochures_images.cs" />
+    <Compile Include="EfundraisingProd\Models\business_calendar.cs" />
+    <Compile Include="EfundraisingProd\Models\Business_Rule.cs" />
+    <Compile Include="EfundraisingProd\Models\campaign_reason.cs" />
+    <Compile Include="EfundraisingProd\Models\campaign_reason_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\Cancelation_Reason.cs" />
+    <Compile Include="EfundraisingProd\Models\carrier.cs" />
+    <Compile Include="EfundraisingProd\Models\carrier_shipping_option.cs" />
+    <Compile Include="EfundraisingProd\Models\carrier_shipping_status.cs" />
+    <Compile Include="EfundraisingProd\Models\charge.cs" />
+    <Compile Include="EfundraisingProd\Models\client.cs" />
+    <Compile Include="EfundraisingProd\Models\client_activity.cs" />
+    <Compile Include="EfundraisingProd\Models\client_activity_type.cs" />
+    <Compile Include="EfundraisingProd\Models\client_address.cs" />
+    <Compile Include="EfundraisingProd\Models\client_address_type.cs" />
+    <Compile Include="EfundraisingProd\Models\client_sequence.cs" />
+    <Compile Include="EfundraisingProd\Models\client_status.cs" />
+    <Compile Include="EfundraisingProd\Models\Collection_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\Comment.cs" />
+    <Compile Include="EfundraisingProd\Models\Commission_Earning.cs" />
+    <Compile Include="EfundraisingProd\Models\Commission_Outstanding.cs" />
+    <Compile Include="EfundraisingProd\Models\Commission_Outstanding_History.cs" />
+    <Compile Include="EfundraisingProd\Models\Commission_Paid.cs" />
+    <Compile Include="EfundraisingProd\Models\Commission_Rate.cs" />
+    <Compile Include="EfundraisingProd\Models\Commission_Table.cs" />
+    <Compile Include="EfundraisingProd\Models\Competitor.cs" />
+    <Compile Include="EfundraisingProd\Models\Competitor_Advertising.cs" />
+    <Compile Include="EfundraisingProd\Models\conciliation.cs" />
+    <Compile Include="EfundraisingProd\Models\Confirmation_Method.cs" />
+    <Compile Include="EfundraisingProd\Models\consultant.cs" />
+    <Compile Include="EfundraisingProd\Models\consultant_address.cs" />
+    <Compile Include="EfundraisingProd\Models\consultant_transfer_status.cs" />
+    <Compile Include="EfundraisingProd\Models\Contact.cs" />
+    <Compile Include="EfundraisingProd\Models\Conversion_Rate_Table.cs" />
+    <Compile Include="EfundraisingProd\Models\cost_range.cs" />
+    <Compile Include="EfundraisingProd\Models\country.cs" />
+    <Compile Include="EfundraisingProd\Models\Country1.cs" />
+    <Compile Include="EfundraisingProd\Models\country_names.cs" />
+    <Compile Include="EfundraisingProd\Models\Coupon_Sheet.cs" />
+    <Compile Include="EfundraisingProd\Models\Credit_Approval_Method.cs" />
+    <Compile Include="EfundraisingProd\Models\credit_card_refund_request.cs" />
+    <Compile Include="EfundraisingProd\Models\credit_card_refund_request_status.cs" />
+    <Compile Include="EfundraisingProd\Models\credit_card_types.cs" />
+    <Compile Include="EfundraisingProd\Models\credit_check_request.cs" />
+    <Compile Include="EfundraisingProd\Models\credit_check_status.cs" />
+    <Compile Include="EfundraisingProd\Models\crm_static_past3seasons_new.cs" />
+    <Compile Include="EfundraisingProd\Models\crm_users.cs" />
+    <Compile Include="EfundraisingProd\Models\culture.cs" />
+    <Compile Include="EfundraisingProd\Models\culture1.cs" />
+    <Compile Include="EfundraisingProd\Models\customer_status.cs" />
+    <Compile Include="EfundraisingProd\Models\C_tbd_partner.cs" />
+    <Compile Include="EfundraisingProd\Models\C_tbd_promotion.cs" />
+    <Compile Include="EfundraisingProd\Models\C_tbd_promotion_type.cs" />
+    <Compile Include="EfundraisingProd\Models\DataProvider.cs" />
+    <Compile Include="EfundraisingProd\Models\Default_Consultant_Rate.cs" />
+    <Compile Include="EfundraisingProd\Models\Department.cs" />
+    <Compile Include="EfundraisingProd\Models\deposit.cs" />
+    <Compile Include="EfundraisingProd\Models\Deposit_Item.cs" />
+    <Compile Include="EfundraisingProd\Models\Destination.cs" />
+    <Compile Include="EfundraisingProd\Models\Destinations2.cs" />
+    <Compile Include="EfundraisingProd\Models\Detailed_Promotion.cs" />
+    <Compile Include="EfundraisingProd\Models\division.cs" />
+    <Compile Include="EfundraisingProd\Models\Double_Lead.cs" />
+    <Compile Include="EfundraisingProd\Models\dtproperty.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Admin.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Campaign.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Campaign_Image.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Campaign_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Catalog_Category.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Email_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Group_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Item.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Message.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Organizer.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Participant.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Sale.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Sale_Item.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Supporter.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Supporter_Email_Sent.cs" />
+    <Compile Include="EfundraisingProd\Models\EFO_Tag.cs" />
+    <Compile Include="EfundraisingProd\Models\eFR_Lead.cs" />
+    <Compile Include="EfundraisingProd\Models\Efr_Lead_Activity.cs" />
+    <Compile Include="EfundraisingProd\Models\EMail_iwon1.cs" />
+    <Compile Include="EfundraisingProd\Models\EMail_iwon2.cs" />
+    <Compile Include="EfundraisingProd\Models\EMail_PaulStanton.cs" />
+    <Compile Include="EfundraisingProd\Models\Entry_Form.cs" />
+    <Compile Include="EfundraisingProd\Models\Ext_sales_status.cs" />
+    <Compile Include="EfundraisingProd\Models\fedex.cs" />
+    <Compile Include="EfundraisingProd\Models\Field_Sales_Manager.cs" />
+    <Compile Include="EfundraisingProd\Models\Flag_Pole.cs" />
+    <Compile Include="EfundraisingProd\Models\fr_pendingleads.cs" />
+    <Compile Include="EfundraisingProd\Models\FSM_Address.cs" />
+    <Compile Include="EfundraisingProd\Models\General_Comment.cs" />
+    <Compile Include="EfundraisingProd\Models\GL_Table.cs" />
+    <Compile Include="EfundraisingProd\Models\Grabber.cs" />
+    <Compile Include="EfundraisingProd\Models\group_type.cs" />
+    <Compile Include="EfundraisingProd\Models\group_type_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\harmony_list_transfer.cs" />
+    <Compile Include="EfundraisingProd\Models\hear_about_us.cs" />
+    <Compile Include="EfundraisingProd\Models\hear_about_us_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\IDGen_Table.cs" />
+    <Compile Include="EfundraisingProd\Models\Inventory_Adjustment.cs" />
+    <Compile Include="EfundraisingProd\Models\Inventory_Adjustment_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Java_Errors.cs" />
+    <Compile Include="EfundraisingProd\Models\Kit_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\language.cs" />
+    <Compile Include="EfundraisingProd\Models\language_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\lead.cs" />
+    <Compile Include="EfundraisingProd\Models\lead_activity.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Activity_Closing_Reason.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Activity_copy.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Activity_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Channel.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Combinaisons.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Conditions.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Duplicates_Login.cs" />
+    <Compile Include="EfundraisingProd\Models\lead_email_tracking.cs" />
+    <Compile Include="EfundraisingProd\Models\lead_history.cs" />
+    <Compile Include="EfundraisingProd\Models\lead_interest_product_class.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Personalized_050403.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Priority.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Promotion.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Qualification_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\Lead_Visit.cs" />
+    <Compile Include="EfundraisingProd\Models\Local_Sponsor.cs" />
+    <Compile Include="EfundraisingProd\Models\Local_Sponsor_Activity.cs" />
+    <Compile Include="EfundraisingProd\Models\Local_Sponsor_Activity_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Local_Sponsor_Sales_Item.cs" />
+    <Compile Include="EfundraisingProd\Models\Local_Sponsor_Steps.cs" />
+    <Compile Include="EfundraisingProd\Models\log_harmony_transfer_leads.cs" />
+    <Compile Include="EfundraisingProd\Models\mag_lead.cs" />
+    <Compile Include="EfundraisingProd\Models\Mailing_Code.cs" />
+    <Compile Include="EfundraisingProd\Models\Mailing_Name.cs" />
+    <Compile Include="EfundraisingProd\Models\mke_replication_test.cs" />
+    <Compile Include="EfundraisingProd\Models\MSysConf.cs" />
+    <Compile Include="EfundraisingProd\Models\Newsletter.cs" />
+    <Compile Include="EfundraisingProd\Models\orders_sale.cs" />
+    <Compile Include="EfundraisingProd\Models\Organization.cs" />
+    <Compile Include="EfundraisingProd\Models\Organization_Class.cs" />
+    <Compile Include="EfundraisingProd\Models\Organization_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\organization_type.cs" />
+    <Compile Include="EfundraisingProd\Models\organization_type_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\Package.cs" />
+    <Compile Include="EfundraisingProd\Models\package1.cs" />
+    <Compile Include="EfundraisingProd\Models\package_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\package_templates.cs" />
+    <Compile Include="EfundraisingProd\Models\pap_client_type.cs" />
+    <Compile Include="EfundraisingProd\Models\pap_partner_product_type_overide.cs" />
+    <Compile Include="EfundraisingProd\Models\pap_product_category.cs" />
+    <Compile Include="EfundraisingProd\Models\pap_product_type.cs" />
+    <Compile Include="EfundraisingProd\Models\pap_suppressed_product_type.cs" />
+    <Compile Include="EfundraisingProd\Models\pap_transaction.cs" />
+    <Compile Include="EfundraisingProd\Models\participant.cs" />
+    <Compile Include="EfundraisingProd\Models\partner_commission.cs" />
+    <Compile Include="EfundraisingProd\Models\Partner_Commission_Range.cs" />
+    <Compile Include="EfundraisingProd\Models\partner_contacts.cs" />
+    <Compile Include="EfundraisingProd\Models\Partner_Fixed_Cost.cs" />
+    <Compile Include="EfundraisingProd\Models\partner_from_esubs_20080414.cs" />
+    <Compile Include="EfundraisingProd\Models\partner_group_types.cs" />
+    <Compile Include="EfundraisingProd\Models\Partner_Lead_Commission.cs" />
+    <Compile Include="EfundraisingProd\Models\partner_packages.cs" />
+    <Compile Include="EfundraisingProd\Models\Partner_Sales_Commission.cs" />
+    <Compile Include="EfundraisingProd\Models\partner_web_details.cs" />
+    <Compile Include="EfundraisingProd\Models\party_type.cs" />
+    <Compile Include="EfundraisingProd\Models\payment.cs" />
+    <Compile Include="EfundraisingProd\Models\Payment_Audit.cs" />
+    <Compile Include="EfundraisingProd\Models\Payment_Entry_Stop_Date.cs" />
+    <Compile Include="EfundraisingProd\Models\payment_method.cs" />
+    <Compile Include="EfundraisingProd\Models\Payment_status.cs" />
+    <Compile Include="EfundraisingProd\Models\payment_term.cs" />
+    <Compile Include="EfundraisingProd\Models\perfom_trace.cs" />
+    <Compile Include="EfundraisingProd\Models\phone_number_tracking.cs" />
+    <Compile Include="EfundraisingProd\Models\postal_address.cs" />
+    <Compile Include="EfundraisingProd\Models\Postponed_Sale.cs" />
+    <Compile Include="EfundraisingProd\Models\Postponed_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\po_status.cs" />
+    <Compile Include="EfundraisingProd\Models\Price_Range.cs" />
+    <Compile Include="EfundraisingProd\Models\Priority.cs" />
+    <Compile Include="EfundraisingProd\Models\Production_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\products_packages.cs" />
+    <Compile Include="EfundraisingProd\Models\product_business_rule.cs" />
+    <Compile Include="EfundraisingProd\Models\product_business_rule_profit_range.cs" />
+    <Compile Include="EfundraisingProd\Models\product_business_rule_shipping_fee.cs" />
+    <Compile Include="EfundraisingProd\Models\product_class.cs" />
+    <Compile Include="EfundraisingProd\Models\product_class_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\product_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\Product_Quantity.cs" />
+    <Compile Include="EfundraisingProd\Models\profit_range.cs" />
+    <Compile Include="EfundraisingProd\Models\promokit.cs" />
+    <Compile Include="EfundraisingProd\Models\promotional_kit.cs" />
+    <Compile Include="EfundraisingProd\Models\Promotion_Code.cs" />
+    <Compile Include="EfundraisingProd\Models\Promotion_Cost.cs" />
+    <Compile Include="EfundraisingProd\Models\Promotion_Group.cs" />
+    <Compile Include="EfundraisingProd\Models\Promotion_Group_Promotion.cs" />
+    <Compile Include="EfundraisingProd\Models\Promotion_old.cs" />
+    <Compile Include="EfundraisingProd\Models\Proposal.cs" />
+    <Compile Include="EfundraisingProd\Models\QSP_Program.cs" />
+    <Compile Include="EfundraisingProd\Models\Question_Entry_Form.cs" />
+    <Compile Include="EfundraisingProd\Models\Reason.cs" />
+    <Compile Include="EfundraisingProd\Models\Referee.cs" />
+    <Compile Include="EfundraisingProd\Models\Replication_Monitoring.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Decision.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Employees.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Language.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Priority.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Project_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Request.cs" />
+    <Compile Include="EfundraisingProd\Models\Req_Request_Type.cs" />
+    <Compile Include="EfundraisingProd\Models\rs_lastcommit.cs" />
+    <Compile Include="EfundraisingProd\Models\rs_threads.cs" />
+    <Compile Include="EfundraisingProd\Models\sale.cs" />
+    <Compile Include="EfundraisingProd\Models\Sales_Change_Log.cs" />
+    <Compile Include="EfundraisingProd\Models\sales_constraints.cs" />
+    <Compile Include="EfundraisingProd\Models\sales_item.cs" />
+    <Compile Include="EfundraisingProd\Models\Sales_Item_Coupon_Sheet.cs" />
+    <Compile Include="EfundraisingProd\Models\sales_item_to_add.cs" />
+    <Compile Include="EfundraisingProd\Models\Sales_Status.cs" />
+    <Compile Include="EfundraisingProd\Models\Sale_Audit.cs" />
+    <Compile Include="EfundraisingProd\Models\sale_carrier_shipping_status.cs" />
+    <Compile Include="EfundraisingProd\Models\sale_to_add.cs" />
+    <Compile Include="EfundraisingProd\Models\Sale_To_Local_Sponsor.cs" />
+    <Compile Include="EfundraisingProd\Models\Sale_Zip_Code.cs" />
+    <Compile Include="EfundraisingProd\Models\salutation.cs" />
+    <Compile Include="EfundraisingProd\Models\salutation_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\Sample.cs" />
+    <Compile Include="EfundraisingProd\Models\scratch_book.cs" />
+    <Compile Include="EfundraisingProd\Models\scratch_book_commission.cs" />
+    <Compile Include="EfundraisingProd\Models\scratch_book_price_info.cs" />
+    <Compile Include="EfundraisingProd\Models\SC_SECTION.cs" />
+    <Compile Include="EfundraisingProd\Models\service_type.cs" />
+    <Compile Include="EfundraisingProd\Models\shipping_fee.cs" />
+    <Compile Include="EfundraisingProd\Models\Site.cs" />
+    <Compile Include="EfundraisingProd\Models\special_offer.cs" />
+    <Compile Include="EfundraisingProd\Models\Sponsor_Consultant.cs" />
+    <Compile Include="EfundraisingProd\Models\Sponsor_Found_Stool.cs" />
+    <Compile Include="EfundraisingProd\Models\Sport_Association.cs" />
+    <Compile Include="EfundraisingProd\Models\SS_Drop_Box.cs" />
+    <Compile Include="EfundraisingProd\Models\SS_Drop_Box_Package.cs" />
+    <Compile Include="EfundraisingProd\Models\State.cs" />
+    <Compile Include="EfundraisingProd\Models\State_Tax.cs" />
+    <Compile Include="EfundraisingProd\Models\subdivision.cs" />
+    <Compile Include="EfundraisingProd\Models\supplier.cs" />
+    <Compile Include="EfundraisingProd\Models\sync_service_log.cs" />
+    <Compile Include="EfundraisingProd\Models\sysdiagram.cs" />
+    <Compile Include="EfundraisingProd\Models\Tag.cs" />
+    <Compile Include="EfundraisingProd\Models\Targeted_Market.cs" />
+    <Compile Include="EfundraisingProd\Models\targeted_market_type.cs" />
+    <Compile Include="EfundraisingProd\Models\Tax_Table.cs" />
+    <Compile Include="EfundraisingProd\Models\Template.cs" />
+    <Compile Include="EfundraisingProd\Models\Template_Set.cs" />
+    <Compile Include="EfundraisingProd\Models\temp_bounce.cs" />
+    <Compile Include="EfundraisingProd\Models\Temp_Lead.cs" />
+    <Compile Include="EfundraisingProd\Models\Temp_Sale_Zip_Code.cs" />
+    <Compile Include="EfundraisingProd\Models\temp_unsub.cs" />
+    <Compile Include="EfundraisingProd\Models\territory.cs" />
+    <Compile Include="EfundraisingProd\Models\Territory_Def.cs" />
+    <Compile Include="EfundraisingProd\Models\title.cs" />
+    <Compile Include="EfundraisingProd\Models\title_desc.cs" />
+    <Compile Include="EfundraisingProd\Models\tmp_total_adjustment.cs" />
+    <Compile Include="EfundraisingProd\Models\tmp_total_deposit.cs" />
+    <Compile Include="EfundraisingProd\Models\transfer_status.cs" />
+    <Compile Include="EfundraisingProd\Models\Unassigned_Consultant.cs" />
+    <Compile Include="EfundraisingProd\Models\Unassigned_Consultant_Sale.cs" />
+    <Compile Include="EfundraisingProd\Models\UnAssignLogin.cs" />
+    <Compile Include="EfundraisingProd\Models\Web_Site.cs" />
+    <Compile Include="EfundraisingProd\Models\WFC_Import.cs" />
+    <Compile Include="EfundraisingProd\Models\WFC_Import_Payments.cs" />
+    <Compile Include="EfundraisingProd\Models\WFC_Logs.cs" />
+    <Compile Include="EfundraisingProd\Models\WFC_Payment_Logs.cs" />
+    <Compile Include="EfundraisingProd\Models\xavier.cs" />
+    <Compile Include="eFundweb\LINQ\DataProvider.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="eFundweb\Models\Accounting_Class.cs" />
+    <Compile Include="eFundweb\Models\Advertisement.cs" />
+    <Compile Include="eFundweb\Models\Advertiser.cs" />
+    <Compile Include="eFundweb\Models\Advertiser_Partner.cs" />
+    <Compile Include="eFundweb\Models\Advertising_Support.cs" />
+    <Compile Include="eFundweb\Models\Advertising_Support_Type.cs" />
+    <Compile Include="eFundweb\Models\Advertisment_Type.cs" />
+    <Compile Include="eFundweb\Models\Agent.cs" />
+    <Compile Include="eFundweb\Models\Agent_Address.cs" />
+    <Compile Include="eFundweb\Models\Agent_Comment.cs" />
+    <Compile Include="eFundweb\Models\Agent_Domain.cs" />
+    <Compile Include="eFundweb\Models\Agent_Email.cs" />
+    <Compile Include="eFundweb\Models\Agent_Link.cs" />
+    <Compile Include="eFundweb\Models\Agent_Reach_Number.cs" />
+    <Compile Include="eFundweb\Models\Agent_Reach_Type.cs" />
+    <Compile Include="eFundweb\Models\Best_Time_Call.cs" />
+    <Compile Include="eFundweb\Models\Best_Time_Call_Desc.cs" />
+    <Compile Include="eFundweb\Models\Brochures_Images.cs" />
+    <Compile Include="eFundweb\Models\Campaign_Reason.cs" />
+    <Compile Include="eFundweb\Models\Campaign_Reason_Desc.cs" />
+    <Compile Include="eFundweb\Models\Category.cs" />
+    <Compile Include="eFundweb\Models\Category_Desc.cs" />
+    <Compile Include="eFundweb\Models\Category_Package.cs" />
+    <Compile Include="eFundweb\Models\Category_Partner.cs" />
+    <Compile Include="eFundweb\Models\Client.cs" />
+    <Compile Include="eFundweb\Models\Client_Address.cs" />
+    <Compile Include="eFundweb\Models\Contact.cs" />
+    <Compile Include="eFundweb\Models\Country.cs" />
+    <Compile Include="eFundweb\Models\Customer_Questions.cs" />
+    <Compile Include="eFundweb\Models\C_tbd_partner.cs" />
+    <Compile Include="eFundweb\Models\C_tbd_promotion.cs" />
+    <Compile Include="eFundweb\Models\C_tbd_promotion_type.cs" />
+    <Compile Include="eFundweb\Models\DataProvider.cs" />
+    <Compile Include="eFundweb\Models\Destination.cs" />
+    <Compile Include="eFundweb\Models\dtproperty.cs" />
+    <Compile Include="eFundweb\Models\Entry_Form.cs" />
+    <Compile Include="eFundweb\Models\Form_Type.cs" />
+    <Compile Include="eFundweb\Models\Form_Type_Desc.cs" />
+    <Compile Include="eFundweb\Models\Grabber.cs" />
+    <Compile Include="eFundweb\Models\Group_Type.cs" />
+    <Compile Include="eFundweb\Models\Group_Type_Desc.cs" />
+    <Compile Include="eFundweb\Models\Hear_About_Us.cs" />
+    <Compile Include="eFundweb\Models\Hear_About_Us_Desc.cs" />
+    <Compile Include="eFundweb\Models\Image.cs" />
+    <Compile Include="eFundweb\Models\Input_Select.cs" />
+    <Compile Include="eFundweb\Models\Language.cs" />
+    <Compile Include="eFundweb\Models\launch.cs" />
+    <Compile Include="eFundweb\Models\Lead.cs" />
+    <Compile Include="eFundweb\Models\leadgen_lead.cs" />
+    <Compile Include="eFundweb\Models\Newsletter.cs" />
+    <Compile Include="eFundweb\Models\Organization_Type.cs" />
+    <Compile Include="eFundweb\Models\Organization_Type_Desc.cs" />
+    <Compile Include="eFundweb\Models\Package.cs" />
+    <Compile Include="eFundweb\Models\Package_Desc.cs" />
+    <Compile Include="eFundweb\Models\package_product.cs" />
+    <Compile Include="eFundweb\Models\partner.cs" />
+    <Compile Include="eFundweb\Models\Partners_Forms.cs" />
+    <Compile Include="eFundweb\Models\partners_site_list.cs" />
+    <Compile Include="eFundweb\Models\Price.cs" />
+    <Compile Include="eFundweb\Models\Product.cs" />
+    <Compile Include="eFundweb\Models\Product_Class.cs" />
+    <Compile Include="eFundweb\Models\Product_Desc.cs" />
+    <Compile Include="eFundweb\Models\Product_Interested_In.cs" />
+    <Compile Include="eFundweb\Models\Product_Interested_In_Desc.cs" />
+    <Compile Include="eFundweb\Models\Product_Interested_Partner.cs" />
+    <Compile Include="eFundweb\Models\promotion.cs" />
+    <Compile Include="eFundweb\Models\promotion_default.cs" />
+    <Compile Include="eFundweb\Models\Promotion_Type.cs" />
+    <Compile Include="eFundweb\Models\Question.cs" />
+    <Compile Include="eFundweb\Models\Questions_Desc.cs" />
+    <Compile Include="eFundweb\Models\Questions_Entry_Form.cs" />
+    <Compile Include="eFundweb\Models\Replication_Monitoring.cs" />
+    <Compile Include="eFundweb\Models\Sale.cs" />
+    <Compile Include="eFundweb\Models\Sales_Item.cs" />
+    <Compile Include="eFundweb\Models\Salutation.cs" />
+    <Compile Include="eFundweb\Models\Salutation_Desc.cs" />
+    <Compile Include="eFundweb\Models\Scratch_Book.cs" />
+    <Compile Include="eFundweb\Models\State.cs" />
+    <Compile Include="eFundweb\Models\Sweepstakes_Registration.cs" />
+    <Compile Include="eFundweb\Models\Sweepstakes_Registration_AT.cs" />
+    <Compile Include="eFundweb\Models\Sweepstakes_Registration_NSG.cs" />
+    <Compile Include="eFundweb\Models\Sweepstakes_Registration_USAWrestling.cs" />
+    <Compile Include="eFundweb\Models\Targeted_Market.cs" />
+    <Compile Include="eFundweb\Models\Targeted_Market_Type.cs" />
+    <Compile Include="eFundweb\Models\tbd_partner.cs" />
+    <Compile Include="eFundweb\Models\TBD_Sweepstakes_Repli.cs" />
+    <Compile Include="eFundweb\Models\tell_a_friend.cs" />
+    <Compile Include="eFundweb\Models\Template.cs" />
+    <Compile Include="eFundweb\Models\Temp_Lead.cs" />
+    <Compile Include="eFundweb\Models\Testimonial.cs" />
+    <Compile Include="eFundweb\Models\Title.cs" />
+    <Compile Include="eFundweb\Models\Title_Desc.cs" />
+    <Compile Include="eFundweb\Models\Unassigned_Consultant.cs" />
+    <Compile Include="eFundweb\Models\Unsubscribe.cs" />
+    <Compile Include="eFundweb\Models\unsubscribe_puffy.cs" />
+    <Compile Include="eFundweb\Models\Visit.cs" />
+    <Compile Include="eFundweb\Models\Web_Site.cs" />
+    <Compile Include="eFundweb\Models\Web_Visit.cs" />
+    <Compile Include="esubs_global_v2\LINQ\DataProvider.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="esubs_global_v2\LINQ\DataProviderDataContext.cs" />
+    <Compile Include="esubs_global_v2\Models\action.cs" />
+    <Compile Include="esubs_global_v2\Models\aoii_chapters.cs" />
+    <Compile Include="esubs_global_v2\Models\aoii_chapters_2006.cs" />
+    <Compile Include="esubs_global_v2\Models\audit_member.cs" />
+    <Compile Include="esubs_global_v2\Models\audit_member_hierarchy.cs" />
+    <Compile Include="esubs_global_v2\Models\audit_personalization_image.cs" />
+    <Compile Include="esubs_global_v2\Models\audit_users.cs" />
+    <Compile Include="esubs_global_v2\Models\bounce_to_transfer.cs" />
+    <Compile Include="esubs_global_v2\Models\business_rule.cs" />
+    <Compile Include="esubs_global_v2\Models\campaign_merges.cs" />
+    <Compile Include="esubs_global_v2\Models\default_personalization.cs" />
+    <Compile Include="esubs_global_v2\Models\email_flow.cs" />
+    <Compile Include="esubs_global_v2\Models\email_flow_template.cs" />
+    <Compile Include="esubs_global_v2\Models\email_template_selector.cs" />
+    <Compile Include="esubs_global_v2\Models\event_participation_action.cs" />
+    <Compile Include="esubs_global_v2\Models\gallery_image.cs" />
+    <Compile Include="esubs_global_v2\Models\landingPage.cs" />
+    <Compile Include="esubs_global_v2\Models\offensive_content.cs" />
+    <Compile Include="esubs_global_v2\Models\page_route_mapper.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_text_group.cs" />
+    <Compile Include="esubs_global_v2\Models\popular_item.cs" />
+    <Compile Include="esubs_global_v2\Models\postal_address_validation.cs" />
+    <Compile Include="esubs_global_v2\Models\text_asset_replace.cs" />
+    <Compile Include="esubs_global_v2\Models\text_group.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_email_process_queue.cs" />
+    <Compile Include="esubs_global_v2\Models\user_oauthmembership.cs" />
+    <Compile Include="esubs_global_v2\Models\country.cs" />
+    <Compile Include="esubs_global_v2\Models\creation_channel.cs" />
+    <Compile Include="esubs_global_v2\Models\culture.cs" />
+    <Compile Include="esubs_global_v2\Models\culture_country_name.cs" />
+    <Compile Include="esubs_global_v2\Models\culture_subdivision_name.cs" />
+    <Compile Include="esubs_global_v2\Models\custcare_comments.cs" />
+    <Compile Include="esubs_global_v2\Models\custom_email_template.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_partner.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_partner_attribute.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_partner_attribute_value.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_partner_promotion.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_partner_type.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_partner_type_culture.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_promotion.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_promotion_destination.cs" />
+    <Compile Include="esubs_global_v2\Models\C_tbd_promotion_type.cs" />
+    <Compile Include="esubs_global_v2\Models\DataProvider.cs" />
+    <Compile Include="esubs_global_v2\Models\default_email_template.cs" />
+    <Compile Include="esubs_global_v2\Models\direct_mail.cs" />
+    <Compile Include="esubs_global_v2\Models\direct_mail_info.cs" />
+    <Compile Include="esubs_global_v2\Models\direct_mail_letter.cs" />
+    <Compile Include="esubs_global_v2\Models\direct_mail_template.cs" />
+    <Compile Include="esubs_global_v2\Models\display_product_type.cs" />
+    <Compile Include="esubs_global_v2\Models\dm_image_approval_status.cs" />
+    <Compile Include="esubs_global_v2\Models\dm_personalization_image.cs" />
+    <Compile Include="esubs_global_v2\Models\dtproperty.cs" />
+    <Compile Include="esubs_global_v2\Models\earned_prize.cs" />
+    <Compile Include="esubs_global_v2\Models\efundraingtransaction_suppID_tranlation.cs" />
+    <Compile Include="esubs_global_v2\Models\email_import_test.cs" />
+    <Compile Include="esubs_global_v2\Models\email_template.cs" />
+    <Compile Include="esubs_global_v2\Models\email_template_culture.cs" />
+    <Compile Include="esubs_global_v2\Models\email_template_field.cs" />
+    <Compile Include="esubs_global_v2\Models\email_template_tag.cs" />
+    <Compile Include="esubs_global_v2\Models\email_template_type.cs" />
+    <Compile Include="esubs_global_v2\Models\employee.cs" />
+    <Compile Include="esubs_global_v2\Models\es_valid_orders_items.cs" />
+    <Compile Include="esubs_global_v2\Models\es_valid_orders_items_staging.cs" />
+    <Compile Include="esubs_global_v2\Models\event.cs" />
+    <Compile Include="esubs_global_v2\Models\event_change.cs" />
+    <Compile Include="esubs_global_v2\Models\event_facebook_visitor.cs" />
+    <Compile Include="esubs_global_v2\Models\event_gasavingcard.cs" />
+    <Compile Include="esubs_global_v2\Models\event_group.cs" />
+    <Compile Include="esubs_global_v2\Models\event_participation.cs" />
+    <Compile Include="esubs_global_v2\Models\event_profit_range.cs" />
+    <Compile Include="esubs_global_v2\Models\event_status.cs" />
+    <Compile Include="esubs_global_v2\Models\event_total_amount.cs" />
+    <Compile Include="esubs_global_v2\Models\event_type.cs" />
+    <Compile Include="esubs_global_v2\Models\ewnchapter.cs" />
+    <Compile Include="esubs_global_v2\Models\ewnparticipant.cs" />
+    <Compile Include="esubs_global_v2\Models\ewnpaticipant_possibleduplicate.cs" />
+    <Compile Include="esubs_global_v2\Models\exception_type.cs" />
+    <Compile Include="esubs_global_v2\Models\external_account.cs" />
+    <Compile Include="esubs_global_v2\Models\external_account_action.cs" />
+    <Compile Include="esubs_global_v2\Models\featured_event.cs" />
+    <Compile Include="esubs_global_v2\Models\featured_event2.cs" />
+    <Compile Include="esubs_global_v2\Models\generated_pass.cs" />
+    <Compile Include="esubs_global_v2\Models\group.cs" />
+    <Compile Include="esubs_global_v2\Models\group_group_status.cs" />
+    <Compile Include="esubs_global_v2\Models\group_status.cs" />
+    <Compile Include="esubs_global_v2\Models\group_type.cs" />
+    <Compile Include="esubs_global_v2\Models\image_approval_status.cs" />
+    <Compile Include="esubs_global_v2\Models\KAT.cs" />
+    <Compile Include="esubs_global_v2\Models\kd_alumni.cs" />
+    <Compile Include="esubs_global_v2\Models\kd_alumni_2006.cs" />
+    <Compile Include="esubs_global_v2\Models\kd_fy08.cs" />
+    <Compile Include="esubs_global_v2\Models\Kiwani.cs" />
+    <Compile Include="esubs_global_v2\Models\kiwanischange.cs" />
+    <Compile Include="esubs_global_v2\Models\kiwanisgroup.cs" />
+    <Compile Include="esubs_global_v2\Models\kiwanismember.cs" />
+    <Compile Include="esubs_global_v2\Models\kiwanis_phone_to_add.cs" />
+    <Compile Include="esubs_global_v2\Models\language.cs" />
+    <Compile Include="esubs_global_v2\Models\MD08.cs" />
+    <Compile Include="esubs_global_v2\Models\MDImport.cs" />
+    <Compile Include="esubs_global_v2\Models\member.cs" />
+    <Compile Include="esubs_global_v2\Models\member_20110621.cs" />
+    <Compile Include="esubs_global_v2\Models\member_hierarchy.cs" />
+    <Compile Include="esubs_global_v2\Models\member_phone_number.cs" />
+    <Compile Include="esubs_global_v2\Models\member_postal_address.cs" />
+    <Compile Include="esubs_global_v2\Models\member_type.cs" />
+    <Compile Include="esubs_global_v2\Models\opt_status.cs" />
+    <Compile Include="esubs_global_v2\Models\order_profit.cs" />
+    <Compile Include="esubs_global_v2\Models\order_profit_backup.cs" />
+    <Compile Include="esubs_global_v2\Models\participant_total_amount.cs" />
+    <Compile Include="esubs_global_v2\Models\participation_channel.cs" />
+    <Compile Include="esubs_global_v2\Models\Partner_Activation_Commission.cs" />
+    <Compile Include="esubs_global_v2\Models\Partner_Commission_Range.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_culture_link.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_email_template.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_payment_config.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_payment_info.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_product_offer.cs" />
+    <Compile Include="esubs_global_v2\Models\Partner_Sales_Commission.cs" />
+    <Compile Include="esubs_global_v2\Models\partner_store_template.cs" />
+    <Compile Include="esubs_global_v2\Models\payment.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_batch.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_comment.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_exception_type.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_info.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_info_corr_20080908.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_info_corr_20080918.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_info_corr_20080918_2.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_item.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_payment_status.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_period.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_status.cs" />
+    <Compile Include="esubs_global_v2\Models\payment_type.cs" />
+    <Compile Include="esubs_global_v2\Models\personalization.cs" />
+    <Compile Include="esubs_global_v2\Models\personalization_image.cs" />
+    <Compile Include="esubs_global_v2\Models\phone_number.cs" />
+    <Compile Include="esubs_global_v2\Models\phone_number_type.cs" />
+    <Compile Include="esubs_global_v2\Models\postal_address.cs" />
+    <Compile Include="esubs_global_v2\Models\postal_address_type.cs" />
+    <Compile Include="esubs_global_v2\Models\precalculatedvalue.cs" />
+    <Compile Include="esubs_global_v2\Models\prize.cs" />
+    <Compile Include="esubs_global_v2\Models\prize_item.cs" />
+    <Compile Include="esubs_global_v2\Models\prize_to_be_removed.cs" />
+    <Compile Include="esubs_global_v2\Models\prize_type.cs" />
+    <Compile Include="esubs_global_v2\Models\product_offer.cs" />
+    <Compile Include="esubs_global_v2\Models\program.cs" />
+    <Compile Include="esubs_global_v2\Models\program_partner.cs" />
+    <Compile Include="esubs_global_v2\Models\program_partner_prize.cs" />
+    <Compile Include="esubs_global_v2\Models\qsp_matching_code.cs" />
+    <Compile Include="esubs_global_v2\Models\Result.cs" />
+    <Compile Include="esubs_global_v2\Models\stats_personalization.cs" />
+    <Compile Include="esubs_global_v2\Models\stats_personalization_item.cs" />
+    <Compile Include="esubs_global_v2\Models\stats_personalization_section.cs" />
+    <Compile Include="esubs_global_v2\Models\Store.cs" />
+    <Compile Include="esubs_global_v2\Models\store_template.cs" />
+    <Compile Include="esubs_global_v2\Models\subdivision.cs" />
+    <Compile Include="esubs_global_v2\Models\sysdiagram.cs" />
+    <Compile Include="esubs_global_v2\Models\tag.cs" />
+    <Compile Include="esubs_global_v2\Models\tellafriend.cs" />
+    <Compile Include="esubs_global_v2\Models\tellafriend_recipient.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_customer.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_group_member.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_member.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_member_bak.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_member_hierarchy.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_payment_info.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_phone_number.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_postal_address.cs" />
+    <Compile Include="esubs_global_v2\Models\temp_touch_info.cs" />
+    <Compile Include="esubs_global_v2\Models\test_table.cs" />
+    <Compile Include="esubs_global_v2\Models\theme.cs" />
+    <Compile Include="esubs_global_v2\Models\touch.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_action.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_archive.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_change_log.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_change_log_details.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_info.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_info_archive.cs" />
+    <Compile Include="esubs_global_v2\Models\touch_not_to_send_20071212.cs" />
+    <Compile Include="esubs_global_v2\Models\tpa_fy09.cs" />
+    <Compile Include="esubs_global_v2\Models\Trace_leads.cs" />
+    <Compile Include="esubs_global_v2\Models\unused_account_number.cs" />
+    <Compile Include="esubs_global_v2\Models\user.cs" />
+    <Compile Include="esubs_global_v2\Models\web_action.cs" />
+    <Compile Include="esubs_global_v2\Models\xfactor_member.cs" />
+    <Compile Include="fastfundraising\Models\category.cs" />
+    <Compile Include="fastfundraising\Models\DataProvider.cs" />
+    <Compile Include="fastfundraising\Models\dtproperty.cs" />
+    <Compile Include="fastfundraising\Models\FC.cs" />
+    <Compile Include="fastfundraising\Models\fc_testimonial.cs" />
+    <Compile Include="fastfundraising\Models\fffeedback.cs" />
+    <Compile Include="fastfundraising\Models\ffitem.cs" />
+    <Compile Include="fastfundraising\Models\ffitemprice.cs" />
+    <Compile Include="fastfundraising\Models\ffnewslettersignup.cs" />
+    <Compile Include="fastfundraising\Models\ffquestion.cs" />
+    <Compile Include="fastfundraising\Models\fftechsupport.cs" />
+    <Compile Include="fastfundraising\Models\saleitem.cs" />
+    <Compile Include="fastfundraising\Models\shipping_fee.cs" />
+    <Compile Include="fastfundraising\Models\shipping_group.cs" />
+    <Compile Include="fastfundraising\Models\tbl_samplerequest.cs" />
+    <Compile Include="fastfundraising\Models\TEMP_FC_WITH_8000_ACCOUNT.cs" />
+    <Compile Include="Helpers\Log4NetWriter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk">
+      <Link>SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</Link>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EFRCommon\LINQ\DataProvider.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProvider.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EFREcommerce\LINQ\DataProvider.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProvider.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EfundraisingProd\LINQ\DataProvider.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProvider.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="eFundweb\LINQ\DataProvider.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProvider.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="esubs_global_v2\LINQ\DataProvider.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProvider.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="fastfundraising\LINQ\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="esubs_global_v2\LINQ\DataProvider.dbml.layout">
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EfundraisingProd\LINQ\DataProvider.dbml.layout">
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="eFundweb\LINQ\DataProvider.dbml.layout">
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EFRCommon\LINQ\DataProvider.dbml.layout">
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EFREcommerce\LINQ\DataProvider.dbml.layout">
+      <DependentUpon>DataProvider.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EFRCommon" Class="EFRCommonDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=gasqlp02;Initial Catalog=EFRCommon;Integrated Security=True" SettingsObjectName="GA.BDC.Data.Properties.Settings" SettingsPropertyName="EFRCommonConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.partner_promotion" Member="partner_promotions">
+    <Type Name="partner_promotion">
+      <Column Name="partner_promotion_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="promotion_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="promotion_partner_promotion" Member="promotion" ThisKey="promotion_id" OtherKey="promotion_id" Type="promotion" IsForeignKey="true" />
+      <Association Name="partner_partner_promotion" Member="partner" ThisKey="partner_id" OtherKey="partner_id" Type="partner" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promotion" Member="promotions">
+    <Type Name="promotion">
+      <Column Name="promotion_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="promotion_type_code" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="promotion_destination_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promotion_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="script_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cookie_content" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="keyword" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="is_displayable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="promotion_partner_promotion" Member="partner_promotions" ThisKey="promotion_id" OtherKey="promotion_id" Type="partner_promotion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.partner_attribute_value" Member="partner_attribute_values">
+    <Type Name="partner_attribute_value">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="partner_attribute_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="partner_partner_attribute_value" Member="partner" ThisKey="partner_id" OtherKey="partner_id" Type="partner" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.partner" Member="partners">
+    <Type Name="partner">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="partner_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="has_collection_site" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="guid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="partner_partner_promotion" Member="partner_promotions" ThisKey="partner_id" OtherKey="partner_id" Type="partner_promotion" />
+      <Association Name="partner_partner_attribute_value" Member="partner_attribute_values" ThisKey="partner_id" OtherKey="partner_id" Type="partner_attribute_value" />
+    </Type>
+  </Table>
+  <Function Name="dbo.efrc_get_partner_by_aaid" Method="efrc_get_partner_by_aaid">
+    <Parameter Name="a_aid" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="efrc_get_partner_by_aaidResult">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="has_collection_site" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="guid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="partner_type_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efrc_get_partner_by_id" Method="efrc_get_partner_by_id">
+    <Parameter Name="partnerID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="efrc_get_partner_by_idResult">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="has_collection_site" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="guid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="partner_type_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efrc_get_partners" Method="efrc_get_partners">
+    <ElementType Name="efrc_get_partnersResult">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="has_collection_site" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="guid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="partner_type_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_partner_attributes" Method="es_get_partner_attributes">
+    <Parameter Name="partnerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cultureCode" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="es_get_partner_attributesResult">
+      <Column Name="partner_attribute_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_attribute_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.efrc_get_partner_personalization" Method="efrc_get_partner_personalization">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="culture_code" Type="System.String" DbType="NVarChar(5)" />
+    <ElementType Name="efrc_get_partner_personalizationResult">
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="fax" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="mailing_address" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_path" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_folder" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_banner_image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_bottom_banner_image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_top_link" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="partner_bottom_link" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="kit_banner_image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_partner_by_promotionId" Method="es_get_partner_by_promotionId">
+    <Parameter Name="promotionId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_partner_by_promotionIdResult">
+      <Column Name="value" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

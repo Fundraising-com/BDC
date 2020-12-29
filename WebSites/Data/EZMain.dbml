@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EZMain" Class="EZMainDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=gasqlt02;Initial Catalog=EZMain;Integrated Security=True" SettingsObjectName="GA.BDC.Data.Properties.Settings" SettingsPropertyName="EZFundConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ORDR_ITEM_TBL" Member="ORDR_ITEM_TBLs">
+    <Type Name="ORDR_ITEM_TBL">
+      <Column Name="ORDR_SUB_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ITEM_CDE" Type="System.String" DbType="VarChar(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ITEM_RAW_QTY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_EXTRA_QTY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_REBT_QTY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_RAW_UOM_TXT" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="ITEM_PO_QTY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_PO_UOM_TXT" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="ITEM_INVOIC_QTY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_INVOIC_UOM_TXT" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="ITEM_INVOIC_UNIT_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="ITEM_INVOIC_EXT_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="ITEM_SLS_UNIT_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="ITEM_SLS_EXT_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="ITEM_CMNT_TXT" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Association Name="ORDR_ITEM_TBL_ORDR_VEND_TBL" Member="ORDR_VEND_TBLs" ThisKey="ORDR_SUB_ID" OtherKey="ORDR_SUB_ID" Type="ORDR_VEND_TBL" />
+      <Association Name="ITEM_LKUP_TBL_ORDR_ITEM_TBL" Member="ITEM_LKUP_TBL" ThisKey="ITEM_CDE" OtherKey="ITEM_CDE" Type="ITEM_LKUP_TBL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDR_VEND_TBL" Member="ORDR_VEND_TBLs">
+    <Type Name="ORDR_VEND_TBL">
+      <Column Name="ORDR_SUB_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDR_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PGM_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="SRC_GRP" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="SRC_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="OFRM_ASSY_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="OFRM_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="VEND_CDE" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="WHSE_CDE" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="PDCT_CDE" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="EZF_PO_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PO_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PO_CONFO_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PO_CONFO_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BILL_RCVD_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SENT_TO_VEND_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SHOW_REBT_FLG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DLVY_CMNT_TXT" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="LAST_MODF_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_MODF_PRSN_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LAST_STAT_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_STAT_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Association Name="ORDR_ITEM_TBL_ORDR_VEND_TBL" Member="ORDR_ITEM_TBL" ThisKey="ORDR_SUB_ID" OtherKey="ORDR_SUB_ID" Type="ORDR_ITEM_TBL" IsForeignKey="true" />
+      <Association Name="ORDR_INVOIC_TBL_ORDR_VEND_TBL" Member="ORDR_INVOIC_TBL" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_INVOIC_TBL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDR_INVOIC_TBL" Member="ORDR_INVOIC_TBLs">
+    <Type Name="ORDR_INVOIC_TBL">
+      <Column Name="ORDR_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDR_TYPE_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ORG_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CPGN_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PRIM_INVOIC_FLG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PO_REQD_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="STAX_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="SHIP_CHRG_CALC_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="SHIP_CHRG_OVRD_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="TOTL_CHRG_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="PTYP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PMT_REF_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PMT_CCRD_EXPIRE_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PMT_APVL_FLG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BILL_ADDR_1_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="BILL_ADDR_2_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="BILL_ADDR_3_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="BILL_CITY_NME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="BILL_ST_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="BILL_ZIP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CTCT_NME" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="CTCT_PH_1_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CTCT_PH_2_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CTCT_EML_TXT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ALT_CTCT_NME" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="ALT_CTCT_PH_1_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ALT_CTCT_PH_2_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ALT_CTCT_EML_TXT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDR_1_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDR_2_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDR_3_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_CITY_NME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ST_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ZIP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_VIA_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_TRACK_NBR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDL_TXT" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDR_1_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDR_2_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDR_3_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_CITY_NME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ST_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ZIP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_VIA_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_TRACK_NBR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDL_TXT" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="DLVY_CMNT_TXT" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="SLSP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="AR_POST_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SENT_TO_ACTG_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SENT_TO_ORG_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CREA_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CREA_PRSN_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LAST_MODF_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_MODF_PRSN_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LAST_STAT_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_STAT_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="ext_order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_sales_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDR_INVOIC_TBL_ORDR_VEND_TBL" Member="ORDR_VEND_TBLs" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_VEND_TBL" />
+      <Association Name="ORDR_INVOIC_TBL_AR_TRNS_TBL" Member="AR_TRNS_TBLs" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="AR_TRNS_TBL" />
+      <Association Name="ORDR_INVOIC_TBL_ORDR_DISC_TBL" Member="ORDR_DISC_TBLs" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_DISC_TBL" />
+      <Association Name="ORDR_INVOIC_TBL_ORDR_INVOIC_TO_PROCESS_TBL1" Member="ORDR_INVOIC_TO_PROCESS_TBLs" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_INVOIC_TO_PROCESS_TBL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AR_TRNS_TBL" Member="AR_TRNS_TBLs">
+    <Type Name="AR_TRNS_TBL">
+      <Column Name="TRNS_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TRNS_TYPE_CDE" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="TRNS_DTE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ORG_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ORDR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OPPOS_ACCT_NBR" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="CASH_BATCH_NBR" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="PMT_METH_TYPE_CDE" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="PMT_METH_REF_NBR" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="TRNS_AMT" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
+      <Column Name="JE_NBR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QBKS_POST_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_MODF_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_MODF_PRSN_CDE" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="payment_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_payment_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDR_INVOIC_TBL_AR_TRNS_TBL" Member="ORDR_INVOIC_TBL" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_INVOIC_TBL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDR_DISC_TBL" Member="ORDR_DISC_TBLs">
+    <Type Name="ORDR_DISC_TBL">
+      <Column Name="ORDR_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DISC_SEQ_NBR" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DISC_TXT" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="DISC_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="MANUAL_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AR_ACCT_CDE" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="CHRG_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="COMMIS_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Ext_Adjustment_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDR_INVOIC_TBL_ORDR_DISC_TBL" Member="ORDR_INVOIC_TBL" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_INVOIC_TBL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORG_CTCT_TBL" Member="ORG_CTCT_TBLs">
+    <Type Name="ORG_CTCT_TBL">
+      <Column Name="CTCT_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORG_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CTCT_SEQ_NBR" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CTCT_NME" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="CTCT_TITL_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PH_1_TYPE_CDE" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="PH_1_NBR" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="PH_2_TYPE_CDE" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="PH_2_NBR" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="PH_3_TYPE_CDE" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="PH_3_NBR" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="FAX_TYPE_CDE" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="FAX_NBR" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="EML_TXT" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="CTCT_NOTE_TXT" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="CREA_DTE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CREA_PRSN_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LAST_MODF_DTE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MODF_PRSN_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ITEM_LKUP_TBL" Member="ITEM_LKUP_TBLs">
+    <Type Name="ITEM_LKUP_TBL">
+      <Column Name="ITEM_CDE" Type="System.String" DbType="VarChar(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ITEM_NME" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="PDCT_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="FLVR_NME" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="SIZE_TXT" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="UOM_TXT" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="ITEM_TYPE_CDE" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="STAX_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ITEM_INVOIC_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="ITEM_AGGR_SIZE_QTY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_AGGR_UOM_TXT" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="SKU_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="ITEM_SEQ_NBR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NTRN_STRT_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NTRN_END_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="STAX_INCL_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SAPMaterialNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ITEM_LKUP_TBL_ORDR_ITEM_TBL" Member="ORDR_ITEM_TBLs" ThisKey="ITEM_CDE" OtherKey="ITEM_CDE" Type="ORDR_ITEM_TBL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDR_INVOIC_TO_PROCESS_TBL" Member="ORDR_INVOIC_TO_PROCESS_TBLs">
+    <Type Name="ORDR_INVOIC_TO_PROCESS_TBL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDR_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ORDR_TYPE_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ORG_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SHIP_CHRG_CALC_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="SHIP_CHRG_OVRD_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="TOTL_CHRG_AMT" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="PTYP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PMT_REF_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PMT_CCRD_EXPIRE_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BILL_ADDR_1_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="BILL_ADDR_2_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="BILL_ADDR_3_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="BILL_CITY_NME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="BILL_ST_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="BILL_ZIP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CTCT_NME" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="CTCT_PH_1_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CTCT_PH_2_NBR" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CTCT_EML_TXT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDR_1_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDR_2_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_CITY_NME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ST_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ZIP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_VIA_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_TRACK_NBR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PDCT_SHIP_ADDL_TXT" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDR_1_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDR_2_TXT" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_CITY_NME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ST_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ZIP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_VIA_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_TRACK_NBR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PRZP_SHIP_ADDL_TXT" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="SLSP_CDE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="AR_POST_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SENT_TO_ACTG_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SENT_TO_ORG_FLG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CREA_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_STAT_DTE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_STAT_CDE" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="ext_order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_sales_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ORDR_SRC_LKUP_TBL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDR_INVOIC_TBL_ORDR_INVOIC_TO_PROCESS_TBL1" Member="ORDR_INVOIC_TBL" ThisKey="ORDR_ID" OtherKey="ORDR_ID" Type="ORDR_INVOIC_TBL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_publishEZpaymentsidoc" Method="sp_publishEZpaymentsidoc">
+    <Parameter Name="salesId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="paymentStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="salesExternalStatus" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="rd_mailer" Class="BDCMassmailerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=MONQSPMVA1,1435;Initial Catalog=rd_mailer;Integrated Security=True" SettingsObjectName="GA.BDC.Data.Properties.Settings" SettingsPropertyName="rd_mailerConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.email_queue" Member="email_queues">
+    <Type Name="email_queue">
+      <Column Name="queue_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="project_id" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="reply_to_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="reply_to_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="to_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="to_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="from_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="from_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="bounce_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="bounce_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cc_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cc_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bcc_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bcc_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="subject" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="bodytxt" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="bodyhtml" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="sent_status_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="error_message" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="datestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="komunik_return_value_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="extra_info" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="timesent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ext_email_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.email_activity" Member="email_activities">
+    <Type Name="email_activity">
+      <Column Name="email_activity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="touch_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="project_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email_template_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email_activity_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="action_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="action_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="batch_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.bdc_get_email_queue" Method="bdc_get_email_queue">
+    <ElementType Name="bdc_get_email_queueResult1">
+      <Column Name="queue_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="project_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="reply_to_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="reply_to_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="to_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="to_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="from_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="from_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="bounce_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="bounce_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cc_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cc_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bcc_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bcc_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="subject" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="bodytxt" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="bodyhtml" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="extra_info" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="sent_status_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="datestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="komunik_return_value_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.bdc_get_latest_email_status" Method="bdc_get_latest_email_status">
+    <Parameter Name="email_status" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="project_id" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="retention" Type="System.Int16" DbType="SmallInt" />
+    <ElementType Name="bdc_get_latest_email_statusResult">
+      <Column Name="touch_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.bdc_get_latest_email_activity" Method="bdc_get_latest_email_activity">
+    <Parameter Name="touch_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="project_id" Type="System.Int16" DbType="SmallInt" />
+    <ElementType Name="bdc_get_latest_email_activityResult">
+      <Column Name="action_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.bdc_update_email_status_by_external_id" Method="bdc_update_email_status_by_external_id">
+    <Parameter Name="externalId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="newStatus" Type="System.Int32" DbType="Int" />
+    <ElementType Name="bdc_update_email_status_by_external_idResult">
+      <Column Name="queue_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="project_id" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="sent_status_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="datestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

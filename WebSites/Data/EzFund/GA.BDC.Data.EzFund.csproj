@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AAF5DE19-C021-4C40-BD37-25B73C92BFF8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Data.EzFund</RootNamespace>
+    <AssemblyName>GA.BDC.Data.EzFund</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Dapper.Contrib.2.0.35\lib\net461\Dapper.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions, Version=5.0.1.27, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\DataAnnotationsExtensions.5.0.1.27\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\FluentValidation-Signed.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi, Version=6.2.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\FluentValidation.WebApi-Signed.6.2.1.0\lib\Net45\FluentValidation.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Conventions.3.3.0\lib\net45\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EZMain\Mappers\BlogCategoriesMapper.cs" />
+    <Compile Include="EZMain\Mappers\BlogPostsMapper.cs" />
+    <Compile Include="EZMain\Mappers\BlogTagsMapper.cs" />
+    <Compile Include="EZMain\Mappers\CategoryMapper.cs" />
+    <Compile Include="EZMain\Mappers\HomePageRotatorMapper.cs" />
+    <Compile Include="EZMain\Mappers\ArTrnsTblMapper.cs" />
+    <Compile Include="EZMain\Mappers\ProspectMapper.cs" />
+    <Compile Include="EZMain\Mappers\OrganizationTypeMapper.cs" />
+    <Compile Include="EZMain\Mappers\PrimaryProgramMapper.cs" />
+    <Compile Include="EZMain\Mappers\SellingKitLeadMapper.cs" />
+    <Compile Include="EZMain\Mappers\PriceRangeMapper.cs" />
+    <Compile Include="EZMain\Mappers\ItemVendorMapper.cs" />
+    <Compile Include="EZMain\Mappers\ItemWarehouseMapper.cs" />
+    <Compile Include="EZMain\Mappers\LeadMapper.cs" />
+    <Compile Include="EZMain\Mappers\NewsletterSubscriptionMapper.cs" />
+    <Compile Include="EZMain\Mappers\NotificationMapper.cs" />
+    <Compile Include="EZMain\Mappers\OrganizationMapper.cs" />
+    <Compile Include="EZMain\Mappers\ProductsClassMapper.cs" />
+    <Compile Include="EZMain\Mappers\ProductMapper.cs" />
+    <Compile Include="EZMain\Mappers\ProgramMapper.cs" />
+    <Compile Include="EZMain\Mappers\ReferralMapper.cs" />
+    <Compile Include="EZMain\Mappers\SaleMapper.cs" />
+    <Compile Include="EZMain\Mappers\SalesStartingDateMapper.cs" />
+    <Compile Include="EZMain\Mappers\ShoppingCartMapper.cs" />
+    <Compile Include="EZMain\Mappers\SiteRefPcklLkupTblMapper.cs" />
+    <Compile Include="EZMain\Mappers\TestimonialMapper.cs" />
+    <Compile Include="EZMain\Mappers\WorkflowMapper.cs" />
+    <Compile Include="EZMain\Repositories\BlogCategoryRepository.cs" />
+    <Compile Include="EZMain\Repositories\BlogPostRepository.cs" />
+    <Compile Include="EZMain\Repositories\BlogTagRepository.cs" />
+    <Compile Include="EZMain\Repositories\CategoriesRepository.cs" />
+    <Compile Include="EZMain\Repositories\HomePageRotatorRepository.cs" />
+    <Compile Include="EZMain\Repositories\ProspectRepository.cs" />
+    <Compile Include="EZMain\Repositories\OrganizationTypeRepository.cs" />
+    <Compile Include="EZMain\Repositories\PrimaryProgramRepository.cs" />
+    <Compile Include="EZMain\Repositories\ArTrnsTblRepository.cs" />
+    <Compile Include="EZMain\Repositories\SellingKitLeadsRepository.cs" />
+    <Compile Include="EZMain\Repositories\LeadsRepository.cs" />
+    <Compile Include="EZMain\Repositories\NewsletterSubscriptionRepository.cs" />
+    <Compile Include="EZMain\Repositories\NotificationRepository.cs" />
+    <Compile Include="EZMain\Repositories\OrganizationRepository.cs" />
+    <Compile Include="EZMain\Repositories\ProductsClassRepository.cs" />
+    <Compile Include="EZMain\Repositories\ProductsRepository.cs" />
+    <Compile Include="EZMain\Repositories\ReferralsRepository.cs" />
+    <Compile Include="EZMain\Repositories\RouteMapperRepository.cs" />
+    <Compile Include="EZMain\Repositories\SalesRepository.cs" />
+    <Compile Include="EZMain\Repositories\SalesStartingDateRepository.cs" />
+    <Compile Include="EZMain\Repositories\ShoppingCartRepository.cs" />
+    <Compile Include="EZMain\Repositories\TestimonialsRepository.cs" />
+    <Compile Include="EZMain\Repositories\WorkflowRepository.cs" />
+    <Compile Include="EZMain\Tables\ar_trns_tbl.cs" />
+    <Compile Include="EZMain\Tables\blog_categories.cs" />
+    <Compile Include="EZMain\Tables\blog_post.cs" />
+    <Compile Include="EZMain\Tables\blog_post_tag.cs" />
+    <Compile Include="EZMain\Tables\blog_tags.cs" />
+    <Compile Include="EZMain\Tables\category.cs" />
+    <Compile Include="EZMain\Tables\Collection_Status.cs" />
+    <Compile Include="EZMain\Tables\DataProvider.cs" />
+    <Compile Include="EZMain\Tables\item_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\item_vend_map_tbl.cs" />
+    <Compile Include="EZMain\Tables\item_whse_map_tbl.cs" />
+    <Compile Include="EZMain\Tables\newsletter_subscription.cs" />
+    <Compile Include="EZMain\Tables\notification.cs" />
+    <Compile Include="EZMain\Tables\ordr_invoic_tbl.cs" />
+    <Compile Include="EZMain\Tables\ordr_item_tbl.cs" />
+    <Compile Include="EZMain\Tables\ordr_vend_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_ctct_addr_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_ctct_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_ctct_titl_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_dept_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_dict_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_lead_stat_atrl_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_mstr_atrl_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_mstr_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_note_tbl.cs" />
+    <Compile Include="EZMain\Tables\org_type_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\page_route_mapper.cs" />
+    <Compile Include="EZMain\Tables\payment.cs" />
+    <Compile Include="EZMain\Tables\pgm_supl_locn_map_tbl.cs" />
+    <Compile Include="EZMain\Tables\price_range.cs" />
+    <Compile Include="EZMain\Tables\product.cs" />
+    <Compile Include="EZMain\Tables\product_category.cs" />
+    <Compile Include="EZMain\Tables\pros_nmad_tbl.cs" />
+    <Compile Include="EZMain\Tables\pros_pdct_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\pros_pdct_tbl.cs" />
+    <Compile Include="EZMain\Tables\pros_req_skit_tbl.cs" />
+    <Compile Include="EZMain\Tables\pros_sls_strt_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\ref_rfrl_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\shipping_fee.cs" />
+    <Compile Include="EZMain\Tables\shipping_fee_detail.cs" />
+    <Compile Include="EZMain\Tables\shopping_cart.cs" />
+    <Compile Include="EZMain\Tables\shopping_cart_item.cs" />
+    <Compile Include="EZMain\Tables\site_home_page_rotator.cs" />
+    <Compile Include="EZMain\Tables\site_org_type_fr_map_tbl.cs" />
+    <Compile Include="EZMain\Tables\site_pdct_pgm_map_tbl.cs" />
+    <Compile Include="EZMain\Tables\site_pdct_tab_index_tbl.cs" />
+    <Compile Include="EZMain\Tables\site_pdct_tbl.cs" />
+    <Compile Include="EZMain\Tables\site_pgm_tbl.cs" />
+    <Compile Include="EZMain\Tables\site_ref_pckl_lkup_tbl.cs" />
+    <Compile Include="EZMain\Tables\site_testml_tbl.cs" />
+    <Compile Include="EZMain\Tables\wkfl_acty_tbl.cs" />
+    <Compile Include="EZMain\Tables\wkfl_proc_tbl.cs" />
+    <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GA.BDC.Shared.csproj">
+      <Project>{e284cab1-4979-40d7-bb94-4238f1d487a7}</Project>
+      <Name>GA.BDC.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fundraising\GA.BDC.Data.Fundraising.csproj">
+      <Project>{FFD0A441-F536-46E7-8CCE-D8B261CD2634}</Project>
+      <Name>GA.BDC.Data.Fundraising</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

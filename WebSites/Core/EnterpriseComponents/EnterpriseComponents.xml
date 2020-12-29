@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>efundraising.EnterpriseComponents</name>
+    </assembly>
+    <members>
+        <member name="T:efundraising.EnterpriseComponents.DatabaseException">
+            <summary>
+            Summary description for DatabaseException.
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.EnterpriseException">
+            <summary>
+            Summary description for EnterpriseException.
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.DataProviders">
+            <summary>
+            Enumeration of available database providers.
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.DataProviders.SqlServer">
+            <summary>
+            For SQL Server providers.
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.DataProviders.Oracle">
+            <summary>
+            For Oracle providers.
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.DataProviders.ODBC">
+            <summary>
+            For ODBC providers.
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.DataProviders.OleDb">
+            <summary>
+            For OleDb providers.
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.DataProviders.Undefined">
+            <summary>
+            For unidentified providers.
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.DatabaseInterface">
+            <summary>
+            A provider independent database interface.
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetConnection">
+            <summary>
+            Gets a connection object to the database.
+            The database provider and connection string are picked up from the configuration file.
+            </summary>
+            <returns>A connection object.</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetConnection(efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            Gets a connection object to the database.
+            The connection string is picked up from the configuration file.
+            </summary>
+            <param name="provider"></param>
+            <returns>A connection object.</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetConnection(System.String)">
+            <summary>
+            Gets a connection object to the database.
+            The data provider is picked up from the configuration file.
+            </summary>
+            <param name="connectionString"></param>
+            <returns>A connection object.</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetConnection(System.String,efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            Gets a connection object to the database based on a specific connection string and provider.
+            </summary>
+            <param name="provider"></param>
+            <param name="connectionString"></param>
+            <returns>A connection object.</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetCommand(System.String,System.Data.CommandType)">
+            <summary>
+            
+            </summary>
+            <param name="commandText"></param>
+            <param name="typeOfCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetCommand(System.String,efundraising.EnterpriseComponents.DataProviders,System.Data.CommandType)">
+            <summary>
+            
+            </summary>
+            <param name="commandText"></param>
+            <param name="provider"></param>
+            <param name="typeOfCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetCommand(System.String,efundraising.EnterpriseComponents.DataProviders,System.Data.IDbConnection,System.Data.CommandType)">
+            <summary>
+            
+            </summary>
+            <param name="commandText"></param>
+            <param name="provider"></param>
+            <param name="connectionObject"></param>
+            <param name="typeOfCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.UpdateCommandParameters(efundraising.EnterpriseComponents.DataParameters[])">
+            <summary>
+            Update the Data Parameters with the values updated in the command parameters
+            </summary>
+            <param name="dataParams"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.AddCommandParameters(System.Data.IDbCommand,efundraising.EnterpriseComponents.DataParameters[],efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            Convert the DataParameters to a specific command parameter
+            </summary>
+            <param name="command"></param>
+            <param name="parameters"></param>
+            <param name="provider"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetDataAdapter(System.Data.IDbCommand)">
+            <summary>
+            
+            </summary>
+            <param name="commandObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetDataAdapter(System.Data.IDbCommand,efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            
+            </summary>
+            <param name="commandObject"></param>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetParameter">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetParameter(efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            
+            </summary>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetConnectionString">
+            <summary>
+            
+            </summary>
+            <returns>The connection string</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetDataProviderName">
+            <summary>
+            
+            </summary>
+            <returns>The data provider name.</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.GetDataProvider">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteFetchDataSet(System.String,efundraising.EnterpriseComponents.DataParameters[])">
+            <summary>
+            Default command type set to stored procedure.
+            </summary>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteScalar(System.String,System.Data.CommandType,System.String,efundraising.EnterpriseComponents.DataParameters[],efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+            <param name="dataCommandType"></param>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <param name="dataProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteScalar(System.String,efundraising.EnterpriseComponents.DataParameters[])">
+            <summary>
+            The connection string is picked up from the config file.
+            The provider is picked up dynamically from the config file.
+            Default command type set to stored procedure.
+            </summary>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteNonQuery(System.Data.IDbConnection,System.Data.CommandType,System.Data.IDbTransaction@,System.String,efundraising.EnterpriseComponents.DataParameters[],efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+            <param name="dataCommandType"></param>
+            <param name="transaction"></param>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <param name="dataProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteNonQuery(System.String,System.Data.CommandType,System.String,efundraising.EnterpriseComponents.DataParameters[],efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            Execute non query. Generic function.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="dataCommandType"></param>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <param name="dataProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteNonQuery(System.Data.CommandType,System.String,efundraising.EnterpriseComponents.DataParameters[],efundraising.EnterpriseComponents.DataProviders)">
+            <summary>
+            
+            The connection string is picked up from the config file.
+            </summary>
+            <param name="dataCommandType"></param>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <param name="dataProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteNonQuery(System.Data.CommandType,System.String,efundraising.EnterpriseComponents.DataParameters[])">
+            <summary>
+            The connection string is picked up from the config file.
+            The provider is picked up dynamically from the config file.
+            </summary>
+            <param name="dataCommandType"></param>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.DatabaseInterface.ExecuteNonQuery(System.String,efundraising.EnterpriseComponents.DataParameters[])">
+            <summary>
+            The connection string is picked up from the config file.
+            The provider is picked up dynamically from the config file.
+            Default command type set to stored procedure.
+            </summary>
+            <param name="commandText"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.Helper">
+            <summary>
+            Summary description for Helper.
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Helper.IsInteger(System.String)">
+            <summary>
+            return true if integer, false if null or contains alpha value
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Helper.IsValidEmail(System.String)">
+            <summary>
+            Checks if an email has the required specs.
+            </summary>
+            <param name="emailAddress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Helper.GetWebConfigValue(System.String)">
+            <summary>
+            Get a value from the WebConfig.
+            </summary>
+            <param name="webConfigValue">Attribute Name</param>
+            <returns>The Web Config Value or string.Empty if not set</returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Helper.AppendToFile(System.String,System.String)">
+            <summary>
+            Append text to a file
+            </summary>
+            <param name="fileName">File name</param>
+            <param name="message">The message to insert into the file</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Helper.HexStringToColor(System.String)">
+            <summary>
+            Convert a hex string to a .NET Color object.
+            </summary>
+            <param name="hexColor">a hex string: "FFFFFF", "#000000"</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Helper.ExtractHexDigits(System.String)">
+            <summary>
+            Extract only the hex digits from a string.
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.LoggingSystem">
+            <summary>
+            This class will record an event into it's proper place specified into the web.config.
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.#ctor">
+            <summary>
+            LoginSytem constructor.
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogPanic(System.String)">
+            <summary>
+            Logs Critical Error
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogPanic(System.String,System.String)">
+            <summary>
+            Logs Critical Error
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogPanic(System.String,System.String,System.Int32)">
+            <summary>
+            Logs Critical Error using internal id
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogError(System.String)">
+            <summary>
+            Log Error
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogError(System.String,System.String)">
+            <summary>
+            Log Error
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogError(System.String,System.String,System.Int32)">
+            <summary>
+            Log Error using internal id
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogWarning(System.String)">
+            <summary>
+            Log Warning
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogWarning(System.String,System.String)">
+            <summary>
+            Log Warning
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogWarning(System.String,System.String,System.Int32)">
+            <summary>
+            Log Warning using internal id
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogInformation(System.String)">
+            <summary>
+            Log Information Event
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogInformation(System.String,System.String)">
+            <summary>
+            Log Information Event
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.LogInformation(System.String,System.String,System.Int32)">
+            <summary>
+            Log Information Event using internal id
+            </summary>
+            <param name="applicationName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String)">
+            <summary>
+            Log Event
+            Default AppName specified into WebConfig
+            Default internal Id set to -1
+            </summary>
+            <param name="logType">Type of event</param>
+            <param name="message">Event Message</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String)">
+            <summary>
+            Log Event
+            Default internal Id set to -1
+            </summary>
+            <param name="logType">Type of event</param>
+            <param name="applicationName">Application Name</param>
+            <param name="message">Event Message</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.Int32)">
+            <summary>
+            Log Event using internal id
+            Default AppName specified into WebConfig
+            </summary>
+            <param name="logType">Type of event</param>
+            <param name="message">Message</param>
+            <param name="internalID">Internal Message ID</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Log Event using internal id
+            </summary>
+            <param name="logType">Type of event</param>
+            <param name="applicationName">Application Name</param>
+            <param name="message">Message</param>
+            <param name="internalID">Internal Message ID</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String)">
+            <summary>
+            Log an Event at the specified Location
+            * application name specified into webconfig
+            * internal id is by default -1
+            </summary>
+            <param name="logLocation">Location</param>
+            <param name="logType">Log Level</param>
+            <param name="message">Message</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String)">
+            <summary>
+            Log an Event at the specified Location
+            * internal id is by default -1
+            </summary>
+            <param name="logLocation">Location</param>
+            <param name="logType">Log Level</param>
+            <param name="applicationName">App Name</param>
+            <param name="message">Message</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.Int32)">
+            <summary>
+            Log an event at the specified location
+            App Name specified into WebConfig
+            </summary>
+            <param name="logLocation">Location</param>
+            <param name="logType">Log Level</param>
+            <param name="message">Message</param>
+            <param name="internalID">Internal ID</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.Log(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Log an event at the specified location
+            </summary>
+            <param name="logLocation">Location</param>
+            <param name="logType">Log Level</param>
+            <param name="applicationName">App Name</param>
+            <param name="message">Message</param>
+            <param name="internalID">Internal ID</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.GetLogLocation(efundraising.EnterpriseComponents.LoggingSystem.LogType)">
+            <summary>
+            Get the location depending of the log type
+            These values are stored into the web config file
+            </summary>
+            <param name="logType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.SaveLog(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.Int32)">
+            <summary>
+            Generic version that will save the error into its appropriate place
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.SaveLog(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String)">
+            <summary>
+            Generic version that will save the error into its appropriate place
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.SaveLog(efundraising.EnterpriseComponents.LoggingSystem.LogLocation,efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Generic version that will save the error into its appropriate place using internal ID
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.AddToFile(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Log an event to a file
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.AddToEmail(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Send an email to the emails specified into the webconfig
+            </summary>
+            <param name="logType">Type of event</param>
+            <param name="applicationName">Application name</param>
+            <param name="message">Message</param>
+            <param name="internalID">internal id</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.AddToEventViewer(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Log an event into the event viewer
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.LoggingSystem.AddToDB(efundraising.EnterpriseComponents.LoggingSystem.LogType,System.String,System.String,System.Int32)">
+            <summary>
+            Log an event into the database
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.LoggingSystem.LogType">
+            <summary>
+            Log Types Levels
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogType.Panic">
+            <summary>
+            Critical Error
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogType.Error">
+            <summary>
+            Error Event
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogType.Warning">
+            <summary>
+            Warning Event
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogType.Info">
+            <summary>
+            Information Event
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.LoggingSystem.LogLocation">
+            <summary>
+            Log Locations (DB, Emails, Files, Event Viewer...)
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogLocation.Email">
+            <summary>
+            Notify by email
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogLocation.EventViewer">
+            <summary>
+            Notify into the event viewer
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogLocation.File">
+            <summary>
+            Notify into a file
+            </summary>
+        </member>
+        <member name="F:efundraising.EnterpriseComponents.LoggingSystem.LogLocation.Database">
+            <summary>
+            Notify into a database
+            </summary>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.Notification">
+            <summary>
+            Notification system.
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Notification.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Notification.Send(efundraising.EnterpriseComponents.Notification.SeverityLevel,System.String)">
+            <summary>
+            This method sends a notification depending on Config settings (email, pager,...)
+            </summary>
+            <param name="severity">Severity level.</param>
+            <param name="data">Data to send.</param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Notification.SendEmail(efundraising.EnterpriseComponents.Notification.SeverityLevel,System.String)">
+            <summary>
+            Not yet implemented.
+            </summary>
+            <param name="severity"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:efundraising.EnterpriseComponents.Notification.SendPager(efundraising.EnterpriseComponents.Notification.SeverityLevel,System.String)">
+            <summary>
+            Not yet implemented.
+            </summary>
+            <param name="severity"></param>
+            <param name="data"></param>
+        </member>
+        <member name="T:efundraising.EnterpriseComponents.SqlFormat">
+            <summary>
+            Summary description for SqlFormat.
+            </summary>
+        </member>
+    </members>
+</doc>

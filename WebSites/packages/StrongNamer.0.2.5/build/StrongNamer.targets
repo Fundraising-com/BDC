@@ -1,0 +1,55 @@
+<Project>
+
+  <PropertyGroup>
+    <IntermediateOutputPath Condition="$(IntermediateOutputPath) == '' Or $(IntermediateOutputPath) == '*Undefined*'">$(MSBuildProjectDirectory)\obj\$(Configuration)\</IntermediateOutputPath>
+    <StrongNamerTaskAssemblyFile Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)netcoreapp2.1\StrongNamer.dll</StrongNamerTaskAssemblyFile>
+    <StrongNamerTaskAssemblyFile Condition="'$(MSBuildRuntimeType)' != 'Core'">$(MSBuildThisFileDirectory)net461\StrongNamer.dll</StrongNamerTaskAssemblyFile>
+
+    <StrongNamerMinCoreVersionRequired>2.1</StrongNamerMinCoreVersionRequired>
+    <!-- Our default CLI version for error checking purposes -->
+    <StrongNamerNetCoreAppVersion>$(BundledNETCoreAppTargetFrameworkVersion)</StrongNamerNetCoreAppVersion>
+    <StrongNamerNetCoreAppVersion Condition="'$(StrongNamerNetCoreAppVersion)' == ''">1.0</StrongNamerNetCoreAppVersion> 
+
+</PropertyGroup>
+
+  <UsingTask TaskName="StrongNamer.AddStrongName" AssemblyFile="$(StrongNamerTaskAssemblyFile)" />
+
+  <Target Name="StrongNamerTarget"
+          AfterTargets="AfterResolveReferences"
+          Condition="'$(DisableStrongNamer)' != 'true'">
+
+    <Error Condition="'$(MSBuildRuntimeType)' == 'Core' and '$(StrongNamerMinCoreVersionRequired)' > '$(StrongNamerNetCoreAppVersion)' "
+           Text="StrongNamer requires at least the .NET Core SDK v2.1 to run with 'dotnet build'"
+           ContinueOnError="false"
+           />
+
+    <PropertyGroup>
+	    <StrongNamerKeyFile Condition="'$(StrongNamerKeyFile)'==''">$(MSBuildThisFileDirectory)SharedKey.snk</StrongNamerKeyFile>
+    </PropertyGroup>
+
+    <StrongNamer.AddStrongName
+          Assemblies="@(ReferencePath)"
+          CopyLocalFiles="@(ReferenceCopyLocalPaths)"
+          SignedAssemblyFolder="$(IntermediateOutputPath)SignedAssemblies"
+          KeyFile="$(StrongNamerKeyFile)">
+
+      <Output TaskParameter="SignedAssembliesToReference" ItemName="AssembliesToReference" />
+      <Output TaskParameter="NewCopyLocalFiles" ItemName="NewCopyLocalFiles" />
+
+    </StrongNamer.AddStrongName>
+
+    <ItemGroup>
+      <ReferencePath Remove="@(ReferencePath)" />
+      <ReferencePath Include="@(AssembliesToReference)" />
+
+      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
+      <ReferenceCopyLocalPaths Include="@(NewCopyLocalFiles)" />
+    </ItemGroup>
+
+  </Target>
+
+  <PropertyGroup>
+    <ResolveReferencesDependsOn>$(ResolveReferencesDependsOn);StrongNamerTarget</ResolveReferencesDependsOn>
+  </PropertyGroup>
+
+</Project>

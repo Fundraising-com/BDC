@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EFRECommerce" Class="EFRECommerceDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.catalog" Member="catalogs">
+    <Type Name="catalog">
+      <Column Name="catalog_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="culture_code" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="catalog_product" Member="products" ThisKey="catalog_id" OtherKey="catalog_id" Type="product" />
+      <Association Name="status_catalog" Member="status" ThisKey="status_id" OtherKey="status_id" Type="status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.subdivision" Member="subdivisions">
+    <Type Name="subdivision">
+      <Column Name="subdivision_code" Type="System.String" DbType="NVarChar(7) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="country_code" Type="System.String" DbType="NVarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="subdivision_name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="subdivision_category" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="subdivision_postal_address" Member="postal_addresses" ThisKey="subdivision_code" OtherKey="subdivision_code" Type="postal_address" />
+      <Association Name="country_subdivision" Member="country" ThisKey="country_code" OtherKey="country_code" Type="country" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.country" Member="countries">
+    <Type Name="country">
+      <Column Name="country_code" Type="System.String" DbType="NVarChar(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="country_name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="false" />
+      <Association Name="country_subdivision" Member="subdivisions" ThisKey="country_code" OtherKey="country_code" Type="subdivision" />
+    </Type>
+  </Table>
+  <Table Name="dbo.credit_card" Member="credit_cards">
+    <Type Name="credit_card">
+      <Column Name="credit_card_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="credit_card_number" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="credit_card_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="credit_card_cvv2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="credit_card_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="credit_card_expiration_month" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="credit_card_expiration_year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="create_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="update_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="update_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="phone_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="postal_address_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="last_cc_digits" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="GUID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="credit_card_credit_card_authorization" Member="credit_card_authorizations" ThisKey="credit_card_id" OtherKey="credit_card_id" Type="credit_card_authorization" />
+      <Association Name="credit_card_order" Member="orders" ThisKey="credit_card_id" OtherKey="credit_card_id" Type="order" />
+      <Association Name="credit_card_type_credit_card" Member="credit_card_type" ThisKey="credit_card_type_id" OtherKey="credit_card_type_id" Type="credit_card_type" IsForeignKey="true" />
+      <Association Name="phone_number_credit_card" Member="phone_number" ThisKey="phone_number_id" OtherKey="phone_number_id" Type="phone_number" IsForeignKey="true" />
+      <Association Name="postal_address_credit_card" Member="postal_address" ThisKey="postal_address_id" OtherKey="postal_address_id" Type="postal_address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.credit_card_authorization" Member="credit_card_authorizations">
+    <Type Name="credit_card_authorization">
+      <Column Name="credit_authorization_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="credit_card_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="transmission_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="transmission_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="transmission_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="transaction_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="response_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="response_auth_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="response_order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="response_payment_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="comment" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="response_message" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="credit_card_credit_card_authorization" Member="credit_card" ThisKey="credit_card_id" OtherKey="credit_card_id" Type="credit_card" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.credit_card_type" Member="credit_card_types">
+    <Type Name="credit_card_type">
+      <Column Name="credit_card_type_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="credit_card_type_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="credit_card_type_credit_card" Member="credit_cards" ThisKey="credit_card_type_id" OtherKey="credit_card_type_id" Type="credit_card" />
+    </Type>
+  </Table>
+  <Table Name="dbo.email" Member="emails">
+    <Type Name="email">
+      <Column Name="email_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="recipient_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="email_shipment_group" Member="shipment_groups" ThisKey="email_id" OtherKey="shipping_email_id" Type="shipment_group" />
+      <Association Name="email_order" Member="orders" ThisKey="email_id" OtherKey="billing_email_id" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.order_comment" Member="order_comments">
+    <Type Name="order_comment">
+      <Column Name="order_comment_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="comment" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="order_comment_order" Member="orders" ThisKey="order_comment_id" OtherKey="order_comment_id" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.order_detail" Member="order_details">
+    <Type Name="order_detail">
+      <Column Name="order_detail_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="shipment_group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="reoccurance_plan_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="reoccurance_status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="order_detail_recurrence_order_detail" Member="recurrence_order_details" ThisKey="order_detail_id" OtherKey="order_detail_id" Type="recurrence_order_detail" />
+      <Association Name="order_detail_recurrence_order_detail1" Member="recurrence_order_details1" ThisKey="order_detail_id" OtherKey="recurrence_order_detail_id" Type="recurrence_order_detail" />
+      <Association Name="product_order_detail" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
+      <Association Name="recurrence_plan_order_detail" Member="recurrence_plan" ThisKey="reoccurance_plan_id" OtherKey="recurrence_plan_id" Type="recurrence_plan" IsForeignKey="true" />
+      <Association Name="shipment_group_order_detail" Member="shipment_group" ThisKey="shipment_group_id" OtherKey="shipment_group_id" Type="shipment_group" IsForeignKey="true" />
+      <Association Name="status_order_detail" Member="status" ThisKey="reoccurance_status_id" OtherKey="status_id" Type="status" IsForeignKey="true" />
+      <Association Name="status_order_detail1" Member="status1" ThisKey="status_id" OtherKey="status_id" Type="status" IsForeignKey="true" />
+      <Association Name="order_order_detail" Member="order" ThisKey="order_id" OtherKey="order_id" Type="order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.phone_number" Member="phone_numbers">
+    <Type Name="phone_number">
+      <Column Name="phone_number_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="phone_number" Member="phone_number1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="phone_number_credit_card" Member="credit_cards" ThisKey="phone_number_id" OtherKey="phone_number_id" Type="credit_card" />
+      <Association Name="phone_number_shipment_group" Member="shipment_groups" ThisKey="phone_number_id" OtherKey="shipping_phone_number_id" Type="shipment_group" />
+      <Association Name="phone_number_order" Member="orders" ThisKey="phone_number_id" OtherKey="billing_phone_number_id" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.postal_address" Member="postal_addresses">
+    <Type Name="postal_address">
+      <Column Name="postal_address_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="zip" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="zip4" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="subdivision_code" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="residential_area" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="postal_address_credit_card" Member="credit_cards" ThisKey="postal_address_id" OtherKey="postal_address_id" Type="credit_card" />
+      <Association Name="postal_address_shipment_group" Member="shipment_groups" ThisKey="postal_address_id" OtherKey="shipping_postal_address_id" Type="shipment_group" />
+      <Association Name="postal_address_order" Member="orders" ThisKey="postal_address_id" OtherKey="billing_postal_address_id" Type="order" />
+      <Association Name="subdivision_postal_address" Member="subdivision" ThisKey="subdivision_code" OtherKey="subdivision_code" Type="subdivision" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.product" Member="products">
+    <Type Name="product">
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="catalog_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="product_code" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="remit_code" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="status_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="culture_code" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="product_order_detail" Member="order_details" ThisKey="product_id" OtherKey="product_id" Type="order_detail" />
+      <Association Name="catalog_product" Member="catalog" ThisKey="catalog_id" OtherKey="catalog_id" Type="catalog" IsForeignKey="true" />
+      <Association Name="status_product" Member="status" ThisKey="status_id" OtherKey="status_id" Type="status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.receipt" Member="receipts">
+    <Type Name="receipt">
+      <Column Name="receipt_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="url" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="order_receipt" Member="order" ThisKey="order_id" OtherKey="order_id" Type="order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.recurrence_order_detail" Member="recurrence_order_details">
+    <Type Name="recurrence_order_detail">
+      <Column Name="recurrence_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="recurrence_order_detail_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_detail_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="order_detail_recurrence_order_detail" Member="order_detail" ThisKey="order_detail_id" OtherKey="order_detail_id" Type="order_detail" IsForeignKey="true" />
+      <Association Name="order_detail_recurrence_order_detail1" Member="order_detail1" ThisKey="recurrence_order_detail_id" OtherKey="order_detail_id" Type="order_detail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.recurrence_plan" Member="recurrence_plans">
+    <Type Name="recurrence_plan">
+      <Column Name="recurrence_plan_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="recurrence_plan_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="frequency" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="annual_frequency" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="recurrence_plan_order_detail" Member="order_details" ThisKey="recurrence_plan_id" OtherKey="reoccurance_plan_id" Type="order_detail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.shipment_group" Member="shipment_groups">
+    <Type Name="shipment_group">
+      <Column Name="shipment_group_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="shipping_postal_address_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shipping_phone_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shipping_email_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shipment_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="shipping_charges" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fulf_shipment_tracking" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Association Name="shipment_group_order_detail" Member="order_details" ThisKey="shipment_group_id" OtherKey="shipment_group_id" Type="order_detail" />
+      <Association Name="email_shipment_group" Member="email" ThisKey="shipping_email_id" OtherKey="email_id" Type="email" IsForeignKey="true" />
+      <Association Name="phone_number_shipment_group" Member="phone_number" ThisKey="shipping_phone_number_id" OtherKey="phone_number_id" Type="phone_number" IsForeignKey="true" />
+      <Association Name="postal_address_shipment_group" Member="postal_address" ThisKey="shipping_postal_address_id" OtherKey="postal_address_id" Type="postal_address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.source" Member="sources">
+    <Type Name="source">
+      <Column Name="source_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="source_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="source_order" Member="orders" ThisKey="source_id" OtherKey="source_id" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.status" Member="status">
+    <Type Name="status">
+      <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="status_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="short_description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="status_catalog" Member="catalogs" ThisKey="status_id" OtherKey="status_id" Type="catalog" />
+      <Association Name="status_order_detail" Member="order_details" ThisKey="status_id" OtherKey="reoccurance_status_id" Type="order_detail" />
+      <Association Name="status_order_detail1" Member="order_details1" ThisKey="status_id" OtherKey="status_id" Type="order_detail" />
+      <Association Name="status_product" Member="products" ThisKey="status_id" OtherKey="status_id" Type="product" />
+      <Association Name="status_order" Member="orders" ThisKey="status_id" OtherKey="status_id" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[order]" Member="orders">
+    <Type Name="order">
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="source_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="billing_postal_address_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="billing_phone_number_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="billing_email_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_participation_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="recurrence_request_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ext_lead_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="adjustment_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ext_order_tracking" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GUID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="credit_card_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_comment_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="order_order_detail" Member="order_details" ThisKey="order_id" OtherKey="order_id" Type="order_detail" />
+      <Association Name="order_receipt" Member="receipts" ThisKey="order_id" OtherKey="order_id" Type="receipt" />
+      <Association Name="email_order" Member="email" ThisKey="billing_email_id" OtherKey="email_id" Type="email" IsForeignKey="true" />
+      <Association Name="phone_number_order" Member="phone_number" ThisKey="billing_phone_number_id" OtherKey="phone_number_id" Type="phone_number" IsForeignKey="true" />
+      <Association Name="postal_address_order" Member="postal_address" ThisKey="billing_postal_address_id" OtherKey="postal_address_id" Type="postal_address" IsForeignKey="true" />
+      <Association Name="credit_card_order" Member="credit_card" ThisKey="credit_card_id" OtherKey="credit_card_id" Type="credit_card" IsForeignKey="true" />
+      <Association Name="order_comment_order" Member="order_comment" ThisKey="order_comment_id" OtherKey="order_comment_id" Type="order_comment" IsForeignKey="true" />
+      <Association Name="source_order" Member="source" ThisKey="source_id" OtherKey="source_id" Type="source" IsForeignKey="true" />
+      <Association Name="status_order" Member="status" ThisKey="status_id" OtherKey="status_id" Type="status" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

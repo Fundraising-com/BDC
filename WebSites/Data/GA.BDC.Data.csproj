@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2A489D5C-2E16-447A-B351-F6A01860435C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GA.BDC.Data</RootNamespace>
+    <AssemblyName>GA.BDC.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FileAlignment>4096</FileAlignment>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FileAlignment>4096</FileAlignment>
+    <DebugSymbols>false</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BDCMassmailer.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDCMassmailer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\DataLayerBase.cs" />
+    <Compile Include="DataLayer\EZClients.cs" />
+    <Compile Include="DataLayer\EZOrders.cs" />
+    <Compile Include="DataLayer\EZPayments.cs" />
+    <Compile Include="DataLayer\FastFundraising.cs" />
+    <Compile Include="DataLayer\Mailer.cs" />
+    <Compile Include="DataLayer\OnlineOrders.cs" />
+    <Compile Include="DataLayer\Orders.cs" />
+    <Compile Include="DataLayer\Partner.cs" />
+    <Compile Include="DataLayer\Payments.cs" />
+    <Compile Include="DataLayer\Personalization.cs" />
+    <Compile Include="DataLayer\TouchChangeLogger.cs" />
+    <Compile Include="DataLayer\TouchEmailTemplate.cs" />
+    <Compile Include="EFRCommon.cs">
+      <DependentUpon>EFRCommon.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EFRCommon.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFRCommon.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EFRECommerce.cs">
+      <DependentUpon>EFRECommerce.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EFRECommerce.designer.cs">
+      <DependentUpon>EFRECommerce.dbml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="eFundraisingProd.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eFundraisingProd.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="eFundraisingProdDataContext.cs" />
+    <Compile Include="EsubsGlobalV2.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EsubsGlobalV2.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EsubsGlobalV2DataContext.cs" />
+    <Compile Include="EZMainCloud.designer.cs">
+      <DependentUpon>EZMainCloud.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="EZMainCloudDataContext.cs" />
+    <Compile Include="EZMainDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EZMainDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FastFundraising.cs">
+      <DependentUpon>FastFundraising.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="FastFundraising.designer.cs">
+      <DependentUpon>FastFundraising.dbml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\__SoftwarePublishing\StrongName\Private\SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk">
+      <Link>SWCorporate.SoftwarePublishing.StrongName.Private.KeyPair.snk</Link>
+    </None>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDCMassmailer.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>BDCMassmailer.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EFRCommon.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EFRCommon.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EFRECommerce.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EFRECommerce.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="eFundraisingProd.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>eFundraisingProd.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EsubsGlobalV2.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EsubsGlobalV2.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EZMainCloud.dbml">
+      <SubType>Designer</SubType>
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EZMainCloud.designer.cs</LastGenOutput>
+    </None>
+    <None Include="EZMainCloud.dbml.layout">
+      <DependentUpon>EZMainCloud.dbml</DependentUpon>
+    </None>
+    <None Include="EZMainDataSet.xsc">
+      <DependentUpon>EZMainDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="EZMainDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EZMainDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EZMainDataSet.xss">
+      <DependentUpon>EZMainDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="FastFundraising.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>FastFundraising.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="eFundraisingProd.dbml.layout">
+      <DependentUpon>eFundraisingProd.dbml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDCMassmailer.dbml.layout">
+      <DependentUpon>BDCMassmailer.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EFRCommon.dbml.layout">
+      <DependentUpon>EFRCommon.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EsubsGlobalV2.dbml.layout">
+      <DependentUpon>EsubsGlobalV2.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EFRECommerce.dbml.layout">
+      <DependentUpon>EFRECommerce.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FastFundraising.dbml.layout">
+      <DependentUpon>FastFundraising.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

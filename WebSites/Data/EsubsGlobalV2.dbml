@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="esubs_global_v2" Class="EsubsGlobalV2DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=GASQLP02;Initial Catalog=esubs_global_v2;Integrated Security=True" SettingsObjectName="GA.BDC.Data.Properties.Settings" SettingsPropertyName="esubs_global_v2ConnectionString3" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.display_product_type" Member="display_product_types">
+    <Type Name="display_product_type">
+      <Column Name="display_product_type_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="display_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="external_product_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.touch_change_log" Member="touch_change_logs">
+    <Type Name="touch_change_log">
+      <Column Name="touch_change_log_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email_template_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="created_by" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="touch_change_log_touch_change_log_detail" Member="touch_change_log_details" ThisKey="touch_change_log_id" OtherKey="touch_change_log_id" Type="touch_change_log_detail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.touch_change_log_details" Member="touch_change_log_details">
+    <Type Name="touch_change_log_detail">
+      <Column Name="touch_change_log_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="email_template_field_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
+      <Column Name="prod_refreshed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="refreshed_by" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="refreshed_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="touch_change_log_touch_change_log_detail" Member="touch_change_log" ThisKey="touch_change_log_id" OtherKey="touch_change_log_id" Type="touch_change_log" IsForeignKey="true" />
+      <Association Name="email_template_field_touch_change_log_detail" Member="email_template_field" ThisKey="email_template_field_id" OtherKey="email_template_field_id" Type="email_template_field" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.email_template_field" Member="email_template_fields">
+    <Type Name="email_template_field">
+      <Column Name="email_template_field_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="field_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="table_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="type_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="email_template_field_touch_change_log_detail" Member="touch_change_log_details" ThisKey="email_template_field_id" OtherKey="email_template_field_id" Type="touch_change_log_detail" />
+    </Type>
+  </Table>
+  <Function Name="dbo.es_get_valid_orders_items_by_partner_id" Method="es_get_valid_orders_items_by_partner_id" IsComposable="true">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_valid_orders_items_by_partner_idResult">
+      <Column Name="rownum" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="act" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_item_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="sub_total" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="tax" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="freight" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="redeemed_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="supp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="supp_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="product_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_type_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_valid_orders_items" Method="es_get_valid_orders_items" IsComposable="true">
+    <ElementType Name="es_get_valid_orders_itemsResult">
+      <Column Name="rownum" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="act" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_item_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="sub_total" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="tax" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="freight" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="redeemed_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="supp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="supp_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="product_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_type_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_kickoff_by_partner_id" Method="es_get_kickoff_by_partner_id">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="start_date" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="es_get_kickoff_by_partner_idResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_auto_created_groups_by_partner_id" Method="es_get_auto_created_groups_by_partner_id">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="start_date" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="es_get_auto_created_groups_by_partner_idResult">
+      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="group_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_valid_orders_items_by_partner_id_and_date_range" Method="es_get_valid_orders_items_by_partner_id_and_date_range" IsComposable="true">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fromdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="todate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="es_get_valid_orders_items_by_partner_id_and_date_rangeResult">
+      <Column Name="rownum" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="act" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_item_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="sub_total" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="tax" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="freight" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="redeemed_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="supp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="supp_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="product_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_type_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_valid_orders_items_by_order_item_id" Method="es_get_valid_orders_items_by_order_item_id" IsComposable="true">
+    <Parameter Name="order_item_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_valid_orders_items_by_order_item_idResult">
+      <Column Name="rownum" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="act" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_item_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="sub_total" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="tax" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="freight" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="handling_fee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="redeemed_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="supp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="supp_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="item_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="product_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_type_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isrenewal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_email_templates_by_search_term" Method="es_get_email_templates_by_search_term">
+    <Parameter Name="email_template_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="culture_code" Type="System.String" DbType="NVarChar(5)" />
+    <Parameter Name="email_template_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="description" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="es_get_email_templates_by_search_termResult">
+      <Column Name="email_template_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email_template_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_touch_change_logs" Method="es_get_touch_change_logs">
+    <ElementType Name="es_get_touch_change_logsResult">
+      <Column Name="touch_change_log_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email_template_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="modified_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified_by" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="email_template_field_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="field_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="value" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="prod_refreshed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="refreshed_by" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="refreshed_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_touch_update_delivery_confirmation" Method="es_touch_update_delivery_confirmation">
+    <Parameter Name="touch_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="delivery_confirmation" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.es_get_personalization_redirect_startswith" Method="es_get_personalization_redirect_startswith">
+    <Parameter Name="redirect" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="es_get_personalization_redirect_startswithResult">
+      <Column Name="personalization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="header_title1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="header_title2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="body" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="fundraising_goal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="site_bgcolor" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="header_bgcolor" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="header_color" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="group_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="image_motivator" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="redirect" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="displayGroupMessage" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="remind_later" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_touch_add_action" Method="es_touch_add_action">
+    <Parameter Name="touch_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="action_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.es_update_touch_ndr" Method="es_update_touch_ndr">
+    <Parameter Name="touchId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.es_update_touch_complaint" Method="es_update_touch_complaint">
+    <Parameter Name="touchId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.es_get_touch_by_external_od" Method="es_get_touch_by_external_od">
+    <Parameter Name="external_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_touch_by_external_odResult">
+      <Column Name="touch_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_update_touch_delivery" Method="es_update_touch_delivery">
+    <Parameter Name="touch_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.es_update_touch_status" Method="es_update_touch_status">
+    <Parameter Name="touch_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

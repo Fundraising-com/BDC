@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sentry.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="T:Sentry.EntityFramework.SentryDatabaseLogging">
+            <summary>
+            Sentry Database Logger
+            </summary>
+        </member>
+        <member name="M:Sentry.EntityFramework.SentryDatabaseLogging.UseBreadcrumbs(Sentry.EntityFramework.IQueryLogger)">
+            <summary>
+            Adds an instance of <see cref="T:Sentry.EntityFramework.SentryCommandInterceptor"/> to <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception"/>
+            This is a static setup call, so make sure you only call it once for each <see cref="T:Sentry.EntityFramework.IQueryLogger"/> instance you want to register globally
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Sentry.SentryOptionsExtensions">
+            <summary>
+            Extension methods to <see cref="T:Sentry.SentryOptions"/>
+            </summary>
+        </member>
+        <member name="M:Sentry.SentryOptionsExtensions.AddEntityFramework(Sentry.SentryOptions)">
+            <summary>
+            Adds the entity framework integration.
+            </summary>
+            <param name="sentryOptions">The sentry options.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

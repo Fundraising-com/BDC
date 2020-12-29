@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EFRCommon" Class="DataProviderDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=GASQLT02;Initial Catalog=EFRCommon;Integrated Security=True;Application Name=GA.BDC.Web.MGP" SettingsObjectName="GA.BDC.Data.MGP.Properties.Settings" SettingsPropertyName="EFRCommonConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.es_get_partner_custom_attribute_values" Method="es_get_partner_custom_attribute_values">
+    <Parameter Name="partnerId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_partner_custom_attribute_valuesResult">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_attribute_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_partner_profit" Method="es_get_partner_profit">
+    <Parameter Name="partnerId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_partner_profitResult">
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Percentage" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ProfitGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Disclaimer" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="PartnerType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

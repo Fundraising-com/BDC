@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="esubs_global_v2" Class="DataProviderDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=GASQLT02;Initial Catalog=esubs_global_v2;Integrated Security=True;Application Name=GA.BDC.Web.MGP" SettingsObjectName="GA.BDC.Data.MGP.Properties.Settings" SettingsPropertyName="esubs_global_v2ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.es_get_subdivision" Method="es_get_subdivision">
+    <Parameter Name="country_code" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="language_code" Type="System.String" DbType="NVarChar(2)" />
+    <ElementType Name="es_get_subdivisionResult">
+      <Column Name="subdivision_code" Type="System.String" DbType="NVarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="subdivision_name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_personalization" Method="es_get_personalization">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_personalizationResult">
+      <Column Name="personalization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="header_title1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="header_title2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="body" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="fundraising_goal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="site_bgcolor" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="header_bgcolor" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="header_color" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="group_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="image_motivator" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="redirect" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="displayGroupMessage" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="remind_later" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_personalization_coveralbum_image" Method="es_get_personalization_coveralbum_image">
+    <Parameter Name="personalization_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_personalization_coveralbum_imageResult">
+      <Column Name="image_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="personalization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="high_image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isCoverAlbum" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="image_approval_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_campaign_summary_report" Method="es_rpt_campaign_summary_report">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_campaign_summary_reportResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nb_group_members" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_part" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_supporters" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount_sold" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="donation_amount_sold" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="profit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="last_activity" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_donor_comments_by_partner_id" Method="es_get_donor_comments_by_partner_id">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_donor_comments_by_partner_idResult">
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="donor_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="donor_comments" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_supporters_invited" Method="es_rpt_supporters_invited">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_supporters_invitedResult">
+      <Column Name="first_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="profit" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="is_supp" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="efrecom_donation_amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_event_email_sent" Method="es_get_event_email_sent">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_event_email_sentResult">
+      <Column Name="launch_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="email_desc" Type="System.String" DbType="VarChar(27) NOT NULL" CanBeNull="false" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_participant_stats_summary" Method="es_get_participant_stats_summary">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_participant_stats_summaryResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nb_gm_email" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_gm" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gm_invited" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gm_bought" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_event_sellers" Method="es_get_event_sellers">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_event_sellersResult">
+      <Column Name="supp_name" Type="System.String" DbType="VarChar(201)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_event_email_sent_for_participant" Method="es_get_event_email_sent_for_participant">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="eventParticipationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_event_email_sent_for_participantResult">
+      <Column Name="launch_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="email_desc" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_supporter_stats_summary" Method="es_get_supporter_stats_summary">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="eventParticipationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_supporter_stats_summaryResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nb_supp_email" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="supp_bought" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_event_supporter_sellers" Method="es_get_event_supporter_sellers">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="eventParticipationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_event_supporter_sellersResult">
+      <Column Name="supp_name" Type="System.String" DbType="VarChar(511) NOT NULL" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_sponsor_email_product_type_by_date_range" Method="es_rpt_sponsor_email_product_type_by_date_range">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fromdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="todate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="es_rpt_sponsor_email_product_type_by_date_rangeResult">
+      <Column Name="member_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="supporter_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="profit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="product_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_desc" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="product_type_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_event_member_prize_stats" Method="es_rpt_event_member_prize_stats">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_event_member_prize_statsResult">
+      <Column Name="first_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nb_supp" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_generate_matching_code" Method="es_generate_matching_code" IsComposable="true">
+    <Parameter Name="address" Type="System.String" DbType="VarChar(127)" />
+    <Parameter Name="zip" Type="System.String" DbType="VarChar(10)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.es_rpt_supporters_invited_product_type_by_date_range" Method="es_rpt_supporters_invited_product_type_by_date_range">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fromdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="todate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="es_rpt_supporters_invited_product_type_by_date_rangeResult">
+      <Column Name="first_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="order_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="profit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="product_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_desc" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="product_type_desc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_group_member_report" Method="es_rpt_group_member_report">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_group_member_reportResult">
+      <Column Name="member_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="profit" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_validate_login" Method="es_validate_login">
+    <Parameter Name="email_address" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_validate_loginResult">
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_sponsor_email_donation_amount" Method="es_rpt_sponsor_email_donation_amount">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_sponsor_email_donation_amountResult">
+      <Column Name="member_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="supporter_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_supporters_invited_donation_amount" Method="es_rpt_supporters_invited_donation_amount">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_supporters_invited_donation_amountResult">
+      <Column Name="first_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_rpt_group_member_donation_amount" Method="es_rpt_group_member_donation_amount">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_rpt_group_member_donation_amountResult">
+      <Column Name="member_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_total_event_amount_by_partner_id" Method="es_get_total_event_amount_by_partner_id">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_total_event_amount_by_partner_idResult">
+      <Column Name="items" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="total_supporters" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_donation_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="total_donars" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_personalization_images_by_event_id" Method="es_get_personalization_images_by_event_id">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_personalization_images_by_event_idResult">
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="isCoverAlbum" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_personalization_images" Method="es_get_personalization_images">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_personalization_imagesResult">
+      <Column Name="image_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="personalization_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="isCoverAlbum" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="image_approval_status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="approver_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="approved_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="high_image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_participant_constraint" Method="es_get_participant_constraint">
+    <Parameter Name="sponsorRedirect" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="participantRedirect" Type="System.String" DbType="NVarChar(200)" />
+    <ElementType Name="es_get_participant_constraintResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_group_constraint" Method="es_get_group_constraint">
+    <Parameter Name="sponsorRedirect" Type="System.String" DbType="NVarChar(200)" />
+    <ElementType Name="es_get_group_constraintResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_partner_branding" Method="es_get_partner_branding">
+    <Parameter Name="partnerId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_partner_brandingResult">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_offer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="program_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="payment_to" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_member_by_event_participation_id" Method="es_get_member_by_event_participation_id">
+    <Parameter Name="participantId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_member_by_event_participation_idResult">
+      <Column Name="member_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_partner_by_event_id" Method="es_get_partner_by_event_id">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_partner_by_event_idResult">
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_get_sponsor_info" Method="cc_get_sponsor_info">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_get_sponsor_infoResult">
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="group_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="unsubscribed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="movie_ticket" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="account_number" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_unsubscribe" Method="cc_unsubscribe">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="is_unsubscribe" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.cc_issue_movie_ticket" Method="cc_issue_movie_ticket">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_issue_movie_ticketResult">
+      <Column Name="" Member="Column1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_get_participant_stats" Method="cc_get_participant_stats">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_get_participant_statsResult">
+      <Column Name="participant_name" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="email_sent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount_sold" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="profit" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="participant_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bounced_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="movie_ticket" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="unsubscribed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_get_supporters_invited" Method="cc_get_supporters_invited">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_get_supporters_invitedResult">
+      <Column Name="supporter_name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="supporter_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="profit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="bounced" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="unsubscribed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="orderdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="parent_member_hierarchy_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_get_links_info" Method="cc_get_links_info">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_get_links_infoResult">
+      <Column Name="redirect" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_search_by_email" Method="cc_search_by_email">
+    <Parameter Name="valeur" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cc_search_by_emailResult">
+      <Column Name="group_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_search_by_lead_id" Method="cc_search_by_lead_id">
+    <Parameter Name="valeur" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_search_by_lead_idResult">
+      <Column Name="group_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_search_by_member_name" Method="cc_search_by_member_name">
+    <Parameter Name="valeur" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cc_search_by_member_nameResult">
+      <Column Name="group_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cc_order_transfer" Method="cc_order_transfer">
+    <Parameter Name="event_participation_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="parent_member_hierarchy_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.cc_get_orders_for_campaign" Method="cc_get_orders_for_campaign">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="cc_get_orders_for_campaignResult">
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="member_name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="nb_subs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="customer_Name" Type="System.String" DbType="VarChar(511)" CanBeNull="true" />
+      <Column Name="CatalogItemTitle" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="orderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OrderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="eds_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_member_hierarchy_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_name" Type="System.String" DbType="VarChar(201)" CanBeNull="true" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_init_payment_info" Method="es_init_payment_info">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.cc_get_member_by_email" Method="cc_get_member_by_email">
+    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="cc_get_member_by_emailResult">
+      <Column Name="member_hierarchy_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="parent_member_hierarchy_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="member_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="creation_channel_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="opt_status_id" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="middle_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="email_address" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bounced" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="lead_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="creation_channel_name" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="unsubscribe" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="partner_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_touch_add_action" Method="es_touch_add_action">
+    <Parameter Name="touch_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="action_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.es_find_something" Method="es_find_something">
+    <Parameter Name="keyword" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="searchType" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="city" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="country_code" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="subdivision_code" Type="System.String" DbType="NVarChar(7)" />
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="group_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_find_somethingResult">
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="culture_code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="partner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="country_code" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="subdivision_code" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="total_supporters" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_donation_amount" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="total_donors" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_profit" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="participant_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_top3_participant_total_amount_by_partner_id" Method="es_get_top3_participant_total_amount_by_partner_id">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="maxResults" Type="System.Int32" DbType="Int" />
+    <Parameter Name="groupId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_top3_participant_total_amount_by_partner_idResult">
+      <Column Name="event_participation_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="participant_name" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="items" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="total_supporters" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="total_donation_amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="total_donors" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="total_profit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="goal" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.es_get_top3_event_total_amount_by_partner_id" Method="es_get_top3_event_total_amount_by_partner_id">
+    <Parameter Name="partner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="maxResults" Type="System.Int32" DbType="Int" />
+    <Parameter Name="groupId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="es_get_top3_event_total_amount_by_partner_idResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="items" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="total_amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="total_supporters" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="total_donation_amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="total_donars" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="total_profit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="image_url" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_name" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_group_cardbox" Method="sp_group_cardbox" IsComposable="true">
+    <Parameter Name="groupId" Type="System.Int32" DbType="Int" />
+    <Return Type="object" />
+  </Function>
+</Database>
