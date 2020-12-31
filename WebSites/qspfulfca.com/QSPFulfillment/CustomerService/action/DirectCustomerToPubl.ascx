@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="DirectCustomerToPubl.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.DirectCustomerToPubl" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="AdjustmentBatchDataSet" targetNamespace="http://tempuri.org/AdjustmentBatchDataSet.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/AdjustmentBatchDataSet.xsd"
+	xmlns:mstns="http://tempuri.org/AdjustmentBatchDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="AdjustmentBatchDataSet" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="AdjustmentBatch">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="AdjustmentTypeID" type="xs:int" />
+							<xs:element name="Status" type="xs:int" />
+							<xs:element name="DateFrom" type="xs:dateTime" />
+							<xs:element name="DateTo" type="xs:dateTime" />
+							<xs:element name="CreateUserID" type="xs:int" />
+							<xs:element name="CreateDate" type="xs:dateTime" />
+							<xs:element name="ChangeUserID" type="xs:int" minOccurs="0" />
+							<xs:element name="ChangeDate" type="xs:dateTime" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="AdjustmentBatchDataSetKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:AdjustmentBatch" />
+			<xs:field xpath="mstns:ID" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

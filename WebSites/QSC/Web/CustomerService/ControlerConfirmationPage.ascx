@@ -1,0 +1,2 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="ControlerConfirmationPage.ascx.cs" Inherits="QSPFulfillment.CustomerService.ControlerConfirmationPage" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
+<input type="hidden" id="hidConfirmed" runat="server" value="0">

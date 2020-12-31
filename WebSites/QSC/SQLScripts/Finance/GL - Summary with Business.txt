@@ -1,0 +1,64 @@
+USE [QSPCanadaFinance]
+GO
+
+	SELECT		CASE e.BusinessUnitID
+					WHEN 1 THEN 'Time QSP'
+					WHEN 2 THEN 'Time EFR'
+					WHEN 3 THEN 'GAO QSP'
+					WHEN 4 THEN 'GAO EFR'
+				END Business,
+				CASE glAcc.BusinessUnitID
+					WHEN 1 THEN	'00172'
+					WHEN 2 THEN '00173'
+					WHEN 3 THEN	'00172'
+					WHEN 4 THEN '00173'
+					ELSE		NULL
+				END AS BusinessUnitID,
+				ROW_NUMBER() OVER(ORDER BY glAcc.BusinessUnitID, e.Country_Code, glAcc.Account, glAcc.Division, glAcc.Product, glAcc.Department) AS 'JournalLineID',
+				glAcc.Account,
+				glAcc.Division,
+				glAcc.Product,
+				glAcc.Department,
+				glAcc.Project,
+				glAcc.Source,
+				glAcc.Geographic,
+				glAcc.Other,
+				glAcc.Affiliate,
+				CASE e.Country_Code
+					WHEN 'CA' THEN	'CAD'
+					ELSE			'USD'
+				END Currency,
+				SUM(CASE t.Debit_Credit
+						WHEN 'C' THEN	t.Amount * -1
+						ELSE			t.Amount
+					END) AS Amount,
+				glAcc.Description
+	FROM		GL_Entry e
+	JOIN		GL_Transaction t
+					ON	t.GL_Entry_ID = e.GL_Entry_ID
+	LEFT JOIN	GLAccount glAcc
+					ON	glAcc.GLAccountID = t.GLAccountID
+	WHERE		e.GL_Entry_Date BETWEEN '2012-01-27' AND '2012-04-14'
+	GROUP BY	e.BusinessUnitID,
+				glAcc.BusinessUnitID,
+				glAcc.Account,
+				glAcc.Division,
+				glAcc.Product,
+				glAcc.Department,
+				glAcc.Project,
+				glAcc.Source,
+				glAcc.Geographic,
+				glAcc.Other,
+				glAcc.Affiliate,
+				e.Country_Code,
+				glAcc.Description
+	HAVING		SUM(CASE t.Debit_Credit
+						WHEN 'C' THEN	t.Amount * -1
+						ELSE			t.Amount
+					END) <> 0.00
+	ORDER BY	glAcc.BusinessUnitID,
+				e.Country_Code,
+				glAcc.Account,
+				glAcc.Division,
+				glAcc.Product,
+				glAcc.Department

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QSPCanadaCommonModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="QSPCanadaCommonModelStoreContainer" />
+        <Function Name="PR_CALC_ORDER_ITEM_AMOUNTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_date" Type="varchar" Mode="In" />
+          <Parameter Name="p_amount" Type="numeric" Mode="In" />
+          <Parameter Name="p_section_id" Type="int" Mode="In" />
+          <Parameter Name="p_product_code" Type="varchar" Mode="In" />
+          <Parameter Name="p_is_straight_order" Type="varchar" Mode="In" />
+          <Parameter Name="p_campaign_id" Type="int" Mode="In" />
+          <Parameter Name="MagPrice_Instance" Type="int" Mode="In" />
+          <Parameter Name="p_ProvinceCode" Type="varchar" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QSPCanadaCommonModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="QSPCanadaCommonEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="PR_CALC_ORDER_ITEM_AMOUNTS" ReturnType="Collection(QSPCanadaCommonModel.TaxResult)">
+            <Parameter Name="p_date" Mode="In" Type="String" />
+            <Parameter Name="p_amount" Mode="In" Type="Decimal" />
+            <Parameter Name="p_section_id" Mode="In" Type="Int32" />
+            <Parameter Name="p_product_code" Mode="In" Type="String" />
+            <Parameter Name="p_is_straight_order" Mode="In" Type="String" />
+            <Parameter Name="p_campaign_id" Mode="In" Type="Int32" />
+            <Parameter Name="MagPrice_Instance" Mode="In" Type="Int32" />
+            <Parameter Name="p_ProvinceCode" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="TaxResult">
+          <Property Type="Decimal" Name="tax1" Nullable="true" Precision="14" Scale="6" />
+          <Property Type="Decimal" Name="tax2" Nullable="true" Precision="14" Scale="6" />
+          <Property Type="Decimal" Name="gross" Nullable="true" Precision="14" Scale="6" />
+          <Property Type="Decimal" Name="net" Nullable="true" Precision="14" Scale="6" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QSPCanadaCommonModelStoreContainer" CdmEntityContainer="QSPCanadaCommonEntities" >
+          <FunctionImportMapping FunctionImportName="PR_CALC_ORDER_ITEM_AMOUNTS" FunctionName="QSPCanadaCommonModel.Store.PR_CALC_ORDER_ITEM_AMOUNTS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QSPCanadaCommonModel.TaxResult">
+                <ScalarProperty Name="tax1" ColumnName="tax1" />
+                <ScalarProperty Name="tax2" ColumnName="tax2" />
+                <ScalarProperty Name="gross" ColumnName="gross" />
+                <ScalarProperty Name="net" ColumnName="net" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="CommonModel" />
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

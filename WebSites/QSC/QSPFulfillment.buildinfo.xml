@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<projects>
+
+ <Common>
+  <nmake_head>
+<![CDATA[# Common project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Shared\Common
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+
+TARGET	= /target:library /warn:4
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Xml.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\Common.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.Common.xml
+RELEASE	= /out:$(PRJDIR)\bin\Release\Common.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.Common.xml
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[
+#clean:
+#	rm *.o
+
+#clobber:
+#	rm *.o a.out
+
+debug:
+	$(COMP) $(TARGET) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(REF) $(RELEASE) $(FILES)]]>
+  </nmake_foot>
+ </Common>
+
+ <DAL>
+  <nmake_head>
+<![CDATA[# DAL project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Shared\DAL
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+
+TARGET	= /target:library /warn:4
+DREF	= /reference:$(PRJDIR)\bin\Debug\Common.dll # debug project references
+RREF	= /reference:$(PRJDIR)\bin\Release\Common.dll # release project references
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Xml.dll #system references
+DEBUG	= /out:$(PRJDIR)\bin\Debug\DAL.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.DAL.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\DAL.dll /optimize+  #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.DAL.xml 
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[#EXCLUDE: CatalogSectionDataTable.cs
+
+debug:
+	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES)]]>
+  </nmake_foot>
+ </DAL>
+
+ <DataAccess>
+  <nmake_head>
+<![CDATA[# DataAccess project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\DataAccess
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+
+TARGET	= /target:library /warn:4
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Web.dll,System.Xml.dll #system references
+REF	= $(REF) /reference:$(PRJDIR)\bin\Debug\QSP.WebControl.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\QSPFulfillment.DataAccess.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.DataAccess.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\QSPFulfillment.DataAccess.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.DataAccess.xml 
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[
+debug:
+	$(COMP) $(TARGET) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(REF) $(RELEASE) $(FILES)]]>
+  </nmake_foot>
+ </DataAccess>
+
+ <WebControl>
+  <nmake_head>
+<![CDATA[# WebControl project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\WebControl
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322 #C:\WINNT\Microsoft.NET\Framework\v1.0.3705\
+COMP	= $(FRMWRK)\csc.exe
+NANTCONTRIB	= D:\apps\NantContrib85.2004.07.06\bin
+
+
+TARGET	= /target:library /warn:4
+LIB1	= /lib:$(FRMWRK)\  #system references
+REF1	= /reference:System.dll,System.Data.dll,System.Design.dll,System.Drawing.dll,System.Web.dll,System.Windows.Forms.dll,System.Xml.dll
+REF	= $(LIB1) $(REF1)
+REF	= $(REF) /reference:$(SLNDIR)\Web\bin\DBauer.Web.UI.WebControls.HierarGrid.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\QSP.WebControl.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.WebControl.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\QSP.WebControl.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.WebControl.xml 
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[
+debug:
+	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES)
+
+#slingMAKE:
+#	$(NANTCONTRIB)\SLiNgshoT.exe -nmake -sln $(PRJDIR)\WebControl.csproj -map http://localhost/ D:\webprojects\
+
+slingMAKE:
+	$(NANTCONTRIB)\SLiNgshoT.exe -nmake -sln "D:\jcaesar\My Documents\Visual Studio Projects\TEMP\TEMP.SLN" -map http://localhost/ D:\webprojects\]]>
+  </nmake_foot>
+ </WebControl>
+ 
+ <Business>
+  <nmake_head>
+<![CDATA[# Business project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Business
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+TARGET	= /target:library /warn:4
+DREF	= /lib:$(PRJDIR)\bin\Debug\ /reference:Common.dll,DAL.dll # debug project references
+RREF	= /lib:$(PRJDIR)\bin\Release\ /reference:Common.dll,DAL.dll # release project references
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Xml.dll #system references
+DEBUG	= /out:$(PRJDIR)\bin\Debug\Business.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.Business.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\Business.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.Business.xml 
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[
+#EXCLUDE: CatalogSection.cs
+#EXCLUDE: FulfillmentBatch.cs 
+
+debug:
+	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES)]]>
+  </nmake_foot>
+ </Business>
+
+ <QSPFulfillment>
+  <nmake_head>
+<![CDATA[# Web project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Web
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+RESGEN	= resgen
+
+TARGET	= /target:library /warn:4 /fullpaths
+REF	= /reference:$(PRJDIR)\bin\Business.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\Common.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\DAL.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\DBauer.Web.UI.WebControls.HierarGrid.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\Microsoft.ReportingServices.Interfaces.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\Microsoft.Samples.ReportingServices.CustomSecurity.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\Microsoft.Web.UI.WebControls.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\QSP.WebControl.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\QSPFulfillment.DataAccess.dll
+REF	= $(REF) /reference:$(PRJDIR)\bin\skmMenu.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Data.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Design.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Drawing.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Web.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Web.Mobile.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Web.Services.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Windows.Forms.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Xml.dll
+
+
+DEBUG	= /out:$(PRJDIR)\bin\QSPFulfillment.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.Web.xml 
+RELEASE	= /out:$(PRJDIR)\bin\QSPFulfillment.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.Web.xml 
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[
+#debug:
+#	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES) #$(RES)
+
+#release:
+#	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES) #$(RES)
+
+debug:
+	$(COMP) $(TARGET) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(REF) $(RELEASE) $(FILES)]]>
+  </nmake_foot>
+ </QSPFulfillment>
+
+ <skmMenu>
+  <nmake_head>
+<![CDATA[# skmMenu project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Menu
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+RESGEN	= resgen
+
+TARGET	= /target:library /warn:4 /fullpaths
+REF	= /reference:$(FRMWRK)\System.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Data.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Drawing.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Web.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Xml.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Design.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\skmMenu.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.skmMenu.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\skmMenu.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.skmMenu.xml 
+
+]]>
+  </nmake_head>
+  <nmake_foot>
+<![CDATA[
+debugComp:
+	$(COMP) $(TARGET) $(REF) $(DEBUG) $(FILES) $(RES)
+
+releaseComp:
+	$(COMP) $(TARGET) $(REF) $(RELEASE) $(FILES) $(RES)
+
+debug: resGen debugComp
+
+release: resGen releaseComp]]>
+  </nmake_foot>
+ </skmMenu>
+
+</projects>

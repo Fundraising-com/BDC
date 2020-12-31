@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ShippingNotifications">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="ShippingNotification">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" name="BatchOrderID" type="xs:int" />
+              <xs:element minOccurs="0" name="OrderHeaderID" type="xs:int" />
+              <xs:element minOccurs="0" name="LineNo" type="xs:int" />
+              <xs:element minOccurs="0" name="CourierShipped" type="xs:string" />
+              <xs:element minOccurs="0" name="TotalBoxes" type="xs:int" />
+              <xs:element minOccurs="0" name="TotalWeight" type="xs:decimal" />
+              <xs:element minOccurs="0" name="TrackingNo" type="xs:string" />
+              <xs:element minOccurs="0" name="ProcessDate" type="xs:date" />
+              <xs:element minOccurs="0" name="ShipDate" type="xs:date" />
+              <xs:element minOccurs="0" name="ItemCode" type="xs:string" />
+              <xs:element minOccurs="0" name="QtyShipped" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

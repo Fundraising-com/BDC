@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s1="http://SES.AddressHygiene.DataTypes/2007/05" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://SES.AddressHygiene.ServiceContracts/2007/05" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://SES.AddressHygiene.ServiceContracts/2007/05" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://SES.AddressHygiene.ServiceContracts/2007/05">
+      <s:import namespace="http://SES.AddressHygiene.DataTypes/2007/05" />
+      <s:element name="LoginMessageRequest" type="tns:LoginMessageRequest" />
+      <s:complexType name="LoginMessageRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LoginResult" type="s:boolean" />
+      <s:element name="LogoutResult" type="s:boolean" />
+      <s:element name="IsLoggedInResult" type="s:boolean" />
+      <s:element name="AddressHygieneSingleMessageRequest" type="tns:AddressHygieneSingleMessageRequest" />
+      <s:complexType name="AddressHygieneSingleMessageRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s1:Address" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnableSuggestionList" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddressHygieneSingleMessageResponse" type="tns:AddressHygieneSingleMessageResponse" />
+      <s:complexType name="AddressHygieneSingleMessageResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OutputAddress" type="s1:OutputAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddressHygieneMessageRequest" type="tns:AddressHygieneMessageRequest" />
+      <s:complexType name="AddressHygieneMessageRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Addresses" type="tns:ArrayOfAddress" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnableSuggestionList" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Address" nillable="true" type="s1:Address" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddressHygieneMessageResponse" type="tns:AddressHygieneMessageResponse" />
+      <s:complexType name="AddressHygieneMessageResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OutputAddresses" type="tns:ArrayOfOutputAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOutputAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OutputAddress" nillable="true" type="s1:OutputAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SuggestionListPageRequest" type="tns:SuggestionListPageMessageRequest" />
+      <s:complexType name="SuggestionListPageMessageRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s1:OutputAddress" />
+          <s:element minOccurs="1" maxOccurs="1" name="SuggestionListPageRequestType" type="tns:SuggestionListPageRequestType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SuggestionListPageRequestType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Previous" />
+          <s:enumeration value="Next" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://SES.AddressHygiene.DataTypes/2007/05">
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostCode2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DetailedAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Address">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Selection" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrimaryAddressComponents" type="s1:PrimaryAddressComponents" />
+              <s:element minOccurs="0" maxOccurs="1" name="SecondaryAddressComponents" type="s1:SecondaryAddressComponents" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PrimaryAddressComponents">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryNumberLow" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryNumberHigh" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryPrefix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryPostfix" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SecondaryAddressComponents">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UnitDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitNumberLow" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitNumberHigh" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OutputAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:DetailedAddress">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InitialAddress" type="s1:Address" />
+              <s:element minOccurs="1" maxOccurs="1" name="Fault" type="s1:Fault" />
+              <s:element minOccurs="0" maxOccurs="1" name="Status" type="s1:Status" />
+              <s:element minOccurs="0" maxOccurs="1" name="SuggestionList" type="s1:ArrayOfDetailedAddress" />
+              <s:element minOccurs="0" maxOccurs="1" name="SuggestionListInformation" type="s1:SuggestionListInformation" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="Fault">
+        <s:restriction base="s:string">
+          <s:enumeration value="NoError" />
+          <s:enumeration value="AddressValidatedInMultipleCountries" />
+          <s:enumeration value="NoCountrySet" />
+          <s:enumeration value="InvalidCharacter" />
+          <s:enumeration value="UnhandledCountry" />
+          <s:enumeration value="UnableToIdentifyLocalityRegionAndOrPostcodeOnInput" />
+          <s:enumeration value="UnableToIdentifyLocalityAndInvalidPostcode" />
+          <s:enumeration value="UnableToIdentifyPostCodeAndInvalidLocality" />
+          <s:enumeration value="InvalidLocalityAndPostcode" />
+          <s:enumeration value="InvalidPostcodePreventingLocalitySelection" />
+          <s:enumeration value="UnableToIdentifyPrimaryAddressLine" />
+          <s:enumeration value="UnableToMatchPrimaryNameToDirectory" />
+          <s:enumeration value="PossiblePrimaryNameMatchesTooCloseToChooseOne" />
+          <s:enumeration value="MissingPrimaryRange" />
+          <s:enumeration value="InvalidPrimaryRange" />
+          <s:enumeration value="InvalidOrMissingPrimaryType" />
+          <s:enumeration value="MissingPrimaryTypeAndDirectional" />
+          <s:enumeration value="InvalidDirectional" />
+          <s:enumeration value="InvalidOrMissingPostcode" />
+          <s:enumeration value="InvalidLocality" />
+          <s:enumeration value="PossibleAddressLineMatchesTooCloseToChooseOne" />
+          <s:enumeration value="AddressConflictsWithPostcode" />
+          <s:enumeration value="InvalidOrMissingSecondaryAddressLine" />
+          <s:enumeration value="PossibleSecondaryAddressLineMatchesTooCloseToChooseOne" />
+          <s:enumeration value="Undeliverable" />
+          <s:enumeration value="AddressNotInSpecifiedCountry" />
+          <s:enumeration value="InputRecordEntirelyBlank" />
+          <s:enumeration value="UnclassifiedError" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Status">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ChangeStatus" type="s1:ChangeStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="FormatChangeStatus" type="s1:FormatChangeStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ChangeStatus">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="None" />
+              <s:enumeration value="UnitDescription" />
+              <s:enumeration value="UnitNumber" />
+              <s:enumeration value="BuildingName" />
+              <s:enumeration value="Firm" />
+              <s:enumeration value="Directional" />
+              <s:enumeration value="PrimaryType" />
+              <s:enumeration value="PrimaryName" />
+              <s:enumeration value="PrimaryRange" />
+              <s:enumeration value="Country" />
+              <s:enumeration value="PostCode" />
+              <s:enumeration value="Region" />
+              <s:enumeration value="Locality" />
+              <s:enumeration value="PostCode2" />
+              <s:enumeration value="County" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:simpleType name="FormatChangeStatus">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="None" />
+              <s:enumeration value="Address1" />
+              <s:enumeration value="Address2" />
+              <s:enumeration value="City" />
+              <s:enumeration value="County" />
+              <s:enumeration value="Region" />
+              <s:enumeration value="PostCode" />
+              <s:enumeration value="PostCode2" />
+              <s:enumeration value="Country" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:complexType name="ArrayOfDetailedAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DetailedAddress" nillable="true" type="s1:DetailedAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SuggestionListInformation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s1:SuggestionListStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s1:SuggestionListError" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstItemID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastItemID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPreviousAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsNextAvailable" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SuggestionListStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="AddressLineSuggestionListGenerated" />
+          <s:enumeration value="LastLineSuggestionListGenerated" />
+          <s:enumeration value="InvalidPrimaryRange" />
+          <s:enumeration value="InvalidSecondaryRange" />
+          <s:enumeration value="SecondaryAddressLineSuggestionListGenerated" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SuggestionListError">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="MoreInformationRequired" />
+          <s:enumeration value="InvalidSelection" />
+          <s:enumeration value="InvalidSuggestionEntry" />
+          <s:enumeration value="InvalidSuggestionRange" />
+          <s:enumeration value="InvalidSuggestionSecondaryRange" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="loginMessageRequest" element="tns:LoginMessageRequest" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="LoginResult" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn" />
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="LogoutResult" element="tns:LogoutResult" />
+  </wsdl:message>
+  <wsdl:message name="IsLoggedInSoapIn" />
+  <wsdl:message name="IsLoggedInSoapOut">
+    <wsdl:part name="IsLoggedInResult" element="tns:IsLoggedInResult" />
+  </wsdl:message>
+  <wsdl:message name="HygieneAddressSoapIn">
+    <wsdl:part name="hygieneAddressRequest" element="tns:AddressHygieneSingleMessageRequest" />
+  </wsdl:message>
+  <wsdl:message name="HygieneAddressSoapOut">
+    <wsdl:part name="HygieneAddressResult" element="tns:AddressHygieneSingleMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="HygieneAddressesSoapIn">
+    <wsdl:part name="hygieneAddressRequest" element="tns:AddressHygieneMessageRequest" />
+  </wsdl:message>
+  <wsdl:message name="HygieneAddressesSoapOut">
+    <wsdl:part name="HygieneAddressesResult" element="tns:AddressHygieneMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSuggestionListPageSoapIn">
+    <wsdl:part name="suggestionListPageRequest" element="tns:SuggestionListPageRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetSuggestionListPageSoapOut">
+    <wsdl:part name="GetSuggestionListPageResult" element="tns:AddressHygieneSingleMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AddressHygieneContract">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <wsdl:input message="tns:IsLoggedInSoapIn" />
+      <wsdl:output message="tns:IsLoggedInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HygieneAddress">
+      <wsdl:input message="tns:HygieneAddressSoapIn" />
+      <wsdl:output message="tns:HygieneAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HygieneAddresses">
+      <wsdl:input message="tns:HygieneAddressesSoapIn" />
+      <wsdl:output message="tns:HygieneAddressesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuggestionListPage">
+      <wsdl:input message="tns:GetSuggestionListPageSoapIn" />
+      <wsdl:output message="tns:GetSuggestionListPageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AddressHygieneContract" type="tns:AddressHygieneContract">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://SES.AddressHygiene.ServiceContracts/2007/05/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://SES.AddressHygiene.ServiceContracts/2007/05/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <soap:operation soapAction="http://SES.AddressHygiene.ServiceContracts/2007/05/IsLoggedIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HygieneAddress">
+      <soap:operation soapAction="http://SES.AddressHygiene.ServiceContracts/2007/05/HygieneAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HygieneAddresses">
+      <soap:operation soapAction="http://SES.AddressHygiene.ServiceContracts/2007/05/HygieneAddresses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuggestionListPage">
+      <soap:operation soapAction="http://SES.AddressHygiene.ServiceContracts/2007/05/GetSuggestionListPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AddressHygieneContract">
+    <wsdl:port name="AddressHygieneContract" binding="tns:AddressHygieneContract">
+      <soap:address location="http://wstest.qsp.com/SES.AddressHygiene.20071031/AddressHygieneContract.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

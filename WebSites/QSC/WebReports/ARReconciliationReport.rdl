@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2003/10/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <PageHeader>
+    <ReportItems>
+      <Image Name="image1">
+        <ZIndex>3</ZIndex>
+        <MIMEType />
+        <Width>2.28125in</Width>
+        <Source>External</Source>
+        <Style />
+        <Value>logo_qsp.gif</Value>
+        <Left>0.125in</Left>
+        <Sizing>Fit</Sizing>
+      </Image>
+      <Textbox Name="textbox10">
+        <Style>
+          <FontSize>12pt</FontSize>
+          <TextAlign>Left</TextAlign>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>2</ZIndex>
+        <rd:DefaultName>textbox10</rd:DefaultName>
+        <Height>0.125in</Height>
+        <Width>4.125in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>Accounts Receivable Reconciliation Report</Value>
+        <Left>2.5in</Left>
+      </Textbox>
+      <Textbox Name="textbox11">
+        <Style>
+          <FontSize>12pt</FontSize>
+          <TextAlign>Left</TextAlign>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <Top>0.125in</Top>
+        <rd:DefaultName>textbox11</rd:DefaultName>
+        <Height>0.125in</Height>
+        <Width>2.5in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>="Generated as of " &amp; Convert.ToDateTime(Parameters!AsOfDate.Value).ToString("dd-MMM-yyyy" )</Value>
+        <Left>2.5in</Left>
+      </Textbox>
+      <Textbox Name="textbox12">
+        <Style>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Right</TextAlign>
+        </Style>
+        <Top>0.125in</Top>
+        <Height>0.125in</Height>
+        <Width>2.625in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=" Report run on " &amp; DateTime.Now()</Value>
+        <Left>5in</Left>
+      </Textbox>
+    </ReportItems>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.625in</Height>
+  </PageHeader>
+  <Body>
+    <ReportItems>
+      <Table Name="table1">
+        <Height>0.9375in</Height>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.1875in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle10">
+                      <ReportItems>
+                        <Textbox Name="textbox9">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>7</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=( Fields!Current.Value + Fields!Over30.Value+ Fields!Over60.Value+ Fields!Over90.Value+ Fields!Over120.Value)</Value>
+                          <Left>2.25in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox23">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Over90.Value</Value>
+                          <Left>5.625in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox25">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <Width>1.375in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!AccountName.Value</Value>
+                          <Left>0.875in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox26">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Over120.Value</Value>
+                          <Left>6.5in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox27">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!AccountID.Value</Value>
+                        </Textbox>
+                        <Textbox Name="textbox28">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Over60.Value</Value>
+                          <Left>4.75in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox33">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Current.Value</Value>
+                          <Left>3.125in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox35">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                          <Width>0.75in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Over30.Value</Value>
+                          <Left>4in</Left>
+                        </Textbox>
+                      </ReportItems>
+                      <Style />
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>GetAgingReport</DataSetName>
+        <Top>0.125in</Top>
+        <Width>7.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.1875in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="rectangle1">
+                          <ZIndex>4</ZIndex>
+                          <ReportItems>
+                            <Textbox Name="textbox1">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Center</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>4</ZIndex>
+                              <Width>4in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>Breakdown of Total Balance owed</Value>
+                              <Left>3.25in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox6">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>3</ZIndex>
+                              <Width>1.75in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=Fields!FMName.Value</Value>
+                              <Left>1.5in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox7">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>2</ZIndex>
+                              <Width>0.5in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=Fields!FMID.Value</Value>
+                              <Left>0.375in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox8">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>1</ZIndex>
+                              <Width>0.625in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>FM Name:</Value>
+                              <Left>0.875in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox13">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <Width>0.375in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>FMID:</Value>
+                            </Textbox>
+                          </ReportItems>
+                          <Style>
+                            <BackgroundColor>Silver</BackgroundColor>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </Header>
+            <Grouping Name="table1_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!FMID.Value</GroupExpression>
+              </GroupExpressions>
+            </Grouping>
+            <Sorting>
+              <SortBy>
+                <SortExpression>=Fields!FMName.Value</SortExpression>
+                <Direction>Ascending</Direction>
+              </SortBy>
+              <SortBy>
+                <SortExpression>=Fields!AccountName.Value</SortExpression>
+                <Direction>Ascending</Direction>
+              </SortBy>
+            </Sorting>
+          </TableGroup>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.1875in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="rectangle2">
+                          <ZIndex>3</ZIndex>
+                          <ReportItems>
+                            <Textbox Name="textbox14">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>7</ZIndex>
+                              <CanGrow>true</CanGrow>
+                              <Value>Over 120 days</Value>
+                              <Left>6.5in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox17">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>6</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>91-120 days</Value>
+                              <Left>5.625in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox18">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>5</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>61-90 days</Value>
+                              <Left>4.75in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox19">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>4</ZIndex>
+                              <Width>0.75in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>31-60 days</Value>
+                              <Left>4in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox20">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>3</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>0-30 days</Value>
+                              <Left>3.125in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox21">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>2</ZIndex>
+                              <Width>1.375in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>Group Name</Value>
+                              <Left>0.875in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox22">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>1</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>Total Balance</Value>
+                              <Left>2.25in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox24">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <BackgroundColor>Gainsboro</BackgroundColor>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>Group ID </Value>
+                            </Textbox>
+                          </ReportItems>
+                          <Style>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </Header>
+            <Grouping Name="table1_Group2">
+              <GroupExpressions>
+                <GroupExpression>=Fields!FMID.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.1875in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="rectangle3">
+                          <ZIndex>1</ZIndex>
+                          <ReportItems>
+                            <Textbox Name="textbox2">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <Format>C</Format>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>6</ZIndex>
+                              <CanGrow>true</CanGrow>
+                              <Value>= Sum(Fields!Over120.Value)</Value>
+                              <Left>6.5in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox3">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <Format>C</Format>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>5</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>= Sum(Fields!Over90.Value)</Value>
+                              <Left>5.625in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox4">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <Format>C</Format>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>4</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>= Sum(Fields!Over60.Value)</Value>
+                              <Left>4.75in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox5">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <Format>C</Format>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>3</ZIndex>
+                              <Width>0.75in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>= Sum(Fields!Over30.Value)</Value>
+                              <Left>4in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox15">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <Format>C</Format>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>2</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>= Sum(Fields!Current.Value)</Value>
+                              <Left>3.125in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox30">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <Format>C</Format>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Right</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>1</ZIndex>
+                              <Width>0.875in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=SUM( Fields!Current.Value + Fields!Over30.Value+ Fields!Over60.Value+ Fields!Over90.Value+ Fields!Over120.Value)</Value>
+                              <Left>2.25in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox31">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <TextAlign>Left</TextAlign>
+                                <PaddingBottom>1pt</PaddingBottom>
+                                <PaddingTop>1pt</PaddingTop>
+                                <PaddingRight>1pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <Width>2.25in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>="Sub total for: " &amp;  Fields!FMID.Value &amp; " " &amp;  Fields!FMName.Value</Value>
+                            </Textbox>
+                          </ReportItems>
+                          <Style />
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+            <Sorting>
+              <SortBy>
+                <SortExpression>=Fields!FMName.Value</SortExpression>
+                <Direction>Ascending</Direction>
+              </SortBy>
+              <SortBy>
+                <SortExpression>=Fields!AccountName.Value</SortExpression>
+                <Direction>Ascending</Direction>
+              </SortBy>
+            </Sorting>
+          </TableGroup>
+        </TableGroups>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <Height>0.1875in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle4">
+                      <Style />
+                      <ZIndex>2</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox29">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Sum(Fields!Over120.Value)</Value>
+                          <Left>6.5in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox32">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Sum(Fields!Over90.Value)</Value>
+                          <Left>5.625in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox34">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Sum(Fields!Over60.Value)</Value>
+                          <Left>4.75in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox36">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <Width>0.75in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Sum(Fields!Over30.Value)</Value>
+                          <Left>4in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox37">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <Width>0.875in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Sum(Fields!Current.Value)</Value>
+                          <Left>3.125in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox38">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <Width>1.375in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=SUM( Fields!Current.Value + Fields!Over30.Value+ Fields!Over60.Value+ Fields!Over90.Value+ Fields!Over120.Value)</Value>
+                          <Left>1.75in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox39">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>1pt</PaddingBottom>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingRight>1pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <Width>1.75in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>Grand Totals</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <Left>0.125in</Left>
+        <TableColumns>
+          <TableColumn>
+            <Width>7.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+    </ReportItems>
+    <Style />
+    <Height>1.625in</Height>
+  </Body>
+  <DataSources>
+    <DataSource Name="QSPCanadaFinance">
+      <rd:DataSourceID>983f7c16-d33c-47e0-a87f-d468aa01c195</rd:DataSourceID>
+      <DataSourceReference>QSPCanadaFinance</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <Width>7.75in</Width>
+  <DataSets>
+    <DataSet Name="GetAgingReport">
+      <Fields>
+        <Field Name="FMID">
+          <DataField>FMID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FMName">
+          <DataField>FMName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AccountID">
+          <DataField>AccountID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Current">
+          <DataField>Current</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Over30">
+          <DataField>Over30</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Over60">
+          <DataField>Over60</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Over90">
+          <DataField>Over90</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Over120">
+          <DataField>Over120</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaFinance</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>GetARReconciliationReport</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="AsOfDate">
+            <Value>=Parameters!AsOfDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <rd:ReportID>40f40b91-b402-40b9-9687-bfd843094198</rd:ReportID>
+  <PageFooter>
+    <ReportItems>
+      <Textbox Name="textbox63">
+        <Style>
+          <PaddingLeft>1pt</PaddingLeft>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Center</TextAlign>
+          <PaddingBottom>1pt</PaddingBottom>
+          <PaddingTop>1pt</PaddingTop>
+          <PaddingRight>1pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <Height>0.125in</Height>
+        <Width>7.5in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>="Page " &amp; Globals!PageNumber &amp; " of " &amp;  Globals!TotalPages</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+    </ReportItems>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.225in</Height>
+  </PageFooter>
+  <ReportParameters>
+    <ReportParameter Name="AsOfDate">
+      <DataType>DateTime</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>AsOfDate</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+</Report>

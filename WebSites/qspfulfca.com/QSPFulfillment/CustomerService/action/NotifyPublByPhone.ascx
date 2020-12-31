@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="NotifyPublByPhone.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.NotifyPublByPhone" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

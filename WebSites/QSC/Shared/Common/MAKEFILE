@@ -1,0 +1,29 @@
+# Common project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Shared\Common
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+
+TARGET	= /target:library /warn:4
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Xml.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\Common.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.Common.xml
+RELEASE	= /out:$(PRJDIR)\bin\Release\Common.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.Common.xml
+
+FILES	= $(PRJDIR)\AssemblyInfo.cs
+FILES	= $(FILES) $(PRJDIR)\IQError.cs
+FILES	= $(FILES) $(PRJDIR)\PhoneNumber.cs
+FILES	= $(FILES) $(PRJDIR)\PostalAddress.cs
+FILES	= $(FILES) $(PRJDIR)\QSPListItem.cs
+
+#clean:
+#	rm *.o
+
+#clobber:
+#	rm *.o a.out
+
+debug:
+	$(COMP) $(TARGET) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(REF) $(RELEASE) $(FILES)

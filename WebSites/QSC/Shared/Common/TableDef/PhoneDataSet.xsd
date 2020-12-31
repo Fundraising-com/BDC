@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PhoneDataSet" targetNamespace="http://tempuri.org/PhoneDataSet.xsd" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/PhoneDataSet.xsd" xmlns:mstns="http://tempuri.org/PhoneDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="PhoneDataSet" msdata:IsDataSet="true" msprop:BusinessRule1="PhoneToPhoneListIntegrity" msprop:BusinessRule2="PhoneTypePhoneListUnicity" msprop:BusinessRule3="StringLength" >
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="Phone">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+                            <xs:element name="Type" type="xs:int" minOccurs="0" msprop:nullValue="0" msdata:Caption="Phone Type" default="30505" />
+                            <xs:element name="PhoneListID" type="xs:int" minOccurs="0" msprop:nullValue="_throw" />
+                            <xs:element name="PhoneNumber" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msdata:Caption="Phone Number" msprop:MaxLength="50" default="" />
+                            <xs:element name="BestTimeToCall" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="2000" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="PhoneDataSetKey1" msdata:PrimaryKey="true">
+            <xs:selector xpath=".//mstns:Phone" />
+            <xs:field xpath="mstns:ID" />
+        </xs:unique>
+    </xs:element>
+</xs:schema>

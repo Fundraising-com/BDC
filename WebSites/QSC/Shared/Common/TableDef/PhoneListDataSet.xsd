@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="PhoneListDataSet" targetNamespace="http://tempuri.org/PhoneListDataSet.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/PhoneListDataSet.xsd"
+	xmlns:mstns="http://tempuri.org/PhoneListDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="PhoneListDataSet" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="PhoneList">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="CreateDate" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="DeletedTF" type="xs:boolean" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="PhoneListDataSetKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:PhoneList" />
+			<xs:field xpath="mstns:ID" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

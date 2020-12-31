@@ -1,0 +1,77 @@
+# DAL project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Shared\DAL
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+
+TARGET	= /target:library /warn:4
+DREF	= /reference:$(PRJDIR)\bin\Debug\Common.dll # debug project references
+RREF	= /reference:$(PRJDIR)\bin\Release\Common.dll # release project references
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Xml.dll #system references
+DEBUG	= /out:$(PRJDIR)\bin\Debug\DAL.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.DAL.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\DAL.dll /optimize+  #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.DAL.xml 
+
+FILES	= $(PRJDIR)\AccountContactsDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\AccountDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\AccountListDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\AddressDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\AddressListDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ApplicationErrorDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\AssemblyInfo.cs
+FILES	= $(FILES) $(PRJDIR)\BankDepositData.cs
+FILES	= $(FILES) $(PRJDIR)\BankDepositItemData.cs
+FILES	= $(FILES) $(PRJDIR)\BatchDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\BillShipAccountData.cs
+FILES	= $(FILES) $(PRJDIR)\CampaignDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\CampaignListDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\CampaignProgramDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\CodeDetailDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\CommandGenerator.cs
+FILES	= $(FILES) $(PRJDIR)\ContactDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ContentCatalogsDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\DBAttribute.cs
+FILES	= $(FILES) $(PRJDIR)\DistributionCenterDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\EstimatedSalesDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\FieldManagerDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\GiftOrderReturnedData.cs
+FILES	= $(FILES) $(PRJDIR)\HomePageDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\InvoiceListDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\InvoiceListPrintDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\MagItemsSummaryReportDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\OnlineStoreDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ParticipantListingReportDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\PaymentData.cs
+FILES	= $(FILES) $(PRJDIR)\PersonnelDirectoryDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\PhoneDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\PhoneListDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\PickListDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ProblemSolverReportDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ProductCatalogPriceData.cs
+FILES	= $(FILES) $(PRJDIR)\ProfileDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ProgramMasterDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\QDAServicedComponent.cs
+FILES	= $(FILES) $(PRJDIR)\QDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\QDataTable.cs
+FILES	= $(FILES) $(PRJDIR)\ReportDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\ShipmentDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\SqlAttribute.cs
+FILES	= $(FILES) $(PRJDIR)\SQLHelper.cs
+FILES	= $(FILES) $(PRJDIR)\StatementReportByCampaignPrintDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\StatementReportPrintDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\UserPermissionsDataAccess.cs
+FILES	= $(FILES) $(PRJDIR)\UserProfileDataAccess.cs
+
+
+resGen:
+	 $(RESGEN) $(PRJDIR)\QDataTable.resx $(PRJDIR)\bin\resTemp\QDataTable.resources
+
+
+RES	= /res:$(PRJDIR)\bin\resTemp\QDataTable.resources
+#EXCLUDE: CatalogSectionDataTable.cs
+
+debug:
+	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES)

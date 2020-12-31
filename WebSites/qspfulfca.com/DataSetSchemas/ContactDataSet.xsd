@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="ContactDataSet" targetNamespace="http://tempuri.org/ContactDataSet.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/ContactDataSet.xsd" xmlns:mstns="http://tempuri.org/ContactDataSet.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+	xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	<xs:element name="ContactDataSet" msdata:IsDataSet="true" msprop:BusinessRule1="RequiredFields"
+		msprop:BusinessRule2="ContactToPhoneListIntegrity" msprop:BusinessRule3="StringLength" msprop:BusinessRule4="ContactPrimaryUnicity">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Contact">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" msdata:AutoIncrementSeed="1" />
+							<xs:element name="ContactListID" type="xs:int" default="0" />
+							<xs:element name="CAccountID" type="xs:int" />
+							<xs:element name="Title" type="xs:string" msprop:MaxLength="10" />
+							<xs:element name="FirstName" type="xs:string" msprop:IsRequired="true" msprop:MaxLength="20"
+								msdata:Caption="Contact First Name" />
+							<xs:element name="LastName" type="xs:string" msprop:IsRequired="true" msprop:MaxLength="30"
+								msdata:Caption="Contact Last Name" />
+							<xs:element name="MiddleInitial" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="10" />
+							<xs:element name="TypeId" type="xs:int" default="-5" />
+							<xs:element name="Function" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="50" />
+							<xs:element name="Email" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="60" />
+							<xs:element name="AddressID" type="xs:int" default="0" />
+							<xs:element name="PhoneListID" type="xs:int" default="0" />
+							<xs:element name="DeletedTF" type="xs:boolean" default="false" />
+							<xs:element name="DateChanged" type="xs:dateTime" minOccurs="0" msprop:nullValue="1995-01-01" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="ContactDataSetKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Contact" />
+			<xs:field xpath="mstns:Id" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

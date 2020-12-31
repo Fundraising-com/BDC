@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="bpps.asmx.cs" Class="BPPS.BatchPaymentSystemWebservice" %>

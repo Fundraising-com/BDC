@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="LetterBatchDataSet" targetNamespace="http://tempuri.org/LetterBatchDataSet.xsd" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/LetterBatchDataSet.xsd" xmlns:mstns="http://tempuri.org/LetterBatchDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="LetterBatchDataSet" msdata:IsDataSet="true">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="LetterBatch">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+                            <xs:element name="LetterTemplateID" type="xs:int" />
+                            <xs:element name="LetterTemplateName" type="xs:string" />
+                            <xs:element name="LetterBatchType" type="xs:int" />
+                            <xs:element name="LetterBatchTypeDescription" type="xs:string" />
+                            <xs:element name="DateFrom" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="DateTo" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="RunID" type="xs:int" minOccurs="0" msprop:nullValue="-1" />
+                            <xs:element name="IsPrinted" type="xs:boolean" />
+                            <xs:element name="DatePrinted" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="IsLocked" type="xs:boolean" />
+                            <xs:element name="UserIDCreated" type="xs:int" />
+                            <xs:element name="UserNameCreated" type="xs:string" />
+                            <xs:element name="DateCreated" type="xs:dateTime" />
+                            <xs:element name="DeletedTF" type="xs:boolean" />
+                            <xs:element name="ReportName" type="xs:string" />
+                            <xs:element name="SubscriptionCount" type="xs:int" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="LetterBatchCustomerOrderDetail">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="LetterBatchID" type="xs:int" />
+                            <xs:element name="CustomerOrderHeaderInstance" type="xs:int" />
+                            <xs:element name="TransID" type="xs:int" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="InactiveMagazineLetterBatch">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="LetterBatchID" type="xs:int" />
+                            <xs:element name="ProductCode" type="xs:string" />
+                            <xs:element name="Reason" type="xs:int" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="LetterBatchDataSetKey1" msdata:PrimaryKey="true">
+            <xs:selector xpath=".//mstns:LetterBatch" />
+            <xs:field xpath="mstns:ID" />
+        </xs:unique>
+        <xs:unique name="LetterBatchDataSetKey2" msdata:PrimaryKey="true">
+            <xs:selector xpath=".//mstns:LetterBatchCustomerOrderDetail" />
+            <xs:field xpath="mstns:LetterBatchID" />
+        </xs:unique>
+        <xs:unique name="LetterBatchDataSetKey3" msdata:PrimaryKey="true">
+            <xs:selector xpath=".//mstns:InactiveMagazineLetterBatch" />
+            <xs:field xpath="mstns:LetterBatchID" />
+        </xs:unique>
+
+        <xs:keyref name="LetterBatchLetterBatchCustomerOrderDetail" refer="LetterBatchDataSetKey1">
+            <xs:selector xpath=".//mstns:LetterBatchCustomerOrderDetail" />
+            <xs:field xpath="mstns:LetterBatchID" />
+        </xs:keyref>
+    </xs:element>
+</xs:schema>

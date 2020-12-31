@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="CCCallAttempt1.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.CCCallAttempt1" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>

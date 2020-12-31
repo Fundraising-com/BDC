@@ -1,0 +1,2 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="DynamicList.ascx.cs" Inherits="QSPFulfillment.CommonWeb.UC.DynamicList" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>
+<asp:Literal ID=ltTheList Runat=server />

@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="ARDeptActionRequired.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.ARDeptActionRequired" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

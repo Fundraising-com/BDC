@@ -1,0 +1,43 @@
+# skmMenu project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Menu
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+RESGEN	= resgen
+
+TARGET	= /target:library /warn:4 /fullpaths
+REF	= /reference:$(FRMWRK)\System.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Data.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Drawing.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Web.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Xml.dll
+REF	= $(REF) /reference:$(FRMWRK)\System.Design.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\skmMenu.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.skmMenu.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\skmMenu.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.skmMenu.xml 
+
+FILES	= $(PRJDIR)\AssemblyInfo.cs
+FILES	= $(FILES) $(PRJDIR)\Enumerations.cs
+FILES	= $(FILES) $(PRJDIR)\Menu.cs
+FILES	= $(FILES) $(PRJDIR)\MenuDesigner.cs
+FILES	= $(FILES) $(PRJDIR)\MenuItem.cs
+FILES	= $(FILES) $(PRJDIR)\MenuItemClickEventArgs.cs
+FILES	= $(FILES) $(PRJDIR)\MenuItemCollection.cs
+FILES	= $(FILES) $(PRJDIR)\RoleCollection.cs
+
+
+resGen:
+	 $(RESGEN) $(PRJDIR)\Menu.resx $(PRJDIR)\bin\resTemp\Menu.resources
+
+
+RES	= /res:$(PRJDIR)\bin\resTemp\Menu.resources
+
+debugComp:
+	$(COMP) $(TARGET) $(REF) $(DEBUG) $(FILES) $(RES)
+
+releaseComp:
+	$(COMP) $(TARGET) $(REF) $(RELEASE) $(FILES) $(RES)
+
+debug: resGen debugComp
+
+release: resGen releaseComp

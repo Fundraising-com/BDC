@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="AddressDataSet" targetNamespace="http://tempuri.org/AddressDataSet.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/AddressDataSet.xsd" xmlns:mstns="http://tempuri.org/AddressDataSet.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+	xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	<xs:element name="AddressDataSet" msdata:IsDataSet="true" msprop:BusinessRule1="StringLength">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Address">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="address_id" msdata:ReadOnly="true" type="xs:int" msdata:AutoIncrement="true" />
+							<xs:element name="street1" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="50" msdata:Caption="Address 1" />
+							<xs:element name="street2" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="50" />
+							<xs:element name="city" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="50" msdata:Caption="City" />
+							<xs:element name="stateProvince" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="10" msdata:Caption="Province" />
+							<xs:element name="postal_code" type="xs:string" minOccurs="0" msprop:nullValue="_empty" msprop:MaxLength="7" msdata:Caption="Postal Code" />
+							<xs:element name="zip4" type="xs:string" minOccurs="0" msprop:nullValue="_empty" default="" msprop:MaxLength="4" />
+							<xs:element name="country" type="xs:string" minOccurs="0" msprop:nullValue="CA" msprop:MaxLength="10" />
+							<xs:element name="address_type" type="xs:int" />
+							<xs:element name="AddressListID" type="xs:int" minOccurs="0" msprop:nullValue="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="AddressDataSetKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Address" />
+			<xs:field xpath="mstns:address_id" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

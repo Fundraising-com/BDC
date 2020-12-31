@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SeasonDataSet" targetNamespace="http://tempuri.org/SeasonDataSet.xsd" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/SeasonDataSet.xsd" xmlns:mstns="http://tempuri.org/SeasonDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="SeasonDataSet" msdata:IsDataSet="true" msprop:BusinessRule1="RequiredFields" msprop:BusinessRule2="SeasonUnicity" msprop:BusinessRule3="SeasonValidateDelete">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="Season">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ID" type="xs:int" />
+                            <xs:element name="Country" type="xs:string" minOccurs="0" />
+                            <xs:element name="Name" type="xs:string" msprop:IsRequired="true" minOccurs="0" />
+                            <xs:element name="FiscalYear" type="xs:int" msprop:IsRequired="true" minOccurs="0" />
+                            <xs:element name="Season" type="xs:string" msprop:IsRequired="true" minOccurs="0" />
+                            <xs:element name="StartDate" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="EndDate" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="DateChanged" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="UserIDChanged" type="xs:int" minOccurs="0" />
+                            <xs:element name="DefaultConversionRate" type="xs:decimal" msprop:IsRequired="true" minOccurs="0" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="SeasonDataSetKey1" msdata:PrimaryKey="true">
+            <xs:selector xpath=".//mstns:Season" />
+            <xs:field xpath="mstns:ID" />
+        </xs:unique>
+    </xs:element>
+</xs:schema>

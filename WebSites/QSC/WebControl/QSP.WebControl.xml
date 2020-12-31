@@ -1,0 +1,1139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QSP.WebControl</name>
+    </assembly>
+    <members>
+        <member name="T:QSP.WebControl.Zip">
+            <summary>
+            Zip/Unzip files.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.TextBox">
+            <summary>
+            Summary description for TextBox.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Business.BusinessSystem">
+            <summary>
+            This class is central object of the Business Layer.
+            </summary> 
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.IsValid_FieldLength(System.Data.DataRow,System.String,System.String,System.Int16)">
+            <summary>
+            Validates a specific field against his maxlength
+            </summary>
+            <param name="row">The Row where the field must be vaidate</param>
+            <param name="fieldName">field in the Row to be validated</param>
+            <param name="maxLen">max length for the field</param>
+            <returns>False if field fails the validation rules.</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.IsValid_RequiredField(System.Data.DataRow,System.String,System.String)">
+            <summary>
+            Validates required field
+            </summary>
+            <param name="row">The Row where the field must be vaidate</param>
+            <param name="FieldNameToValidate">Field to be validate</param>
+            <param name="FieldForErrorMessage">Field for the error message</param>
+            <returns></returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.ValidateTable(System.Data.DataTable)">
+            <summary>
+            Validate information in the table
+            </summary>
+            <param name="Table">Table to be validate</param>
+            <returns>False if table is not valid</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.Insert(System.Data.DataTable,QSP.WebControl.DataAccess.Data.DBTableOperation)">
+            <summary>
+            Insert row inserted in the Table
+            </summary>
+            <param name="Table">Table containing row to be inserted</param>
+            <param name="DataAccess">Table operation class for this Table</param>
+            <returns>true if successful; otherwise, false.</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.Update(System.Data.DataTable,QSP.WebControl.DataAccess.Data.DBTableOperation)">
+            <summary>
+            Update row modified in the Table
+            </summary>
+            <param name="Table">Table containing row to be inserted</param>
+            <param name="DataAccess">Table operation class for this Table</param>
+            <returns>true if successful; otherwise, false.</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.Delete(System.Data.DataTable,QSP.WebControl.DataAccess.Data.DBTableOperation)">
+            <summary>
+            Delete row deleted in the Table
+            </summary>
+            <param name="Table">Table containing row to be deleted</param>
+            <param name="DataAccess">Table operation class for this Table</param>
+            <returns>true if successful; otherwise, false.</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Business.BusinessSystem.UpdateBatch(System.Data.DataTable,QSP.WebControl.DataAccess.Data.DBTableOperation)">
+            <summary>
+            Update,Insert,Delete row in the Table
+            </summary>
+            <param name="Table">Table containing row to be Update,Insert and delete</param>
+            <param name="DataAccess">Table operation class for this Table</param>
+            <returns>true if successful; otherwise, false.</returns>
+        </member>
+        <member name="P:QSP.WebControl.DataAccess.Business.BusinessSystem.RowAffected">
+            <summary>
+            Get number of row affected by the Querry
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxInteger">
+            <summary>
+            Summary description for TextBoxNumeric.
+            </summary>
+            <Author>Benoit Nadon</Author>
+            <Date>14 mars 2005</Date>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxControlReqRev">
+            <summary>
+            Summary description for TextBoxControl.
+            </summary>
+            <Author>Dave Mustaikis</Author>
+            <Date>10 décembre 2003</Date>
+            <remarks>Super class for text box control with behavior</remarks>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxControlReqRev.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxControlReqRev.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxControlReqRev.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.TextBoxInteger.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxInteger.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxInteger.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxInteger.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxInteger.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ExcelManager">
+            <summary>
+            creates excel files from datasets
+            </summary>
+            <remarks>
+            Madina Saitakhmetova
+            August 2006
+            
+            Updated by Jeff Miles
+            October 2006
+            Purpose: To abstract object for reusability
+            </remarks>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Data.DBInteractionBase">
+            <summary>
+            Purpose: Abstract base class for Database Interaction classes.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.ExecuteCmd(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            Execute Update, Insert, Delete Action into BD
+            </summary>
+            <param name="Command">command with parameter already set with values</param>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.Insert(System.Data.SqlClient.SqlCommand,System.Data.DataTable)">
+            <summary>
+            Insert row row in the database
+            </summary>
+            /// <param name="Table">Table containing row to be Inserted</param>
+            <param name="Command">command with value and param</param>
+            <returns>nb row affected</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.Update(System.Data.SqlClient.SqlCommand,System.Data.DataTable)">
+            <summary>
+            Update row corresponding of row updated in the table in the database
+            </summary>
+            <param name="Command">Command to execute for Update row with param</param>
+            <param name="Table">Table containing row to be Updated</param>
+            <returns>nb row affected</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.Delete(System.Data.SqlClient.SqlCommand,System.Data.DataTable)">
+            <summary>
+            Deleted row corresponding of row deleted in the table in the database
+            </summary>
+            <param name="Command">Command to execute for delete row with param</param>
+            <param name="Table">Table containing row to be deleted</param>
+            <returns>nb row affected</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.Select(System.Data.SqlClient.SqlCommand,System.Data.DataTable)">
+            <summary>
+            Fill a table
+            </summary>
+            <param name="Command">Command to fill the table</param>
+            <param name="Table">Table to be filled</param>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.Select(System.Data.SqlClient.SqlCommand,System.Data.DataSet)">
+            <summary>
+            Fill a DataSet
+            </summary>
+            <param name="Command">Command to fill the dataset</param>
+            <param name="dts">DataSet to be filled</param>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBInteractionBase.UpdateBatch(System.Data.SqlClient.SqlDataAdapter,System.Data.DataTable)">
+            <summary>
+            Update table
+            </summary>
+            <param name="adapter">Adapter with Update, Delete and insert command</param>
+            <param name="Table">Table to update</param>
+            <returns>nb row affected</returns>
+        </member>
+        <member name="P:QSP.WebControl.DataAccess.Data.DBInteractionBase.MainConnectionProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.DBTableOperation.AddParameterDate(System.String,System.DateTime,System.Data.SqlClient.SqlCommand,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="ParameterName"></param>
+            <param name="Value"></param>
+            <param name="Command"></param>
+            <param name="IsNullable">if true and the value reiceved is Datetime.MinValue it will be added value as System.DbNull.Value</param>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Common.TableDef.CommonTable">
+            <summary>
+            Summary description for CommonTable.
+            </summary>
+            
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientPersistentStyle">
+            <summary>
+            Manages the persistence of an element's style property.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty">
+            <summary>
+            Manages the persistence of an element's property.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.CreateChildControls">
+            <summary>
+            Manages the hidden field.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.OnLoad(System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.OnPreRender(System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.SetFirstInitialization(System.Boolean)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.ApplyClientChanges">
+            <summary>
+            Applies the client changes to the control's server properties.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.AssignUpdateScript">
+            <summary>
+            Registers the client script responsible of copying the property's value
+            to the hidden field before submitting the page.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.Container">
+            <summary>
+            The element for which the property has to be persisted.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.HiddenClientID">
+            <summary>
+            Client ID of the hidden field holding the property's value.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.ClientPropertyName">
+            <summary>
+            Client property name used when rendering the control.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.Value">
+            <summary>
+            Current value of the property held in the hidden field.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentProperty.IsFirstInitialization">
+            <summary>
+            Indicates through the whole page processing flow whether the control is
+            initialized for the first time.
+            </summary>
+            <remarks>
+            IsPostBack wouldn't have worked because of dynamic controls.
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentStyle.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentStyle.OnLoad(System.EventArgs)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentStyle.ApplyClientChanges">
+            <summary>
+            Applies the client changes to the control's server properties.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentStyle.AssignUpdateScript">
+            <summary>
+            Registers the client script responsible of copying the property's value
+            to the hidden field before submitting the page.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentStyle.ClientPropertyName">
+            <summary>
+            Client attribute name used when rendering the control.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Data.ProvinceData">
+            <summary>
+            Purpose: Data Access class for the table 'Province'.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ProvinceData.#ctor">
+            <summary>
+            Purpose: Class constructor.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ProvinceData.SelectOne(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            Purpose: Select method. This method will Select one existing row from the database, based on the Primary Key.
+            </summary>
+            <returns>DataTable object if succeeded, otherwise an Exception is thrown. </returns>
+            <remarks>
+            Properties needed for this method: 
+            <UL>
+            	 <LI>sCOUNTRY_CODE</LI>
+            	 <LI>sPROVINCE_CODE</LI>
+            </UL>
+            	 <LI>sCOUNTRY_CODE</LI>
+            	 <LI>sPROVINCE_CODE</LI>
+            	 <LI>sPROVINCE_NAME</LI>
+            	 <LI>iLAPSE_DAYS_DELIVERY</LI>
+            	 <LI>sTAX_BACKOUT_FUNCTION</LI>
+            	 <LI>iLAPSE_DAYS_FIELD_SUPPLY_PREP</LI>
+            Will fill all properties corresponding with a field in the table with the value of the row selected.
+            </remarks>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ProvinceData.SelectAll(System.Data.DataTable)">
+            <summary>
+            Purpose: SelectAll method. This method will Select all rows from the table.
+            </summary>
+            <returns>DataTable object if succeeded, otherwise an Exception is thrown. </returns>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:QSP.WebControl.Currency">
+            <summary>
+            Summary description for Currency.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxControlReqCompVal">
+            <summary>
+            Summary description for TextBoxControl.
+            </summary>
+            <Author>Dave Mustaikis</Author>
+            <Date>10 décembre 2003</Date>
+            <remarks>Super class for text box control with behavior</remarks>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxControlReqCompVal.ErrorMsgCompareValidation">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxControlReqCompVal.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxControlReqCompVal.TextCompareValidation">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.Currency.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.PageSwitchStatePage">
+            <summary>
+            Summary description for PageSwitchStatePage.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ErrorManagingPage">
+            <summary>
+            Summary description for ErrorManagingPage.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.InternalDropDownListSearch">
+            <summary>
+            Summary description for InternalTextBoxSearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ISearch">
+            <summary>
+            Summary description for ISearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientPersistentAttribute">
+            <summary>
+            Manages the persistence of an element's attribute.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentAttribute.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentAttribute.OnLoad(System.EventArgs)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentAttribute.ApplyClientChanges">
+            <summary>
+            Applies the client changes to the control's server properties.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientPersistentAttribute.AssignUpdateScript">
+            <summary>
+            Registers the client script responsible of copying the property's value
+            to the hidden field before submitting the page.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientPersistentAttribute.ClientPropertyName">
+            <summary>
+            Client attribute name used when rendering the control.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.CheckBoxSearch">
+            <summary>
+            Summary description for CheckBoxSearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.CheckBox">
+            <summary>
+            That checkbox enable the persistant attribute
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.IClientPersistentPropertyContainer">
+            <summary>
+            Defines the contract that a control will manage client persistent properties.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            
+            Implement in a web server control, add the manager to the Controls collection
+            in the OnInit method and render it in the Render method.
+            </remarks>
+        </member>
+        <member name="T:QSP.WebControl.MailTypes">
+            <summary>
+            Summary description for SendMail.  
+            </summary>
+            <Author>Dave Mustaikis</Author>
+            <Date>20 octobre 2003</Date>
+        </member>
+        <member name="T:QSP.WebControl.Fax">
+            <summary>
+            Summary description for Phone.
+            </summary>
+            <Author>Dave Mustaikis</Author>
+            <Date>10 décembre 2003</Date>
+        </member>
+        <member name="M:QSP.WebControl.Fax.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="P:QSP.WebControl.Fax.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.Fax.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.Fax.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.Fax.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Common.TableDef.ProvinceTable">
+            <summary>
+                A custom serializable dataset containing user information.
+                <remarks>
+                    This class is used to define the shape of CampaignPrizeData.
+                </remarks>
+                <remarks>
+                    The serializale constructor allows objects of type CampaignPrizeData to be remoted.
+                </remarks>
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Common.TableDef.ProvinceTable.#ctor">
+            <summary>
+                Constructor for CampaignPrizeData.  
+                <remarks>Initialize a CampaignPrizeData instance by building the table schema.</remarks> 
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Common.TableDef.ProvinceTable.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+                Constructor to support serialization.
+                <remarks>Constructor that supports serialization.</remarks> 
+                <param name="info">The SerializationInfo object to read from.</param>
+                <param name="context">Information on who is calling this method.</param>
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Business.Connection">
+            <summary>
+            Summary description for Connection.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientReadOnlyAttribute">
+            <summary>
+            Manages the persistence of the "readOnly" attribute of an element.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientReadOnlyAttribute.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientReadOnlyAttribute.ApplyClientChanges">
+            <summary>
+            Applies the client changes to the control's server properties.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientReadOnlyAttribute.ClientPropertyName">
+            <summary>
+            Client style name used when rendering the control.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientReadOnlyAttribute.IsReadOnly">
+            <summary>
+            Indicates whether the control is read only on the client.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.AlphaSearch">
+            <summary>
+            Summary description for AlphaSearch.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.AlphaSearch.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxRegEx">
+            <summary>
+            Summary description for TextBoxRegularExpression.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.TextBoxRegEx.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxRegEx.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxRegEx.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxRegEx.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxRegEx.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.Phone">
+            <summary>
+            Summary description for Phone.
+            </summary>
+            <Author>Dave Mustaikis</Author>
+            <Date>10 décembre 2003</Date>
+        </member>
+        <member name="M:QSP.WebControl.Phone.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.EnhancedSmartNavigationControl">
+            <summary>
+            Summary description for EnhancedSmartNavigationControl.
+            </summary>
+            
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientPersistentPropertyEnum">
+            <summary>
+            Enumerates the available ClientPersistentProperty implementation classes.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            
+            This file has to be updated every time a property is added.
+            </remarks>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientEnabledAttribute">
+            <summary>
+            Manages the persistence of the "disabled" attribute (Enabled state) of an element.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientEnabledAttribute.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientEnabledAttribute.ApplyClientChanges">
+            <summary>
+            Applies the client changes to the control's server properties.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientEnabledAttribute.ClientPropertyName">
+            <summary>
+            Client style name used when rendering the control.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientEnabledAttribute.IsEnabled">
+            <summary>
+            Indicates whether the control is enabled on the client.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DropDownListCached">
+            <summary>
+            Summary description for DropDownListCached.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Data.Transaction">
+            <summary>
+            Summary description for Transaction.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.Transaction.#ctor(QSP.WebControl.DataAccess.Data.TransactionItems)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Items">TransactionItems</param>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.Transaction.Execute">
+            <summary>
+            Make change on every table by starting by the first one in the list and as fallow
+            Update, Insert or delete are going to be done
+            </summary>
+            <returns>True when all queries as affected one or more row</returns>
+            <remarks>Transaction is rollback when querie don't modifie row on one of the table</remarks>
+        </member>
+        <member name="T:QSP.WebControl.RadioButtonSearch">
+            <summary>
+            Summary description for RadioButtonSearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.LengthValidator">
+            <summary>
+            Summary description for LengthValidator.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DropDownListInteger">
+            <summary>
+            Summary description for DropDownListInteger.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DropDownListReq">
+            <summary>
+            Summary description for DropDownListReq.
+            </summary>
+            <Author>Benoit Nadon</Author>
+            <Date>2005/04/11</Date>
+        </member>
+        <member name="P:QSP.WebControl.DropDownListReq.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.DropDownListReq.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.DropDownListReq.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.DropDownListReq.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.IPageSwitchStateControl">
+            <summary>
+            Summary description for PageSwitchStateControl.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataGridControl.NestedDataGrid">
+            <summary>
+            	Summary description for NestedDataGrid.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.StringExtended">
+            <summary>
+            Custom string functions.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.RadioButtonListItemAttributes">
+            <summary>
+            Summary description for RadioButtonListItemAttributes.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.RadioButtonListItemAttributes.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.PageSwitchStateBagCollection">
+            <summary>
+            Summary description for PageSwitchStateBag.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DropDownListSearch">
+            <summary>
+            Summary description for TextBoxSearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.AlphaSearchDesigner">
+            <summary>
+            Summary description for AlphaSearchDesigner.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxReq">
+            <summary>
+            Summary description for TextBoxReq.
+            </summary>
+            <Author>Benoit Nadon</Author>
+            <Date>14 mars 2005</Date>
+        </member>
+        <member name="M:QSP.WebControl.TextBoxReq.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxReq.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxReq.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxReq.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxReq.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.Time">
+            <summary>
+            Summary description for Time.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.Time.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientVisibilityStyle">
+            <summary>
+            Manages the persistence of the "visibility" style of an element.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientVisibilityStyle.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <member name="M:QSP.WebControl.ClientPersistentProperties.ClientVisibilityStyle.ApplyClientChanges">
+            <summary>
+            Applies the client changes to the control's server properties.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientVisibilityStyle.ClientPropertyName">
+            <summary>
+            Client style name used when rendering the control.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientVisibilityStyle.IsVisible">
+            <summary>
+            Indicates whether the control is visible on the client.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.PageSwitchStateBag">
+            <summary>
+            Summary description for PageSwitchStateBag.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.InternalTextBoxSearch">
+            <summary>
+            Summary description for InternalTextBoxSearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.EMail">
+            <summary>
+            Summary description for Phone with default REGEX.
+            </summary>
+            <Author>Dave Mustaikis</Author>
+            <Date>10 décembre 2003</Date>
+        </member>
+        <member name="M:QSP.WebControl.EMail.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="M:QSP.WebControl.EMail.BuildRegulareExpression">
+            <summary>
+            Assign a RegularExpressionValidator to the control
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.EMail.SetValidationExpression">
+            <summary>
+            Validation Expression for an EMail
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.EMail.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.EMail.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.EMail.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.EMail.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataGridControl.SortedDataGrid">
+            <summary>
+            Summary description for SortedDataGrid.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Business.ProvinceBusiness">
+            <summary>
+                This class contains the business rules that are used for a 
+                collection Day.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientDisplayStyle">
+            <summary>
+            Manages the persistence of the "display" style of an element.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientDisplayStyle.#ctor(System.Web.UI.WebControls.WebControl)" -->
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientDisplayStyle.ClientPropertyName">
+            <summary>
+            Client style name used when rendering the control.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.ClientPersistentProperties.ClientDisplayStyle.IsDisplayed">
+            <summary>
+            Indicates whether the control is being displayed on the client.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.AlphaSearchClickedArgs">
+            <summary>
+            Summary description for AlphaSearchClicked.
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.AlphaSearchClickedArgs.CharSelected">
+            <summary>
+            Character selected in the AlphaSearch
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.IOnloadJSEvent">
+            <summary>
+            Summary description for IOnloadJSEvent.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Common.Message">
+            <summary>
+            Summary description for QCAPMessage.
+            This class i used to Manage all Message for exception, including
+            the validation message that we need to provide to the presentation Layer
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Common.Message.PrepareErrorMessage">
+            <summary>
+            Prepare Error with the list of error added
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Common.ApplicationError">
+            <summary>
+            Summary description for ApplicationError.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Common.ApplicationError.Log_Exception(System.Exception)">
+            <summary>Logs exceptions into QSPError DB.</summary>
+            <param name="ex">The exception to be logged</param>
+            <param name="nv">A collection of additional developer comments</param>
+            <returns>the error ID #</returns>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxFloat">
+            <summary>
+            Summary description for TextBoxFloat.
+            </summary>
+            <Author>Benoit Nadon</Author>
+            <Date>14 mars 2005</Date>
+        </member>
+        <member name="M:QSP.WebControl.TextBoxFloat.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxFloat.ErrorMsgRequired">
+            <summary>
+            Message error when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxFloat.ErrorMsgRegExp">
+            <summary>
+            Message error when is not a valid email
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxFloat.TextMsgRequired">
+            <summary>
+            Text when is required
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.TextBoxFloat.TextRegExp">
+            <summary>
+            Text when is not valid email
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.PostalCode">
+            <summary>
+            Summary description for PostalCode.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.PostalCode.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Data.TransactionItem">
+            <summary>
+            Summary description for TransactionItem.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.ClientPersistentProperties.ClientPersistentPropertiesManagerControl">
+            <summary>
+            Manages the persisted properties for another control.
+            </summary>
+            <remarks>
+            Author(s):		Benoit Nadon, Éric Charest
+            Last Update:	2005/08/04
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:QSP.WebControl.ClientPersistentProperties.ClientPersistentPropertiesManagerControl.Add(QSP.WebControl.ClientPersistentProperties.ClientPersistentPropertyEnum)" -->
+        <member name="T:QSP.WebControl.ImageButtonExtended">
+            <summary>
+            Summary description for foImageButton.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DropDownListProvince">
+            <summary>
+            Summary description for DDLProvince.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.Date">
+            <summary>
+            Summary description for Date.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.Date.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Data.TransactionItems">
+            <summary>
+            Summary description for TransactionItem.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Common.QspException">
+            <summary>
+            Summary description for QCAPException.
+            This is the Base Exception for the Application
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Common.ValidationException">
+            <summary>
+            Summary description for QCAPException.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.TextBoxSearch">
+            <summary>
+            Summary description for TextBoxSearch.
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataGridControl.ExpandCommandColumn">
+            <summary>
+            Summary description for ExpandCommandColumn.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataGridControl.ExpandCommandColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)">
+            <summary>
+             Initializes the cells in the column
+            </summary>
+            <param name="cell"></param>
+            <param name="columnIndex"></param>
+            <param name="itemType"></param>
+        </member>
+        <member name="P:QSP.WebControl.DataGridControl.ExpandCommandColumn.ExpandText">
+            <summary>
+            Gets or sets the text for the item used to expand
+            </summary>
+        </member>
+        <member name="P:QSP.WebControl.DataGridControl.ExpandCommandColumn.CollapseText">
+            <summary>
+            Gets or sets the text for the item used to collapse
+            </summary>
+        </member>
+        <member name="T:QSP.WebControl.DataAccess.Data.ConnectionProvider">
+            <summary>
+            Purpose: provides a SqlConnection object which can be shared among data-access tier objects
+            to provide a way to do ADO.NET transaction coding without the hassling with SqlConnection objects
+            on a high level.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.Dispose">
+            <summary>
+            Purpose: Implements the IDispose' method Dispose.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.Dispose(System.Boolean)">
+            <summary>
+            Purpose: Implements the Dispose functionality.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.InitClass">
+            <summary>
+            Purpose: Initializes class members.
+            </summary>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.OpenConnection">
+            <summary>
+            Purpose: opens the connection object.
+            </summary>
+            <returns>true, if succeeded, otherwise an Exception exception is thrown.</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.BeginTransaction(System.String)">
+            <summary>
+            Purpose: starts a new ADO.NET transaction using the open connection object of this class.
+            </summary>
+            <param name="transactionName">Name of the transaction to start</param>
+            <returns>true, if transaction is started correctly, otherwise an Exception exception is thrown</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.CommitTransaction">
+            <summary>
+            Purpose: commits a pending transaction on the open connection object of this class.
+            </summary>
+            <returns>true, if commit was succesful, or an Exception exception is thrown</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.RollbackTransaction(System.String)">
+            <summary>
+            Purpose: rolls back a pending transaction on the open connection object of this class, 
+            or rolls back to the savepoint with the given name. Savepoints are created with SaveTransaction().
+            </summary>
+            <param name="transactionToRollback">Name of transaction to roll back. Can be name of savepoint</param>
+            <returns>true, if rollback was succesful, or an Exception exception is thrown</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.SaveTransaction(System.String)">
+            <summary>
+            Purpose: Saves a pending transaction on the open connection object of this class to a 'savepoint'
+            with the given name.
+            When a rollback is issued, the caller can rollback to this savepoint or roll back the complete transaction.
+            </summary>
+            <param name="savePointName">Name of the savepoint to store the current transaction under.</param>
+            <returns>true, if save was succesful, or an Exception exception is thrown</returns>
+        </member>
+        <member name="M:QSP.WebControl.DataAccess.Data.ConnectionProvider.CloseConnection(System.Boolean)">
+            <summary>
+            Purpose: Closes the open connection. Depending on bCommitPendingTransactions, a pending
+            transaction is commited, or aborted. 
+            </summary>
+            <param name="commitPendingTransaction">Flag for what to do when a transaction is still pending. True
+            will commit the current transaction, false will abort (rollback) the complete current transaction.</param>
+            <returns>true, if close was succesful, false if connection was already closed, or an Exception exception is thrown when
+            an error occurs</returns>
+        </member>
+    </members>
+</doc>

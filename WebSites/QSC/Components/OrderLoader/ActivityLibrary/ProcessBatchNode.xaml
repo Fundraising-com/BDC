@@ -1,0 +1,84 @@
+﻿<Activity mc:Ignorable="sap" x:Class="ActivityLibrary.ProcessBatchNode" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:b="clr-namespace:BusinessServices;assembly=BusinessServices" xmlns:d="clr-namespace:Data;assembly=Data" xmlns:local="clr-namespace:ActivityLibrary" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:sx="clr-namespace:System.Xml;assembly=System.Data" xmlns:sx1="clr-namespace:System.Xml;assembly=System.Xml" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq" xmlns:sxs="clr-namespace:System.Xml.Serialization;assembly=System.Xml" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="batchNode" Type="InArgument(sxl:XElement)" />
+    <x:Property Name="batchNodeParser" Type="InArgument(b:ParseBatchNode)" />
+    <x:Property Name="envelopeNodeParser" Type="InArgument(b:ParseEnvelopeNode)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>654,676</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Flowchart sad:XamlDebuggerXmlReader.FileName="C:\Projects\OrderLoader\ActivityLibrary\ProcessBatchNode.xaml" sap:VirtualizedContainerService.HintSize="614,636">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="d:BatchNode" Name="_BatchNode" />
+      <Variable x:TypeArguments="scg3:IEnumerable(sxl:XElement)" Name="_EnvelopeNodes" />
+      <Variable x:TypeArguments="b:ParseEnvelopeNode" Default="[envelopeNodeParser]" Name="_EnvelopeNodeParser" />
+    </Flowchart.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+        <av:Size x:Key="ShapeSize">60,75</av:Size>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,107.5 301,107.5 301,109</av:PointCollection>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID0">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">180,109</av:Point>
+            <av:Size x:Key="ShapeSize">242,57</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">301,166 290,166 290,191.5</av:PointCollection>
+          </scg3:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign sap:VirtualizedContainerService.HintSize="242,57">
+          <Assign.To>
+            <OutArgument x:TypeArguments="d:BatchNode">[_BatchNode]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="d:BatchNode">[batchNodeParser(batchNode)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <av:Point x:Key="ShapeLocation">169,191.5</av:Point>
+                <av:Size x:Key="ShapeSize">242,59</av:Size>
+                <av:PointCollection x:Key="ConnectorLocation">290,250.5 290,280.5 300,280.5 300,295.5</av:PointCollection>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="242,59">
+              <Assign.To>
+                <OutArgument x:TypeArguments="scg3:IEnumerable(sxl:XElement)">[_EnvelopeNodes]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="scg3:IEnumerable(sxl:XElement)" xml:space="preserve">[From r In batchNode.Descendants("ENVELOPE")
+                        Select r]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <FlowStep.Next>
+              <FlowStep x:Name="__ReferenceID2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                    <av:Point x:Key="ShapeLocation">200,295.5</av:Point>
+                    <av:Size x:Key="ShapeSize">200,49</av:Size>
+                  </scg3:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ForEach x:TypeArguments="sxl:XElement" DisplayName="ForEach&lt;XElement&gt;" sap:VirtualizedContainerService.HintSize="200,49" Values="[_EnvelopeNodes]">
+                  <ActivityAction x:TypeArguments="sxl:XElement">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sxl:XElement" Name="_envelopeNode" />
+                    </ActivityAction.Argument>
+                    <local:ProcessEnvelopeNode sap:VirtualizedContainerService.HintSize="252,100" envelopeNode="[_envelopeNode]" envelopeNodeParser="[_EnvelopeNodeParser]" />
+                  </ActivityAction>
+                </ForEach>
+              </FlowStep>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+  </Flowchart>
+</Activity>

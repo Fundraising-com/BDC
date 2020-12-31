@@ -1,0 +1,15 @@
+SELECT	*
+FROM	QSPCanadaCommon..FieldManager
+WHERE	LastName like 'cougle%'
+
+SELECT	*
+FROM	Commission
+WHERE	FM_ID = '0094'
+and COMMISSION_TYPE_CODE = 'PERCENT'
+order by COMM_EFFECTIVE_DATE
+
+SELECT	MAX(Commission_ID)
+FROM	Commission
+
+INSERT Commission
+VALUES (484, 2, 'PERCENT', 'NB_SUBS', GETDATE(), 'JMILES', 'CA', '2016-07-01', NULL, NULL, NULL, 16, NULL, NULL, 0094, GETDATE())

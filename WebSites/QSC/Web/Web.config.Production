@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<configSections>
+		<section name="ApplicationConfiguration" type="QSPFulfillment.DataAccess.Common.ApplicationConfiguration, QSPFulfillment.DataAccess" />
+		<sectionGroup name="system.web.extensions" type="System.Web.Configuration.SystemWebExtensionsSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+			<sectionGroup name="scripting" type="System.Web.Configuration.ScriptingSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+				<section name="scriptResourceHandler" type="System.Web.Configuration.ScriptingScriptResourceHandlerSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+				<sectionGroup name="webServices" type="System.Web.Configuration.ScriptingWebServicesSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+					<section name="jsonSerialization" type="System.Web.Configuration.ScriptingJsonSerializationSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="Everywhere"/>
+					<section name="profileService" type="System.Web.Configuration.ScriptingProfileServiceSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+					<section name="authenticationService" type="System.Web.Configuration.ScriptingAuthenticationServiceSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+					<section name="roleService" type="System.Web.Configuration.ScriptingRoleServiceSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/></sectionGroup></sectionGroup></sectionGroup></configSections>
+	<connectionStrings>
+		<add name="DSN" connectionString="server=USPVL3K117.rdigest.com;uid=qspcafulfillment;pwd=fi11m3nt;Application Name=QSPFulfillment Canada;Connect Timeout=360;Max Pool Size=200;"/>
+	</connectionStrings>
+	<ApplicationConfiguration>
+		<add key="QSP.Fulfillment.Data.ConnectionString"   value="server=USPVL3K117.rdigest.com;database=[DataBase];uid=qspcafulfillment;pwd=fi11m3nt;Application Name=QSPFulfillment Canada - Developer Prod;Connect Timeout=720;"/>
+		<add key="QSP.Fulfillment.Report.ConnectionString" value="server=USPVL3K117.rdigest.com;database=[DataBase];uid=qspcafulfillment;pwd=fi11m3nt;Application Name=QSPFulfillment Canada Reporting - Developer Prod;Connect Timeout=720;"/> 
+		<add key="QSP.Fulfillment.Report.UserID" value="qspca" />
+		<add key="QSP.Fulfillment.Report.Password" value="canada" />
+		<add key="QSP.Fulfillment.Report.DefautlUrl" value="http://USPVLDMZ3K12/RDReportServer/?/QSPCanadaFinance" />
+		<add key="QSP.Fulfillment.Mail.From" value="QSPFulfDeveloperProd@RD.com" />
+		<add key="QSP.Fulfillment.Mail.To" value="qsp-IT-canada@qsp.com" />
+		<add key="QSP.Fulfillment.Mail.Smtp" value="nasmtp.us.rdigest.com" />
+		<add key="QSP.Fulfillment.Error.ConnectionString" value="data source=USPVL3K117.rdigest.com;initial catalog=QSPCanadaError;pwd=3rr*r;uid=QSPCanadaErrorApp;Application Name=QSPFulfillment Canada Error Reporting - Developer Prod" />
+		<add key="QSP.Fulfillment.Error.SendMail.Enabled" value="true"/> 
+		<add key="QSP.Fulfillment.Error.DBInsert.Enabled" value="true"/>
+		<add key="QSP.Fulfillment.Error.DBInsert.LinkError" value=""/>
+	</ApplicationConfiguration>
+	<appSettings>
+		<add key="AcrobatPath" value="C:\Program Files\Adobe\Acrobat 6.0\Acrobat\Acrobat.exe"/>
+		<add key="AddressChangeWarningEmail" value="qsp-IT-canada@qsp.com" />
+		<add key="AddressHygieneEnabled" value="true"/>
+		<add key="AddressHygieneUsername" value="AddressHygiene"/>
+		<add key="AddressHygienePassword" value="sesahpwd"/>
+		<add key="AddressHygieneURL" value="http://ws.qsp.com/SES.AddressHygiene.20071031/" />
+		<add key="BarcodeTemporaryImagesPath" value="D:\\QSP\\Source\\QSPFulfillment\\Tags\\Production\\Web\\Images\\temp\\"/>
+		<add key="BarcodeTemporaryImagesURL" value="http://localhost/QSPFulfillment/Images/temp/"/>
+		<add key="BarcodeFontsPath" value="D:\\QSP\\Source\\Common\\Trunk\\BarcodeWriter\\"/>
+		<add key="BatchFilePath" value="/QSPFulfillment/PrintDocs/BatchFiles/" />
+		<add key="BatchFileLoc" value="D:\QSP\Source\QSPFulfillment\Tags\Production\Web\PrintDocs\BatchFiles\"/>
+		<add key="BatchFilesURL" value="http://localhost/QSPFulfillment/BatchReports/"/>
+		<add key="CatalystWarningEmail" value="qsp-IT-canada@qsp.com" />
+		<add key="CatalogContract_Excel_Stylesheet" value="D:\\QSP\\Source\\QSPFulfillment\\Tags\\Production\\Reports\\CatalogContractExcel.xsl"/>
+		<add key="DataSetSchemaPath" value="D:\\QSP\\Source\\QSPFulfillment\\Tags\\Production\\Shared\\Common\\TableDef\\"/>
+		<add key="DocsPrinter1" value="\\ipp://printing-sca.ca.rdigest.com\131-HPLJ9000A"/>
+		<add key="DocsPrinter2" value="\\ipp://printing-sca.ca.rdigest.com\131-HPLJ9000B"/>
+		<add key="DocsPrinter3" value="\\ipp://printing-sca.ca.rdigest.com\131-HPLJ4050"/>
+		<add key="DocsPrinter4" value="\\ipp://printing-sca.ca.rdigest.com\131-HPLJ8100"/>
+		<add key="DSN" value="server=USPVL3K117.rdigest.com;uid=qspcafulfillment;pwd=fi11m3nt;Application Name=QSPFulfillment Canada Reports - Developer Prod;Connect Timeout=360;Max Pool Size=200;"/>
+		<add key="EnablePaymenTechWebService" value="true"/>
+		<add key="FileStoreConfigurationPath" value="D:\\QSP\\Source\\QSPFulfillment\\Tags\\Production\\FileStore\\StoreConfiguration.xml"/>
+		<add key="INotesPath" value="https://webmail.myrda.com/intranet/us/template/qspsalestools.nsf/names.nsf?Login"/>
+		<add key="INotesRedirectPath" value="https://webmail.myrda.com/Intranet/US/template/qspsalestools.nsf/e05a926b2ed468ac85256980000301d5/"/>
+		<add key="INotesWebmailPath" value="54538ed6920d4ae1852572330073fab0/"/>
+		<add key="LabelPrinter" value="\\ipp://printing-sca.ca.rdigest.com\131-HPLJ4050"/>
+		<add key="PageSwitchStateTimeout" value="3"/>
+		<add key="PDFTKPath" value="D:\\QSP\\Source\\QSPFulfillment\\Tags\\Production\\Web\\Bin\\pdftk.exe"/>
+		<add key="RSBaseDirectory" value="" />
+		<add key="RSDefaultUrl" value="http://USPVLDMZ3K12/RDReportServer?" />
+		<add key="RSExportPassword" value="oneteam"/>
+		<add key="RSExportPath" value="\\USPVLDMZ3K12\rsexportedreports" />
+		<add key="RSExportUsername" value="RSReportWriter"/>
+		<add key="RSInstallation" value = "http://USPVLDMZ3K12/" />
+		<add key="RSPowerPassword" value="oneteam" />
+		<add key="RSPowerUsername" value="rsreportwriter" />
+		<add key="RSPwd" value="canada" />
+		<add key="RSReportQueueURL" value="http://www.qspfulfca.com/QSPFulfillment/RSReportQueue/" />
+		<add key="RSServer" value="http://USPVLDMZ3K12/RDReportServer/reportservice.asmx" />
+		<add key="RSUID" value="qspca" />
+		<add key="TotalPrinters" value="4" />
+	</appSettings>
+	<system.web>
+		<httpRuntime executionTimeout="600" />
+		<compilation defaultLanguage="c#" debug="true" />
+		<pages enableSessionState="true"/>
+		<customErrors mode="Off" />
+		<authentication mode="Forms">
+			<forms 
+				name="QSPCanada_Web.ASPXAUTH" 
+				loginUrl="QSPFulfillmentLogin.aspx" 
+				protection="All" 
+				path="/" 
+				timeout="555"
+			/><!--timeout is minutes the cookie is valid for - was 12000-->
+		</authentication>
+		<trace enabled="false" requestLimit="10" pageOutput="false" traceMode="SortByTime" localOnly="true" />
+		<sessionState 
+			mode="InProc"
+			stateConnectionString="tcpip=127.0.0.1:42424"
+			sqlConnectionString="data source=127.0.0.1;Trusted_Connection=yes"
+			cookieless="false" 
+			timeout="555" 
+		/>
+		<globalization requestEncoding="utf-8" responseEncoding="utf-8" />
+		<authorization>
+			<!-- Allow all users -->
+			<allow users="*" />
+		</authorization>
+		<httpHandlers>   
+			<add verb="POST,GET" path="ajax/*.ashx" type="Ajax.PageHandlerFactory, Ajax" />
+		</httpHandlers>
+	</system.web>
+</configuration>
+
+    <!--  DYNAMIC DEBUG COMPILATION
+          Set compilation debug="true" to enable ASPX debugging.  Otherwise, setting this value to
+          false will improve runtime performance of this application. 
+          Set compilation debug="true" to insert debugging symbols (.pdb information)
+          into the compiled page. Because this creates a larger file that executes
+          more slowly, you should set this value to true only when debugging and to
+          false at all other times. For more information, refer to the documentation about
+          debugging ASP.NET files.
+    -->
+    <!--  CUSTOM ERROR MESSAGES
+          Set customErrors mode="On" or "RemoteOnly" to enable custom error messages, "Off" to disable. 
+          Add <error> tags for each of the errors you want to handle.
+
+          "On" Always display custom (friendly) messages.
+          "Off" Always display detailed ASP.NET error information.
+          "RemoteOnly" Display custom (friendly) messages only to users not running 
+           on the local Web server. This setting is recommended for security purposes, so 
+           that you do not display application detail information to remote clients.
+    -->
+    <!--  AUTHENTICATION 
+          This section sets the authentication policies of the application. Possible modes are "Windows", 
+          "Forms", "Passport" and "None"
+
+          "None" No authentication is performed. 
+          "Windows" IIS performs authentication (Basic, Digest, or Integrated Windows) according to 
+           its settings for the application. Anonymous access must be disabled in IIS. 
+          "Forms" You provide a custom form (Web page) for users to enter their credentials, and then 
+           you authenticate them in your application. A user credential token is stored in a cookie.
+          "Passport" Authentication is performed via a centralized authentication service provided
+           by Microsoft that offers a single logon and core profile services for member sites.
+    -->
+	<!--  AUTHORIZATION 
+          This section sets the authorization policies of the application. You can allow or deny access
+          to application resources by user or role. Wildcards: "*" mean everyone, "?" means anonymous 
+          (unauthenticated) users.
+    -->
+	<!--
+			<authorization>
+			<allow users="*" /> /* Allow all users */
+			/*  <allow     users="[comma separated list of users]"
+			                 roles="[comma separated list of roles]"/>
+			<deny      users="[comma separated list of users]"
+			                 roles="[comma separated list of roles]"/>
+			*/
+		</authorization>
+	-->
+    <!--  APPLICATION-LEVEL TRACE LOGGING
+          Application-level tracing enables trace log output for every page within an application. 
+          Set trace enabled="true" to enable application trace logging.  If pageOutput="true", the
+          trace information will be displayed at the bottom of each page.  Otherwise, you can view the 
+          application trace log by browsing the "trace.axd" page from your web application
+          root. 
+    -->
+    <!--  SESSION STATE SETTINGS
+          By default ASP.NET uses cookies to identify which requests belong to a particular session. 
+          If cookies are not available, a session can be tracked by adding a session identifier to the URL. 
+          To disable cookies, set sessionState cookieless="true".
+    -->
+    <!--  GLOBALIZATION
+          This section sets the globalization settings of the application. 
+    -->

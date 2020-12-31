@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{182D4391-45A3-4C53-BACF-C26930F74D3C}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Business</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Business</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <WebReference_EnableProperties>true</WebReference_EnableProperties>
+    <WebReference_EnableSQLTypes>false</WebReference_EnableSQLTypes>
+    <WebReference_EnableLegacyEventingModel>true</WebReference_EnableLegacyEventingModel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BarcodeWriter, Version=1.0.3125.29673, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\BarcodeWriter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportingServices.Interfaces, Version=8.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Name>System.EnterpriseServices</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Name>DataAccess</Name>
+      <Project>{E8476CAD-60B3-405B-9F01-5B3FDE168D5B}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\FileStore\FileStore.csproj">
+      <Name>FileStore</Name>
+      <Project>{922C4CC4-47E4-44EA-8F1A-5CB95757FACC}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Common\Common.csproj">
+      <Name>Common</Name>
+      <Project>{0D71FE6F-4C9A-4ABC-81D7-E6B8950E6D34}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\DAL\DAL.csproj">
+      <Name>DAL</Name>
+      <Project>{21D7E405-3FCB-41BF-84C5-39A77212F719}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\WebControl\WebControl.csproj">
+      <Name>WebControl</Name>
+      <Project>{9602B885-B053-4D48-AD7A-311ED8FD736D}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AccountList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Address.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BankDeposit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Batch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BillShipAccount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CampaignList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CampaignProgram.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CodeDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConfirmationAgreement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contact.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ContactMaintenance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DistributionCenter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EstimatedSalesView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FieldManagerList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FulfillmentHouse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FulfillmentIterator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GiftOrderReturned.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\AccountCampaignList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Address.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\AdjustmentBatch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\AdjustmentBatchList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\AdjustmentType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Batch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\BatchReportsObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\BusinessSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CAccount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CAccountClassCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Campaign.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CampaignBatchReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CampaignProgram.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CampaignProgramValidationFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CatalogContract.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\CodeDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Contact.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\FieldManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\FieldSuppliesOrderList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\InactiveMagazineLetterBatch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\InactiveMagazineLetterBatchItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\InactiveMagazineLetterBatchSearchCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\INotes.cs" />
+    <Compile Include="Objects\InvoiceBatchReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterBatch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterBatchFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterBatchItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterBatchItemFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterBatchSearchCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterBatchSearchCriteriaFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\LetterTemplateItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Phone.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\PhoneList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Province.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\Remit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitMailer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitSummary.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\AttachmentCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\ExcelManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\RemitTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\RemitTestCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\RemitTestExcelHandling.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\RemitTestFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\RemitTestLog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Remit\RemitTest\RemitValidation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\RSClient.cs" />
+    <Compile Include="Objects\Season.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\StatementBatchReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\StatementRun.cs" />
+    <Compile Include="Objects\Strategies\RallyValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\CoolCardsValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PretzelRods30ValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\LeapLabels.cs" />
+    <Compile Include="Objects\Strategies\TastyTreatsValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\DepositOnlyExtraServiceValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PretzelRods40ValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\TheCureJewelryValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\TervisValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PapaJackPopcornValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\GiftCardValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\QSPSavingsPassValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\StainlessSteelTravelCup.cs" />
+    <Compile Include="Objects\Strategies\FFTTPopcornValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\Top20MagazinesValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\DonationsValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\LifeIsSweetValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\NaturallyGoodCollectionValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\KitchenCollectionValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\BloomValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\GiftsWeLoveValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\FestivalValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\EntertainmentValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\59MinuteFundraiserValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\AllOccasionComboProgramValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\AllOccasionProgramValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\BearProgramValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\CampaignProgramValidationNamingConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\CampaignProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\CooksCollectionValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\CookieDoughValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\ChocolateValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\CandlesValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\ComboSummaryReportStrategy.cs" />
+    <Compile Include="Objects\Strategies\ToRememberThisValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\CumulativeMiddleSchoolValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\MagazineFullServiceValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PrizeCValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\HybridValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PrizeTimeValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PrizeZoneValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\CumulativeValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\LargeChartWithNumSubsValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\DiscoverCanadaProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\Dollars20GiftCardCouponValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\DrawPrizeValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\FreeSubsValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\GameOnValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\GiftOnlyProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\GiftValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\GoForTheGoldValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\KanataExtremeRewardsProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\LoonieValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\LoyaltyBonusValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\MagazineExpressValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\MagazineValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\MagnetValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\PlanetaryRewardsProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\PlannerComboProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\PlannerOnlyProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\PrizeDimensionValidationStrategy.cs" />
+    <Compile Include="Objects\Strategies\PrizeSafariValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\LargeChartValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\SummaryFormsReportAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\SummaryFormsReportNamingConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\SummaryFormsReportStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\SummaryFormsReportStrategyCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\SweetSensationsValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\TeacherProgramValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Strategies\TreasureQuestValidationStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\SummaryFormBatchReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\SummaryFormReportFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\SummaryReportsCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\Transaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OnlineStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OnlineStore_AccountReportingUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderStageTracking.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Payments.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Phone.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PickList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProductCatalogPrice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Program.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProgramMaster.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QBusinessObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RemitBatch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\CampaignConfirmationAgreementReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\CampaignStatementReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\CustomerServiceStatementReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\OEFReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\OnlineProfitStatementReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintInvoiceReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\Report.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\SummaryFormReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\UndefinedReportParameterException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CAccountParentIntegrity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CampaignDateValidation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CampaignProgramCombinations.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CampaignProgramGroupProfitRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CampaignStaffOrderDiscount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CampaignToAccountIntegrity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\CampaignToPhoneListIntegrity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\ConditionalRequiredFields.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\ContactPrimaryUnicity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\ContactToPhoneListIntegrity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\PhoneToPhoneListIntegrity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\PhoneTypePhoneListUnicity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\Range.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\RegularExpression.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\RequiredFields.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\RulesBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\RulesCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\SeasonUnicity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\SeasonValidateDelete.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\StringLength.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shipment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserProfile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web References\com.ses.ws.AddressHygiene\Reference.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Web References\ReportExecution\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Web References\ReportService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Content Include="Web References\com.ses.ws.AddressHygiene\AddressHygieneContract.disco" />
+    <Content Include="Web References\com.ses.ws.AddressHygiene\AddressHygieneContract.wsdl" />
+    <Content Include="Web References\com.ses.ws.AddressHygiene\Reference.map" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ReportExecution\DocumentMapNode1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\ExecutionInfo1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\ExecutionInfo21.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\Extension1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ReportExecution\ReportExecution2005.wsdl" />
+    <None Include="Web References\ReportExecution\Warning1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ActiveState.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\CatalogItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataRetrievalPlan.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSetDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSource.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSourceDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSourcePrompt.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Event.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExecutionSettingEnum.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExpirationDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Extension.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExtensionParameter.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExtensionSettings.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ItemTypeEnum.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Job.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ModelCatalogItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ModelDrillthroughReport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ModelItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ParameterValue.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ParameterValueOrFieldReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Policy.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Property.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ReportService\ReportHistorySnapshot.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ReportParameter.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ReportService2005.wsdl" />
+    <None Include="Web References\ReportService\Role.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Schedule.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ScheduleDefinitionOrReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Subscription.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Task.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Warning.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <WebReferenceUrl Include="http://testssrs.gafundraising.com/ReportServer/ReportExecution2005.asmx">
+      <RelPath>Web References\ReportExecution\</RelPath>
+      <UrlBehavior>Static</UrlBehavior>
+      <UpdateFromURL>http://testssrs.gafundraising.com/ReportServer/ReportExecution2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://testssrs.gafundraising.com/ReportServer/ReportService2005.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ReportService\</RelPath>
+      <UpdateFromURL>http://testssrs.gafundraising.com/ReportServer/ReportService2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Business_ReportService_ReportingService2005</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

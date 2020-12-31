@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="SaveCustomer.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.SaveCustomer" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

@@ -1,0 +1,55 @@
+# Business project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\Business
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322
+COMP	= $(FRMWRK)\csc.exe
+TARGET	= /target:library /warn:4
+DREF	= /lib:$(PRJDIR)\bin\Debug\ /reference:Common.dll,DAL.dll # debug project references
+RREF	= /lib:$(PRJDIR)\bin\Release\ /reference:Common.dll,DAL.dll # release project references
+REF	= /lib:$(FRMWRK)\ /reference:System.dll,System.Data.dll,System.Xml.dll #system references
+DEBUG	= /out:$(PRJDIR)\bin\Debug\Business.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.Business.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\Business.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.Business.xml 
+
+FILES	= $(PRJDIR)\Account.cs
+FILES	= $(FILES) $(PRJDIR)\AccountList.cs
+FILES	= $(FILES) $(PRJDIR)\Address.cs
+FILES	= $(FILES) $(PRJDIR)\AssemblyInfo.cs
+FILES	= $(FILES) $(PRJDIR)\BankDeposit.cs
+FILES	= $(FILES) $(PRJDIR)\Batch.cs
+FILES	= $(FILES) $(PRJDIR)\BillShipAccount.cs
+FILES	= $(FILES) $(PRJDIR)\CampaignList.cs
+FILES	= $(FILES) $(PRJDIR)\CampaignProgram.cs
+FILES	= $(FILES) $(PRJDIR)\CodeDetail.cs
+FILES	= $(FILES) $(PRJDIR)\ConfirmationAgreement.cs
+FILES	= $(FILES) $(PRJDIR)\Contact.cs
+FILES	= $(FILES) $(PRJDIR)\ContactMaintenance.cs
+FILES	= $(FILES) $(PRJDIR)\DistributionCenter.cs
+FILES	= $(FILES) $(PRJDIR)\Enums.cs
+FILES	= $(FILES) $(PRJDIR)\EstimatedSalesView.cs
+FILES	= $(FILES) $(PRJDIR)\FieldManagerList.cs
+FILES	= $(FILES) $(PRJDIR)\FulfillmentHouse.cs
+FILES	= $(FILES) $(PRJDIR)\FulfillmentIterator.cs
+FILES	= $(FILES) $(PRJDIR)\GiftOrderReturned.cs
+FILES	= $(FILES) $(PRJDIR)\OnlineStore.cs
+FILES	= $(FILES) $(PRJDIR)\OnlineStore_AccountReportingUser.cs
+FILES	= $(FILES) $(PRJDIR)\Payments.cs
+FILES	= $(FILES) $(PRJDIR)\Phone.cs
+FILES	= $(FILES) $(PRJDIR)\PickList.cs
+FILES	= $(FILES) $(PRJDIR)\ProductCatalogPrice.cs
+FILES	= $(FILES) $(PRJDIR)\Program.cs
+FILES	= $(FILES) $(PRJDIR)\ProgramMaster.cs
+FILES	= $(FILES) $(PRJDIR)\QBusinessObject.cs
+FILES	= $(FILES) $(PRJDIR)\RemitBatch.cs
+FILES	= $(FILES) $(PRJDIR)\Report.cs
+FILES	= $(FILES) $(PRJDIR)\Shipment.cs
+FILES	= $(FILES) $(PRJDIR)\UserProfile.cs
+
+#EXCLUDE: CatalogSection.cs
+#EXCLUDE: FulfillmentBatch.cs 
+
+debug:
+	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES)

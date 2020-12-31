@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="AdjustmentBatchListDataSet" targetNamespace="http://tempuri.org/AdjustmentBatchListDataSet.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/AdjustmentBatchListDataSet.xsd"
+	xmlns:mstns="http://tempuri.org/AdjustmentBatchListDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="AdjustmentBatchListDataSet" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="AdjustmentBatch">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="AdjustmentTypeID" type="xs:int" />
+							<xs:element name="AdjustmentTypeName" type="xs:string" />
+							<xs:element name="Status" type="xs:int" />
+							<xs:element name="StatusDescription" type="xs:string" />
+							<xs:element name="DateFrom" type="xs:dateTime" />
+							<xs:element name="DateTo" type="xs:dateTime" />
+							<xs:element name="CreateUserID" type="xs:int" />
+							<xs:element name="CreateUserName" type="xs:string" />
+							<xs:element name="CreateDate" type="xs:dateTime" />
+							<xs:element name="ChangeUserID" type="xs:int" minOccurs="0" />
+							<xs:element name="ChangeUserName" type="xs:string" minOccurs="0" />
+							<xs:element name="ChangeDate" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="IsDeletable" type="xs:boolean" minOccurs="0" msdata:Expression="Status = 64001" />
+							<xs:element name="IsRestorable" type="xs:boolean" minOccurs="0" msdata:Expression="Status = 64003" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ADJUSTMENT">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ADJUSTMENT_ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="ACCOUNT_ID" type="xs:int" />
+							<xs:element name="AccountName" type="xs:string" />
+							<xs:element name="CampaignStartDate" type="xs:dateTime" />
+							<xs:element name="CampaignEndDate" type="xs:dateTime" />
+							<xs:element name="ACCOUNT_TYPE_ID" type="xs:int" />
+							<xs:element name="ADJUSTMENT_TYPE_ID" type="xs:int" />
+							<xs:element name="ADJUSTMENT_EFFECTIVE_DATE" type="xs:dateTime" />
+							<xs:element name="ADJUSTMENT_AMOUNT" type="xs:decimal" />
+							<xs:element name="NOTE_TO_PRINT" type="xs:string" minOccurs="0" />
+							<xs:element name="DATE_CREATED" type="xs:dateTime" />
+							<xs:element name="DATETIME_MODIFIED" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="LAST_UPDATED_BY" type="xs:string" minOccurs="0" />
+							<xs:element name="COUNTRY_CODE" type="xs:string" />
+							<xs:element name="INTERNAL_COMMENT" type="xs:string" minOccurs="0" />
+							<xs:element name="ORDER_ID" type="xs:int" minOccurs="0" />
+							<xs:element name="CAMPAIGN_ID" type="xs:int" minOccurs="0" />
+							<xs:element name="ADJUSTMENT_BATCH_ID" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="AdjustmentBatchListDataSetKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:AdjustmentBatch" />
+			<xs:field xpath="mstns:ID" />
+		</xs:unique>
+		<xs:unique name="AdjustmentBatchListDataSetKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:ADJUSTMENT" />
+			<xs:field xpath="mstns:ADJUSTMENT_ID" />
+		</xs:unique>
+		<xs:keyref name="AdjustmentBatchADJUSTMENT" refer="AdjustmentBatchListDataSetKey1">
+			<xs:selector xpath=".//mstns:ADJUSTMENT" />
+			<xs:field xpath="mstns:ADJUSTMENT_BATCH_ID" />
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

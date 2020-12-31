@@ -1,0 +1,76 @@
+# WebControl project make file, QSPFulfillment Project
+
+SLNDIR	= D:\webprojects\QSPFulfillment
+PRJDIR	= $(SLNDIR)\WebControl
+FRMWRK	= C:\WINNT\Microsoft.NET\Framework\v1.1.4322 #C:\WINNT\Microsoft.NET\Framework\v1.0.3705\
+COMP	= $(FRMWRK)\csc.exe
+NANTCONTRIB	= D:\apps\NantContrib85.2004.07.06\bin
+
+
+TARGET	= /target:library /warn:4
+LIB1	= /lib:$(FRMWRK)\  #system references
+REF1	= /reference:System.dll,System.Data.dll,System.Design.dll,System.Drawing.dll,System.Web.dll,System.Windows.Forms.dll,System.Xml.dll
+REF	= $(LIB1) $(REF1)
+REF	= $(REF) /reference:$(SLNDIR)\Web\bin\DBauer.Web.UI.WebControls.HierarGrid.dll
+DEBUG	= /out:$(PRJDIR)\bin\Debug\QSP.WebControl.dll /debug:full /filealign:4096 #/doc:$(PRJDIR)\bin\Debug\QSPFulfillment.WebControl.xml 
+RELEASE	= /out:$(PRJDIR)\bin\Release\QSP.WebControl.dll /optimize+ #/doc:$(PRJDIR)\bin\Release\QSPFulfillment.WebControl.xml 
+
+FILES	= $(PRJDIR)\AlphaSearch.cs
+FILES	= $(FILES) $(PRJDIR)\AlphaSearchClickedArgs.cs
+FILES	= $(FILES) $(PRJDIR)\AlphaSearchDesigner.cs
+FILES	= $(FILES) $(PRJDIR)\AssemblyInfo.cs
+FILES	= $(FILES) $(PRJDIR)\CheckBoxSearch.cs
+FILES	= $(FILES) $(PRJDIR)\Currency.cs
+FILES	= $(FILES) $(PRJDIR)\Date.cs
+FILES	= $(FILES) $(PRJDIR)\DropDownListProvince.cs
+FILES	= $(FILES) $(PRJDIR)\DropDownListReq.cs
+FILES	= $(FILES) $(PRJDIR)\DropDownListSearch.cs
+FILES	= $(FILES) $(PRJDIR)\Email.cs
+FILES	= $(FILES) $(PRJDIR)\EnhancedSmartNavigationControl.cs
+FILES	= $(FILES) $(PRJDIR)\Fax.cs
+FILES	= $(FILES) $(PRJDIR)\InternalDropDownListSearch.cs
+FILES	= $(FILES) $(PRJDIR)\InternalTextBoxSearch.cs
+FILES	= $(FILES) $(PRJDIR)\IOnloadJSEvent.cs
+FILES	= $(FILES) $(PRJDIR)\ISearch.cs
+FILES	= $(FILES) $(PRJDIR)\LengthValidator.cs
+FILES	= $(FILES) $(PRJDIR)\Phone.cs
+FILES	= $(FILES) $(PRJDIR)\PostalCode.cs
+FILES	= $(FILES) $(PRJDIR)\RadioButtonSearch.cs
+FILES	= $(FILES) $(PRJDIR)\SendMail.cs
+FILES	= $(FILES) $(PRJDIR)\TextBoxControlReqCompVal.cs
+FILES	= $(FILES) $(PRJDIR)\TextBoxControlReqRev.cs
+FILES	= $(FILES) $(PRJDIR)\TextBoxFloat.cs
+FILES	= $(FILES) $(PRJDIR)\TextBoxInteger.cs
+FILES	= $(FILES) $(PRJDIR)\TextBoxReq.cs
+FILES	= $(FILES) $(PRJDIR)\TextBoxSearch.cs
+FILES	= $(FILES) $(PRJDIR)\Time.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Business\BusinessSystem.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Business\Connection.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Business\ProvinceBusiness.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Common\ApplicationError.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Common\Message.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Common\QspException.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Common\TableDef\CommonTable.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Common\TableDef\ProvinceTable.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\ConnectionProvider.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\DBInteractionBase.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\DBTableOperation.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\ProvinceData.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\Transaction.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\TransactionItem.cs
+FILES	= $(FILES) $(PRJDIR)\DataAccess\Data\TransactionItems.cs
+FILES	= $(FILES) $(PRJDIR)\DataGridControl\ExpandCommandColumn.cs
+FILES	= $(FILES) $(PRJDIR)\DataGridControl\NestedDataGrid.cs
+FILES	= $(FILES) $(PRJDIR)\DataGridControl\SortedDataGrid.cs
+
+debug:
+	$(COMP) $(TARGET) $(DREF) $(REF) $(DEBUG) $(FILES)
+
+release:
+	$(COMP) $(TARGET) $(RREF) $(REF) $(RELEASE) $(FILES)
+
+#slingMAKE:
+#	$(NANTCONTRIB)\SLiNgshoT.exe -nmake -sln $(PRJDIR)\WebControl.csproj -map http://localhost/ D:\webprojects\
+
+slingMAKE:
+	$(NANTCONTRIB)\SLiNgshoT.exe -nmake -sln "D:\jcaesar\My Documents\Visual Studio Projects\TEMP\TEMP.SLN" -map http://localhost/ D:\webprojects\

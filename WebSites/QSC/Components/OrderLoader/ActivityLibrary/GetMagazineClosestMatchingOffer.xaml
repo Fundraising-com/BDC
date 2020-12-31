@@ -1,0 +1,54 @@
+﻿<Activity mc:Ignorable="sap" x:Class="ActivityLibrary.GetMagazineClosestMatchingOffer" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:b="clr-namespace:BusinessServices;assembly=BusinessServices" xmlns:d="clr-namespace:Data;assembly=Data" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mps="clr-namespace:Microsoft.Practices.ServiceLocation;assembly=Microsoft.Practices.ServiceLocation" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="zProductCode" Type="InArgument(x:String)" />
+    <x:Property Name="nProductQty" Type="InArgument(x:Int32)" />
+    <x:Property Name="dProductPrice" Type="InArgument(x:Double)" />
+    <x:Property Name="zProductName" Type="InArgument(x:String)" />
+    <x:Property Name="nCampaignID" Type="InArgument(x:Int32)" />
+    <x:Property Name="nPriceOverride" Type="InArgument(x:Int32)" />
+    <x:Property Name="PricingDataResult" Type="OutArgument(d:PricingData)" />
+    <x:Property Name="argument1" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>526,559</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\Projects\OrderLoader\ActivityLibrary\GetMagazineClosestMatchingOffer.xaml" sap:VirtualizedContainerService.HintSize="486,519">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="b:ProductAndPricingService" Name="ProductAndPricingService" />
+      <Variable x:TypeArguments="d:PricingData" Name="PricingData" />
+      <Variable x:TypeArguments="mps:ServiceLocator" Name="ServiceLoc" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="464,57">
+      <Assign.To>
+        <OutArgument x:TypeArguments="b:ProductAndPricingService">[ProductAndPricingService]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="b:ProductAndPricingService">[New ProductAndPricingService()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="464,57">
+      <Assign.To>
+        <OutArgument x:TypeArguments="d:PricingData">[PricingData]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="d:PricingData">[ProductAndPricingService.GetPricingData(zProductCode, nProductQty, nCampaignID, 46001)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[PricingData Is Nothing]" sap:VirtualizedContainerService.HintSize="464,201">
+      <If.Else>
+        <Assign sap:VirtualizedContainerService.HintSize="290,100">
+          <Assign.To>
+            <OutArgument x:TypeArguments="d:PricingData">[PricingDataResult]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="d:PricingData">[PricingData]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

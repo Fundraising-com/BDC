@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F4022490-D5AA-45F6-ACD2-558FFBCEBBBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AddressNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Batch.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatchNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Campaign.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditCardBatch.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditCardPayment.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditCardPaymentPartial.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerOrderDetail.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerOrderHeader.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerPaymentHeader.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnvelopeNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InternetIDNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InternetOrderID.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MagOrderDetailNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MagOrderNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderModel.Context.Extensions.cs">
+      <DependentUpon>OrderModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipantNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PricingData.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessingFeeNode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductCodeFromRemitCode.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductPricings.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemOption.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaxResult.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.cs">
+      <DependentUpon>OrderModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="OrderModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrderModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="OrderModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrderModel.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\QSPCanadaOrderManagementEntities.datasource" />
+    <None Include="xxxx.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

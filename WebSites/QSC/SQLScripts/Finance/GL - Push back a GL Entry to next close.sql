@@ -1,0 +1,74 @@
+SELECT	ge.*
+INTO	#EntriesToPushBack
+FROM		GL_Entry ge
+LEFT JOIN	Adjustment adj
+				ON	adj.Adjustment_ID = ge.Adjustment_ID
+WHERE		adj.Adjustment_ID IN (
+78663,
+78669,
+78670,
+78672,
+78680,
+80762,
+80764,
+80766,
+80768,
+82749,
+82750,
+82751,
+82752,
+82753,
+76810,
+76811,
+76812,
+76813,
+76814,
+76815,
+76816,
+76817,
+78655,
+78656,
+78660,
+78661,
+78665,
+78666,
+78667,
+78668,
+78671,
+78673,
+78674,
+78675,
+78676,
+78677,
+78678,
+78679,
+78681,
+78682,
+78684,
+80759,
+80760,
+80763,
+80765,
+80767,
+80769,
+80770,
+80771,
+80772,
+80818,
+80821,
+80822,
+81601,
+82746,
+82747,
+82748,
+82754
+)
+
+BEGIN TRAN t1
+UPDATE	ge
+SET		GL_Entry_Date = '2009-02-05',
+		Accounting_Period = 8
+FROM	GL_Entry ge
+JOIN	#EntriesToPushBack epb
+			ON	epb.GL_Entry_ID = ge.GL_Entry_ID
+COMMIT TRAN t1

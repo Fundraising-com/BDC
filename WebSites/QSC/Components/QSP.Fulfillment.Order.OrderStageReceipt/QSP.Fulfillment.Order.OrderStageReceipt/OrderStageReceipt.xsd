@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RESOLVEORDERSTAGE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SNAPSHOT">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" name="SNAPSHOTDATE" type="xs:string" />
+              <xs:element minOccurs="0" name="TOTALRECEIVED" type="xs:int" />
+              <xs:element minOccurs="0" name="TRANSMISSIONSEQUENCE" type="xs:unsignedShort" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="ORDERS">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ORDER">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" name="RECEIPTDATE" type="xs:string" />
+                    <xs:element minOccurs="0" name="IMAGEDATE" type="xs:string" />
+                    <xs:element minOccurs="0" name="DATACAPTUREDATE" type="xs:string" />
+                    <xs:element minOccurs="0" name="VERIFICATIONDATE" type="xs:string" />
+                    <xs:element minOccurs="0" name="EDITDATE" type="xs:string" />
+                    <xs:element minOccurs="0" name="TRANSMITDATE" type="xs:string" />
+                    <xs:element minOccurs="0" name="STAGE" type="xs:int" />
+                    <xs:element minOccurs="0" name="CAMPAIGNID" type="xs:int" />
+                    <xs:element minOccurs="0" name="GROUPID" type="xs:int" />
+                    <xs:element minOccurs="0" name="GROUPNAME" type="xs:string" />
+                    <xs:element minOccurs="0" name="FMID" type="xs:string" />
+                    <xs:element minOccurs="0" name="FMNAME" type="xs:string" />
+                    <xs:element minOccurs="0" name="ORDERID" type="xs:int" />
+                    <xs:element minOccurs="0" name="SCANCOUNT" type="xs:int" />
+                    <xs:element minOccurs="0" name="ERRORCODE" type="xs:int" />
+                    <xs:element minOccurs="0" name="UNITS" type="xs:int" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

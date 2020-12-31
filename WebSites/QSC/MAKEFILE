@@ -1,0 +1,258 @@
+# QSPFulfillment Project - Cool Stuff
+
+#variable declarations
+# be careful not to place a backslash at the end of a variable
+# declaration line, it means the line continues
+# it cant be part of the actual string placed into the variable
+
+QSPUTIL	= D:\utilprojects\QSPUtility\bin\Debug\QSPUtility.exe
+SLNDIR	= D:\webprojects\QSPFulfillment
+Common	= Shared\Common\Common
+DAL	= Shared\DAL\DAL
+DataAccess	= DataAccess\DataAccess
+WebControl	= WebControl\WebControl
+Business	= Business\Business
+Web	= Web\QSPFulfillment
+Menu	= Menu\skmMenu
+WebReports	= WebReports\WebReports
+DESTDIR	= E:\staging\QSPFulfillment
+CONTENT	= E:\websites\QSPFulfillment
+MAKEDIR	= D:\webprojects\QSPFULF_builds\QSPFulfillment_MAKEFILE_generation
+
+default: debugALL
+
+da: debugAll
+ra: releaseAll
+ca: cleanAll
+
+#re-generate the MAKEFILE info
+# Using the QSPUTIL exe, I regenerate all my makefiles 
+# (based off of the .csproj files and a xml settings file)
+# into a seperate directory, and then compare them before
+# copying the info back into my build directory.
+qspuCommon:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(Common).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\Shared\Common\MAKEFILE
+
+qspuDAL:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(DAL).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\Shared\DAL\MAKEFILE
+
+qspuDataAccess:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(DataAccess).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\DataAccess\MAKEFILE
+
+qspuWebControl:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(WebControl).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\WebControl\MAKEFILE
+
+qspuBusiness:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(Business).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\Business\MAKEFILE
+
+qspuWeb:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(Web).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\Web\MAKEFILE
+
+qspuMenu:
+	$(QSPUTIL) /mode:csproj2make /projfile:$(SLNDIR)\$(Menu).csproj /makeinfo:$(SLNDIR)\QSPFulfillment.buildinfo.xml > $(MAKEDIR)\Menu\MAKEFILE
+
+qspuAll: qspuCommon qspuDAL qspuDataAccess qspuWebControl qspuBusiness qspuWeb qspuMenu
+
+#build the various projects
+# the -f flag lets this instance of nmake
+# call nmake on another file 
+# (in this case I am calling the files within my project directories).
+#
+# Each project build command here copies the dll and pdb files for that projects
+# dependencies into it's bin before it calls that projects MAKEFILE to do the compile.
+
+debugCommon:
+	nmake debug -f $(SLNDIR)\Shared\Common\MAKEFILE
+
+debugDAL:
+	copy $(SLNDIR)\Shared\Common\bin\Debug\Common.dll $(SLNDIR)\Shared\DAL\bin\Debug\Common.dll
+	copy $(SLNDIR)\Shared\Common\bin\Debug\Common.pdb $(SLNDIR)\Shared\DAL\bin\Debug\Common.pdb
+	nmake debug -f $(SLNDIR)\Shared\DAL\MAKEFILE
+
+debugDataAccess:
+	copy $(SLNDIR)\WebControl\bin\Debug\QSP.WebControl.dll $(SLNDIR)\DataAccess\bin\Debug\QSP.WebControl.dll
+	copy $(SLNDIR)\WebControl\bin\Debug\QSP.WebControl.pdb $(SLNDIR)\DataAccess\bin\Debug\QSP.WebControl.pdb
+	nmake debug -f $(SLNDIR)\DataAccess\MAKEFILE
+
+debugWebControl:
+	nmake debug -f $(SLNDIR)\WebControl\MAKEFILE
+
+debugBusiness:
+	copy $(SLNDIR)\Shared\Common\bin\Debug\Common.dll $(SLNDIR)\Business\bin\Debug\Common.dll
+	copy $(SLNDIR)\Shared\DAL\bin\Debug\DAL.dll $(SLNDIR)\Business\bin\Debug\DAL.dll
+	copy $(SLNDIR)\Shared\Common\bin\Debug\Common.pdb $(SLNDIR)\Business\bin\Debug\Common.pdb
+	copy $(SLNDIR)\Shared\DAL\bin\Debug\DAL.pdb $(SLNDIR)\Business\bin\Debug\DAL.pdb
+	nmake debug -f $(SLNDIR)\Business\MAKEFILE
+
+# as seen below with debugWeb
+# an nmake command can have multiple actual commands that it runs
+
+debugWeb:
+	copy $(SLNDIR)\Shared\Common\bin\Debug\Common.dll $(SLNDIR)\Web\bin\Common.dll
+	copy $(SLNDIR)\Shared\DAL\bin\Debug\DAL.dll $(SLNDIR)\Web\bin\DAL.dll
+	copy $(SLNDIR)\Business\bin\Debug\Business.dll $(SLNDIR)\Web\bin\Business.dll
+	copy $(SLNDIR)\DataAccess\bin\Debug\QSPFulfillment.DataAccess.dll $(SLNDIR)\Web\bin\QSPFulfillment.DataAccess.dll
+	copy $(SLNDIR)\WebControl\bin\Debug\QSP.WebControl.dll $(SLNDIR)\Web\bin\QSP.WebControl.dll
+	copy $(SLNDIR)\Shared\Common\bin\Debug\Common.pdb $(SLNDIR)\Web\bin\Common.pdb
+	copy $(SLNDIR)\Shared\DAL\bin\Debug\DAL.pdb $(SLNDIR)\Web\bin\DAL.pdb
+	copy $(SLNDIR)\Business\bin\Debug\Business.pdb $(SLNDIR)\Web\bin\Business.pdb
+	copy $(SLNDIR)\WebControl\bin\Debug\QSP.WebControl.pdb $(SLNDIR)\Web\bin\QSP.WebControl.pdb
+	copy $(SLNDIR)\DataAccess\bin\Debug\QSPFulfillment.DataAccess.pdb $(SLNDIR)\Web\bin\QSPFulfillment.DataAccess.pdb
+	nmake debug -f $(SLNDIR)\Web\MAKEFILE
+
+
+# OR, instead of running system commands
+# an nmake command can be a chain of other nmake commands.
+debugAll: debugCommon debugDAL debugWebControl debugDataAccess debugBusiness debugWeb
+
+releaseCommon:
+	nmake release -f $(SLNDIR)\Shared\Common\MAKEFILE
+
+releaseDAL:
+	copy $(SLNDIR)\Shared\Common\bin\Release\Common.dll $(SLNDIR)\Shared\DAL\bin\Release\Common.dll
+	nmake release -f $(SLNDIR)\Shared\DAL\MAKEFILE
+
+releaseDataAccess:
+	copy $(SLNDIR)\WebControl\bin\Release\QSP.WebControl.dll $(SLNDIR)\DataAccess\bin\Release\QSP.WebControl.dll
+	nmake release -f $(SLNDIR)\DataAccess\MAKEFILE
+
+releaseWebControl:
+	nmake release -f $(SLNDIR)\WebControl\MAKEFILE
+
+releaseBusiness:
+	copy $(SLNDIR)\Shared\Common\bin\Release\Common.dll $(SLNDIR)\Business\bin\Release\Common.dll
+	copy $(SLNDIR)\Shared\DAL\bin\Release\DAL.dll $(SLNDIR)\Business\bin\Release\DAL.dll
+	nmake release -f $(SLNDIR)\Business\MAKEFILE
+
+releaseWeb:
+	copy $(SLNDIR)\Shared\Common\bin\Release\Common.dll $(SLNDIR)\Web\bin\Common.dll
+	copy $(SLNDIR)\Shared\DAL\bin\Release\DAL.dll $(SLNDIR)\Web\bin\DAL.dll
+	copy $(SLNDIR)\Business\bin\Release\Business.dll $(SLNDIR)\Web\bin\Business.dll
+	copy $(SLNDIR)\DataAccess\bin\Release\QSPFulfillment.DataAccess.dll $(SLNDIR)\Web\bin\QSPFulfillment.DataAccess.dll
+	copy $(SLNDIR)\WebControl\bin\Release\QSP.WebControl.dll $(SLNDIR)\Web\bin\QSP.WebControl.dll
+	nmake release -f $(SLNDIR)\Web\MAKEFILE
+
+releaseAll: releaseCommon releaseDAL releaseWebControl releaseDataAccess releaseBusiness releaseWeb
+
+# Using the QSPUTIL exe, I regenerate some PCAnywhere command queues
+# so that I can move my files from box to box easily.
+
+echooff:
+	@echo off
+
+moveFiles:
+	$(QSPUTIL) /mode:movefilesBAT /sourcedir:e:\staging\qspfulfillment\ /destinationdir:e:\websites\qspfulfillment\ /projfile:$(SLNDIR)\$(Web).csproj
+
+pcaCommon:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(Common).csproj /sourceDir:$(SLNDIR)\Shared\Common\ /destinationDir:$(DESTDIR)\Shared\Common\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaDAL:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(DAL).csproj /sourceDir:$(SLNDIR)\Shared\DAL\ /destinationDir:$(DESTDIR)\Shared\DAL\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaDataAccess:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(DataAccess).csproj /sourceDir:$(SLNDIR)\DataAccess\ /destinationDir:$(DESTDIR)\DataAccess\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaWebControl:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(WebControl).csproj /sourceDir:$(SLNDIR)\WebControl\ /destinationDir:$(DESTDIR)\WebControl\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaBusiness:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(Business).csproj /sourceDir:$(SLNDIR)\Business\ /destinationDir:$(DESTDIR)\Business\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaWeb:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(Web).csproj /sourceDir:$(SLNDIR)\Web\ /destinationDir:$(DESTDIR)\Web\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaMenu:
+	echo $(QSPUTIL) /mode:movefilesPCA /projfile:$(SLNDIR)\$(Menu).csproj /sourceDir:$(SLNDIR)\Menu\ /destinationDir:$(DESTDIR)\Menu\ /contentDestDir:$(CONTENT)\ /StartCommandAT:0
+
+pcaAll: echooff pcaCommon pcaDAL pcaDataAccess pcaWebControl pcaBusiness pcaWeb
+
+
+# Copy all of the MAKEFILES to another location
+# and give them unique names, so they can be sent in email to other ppl.
+
+exportMake:
+	copy $(SLNDIR)\MAKEFILE $(MAKEDIR)\MAKEFILE.Root
+	copy $(SLNDIR)\Shared\Common\MAKEFILE $(MAKEDIR)\MAKEFILE.Shared.Common
+	copy $(SLNDIR)\Shared\DAL\MAKEFILE $(MAKEDIR)\MAKEFILE.Shared.DAL
+	copy $(SLNDIR)\Business\MAKEFILE $(MAKEDIR)\MAKEFILE.Business
+	copy $(SLNDIR)\DataAccess\MAKEFILE $(MAKEDIR)\MAKEFILE.DataAccess
+	copy $(SLNDIR)\WebControl\MAKEFILE $(MAKEDIR)\MAKEFILE.WebControl
+	copy $(SLNDIR)\Web\MAKEFILE $(MAKEDIR)\MAKEFILE.Web
+	copy $(SLNDIR)\Menu\MAKEFILE $(MAKEDIR)\MAKEFILE.Menu
+
+
+# Files that PVCS locks on me
+# that I want to be readable
+readable:
+	attrib -R $(SLNDIR)\$(Common).csproj
+	attrib -R $(SLNDIR)\$(DAL).csproj
+	attrib -R $(SLNDIR)\$(DataAccess).csproj
+	attrib -R $(SLNDIR)\$(WebControl).csproj
+	attrib -R $(SLNDIR)\$(Business).csproj
+	attrib -R $(SLNDIR)\$(Web).csproj
+	attrib -R $(SLNDIR)\$(Menu).csproj
+	attrib -R $(SLNDIR)\$(WebReports).rptproj
+	attrib -R $(SLNDIR)\$(Common).csproj.user
+	attrib -R $(SLNDIR)\$(DAL).csproj.user
+	attrib -R $(SLNDIR)\$(DataAccess).csproj.user
+	attrib -R $(SLNDIR)\$(WebControl).csproj.user
+	attrib -R $(SLNDIR)\$(Business).csproj.user
+	attrib -R $(SLNDIR)\$(Web).csproj.webinfo
+	attrib -R $(SLNDIR)\$(Menu).csproj.user
+	attrib -R $(SLNDIR)\$(WebReports).rptproj.user
+	attrib -R $(SLNDIR)\WebReports\QSPCanadaCommon.rds
+	attrib -R $(SLNDIR)\WebReports\QSPCanadaFinance.rds
+
+#for the rest of the MAKEFILE, exit codes will be ignored.
+#DO NOT place anything beyond here except "clean" commands
+# .IGNORE makes nmake ignore exit codes.
+
+.IGNORE :
+
+cleanCommon:
+	del $(SLNDIR)\Shared\Common\bin\Debug\Common.dll
+	del $(SLNDIR)\Shared\Common\bin\Debug\Common.pdb
+
+cleanDAL:
+	del $(SLNDIR)\Shared\DAL\bin\Debug\Common.dll
+	del $(SLNDIR)\Shared\DAL\bin\Debug\DAL.dll
+	del $(SLNDIR)\Shared\DAL\bin\Debug\Common.pdb
+	del $(SLNDIR)\Shared\DAL\bin\Debug\DAL.pdb
+	
+	
+cleanDataAccess:
+	del $(SLNDIR)\DataAccess\bin\Debug\QSP.WebControl.dll
+	del $(SLNDIR)\DataAccess\bin\Debug\QSPFulfillment.DataAccess.dll
+	del $(SLNDIR)\DataAccess\bin\Debug\QSP.WebControl.pdb
+	del $(SLNDIR)\DataAccess\bin\Debug\QSPFulfillment.DataAccess.pdb
+
+cleanWebControl:
+	del $(SLNDIR)\WebControl\bin\Debug\QSPFulfillment.DataAccess.dll
+	del $(SLNDIR)\WebControl\bin\Debug\QSP.WebControl.dll
+	del $(SLNDIR)\WebControl\bin\Debug\QSPFulfillment.DataAccess.pdb
+	del $(SLNDIR)\WebControl\bin\Debug\QSP.WebControl.pdb
+
+cleanBusiness:
+	del $(SLNDIR)\Business\bin\Debug\Common.dll
+	del $(SLNDIR)\Business\bin\Debug\DAL.dll
+	del $(SLNDIR)\Business\bin\Debug\Business.dll
+	del $(SLNDIR)\Business\bin\Debug\Common.pdb
+	del $(SLNDIR)\Business\bin\Debug\DAL.pdb
+	del $(SLNDIR)\Business\bin\Debug\Business.pdb
+
+cleanWeb:
+	del $(SLNDIR)\Web\bin\Common.dll
+	del $(SLNDIR)\Web\bin\DAL.dll
+	del $(SLNDIR)\Web\bin\Business.dll
+	del $(SLNDIR)\Web\bin\QSPFulfillment.DataAccess.dll
+	del $(SLNDIR)\Web\bin\QSP.WebControl.dll
+	del $(SLNDIR)\Web\bin\QSPFulfillment.dll
+	del $(SLNDIR)\Web\bin\Common.pdb
+	del $(SLNDIR)\Web\bin\DAL.pdb
+	del $(SLNDIR)\Web\bin\Business.pdb
+	del $(SLNDIR)\Web\bin\QSPFulfillment.DataAccess.pdb
+	del $(SLNDIR)\Web\bin\QSP.WebControl.pdb
+	del $(SLNDIR)\Web\bin\QSPFulfillment.pdb
+	
+cleanAll: cleanCommon cleanDAL cleanDataAccess cleanWebControl cleanBusiness cleanWeb
+

@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="ProofPaymtRequired.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.ProofPaymtRequired" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

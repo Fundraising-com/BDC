@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="CancelSubBeforeRemit.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.CancelSubBeforeRemit" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

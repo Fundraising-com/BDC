@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="ProgramDataSet" targetNamespace="http://tempuri.org/ProgramDataSet.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/ProgramDataSet.xsd" xmlns:mstns="http://tempuri.org/ProgramDataSet.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="ProgramDataSet" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Program">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="Country" type="xs:string" minOccurs="0" />
+							<xs:element name="FundraisingProcedureID" type="xs:int" minOccurs="0" />
+							<xs:element name="ProgramTypeID" type="xs:int" minOccurs="0" />
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="MajorProductLineID" type="xs:int" minOccurs="0" />
+							<xs:element name="DefaultProfit" type="xs:decimal" minOccurs="0" />
+							<xs:element name="MinProfit" type="xs:decimal" minOccurs="0" />
+							<xs:element name="MaxProfit" type="xs:decimal" minOccurs="0" />
+							<xs:element name="OrdefuPrintInAR" type="xs:string" minOccurs="0" />
+							<xs:element name="ActiveForFiscal_TF" type="xs:boolean" />
+							<xs:element name="Abr" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="ProgramDataSetKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Program" />
+			<xs:field xpath="mstns:ID" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

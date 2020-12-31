@@ -1,0 +1,2843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2003/10/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <rd:GridSpacing>0.045in</rd:GridSpacing>
+  <PageHeader>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.05in</Height>
+  </PageHeader>
+  <RightMargin>0.25in</RightMargin>
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox70">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <FontSize>11pt</FontSize>
+          <TextAlign>Center</TextAlign>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>4</ZIndex>
+        <Top>4.68in</Top>
+        <rd:DefaultName>textbox70</rd:DefaultName>
+        <Height>0.225in</Height>
+        <Width>10.305in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>QSP Inc. will be performing Credit Card info correction / Re-Charging services.</Value>
+        <Left>0.045in</Left>
+      </Textbox>
+      <Table Name="table2">
+        <Height>1.15in</Height>
+        <ZIndex>3</ZIndex>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>5</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox131">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>None</Right>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <FontSize>9pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>19</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") = "EN","Problematic Illegible GIFT items:","ERREUR D'ARTICLE CADEAU - NUMÉRO DE CODE INVALIDE OU ILLISIBLE ")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox134">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>Solid</Right>
+                          <Left>None</Left>
+                        </BorderStyle>
+                        <FontSize>9pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>18</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") = "EN","Campaign ID: "+ Str(First(Fields!CampaignId.Value, "OrderInfo")) + "   Order ID: "+ Str(First(Fields!OrderID.Value, "OrderInfo")),   "N° de campagne: "+ Str(First(Fields!CampaignId.Value, "OrderInfo")) + "   N° de commande: "+ Str(First(Fields!OrderID.Value, "OrderInfo")))</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+            <TableRow>
+              <Height>0.3in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox138">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>17</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value = "EN","Teacher Name","Nom de l'enseignant")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox139">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>16</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value = "EN","Room No.","N° de classe")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox143">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>15</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value = "EN","Quantity","Quantité")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox141">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>14</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value = "EN","Price Paid","Prix Payé") + IIF( First(Fields!isStaffOrder.Value, "OrderInfo") = "True", " *","")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox144">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>13</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value = "EN","Student's Name","Nom de l'élève")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox145">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>12</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value = "EN","Customer's Name and Phone No.","Nom &amp; Numéro de Téléphone de l'acheteur")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.3in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox149">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>7pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>5</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!TeacherName.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox150">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>7pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>4</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!Classroom.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox154">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>7pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>3</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!Quantity.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox142">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>C</Format>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>7pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!Price.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox155">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>7pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>1</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!ParticipantName.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox156">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>7pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!PurchaserName.Value +" "+Fields!CustomerPhone.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>GiftProblems_Data</DataSetName>
+        <Top>6.57in</Top>
+        <Width>10.395in</Width>
+        <Visibility>
+          <Hidden>=IIF(CountRows("GiftProblems_Data")&gt; 0 and CountRows("OrderInfo")&gt; 0,False,True)</Hidden>
+        </Visibility>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+        </Style>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <Height>0.3in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox160">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>11</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox161">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>10</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox165">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>9</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox151">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>8</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox166">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox167">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>6</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <TableColumns>
+          <TableColumn>
+            <Width>1.13918in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.85116in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.99679in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.85438in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.70554in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.84795in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="CustomerInfoMissing_Table">
+        <Height>1.87792in</Height>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+        </Style>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <Height>0.405in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>8</ColSpan>
+                  <ReportItems>
+                    <Rectangle Name="rectangle1">
+                      <ZIndex>5</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox62">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>10</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>1.125in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Customer's Name" &amp; vbnewline &amp;"and Phone No.","Nom du client" &amp;vbnewline &amp; "Numéro de Téléphone")</Value>
+                          <Left>4.815in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox59">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>9</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") = "FR" ,"Code De " &amp; vbnewline &amp; "Titre", "Title" &amp; vbnewline &amp; "Code")</Value>
+                          <Left>1.755in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox26">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>8</ZIndex>
+                          <Top>0.225in</Top>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Address","Adresse")</Value>
+                          <Left>8.325in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox25">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>7</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>1.125in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Customer's Name and Phone No.","Nom du client")</Value>
+                          <Left>7.2in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox24">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>1.26in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Student's Name","Nom de l'élève")</Value>
+                          <Left>5.94in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox21">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>0.585in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Price Paid","Prix Payé")</Value>
+                          <Left>4.23in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox17">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","No. of" &amp; vbnewline &amp; "Issues","N° de" &amp; vbnewline &amp;  "numéros")</Value>
+                          <Left>3.69in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox18">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>1.395in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Description","Description")</Value>
+                          <Left>2.295in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox19">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <Top>0.225in</Top>
+                          <Width>0.675in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR" ,"Room" &amp; vbnewline &amp; "No.","N° de" &amp; vbnewline &amp; "classe")</Value>
+                          <Left>1.08in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox6">
+                          <ZIndex>1</ZIndex>
+                          <Top>0.225in</Top>
+                          <rd:DefaultName>textbox6</rd:DefaultName>
+                          <Width>1.08in</Width>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Teacher's" &amp; vbnewline &amp; "Name","Nom de" &amp; vbnewline &amp;  "l'enseignant")</Value>
+                        </Textbox>
+                        <Textbox Name="textbox4">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>9pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <Height>0.22208in</Height>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR", "MAGAZINE SUBSCRIPTION ERROR[S]                TOTAL MAGAZINE ERROR: 0 SUBSCRIPTION", "ERREUR D'ABONNEMENT À UN MAGAZINE - ADRESSE INCOMPLÈTE OU MANQUANTE                           ERREURS D'ADRESSE TOTALES : 0 ABONNEMENT[S] ")</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>=IIF(CountRows("CustomerInfoMissing_Data") = 0 ,False,True)</Hidden>
+              </Visibility>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25292in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>8</ColSpan>
+                  <ReportItems>
+                    <Rectangle Name="rectangle4">
+                      <ZIndex>2</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox53">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>9</ZIndex>
+                          <rd:DefaultName>textbox53</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!CustomerAddress1.Value +" " +Fields!CustomerAddress2.Value +" " +Fields!CustomerCity.Value +" " +Fields!CustomerState.Value +" " +Fields!CustomerZip.Value</Value>
+                          <Left>8.325in</Left>
+                        </Textbox>
+                        <Textbox Name="SubscriberName">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>8</ZIndex>
+                          <rd:DefaultName>SubscriberName</rd:DefaultName>
+                          <Width>1.125in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!SubscriberName.Value</Value>
+                          <Left>7.2in</Left>
+                        </Textbox>
+                        <Textbox Name="ParticipantName">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>7</ZIndex>
+                          <rd:DefaultName>ParticipantName</rd:DefaultName>
+                          <Width>1.305in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!ParticipantName.Value</Value>
+                          <Left>5.895in</Left>
+                        </Textbox>
+                        <Textbox Name="PurchaserName">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <rd:DefaultName>PurchaserName</rd:DefaultName>
+                          <Width>1.08in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!PurchaserName.Value +" "+Fields!CustomerPhone.Value</Value>
+                          <Left>4.815in</Left>
+                        </Textbox>
+                        <Textbox Name="Catalogprice">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <Format>C</Format>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <rd:DefaultName>Catalogprice</rd:DefaultName>
+                          <Width>0.585in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Catalogprice.Value</Value>
+                          <Left>4.23in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox14">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <Width>1.395in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!MagazineTitle.Value</Value>
+                          <Left>2.295in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox12">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <Width>0.675in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!Classroom.Value</Value>
+                          <Left>1.08in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox11">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!TitleCode.Value</Value>
+                          <Left>1.755in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox9">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Numberofissues.Value</Value>
+                          <Left>3.69in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox5">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
+                          <Width>1.08in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!TeacherName.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+            <TableRow>
+              <Height>0.45in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>8</ColSpan>
+                  <ReportItems>
+                    <Rectangle Name="rectangle5">
+                      <ReportItems>
+                        <Textbox Name="textbox56">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <rd:DefaultName>textbox56</rd:DefaultName>
+                          <Height>0.43in</Height>
+                          <Width>10.35in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( Fields!Lang.Value &lt;&gt; "FR", IIF( Fields!TitleCode.Value = "NNNN", "Write Customer's CORRECT Code Number and Magazine Title Below: ","Write Customer's CORRECT Address Below: "), IIF( Fields!TitleCode.Value = "NNNN", "Inscrire ci-dessous le BON numéro de code et le BON nom du magazine : ","Inscrire ci-dessous l'adresse EXACTE du client : "))</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>=IIF( Fields!StatusInstance.Value=300,true,false)</Hidden>
+              </Visibility>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>CustomerInfoMissing_Data</DataSetName>
+        <Top>2.745in</Top>
+        <Width>10.395in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ColSpan>8</ColSpan>
+                      <ReportItems>
+                        <Rectangle Name="rectangle2">
+                          <ZIndex>4</ZIndex>
+                          <ReportItems>
+                            <Textbox Name="textbox31">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>9pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>1</ZIndex>
+                              <rd:DefaultName>textbox31</rd:DefaultName>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR", Fields!ErrorType.Value , Fields!ErrorType_FR.Value )   &amp; "  " &amp; Count( Fields!ErrorCategory.Value ) &amp; IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR"," SUBSCRIPTION[S]"," ABONNEMENTS") &amp; "  $" &amp; Sum(Fields!Catalogprice.Value)</Value>
+                              <Left>5.805in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox30">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>9pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <rd:DefaultName>textbox30</rd:DefaultName>
+                              <Width>5.805in</Width>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR", Fields!ErrorCategory.Value , Fields!ErrorCategory_FR.Value )</Value>
+                              <CanGrow>true</CanGrow>
+                            </Textbox>
+                          </ReportItems>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                              <Default>Solid</Default>
+                              <Top>Solid</Top>
+                              <Right>None</Right>
+                              <Left>Solid</Left>
+                            </BorderStyle>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+                <TableRow>
+                  <Height>0.27in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ColSpan>8</ColSpan>
+                      <ReportItems>
+                        <Rectangle Name="rectangle3">
+                          <ZIndex>3</ZIndex>
+                          <ReportItems>
+                            <Textbox Name="textbox49">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>9</ZIndex>
+                              <rd:DefaultName>textbox49</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Address","Adresse")</Value>
+                              <Left>8.325in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox48">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>8</ZIndex>
+                              <rd:DefaultName>textbox48</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>1.125in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Recipient's Name and Phone No.","Nom du Abonné")</Value>
+                              <Left>7.2in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox47">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>7</ZIndex>
+                              <rd:DefaultName>textbox47</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>1.305in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Student's Name","Nom de l'élève")</Value>
+                              <Left>5.895in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox45">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>6</ZIndex>
+                              <rd:DefaultName>textbox45</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>1.08in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Customer's Name" &amp; vbnewline &amp;"and Phone No.","Nom du client" &amp;vbnewline &amp; "Numéro de Téléphone")</Value>
+                              <Left>4.815in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox44">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>5</ZIndex>
+                              <rd:DefaultName>textbox44</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>0.585in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Price Paid","Prix Payé") + IIF( First(Fields!isStaffOrder.Value, "OrderInfo") = "True", " *","")</Value>
+                              <Left>4.23in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox40">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>4</ZIndex>
+                              <rd:DefaultName>textbox40</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>0.54in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","No. of"  &amp; vbnewline &amp;  "Issues","N° de'"  &amp; vbnewline &amp;  "numéros")</Value>
+                              <Left>3.69in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox37">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>3</ZIndex>
+                              <ToggleImage>
+                                <InitialState>true</InitialState>
+                              </ToggleImage>
+                              <rd:DefaultName>textbox37</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>1.395in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Description","Description")</Value>
+                              <Left>2.295in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox34">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>2</ZIndex>
+                              <ToggleImage>
+                                <InitialState>true</InitialState>
+                              </ToggleImage>
+                              <rd:DefaultName>textbox34</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>0.54in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") = "FR" ,"Code De " &amp; vbnewline &amp; "Titre", "Title" &amp; vbnewline &amp; "Code")</Value>
+                              <Left>1.755in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox33">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ZIndex>1</ZIndex>
+                              <ToggleImage>
+                                <InitialState>true</InitialState>
+                              </ToggleImage>
+                              <rd:DefaultName>textbox33</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>0.675in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR" ,"Room"  &amp; vbnewline &amp;  "No.","N° de"  &amp; vbnewline &amp;  "classe")</Value>
+                              <Left>1.08in</Left>
+                            </Textbox>
+                            <Textbox Name="textbox32">
+                              <Style>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <FontSize>8pt</FontSize>
+                                <PaddingBottom>2pt</PaddingBottom>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingRight>2pt</PaddingRight>
+                                <FontWeight>700</FontWeight>
+                              </Style>
+                              <ToggleImage>
+                                <InitialState>true</InitialState>
+                              </ToggleImage>
+                              <rd:DefaultName>textbox32</rd:DefaultName>
+                              <Height>0.25in</Height>
+                              <Width>1.08in</Width>
+                              <CanGrow>true</CanGrow>
+                              <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Teacher's Name","Nom de l'enseignant")</Value>
+                            </Textbox>
+                          </ReportItems>
+                          <Style>
+                            <BorderStyle>
+                              <Bottom>Solid</Bottom>
+                              <Top>Solid</Top>
+                            </BorderStyle>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </Header>
+            <Grouping Name="CustomerInfoMissing_Table_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!ErrorCategory.Value</GroupExpression>
+              </GroupExpressions>
+            </Grouping>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>=IIF(CountRows("OrderInfo")&gt; 0,False,True)</Hidden>
+        </Visibility>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>8</ColSpan>
+                  <ReportItems>
+                    <Rectangle Name="rectangle6">
+                      <ZIndex>1</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox58">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>9pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <Height>0.24667in</Height>
+                          <Width>4.77in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","* Price Calculated At Staff Rate","*  Prix calculé au tarif du personnel")</Value>
+                          <Left>5.58in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox57">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>9pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <Height>0.24667in</Height>
+                          <Width>5.63in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","** No action required, QSP will be corresponding with customers","** Aucune action requise, QSP correspondra au clients")</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>=IIF( First(Fields!isStaffOrder.Value, "OrderInfo") = "True", false,true)</Hidden>
+              </Visibility>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <TableColumns>
+          <TableColumn>
+            <Width>1.35in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.81in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.07in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.72in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.675in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.26in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.215in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.295in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="MagCCProblems_Table">
+        <Height>1.54in</Height>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+        </Style>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>6</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox84">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>None</Right>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <FontSize>9pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>8</ZIndex>
+                      <rd:DefaultName>textbox84</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","CREDIT CARD ERROR - INVALID/INCOMPLETE CREDIT CARD NUMBER or NO EXPIRY DATE"," * * ERREUR DE CARTE DE CRÉDIT - NUMÉRO DE CARTE DE CRÉDIT INCOMPLET/INVALIDE ou AUCUNE DATE D'EXPIRATION  ")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ColSpan>3</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox20">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>None</Right>
+                          <Left>None</Left>
+                        </BorderStyle>
+                        <FontSize>9pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <rd:DefaultName>textbox20</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","TOTAL CREDIT CARD ERRORS:","ERREURS DE CARTE DE CRÉDIT TOTALES : ")   &amp; " " &amp;  CountRows("MagazineCCProblems_Data") &amp; " " &amp; IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR"," SUBSCRIPTION[S]"," ABONNEMENTS") &amp; "  $" &amp; Sum(Fields!Catalogprice.Value, "MagazineCCProblems_Data")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+            </TableRow>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>9</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox15">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>None</Right>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <FontSize>9pt</FontSize>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>6</ZIndex>
+                      <rd:DefaultName>textbox15</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","NOTE:  YOUR GROUP HAS NOT BEEN BILLED FOR THESE ORDERS."," NOTE :  LES COMMANDES VISÉES PAR DES ERREURS DE CARTE DE CRÉDIT N'ONT PAS ÉTÉ FACTURÉES À VOTRE GROUPE. ")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+            </TableRow>
+            <TableRow>
+              <Height>0.27in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>9</ColSpan>
+                  <ReportItems>
+                    <Rectangle Name="rectangle7">
+                      <ZIndex>5</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox66">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>9</ZIndex>
+                          <Top>0.01in</Top>
+                          <Height>0.25in</Height>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Address","Adresse")</Value>
+                          <Left>8.325in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox65">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>8</ZIndex>
+                          <Top>0.01in</Top>
+                          <Height>0.25in</Height>
+                          <Width>1.125in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Recipient's Name and Phone No.","Nom du Abonné")</Value>
+                          <Left>7.2in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox64">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>7</ZIndex>
+                          <Top>0.01in</Top>
+                          <Height>0.25in</Height>
+                          <Width>1.305in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Student's Name","Nom de l'élève")</Value>
+                          <Left>5.895in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox63">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <Top>0.01in</Top>
+                          <Height>0.25in</Height>
+                          <Width>1.08in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Customer's Name" &amp; vbnewline &amp;"and Phone No.","Nom du client" &amp;vbnewline &amp; "Numéro de Téléphone")</Value>
+                          <Left>4.815in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox61">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <Top>0.01in</Top>
+                          <Height>0.25in</Height>
+                          <Width>0.585in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Price Paid","Prix Payé") + IIF( First(Fields!isStaffOrder.Value, "OrderInfo") = "True", " *","")</Value>
+                          <Left>4.23in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox60">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <Top>0.01in</Top>
+                          <Height>0.25in</Height>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","No. of"  &amp; vbnewline &amp;  "Issues","N° de'"  &amp; vbnewline &amp;  "numéros")</Value>
+                          <Left>3.69in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox55">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <Top>0.01in</Top>
+                          <ToggleImage>
+                            <InitialState>true</InitialState>
+                          </ToggleImage>
+                          <Height>0.25in</Height>
+                          <Width>1.395in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Description","Description")</Value>
+                          <Left>2.295in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox54">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <Top>0.01in</Top>
+                          <ToggleImage>
+                            <InitialState>true</InitialState>
+                          </ToggleImage>
+                          <Height>0.25in</Height>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") = "FR" ,"Code De " &amp; vbnewline &amp; "Titre", "Title" &amp; vbnewline &amp; "Code")</Value>
+                          <Left>1.755in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox52">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <ToggleImage>
+                            <InitialState>true</InitialState>
+                          </ToggleImage>
+                          <Height>0.25in</Height>
+                          <Width>0.675in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR" ,"Room"  &amp; vbnewline &amp;  "No.","N° de"  &amp; vbnewline &amp;  "classe")</Value>
+                          <Left>1.08in</Left>
+                        </Textbox>
+                        <Textbox Name="textbox51">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>8pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                            <FontWeight>700</FontWeight>
+                          </Style>
+                          <ToggleImage>
+                            <InitialState>true</InitialState>
+                          </ToggleImage>
+                          <Height>0.25in</Height>
+                          <Width>1.08in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") &lt;&gt; "FR","Teacher's Name","Nom de l'enseignant")</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.27in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>9</ColSpan>
+                  <ReportItems>
+                    <Rectangle Name="rectangle8">
+                      <ZIndex>4</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox67">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>9</ZIndex>
+                          <rd:DefaultName>textbox67</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!CustomerAddress1.Value +" " +Fields!CustomerAddress2.Value +" " +Fields!CustomerCity.Value +" " +Fields!CustomerState.Value +" " +Fields!CustomerZip.Value</Value>
+                          <Left>8.325in</Left>
+                        </Textbox>
+                        <Textbox Name="SubscriberName_1">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>8</ZIndex>
+                          <rd:DefaultName>SubscriberName_1</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>1.125in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!SubscriberName.Value</Value>
+                          <Left>7.2in</Left>
+                        </Textbox>
+                        <Textbox Name="ParticipantName_1">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>7</ZIndex>
+                          <rd:DefaultName>ParticipantName_1</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>1.305in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!ParticipantName.Value</Value>
+                          <Left>5.895in</Left>
+                        </Textbox>
+                        <Textbox Name="PurchaserName_1">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <rd:DefaultName>PurchaserName_1</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>1.08in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>= Fields!PurchaserName.Value +" "+Fields!CustomerPhone.Value</Value>
+                          <Left>4.815in</Left>
+                        </Textbox>
+                        <Textbox Name="Catalogprice_1">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <rd:DefaultName>Catalogprice_1</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>0.585in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Catalogprice.Value</Value>
+                          <Left>4.23in</Left>
+                        </Textbox>
+                        <Textbox Name="Numberofissues">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <TextAlign>Right</TextAlign>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <rd:DefaultName>Numberofissues</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Numberofissues.Value</Value>
+                          <Left>3.69in</Left>
+                        </Textbox>
+                        <Textbox Name="MagazineTitle">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <rd:DefaultName>MagazineTitle</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>1.395in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!MagazineTitle.Value</Value>
+                          <Left>2.295in</Left>
+                        </Textbox>
+                        <Textbox Name="TitleCode">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <rd:DefaultName>TitleCode</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>0.54in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!TitleCode.Value</Value>
+                          <Left>1.755in</Left>
+                        </Textbox>
+                        <Textbox Name="Classroom">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <rd:DefaultName>Classroom</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>0.675in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!Classroom.Value</Value>
+                          <Left>1.08in</Left>
+                        </Textbox>
+                        <Textbox Name="TeacherName">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <FontSize>7pt</FontSize>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <rd:DefaultName>TeacherName</rd:DefaultName>
+                          <Height>0.25in</Height>
+                          <Width>1.08in</Width>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!TeacherName.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+            </TableRow>
+            <TableRow>
+              <Height>0.5in</Height>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>6</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox1">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>None</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>3</ZIndex>
+                      <rd:DefaultName>textbox1</rd:DefaultName>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                      </Visibility>
+                      <CanGrow>true</CanGrow>
+                      <Value>=IIF( Fields!Lang.Value &lt;&gt; "FR","Write Customer's CORRECT and COMPLETE Credit Card Information Below:","Inscrire ci-dessous l'information COMPLÈTE et EXACTE sur la carte de crédit :")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox46">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>None</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <rd:DefaultName>textbox46</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox27">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>None</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>1</ZIndex>
+                      <rd:DefaultName>textbox27</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox7">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderStyle>
+                          <Bottom>None</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <rd:DefaultName>textbox7</rd:DefaultName>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                      </Visibility>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>MagazineCCProblems_Data</DataSetName>
+        <Top>4.905in</Top>
+        <Width>10.395in</Width>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
+        <TableColumns>
+          <TableColumn>
+            <Width>1.125in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.675in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.665in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.63in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.585in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.26in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.215in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.945in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.295in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <List Name="list1">
+        <Style>
+          <TextAlign>Left</TextAlign>
+        </Style>
+        <Height>2.61in</Height>
+        <Width>10.475in</Width>
+        <DataSetName>OrderInfo</DataSetName>
+        <ReportItems>
+          <Textbox Name="textbox69">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+            </Style>
+            <ZIndex>21</ZIndex>
+            <Top>2.385in</Top>
+            <Height>0.18in</Height>
+            <Width>2.34in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= First( Fields!FM_Name.Value , "OrderInfo")</Value>
+            <Left>7.47in</Left>
+          </Textbox>
+          <Textbox Name="textbox68">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>20</ZIndex>
+            <Top>2.385in</Top>
+            <Height>0.18in</Height>
+            <Width>1.575in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF( Fields!Lang.Value = "EN","Field Manager:", "Rep. QSP:")</Value>
+            <Left>5.58in</Left>
+          </Textbox>
+          <Image Name="image2">
+            <ZIndex>19</ZIndex>
+            <Top>0.045in</Top>
+            <MIMEType />
+            <Height>0.69792in</Height>
+            <Width>2.125in</Width>
+            <Visibility>
+              <Hidden>=NOT(Fields!Lang.Value="FR")</Hidden>
+            </Visibility>
+            <Source>External</Source>
+            <Style />
+            <Value>Logo_qsp_fr.gif</Value>
+            <Left>8.325in</Left>
+            <Sizing>Fit</Sizing>
+          </Image>
+          <Textbox Name="textbox8">
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+            <ZIndex>18</ZIndex>
+            <Top>2.025in</Top>
+            <Height>0.54in</Height>
+            <Width>4.455in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= IIF(First(Fields!ShipToAddress2.Value, "OrderInfo") &lt;&gt; "",
+First(Fields!ShipToAddress1.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!ShipToAddress2.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!ShipToCity.Value, "OrderInfo") +"  "+ First(Fields!ShipToState.Value, "OrderInfo") +" "+
+First(Fields!ShipToPostalCode.Value, "OrderInfo")
+,
+First(Fields!ShipToAddress1.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!ShipToCity.Value, "OrderInfo") +"  "+ First(Fields!ShipToState.Value, "OrderInfo") +" "+
+First(Fields!ShipToPostalCode.Value, "OrderInfo")
+)</Value>
+            <Left>0.45in</Left>
+          </Textbox>
+          <Textbox Name="textbox10">
+            <Style>
+              <FontSize>12pt</FontSize>
+              <TextAlign>Left</TextAlign>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>17</ZIndex>
+            <Top>1.665in</Top>
+            <Height>0.135in</Height>
+            <Width>4.5in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= First(Fields!ShipToAccountName.Value, "OrderInfo")</Value>
+            <Left>0.45in</Left>
+          </Textbox>
+          <Textbox Name="textbox2">
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+            <ZIndex>16</ZIndex>
+            <Top>1.845in</Top>
+            <CanGrow>true</CanGrow>
+            <Height>0.135in</Height>
+            <Width>3.96in</Width>
+            <Value>= "ATTN: "+First(Fields!ShipToContactName.Value, "OrderInfo")</Value>
+            <Left>0.45in</Left>
+          </Textbox>
+          <Textbox Name="textbox39">
+            <Style>
+              <PaddingLeft>1pt</PaddingLeft>
+              <FontSize>14pt</FontSize>
+              <TextAlign>Center</TextAlign>
+              <PaddingBottom>1pt</PaddingBottom>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingRight>1pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>15</ZIndex>
+            <Top>0.18in</Top>
+            <Height>0.25in</Height>
+            <Width>5.535in</Width>
+            <Visibility>
+              <Hidden>=IIF( Fields!isStaffOrder.Value = "True", false,true)</Hidden>
+            </Visibility>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF(Fields!Lang.Value ="EN", "STAFF", "PERSONNEL")</Value>
+            <Left>2.7in</Left>
+          </Textbox>
+          <Image Name="image1">
+            <ZIndex>14</ZIndex>
+            <Top>0.045in</Top>
+            <MIMEType />
+            <Height>0.69792in</Height>
+            <Width>2.125in</Width>
+            <Visibility>
+              <Hidden>=NOT(Fields!Lang.Value="EN")</Hidden>
+            </Visibility>
+            <Source>External</Source>
+            <Style />
+            <Value>Logo_qsp.gif</Value>
+            <Left>8.325in</Left>
+            <Sizing>Fit</Sizing>
+          </Image>
+          <Textbox Name="textbox38">
+            <Style>
+              <FontSize>11pt</FontSize>
+              <VerticalAlign>Middle</VerticalAlign>
+              <TextAlign>Left</TextAlign>
+            </Style>
+            <ZIndex>13</ZIndex>
+            <Top>0.045in</Top>
+            <Height>0.7in</Height>
+            <Width>2.34in</Width>
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <Value>=IIF( First(Fields!Lang.Value, "OrderInfo") ="EN" ,
+"QSP Inc. c/o Resolve" &amp; vbcrlf &amp;
+First(Fields!QSPShipAddress1.Value, "OrderInfo") &amp; "  " &amp; 
+First(Fields!QSPShipAddress2.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!QSPShipCity.Value, "OrderInfo") &amp; "  " &amp; First(Fields!QSPShipProvince.Value, "OrderInfo") &amp; " " &amp;
+First(Fields!QSPShipPostalCode.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!QSPShipPhone.Value, "OrderInfo")
+
+ ,
+
+"QSP INC" &amp; vbcrlf &amp;
+First(Fields!QspFRShipAddress1.Value, "OrderInfo") +" "+
+First(Fields!QspFRShipAddress2.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!QspFRShipCity.Value, "OrderInfo") +", "+ First(Fields!QspFRShipProvince.Value, "OrderInfo") +" "+
+First(Fields!QspFRShipPostalCode.Value, "OrderInfo") &amp; vbcrlf &amp;
+First(Fields!QspFRShipPhone1.Value, "OrderInfo")
+
+ )</Value>
+            <Left>0.045in</Left>
+          </Textbox>
+          <Textbox Name="textbox132">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>12</ZIndex>
+            <Top>1.845in</Top>
+            <Height>0.18in</Height>
+            <Width>1.575in</Width>
+            <Value>=IIF( Fields!Lang.Value = "EN","Group ID:", "N° du groupe:")</Value>
+            <CanGrow>true</CanGrow>
+            <Left>5.58in</Left>
+          </Textbox>
+          <Textbox Name="textbox36">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <FontSize>12pt</FontSize>
+              <TextAlign>Center</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>11</ZIndex>
+            <Top>1.1in</Top>
+            <Height>0.275in</Height>
+            <Width>8.845in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF(Fields!Lang.Value ="EN", "PLEASE FAX CORRECTIONS TO QSP at 1-800-844-3568, or CALL 1-800-667-2536",
+ "TÉLÉCOPIEZ CE RELEVÉ CORRIGÉ À QSP AU 1 800 844-3568 ou COMPOSEZ LE 1 800 667-2536")</Value>
+            <Left>1.08in</Left>
+          </Textbox>
+          <Textbox Name="textbox35">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <FontSize>12pt</FontSize>
+              <TextAlign>Center</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>10</ZIndex>
+            <Top>0.9in</Top>
+            <rd:DefaultName>textbox35</rd:DefaultName>
+            <Height>0.25in</Height>
+            <Width>8.865in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF(Fields!Lang.Value ="EN", "IMMEDIATE ACTION REQUIRED - THESE ORDERS CANNOT BE PROCESSED",
+ "AGISSEZ SANS DÉLAI - CES COMMANDES N'ONT PAS PU ÊTRE TRAITÉES")</Value>
+            <Left>1.08in</Left>
+          </Textbox>
+          <Textbox Name="textbox29">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+            </Style>
+            <ZIndex>9</ZIndex>
+            <Top>2.205in</Top>
+            <Height>0.18in</Height>
+            <Width>2.34in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= First(Fields!OrderID.Value, "OrderInfo")</Value>
+            <Left>7.47in</Left>
+          </Textbox>
+          <Textbox Name="textbox28">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+            </Style>
+            <ZIndex>8</ZIndex>
+            <Top>2.025in</Top>
+            <Height>0.18in</Height>
+            <Width>2.34in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= First(Fields!CampaignId.Value, "OrderInfo")</Value>
+            <Left>7.47in</Left>
+          </Textbox>
+          <Textbox Name="textbox23">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>7</ZIndex>
+            <Top>2.205in</Top>
+            <Height>0.18in</Height>
+            <Width>1.575in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF( Fields!Lang.Value = "EN","Order ID:", "N° de commande:")</Value>
+            <Left>5.58in</Left>
+          </Textbox>
+          <Textbox Name="textbox22">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>6</ZIndex>
+            <Top>2.025in</Top>
+            <Height>0.18in</Height>
+            <Width>1.575in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF( Fields!Lang.Value = "EN","Campaign ID:", "N° de campagne:")</Value>
+            <Left>5.58in</Left>
+          </Textbox>
+          <Textbox Name="textbox16">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+            </Style>
+            <ZIndex>5</ZIndex>
+            <Top>1.665in</Top>
+            <Height>0.18in</Height>
+            <Width>2.34in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= First(Fields!AccountShipToPhone.Value, "OrderInfo")</Value>
+            <Left>7.47in</Left>
+          </Textbox>
+          <Textbox Name="textbox13">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>4</ZIndex>
+            <Top>1.665in</Top>
+            <Height>0.18in</Height>
+            <Width>1.575in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF( Fields!Lang.Value = "EN","Group Telephone:", "Téléphone du groupe:")</Value>
+            <Left>5.58in</Left>
+          </Textbox>
+          <Textbox Name="textbox3">
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <TextAlign>Left</TextAlign>
+              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingRight>2pt</PaddingRight>
+            </Style>
+            <ZIndex>3</ZIndex>
+            <Top>1.845in</Top>
+            <rd:DefaultName>textbox3</rd:DefaultName>
+            <Height>0.18in</Height>
+            <Width>2.34in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>= First(Fields!ShipToAccountId.Value, "OrderInfo")</Value>
+            <Left>7.47in</Left>
+          </Textbox>
+          <Line Name="line1">
+            <ZIndex>2</ZIndex>
+            <Top>1.485in</Top>
+            <Height>0in</Height>
+            <Width>10.395in</Width>
+            <Style>
+              <BorderStyle>
+                <Default>Solid</Default>
+              </BorderStyle>
+            </Style>
+          </Line>
+          <Textbox Name="textbox41">
+            <Style>
+              <PaddingLeft>1pt</PaddingLeft>
+              <FontSize>14pt</FontSize>
+              <TextAlign>Center</TextAlign>
+              <PaddingBottom>1pt</PaddingBottom>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingRight>1pt</PaddingRight>
+              <FontWeight>700</FontWeight>
+            </Style>
+            <ZIndex>1</ZIndex>
+            <Top>0.49in</Top>
+            <Height>0.25in</Height>
+            <Width>5.535in</Width>
+            <CanGrow>true</CanGrow>
+            <Value>=IIF(Fields!Lang.Value ="EN", "ORDER ENTRY FOLLOW-UP REPORT",
+ "RELEVÉ DU SUIVI DE L'ENTRÉE DES COMMANDES")</Value>
+            <Left>2.7in</Left>
+          </Textbox>
+          <Textbox Name="textbox42">
+            <Style>
+              <FontSize>8pt</FontSize>
+              <TextAlign>Right</TextAlign>
+            </Style>
+            <Top>0.765in</Top>
+            <Height>0.1in</Height>
+            <CanGrow>true</CanGrow>
+            <Value>="Date: " + Globals!ExecutionTime</Value>
+            <Left>8.325in</Left>
+          </Textbox>
+        </ReportItems>
+      </List>
+    </ReportItems>
+    <Style />
+    <Height>7.855in</Height>
+  </Body>
+  <TopMargin>0.25in</TopMargin>
+  <DataSources>
+    <DataSource Name="QSPCanadaOrderManagement">
+      <rd:DataSourceID>c4aacc25-5d81-4a80-adb1-a51f281acbbf</rd:DataSourceID>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>data source=USPVL3K05-DEV;initial catalog=QSPCanadaOrderManagement</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <Code />
+  <Width>10.485in</Width>
+  <DataSets>
+    <DataSet Name="OrderInfo">
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="date">
+          <DataField>date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="OrderID">
+          <DataField>OrderID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BillToAccountID">
+          <DataField>BillToAccountID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BillToAccountName">
+          <DataField>BillToAccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AccountBillToPhone">
+          <DataField>AccountBillToPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BillToAddress1">
+          <DataField>BillToAddress1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BillToAddress2">
+          <DataField>BillToAddress2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BillToCity">
+          <DataField>BillToCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BillToState">
+          <DataField>BillToState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BillToPostalCode">
+          <DataField>BillToPostalCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToAccountId">
+          <DataField>ShipToAccountId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ShipToAccountName">
+          <DataField>ShipToAccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AccountShipToPhone">
+          <DataField>AccountShipToPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToAddress1">
+          <DataField>ShipToAddress1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToAddress2">
+          <DataField>ShipToAddress2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToCity">
+          <DataField>ShipToCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToState">
+          <DataField>ShipToState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToPostalCode">
+          <DataField>ShipToPostalCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderIDIncentive">
+          <DataField>OrderIDIncentive</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DateCreated">
+          <DataField>DateCreated</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DateReceived">
+          <DataField>DateReceived</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CampaignId">
+          <DataField>CampaignId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="StatusInstance">
+          <DataField>StatusInstance</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Lang">
+          <DataField>Lang</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="isStaffOrder">
+          <DataField>isStaffOrder</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="BillToCampaignContactID">
+          <DataField>BillToCampaignContactID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BillToContactName">
+          <DataField>BillToContactName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipToCampaignContactID">
+          <DataField>ShipToCampaignContactID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ShipToContactName">
+          <DataField>ShipToContactName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FMID">
+          <DataField>FMID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FM_Name">
+          <DataField>FM_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Invoice_ID">
+          <DataField>Invoice_ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="invoice_Date">
+          <DataField>Invoice_Date</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPCompanyName">
+          <DataField>QSPCompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPShipAddress1">
+          <DataField>QSPShipAddress1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPShipAddress2">
+          <DataField>QSPShipAddress2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPShipCity">
+          <DataField>QSPShipCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPShipProvince">
+          <DataField>QSPShipProvince</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPShipPostalCode">
+          <DataField>QSPShipPostalCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QSPShipPhone">
+          <DataField>QSPShipPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRCompanyName">
+          <DataField>QspFRCompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRShipAddress1">
+          <DataField>QspFRShipAddress1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRShipAddress2">
+          <DataField>QspFRShipAddress2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRShipCity">
+          <DataField>QspFRShipCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRShipProvince">
+          <DataField>QspFRShipProvince</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRShipPostalCode">
+          <DataField>QspFRShipPostalCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QspFRShipPhone1">
+          <DataField>QspFRShipPhone1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.pr_OrderEntryFollowupReport</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@ReportRequestID">
+            <Value>=Parameters!ReportRequestID.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@OrderID">
+            <Value>=Parameters!OrderID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </Query>
+    </DataSet>
+    <DataSet Name="MagazineCCProblems_Data">
+      <Fields>
+        <Field Name="Classroom">
+          <DataField>Classroom</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TeacherName">
+          <DataField>TeacherName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ParticipantName">
+          <DataField>ParticipantName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerBillToInstance">
+          <DataField>CustomerBillToInstance</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SubscriberName">
+          <DataField>SubscriberName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PurchaserName">
+          <DataField>PurchaserName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BillToCustomerPhone">
+          <DataField>BillToCustomerPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerPhone">
+          <DataField>CustomerPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerAddress1">
+          <DataField>CustomerAddress1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerAddress2">
+          <DataField>CustomerAddress2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerCity">
+          <DataField>CustomerCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerState">
+          <DataField>CustomerState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerZip">
+          <DataField>CustomerZip</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TitleCode">
+          <DataField>TitleCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MagazineTitle">
+          <DataField>MagazineTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Numberofissues">
+          <DataField>Numberofissues</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Catalogprice">
+          <DataField>Catalogprice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Lang">
+          <DataField>Lang</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StatusInstance">
+          <DataField>StatusInstance</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.pr_OrderEntryFollowupReport_CC</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@OrderID">
+            <Value>=Parameters!OrderID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </Query>
+    </DataSet>
+    <DataSet Name="CustomerInfoMissing_Data">
+      <Fields>
+        <Field Name="Classroom">
+          <DataField>Classroom</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TeacherName">
+          <DataField>TeacherName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ParticipantName">
+          <DataField>ParticipantName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerBillToInstance">
+          <DataField>CustomerBillToInstance</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="StatusInstance">
+          <DataField>StatusInstance</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SubscriberName">
+          <DataField>SubscriberName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PurchaserName">
+          <DataField>PurchaserName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerPhone">
+          <DataField>CustomerPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerAddress1">
+          <DataField>CustomerAddress1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerAddress2">
+          <DataField>CustomerAddress2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerCity">
+          <DataField>CustomerCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerState">
+          <DataField>CustomerState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerZip">
+          <DataField>CustomerZip</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TitleCode">
+          <DataField>TitleCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MagazineTitle">
+          <DataField>MagazineTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Numberofissues">
+          <DataField>Numberofissues</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Catalogprice">
+          <DataField>Catalogprice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Lang">
+          <DataField>Lang</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ErrorCategory">
+          <DataField>ErrorCategory</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ErrorCategory_FR">
+          <DataField>ErrorCategory_FR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ErrorType">
+          <DataField>ErrorType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ErrorType_FR">
+          <DataField>ErrorType_FR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.pr_OrderEntryFollowupReport_Mag</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@OrderID">
+            <Value>=Parameters!OrderID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </Query>
+    </DataSet>
+    <DataSet Name="GiftProblems_Data">
+      <Fields>
+        <Field Name="Classroom">
+          <DataField>Classroom</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TeacherName">
+          <DataField>TeacherName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ParticipantName">
+          <DataField>ParticipantName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerBillToInstance">
+          <DataField>CustomerBillToInstance</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PurchaserName">
+          <DataField>PurchaserName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerPhone">
+          <DataField>CustomerPhone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Catalogprice">
+          <DataField>Catalogprice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Price">
+          <DataField>Price</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OrderID">
+          <DataField>OrderID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Lang">
+          <DataField>Lang</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>dbo.pr_OrderEntryFollowupReport_Gift</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@OrderID">
+            <Value>=Parameters!OrderID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <EmbeddedImages>
+    <EmbeddedImage Name="qsp_logo">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <LeftMargin>0.25in</LeftMargin>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <PageHeight>8.5in</PageHeight>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <Description />
+  <PageWidth>11in</PageWidth>
+  <rd:ReportID>0f287adc-f0b7-4173-8336-e0add1d3ffa1</rd:ReportID>
+  <PageFooter>
+    <ReportItems>
+      <Textbox Name="textbox50">
+        <Style>
+          <PaddingLeft>1pt</PaddingLeft>
+          <TextAlign>Left</TextAlign>
+          <PaddingBottom>1pt</PaddingBottom>
+          <PaddingTop>1pt</PaddingTop>
+          <PaddingRight>1pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <Top>0.045in</Top>
+        <Height>0.18in</Height>
+        <Width>2.25in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>="Order ID: " &amp; Parameters!OrderID.Value</Value>
+        <Left>0.09in</Left>
+      </Textbox>
+      <Textbox Name="textbox43">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Left</TextAlign>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <Width>1.125in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>= "Page "+str(Globals!PageNumber)+"/"+ str(Globals!TotalPages)</Value>
+        <Left>9in</Left>
+      </Textbox>
+    </ReportItems>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.25in</Height>
+  </PageFooter>
+  <BottomMargin>0.25in</BottomMargin>
+  <ReportParameters>
+    <ReportParameter Name="ReportRequestID">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>0</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report Request ID</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OrderID">
+      <DataType>Integer</DataType>
+      <Prompt>OrderID</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+</Report>

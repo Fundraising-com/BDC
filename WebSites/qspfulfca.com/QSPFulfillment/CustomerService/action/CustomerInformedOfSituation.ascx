@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="True" Codebehind="CustomerInformedOfSituation.ascx.cs" Inherits="QSPFulfillment.CustomerService.action.CustomerInformedOfSituation" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

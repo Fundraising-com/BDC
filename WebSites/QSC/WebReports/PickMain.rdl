@@ -1,0 +1,1148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2003/10/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Subreport Name="subreport2">
+        <Style />
+        <ZIndex>13</ZIndex>
+        <Top>3.25in</Top>
+        <ReportName>PrintPickList</ReportName>
+        <Height>0.25in</Height>
+        <Width>8.5in</Width>
+        <Visibility>
+          <Hidden>= Not Parameters!Run_Report_2.Value</Hidden>
+        </Visibility>
+        <Parameters>
+          <Parameter Name="OrderId">
+            <Value>=Fields!BatchOrderId.Value</Value>
+          </Parameter>
+          <Parameter Name="BatchId">
+            <Value>=Fields!BatchId.Value</Value>
+          </Parameter>
+          <Parameter Name="BatchDate">
+            <Value>=Fields!BatchDate.Value</Value>
+          </Parameter>
+          <Parameter Name="ReportType">
+            <Value>=Fields!ReportTypeForPickList.Value</Value>
+          </Parameter>
+          <Parameter Name="ShipDateFrom">
+            <Value>=Fields!ReportStartDate.Value</Value>
+          </Parameter>
+          <Parameter Name="ShipDateTo">
+            <Value>=Fields!ReportEndDate.Value</Value>
+          </Parameter>
+        </Parameters>
+      </Subreport>
+      <Rectangle Name="rectangle1">
+        <PageBreakAtEnd>true</PageBreakAtEnd>
+        <ZIndex>12</ZIndex>
+        <Top>3.125in</Top>
+        <Height>0in</Height>
+        <Width>6.875in</Width>
+        <Style />
+      </Rectangle>
+      <Table Name="table8">
+        <Height>0.75in</Height>
+        <ZIndex>11</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="subreport12">
+                      <Style />
+                      <ReportName>PriceDiscrepancyReport</ReportName>
+                      <Visibility>
+                        <Hidden>= NOT Parameters!Run_Report_12.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="AccountID">
+                          <Value>=Fields!AccountId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="CampaignID">
+                          <Value>=Fields!CampaignId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="OrderID">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="InvoiceID">
+                          <Value>=Fields!InvoiceId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="FMID">
+                          <Value>=Fields!FMID.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>12.5in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox17">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table8_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox18">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= NOT Parameters!Run_Report_12.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="table7">
+        <Height>0.75in</Height>
+        <ZIndex>10</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="subreport11">
+                      <Style />
+                      <ReportName>OrderEntryFollowupReport</ReportName>
+                      <Visibility>
+                        <Hidden>= Not Parameters!Run_Report_11.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="AccountID">
+                          <Value />
+                        </Parameter>
+                        <Parameter Name="CampaignID">
+                          <Value>=Fields!CampaignId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="OrderID">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>11.625in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox14">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table7_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox15">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= Not Parameters!Run_Report_11.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="table6">
+        <Height>0.75in</Height>
+        <ZIndex>9</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="subreport9">
+                      <Style />
+                      <ReportName>ProblemSolverReport</ReportName>
+                      <Visibility>
+                        <Hidden>= NOT Parameters!Run_Report_9.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="OrderID">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="CampaignID">
+                          <Value>=Fields!CampaignId.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>11in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox11">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table6_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox12">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= NOT Parameters!Run_Report_9.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Textbox Name="textbox2">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>8</ZIndex>
+        <Top>0.625in</Top>
+        <rd:DefaultName>textbox2</rd:DefaultName>
+        <Height>2.5in</Height>
+        <Width>4.375in</Width>
+        <CanGrow>true</CanGrow>
+        <CanShrink>true</CanShrink>
+        <Value>= Code.ReportsIncluded( Parameters!Run_Report_1.Value , Parameters!Run_Report_2.Value , Parameters!Run_Report_3.Value , Parameters!Run_Report_5.Value , Parameters!Run_Report_6.Value  , Parameters!Run_Report_7.Value , Parameters!Run_Report_8.Value , Parameters!Run_Report_9.Value , Parameters!Run_Report_11.Value , Parameters!Run_Report_12.Value)</Value>
+        <Left>0.25in</Left>
+      </Textbox>
+      <Textbox Name="textbox1">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>7</ZIndex>
+        <Top>0.25in</Top>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>3.5in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>The reports below were included in this report for Batch #</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+      <Textbox Name="BatchOrderId">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <TextAlign>Right</TextAlign>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>6</ZIndex>
+        <Top>0.25in</Top>
+        <rd:DefaultName>BatchOrderId</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>0.875in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=Sum(Fields!BatchOrderId.Value)</Value>
+        <Left>3.625in</Left>
+      </Textbox>
+      <Table Name="table5">
+        <Height>0.75in</Height>
+        <ZIndex>5</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="subreport8">
+                      <Style />
+                      <ReportName>MagazineItemsSummary</ReportName>
+                      <Visibility>
+                        <Hidden>= Not Parameters!Run_Report_8.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="OrderID">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="CampaignID">
+                          <Value>=Fields!CampaignId.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>10.375in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox9">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table5_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox10">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= Not Parameters!Run_Report_8.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <Left>0.125in</Left>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="table4">
+        <Height>0.75in</Height>
+        <ZIndex>4</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="SubReport7">
+                      <Style />
+                      <ReportName>GroupSummaryReport</ReportName>
+                      <Visibility>
+                        <Hidden>= Not Parameters!Run_Report_7.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="OrderId">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="BatchDate">
+                          <Value>=Fields!BatchDate.Value</Value>
+                        </Parameter>
+                        <Parameter Name="BatchId">
+                          <Value>=Fields!BatchId.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>9.25in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox7">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table4_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox8">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= Not Parameters!Run_Report_7.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="table3">
+        <Height>0.75in</Height>
+        <ZIndex>3</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="subreport6">
+                      <Style />
+                      <ReportName>HomeRoomSummaryReport</ReportName>
+                      <Visibility>
+                        <Hidden>= Not Parameters!Run_Report_6.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="OrderId">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="BatchId">
+                          <Value>=Fields!BatchId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="BatchDate">
+                          <Value>=Fields!BatchDate.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>8.375in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox5">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table3_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox6">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= Not Parameters!Run_Report_6.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="table2">
+        <Height>0.75in</Height>
+        <ZIndex>2</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Subreport Name="subreport5">
+                      <Style />
+                      <ReportName>ParticipantListing</ReportName>
+                      <Visibility>
+                        <Hidden>= NOT Parameters!Run_Report_5.Value</Hidden>
+                      </Visibility>
+                      <Parameters>
+                        <Parameter Name="OrderID">
+                          <Value>=Fields!BatchOrderId.Value</Value>
+                        </Parameter>
+                        <Parameter Name="CampaignID">
+                          <Value>=Fields!CampaignId.Value</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Subreport>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>7.375in</Top>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox3">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table2_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox4">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= NOT Parameters!Run_Report_5.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="table1">
+        <Height>0.75in</Height>
+        <ZIndex>1</ZIndex>
+        <Style />
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox19">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <rd:DefaultName>textbox19</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>QSPCanadaOrderManagement</DataSetName>
+        <Top>6.375in</Top>
+        <PageBreakAtEnd>true</PageBreakAtEnd>
+        <Width>8.5in</Width>
+        <TableGroups>
+          <TableGroup>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox13">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <rd:DefaultName>textbox13</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Header>
+            <Grouping Name="table1_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!Id.Value</GroupExpression>
+              </GroupExpressions>
+              <PageBreakAtEnd>true</PageBreakAtEnd>
+            </Grouping>
+            <Footer>
+              <TableRows>
+                <TableRow>
+                  <Height>0.25in</Height>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox16">
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingRight>2pt</PaddingRight>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <rd:DefaultName>textbox16</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <Value />
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                </TableRow>
+              </TableRows>
+            </Footer>
+          </TableGroup>
+        </TableGroups>
+        <Visibility>
+          <Hidden>= Not Parameters!Run_Report_2.Value</Hidden>
+        </Visibility>
+        <PageBreakAtStart>true</PageBreakAtStart>
+        <TableColumns>
+          <TableColumn>
+            <Width>8.5in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Rectangle Name="rectangle2">
+        <PageBreakAtEnd>true</PageBreakAtEnd>
+        <Top>3.625in</Top>
+        <Height>0in</Height>
+        <Width>6.875in</Width>
+        <Style />
+      </Rectangle>
+    </ReportItems>
+    <Style />
+    <Height>14.875in</Height>
+  </Body>
+  <DataSources>
+    <DataSource Name="QSPCanadaOrderManagement">
+      <rd:DataSourceID>d7fdf2d1-23eb-4bfb-96d4-2ec1ea3f3ce4</rd:DataSourceID>
+      <DataSourceReference>QSPCanadaOrderManagement</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <Code>
+function ReportsIncluded(b1 As Boolean, b2 As Boolean, b3 As Boolean, b5 As Boolean, b6 As Boolean, b7 As Boolean, b8 As Boolean, b9 As Boolean, b11 As Boolean, b12 As Boolean)
+
+	dim sText as string
+
+	if b1 Then
+		sText = sText &amp; "Order Control Sheet" &amp; vbCrLf
+	end if
+
+	if b2 Then
+		sText = sText &amp; "Pick List" &amp; vbCrLf
+	end if
+
+	if b3 Then
+		sText = sText &amp; "Confirm Shipment Report" &amp; vbCrLf
+	end if
+
+	if b5 Then
+		sText = sText &amp; "Participant Listing" &amp; vbCrLf
+	end if
+
+	if b6 Then
+		sText = sText &amp; "Homeroom Summary Report" &amp; vbCrLf
+	end if
+
+	if b7 Then
+		sText = sText &amp; "Group Summary Report" &amp; vbCrLf
+	end if
+
+	if b8 Then
+		sText = sText &amp; "Magazine Item Summary Report" &amp; vbCrLf
+	end if
+
+	if b9 Then
+		sText = sText &amp; "Problem Solver Report" &amp; vbCrLf
+	end if
+
+	if b11 Then
+		sText = sText &amp; "Order Entry Followup Report" &amp; vbCrLf
+	end if
+
+	if b12 Then
+		sText = sText &amp; "Price Discrepancy Report" &amp; vbCrLf
+	end if
+
+	ReportsIncluded = sText &amp; ""
+
+end function</Code>
+  <Width>9in</Width>
+  <DataSets>
+    <DataSet Name="QSPCanadaOrderManagement">
+      <Fields>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BatchOrderId">
+          <DataField>BatchOrderId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReportTypeId">
+          <DataField>ReportTypeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RSSubscriptionId">
+          <DataField>RSSubscriptionId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CreateDate">
+          <DataField>CreateDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ModifiedBy">
+          <DataField>ModifiedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BatchDate">
+          <DataField>BatchDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="BatchId">
+          <DataField>BatchId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReportTypeForPickList">
+          <DataField>ReportTypeForPickList</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReportStartDate">
+          <DataField>ReportStartDate</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReportEndDate">
+          <DataField>ReportEndDate</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CampaignId">
+          <DataField>CampaignId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AccountId">
+          <DataField>AccountId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceId">
+          <DataField>InvoiceId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FMID">
+          <DataField>FMID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandText>SELECT     A.*
+	, B.Date As 'BatchDate'
+	, B.Id As 'BatchId'
+	, 1 As 'ReportTypeForPickList'
+	, null As 'ReportStartDate'
+	, null As 'ReportEndDate'
+	, B.CampaignId As 'CampaignId'
+	, B.AccountId As 'AccountId'
+	, null As 'InvoiceId'
+	, null As 'FMID'
+FROM         QSPCanadaOrderManagement..ReportRequest A
+	INNER JOIN QSPCanadaOrderManagement..Batch B ON A.BatchOrderId = B.OrderId
+WHERE 
+	A.Id = @ReportRequestId</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@ReportRequestId">
+            <Value>=Parameters!ReportRequestId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <Description />
+  <rd:ReportID>afb9e3c0-7012-4123-9770-0c06ce034348</rd:ReportID>
+  <ReportParameters>
+    <ReportParameter Name="ReportRequestId">
+      <DataType>Integer</DataType>
+      <Prompt>ReportRequestId</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_1">
+      <DataType>Boolean</DataType>
+      <Prompt>Run_Report_1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_2">
+      <DataType>Boolean</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Run_Report_2</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_3">
+      <DataType>Boolean</DataType>
+      <Prompt>Run_Report_3</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_5">
+      <DataType>Boolean</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Run_Report_5</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_6">
+      <DataType>Boolean</DataType>
+      <Prompt>Run_Report_6</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_7">
+      <DataType>Boolean</DataType>
+      <Prompt>Run_Report_7</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_8">
+      <DataType>Boolean</DataType>
+      <Prompt>Run_Report_8</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_9">
+      <DataType>Boolean</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Run_Report_9</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_11">
+      <DataType>Boolean</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Run_Report_11</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Run_Report_12">
+      <DataType>Boolean</DataType>
+      <Prompt>Run_Report_12</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+</Report>

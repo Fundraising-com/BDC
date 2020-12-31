@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2003/10/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <PageHeader>
+    <ReportItems>
+      <Textbox Name="textbox32">
+        <Style>
+          <PaddingLeft>1pt</PaddingLeft>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Center</TextAlign>
+          <PaddingBottom>1pt</PaddingBottom>
+          <PaddingTop>1pt</PaddingTop>
+          <PaddingRight>1pt</PaddingRight>
+        </Style>
+        <rd:DefaultName>textbox32</rd:DefaultName>
+        <Width>1.75in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>="Report Run on: " &amp; Globals!ExecutionTime</Value>
+        <Left>4.625in</Left>
+      </Textbox>
+    </ReportItems>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.125in</Height>
+  </PageHeader>
+  <RightMargin>0.25in</RightMargin>
+  <Author>Saqib Shah</Author>
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox5">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <BackgroundColor>DarkGray</BackgroundColor>
+          <FontSize>12pt</FontSize>
+          <TextAlign>Center</TextAlign>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>3</ZIndex>
+        <Top>0.25in</Top>
+        <Height>0.25in</Height>
+        <Width>6.375in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=First(Fields!SeasonName.Value, "Header") &amp; " - Books Sale"</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+      <Table Name="table1">
+        <Height>0.75in</Height>
+        <ZIndex>2</ZIndex>
+        <Style />
+        <Header>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox6">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>11</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>Product Code</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox8">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>10</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>Description</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox9">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>9</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>Week Start Date</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox11">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>8</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>Total Subs.</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox13">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>3</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!ProductCode.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox14">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!ProductName.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox15">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>d</Format>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>1</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!WeekStartDay.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox16">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!Total_Subs.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>MusicCD_DATA</DataSetName>
+        <Top>2in</Top>
+        <Width>6.375in</Width>
+        <NoRows>NO DATA FOUND</NoRows>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox17">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox18">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                          <Left>None</Left>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>6</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>Report Total:</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox19">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>5</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox20">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>g</Format>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>4</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Sum(Fields!Total_Subs.Value)</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <Left>0.125in</Left>
+        <TableColumns>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.5in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.125in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Table Name="BooksTable">
+        <Height>0.75in</Height>
+        <ZIndex>1</ZIndex>
+        <Style />
+        <Header>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox22">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>11</ZIndex>
+                      <rd:DefaultName>textbox22</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Product Code</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox53">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>10</ZIndex>
+                      <rd:DefaultName>textbox53</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Book Title</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox1">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>9</ZIndex>
+                      <rd:DefaultName>textbox1</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Week Start Date</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox10">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>8</ZIndex>
+                      <rd:DefaultName>textbox10</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Total Subs.</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox50">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>3</ZIndex>
+                      <rd:DefaultName>textbox50</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!ProductCode.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox30">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <rd:DefaultName>textbox30</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!ProductName.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox2">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>d</Format>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>1</ZIndex>
+                      <rd:DefaultName>textbox2</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!WeekStartDay.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox4">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <rd:DefaultName>textbox4</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Fields!Total_Subs.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>BookSales_DataSet</DataSetName>
+        <Top>0.5in</Top>
+        <Width>6.375in</Width>
+        <NoRows>NO DATA FOUND</NoRows>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox3">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <rd:DefaultName>textbox3</rd:DefaultName>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox52">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                          <Left>None</Left>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>6</ZIndex>
+                      <rd:DefaultName>textbox52</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Report Total:</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox12">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>5</ZIndex>
+                      <rd:DefaultName>textbox12</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox7">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>g</Format>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <BorderStyle>
+                          <Bottom>Solid</Bottom>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>4</ZIndex>
+                      <rd:DefaultName>textbox7</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>= Sum(Fields!Total_Subs.Value)</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <Left>0.125in</Left>
+        <TableColumns>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.5in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.125in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Textbox Name="textbox21">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <BackgroundColor>DarkGray</BackgroundColor>
+          <FontSize>12pt</FontSize>
+          <TextAlign>Center</TextAlign>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <Top>1.75in</Top>
+        <rd:DefaultName>textbox21</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>6.375in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=First(Fields!SeasonName.Value, "Header") &amp; " - Music/CD Sales"</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+    </ReportItems>
+    <Style />
+    <Height>3in</Height>
+    <ColumnSpacing>0.2in</ColumnSpacing>
+  </Body>
+  <TopMargin>0.25in</TopMargin>
+  <DataSources>
+    <DataSource Name="QSPCanadaOrderManagement">
+      <rd:DataSourceID>fd29c179-8416-4e14-b496-59254bfa98a3</rd:DataSourceID>
+      <DataSourceReference>QSPCanadaOrderManagement</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <Code />
+  <Width>7.5in</Width>
+  <DataSets>
+    <DataSet Name="BookSales_DataSet">
+      <Fields>
+        <Field Name="ProductCode">
+          <DataField>ProductCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProductName">
+          <DataField>ProductName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WeekStartDay">
+          <DataField>WeekStartDay</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Total_Subs">
+          <DataField>Total_Subs</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandText>SELECT     Cod.ProductCode, Cod.ProductName, DATEADD(wk, DATEDIFF(wk, 6, batch.date), 6) + 1 AS WeekStartDay, COUNT(cod.ProductCode) 
+                      AS Total_Subs
+FROM         QSPCanadaOrderManagement..CustomerOrderHeader coh, QSPCanadaOrderManagement..CustomerOrderDetail cod, 
+                      QSPCANADACOMMON..CAMPAIGN AS ca, QspcanadaOrderManagement..batch AS batch
+WHERE     coh.Instance = cod.CustomerOrderHeaderInstance AND batch.id = coh.orderbatchid AND batch.date = coh.orderbatchdate AND 
+                      batch.campaignid = ca.id AND ca.StartDate &gt;= @SeasonStartDate AND ca.endDate &lt;= @SeasonEndDate AND batch.statusinstance &lt;&gt; 40005 AND 
+                      ca.status &lt;&gt; 37005 AND cod.producttype = 46006 AND cod.delflag &lt;&gt; 1 AND cod.statusinstance NOT IN (501, 506)
+GROUP BY cod.ProductCode, cod.ProductName, DATEADD(wk, DATEDIFF(wk, 6, batch.date), 6) + 1
+ORDER BY cod.ProductCode, cod.ProductName, WeekStartDay</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@SeasonStartDate">
+            <Value>=Parameters!SeasonStartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@SeasonEndDate">
+            <Value>=Parameters!SeasonEndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </Query>
+    </DataSet>
+    <DataSet Name="MusicCD_DATA">
+      <Fields>
+        <Field Name="ProductCode">
+          <DataField>ProductCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProductName">
+          <DataField>ProductName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WeekStartDay">
+          <DataField>WeekStartDay</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Total_Subs">
+          <DataField>Total_Subs</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandText>SELECT     Cod.ProductCode, Cod.ProductName, DATEADD(wk, DATEDIFF(wk, 6, batch.date), 6) + 1 AS WeekStartDay, COUNT(cod.ProductCode) 
+                      AS Total_Subs
+FROM         QSPCanadaOrderManagement..CustomerOrderHeader coh, QSPCanadaOrderManagement..CustomerOrderDetail cod, 
+                      QSPCANADACOMMON..CAMPAIGN AS ca, QspcanadaOrderManagement..batch AS batch
+WHERE     coh.Instance = cod.CustomerOrderHeaderInstance AND batch.id = coh.orderbatchid AND batch.date = coh.orderbatchdate AND 
+                      batch.campaignid = ca.id AND ca.StartDate &gt;= @SeasonStartDate AND ca.endDate &lt;= @SeasonEndDate AND batch.statusinstance &lt;&gt; 40005 AND 
+                      ca.status &lt;&gt; 37005 AND cod.producttype in ( 46007,46012) AND cod.delflag &lt;&gt; 1 AND cod.statusinstance NOT IN (501, 506)
+GROUP BY cod.ProductCode, cod.ProductName, DATEADD(wk, DATEDIFF(wk, 6, batch.date), 6) + 1
+ORDER BY cod.ProductCode, cod.ProductName, WeekStartDay</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@SeasonStartDate">
+            <Value>=Parameters!SeasonStartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@SeasonEndDate">
+            <Value>=Parameters!SeasonEndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+    <DataSet Name="Header">
+      <Fields>
+        <Field Name="SeasonName">
+          <DataField>SeasonName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>QSPCanadaOrderManagement</DataSourceName>
+        <CommandText>Select  [NAME]AS SeasonName
+From  QspCanadaCommon.dbo.Season 
+Where cast(FiscalYear as varchar)+ season  = (
+SELECT   top 1 cast(pd.pricing_year as varchar)+pd.pricing_season
+FROM     QSPCanadaOrderManagement..CustomerOrderDetailRemitHistory codrh,
+	 QSPCanadaOrderManagement..RemitBatch rb,
+	 QSPCanadaOrderManagement..CustomerOrderHeader coh,
+	 QSPCanadaOrderManagement..CustomerOrderDetail cod,
+	 QSPCanadaProduct..Pricing_Details pd
+WHERE 	codrh.RemitBatchID = rb.id
+	 AND cod.customerorderheaderinstance = codrh.customerorderheaderinstance
+	 AND cod.transid = codrh.transid
+	 AND coh.Instance = cod.CustomerOrderHeaderInstance
+	 AND cod.PricingDetailsID = pd.MagPrice_Instance
+	 AND rb.RunID  in (select top 1 max(runid) as BatchID from QSPCanadaOrderManagement.dbo.RemitBatch)
+	 and cod.delflag &lt;&gt; 1 
+	 AND CODRH.STATUS IN (42000, 42001)
+)</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo_qsp">
+      <MIMEType>image/gif</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <LeftMargin>0.25in</LeftMargin>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <Description />
+  <PageWidth>8in</PageWidth>
+  <rd:ReportID>c1c72bb8-8089-48c0-89e9-0ca1eba2e642</rd:ReportID>
+  <PageFooter>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.05in</Height>
+  </PageFooter>
+  <BottomMargin>0.25in</BottomMargin>
+  <ReportParameters>
+    <ReportParameter Name="SeasonStartDate">
+      <DataType>DateTime</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>SeasonStartDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SeasonEndDate">
+      <DataType>DateTime</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>SeasonEndDate</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+</Report>
