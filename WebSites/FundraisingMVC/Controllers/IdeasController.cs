@@ -52,14 +52,21 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
         [MvcSiteMapNode(Title = "Unique Fundraisers", ParentKey = "Ideas", Protocol = "https"), Route("unique-fundraisers")]
         public ActionResult UniqueFundraisers()
         {
-            return RedirectToActionPermanent("Ideas" , "Ideas");
-          
+            return View();
+
         }
+        [MvcSiteMapNode(Title = "Easy Fundraising Ideas", ParentKey = "Ideas", Protocol = "https"), Route("fundraising-idea")]
+        public ActionResult Ideas2020()
+        {
+            return View();
+        }
+
         [Route("fundraising-ideas")]
         public ActionResult Ideas()
         {
-            return RedirectToActionPermanent("Ideas", "Home");
+            return RedirectToActionPermanent("Ideas2020", "Ideas");
         }
+
         [MvcSiteMapNode(Title = "Easy Fundraisers", ParentKey = "Ideas", Protocol = "https"), Route("easy-fundraisers")]
         public ActionResult EasyFundraisers()
         {
@@ -68,7 +75,7 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
         [MvcSiteMapNode(Title = "Non-Profit Fundraising", ParentKey = "Ideas", Protocol = "https"), Route("non-profit-fundraising")]
         public ActionResult NonProfitFundraising()
         {
-            return RedirectToActionPermanent("Ideas", "Ideas");
+            return View();
         }
         [MvcSiteMapNode(Title = "A to Z of Fundraising Ideas", ParentKey = "Ideas", Protocol = "https"), Route("A-to-Z-fundraising-ideas")]
         // ReSharper disable once InconsistentNaming

@@ -10,7 +10,7 @@
    ViewBag.CanonicalUrl = string.IsNullOrEmpty(Model.CanonicalUrl) ? string.Format("/{0}/{1}/{2}/{3}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId), Model.Category.Parent.Url, Model.Category.Url, Model.Url) : Model.CanonicalUrl;
 }
 
-<div class="container" style="margin-top:125px">
+<div  class="container">
     <div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.Get(@Model.Id);">
         <div class="row">
             <div class="col-sm-12">

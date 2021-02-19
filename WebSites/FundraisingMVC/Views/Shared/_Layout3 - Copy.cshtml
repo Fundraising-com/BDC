@@ -1,0 +1,1755 @@
+﻿@using System.Configuration
+@using Microsoft.AspNet.Identity
+@using MvcSiteMapProvider.Web.Html
+
+
+
+<!DOCTYPE html>
+<html ng-app="fundraising" lang="en" ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta name="google-site-verification" content="pZuC0NGOilIKA5R0AjJl8CTQUv7EptJVCiremoMxa6E" />
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <link rel="alternate" href="https://www.fundraising.com/" />
+    @if (ViewBag.HideBaseOGTag == null || (ViewBag.HideBaseOGTag != null && !(bool)ViewBag.HideBaseOGTag))
+    {
+        <meta property="og:url" content="https://www.fundraising.com/" />
+        <meta property="og:title" content="Fundraising.com" />
+        <meta property="og:description" content="@ViewBag.Description" />
+        <meta property="og:image" content="https://www.fundraising.com/Content/images/public/fundraising_logo.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale " content="en_US" />
+        <meta property="og:site_name " content="Fundraising.com" />
+    }
+
+
+
+
+
+
+    <link href="~/Content/styles/bootstrap/bootstrap.css" rel="stylesheet" />
+    @*@<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+    @*<link href="~/Content/styles/menu.css" rel="stylesheet" />*@
+    <link href="~/Content/styles/menu-min.css" rel="stylesheet" />
+    @*<link href="~/Content/styles/bootstrap/font-awesome.css" rel="stylesheet" />*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+    @Styles.Render("~/bundles/styles")
+    @if (ViewBag.CanonicalUrl != null && !string.IsNullOrEmpty(ViewBag.CanonicalUrl))
+    {
+        <link rel="canonical" href="@string.Format("https://www.fundraising.com{0}", ViewBag.CanonicalUrl)" />
+    }
+
+
+    <!-- FACEBOOK PIXEL-->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '118042298771307');
+        fbq('track', 'PageView');
+    </script>
+
+    <noscript>
+        <img height="1" width="1" src="https://www.facebook.com/tr?id=118042298771307&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- END FACEBOOK PIXEL-->
+
+
+
+</head>
+<body ng-controller="PartnersController as partnersCtrl" style="font-family: 'karla', sans-serif;">
+
+    <div class="container" style="padding-left:0px; padding-right:0px;">
+        <span class="visible-print-block" style="font-size: xx-large">Fundraising.com</span>
+        <header ng-controller="ShoppingCartController as shoppingCartCtrl">
+
+
+
+            <!-- MOBILE Navigation-->
+            <nav class="navbar navbar-default navbar-fixed-top visible-xs" role="navigation" style="background-color: #ffffff; font-family:'karla', sans-serif">
+                <div class="container-fluid">
+
+                    <div class="navbar-header" style="padding-top:5px; margin-right:0px">
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-xs" style="background-color: #a0bb38">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="rightie blue-mobile-search" ng-cloak ng-controller="SearchController as searchCtrl">
+                            <a href="/search" ng-click="showme=true">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true" style="font-size: 1.2em;color:#b3b3b3"></span>
+                            </a>
+                        </div>
+
+                        <div ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}">
+                            <a class="navbar-brand top-left-partner-logo" href="/" style="visibility: inherit; padding: 0; padding-left: 0px; padding-top: 10px;">
+                                <img style="height:95%" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/{{partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" ng-show="partnersCtrl.Partner.Attributes.FR_partner_banner_image" ng-cloak />
+                                <img style="height:95%" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" ng-show="!partnersCtrl.Partner.Attributes.FR_partner_banner_image" ng-cloak />
+                            </a>
+
+                        </div>
+                        <br /> <br /> <br />
+                        <div style="padding-left: 5px; padding-top: 10px;">
+                            <span class="hidden-sm" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}"><strong><a ng-href="1.800.443.5353" ng-cloak style="text-decoration: none;"><span style="font-size:20pt; color:#656565">1.800.443.5353</span></a></strong></span>
+                            <span class="hidden-sm" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}"><strong><a href="tel:+1-866-877-2777" ng-cloak style="color:#605f5f; font-size:12px; text-decoration: none;">1-866-877-2777</a></strong></span>
+
+                            <span class="hidden-sm" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl" ng-cloak style="padding-left:15px">
+                                <a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="hidedisplay()" style="color: #09798f; font-size: 18px" alt="Request a Free Kit" title="Request a Free Kit">
+                                    <span style="font-size: 12px; padding-top:10px; font-weight:bold">GET YOUR FUNDRAISING GUIDE</span>
+                                </a>
+                            </span>
+
+                        </div>
+                        <div ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}">
+                            <a class="navbar-brand top-left-partner-logo" href="/canada" style="visibility: inherit; padding: 0; padding-left: 5px; padding-top: 8px;">
+                                <img alt="canadian fundraising" ng-src="~/Content/images/public/mobile_fr_cdn_logo_03.png" style="height: 70%;" ng-cloak />
+                            </a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbar-xs" ng-controller="DetectCountryController as detectCountryCtrl">
+                            <ul class="nav navbar-nav navbar-right" style="background-color: #ffffff">
+                                <div class="row menuBottom new-homepage-font">
+                                    <!-- visible for mobiles-->
+                                    <div class="col-sm-12 visible-xs visible-sm">
+                                        <span ng-click="collapseBestSellers = !collapseBestSellers" data-target="#listBestSellers" data-toggle="collapse" class="gradient-line2 collapsed-col-title" style="color:#000000; font-weight:normal;text-align: center; font-size:1.0em">MOST POPULAR<i class="pull-right glyphicon" style="color:#adadad" ng-class="{'glyphicon-chevron-down': !collapseBestSellers, 'glyphicon-chevron-up': collapseBestSellers}"></i></span>
+                                        <div id="listBestSellers" class="collapse">
+                                            <ul>
+                                                <li>
+                                                    <a href="/products/chocolate/kathryn-beich">Katydids</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/cookie-dough">Cookie Dough</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/pretzel-rods">Pretzel Rods</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/smencils">Smencils</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/lollipops">Lollipops</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <span ng-click="collapseSweetProducts = !collapseSweetProducts" data-target="#listSweetProducts" data-toggle="collapse" class="gradient-line2 collapsed-col-title" style="color:#000000; font-weight:normal;text-align: center; font-size:1.0em">SWEET FUNDRAISERS<i class="pull-right glyphicon" style="color:#adadad" ng-class="{'glyphicon-chevron-down': !collapseSweetProducts, 'glyphicon-chevron-up': collapseSweetProducts}"></i></span>
+                                        <div id="listSweetProducts" class="collapse">
+                                            <ul>
+                                                <li>
+                                                    <a href="/products/chocolate/kathryn-beich/katydids-by-the-tin">Katydids Tin</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/chocolate">Chocolate</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/pretzel-rods">Pretzel Rods</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/cookie-dough">Cookie Dough</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/cookie-dough/edible-cookie-dough">Edible Cookie Dough</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/lollipops">Lollipops</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/popcorn">Popcorn</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/fruit-snacks">Fruit Snacks</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/fruit-snacks/all-fruit-snacks/Welchs-Fruit-Rolls">Welch's Fruit Rolls</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/gummies/all-gummies/Main-Street-Gummies">Main Street Gummies</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/fortune-cookies/all-fortune-cookies/Famous-Fortune-Cookies">Famous Fortune Cookies</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+
+
+                                        <span ng-click="collapseDis = !collapseDis" data-target="#listDis" data-toggle="collapse" class="gradient-line2 collapsed-col-title" style="color:#000000; font-weight:normal;text-align: center; font-size:1.0em">DISCOUNT FUNDRAISERS<i class="pull-right glyphicon" style="color:#adadad" ng-class="{'glyphicon-chevron-down': !collapseDis, 'glyphicon-chevron-up': collapseDis}"></i></span>
+                                        <div id="listDis" class="collapse">
+                                            <ul>
+                                                @*<li>
+                                                    <a href="/products/scratchcards">Scratchcards</a>
+                                                </li>*@
+                                                <li>
+                                                    <a href="/products/restaurant-gift-cards">Restaurant.com</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/products/discount-fundraisers/all-discount-fundraisers/city-saver">City Saver</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/discount-fundraisers/all-discount-fundraisers/Dinner-Movie-Card">Dinner and Movie</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/scratch-and-help/all-scratch-and-help/scratch-help-fundraising">Scratch &amp; Help</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/products/discount-fundraisers/">VIEW ALL</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
+                                        <span ng-click="collapseCus = !collapseCus" data-target="#listCus" data-toggle="collapse" class="gradient-line2 collapsed-col-title" style="color:#000000; font-weight:normal;text-align: center; font-size:1.0em">CUSTOM FUNDRAISERS<i class="pull-right glyphicon" style="color:#adadad" ng-class="{'glyphicon-chevron-down': !collapseCus, 'glyphicon-chevron-up': collapseCus}"></i></span>
+                                        <div id="listCus" class="collapse">
+                                            <ul>
+                                                <li>
+                                                    <a href="/products/custom-sports-apparel">Sports Apparel</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/t-shirts/all-t-shirts/Custom-Tshirts">T-shirts</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/tumblers">Tumblers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/scratchcards">Scratchcards</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/custom-eye-black/custom-fundraiser/Custom-Eye-Black">Custom Eye Black</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <span ng-click="collapseScent = !collapseScent" data-target="#listScent" data-toggle="collapse" class="gradient-line2 collapsed-col-title" style="color:#000000; font-weight:normal;text-align: center; font-size:1.0em">SCENTED FUNDRAISERS<i class="pull-right glyphicon" style="color:#adadad" ng-class="{'glyphicon-chevron-down': !collapseScent, 'glyphicon-chevron-up': collapseScent}"></i></span>
+                                        <div id="listScent" class="collapse">
+                                            <ul>
+                                                <li>
+                                                    <a href="/products/smencils">Smencils</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/products/heritage-candles">Candles</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/Homefront-Candles">Homefront Candles</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <span ng-click="collapseOrdertakers = !collapseOrdertakers" data-target="#listOrdertakers" data-toggle="collapse" class="gradient-line2 collapsed-col-title" style="color:#000000; font-weight:normal;text-align: center; font-size:1.0em">ORDER TAKERS<i class="pull-right glyphicon" style="color:#adadad" ng-class="{'glyphicon-chevron-down': !collapseOrdertakers, 'glyphicon-chevron-up': collapseOrdertakers}"></i></span>
+                                        <div id="listOrdertakers" class="collapse">
+                                            <ul>
+
+                                                <li>
+                                                    <a href="/products/cookie-dough">Cookie Dough</a>
+                                                </li>
+
+
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/fusion-drinkware-24oz-sportz-tumbler-ordertaker">Tumblers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/earth-candle-brochures">Candles</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/popcorn-brochures">Popcorn</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/Ultimate-Coffee-Collection">Coffee</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/Homefront-Candles">Homefront Candles</a>
+
+                                                </li>
+
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/Smoke-Haus-Slow-Cooked-Snacks">Smoked Snacks</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/Snacking-Made-Simple">Simple Snacking</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/products/order-takers/all-order-takers/Mini-Cookies">Mini Cookies</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 0;" style="padding-right">
+                                            <a href="/" title="USA fundraising ideas" id="usaCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:12pt; color:Black">
+                                                <span>USA</span>
+                                                <img ng-src="{{detectCountryCtrl.country == 0 && '/Content/images/public/usa_flag_active.jpg' || '/Content/images/public/usa_flag_nonactive.jpg'}}" alt="usa fundraising" />
+                                            </a>
+                                        </span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 1;">
+                                            <a href="/canada" title="CANADA fundraising ideas" id="cdnCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:12px; color:Black">
+                                                <span>CAN</span>
+                                                <img ng-src="{{detectCountryCtrl.country == 1 && '/Content/images/public/can_flag_active.jpg' || '/Content/images/public/can_flag_nonactive.jpg'}}" alt="canada fundraising" />
+                                            </a>
+                                        </span>
+
+
+
+
+
+
+
+                                    </div>
+
+                                    <!-- visible for mobiles-->
+
+
+                                    <div class="col-sm-2 hidden-xs hidden-sm">
+                                        <a href="/products" alt="Fundraising Products" title="Fundraising Products" style="color: #00768c; font-size: 13px" id="topleftlinks">FUNDRAISING PRODUCTS</a>
+                                        <ul>
+                                            <li>
+                                                <a href="/products/scratchcards" title="Scratchcards" class="new-bottomlink-color" id="topleftlinks">Scratchcards Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/products/chocolate" title="Chocolate" class="new-bottomlink-color" id="topleftlinks">Chocolate Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/products/pretzel-rods" title="Pretzel Rods" class="new-bottomlink-color" id="topleftlinks">Pretzel Rods Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/products/cookie-dough" title="Cookie Dough" class="new-bottomlink-color" id="topleftlinks">Cookie Dough Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/products/lollipops" title="Lollipops" class="new-bottomlink-color" id="topleftlinks">Lollipops Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/products" class="new-bottomlink-color" style="text-decoration: underline" id="topleftlinks">See more</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 hidden-xs hidden-sm">
+                                        <a href="/canada" alt="Canadian Fundraisers" title="Canadian Fundraisers" style="color: #00768c; font-size: 13px" id="topleftlinks">CANADIAN FUNDRAISERS</a>
+                                        <ul>
+                                            <li>
+                                                <a href="/canada/scratchcards" title="Scratchcards" class="new-bottomlink-color" id="topleftlinks">Scratchcards Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/canada/chocolate" title="Chocolate" class="new-bottomlink-color" id="topleftlinks">Chocolate Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/canada/cookie-dough" title="Cookie Dough" class="new-bottomlink-color" id="topleftlinks">Cookie Dough Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/canada/lollipops" title="Lollipops" class="new-bottomlink-color" id="topleftlinks">Lollipops Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/canada/beef-jerky" title="Beef Jerky" class="new-bottomlink-color" id="topleftlinks">Beef Jerky Fundraiser</a>
+                                            </li>
+                                            <li>
+                                                <a href="/canada" class="new-bottomlink-color" style="text-decoration: underline" id="topleftlinks">See more</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                                        FUNDRAISING IDEAS
+                                        <ul>
+                                            <li>@Html.ActionLink("Fundraising Ideas", "Ideas2020", "Ideas", null, new { title = "Fundraising Ideas", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Resources", "FundraisingResources", "Resources", null, new { title = "Fundraising Resources", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Easy Fundraisers", "EasyFundraisers", "Ideas", null, new { title = "Easy Fundraisers", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Healthy Fundraisers", "HealthyFundraisers", "Ideas", null, new { title = "Healthy Fundraisers", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Unique Fundraisers", "UniqueFundraisers", "Ideas", null, new { title = "Unique Fundraisers", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Events", "Events", "Ideas", null, new { title = "Events", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Tips", "Tips", "Ideas", null, new { title = "Tips", id = "topleftlinks" })</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                                        PARTNERSHIP
+                                        <ul>
+                                            <li>@Html.ActionLink("Our Partners", "OurPartners", "Partners", null, new { title = "Our Partners", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Affiliate Program", "AffiliateProgram", "Partners", null, new { title = "Affiliate Program", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Affiliate Program Login", "Login", "Partners", null, new { title = "Affiliate Program Login", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Donation Fundraising", "DonationFundraising", "Partners", null, new { title = "Donation Fundraising", id = "topleftlinks" })</li>
+                                            <li><a href="http://www.fundraisingmediakit.com/" target="_blank" title="ADVERTISE WITH US" id="topleftlinks">ADVERTISE WITH US</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                                        ABOUT US
+                                        <ul>
+                                            <li>@Html.ActionLink("Our Company", "OurCompany", "AboutUs", null, new { title = "Our Company", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Shipping Policies", "ShippingPolicies", "AboutUs", null, new { title = "Shipping Policies", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Testimonials", "Testimonials", "AboutUs", null, new { title = "Testimonials", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Contact Us", "ContactUs", "AboutUs", null, new { title = "Contact Us", id = "topleftlinks" })</li>
+                                            <li>@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "AboutUs", null, new { title = "Privacy Policy", id = "topleftlinks" })</li>
+                                            <li>
+                                                @Html.ActionLink("Site Map", "Sitemap", "AboutUs", null, new { @class = "afooterseealllink", title = "Site Map", id = "topleftlinks" }) <span class="arrow">></span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                                        ONLINE FUNDRAISER
+                                        <ul>
+                                            <li>@Html.ActionLink("How It Works", "HowItWorks", "OnlineFundraising", null, new { title = "Online Fundraising How it Works", id = "topleftlinks" })</li>
+
+                                            <li>
+                                                <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Start your Campaign" id="topleftlinks">Start your Campaign</a>
+                                            </li>
+                                            <li>
+                                                <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Log In" id="topleftlinks">Log In</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+
+
+
+
+
+                                </div>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+
+
+
+
+
+            <!-- END MOBILE Navigation-->
+            <!-- TOP FR SECTION / MENU-->
+            <div class="row hidden-xs visible-sm visible-md visible-lg">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div class="container" style="padding-left:0px; padding-right:0px;">
+                            <div class="row" ng-controller="DetectCountryController as detectCountryCtrl">
+                                <div class="row" style="background-color:black; padding-bottom:5px">
+                                    <div class="col-md-6" style="padding-left:20px; padding-top:5px;">
+                                        <div style="float:left;">
+                                            <div>
+                                                <span class="hidden-sm" ng-show="{{detectCountryCtrl.country == 0}}"><strong><a href="tel:+1.800.443.5353" ng-cloak style="text-decoration: none; font-weight:bold"><span style="font-size:20pt;color:white">1.800.443.5353</span></a></strong></span>
+                                                <span class="hidden-sm" ng-show="{{detectCountryCtrl.country == 1}}"><strong><a href="tel:+1-866-877-2777" ng-cloak style="text-decoration: none; font-weight:bold"><span style="font-size:15pt;color:white">1-866-877-2777</span></a></strong></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="padding-right:20px;padding-top:5px;">
+                                        <div style="float:right;">
+                                            <div>
+                                                <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 0;" style="padding-right">
+                                                    <a href="/" title="USA fundraising ideas" id="usaCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:12pt; color:white">
+                                                        <span>USA</span>
+                                                        <img ng-src="{{detectCountryCtrl.country == 0 && '/Content/images/public/usa_flag_active.jpg' || '/Content/images/public/usa_flag_nonactive.jpg'}}" alt="usa fundraising" />
+                                                    </a>
+                                                </span>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 1;">
+                                                    <a href="/canada" title="CANADA fundraising ideas" id="cdnCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:12px; color:white">
+                                                        <span>CAN</span>
+                                                        <img ng-src="{{detectCountryCtrl.country == 1 && '/Content/images/public/can_flag_active.jpg' || '/Content/images/public/can_flag_nonactive.jpg'}}" alt="canada fundraising" />
+                                                    </a>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px; padding-top:15px;">
+
+                                    <div class="col-md-4">
+                                        <div ng-controller="SearchController as searchCtrl" ng-cloak>
+                                            <form name="searchForm" role="search" ng-submit="searchForm.$submitted && searchForm.$valid && searchCtrl.Search()">
+                                                <div class="input-group add-on">
+                                                    <input class="form-control" placeholder="Search" type="text" ng-model="searchCtrl.q" ng-required="true" style="border-radius:0px;">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-default" type="submit" style="vertical-align:top; border-radius:0px; float:left"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+
+                                        <a href="/" ng-cloak>
+                                            <img alt="{{::partnersCtrl.Partner.Name}}" src="~/Content/external/partners/header/{{partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" style="margin-left: auto;  margin-right: auto;  display: block;" />
+                                        </a>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl" ng-cloak>
+                                                    <a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'New Kit Request', 'Open Popup Top Menu ' + location.pathname);" style="color: #09798f; font-size: 18px; cursor: pointer;" alt="Request a Free Kit" title="Request a Free Kit">
+                                                        <div style="font-size: 14px;font-weight:bold">
+                                                            <div class="row">
+                                                                <div class="col-sm-10" style="text-align:end"> GET YOUR FREE <br />GUIDE HERE >></div>
+                                                                <div class="col-sm-2" style="align-content:flex-end"><img src="~/Content/external/NewHP/hp2020/iconreading.jpg" alt="fundraising kit" /></div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5" style="float:right">
+                                                <span style="border-left: thin solid #7c787a; padding-bottom:15px; margin-top:30px;">&nbsp;</span>
+                                                <a ng-href="@Url.Action("Index", "ShoppingCarts")" title="Shopping Cart" style="text-decoration:none">
+                                                    <span style="color: #087A92; background-color: white; " ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length > 0">{{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}}</span> <img src="~/Content/images/public/shopping_bag.jpg" alt="add items to your cart" />
+                                                </a>
+                                                SHOPPING CART
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="container" style="padding-left:0px; padding-right:0px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr />
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="display: inline-block;text-align: center">
+                                    <!-- TOP FR MENU SECTION -->
+                                    <div class="row" ng-controller="DetectCountryController as detectCountryCtrl" ng-hide="{{detectCountryCtrl.country == 1}}" ng-cloak>
+                                        <div class="col-md-12">
+                                            <ul id="menu">
+                                                <li style="z-index:1000">
+                                                    <a href="#" class="drop sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">
+                                                            MOST POPULAR
+                                                        </span>
+                                                        <span style="border-left: thin solid #7c787a; float:right; margin-left:24px">&nbsp;</span>
+                                                    </a>
+
+                                                    <div class="dropdown_1column align_left">
+
+                                                        <div class="col_1">
+
+                                                            <ul class="simple">
+                                                                <li>
+                                                                    <a href="/products/chocolate/kathryn-beich">Katydids</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/cookie-dough">Cookie Dough</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/pretzel-rods">Pretzel Rods</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/smencils">Smencils</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/lollipops">Lollipops</a>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+
+
+                                                <li class="hidden-sm hidden-md" style="z-index:1000">
+                                                    <a href="#" class="drop sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">SWEET FUNDRAISERS</span>
+                                                        <span style="border-left: thin solid #7c787a; float:right; margin-left:23px">&nbsp;</span>
+                                                    </a>
+
+                                                    <div class="dropdown_1column align_left">
+
+                                                        <div class="col_1">
+
+                                                            <ul class="simple">
+                                                                <li>
+                                                                    <a href="/products/chocolate/kathryn-beich/katydids-by-the-tin">Katydids Tin</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/chocolate">Chocolate</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/pretzel-rods">Pretzel Rods</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/cookie-dough">Cookie Dough</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/cookie-dough/edible-cookie-dough">Edible Cookie Dough</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/lollipops">Lollipops</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/popcorn">Popcorn</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/fruit-snacks">Fruit Snacks</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/fruit-snacks/all-fruit-snacks/Welchs-Fruit-Rolls">Welch's Fruit Rolls</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/gummies/all-gummies/Main-Street-Gummies">Main Street Gummies</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/fortune-cookies/all-fortune-cookies/Famous-Fortune-Cookies">Famous Fortune Cookies</a>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+
+                                                <li style="z-index:1000" class="hidden-md">
+                                                    <a href="#" class="drop  sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">DISCOUNT FUNDRAISERS</span>
+                                                        <span style="border-left: thin solid #7c787a; float:right; margin-left:24px">&nbsp;</span>
+                                                    </a>
+
+                                                    <div class="dropdown_1column align_left ">
+
+                                                        <div class="col_1 ">
+
+                                                            <ul class="simple">
+
+                                                                @*<li>
+                                                                    <a href="/products/scratchcards">Scratchcards</a>
+                                                                </li>*@
+                                                                <li>
+                                                                    <a href="/products/restaurant-gift-cards">Restaurant.com</a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="/products/discount-fundraisers/all-discount-fundraisers/city-saver">City Saver</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/discount-fundraisers/all-discount-fundraisers/Dinner-Movie-Card">Dinner and Movie</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/scratch-and-help/all-scratch-and-help/scratch-help-fundraising">Scratch &amp; Help</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/discount-fundraisers/">VIEW ALL</a>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+
+                                                <li style="z-index:1000" class="hidden-sm ">
+                                                    <a href="#" class="drop  sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">CUSTOM FUNDRAISERS</span>
+                                                        <span style="border-left: thin solid #7c787a; float:right; margin-left:24px">&nbsp;</span>
+                                                    </a>
+
+                                                    <div class="dropdown_1column align_left">
+
+                                                        <div class="col_1">
+
+                                                            <ul class="simple">
+                                                                <li>
+                                                                    <a href="/products/custom-sports-apparel">Sports Apparel</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/t-shirts/all-t-shirts/Custom-Tshirts">T-shirts</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/tumblers">Tumblers</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/scratchcards">Scratchcards</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/custom-eye-black/custom-fundraiser/Custom-Eye-Black">Custom Eye Black</a>
+                                                                </li>
+
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+
+                                                <li class="hidden-sm" style="z-index:1000">
+                                                    <a href="#" class="drop  sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">SCENTED FUNDRAISERS</span>
+                                                        <span style="border-left: thin solid #7c787a; float:right; margin-left:23px">&nbsp;</span>
+                                                    </a>
+
+                                                    <div class="dropdown_1column align_left">
+
+                                                        <div class="col_1">
+
+                                                            <ul class="simple">
+                                                                <li>
+                                                                    <a href="/products/smencils">Smencils</a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="/products/heritage-candles">Candles</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/Homefront-Candles">Homefront Candles</a>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </li>
+
+                                                <li style="z-index:1000">
+                                                    <a href="#" class="drop  sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">ORDER TAKERS</span>
+                                                        <span style="border-left: thin solid #7c787a; float:right; margin-left:23px">&nbsp;</span>
+                                                    </a>
+
+                                                    <div class="dropdown_1column align_left">
+
+                                                        <div class="col_1">
+
+                                                            <ul class="simple">
+
+                                                                <li>
+                                                                    <a href="/products/cookie-dough">Cookie Dough</a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/fusion-drinkware-24oz-sportz-tumbler-ordertaker">Tumblers</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/earth-candle-brochures">Candles</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/popcorn-brochures">Popcorn</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/Ultimate-Coffee-Collection">Coffee</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/Homefront-Candles">Homefront Candles</a>
+
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/Smoke-Haus-Slow-Cooked-Snacks">Smoked Snacks</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/Snacking-Made-Simple">Simple Snacking</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/all-order-takers/Mini-Cookies">Mini Cookies</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="/products/order-takers/">VIEW ALL</a>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+
+                                                <li style="z-index:1000">
+                                                    <a href="#" class="drop  sliding-middle-out">
+                                                        <span class="new-homepage-font" style="font-size: 0.83em">FEATURED FUNDRAISERS</span>
+
+                                                    </a>
+
+                                                    <div class="dropdown_2columns">
+
+                                                        <div class="col_1" style="width:160px">
+
+                                                            <ul class="simple">
+                                                                <li style="width:150px">
+                                                                    <a href="/products/featured-fundraisers/all-featured-fundraisers/Fund-Duel">Fund Duel&trade;</a>
+                                                                </li>
+                                                                
+                                                                <li style="width:150px">
+                                                                    <a href="/products/ship-to-home">Ship To Home</a>
+                                                                </li>
+                                                                <li style="width:150px">
+                                                                    <a href="/products/safe-and-healthy">Stay Safe &amp; Healthy</a>
+                                                                </li>
+
+                                                                <li style="width:150px">
+                                                                    <a href="/products/featured-fundraisers">VIEW ALL</a>
+                                                                </li>
+
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+
+
+
+
+                                            </ul>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- END TOP FR SECTION -->
+                        <!-- END TOP FR MENU SECTION -->
+                        <!-- END TOP FR MENU SECTION -->
+
+                    </nav>
+
+                </div>
+            </div>
+            <!-- END TOP FR SECTION / MENU-->
+            <!-- TOP FR SECTION / MENU (smaller screen / tablets)-->
+            @*<div class="row hidden-xs visible-sm">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-default navbar-fixed-top">
+                            <div class="container" style="padding-left:0px; padding-right:0px">
+
+                                <div class="row fontSizeTopMenu new-homepage-font" style="background-color: white;" ng-controller="DetectCountryController as detectCountryCtrl">
+
+                                    <div class="col-sm-6" style="padding-top:10px">
+                                        <a id="main-logo-fr-07" href="/" class="top-left-partner-logo" ng-cloak>
+                                            <img alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/{{partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" />
+                                        </a>
+                                        <br /><br />
+                                        <div>
+                                            <span ng-show="{{detectCountryCtrl.country == 0}}"><strong><a ng-href="tel:+{{partnersCtrl.Partner.Attributes.phone_number}}" ng-cloak style="color: #605f5f; font-size: 23px; text-decoration: none; font-weight:bold">{{partnersCtrl.Partner.Attributes.phone_number}}</a></strong></span>
+                                            <span ng-show="{{detectCountryCtrl.country == 1}}"><strong><a href="tel:+1-866-877-2777" ng-cloak style="color: #605f5f; font-size: 23px; text-decoration: none; font-weight:bold">1-866-877-2777</a></strong></span>
+                                        </div>
+                                        <br />
+                                        <div ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl" ng-show="{{detectCountryCtrl.country == 0}}" ng-cloak>
+                                            <a href="" data-toggle="modal" data-target="#kit-request-modal" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'Kit Request', 'Open Popup Top Menu ' + location.pathname);" style="color: #09798f; font-size: 18px" alt="Request a Free Kit" title="Request a Free Kit">
+                                                <div class="btn btn-success btn-xs" style="font-size: 24px; background-color:#9dba3a; border:none;  color: #fff; border-radius: 10px;">GET YOUR FUNDRAISING GUIDE</div>
+                                            </a>
+                                        </div>
+                                        <div ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl" ng-show="{{detectCountryCtrl.country == 1}}" ng-cloak>
+                                            <a href="" class="canada-free-guide" data-toggle="modal" data-target="#kit-request-modal" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'Kit Request Canada', 'Open Popup Top Menu Canada ' + location.pathname);" style="color: #09798f; font-size: 18px" alt="Request a Free Kit" title="Request a Free Kit">
+                                                <div class="btn btn-success btn-xs" style="font-size: 24px; background-color:#9dba3a; border:none;  color: #fff; border-radius: 10px;">GET YOUR FUNDRAISING GUIDE</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding-top:10px; line-height:25px; float:right" align="right">
+                                        <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 0;">
+                                            <a href="/" title="USA fundraising ideas" id="usaCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:12pt; color:#323232">
+                                                <span>USA</span>
+                                                <img ng-src="{{detectCountryCtrl.country == 0 && '/Content/images/public/usa_flag_active.jpg' || '/Content/images/public/usa_flag_nonactive.jpg'}}" alt="usa fundraising" />
+                                            </a>
+                                        </span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 1;">
+                                            <a href="/canada" title="CANADA fundraising ideas" id="cdnCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:12px; color:#595959">
+                                                <span>CAN</span>
+                                                <img ng-src="{{detectCountryCtrl.country == 1 && '/Content/images/public/can_flag_active.jpg' || '/Content/images/public/can_flag_nonactive.jpg'}}" alt="canada fundraising" />
+                                            </a>
+                                        </span>
+                                        <br /><br />
+                                        <div>
+                                            <div ng-cloak>
+                                                <a href="@Url.Action("Index", "ShoppingCarts")" title="Shopping Cart" style="text-decoration:none">
+                                                    <span style="color: #087A92; background-color: white; " ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length > 0">{{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}}</span> <img src="~/Content/images/public/shopping_bag.jpg" alt="add items to your cart" />
+                                                </a>
+                                                SHOPPING CART: <span style="color:#077b92; font-size:14px">{{shoppingCartCtrl.scope.$storage.ShoppingCart.TotalAmount | currency}}</span>
+
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div ng-controller="SearchController as searchCtrl" ng-cloak>
+                                            <form name="searchForm" role="search" ng-submit="searchForm.$submitted && searchForm.$valid && searchCtrl.Search()">
+                                                <div class="input-group add-on">
+                                                    <input class="form-control" placeholder="Search" type="text" ng-model="searchCtrl.q" ng-required="true" style="border-radius:0px; width:40%; float:right">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-default" type="submit" style="vertical-align:top; border-radius:0px"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- END TOP FR SECTION -->
+                                <!-- TOP FR MENU SECTION -->
+                                <div class="row" ng-controller="DetectCountryController as detectCountryCtrl" ng-hide="{{detectCountryCtrl.country == 1}}" style="margin-top:15px; margin-left:50px" ng-cloak>
+                                    <div class="col-md-12">
+                                        <ul id="menu">
+                                            <li style="z-index:1000">
+                                                <a href="#" class="drop sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">MOST POPULAR</span>
+                                                </a>
+
+                                                <div class="dropdown_1column align_left">
+
+                                                    <div class="col_1">
+
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <a href="/products/chocolate/kathryn-beich">Katydids</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/cookie-dough">Cookie Dough</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/pretzel-rods">Pretzel Rods</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/smencils">Smencils</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/lollipops">Lollipops</a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+
+                                            <li class="hidden-sm hidden-md" style="z-index:1000">
+                                                <a href="#" class="drop sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">SWEET FUNDRAISERS</span>
+                                                </a>
+
+                                                <div class="dropdown_1column align_left">
+
+                                                    <div class="col_1">
+
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <a href="/products/chocolate/kathryn-beich/katydids-by-the-tin">Katydids Tin</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/chocolate">Chocolate</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/pretzel-rods">Pretzel Rods</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/cookie-dough">Cookie Dough</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/cookie-dough/edible-cookie-dough">Edible Cookie Dough</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/lollipops">Lollipops</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/popcorn">Popcorn</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/fruit-snacks">Fruit Snacks</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/fruit-snacks/all-fruit-snacks/Welchs-Fruit-Rolls">Welch's Fruit Rolls</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/gummies/all-gummies/Main-Street-Gummies">Main Street Gummies</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/fortune-cookies/all-fortune-cookies/Famous-Fortune-Cookies">Famous Fortune Cookies</a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+                                            <li style="z-index:1000" class="hidden-md">
+                                                <a href="#" class="drop  sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">DISCOUNT FUNDRAISERS</span>
+                                                </a>
+
+                                                <div class="dropdown_1column align_left ">
+
+                                                    <div class="col_1 ">
+
+                                                        <ul class="simple">
+
+                                                            <li>
+                                                                <a href="/products/scratchcards">Scratchcards</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/restaurant-gift-cards">Restaurant.com</a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="/products/discount-fundraisers/all-discount-fundraisers/city-saver">City Saver</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/discount-fundraisers/all-discount-fundraisers/Dinner-Movie-Card">Dinner and Movie</a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="/products/discount-fundraisers/">VIEW ALL</a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+                                            <li style="z-index:1000" class="hidden-sm ">
+                                                <a href="#" class="drop  sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">CUSTOM FUNDRAISERS</span>
+                                                </a>
+
+                                                <div class="dropdown_1column align_left">
+
+                                                    <div class="col_1">
+
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <a href="/products/custom-sports-apparel">Sports Apparel</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/t-shirts/all-t-shirts/Custom-Tshirts">T-shirts</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/tumblers">Tumblers</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/scratchcards">Scratchcards</a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="/products/custom-eye-black/custom-fundraiser/Custom-Eye-Black">Custom Eye Black</a>
+                                                            </li>
+
+
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+                                            <li class="hidden-sm" style="z-index:1000">
+                                                <a href="#" class="drop  sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">SCENTED FUNDRAISERS</span>
+                                                </a>
+
+                                                <div class="dropdown_1column align_left">
+
+                                                    <div class="col_1">
+
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <a href="/products/smencils">Smencils</a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="/products/heritage-candles">Candles</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/Homefront-Candles">Homefront Candles</a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </li>
+
+                                            <li style="z-index:1000">
+                                                <a href="#" class="drop  sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">ORDER TAKERS</span>
+                                                </a>
+
+                                                <div class="dropdown_1column align_left">
+
+                                                    <div class="col_1">
+
+                                                        <ul class="simple">
+
+                                                            <li>
+                                                                <a href="/products/cookie-dough">Cookie Dough</a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/fusion-drinkware-24oz-sportz-tumbler-ordertaker">Tumblers</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/earth-candle-brochures">Candles</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/popcorn-brochures">Popcorn</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/Homefront-Candles">Homefront Candles</a>
+
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/Smoke-Haus-Slow-Cooked-Snacks">Smoked Snacks</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/Snacking-Made-Simple">Simple Snacking</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/all-order-takers/Mini-Cookies">Mini Cookies</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/products/order-takers/">VIEW ALL</a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+                                            <li style="z-index:1000">
+                                                <a href="#" class="drop  sliding-middle-out">
+                                                    <span class="new-homepage-font" style="font-size: 0.83em">FEATURED FUNDRAISERS</span>
+                                                </a>
+
+                                                <div class="dropdown_2columns">
+
+                                                    <div class="col_1" style="width:160px">
+
+                                                        <ul class="simple">
+
+                                                            <li style="width:150px">
+                                                                <a href="/products/featured-fundraisers/all-featured-fundraisers/Fund-Duel">Fund Duel&trade;</a>
+                                                            </li>
+                                                            <li style="width:150px">
+                                                                <a href="/products/ship-to-home">Ship To Home</a>
+                                                            </li>
+                                                            <li style="width:150px">
+                                                                <a href="/products/safe-and-healthy">Stay Safe &amp; Healthy</a>
+                                                            </li>
+
+                                                            <li style="width:150px">
+                                                                <a href="/products/featured-fundraisers">VIEW ALL</a>
+                                                            </li>
+
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+
+
+
+                                        </ul>
+
+
+                                    </div>
+
+                                </div>
+                                <!-- END TOP FR MENU SECTION -->
+
+                                <div class="row container" ng-controller="DetectCountryController as detectCountryCtrl" ng-hide="{{detectCountryCtrl.country == 1}}" ng-cloak>
+                                    <div class="col-md-12" style="width:inherit; border-bottom: 3px solid; border-bottom-color: #e3e3e3;">
+                                    </div>
+                                </div>
+
+                                <!-- END TOP FR MENU SECTION -->
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>*@
+            <!-- END TOP FR SECTION / MENU (smaller screen / tablets)-->
+
+        </header>
+        <section>
+
+
+            @RenderBody()
+        </section>
+        <footer class="hidden-print">
+            <div class="row text-center new-homepage-font">
+                <div class="col-md-12">
+                    <a href="/partners/our-partners" style="text-decoration: none">
+                        <span style="color: #565656; font-size: x-large;">THEY SIGNED UP</span><br />
+
+                    </a>
+                </div>
+            </div>
+            <div class="row" ng-controller="BannersController as bannersCtrl" ng-init="bannersCtrl.FindBanners(3, false, 0);">
+                <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="banner in bannersCtrl.banners |  limitTo: 3" ng-cloak>
+                    <img ng-src="/Content/external/banners/{{::banner.Image}}" alt="{{::banner.AlternativeText}}" class="img-responsive" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row menuBottom new-homepage-font">
+                <!-- visible for mobiles-->
+                <div class="col-sm-12 visible-xs visible-sm">
+                    <span ng-click="collapseProducts = !collapseProducts" data-target="#listProducts" data-toggle="collapse" class="gradient-line collapsed-col-title">FUNDRAISING PRODUCTS<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !collapseProducts, 'glyphicon-chevron-up': collapseProducts}"></i></span>
+                    <div id="listProducts" class="collapse">
+                        <ul>
+                            <li>
+                                <a href="/products/scratchcards" title="Scratchcards" class="new-bottomlink-color" id="topleftlinks">Scratchcards Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/products/chocolate" title="Chocolate" class="new-bottomlink-color" id="topleftlinks">Chocolate Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/products/pretzel-rods" title="Pretzel Rods" class="new-bottomlink-color" id="topleftlinks">Pretzel Rods Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/products/cookie-dough" title="Cookie Dough" class="new-bottomlink-color" id="topleftlinks">Cookie Dough Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/products/lollipops" title="Lollipops" class="new-bottomlink-color" id="topleftlinks">Lollipops Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/products" class="new-bottomlink-color" style="text-decoration: underline" id="topleftlinks">See more</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <span ng-click="collapseCAProducts = !collapseCAProducts" data-target="#listCAProducts" data-toggle="collapse" class="gradient-line collapsed-col-title">CANADIAN FUNDRAISERS<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !collapseCAProducts, 'glyphicon-chevron-up': collapseCAProducts}"></i></span>
+                    <div id="listCAProducts" class="collapse">
+                        <ul>
+                            <li>
+                                <a href="/canada/scratchcards" title="Scratchcards" class="new-bottomlink-color" id="topleftlinks">Scratchcards Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/canada/chocolate" title="Chocolate" class="new-bottomlink-color" id="topleftlinks">Chocolate Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/canada/cookie-dough" title="Cookie Dough" class="new-bottomlink-color" id="topleftlinks">Cookie Dough Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/canada/lollipops" title="Lollipops" class="new-bottomlink-color" id="topleftlinks">Lollipops Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/canada/beef-jerky" title="Beef Jerky" class="new-bottomlink-color" id="topleftlinks">Beef Jerky Fundraiser</a>
+                            </li>
+                            <li>
+                                <a href="/canada" class="new-bottomlink-color" style="text-decoration: underline" id="topleftlinks">See more</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                    <span ng-click="collapseIdeas = !collapseIdeas" data-target="#listIdeas" data-toggle="collapse" class="gradient-line collapsed-col-title">FUNDRAISING IDEAS<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !collapseIdeas, 'glyphicon-chevron-up': collapseIdeas}"></i></span>
+                    <div id="listIdeas" class="collapse">
+                        <ul>
+                            <li>@Html.ActionLink("Fundraising Ideas", "Ideas2020", "Ideas", null, new { title = "Fundraising Ideas", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Resources", "FundraisingResources", "Resources", null, new { title = "Fundraising Resources", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Easy Fundraisers", "EasyFundraisers", "Ideas", null, new { title = "Easy Fundraisers", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Healthy Fundraisers", "HealthyFundraisers", "Ideas", null, new { title = "Healthy Fundraisers", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Unique Fundraisers", "UniqueFundraisers", "Ideas", null, new { title = "Unique Fundraisers", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Events", "Events", "Ideas", null, new { title = "Events", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Tips", "Tips", "Ideas", null, new { title = "Tips", id = "topleftlinks" })</li>
+                        </ul>
+                    </div>
+
+                    <span ng-click="collapsePartners = !collapsePartners" data-target="#listPartners" data-toggle="collapse" class="gradient-line collapsed-col-title">PARTNERS<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !collapsePartners, 'glyphicon-chevron-up': collapsePartners}"></i></span>
+                    <div id="listPartners" class="collapse">
+                        <ul>
+                            <li>@Html.ActionLink("Our Partners", "OurPartners", "Partners", null, new { title = "Our Partners", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Affiliate Program", "AffiliateProgram", "Partners", null, new { title = "Affiliate Program", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Affiliate Program Login", "Login", "Partners", null, new { title = "Affiliate Program Login", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Donation Fundraising", "DonationFundraising", "Partners", null, new { title = "Donation Fundraising", id = "topleftlinks" })</li>
+                            <li><a href="http://www.fundraisingmediakit.com/" target="_blank" title="ADVERTISE WITH US" id="topleftlinks">ADVERTISE WITH US</a></li>
+                        </ul>
+                    </div>
+
+                    <span ng-click="collapseUS = !collapseUS" data-target="#listUS" data-toggle="collapse" class="gradient-line collapsed-col-title">ABOUT US<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !collapseUS, 'glyphicon-chevron-up': collapseUS}"></i></span>
+                    <div id="listUS" class="collapse">
+                        <ul>
+                            <li>@Html.ActionLink("Our Company", "OurCompany", "AboutUs", null, new { title = "Our Company", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Shipping Policies", "ShippingPolicies", "AboutUs", null, new { title = "Shipping Policies", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Testimonials", "Testimonials", "AboutUs", null, new { title = "Testimonials", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Contact Us", "ContactUs", "AboutUs", null, new { title = "Contact Us", id = "topleftlinks" })</li>
+                            <li>@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "AboutUs", null, new { title = "Privacy Policy", id = "topleftlinks" })</li>
+                            <li>
+                                @Html.ActionLink("Site Map", "Sitemap", "AboutUs", null, new { @class = "afooterseealllink", title = "Site Map", id = "topleftlinks" }) <span class="arrow">></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <span ng-click="collapseOnline = !collapseOnline" data-target="#listOnline" data-toggle="collapse" class="gradient-line collapsed-col-title">ONLINE FUNDRAISER<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !collapseOnline, 'glyphicon-chevron-up': collapseOnline}"></i></span>
+                    <div id="listOnline" class="collapse">
+                        <ul>
+                            <li>@Html.ActionLink("How It Works", "HowItWorks", "OnlineFundraising", null, new { title = "Online Fundraising How it Works", id = "topleftlinks" })</li>
+
+                            <li>
+                                <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Start your Campaign" id="topleftlinks">Start your Campaign</a>
+                            </li>
+                            <li>
+                                <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Log In" id="topleftlinks">Log In</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <br />
+                    <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 0;">
+                        <a href="/" title="USA fundraising ideas" id="usaCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:11pt; color:Black">
+                            <span>USA</span>
+                            <img ng-src="{{detectCountryCtrl.country == 0 && '/Content/images/public/usa_flag_active.jpg' || '/Content/images/public/usa_flag_nonactive.jpg'}}" alt="usa fundraising" />
+                        </a>
+                    </span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="country-sel" ng-controller="DetectCountryController as detectCountryCtrl" ng-init="detectCountryCtrl.DetectCountry(); showSelectedCountryClass = detectCountryCtrl.country == 1;">
+                        <a href="/canada" title="CANADA fundraising ideas" id="cdnCountry" ng-class="{selectedCountry: showSelectedCountryClass}" style="text-decoration:none; font-size:11px; color:Black">
+                            <span>CAN</span>
+                            <img ng-src="{{detectCountryCtrl.country == 1 && '/Content/images/public/can_flag_active.jpg' || '/Content/images/public/can_flag_nonactive.jpg'}}" alt="canada fundraising" />
+                        </a>
+                    </span>
+                </div>
+
+                <!-- visible for mobiles-->
+
+
+                <div class="col-sm-2 hidden-xs hidden-sm">
+                    <a href="/products" alt="Fundraising Products" title="Fundraising Products" style="color: #00768c; font-size: 13px" id="topleftlinks">FUNDRAISING PRODUCTS</a>
+                    <ul>
+                        <li>
+                            <a href="/products/scratchcards" title="Scratchcards" class="new-bottomlink-color" id="topleftlinks">Scratchcards Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/products/chocolate" title="Chocolate" class="new-bottomlink-color" id="topleftlinks">Chocolate Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/products/pretzel-rods" title="Pretzel Rods" class="new-bottomlink-color" id="topleftlinks">Pretzel Rods Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/products/cookie-dough" title="Cookie Dough" class="new-bottomlink-color" id="topleftlinks">Cookie Dough Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/products/lollipops" title="Lollipops" class="new-bottomlink-color" id="topleftlinks">Lollipops Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/products" class="new-bottomlink-color" style="text-decoration: underline" id="topleftlinks">See more</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-2 hidden-xs hidden-sm">
+                    <a href="/canada" alt="Canadian Fundraisers" title="Canadian Fundraisers" style="color: #00768c; font-size: 13px" id="topleftlinks">CANADIAN FUNDRAISERS</a>
+                    <ul>
+                        <li>
+                            <a href="/canada/scratchcards" title="Scratchcards" class="new-bottomlink-color" id="topleftlinks">Scratchcards Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/canada/chocolate" title="Chocolate" class="new-bottomlink-color" id="topleftlinks">Chocolate Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/canada/cookie-dough" title="Cookie Dough" class="new-bottomlink-color" id="topleftlinks">Cookie Dough Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/canada/lollipops" title="Lollipops" class="new-bottomlink-color" id="topleftlinks">Lollipops Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/canada/beef-jerky" title="Beef Jerky" class="new-bottomlink-color" id="topleftlinks">Beef Jerky Fundraiser</a>
+                        </li>
+                        <li>
+                            <a href="/canada" class="new-bottomlink-color" style="text-decoration: underline" id="topleftlinks">See more</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                    FUNDRAISING IDEAS
+                    <ul>
+                        <li>@Html.ActionLink("Fundraising Ideas", "Ideas2020", "Ideas", null, new { title = "Fundraising Ideas", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Resources", "FundraisingResources", "Resources", null, new { title = "Fundraising Resources", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Easy Fundraisers", "EasyFundraisers", "Ideas", null, new { title = "Easy Fundraisers", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Healthy Fundraisers", "HealthyFundraisers", "Ideas", null, new { title = "Healthy Fundraisers", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Unique Fundraisers", "UniqueFundraisers", "Ideas", null, new { title = "Unique Fundraisers", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Events", "Events", "Ideas", null, new { title = "Events", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Tips", "Tips", "Ideas", null, new { title = "Tips", id = "topleftlinks" })</li>
+                    </ul>
+                </div>
+                <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                    PARTNERSHIP
+                    <ul>
+                        <li>@Html.ActionLink("Our Partners", "OurPartners", "Partners", null, new { title = "Our Partners", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Affiliate Program", "AffiliateProgram", "Partners", null, new { title = "Affiliate Program", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Affiliate Program Login", "Login", "Partners", null, new { title = "Affiliate Program Login", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Donation Fundraising", "DonationFundraising", "Partners", null, new { title = "Donation Fundraising", id = "topleftlinks" })</li>
+                        <li><a href="http://www.fundraisingmediakit.com/" target="_blank" title="ADVERTISE WITH US" id="topleftlinks">ADVERTISE WITH US</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                    ABOUT US
+                    <ul>
+                        <li>@Html.ActionLink("Our Company", "OurCompany", "AboutUs", null, new { title = "Our Company", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Shipping Policies", "ShippingPolicies", "AboutUs", null, new { title = "Shipping Policies", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Testimonials", "Testimonials", "AboutUs", null, new { title = "Testimonials", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Contact Us", "ContactUs", "AboutUs", null, new { title = "Contact Us", id = "topleftlinks" })</li>
+                        <li>@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "AboutUs", null, new { title = "Privacy Policy", id = "topleftlinks" })</li>
+                        <li>
+                            @Html.ActionLink("Site Map", "Sitemap", "AboutUs", null, new { @class = "afooterseealllink", title = "Site Map", id = "topleftlinks" }) <span class="arrow">></span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-2 new-homepage-font hidden-xs hidden-sm" style="color: #00768c; font-size: 13px">
+                    ONLINE FUNDRAISER
+                    <ul>
+                        <li>@Html.ActionLink("How It Works", "HowItWorks", "OnlineFundraising", null, new { title = "Online Fundraising How it Works", id = "topleftlinks" })</li>
+
+                        <li>
+                            <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Start your Campaign" id="topleftlinks">Start your Campaign</a>
+                        </li>
+                        <li>
+                            <a ng-href="@Html.Raw(ConfigurationManager.AppSettings["EFundraisingHost"])/?utm_source=fundraisingcom&utm_medium=banner&utm_campaign=FundraisingCom&p={{::partnersCtrl.Partner.Id}}" title="Online Fundraising Log In" id="topleftlinks">Log In</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="row footerBox new-homepage-font" style="font-size: 12px; vertical-align: middle">
+
+                <div class="col-md-4 text-center" style="padding-top: 7px; padding-bottom: 7px">
+                    <!-- Flags used to be here -->
+                </div>
+
+                <div class="col-md-4">
+                    <div ng-controller="NewsletterSubscriptionController as newsletterSubscriptionCtrl">
+                        <form name="newsletterForm" ng-submit="newsletterSubscriptionCtrl.Send();">
+                            <div class="input-group">
+                                <input type="email" style="vertical-align:middle;border-radius: 0 !important;" class="form-control" placeholder="Subscribe to our Newsletter" aria-describedby="sizing-addon2" ng-required="true" ng-model="newsletterSubscriptionCtrl.newsletterSubscription.Email">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary" style="border-radius: 0 !important;" ng-disabled="!newsletterForm.$valid">Join</button>
+
+                                </div>
+                                <span class="text-info" ng-show="newsletterSubscriptionCtrl.ActionState == 1" style="color: white;">
+                                    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>
+                                </span>
+                                <span class="text-info" ng-show="newsletterSubscriptionCtrl.ActionState == 3" style="color: white;">
+                                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" style="color: white"></span>
+                                </span>
+                            </div>
+
+                        </form>
+                        <br />
+                        <div class="col-md-12 text-center" style="padding-top: 5px">
+                            <a href="https://www.facebook.com/Fundraisingdotcom" onclick="ga('send', 'social', 'Facebook', 'Visit'); " target="_blank">
+                                <img src="/Content/images/public/fb-icon.png" alt="Visit our Facebook page" />
+                            </a>
+                            <a href="https://www.pinterest.com/frdotcom/" onclick="ga('send', 'social', 'Pinterest', 'Visit'); " target="_blank">
+                                <img src="/Content/images/public/pinterest-icon.png" alt="Visit our Pinterest page" style="padding-left: 20px" />
+                            </a>
+                            <a href="https://twitter.com/fundraising_com" onclick="ga('send', 'social', 'Twitter', 'Visit'); " target="_blank">
+                                <img src="/Content/images/public/twitter-icon.png" alt="Visit our Twitter page" style="padding-left: 20px" />
+                            </a>
+                            <a href="https://instagram.com/fundraisingdotcom/" onclick="ga('send', 'social', 'Instagram', 'Visit'); " target="_blank">
+                                <img src="/Content/images/public/instagram-icon.png" alt="Visit our Instagram page" style="padding-left: 20px" />
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <br />
+                <div class="col-md-4 text-center" style="padding-top: 7px; padding-bottom: 7px">
+
+                </div>
+
+
+            </div>
+            <a href="" data-toggle="modal" data-target="#representative-intro-modal" id="representative-intro-modal-shower"></a>
+        </footer>
+        <br />
+        <div class="modal fade" id="kit-request-modal" tabindex="-1" role="dialog" aria-labelledby="kit-request-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <img alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/{{::partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" />
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("_KitRequestForm", 1)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="kit-request-modal-New" tabindex="-1" role="dialog" aria-labelledby="kit-request-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="height:800px">
+                <div class="modal-content">
+                    <div class="modal-header" align="right">
+                        <div style="float:left; margin-top:5px"><strong>Call Us <a ng-href="tel:+{{partnersCtrl.Partner.Attributes.phone_number}}" style="color:#057890">{{partnersCtrl.Partner.Attributes.phone_number}}</a></strong></div>
+                        <a data-dismiss="modal" aria-label="Close" style="cursor:pointer;">
+                            <span aria-hidden="true" align="right" class="text-muted">x</span>
+                        </a>
+
+                    </div>
+                    <div class="modal-body" style="padding-bottom:5px">
+                        @Html.Partial("_partialNewKit")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BDC / FR Consultant ID = 3450 -->
+        @if (ViewBag.RepresentativeId != null && ViewBag.RepresentativeId != 3450)
+        {
+            <div ng-controller="RepresentativesController as representativeCtrl">
+                <div class="modal fade" id="representative-intro-modal" tabindex="-1" role="dialog" aria-labelledby="representative-intro-modal" aria-hidden="true" ng-if="representativeCtrl.Representative.Id > 0">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="hidden-xs col-sm-4">
+                                        <img ng-src="/Content/external/rep/{{::representativeCtrl.Representative.Image}}" style="width: 100%;" alt="{{::representativeCtrl.Representative.Name}}" />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8" ng-cloak>
+                                        <div class="jumbotron">
+                                            <h1>
+                                                Welcome to <strong>{{::representativeCtrl.Representative.Name}}'s</strong> store
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">OK</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+            </div>
+        }
+    </div>
+    <div id='papPlaceholder'></div>
+
+    @Html.Partial(HttpContext.Current.IsDebuggingEnabled ? "_coreJSFiles" : "_coreJSFiles.min")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+
+
+
+
+    <script type="text/javascript">
+        function hidedisplay() {
+            if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent))
+                $zopim.livechat.hideAll();
+        }
+        //-->
+    </script>
+    <script type="text/javascript">
+        if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
+            $('#kit-request-modal-New').on('hidden.bs.modal', function () {
+
+                $zopim.livechat.button.show();
+            });
+        };
+    </script>
+
+
+
+    @if (bool.Parse(ConfigurationManager.AppSettings["showChatProviderCode"]))
+    {
+
+        <!-- Start of efundraising Zendesk Widget script -->
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=313d3676-a112-459a-843e-2ac8e41c559f"></script>
+        <!-- End of efundraising Zendesk Widget script -->
+
+
+    }
+    @if (bool.Parse(ConfigurationManager.AppSettings["showGoogleAnalyticsCode"]))
+    {
+        <!--Start of Google Analytics-->
+        <script type="text/javascript">
+
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-6620752-4', 'auto', { 'allowLinker': true });
+            ga('require', 'ec');
+            ga('set', 'dimension3', 'fundEFund');
+            ga('send', 'pageview');
+        </script>
+        <!--End of Google Analytics-->
+    }
+    <!-- start web api hosts -->
+    <script type="text/javascript">
+   (function() {
+      'use strict';
+      var app = angular.module('fundraising');
+      app.constant('hosts', {
+         webApiCoreBaseUrl: '@ConfigurationManager.AppSettings["core.webapi.host"]',
+         webApiFundraisingBaseUrl: '@ConfigurationManager.AppSettings["fundraising.webapi.host"]',
+         PaypalLogin: '@ConfigurationManager.AppSettings["Paypal.Login"]',
+         PaypalReturnUrl: '@ConfigurationManager.AppSettings["Paypal.ReturnUrl"]',
+         PaypalUrl: '@ConfigurationManager.AppSettings["Paypal.Url"]'
+      });
+   })();
+    </script>
+    <!-- end web api hosts -->
+    @RenderSection("scripts", false)
+
+    <script type="text/javascript">
+   $(document).ready(function() {
+      if (window.location.hash.indexOf("showkitwindow") > -1) {
+         $("#kit-request-modal-New").modal("show");
+      }
+
+      if ("True" === "@ViewBag.ShowRepresentativeIntroPopup") {
+         $('#representative-intro-modal').modal('show');
+      }
+
+       if ($("#mobile-fr-main-banner").length > 0) {
+           if ($("#mobile-fr-main-banner").is(":visible")) {
+               $("#mobile-fr-main-banner").slick({
+                   dots: false,
+                   infinite: true,
+                   speed: 500,
+                   fade: true,
+                   cssEase: 'linear',
+                   autoplay: true,
+                   autoplaySpeed: 6000,
+                   arrows: false
+               });
+           }
+       }
+
+      $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+         // Avoid following the href location when clicking
+         event.preventDefault();
+         // Avoid having the menu to close when clicking
+         event.stopPropagation();
+         // If a menu is already open we close it
+         //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+         // opening the one you clicked on
+         $(this).parent().addClass('open');
+
+         var menu = $(this).parent().find("ul");
+         var menupos = menu.offset();
+
+         if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+            var newpos = - menu.width();
+         } else {
+            var newpos = $(this).parent().width();
+         }
+         menu-min.css({ left: newpos });
+
+      });
+      // PAP SCRIPT START
+      (function (d, t) {
+         var script = d.createElement(t); script.id = 'pap_x2s6df8d'; script.async = true;
+         script.src = 'https://fundraising.postaffiliatepro.com/scripts/trackjs.js';
+         script.onload = script.onreadystatechange = function () {
+            try {
+               var rs = this.readyState;
+               if (rs && (rs != 'complete') && (rs != 'loaded')) return;
+               PostAffTracker.setAccountId('default1');
+               PostAffTracker.track();
+            } catch (e) {
+               console.warn(e);
+            }
+         }
+         var placeholder = document.getElementById('papPlaceholder');
+         placeholder.parentNode.insertBefore(script, placeholder);
+         placeholder.parentNode.removeChild(placeholder);
+      })(document, 'script');
+      // PAP SCRIPT END
+   });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#search").hide();
+        });
+
+        function toggleDiv(divId) {
+
+            $("#" + divId).toggle();
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $(".activeBtn").click(function () {
+                // remove classes from all
+                $(".activeBtn").removeClass("active");
+                // add class to the one we clicked
+                $(this).addClass("active");
+            });
+        });
+    </script>
+
+
+</body>
+</html>

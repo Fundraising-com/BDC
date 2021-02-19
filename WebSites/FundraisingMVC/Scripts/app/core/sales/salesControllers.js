@@ -762,12 +762,15 @@
         function chargeCreditCard() {
             var totalAmount = 0;
             var reference = "";
+            
             for (var j = 0; j < vm.Sales.length; j++) {
                 var sale = vm.Sales[j];
                 totalAmount += sale.TotalAmount;
                 reference += sale.Id + ",";
+                
+
             }
-            var creditCard = { Number: vm.Sale.CreditCard.Number, Holder: vm.Sale.CreditCard.Holder, ExpirationDate: vm.Sale.CreditCard.ExpirationDate, CVV: vm.Sale.CreditCard.CVV, InternalPaymentMethod: vm.Sale.InternalPaymentMethod, Amount: totalAmount, Reference: reference, Address: { Address1: vm.Sale.Client.Addresses[0].Address1, City: vm.Sale.Client.Addresses[0].City, Region: vm.Sale.Client.Addresses[0].Region, Country: vm.Sale.Client.Addresses[0].Country, PostCode: vm.Sale.Client.Addresses[0].PostCode } };
+            var creditCard = { Email: vm.Sale.Client.Email, Number: vm.Sale.CreditCard.Number, Holder: vm.Sale.CreditCard.Holder, ExpirationDate: vm.Sale.CreditCard.ExpirationDate, CVV: vm.Sale.CreditCard.CVV, InternalPaymentMethod: vm.Sale.InternalPaymentMethod, Amount: totalAmount, Reference: reference, Address: { Address1: vm.Sale.Client.Addresses[0].Address1, City: vm.Sale.Client.Addresses[0].City, Region: vm.Sale.Client.Addresses[0].Region, Country: vm.Sale.Client.Addresses[0].Country, PostCode: vm.Sale.Client.Addresses[0].PostCode } };
             return SalesFactory.CreditCard.save(creditCard).$promise;
         };
         /*

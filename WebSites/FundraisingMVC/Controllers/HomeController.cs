@@ -74,12 +74,6 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
 
 
 
-        [MvcSiteMapNode(Title = "105 Fundraising Ideas", ParentKey = "Root", Protocol = "https"), Route("fundraising-ideas")]
-        public ActionResult Ideas()
-        {
-            return View();
-        }
-
 
         [MvcSiteMapNode(Title = "Request a Kit", ParentKey = "Root", Protocol = "https"), Route("request-a-kit")]
         public ActionResult KitRequest()
@@ -190,6 +184,43 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
         {
             return KitRequestConfirmation(c, partnerId);
             
+        }
+
+
+        [MvcSiteMapNode(Title = "sports fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("sports-fundraising-ideas")]
+        public ActionResult sportsfundraisingideas()
+        {
+            return View();
+        }
+
+        [MvcSiteMapNode(Title = "school fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("school-fundraiser-ideas")]
+        public ActionResult schoolfundraisingideas()
+        {
+            return View();
+        }
+
+        [MvcSiteMapNode(Title = "non-profit fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("nonprofit-fundraising-ideas")]
+        public ActionResult nonprofitfundraisingideas()
+        {
+            return View();
+        }
+
+        [MvcSiteMapNode(Title = "Katydids fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("katydids-fundraising-ideas")]
+        public ActionResult katydidsfundraisingideas()
+        {
+            return View();
+        }
+
+        [MvcSiteMapNode(Title = "Best Sellers fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("best-sellers-fundraising-ideas")]
+        public ActionResult bestsellersfundraisingideas()
+        {
+            return View();
+        }
+
+        [MvcSiteMapNode(Title = "Buy Online fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("buy-online")]
+        public ActionResult buyonline()
+        {
+            return View();
         }
 
 

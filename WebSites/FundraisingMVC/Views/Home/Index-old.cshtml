@@ -1,0 +1,238 @@
+@using GA.BDC.Shared.Entities
+@model IList<Product>
+@{
+    ViewBag.Title = "Fundraising.com - Fundraising ideas and products to raise money";
+    ViewBag.Description = "Your good cause deserves a great fundraiser! Traditional and online fundraising ideas for schools, sports teams, churches and non-profits.";
+    ViewBag.Keywords = "fundraising, fundraisers, efundraising, fundraising tips, fundraising ideas, cookie dough fundraiser, candy fundraisers";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("Index", "Home");
+}
+
+<link href="~/Content/styles/slickJs/slick-theme-min.css" rel="stylesheet" />
+<link href="~/Content/styles/slickJs/slick-min.css" rel="stylesheet" />
+<script src="~/Scripts/flipbook/jquery-2.1.0.min.js"></script>
+<script src="~/Scripts/slick-carousel.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.homepage-mobile-banner').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplaySpeed: 3000,
+            autoplay: true,
+        });
+    });
+</script>
+
+<!-- TOP BANNER  -->
+<div class="homepage-mobile-banner row visible-xs text-center" style="padding-top:80px;padding-bottom:15px;" ng-cloak ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}">
+
+    <div>
+        @*<a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'New Kit Request', 'Open Popup Top Menu ' + location.pathname); hidedisplay()" style="text-decoration:none" alt="Request a Free Kit" title="Request a Free Kit">*@
+        <a href="/products/chocolate/kathryn-beich" style="text-decoration:none;">
+            <img src="/Content/external/newhp/mobile_banner_kd.jpg" class="img-responsive" alt="katydids" />
+        </a>
+    </div>
+
+</div>
+<div class="hidden-xs" ng-cloak style="margin-top:125px">
+
+    <div class="row">
+        <div id="banners-big" class="carousel carousel-fade " data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                @*<div ng-repeat="banner in bannerCtrl.banners track by $index" ng-class="{item : true, active: $first}">
+           <a ng-href="{{::banner.Url}}" ng-controller="GoogleAnalyticsController as googleAnalyticsCtrl" ng-click="googleAnalyticsCtrl.BannerClicked(banner.Id);">
+              <img ng-src="/Content/external/banners/{{::banner.Image}}" alt="{{::banner.AlternativeText}}" style="margin: auto; width: 100%;">
+           </a>
+        </div>*@
+                @*<a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'New Kit Request', 'Open Popup Top Menu ' + location.pathname);" style="text-decoration:none" alt="Request a Free Kit" title="Request a Free Kit">*@
+                <a href="/products/chocolate/kathryn-beich" style="text-decoration:none;">
+                    <img src="/Content/external/newhp/banner_homepage_KD.jpg" alt="katydids" style="margin: auto; width: 100%;">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--END TOP BANNER -->
+<div style="background-color:#f6f6f6; padding-left:50px;padding-right:50px;">
+    <div class="row">
+        <div class="col-md-12 text-center new-homepage-font" style="padding-top:20px; margin-bottom:40px">
+            <span style="color:#323232; font-size:3.0vw; font-weight: bold">RAISE MORE MONEY WITH LESS EFFORT</span>
+        </div>
+    </div>
+
+
+    <div class="row ">
+        <div class="col-sm-6 col-md-6 col-xs-12" style="text-align: center;">
+            <a href="/products/order-takers" style="text-decoration:none;">
+                <img src="~/Content/external/NewHP/hp2020/order-taker_homepage.jpg" style="margin:auto; display: block; height:90%; width:90%; margin-bottom:20px" border="0" class="img-responsive" alt="Order takers" />
+            </a>
+        </div>
+        <div class="col-sm-6  col-md-6 col-xs-12" style="text-align: center;">
+            <a href="/products" style="text-decoration:none;">
+                <img src="~/Content/external/NewHP/hp2020/moreprograms_homepage.jpg" style="margin:auto; display: block;height:90%; width:90%" border="0" class="img-responsive" alt="more programs" />
+            </a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:30px">
+        <div class="col-md-6 col-sm-6 col-xs-12" style="text-align: center;">
+            <a href="/products/ship-to-home" style="text-decoration:none;">
+                <img src="~/Content/external/NewHP/hp2020/shiptohome_homepage.jpg" style="margin:auto; display: block;height:90%; width:90%;margin-bottom:20px" border="0" class="img-responsive" alt="ship to home" />
+            </a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12" style="text-align: center;">
+            <a href="/products/safe-and-healthy" style="text-decoration:none;">
+                <img src="~/Content/external/NewHP/hp2020/staysafe_homepage.jpg" style="margin:auto; display: block;height:90%; width:90%" border="0" class="img-responsive" alt="stay safe" />
+            </a>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top:25px">
+        <div class="col-md-12">
+            <a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'New Kit Request', 'Open Popup Top Menu ' + location.pathname);" style="text-decoration:none" alt="Request a Free Kit" title="Request a Free Kit">
+                <img src="~/Content/external/NewHP/banner_homepage.png" class="img-responsive" alt="guide" style="display: block; margin: 0 auto;"/>
+            </a>
+            </div>
+        </div>
+
+
+        <div class="row" style="padding-bottom:20px">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="text-align: center;margin-top:30px">
+                <a href="/ideas/fundraising-idea" style="text-decoration:none;">
+                    <img src="~/Content/external/NewHP/hp2020/fundraising_ideas.jpg" style="margin:auto; display: block;height:90%; width:90%" " border="0" class="img-responsive" alt="fundraising ideas" />
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="text-align:center;margin-top:30px">
+                <a href="/blog" style="text-decoration:none;">
+                    <img src="~/Content/external/NewHP/hp2020/Blog.jpg" style="margin:auto; display: block;height:90%; width:90%" " border="0" class="img-responsive" alt="fundraising blog" />
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+@section scripts
+{
+    <style>
+        ol.carousel-indicators li.active {
+            width: 15px;
+            height: 15px;
+            background: black;
+        }
+
+        ol.carousel-indicators li {
+            width: 15px;
+            height: 15px;
+            background: grey;
+        }
+
+        #banners-big .carousel-control.left {
+            background: none;
+        }
+
+        #banners-big .carousel-control.right {
+            background: none;
+        }
+
+        #banners-big .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+
+
+        #hprotator .carousel-control.left {
+            background: none;
+        }
+
+        #hprotator .carousel-control.right {
+            background: none;
+        }
+
+        #hprotator .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+
+        #hprotator-lg .carousel-control.left {
+            background: none;
+        }
+
+        #hprotator-lg .carousel-control.right {
+            background: none;
+        }
+
+        #hprotator-lg .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+
+        #hprotator-md .carousel-control.left {
+            background: none;
+        }
+
+        #hprotator-md .carousel-control.right {
+            background: none;
+        }
+
+        #hprotator-md .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+
+
+        #banners .carousel-control.left {
+            background: none;
+        }
+
+        #banners .carousel-control.right {
+            background: none;
+        }
+
+        #banners .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+
+        #banners .carousel-indicators li {
+            border: solid 1px #087A92;
+        }
+
+        #banners .carousel-indicators .active {
+            border: solid 1px #087A92;
+            background-color: white;
+        }
+
+        #carousel-featured-products-lg .carousel-control.left {
+            background: none;
+        }
+
+        #carousel-featured-products-lg .carousel-control.right {
+            background: none;
+        }
+
+        #carousel-featured-products-lg .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+
+        #carousel-featured-products-md .carousel-control.left {
+            background: none;
+        }
+
+        #carousel-featured-products-md .carousel-control.right {
+            background: none;
+        }
+
+        #carousel-featured-products-md .carousel-control {
+            width: 3%;
+            color: #087A92;
+        }
+    </style>
+}
