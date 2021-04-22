@@ -44,7 +44,7 @@ namespace GA.BDC.Web.Fundraising.MVC
              name: "Default Route",
              url: "{controller}/{action}/{id}",
              defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-             constraints: new { controller = "Home|Products|Canada|AboutUs|Ideas|OnlineFundraising|Partners|Resources|Representatives|ShoppingCarts|Blog|Administration" }
+             constraints: new { controller = "Home|Products|Canada|AboutUs|Ideas|OnlineFundraising|Partners|Resources|Representatives|ShoppingCarts|Blog|Administration|FundraisingProduct" }
          );
          //Redirection, it catches old calls from the ASP.Net site and redirect them to the new MVC one
          routes.MapRoute(

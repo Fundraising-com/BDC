@@ -116,9 +116,10 @@
          { Id: 2, Name: 'Repeated Business', Url: '/Reports/Report/RepeatedBusiness', Icon: 'compare_arrows' },
              { Id: 3, Name: 'Gross Profit', Url: '/Reports/Report/GrossProfit', Icon: 'trending_up' },
              { Id: 4, Name: 'Sales To Process', Url: '/Reports/Report/SalesToProcess', Icon: 'trending_up' },
-             { Id: 5, Name: 'Products List', Url: '/Reports/Report/ProductList', Icon: '' },
-             { Id: 6, Name: 'Customer List', Url: '/Reports/Report/CustomerList', Icon: '' },
-             { Id: 7, Name: 'Traditional Confirmed Sales By Product Class', Url: '/Reports/Report/TraditionalConfirmedSalesByProductClass', Icon: 'info' }];
+             { Id: 5, Name: 'Sales Transformer', Url: '/Reports/Report/SalesToProcessNEW', Icon: 'trending_up' },
+             { Id: 6, Name: 'Products List', Url: '/Reports/Report/ProductList', Icon: '' },
+             { Id: 7, Name: 'Customer List', Url: '/Reports/Report/CustomerList', Icon: '' },
+             { Id: 8, Name: 'Traditional Confirmed Sales By Product Class', Url: '/Reports/Report/TraditionalConfirmedSalesByProductClass', Icon: 'info' }];
          vm.executing = false;
        };
 
@@ -222,6 +223,71 @@
                "InvoiceNo", "Customer", "InvoiceDate", "DueDate", "Terms", "Location", "Memo",
                "Item(Product/Service)", "ItemDescription", "ItemQuantity", "ItemRate", "ItemAmount","ItemTaxCode", "TaxRate", "Currency"];
        };
+
+
+       vm.ExecuteReportSalesToProcessNEW = function () {
+           vm.executing = true;
+           var startedReportExecution = new Date();
+           ReportsFactory.SalesToProcessNEW(vm.parameters)
+               .then(function (result) {
+                   var endedReportExecution = new Date();
+                   vm.executedOn = new Date();
+                   vm.executionTime = Math.abs((endedReportExecution.getTime() - startedReportExecution.getTime()) / 1000);
+                   vm.fileName = "SalesTransformer (" + startedReportExecution.toLocaleString() + ").csv";
+                   vm.results = result.data;
+               }, function (error) {
+                   $log.error(error);
+                   ToastFactory.Error(error);
+               }).finally(function () {
+                   vm.executing = false;
+               });
+       };
+
+
+
+
+       vm.GetSalesToProcessReportHeaderNEW = function () {
+           return [
+               "Billing First Name",
+               "Billing Last Name",
+               "Billing Organization",
+               "Billing Phone",
+               "Billing Mobile",
+               "Billing Email",
+               "Billing Street",
+               "Billing City",
+               "Billing State",
+               "Billing Country",
+               "Billing Zip Code",
+               "Shipping First Name",
+               "Shipping Last Name",
+               "Shipping Attention of",
+               "Shipping Organization",
+               "Shipping Location",
+               "Shipping Street",
+               "Shipping City",
+               "Shipping State",
+               "Shipping Country",
+               "Shipping Zip Code",
+               "Sale ID",
+               "Invoice date",
+               "Terms",
+               "Due Date",
+               "Division",
+               "Consultant",
+               "Product Description",
+               "Item Description",
+               "Item Quantity",
+               "Item Selling Rate",
+               "Item Amount",
+               "Shipping Amount",
+               "Sale Total Amount",
+               "Price Adjustment",
+               "Billing ItemTax Code",
+               "Billing Tax Rate"];
+       };
+
+
 
 
       vm.ExecuteReportSpider = function () {

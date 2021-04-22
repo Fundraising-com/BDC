@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using System.Web.SessionState;
+//using System.Web.SessionState;
+//using Google.Cloud.Diagnostics.AspNet;
+//using Google.Cloud.Diagnostics.Common;
+
 
 namespace GA.BDC.Web.Fundraising.MVC
 {
@@ -29,6 +33,11 @@ namespace GA.BDC.Web.Fundraising.MVC
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            //string projectId = ConfigurationManager.AppSettings["projectId"];
+            //// ...
+            //base.Init();
+            //TraceOptions traceConfig = TraceOptions.Create(bufferOptions: BufferOptions.NoBuffer());
+            //CloudTrace.Initialize(this, projectId, traceConfig);
 
         }
 
@@ -38,7 +47,11 @@ namespace GA.BDC.Web.Fundraising.MVC
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
+        
+        
+        
         {
+            
 
         }
 

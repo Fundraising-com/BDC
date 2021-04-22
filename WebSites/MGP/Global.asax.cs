@@ -80,7 +80,7 @@ namespace GA.BDC.Web.MGP
          {
             if (!IgnoreException(Request, lastError))
             {
-               SWCorporate.SystemEx.InstrumentationProvider.Current.SendExceptionNotification(lastError, null);
+               //SWCorporate.SystemEx.InstrumentationProvider.Current.SendExceptionNotification(lastError, null);
 
             }
 

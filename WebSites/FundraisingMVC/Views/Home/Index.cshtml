@@ -9,7 +9,9 @@
 }
 
 
-<script src="https://kit.fontawesome.com/43ebec9117.js" crossorigin="anonymous"></script>
+
+
+
 
 <style>
     /* carousel */
@@ -30,7 +32,7 @@
             margin-top: 10%
         }
 
-       
+
         /* Next button  */
         .media-carousel .carousel-control.right {
             right: 130px !important;
@@ -42,7 +44,7 @@
             width: 40px;
             margin-top: 10%
         }
-       
+
         /* Changes the position of the indicators */
         .media-carousel .carousel-indicators {
             right: 50%;
@@ -66,23 +68,77 @@
     /* End carousel */
 
 </style>
+<style>
+    .carousel-indicators .active {
+        background-color: #848383;
+    }
 
-
-
-
-
-
+    .carousel-indicators li {
+        background-color: #d9d9d9;
+    }
+</style>
 
 <!-- TOP BANNER  -->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" style="margin-bottom:25px">
         <div class="col-md-12">
-            <a href="/katydids-fundraising-ideas" style="text-decoration:none;">
-                <img src="/Content/external/newhp/NEWHP2021/KD_banner.jpg" alt="katydids" class="hidden-xs"  style="margin: auto;max-width:100%; height:auto;display: block;">
-                <img src="/Content/external/newhp/NEWHP2021/KD_banner_mobile.jpg" alt="katydids" class="visible-xs"  style="margin: auto;max-width:100%; height:auto;display: block;">
-            </a>
+            <div id="myCarousel" class="carousel slide" data-interval="false">
+                <!-- Indicators -->
+                <ol class="carousel-indicators" style="bottom:-35px">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+
+                    <div class="item active">
+                        <a href="/katydids-fundraising-ideas" style="text-decoration:none;">
+                            <img src="~/Content/external/NewHP/NEWHP2021/KD_banner-top.jpg" style="margin: auto;max-width:100%; height:auto;display: block;" class="hidden-xs" />
+                            <img src="~/Content/external/NewHP/NEWHP2021/KD_banner_mobile-top.jpg" style="margin: auto;max-width:100%; height:auto;display: block;" class="visible-xs" />
+                        </a>
+                    </div>
+
+                    <div class="item">
+                        <a href="/products/ship-to-home" style="text-decoration:none;">
+                            <img src="~/Content/external/NewHP/NEWHP2021/STH_banner-top.jpg" style="margin: auto;max-width:100%; height:auto;display: block;" class="hidden-xs" />
+                            <img src="~/Content/external/NewHP/NEWHP2021/STH_banner_mobile.jpg" style="margin: auto;max-width:100%; height:auto;display: block;" class="visible-xs" />
+                        </a>
+                    </div>
+
+                    <div class="item">
+                        <a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'New Kit Request 2021', 'Open Popup Top Menu 2021' + location.pathname);" style="text-decoration:none" alt="Request a Free Kit" title="Request a Free Kit">
+                            <img src="~/Content/external/NewHP/NEWHP2021/Guide_banner-top.jpg" style="margin: auto;max-width:100%; height:auto;display: block;" class="hidden-xs" />
+                            <img src="~/Content/external/NewHP/NEWHP2021/guide_banner_mobile-top.jpg" style="margin: auto;max-width:100%; height:auto;display: block;" class="visible-xs" />
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="visible-xs">
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background:none">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background:none">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    @*<div class="row">
+            <div class="col-md-12">
+                <a href="/katydids-fundraising-ideas" style="text-decoration:none;">
+                    <img src="/Content/external/newhp/NEWHP2021/KD_banner.jpg" alt="katydids" class="hidden-xs" style="margin: auto;max-width:100%; height:auto;display: block;">
+                    <img src="/Content/external/newhp/NEWHP2021/KD_banner_mobile.jpg" alt="katydids" class="visible-xs" style="margin: auto;max-width:100%; height:auto;display: block;">
+                </a>
+            </div>
+        </div>*@
 
 
 
@@ -96,60 +152,44 @@
         <div class="col-md-4" style="margin-top:20px">
             <a href="/school-fundraiser-ideas" style="text-decoration:none;">
                 <img src="/Content/external/newhp/NEWHP2021/school_category.jpg" alt="school fundraising" style="margin: auto;max-width:100%; height:auto;display: block;">
-                </a>
+            </a>
         </div>
         <div class="col-md-4" style="margin-top:20px">
             <a href="/nonprofit-fundraising-ideas" style="text-decoration:none;">
                 <img src="/Content/external/newhp/NEWHP2021/nonprofit_category.jpg" alt="non profit" style="margin: auto;max-width:100%; height:auto;display: block;">
-                </a>
+            </a>
 
         </div>
     </div>
+
 
 
     <!-- TOP Products Logos-->
-    <div class="row visible-xs visible-sm" style="margin-top: 35px;">
-        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
-            <img src="/Content/external/newhp/NEWHP2021/jacklinks_logo.jpg" alt="beef jerky fundraising" style="margin: auto; " class="responsive-img">
-            <img src="/Content/external/newhp/NEWHP2021/vanwyk_logo.jpg" alt="van wyk fundraising" style="margin: auto;" class="responsive-img">
+    <div style="margin-top:40px">
+    <div class="row hidden-xs hidden-sm hidden-md" style="display: block; margin:0 auto;max-width:1800px;">
+        <div class="col-md-2" style="margin-top: 25px;margin-right:5%;">
+            <img src="/Content/external/newhp/NEWHP2021/jacklinks.jpg" alt="beef jerky fundraising" style="margin: 0 auto; display: block;"><br />
+            <img src="/Content/external/newhp/NEWHP2021/cinnabon.jpg" alt="cinnabon fundraising" style="margin: 0 auto; display: block;">
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
-            <img src="/Content/external/newhp/NEWHP2021/nestle_logo.jpg" alt="nestle fundraising" style="margin: auto;" class="responsive-img">
-            <img src="/Content/external/newhp/NEWHP2021/smencil_logo.jpg" alt="smencils fundraising" style="margin: auto;" class="responsive-img">
+        <div class="col-md-2" style="margin-top: 25px;margin-right:5%">
+            <img src="/Content/external/newhp/NEWHP2021/vanwyk.jpg" alt="vanwyk fundraising" style="margin: 0 auto; display: block;"><br />
+            <img src="/Content/external/newhp/NEWHP2021/zapapizza.jpg" alt="zapapizza fundraising" style="margin: 0 auto; display: block;">
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
-            <img src="/Content/external/newhp/NEWHP2021/katydids_logo.jpg" alt="katydids fundraising" style="margin: auto;" class="responsive-img">
-            <img src="/Content/external/newhp/NEWHP2021/mrsfields_logo.jpg" alt="cookie dough fundraising" style="margin: auto;" class="responsive-img">
+        <div class="col-md-2" style="margin-top: 25px;margin-right:5% ">
+            <img src="/Content/external/newhp/NEWHP2021/nestle.jpg" alt="nestle fundraising" style="margin: 0 auto; display: block;"><br />
+            <img src="/Content/external/newhp/NEWHP2021/reese.jpg" alt="reese fundraising" style="margin: 0 auto; display: block;">
         </div>
+        <div class="col-md-2" style="margin-top: 25px;margin-right:1%">
+            <img src="/Content/external/newhp/NEWHP2021/smencils.jpg" alt="smencils fundraising" style="margin: 0 auto; display: block;"><br />
+            <img src="/Content/external/newhp/NEWHP2021/otis.jpg" alt="otis fundraising" style="margin: 0 auto; display: block;">
+        </div>
+        <div class="col-md-2" style="margin-top: 25px;margin-right:-50;">
+            <img src="/Content/external/newhp/NEWHP2021/auntiannes.jpg" alt="auntiannes fundraising" style="float:right"><br />
+            <img src="/Content/external/newhp/NEWHP2021/mrsfileds.jpg" alt="mrsfileds fundraising" style="float:right">
+        </div>
+
     </div>
-
-    <div class="row hidden-xs hidden-sm" style="margin-top: 35px;">
-        <div class="col-md-2" style="margin-top: 25px; text-align: center;">
-            <img src="/Content/external/newhp/NEWHP2021/jacklinks_logo.jpg" alt="beef jerky fundraising"  style="margin: auto;max-width:100%; height:auto;display: block;">
-
-        </div>
-        <div class="col-md-2" style="margin-top: 25px; text-align: center;">
-
-            <img src="/Content/external/newhp/NEWHP2021/vanwyk_logo.jpg" alt="van wyk fundraising"  style="margin: auto;max-width:100%; height:auto;display: block;">
-        </div>
-        <div class="col-md-2" style="margin-top: 25px; text-align: center;">
-            <img src="/Content/external/newhp/NEWHP2021/nestle_logo.jpg" alt="nestle fundraising"  style="margin: auto;max-width:100%; height:auto;display: block;">
-
-        </div>
-        <div class="col-md-2" style="margin-top: 25px; text-align: center;">
-
-            <img src="/Content/external/newhp/NEWHP2021/smencil_logo.jpg" alt="smencils fundraising"  style="margin: auto;max-width:100%; height:auto;display: block;">
-        </div>
-        <div class="col-md-2" style="margin-top: 25px; text-align: center;">
-            <img src="/Content/external/newhp/NEWHP2021/katydids_logo.jpg" alt="katydids fundraising"  style="margin: auto;max-width:100%; height:auto;display: block;">
-
-        </div>
-        <div class="col-md-2" style="margin-top: 25px; text-align: center;">
-
-            <img src="/Content/external/newhp/NEWHP2021/mrsfields_logo.jpg" alt="cookie dough fundraising"  style="margin: auto;max-width:100%; height:auto;display: block;">
-        </div>
-    </div>
-
+</div>
 
     <!-- Best Sellers  -->
     <div class="row">
@@ -162,16 +202,16 @@
     <div class="row hidden-sm hidden-xs" style="text-align: center;margin-top:25px;margin-left:0;margin-right:0px">
         <div class="col-md-3 col-sm-4 col-xs-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
             <a href="/products/cookie-dough" style="text-decoration:none;color:black;" title="cookie dough">
-                <img src="/Content/external/newhp/NEWHP2021/cookiedough_homepageimage.jpg" alt="cookie dough fundraising"  style="margin: auto; max-width: 100%; height: auto; display: block; padding-bottom: 15px" class="responsive-img"><br />
+                <img src="/Content/external/newhp/NEWHP2021/cookiedough_homepageimage.jpg" alt="cookie dough fundraising" style="margin: auto; max-width: 100%; height: auto; display: block; padding-bottom: 15px" class="responsive-img"><br />
                 <span style="font-size:18px; font-weight:bold">Cookie Dough</span><br />
-                <span style="font-size:16px; color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px; color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
             <a href="/products/pretzel-rods/all-pretzel-rods/Sweet-and-Salty-Pretzel-Rods" style="text-decoration:none;color:black;" title="pretzel rods">
                 <img src="/Content/external/newhp/NEWHP2021/pretzelrods_homepageimage.jpg" alt="pretzel rods fundraising" style="margin: auto; max-width: 100%; height: auto; display: block; padding-bottom: 15px" class="responsive-img">
                 <br /><span style="font-size:18px; font-weight:bold">Sweet & Salty Pretzel Rods</span><br />
-                <span style="font-size:16px; color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px; color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-4 " style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
@@ -184,24 +224,24 @@
     </div>
     <div class="row hidden-sm hidden-xs" style="text-align: center;margin-top:25px;margin-left:0;margin-right:0px">
         <div class="col-md-3 col-sm-4 col-xs-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
-            <a href="/products/lollipops" style="text-decoration:none;color:black;" title="lollipop">
+            <a href="/lollipop-fundraiser" style="text-decoration:none;color:black;" title="lollipop">
                 <img src="/Content/external/newhp/NEWHP2021/lollipops_homepageimage.jpg" alt="lollipop fundraising" style="margin: auto; max-width: 100%; height: auto; padding-bottom: 15px" class="responsive-img">
                 <br /><span style="font-size:18px; font-weight:bold">Lollipops</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
             <a href="/products/smencils" style="text-decoration:none;color:black;" title="smencils">
                 <img src="/Content/external/newhp/NEWHP2021/smencils_homepageimage.jpg" alt="smencils fundraising" style="margin: auto; max-width: 100%; height: auto; padding-bottom: 15px" class="responsive-img">
                 <br /><span style="font-size:18px; font-weight:bold">Scented Pens and Pencils</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-4 " style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
-            <a href="/products/beef-jerky" style="text-decoration:none;color:black;" title="beef jerky">
+            <a href="/beef-jerky-fundraiser" style="text-decoration:none;color:black;" title="beef jerky">
                 <img src="/Content/external/newhp/NEWHP2021/jacklinks_homepageimage.jpg" alt="beef jerky fundraising" style="margin: auto; max-width: 100%; height: auto; padding-bottom: 15px" class="responsive-img">
                 <br /><span style="font-size:18px; font-weight:bold">Jack Link's Beef Jerky</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
     </div>
@@ -211,14 +251,14 @@
             <a href="/products/smencils" style="text-decoration:none;color:black;" title="smencils">
                 <img src="/Content/external/newhp/NEWHP2021/smencils_homepageimage.jpg" alt="smencils fundraising" style="margin: auto;width:100%; padding-bottom:15px" class="responsive-img">
                 <br /><span style="font-size:17px; font-weight:bold">Scented Pens and Pencils</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
         <div class="col-sm-6 col-xs-6" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
-            <a href="/products/beef-jerky" style="text-decoration:none;color:black;" title="beef jerky">
+            <a href="/beef-jerky-fundraiser" style="text-decoration:none;color:black;" title="beef jerky">
                 <img src="/Content/external/newhp/NEWHP2021/jacklinks_homepageimage.jpg" alt="beef jerky fundraising" style="margin: auto;width:100%; padding-bottom:15px" class="responsive-img">
                 <br /><span style="font-size:17px; font-weight:bold">Jack Link's Beef Jerky</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
 
@@ -228,14 +268,14 @@
             <a href="/products/cookie-dough" style="text-decoration:none;color:black;" title="cookie dough">
                 <img src="/Content/external/newhp/NEWHP2021/cookiedough_homepageimage.jpg" alt="cookie dough fundraising" style="margin: auto;width:100%; padding-bottom:15px" class="responsive-img"><br />
                 <span style="font-size:17px; font-weight:bold">Cookie Dough</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
         <div class="col-sm-6 col-xs-6" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center;">
-            <a href="/products/lollipops" style="text-decoration:none;color:black;" title="lollipop">
+            <a href="/lollipop-fundraiser" style="text-decoration:none;color:black;" title="lollipop">
                 <img src="/Content/external/newhp/NEWHP2021/lollipops_homepageimage.jpg" alt="lollipop fundraising" style="margin: auto;width:100%; padding-bottom:15px" class="responsive-img">
                 <br /><span style="font-size:17px; font-weight:bold">Lollipops</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
 
@@ -252,7 +292,7 @@
             <a href="/products/pretzel-rods/all-pretzel-rods/Sweet-and-Salty-Pretzel-Rods" style="text-decoration:none;color:black;" title="pretzel rods">
                 <img src="/Content/external/newhp/NEWHP2021/pretzelrods_homepageimage.jpg" alt="pretzel rods fundraising" style="margin: auto;width:100%; padding-bottom:15px" class="responsive-img">
                 <br /><span style="font-size:17px; font-weight:bold">Sweet & Salty Pretzel Rods</span><br />
-                <span style="font-size:16px;color:#4b4b4b">Up to 40% Profit</span>
+                <span style="font-size:16px;color:#4b4b4b">Up to 50% Profit</span>
             </a>
         </div>
 
@@ -262,7 +302,7 @@
     <!-- VIEW ALL  -->
     <div class="row">
         <div class="col-md-12" style="margin-top: 75px; text-align: center;">
-            <a href="/products" style="text-decoration:none;font-size:20px;color:black;">VIEW ALL FUNDRAISING PRODUCTS</a>
+            <a href="/all-fundraising-products" style="text-decoration:none;font-size:20px;color:black;">VIEW ALL FUNDRAISING PRODUCTS</a>
             <hr style="height: 2px;border-width: 0;color: black;background-color:black;width:20%" />
         </div>
     </div>
@@ -271,8 +311,8 @@
     <div class="row" style="margin-top:35px">
         <div class="col-md-12">
             <a ng-href="" data-toggle="modal" data-target="#kit-request-modal-New" ng-click="googleAnalyticsCtrl.PopUpKitClicked();" onclick="ga('send', 'event', 'New Kit Request 2021', 'Open Popup Top Menu 2021' + location.pathname);" style="text-decoration:none" alt="Request a Free Kit" title="Request a Free Kit">
-                <img src="/Content/external/newhp/NEWHP2021/Guide_banner.jpg" alt="Guide" class="hidden-xs"  style="margin: auto;max-width:100%; height:auto;display: block;">
-                <img src="/Content/external/newhp/NEWHP2021/Guide_banner_mobile.jpg" alt="Guide" class="visible-xs"  style="margin: auto;max-width:100%; height:auto;display: block;">
+                <img src="/Content/external/newhp/NEWHP2021/Guide_banner.jpg" alt="Guide" class="hidden-xs" style="margin: auto;max-width:100%; height:auto;display: block;">
+                <img src="/Content/external/newhp/NEWHP2021/Guide_banner_mobile.jpg" alt="Guide" class="visible-xs" style="margin: auto;max-width:100%; height:auto;display: block;">
             </a>
         </div>
     </div>
@@ -288,20 +328,19 @@
     </div>
 
 
-
     <div class="row" style="text-align: center;">
         <div class='col-md-12'>
             <div class="carousel slide media-carousel" id="media">
-                <ol class="carousel-indicators visible-xs visible-sm">
-                    <li data-target="#media" data-slide-to="0" class="active"></li>
-                    <li data-target="#media" data-slide-to="1"></li>
-                </ol>
+                @*<ol class="carousel-indicators visible-xs visible-sm">
+                        <li data-target="#media" data-slide-to="0" class="active"></li>
+                        <li data-target="#media" data-slide-to="1"></li>
+                    </ol>*@
                 <div class="carousel-inner">
                     <div class="item  active">
                         <div class="row" style="text-align: center;">
                             <div class="col-md-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ text-align: center; margin-bottom:20px">
-                                <a class="thumbnail" href="/ideas/fundraising-idea#atoz" style="text-decoration:none;color:black">
-                                    <img alt="A TO Z FUNDRAISING IDEAS" src="~/Content/external/NewHP/NEWHP2021/atoz_thumbnail.jpg" style="margin-bottom:15px">
+                                <a href="/ideas/fundraising-idea#atoz" style="text-decoration:none;color:black">
+                                    <img alt="A TO Z FUNDRAISING IDEAS" src="~/Content/external/NewHP/NEWHP2021/atoz_thumbnail.jpg" style="margin-bottom:15px;margin: auto;max-width:100%; height:auto;display: block;" class="responsive-img">
                                     <div style="text-align:left">
                                         <span style="font-size:18px; font-weight:bold">A TO Z FUNDRAISING IDEAS</span><br /><br />
                                         <span style="font-size:15px">Do some good for your community and assemble a team to clean up a local park, forest, or river. You'll be doing a great service to the neighborhood, and people will appreciate the hard work you're doing.</span>
@@ -310,7 +349,7 @@
 
                             </div>
                             <div class="col-md-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ text-align: center; margin-bottom:20px">
-                                <a class="thumbnail" href="/ideas/fundraising-idea#105ideas" style="text-decoration:none;color:black">
+                                <a href="/ideas/fundraising-idea#105ideas" style="text-decoration:none;color:black">
                                     <img alt="105 FUNDRAISING IDEAS" src="~/Content/external/NewHP/NEWHP2021/105ideas_thumbnail.jpg" style="margin-bottom:15px">
                                     <div style="text-align:left;">
                                         <span style="font-size:18px; font-weight:bold">105 FUNDRAISING IDEAS</span><br /><br />
@@ -324,71 +363,96 @@
 
 
                     @*<div class="item">
-            <div class="row" style="text-align: center;">
-                <div class="col-md-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center; margin-bottom:20px">
-                    <a class="thumbnail" href="blog/post/surprising-stunning-solutions" style="text-decoration:none;color:black">
-                        <img alt="stunning solution" src="~/Content/external/NewHP/NEWHP2021//blog_image_01.jpg" style="margin-bottom:15px">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center; margin-bottom:20px">
+                                    <a class="thumbnail" href="blog/post/surprising-stunning-solutions" style="text-decoration:none;color:black">
+                                        <img alt="stunning solution" src="~/Content/external/NewHP/NEWHP2021//blog_image_01.jpg" style="margin-bottom:15px">
 
-                        <div style="text-align:left">
-                            <span style="font-size:18px; font-weight:bold">SURPRISING AND STUNNING SOLUTION!</span><br /><br />
-                            <span style="font-size:15px">In this crazy Covid-19 world are you surviving or thriving? Are you and your organization barely hanging on or are you innovating solutions to absolutely thrive? Do not be paralyzed by fear for this is a time to change.</span>
-                        </div>
-                    </a>
+                                        <div style="text-align:left">
+                                            <span style="font-size:18px; font-weight:bold">SURPRISING AND STUNNING SOLUTION!</span><br /><br />
+                                            <span style="font-size:15px">In this crazy Covid-19 world are you surviving or thriving? Are you and your organization barely hanging on or are you innovating solutions to absolutely thrive? Do not be paralyzed by fear for this is a time to change.</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center; margin-bottom:20px">
+                                    <a class="thumbnail" href="/blog/post/Money-saver-fundraising-ideas" style="text-decoration:none;color:black">
+                                        <img alt="easy money save" src="~/Content/external/NewHP/NEWHP2021//blog_image_02.jpg" style="margin-bottom:15px">
+
+                                    <div style="text-align:left;">
+                                        <span style="font-size:18px; font-weight:bold">EASY MONEY-SAVER FUNDRAISING IDEAS</span><br /><br />
+                                        <span style="font-size:15px">We know everyone loves an opportunity to save money. Thus, we have a complete catalog of money-saving fundraisers that your supporters will cherish. Money-saver fundraisers are an easy sell!</span>
+
+                                    </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>*@
                 </div>
-                <div class="col-md-4" style="display: inline-block; float: none; /* reset the text-align */ text-align: left; /* inline-block space fix */ margin-right: -4px; text-align: center; margin-bottom:20px">
-                    <a class="thumbnail" href="/blog/post/Money-saver-fundraising-ideas" style="text-decoration:none;color:black">
-                        <img alt="easy money save" src="~/Content/external/NewHP/NEWHP2021//blog_image_02.jpg" style="margin-bottom:15px">
-
-                    <div style="text-align:left;">
-                        <span style="font-size:18px; font-weight:bold">EASY MONEY-SAVER FUNDRAISING IDEAS</span><br /><br />
-                        <span style="font-size:15px">We know everyone loves an opportunity to save money. Thus, we have a complete catalog of money-saving fundraisers that your supporters will cherish. Money-saver fundraisers are an easy sell!</span>
-
-                    </div>
-                    </a>
-                </div>
+                @*<div class="hidden-xs hidden-sm">
+                        <a data-slide="prev" href="#media" class="left carousel-control"><i class="fas fa-chevron-left" style="color:#a2a2a2; font-size:25px;margin-top:5px"></i></a>
+                        <a data-slide="next" href="#media" class="right carousel-control"><i class="fas fa-chevron-right" style="color:#a2a2a2; font-size:25px;margin-top:5px"></i></a>
+                    </div>*@
 
             </div>
-        </div>*@
-                </div>
-                <div class="hidden-xs hidden-sm">
-                    <a data-slide="prev" href="#media" class="left carousel-control"><i class="fas fa-chevron-left" style="color:#a2a2a2; font-size:25px;margin-top:5px"></i></a>
-                    <a data-slide="next" href="#media" class="right carousel-control"><i class="fas fa-chevron-right" style="color:#a2a2a2; font-size:25px;margin-top:5px"></i></a>
-                </div>
+        </div>
+    </div>
 
-            </div>
+    <!-- TOP Products Logos mobile-->
+    <div class="row visible-xs visible-sm visible-md" style="margin-top: 35px;">
+        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
+            <img src="/Content/external/newhp/NEWHP2021/jacklinks_logo.jpg" alt="beef jerky fundraising" style="margin: auto; " class="responsive-img">
+            <img src="/Content/external/newhp/NEWHP2021/vanwyk_logo.jpg" alt="van wyk fundraising" style="margin: auto;" class="responsive-img">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
+            <img src="/Content/external/newhp/NEWHP2021/nestle_logo.jpg" alt="nestle fundraising" style="margin: auto;" class="responsive-img">
+            <img src="/Content/external/newhp/NEWHP2021/smencil_logo.jpg" alt="smencils fundraising" style="margin: auto;" class="responsive-img">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
+            <img src="/Content/external/newhp/NEWHP2021/otis.jpg" alt="otis fundraising" style="margin: auto;" class="responsive-img">
+            <img src="/Content/external/newhp/NEWHP2021/mrsfields_logo.jpg" alt="mrsfields_logo fundraising" style="margin: auto;" class="responsive-img">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
+            <img src="/Content/external/newhp/NEWHP2021/reese.jpg" alt="reese fundraising" style="margin: auto;" class="responsive-img">
+            <img src="/Content/external/newhp/NEWHP2021/auntiannes.jpg" alt="auntiannes fundraising" style="margin: auto;" class="responsive-img">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 25px; text-align: center;">
+            <img src="/Content/external/newhp/NEWHP2021/zapapizza.jpg" alt="zapapizza fundraising" style="margin: auto;" class="responsive-img">
+            <img src="/Content/external/newhp/NEWHP2021/cinnabon.jpg" alt="cinnabon fundraising" style="margin: 0 auto; display: block;">
+
         </div>
     </div>
 
 
 
 
-
-
-
-
 </div>
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#media').carousel({
-            pause: true,
-            interval: false,
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#media').carousel({
+                pause: true,
+                interval: false,
+            });
         });
-    });
-</script>
+    </script>*@
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.homepage-mobile-banner').slick({
-            dots: true,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplaySpeed: 3000,
-            autoplay: true,
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('.homepage-mobile-banner').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplaySpeed: 3000,
+                autoplay: true,
+            });
         });
-    });
-</script>
+    </script>*@
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

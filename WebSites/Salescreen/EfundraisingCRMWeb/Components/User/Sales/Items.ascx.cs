@@ -981,13 +981,13 @@ namespace EFundraisingCRMWeb.Components.User.Sales
                     {
                        DiscountTextBox.Text = Convert.ToString(a.AdjustmentAmount);
                        Discount = Convert.ToDecimal(a.AdjustmentAmount);
-                       DiscountReasonId = a.ChargeID;
+                       DiscountReasonId = a.ReasonID;
                     }
                     if (a.AdjustmentNo == 2)
                     {
                         SurchargeTextBox.Text = Convert.ToString(a.AdjustmentAmount);
                         Surcharge = Convert.ToDecimal(a.AdjustmentAmount);
-                        SurchargeReasonId = a.ChargeID;
+                        SurchargeReasonId = a.ReasonID;
                     }
 
 

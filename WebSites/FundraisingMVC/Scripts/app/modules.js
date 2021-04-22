@@ -187,7 +187,7 @@
    ]);
    app.constant("MasksConstants", {
       Phone: "(999) 999 9999",
-      CreditCardNumber: "9999 9999 9999 999?9",
+      CreditCardNumber: "9999 9999 9999 99?9?9",
        CreditCardCVV: "999",
        CreditCardCVVAmex: "9999",
       CreditCardExpirationDate: "9999",

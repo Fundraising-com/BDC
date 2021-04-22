@@ -1,0 +1,1663 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.Cloud.Diagnostics.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Google.Cloud.Diagnostics.Common.BufferType">
+            <summary>
+            Types of buffers.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferType.None">
+            <summary>No buffer will be used and the base consumer will be returned.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferType.Sized">
+            <summary>A sized buffer will be used to wrap the base consumer.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferType.Timed">
+            <summary>A timed buffer will be used to wrap the base consumer.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.BufferOptions">
+            <summary>
+            Options that define a buffer.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferOptions.s_noBufferInstance">
+            <summary>
+            Singleton for a <see cref= "T:Google.Cloud.Diagnostics.Common.BufferOptions" /> instance that describes a 
+            <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.None"/> type of buffer.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferOptions.DefaultBufferSize">
+            <summary>The default buffer size in bytes. 2^16 = 65536.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferOptions.DefaultWaitTime">
+            <summary>The default amount of time to wait before a flush is automatically made.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.BufferOptions.BufferType">
+            <summary>The type of buffer to be used.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.BufferOptions.BufferSizeBytes">
+            <summary>The size of the buffer in bytes, only used for <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.Sized"/></summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.BufferOptions.BufferWaitTime">
+            <summary>The time to wait before the buffer is flushed, only used for <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.Timed"/></summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.BufferOptions.NoBuffer">
+            <summary>
+            Create <see cref="T:Google.Cloud.Diagnostics.Common.BufferOptions"/> for <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.None"/>
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.BufferOptions.SizedBuffer(System.Int32)">
+            <summary>
+            Create <see cref="T:Google.Cloud.Diagnostics.Common.BufferOptions"/> for <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.Sized"/>
+            </summary>
+            <param name="bufferSizeBytes">Optional, The buffer size in bytes.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.BufferOptions.TimedBuffer(System.Nullable{System.TimeSpan})">
+            <summary>
+            Create <see cref="T:Google.Cloud.Diagnostics.Common.BufferOptions"/> for <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.Timed"/>
+            </summary>
+            <param name="bufferWaitTime">Optional, The minimum amount of time between flushes.</param>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.CommonUtils.AgentName">
+            <summary>The name of the this agent.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.CommonUtils.CompletedTask">
+            <summary>A completed <see cref="T:System.Threading.Tasks.Task"/>.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.CommonUtils.AgentNameAndVersion">
+            <summary>
+            The agent name <see cref="F:Google.Cloud.Diagnostics.Common.CommonUtils.AgentName"/> and version of the agent in the
+            format "[agent-name] [agent-version]".
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.CommonUtils.GetVersion(System.Type)">
+            <summary>Gets the version of the current library using reflection.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ConsumerFactory`1.GetConsumer(Google.Cloud.Diagnostics.Common.IConsumer{`0},System.Func{`0,System.Int32},Google.Cloud.Diagnostics.Common.BufferOptions,Google.Cloud.Diagnostics.Common.RetryOptions)">
+            <summary>
+            Gets a <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/> that wraps the passed in consumer based on the buffer options.
+            </summary>
+            <param name="consumer">The consumer to buffer into.</param>
+            <param name="sizer">A function to obtain the size of an item in bytes.</param>
+            <param name="bufferOptions">Buffer options for the buffered consumer.</param>
+            <param name="retryOptions">Retry options for all consumer types.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ContextExceptionLogger">
+            <summary>
+            Functions to create <see cref="T:Google.Cloud.Diagnostics.Common.IContextExceptionLogger"/>s.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ContextExceptionLogger.Create(System.String,System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an <see cref="T:Google.Cloud.Diagnostics.Common.IContextExceptionLogger"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID.  If unspecified and running
+            on GAE or GCE the project ID will be detected from the platform.</param>
+            <param name="serviceName"> An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">The error reporting options. Can be null, if null default options will be used.</param>
+            <returns>An <see cref="T:Google.Cloud.Diagnostics.Common.IContextExceptionLogger"/> for the given options.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger">
+            <summary>
+             Google Cloud Error Reporting Logger.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.Create(System.String,System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger"/>
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. May be null.</param>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.Google#Cloud#Diagnostics#Common#IContextExceptionLogger#LogAsync(System.Exception,Google.Cloud.Diagnostics.Common.IContextWrapper,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.Google#Cloud#Diagnostics#Common#IContextExceptionLogger#Log(System.Exception,Google.Cloud.Diagnostics.Common.IContextWrapper)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.CreateHttpRequestContext(Google.Cloud.Diagnostics.Common.IContextWrapper)">
+            <summary>
+            Gets information about the HTTP request and response when the exception occurred 
+            and populates a <see cref="T:Google.Protobuf.WellKnownTypes.Struct"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.CreateSourceLocation(System.Exception)">
+            <summary>
+            Gets information about the source location where the exception occurred 
+            and populates a <see cref="T:Google.Protobuf.WellKnownTypes.Struct"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingContextExceptionLogger.CreateReportRequest(System.Exception,Google.Cloud.Diagnostics.Common.IContextWrapper)">
+            <summary>
+            Gets information about the exception that occurred and populates
+            a <see cref="T:Google.Cloud.Logging.V2.LogEntry"/>.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ErrorReportingOptions">
+            <summary>
+            Optional configuration to be used when initializing error reporting.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.ErrorReportingOptions.EventTarget">
+            <summary>
+            Where the error events should be sent.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.ErrorReportingOptions.BufferOptions">
+            <summary>The buffer options for the error reporter.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.ErrorReportingOptions.RetryOptions">
+            <summary>The retry options for the error reporter.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingOptions.Create(Google.Cloud.Diagnostics.Common.EventTarget,Google.Cloud.Diagnostics.Common.BufferOptions,Google.Cloud.Diagnostics.Common.RetryOptions)">
+            <summary>
+            Creates an <see cref="T:Google.Cloud.Diagnostics.Common.ErrorReportingOptions"/>.
+            </summary>
+            <param name="eventTarget">Where the error events should be sent. Must not be null.</param>
+            <param name="bufferOptions">The buffer options for the error reporter. Defaults to no buffer.</param>
+            <param name="retryOptions">The retry options for the error reporter. Defaults to no retry.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingOptions.Create(System.String,Google.Cloud.Diagnostics.Common.BufferOptions,Google.Cloud.Diagnostics.Common.RetryOptions)">
+            <summary>
+            Creates an <see cref="T:Google.Cloud.Diagnostics.Common.ErrorReportingOptions"/> that will send error events to the
+            Stackdriver Logging API.
+            </summary>
+            <param name="projectId">Optional if running on Google App Engine or Google Compute Engine.
+                The Google Cloud Platform project ID. If running on GAE or GCE the project ID will be
+                detected from the platform.</param>
+            <param name="bufferOptions">The buffer options for the error reporter. Defaults to no buffer.</param>
+            <param name="retryOptions">The retry options for the error reporter. Defaults to no retry.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ErrorReportingOptions.CreateConsumer">
+            <summary>
+            Gets a <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/>.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.EventTargetKind">
+            <summary>
+            The location error events will be sent to.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.EventTargetKind.Logging">
+            <summary>Stackdriver Error Logging API.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.EventTarget">
+            <summary>
+            Represents the location error events will be sent.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.EventTarget.LogNameDefault">
+            <summary>The default log name, this is the log that error events will be written to.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.EventTarget.Kind">
+            <summary>The location to send error events to.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.EventTarget.LoggingClient">
+            <summary>The logging client.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.EventTarget.LogTarget">
+            <summary>Where to log to, such as project or organization.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.EventTarget.LogName">
+            <summary>The name of the log.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.EventTarget.ProjectId">
+            <summary>The Google Cloud Platform project Id.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.EventTarget.MonitoredResource">
+            <summary>The resource being monitored.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.EventTarget.ForLogging(System.String,System.String,Google.Cloud.Logging.V2.LoggingServiceV2Client,Google.Api.MonitoredResource)">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.EventTarget"/> instance that will report to the Stackdriver Logging API.
+            The events are then automatically propagated to the Stackdriver Error Logging API from the 
+            Stackdriver Logging API.
+            </summary>
+            <remarks>
+            For more information see "Formatting Log Error Messages"
+            (https://cloud.google.com/error-reporting/docs/formatting-error-messages).
+            </remarks>
+            <param name="projectId">Optional if running on Google App Engine or Google Compute Engine.
+                The Google Cloud Platform project ID. If running on GAE or GCE the project ID will be
+                detected from the platform.</param>
+            <param name="logName">The log name.  Must not be null.</param>
+            <param name="loggingClient">The logging client.</param>
+            <param name="monitoredResource">Optional, the monitored resource.  The monitored resource will
+                be automatically detected if it is not set and will default to the global resource if the detection fails.
+                See: https://cloud.google.com/logging/docs/api/v2/resource-list </param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.EventTarget.ForLogging(Google.Cloud.Diagnostics.Common.LogTarget,System.String,Google.Cloud.Logging.V2.LoggingServiceV2Client,Google.Api.MonitoredResource)">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.EventTarget"/> instance that will report to the Stackdriver Logging API.
+            The events are then automatically propagated to the Stackdriver Error Logging API from the 
+            Stackdriver Logging API.
+            </summary>
+            <remarks>
+            For more information see "Formatting Log Error Messages"
+            (https://cloud.google.com/error-reporting/docs/formatting-error-messages).
+            </remarks>
+            <param name="logTarget">Where to log to, such as a project or organization. Must not be null.</param>
+            <param name="logName">The log name.  Must not be null.</param>
+            <param name="loggingClient">The logging client.</param>
+            <param name="monitoredResource">Optional, the monitored resource.  The monitored resource will
+                be automatically detected if it is not set and will default to the global resource if the detection fails.
+                See: https://cloud.google.com/logging/docs/api/v2/resource-list </param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IContextExceptionLogger">
+            <summary>
+            A generic exception logger for <see cref="T:Google.Cloud.Diagnostics.Common.IContextWrapper"/>s.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IContextExceptionLogger.Log(System.Exception,Google.Cloud.Diagnostics.Common.IContextWrapper)">
+            <summary>
+            Logs an exception that occurred.
+            </summary>
+            <param name="exception">The exception to log. Must not be null.</param>
+            <param name="context">The current context. Must not be null.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IContextExceptionLogger.LogAsync(System.Exception,Google.Cloud.Diagnostics.Common.IContextWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously logs an exception that occurred.
+            </summary>
+            <param name="exception">The exception to log. Must not be null.</param>
+            <param name="context">The current context. Must not be null.</param>
+            <param name="cancellationToken">Optional, The token to monitor for cancellation requests.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IContextWrapper">
+            <summary>
+            Wraps an HTTP context.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IContextWrapper.GetHttpMethod">
+            <summary>
+            Gets the HTTP method.  GET, POST, etc. Can be null.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IContextWrapper.GetUri">
+            <summary>
+            Gets the HTTP request Uri. Can be null.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IContextWrapper.GetUserAgent">
+            <summary>
+            Gets the user agent. Can be null.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1">
+            <summary>
+            Base class for the <see cref="T:Google.Cloud.Diagnostics.Common.IFlushableConsumer`1"/> that uses a <see cref="T:System.Threading.SemaphoreSlim"/> to
+            protect the flush and receive calls.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1._semaphore">
+            <summary>A semaphore to protect the buffer.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1._consumer">
+            <summary>The consumer to flush to.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.ReceiveWithSemaphoreHeld(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Accepts an enumerable of items while the semaphore is held.
+            </summary>
+            <param name="items">The items to receive. Must not be null.</param>
+            <returns><code>true</code> if <see cref="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.Flush"/> should be triggered after receiving.
+            <code>false</code> otherwise.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.GetAndResetItemsWithSemaphoreHeld">
+            <summary>
+            Shallow copies the list of items currently in the consumer and resets it.
+            </summary>
+            <returns>The shallow copy of items.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.Receive(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.ReceiveAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.Flush">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.FlushAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.Flush(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Flushes an enumerable of items.
+            </summary>
+            <param name="items">The items to flush.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.FlushableConsumerBase`1.FlushAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Flushes an enumerable of items asynchronously.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <param name="items">The items to flush.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IConsumer`1">
+            <summary>
+            A consumer.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IConsumer`1.Receive(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Accepts an enumerable of items.
+            </summary>
+            <param name="items">The items to receive. Must not be null.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IConsumer`1.ReceiveAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Accepts an enumerable of items asynchronously.
+            </summary>
+            <param name="items">The items to receive. Must not be null.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IFlushableConsumer`1">
+            <summary>
+            A flushable consumer.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IFlushableConsumer`1.Flush">
+            <summary>
+            Flushes the consumer.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IFlushableConsumer`1.FlushAsync(System.Threading.CancellationToken)">
+            <summary>
+            Flushes the consumer asynchronously.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ISequentialThreadingTimer">
+            <summary>
+            A timer that will automatically call a callback after the previous call has finished and an
+            additional time interval has passed.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ISequentialThreadingTimer.Initialize(System.Action,System.TimeSpan)">
+            <summary>
+            Initialize the timer.
+            </summary>
+            <param name="callback">The callback to be called after every wait time interval.</param>
+            <param name="waitTime">The amount of time between calls to the callback.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IThreadingTimer">
+            <summary>
+            A timer that will automatically call a callback after every wait time interval.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IThreadingTimer.Initialize(System.Threading.TimerCallback,System.TimeSpan)">
+            <summary>
+            Initialize the timer.
+            </summary>
+            <param name="callback">The callback to be called after every wait time interval.</param>
+            <param name="waitTime">The amount of time between calls to the callback.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.GrpcLogConsumer">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/> that will send received logs to the Stackdriver Logging API.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcLogConsumer.#ctor(Google.Cloud.Logging.V2.LoggingServiceV2Client)">
+            <param name="client">The logging client that will push logs to the Stackdriver Logging API.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcLogConsumer.Receive(System.Collections.Generic.IEnumerable{Google.Cloud.Logging.V2.LogEntry})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcLogConsumer.ReceiveAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Logging.V2.LogEntry},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcLogConsumer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.LogConsumer">
+            <summary>
+            Functions to create <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/>s.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.LogConsumer.Create(Google.Cloud.Logging.V2.LoggingServiceV2Client,Google.Cloud.Diagnostics.Common.BufferOptions,Google.Cloud.Diagnostics.Common.RetryOptions)">
+            <summary>
+            Creates an <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/> based on the client and options.
+            </summary>
+            <param name="client">A client to send log entries with. Must not be null.</param>
+            <param name="bufferOptions">The buffering options. Must not be null.</param>
+            <param name="retryOptions">The retry options. Must not be null.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.LogTargetKind">
+            <summary>
+            The location log entries will be logged to.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.LogTargetKind.Project">
+            <summary>A Google Cloud Platform project.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.LogTargetKind.Organization">
+            <summary>A Google Cloud Platform organization.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.LogTarget">
+            <summary>
+            Represents the location log entries will be sent, such as a project or organization.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.LogTarget.Kind">
+            <summary>The location to log entries to.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.LogTarget.ProjectId">
+            <summary>The Google Cloud Platform project Id.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.LogTarget.OrganizationId">
+            <summary>The Google Cloud Platform organization Id.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.LogTarget.ForProject(System.String)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.LogTarget"/> instance for sending log entries to a <see cref="F:Google.Cloud.Diagnostics.Common.LogTargetKind.Project"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.LogTarget.ForOrganization(System.String)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.LogTarget"/> instance for sending log entries to an <see cref="F:Google.Cloud.Diagnostics.Common.LogTargetKind.Organization"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.LogTarget.GetFullLogName(System.String)">
+            <summary>
+            Gets the full log name.
+            See: https://cloud.google.com/logging/docs/api/reference/rest/v2/LogEntry.
+            </summary>
+            <param name="name">The name of the log which will be used with the project or organization
+                to create a full log name.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.MessageSizer`1.GetSize(`0)">
+            <summary>Gets the size of a <c>T</c> in bytes.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.Project">
+            <summary>
+            Operations for Cloud Console Projects.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.Project._detectedMonitoredResource">
+            <summary>
+            Stores a cached instance of <see cref="T:Google.Api.MonitoredResource"/> detected from <see cref="M:Google.Api.Gax.Grpc.MonitoredResourceBuilder.FromPlatform"/>
+            to be used in subsequent calls to <see cref="M:Google.Cloud.Diagnostics.Common.Project.GetAndCheckProjectId(System.String,Google.Api.MonitoredResource)"/>,
+            <see cref="M:Google.Cloud.Diagnostics.Common.Project.GetAndCheckServiceName(System.String,Google.Api.MonitoredResource)"/> and <see cref="M:Google.Cloud.Diagnostics.Common.Project.GetAndCheckServiceVersion(System.String,Google.Api.MonitoredResource)"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Project.GetAndCheckProjectId(System.String,Google.Api.MonitoredResource)">
+            <summary>
+            Determines the correct project id from a string project id and a <see cref="T:Google.Api.MonitoredResource"/>.
+            If the specified project id is not null, it is returned. Otherwise, if the project id of
+            the MonitoredResource is not null, it is returned. It both are null,
+            an <see cref="T:System.InvalidOperationException"/> is thrown.
+            </summary>
+            <param name="projectId">The Google Cloud project ID.  Can be null.</param>
+            <param name="monitoredResource">Optional, The monitored resource. If unset the monitored resource will
+                be auto detected.</param>
+            <returns>The Google Cloud project ID.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Project.GetProjectId(System.String,Google.Api.MonitoredResource)">
+            <summary>
+            Determines the correct project ID from a string <paramref name="projectId"/> and a <see cref="T:Google.Api.MonitoredResource"/>.
+            If the specified project ID is not null, it is returned. Otherwise, if the project ID of
+            the MonitoredResource is not null, it is returned. It both are null, null is returned.
+            </summary>
+            <param name="projectId">The project ID. Can be null.</param>
+            <param name="monitoredResource">Optional, The monitored resource. If unset the monitored resource will
+                be auto detected.</param>
+            <returns>The Google Cloud project ID.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Project.GetAndCheckServiceName(System.String,Google.Api.MonitoredResource)">
+            <summary>
+            Determines the correct service name from a string <paramref name="serviceName"/> and a <see cref="T:Google.Api.MonitoredResource"/>.
+            If the specified service name is not null, it is returned. Otherwise, if the service name of
+            the MonitoredResource is not null, it is returned. It both are null,
+            an <see cref="T:System.InvalidOperationException"/> is thrown.
+            </summary>
+            <param name="serviceName">The service name. Can be null.</param>
+            <param name="monitoredResource">Optional, The monitored resource. If unset the monitored resource will
+                be auto detected.</param>
+            <returns>The service name that was passed in or detected.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Project.GetServiceName(System.String,Google.Api.MonitoredResource)">
+            <summary>
+            Determines the correct service name from a string <paramref name="serviceName"/> and a <see cref="T:Google.Api.MonitoredResource"/>.
+            If the specified service name is not null, it is returned. Otherwise, if the service name of
+            the MonitoredResource is not null, it is returned. It both are null, null is returned.
+            </summary>
+            <param name="serviceName">The service name. Can be null.</param>
+            <param name="monitoredResource">Optional, The monitored resource. If unset the monitored resource will
+                be auto detected.</param>
+            <returns>The service name that was passed in or detected.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Project.GetAndCheckServiceVersion(System.String,Google.Api.MonitoredResource)">
+            <summary>
+            Determines the correct service version from a string <paramref name="serviceVersion"/> and a <see cref="T:Google.Api.MonitoredResource"/>.
+            If the specified service version is not null, it is returned. Otherwise, if the service version of
+            the MonitoredResource provided or detected is not null, it is returned. It both are null,
+            an <see cref="T:System.InvalidOperationException"/> is thrown.
+            </summary>
+            <param name="serviceVersion">The service version. Can be null.</param>
+            <param name="monitoredResource">Optional, The monitored resource. If unset the monitored resource will
+                be auto detected.</param>
+            <returns>The Google App Engine service version.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Project.GetServiceVersion(System.String,Google.Api.MonitoredResource)">
+            <summary>
+            Determines the correct service version from a string <paramref name="serviceVersion"/> and a <see cref="T:Google.Api.MonitoredResource"/>.
+            If the specified service version is not null, it is returned. Otherwise, if the service version of
+            the MonitoredResource provided or detected is not null, it is returned. It both are null, null is resturned.
+            </summary>
+            <param name="serviceVersion">The service version. Can be null.</param>
+            <param name="monitoredResource">Optional, The monitored resource. If unset the monitored resource will
+                be auto detected.</param>
+            <returns>The service version that was passed in or detected.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.RetryType">
+            <summary>The type of retry to make.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RetryType.None">
+            <summary>Requests will not be retried.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RetryType.Retry">
+            <summary>Requests will be retried.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.BufferOverflow">
+            <summary>How to handle a full buffer holding items from calls to be retried.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferOverflow.ThrowException">
+            <summary>Throws an exception when the buffer is full.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.BufferOverflow.IgnoreNewEntries">
+            <summary>Ignores new entries.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ExceptionHandling">
+            <summary>How to handle exceptions from calls.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.ExceptionHandling.Propagate">
+            <summary>
+            Let the errors propagate up after they have been retried if they continually fail.
+            This may kill the running process, if an exception occurs when the retry limit has been reached.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.ExceptionHandling.Ignore">
+            <summary>Ignores the errors.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.RetryOptions">
+            <summary>
+            Options that define retry logic for requests that failed.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RetryOptions.DefaultBufferSize">
+            <summary>The default buffer size in bytes. 2^18 = 262144.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RetryOptions.DefaultRetryAttempts">
+            <summary>The default number of retry attempts.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RetryOptions.DefaultRetryInterval">
+            <summary>The default wait time between retries.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.RetryOptions.RetryType">
+            <summary>The type of retry to make.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.RetryOptions.ExceptionHandling">
+            <summary>How exceptions are handled.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.RetryOptions.BufferOverflow">
+            <summary>How to handle a full buffer, only used for <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.Retry"/>.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.RetryOptions.BufferSizeBytes">
+            <summary>The size of the buffer in bytes, only used for <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.Retry"/>.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.RetryOptions.RetryAttempts">
+            <summary>The number of attempts to retry sending information, only used for <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.Retry"/>.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.RetryOptions.RetryInterval">
+            <summary>The amount of time to wait between retries, only used for <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.Retry"/>.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RetryOptions.NoRetry(Google.Cloud.Diagnostics.Common.ExceptionHandling)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.RetryOptions"/> for <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.None"/>.
+            </summary>
+            <param name="exceptionHandling">Optional, how exceptions should be handled.
+                Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.ExceptionHandling.Ignore"/>.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RetryOptions.Retry(Google.Cloud.Diagnostics.Common.ExceptionHandling,Google.Cloud.Diagnostics.Common.BufferOverflow,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.Nullable{System.Int32})">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.RetryOptions"/> for <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.Retry"/>.
+            </summary>
+            <param name="exceptionHandling">Optional, how exceptions should be handled.
+                Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.ExceptionHandling.Ignore"/>.</param>
+            <param name="bufferOverflow">Optional, how a buffer overflow should be handled.
+                Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.BufferOverflow.IgnoreNewEntries"/>.</param>
+            <param name="bufferSizeBytes">Optional, the size of the buffer to be used in bytes.
+                Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.RetryOptions.DefaultBufferSize"/>.</param>
+            <param name="retryInterval">Optional, the time between retries. Default to <see cref="F:Google.Cloud.Diagnostics.Common.RetryOptions.DefaultRetryInterval"/>.</param>
+            <param name="retryAttempts">Optional, the number of retry attempts. Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.RetryOptions.DefaultRetryAttempts"/>.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/> that will allow for the option to retry RPC failures and buffer
+            the data while the retries occur.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._options">
+            <summary>The options dictating how retries will be handled.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._sizer">
+            <summary>A function to obtain the size of an item in bytes.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._timerFactory">
+            <summary>
+            Function to create a <see cref="T:Google.Cloud.Diagnostics.Common.ISequentialThreadingTimer"/> that will start the given
+            action based on retry options.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._timer">
+            <summary>The timer running in the background to retry failed requests.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._mutex">
+            <summary>An mutex to protect the buffer.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._consumer">
+            <summary>The consumer to send items to.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._buffer">
+            <summary>
+            The buffered items. This is not readonly as it is replaced when the buffer is successfully send to
+            the base consumer.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._sizeInBytes">
+            <summary>The size of the buffer.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1._retries">
+            <summary>The number of sequential unsuccessful retries.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1.Receive(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1.ReceiveAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1.HandleException(System.Collections.Generic.IEnumerable{`0},Grpc.Core.RpcException)">
+            <summary>
+            Handles a <see cref="T:Grpc.Core.RpcException"/> that occurred during a <see cref="M:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1.Receive(System.Collections.Generic.IEnumerable{`0})"/> call.
+            </summary>
+            <returns>True if the exception was handled, false otherwise.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RpcRetryConsumer`1.FlushBuffer">
+            <summary>
+            Try to flush the buffer if it has any entries.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SequentialThreadingTimer">
+            <summary>
+            A simple <see cref="T:Google.Cloud.Diagnostics.Common.ISequentialThreadingTimer"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SequentialThreadingTimer.Initialize(System.Action,System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SequentialThreadingTimer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SimpleThreadingTimer">
+            <summary>
+            A simple <see cref="T:Google.Cloud.Diagnostics.Common.IThreadingTimer"/> based on a <see cref="T:System.Threading.Timer"/>.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleThreadingTimer._timer">
+            <summary>The underlying timer.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleThreadingTimer.Initialize(System.Threading.TimerCallback,System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleThreadingTimer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1">
+            <summary>
+            A <see cref="T:Google.Cloud.Diagnostics.Common.IFlushableConsumer`1"/> that will automatically flush when
+            the buffer is full.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1._sizer">
+            <summary>A function to obtain the size of an item in bytes.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1._bufferSize">
+            <summary>The size of the buffer in bytes.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1._items">
+            <summary>
+            The buffered items. This is not readonly as it is replaced when the buffer is flushed.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1._size">
+            <summary>The current size of the items.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1.Create(Google.Cloud.Diagnostics.Common.IConsumer{`0},System.Func{`0,System.Int32},System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1"/> that will flush to the
+            given <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/>. 
+            </summary>
+            <param name="consumer">The consumer to flush to. Must not be null.</param>
+            <param name="bufferSize">The buffer size in bytes.</param>
+            <param name="sizer">A function to obtain the size of an item in bytes.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SizedBufferingConsumer`1.ReceiveWithSemaphoreHeld(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1">
+            <summary>
+            A <see cref="T:Google.Cloud.Diagnostics.Common.IFlushableConsumer`1"/> that will automatically flush the buffer after a 
+            given amount of time.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1._items">
+            <summary>
+            The buffered items. This is not readonly as it is replaced when the buffer is flushed.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1._timer">
+            <summary>The timer to automatically flush the buffer.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1.Create(Google.Cloud.Diagnostics.Common.IConsumer{`0},System.TimeSpan)">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1"/> that will automatically flush the 
+            buffer to the <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/> after the given wait time.
+            </summary>
+            <param name="consumer">The consumer to flush to. Must not be null.</param>
+            <param name="waitTime">The amount of time between automatic flushes.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1.ReceiveWithSemaphoreHeld(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TimedBufferingConsumer`1.GetAndResetItemsWithSemaphoreHeld">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ContextTracerManager">
+            <summary>
+            Manages access to the current <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ContextTracerManager.SetCurrentTracer(Google.Cloud.Diagnostics.Common.IManagedTracer)">
+            <summary>
+            Sets the current <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>.  This is called for each new trace context.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ContextTracerManager.GetCurrentTracer">
+            <summary>
+            Gets the current <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> or a <see cref="T:Google.Cloud.Diagnostics.Common.NullManagedTracer"/> if none exists.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.DelegatingTracer">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> that delegates all calls to another <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>
+            that is retrieved from the given function on each method call.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.StartSpan(System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.RunInSpan(System.Action,System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.RunInSpan``1(System.Func{``0},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.RunInSpanAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.SetStackTrace(System.Diagnostics.StackTrace)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.GetCurrentTraceId">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.DelegatingTracer.GetCurrentSpanId">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.GrpcTraceConsumer">
+            <summary>
+            A <see cref="T:Google.Cloud.Diagnostics.Common.IConsumer`1"/> that will send received traces to the Stackdriver Trace API.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcTraceConsumer.#ctor(Google.Cloud.Trace.V1.TraceServiceClient)">
+            <param name="client">The trace client that will push traces to the Stackdriver Trace API.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcTraceConsumer.Receive(System.Collections.Generic.IEnumerable{Google.Cloud.Trace.V1.Trace})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcTraceConsumer.ReceiveAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Trace.V1.Trace},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.GrpcTraceConsumer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.HttpClientBuilderExtensions">
+            <summary>
+            Extensions methods for <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.HttpClientBuilderExtensions.AddOutgoingGoogleTraceHandler(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder)">
+            <summary>
+            Adds an <see cref="T:Google.Cloud.Diagnostics.Common.UnchainedTraceHeaderPropagatingHandler"/> to the HTTP client being built,
+            which will propagate trace information for outgoing requests, made with this client,
+            when the request being handled by this server is already being traced
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IManagedTracer">
+            <summary>
+            Manages creating spans for a trace as well as adding meta data to them.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.StartSpan(System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Starts a new span using the most recent (if any) unfinished span as the parent.
+            </summary>
+            <param name="name">The name of the span. Must not be null.</param>
+            <param name="options">The span options to override default values.</param>
+            <returns>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.ISpan"/> that will end the current span when disposed.
+            </returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.RunInSpan(System.Action,System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Runs the function in a span and will add a stacktrace from a thrown
+            exception (the exception will be re-thrown) to the span.
+            </summary>
+            <param name="action">The action to run in a span.</param>
+            <param name="name">The name of the span. Must not be null.</param>
+            <param name="options">The span options to override default values.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.RunInSpan``1(System.Func{``0},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Runs the function in a span and will add a stacktrace from a thrown
+            exception (the exception will be re-thrown) to the span.
+            </summary>
+            <param name="func">The function to run in a span.</param>
+            <param name="name">The name of the span. Must not be null.</param>
+            <param name="options">The span options to override default values.</param>
+            <returns>The result from the call to <paramref name="func"/></returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.RunInSpanAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Runs the function asynchronously in a span and will add a stacktrace
+            from a thrown exception (the exception will be re-thrown) to the span.
+            </summary>
+            <param name="func">The function to run in a span.</param>
+            <param name="name">The name of the span. Must not be null.</param>
+            <param name="options">The span options to override default values.</param>
+            <returns>The result from the call to <paramref name="func"/></returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Annotates the current span with the given labels. 
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.SetStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Adds the given StackTrace to the current span.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.GetCurrentTraceId">
+            <summary>
+            Gets the current trace id or null if none exists.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracer.GetCurrentSpanId">
+            <summary>
+            Gets the current span id or null if none exists.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.IManagedTracerFactory">
+            <summary>
+            A factory to generate <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>s from <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/>s.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.IManagedTracerFactory.CreateTracer(Google.Cloud.Diagnostics.Common.TraceHeaderContext)">
+            <summary>
+            Creates an <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>s from a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/>.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.InternalTraceOptions">
+            <summary>
+            Options about a trace, such as if tracing should occur.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.InternalTraceOptions.ShouldTrace">
+            <summary>True if the request should be traced.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.InternalTraceOptions.Create(System.Boolean)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.InternalTraceOptions"/>.
+            </summary>
+            <param name="shouldTrace">True if the tracing should occur.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ISpan">
+            <summary>
+            A trace span.
+            </summary>
+            <remarks>
+            <para>
+            The functions here, aside from <see cref="M:System.IDisposable.Dispose"/>, do not need to be used in most cases. 
+            They need to be used when updating the current span in a disjoint thread. For example:
+            </para>
+            <code>
+            public void DoSomething(IManagedTracer tracer)
+            {
+                var tcs = new TaskCompletionSource&lt;bool&gt;();
+                ISpan span = null;
+                Thread t = new Thread(() => 
+                {
+                    span = tracer.StartSpan(nameof(DoSomething));
+                    tcs.SetResult(true);
+                });
+                Thread t2 = new Thread(() =>
+                {
+                    tcs.Task.Wait();
+                    span.AnnotateSpan(new Dictionary&lt;string, string&gt; { { "new", "label"} });
+                    span.Dispose();
+                });
+                
+                t.Start();
+                t2.Start();
+            }
+            </code>
+            <para>
+            NOTE: While it is possible to end a span in another thread any new spans after this may be in
+            a poor state.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ISpan.Disposed">
+            <summary>
+            True if the span has been disposed and ended.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ISpan.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Annotates the current span with the given labels. 
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ISpan.SetStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Adds the given StackTrace to the current span.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ISpan.SpanId">
+            <summary>
+            Gets span's id.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ITimer">
+            <summary>
+            A simple interface for a timer.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ITimer.Start">
+            <summary>
+            Starts the timer.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ITimer.GetElapsedMilliseconds">
+            <summary>
+            Gets the elapsed milliseconds since the timer has started.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ITraceOptionsFactory">
+            <summary>
+            A factory to generate trace options such as if the current request should be traced.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ITraceOptionsFactory.CreateOptions">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.InternalTraceOptions"/>.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ManagedTracer">
+            <summary>
+            Functions to create <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>s.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ManagedTracer.CreateConsumer(Google.Cloud.Trace.V1.TraceServiceClient,Google.Cloud.Diagnostics.Common.TraceOptions)">
+            <summary>
+            Creates a trace consumer for a <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/> and options.
+            </summary>
+            <param name="client">The trace client. Must not be null.</param>
+            <param name="options">Trace options. Must not be null.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ManagedTracer.CreateTracerFactory(System.String,Google.Cloud.Diagnostics.Common.IConsumer{Google.Cloud.Trace.V1.Trace},Google.Cloud.Diagnostics.Common.TraceOptions)">
+            <summary>
+            Create a factory to generate an <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> from a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null</param>
+            <param name="consumer">The trace consumer.  Must not be null.</param>
+            <param name="options">Trace options. Must not be null.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ManagedTracer.CreateDelegatingTracer(System.Func{Google.Cloud.Diagnostics.Common.IManagedTracer})">
+            <summary>
+            Creates an <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> that delegates all calls to another <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>
+            that is retrieved from the given function on each method call.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.ManagedTracerFactory">
+            <summary>
+            A factory that will generate <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/>s from 
+            <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/>s.  If the <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/> does not provide
+            the needed context to determine the proper <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> then the given
+            <see cref="T:Google.Cloud.Diagnostics.Common.ITraceOptionsFactory"/> will decide.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ManagedTracerFactory.#ctor(System.String,Google.Cloud.Diagnostics.Common.IConsumer{Google.Cloud.Trace.V1.Trace},Google.Cloud.Diagnostics.Common.ITraceOptionsFactory,Google.Cloud.Diagnostics.Common.TraceIdFactory)">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.ManagedTracerFactory"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null.</param>
+            <param name="consumer">A trace consumer for the tracer. Must not be null.</param>
+            <param name="optionsFactory">An options factory to fall back to if the 
+                <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/> does not provide enough context. Must not be null.</param>
+            <param name="traceIdFactory">A trace Id factory. Must not be null.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ManagedTracerFactory.CreateTracer(Google.Cloud.Diagnostics.Common.TraceHeaderContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.ManagedTracerFactory.ShouldTrace(Google.Cloud.Diagnostics.Common.TraceHeaderContext)">
+            <summary>
+            True if the tracing should occur. Decision based on a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/>
+            and an <see cref="T:Google.Cloud.Diagnostics.Common.ITraceOptionsFactory"/>.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.NullManagedTracer">
+            <summary>
+            A managed tracer that does not trace.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span">
+            <summary>
+            A disposable class that does nothing when disposed.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Does nothing.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.Dispose">
+            <summary>
+            Will cause <see cref="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.Disposed"/> to return 'true'.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.SetStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Does nothing.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.SpanId">
+            <summary>
+            Always returns 0.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.Disposed">
+            <summary>
+            Returns true if <see cref="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.Span.Dispose"/> has been called.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.NullManagedTracer.Instance">
+            <summary>
+            Instance of <see cref="T:Google.Cloud.Diagnostics.Common.NullManagedTracer"/>
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.StartSpan(System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Does nothing.
+            </summary>
+            <returns>Returns an <see cref="T:System.IDisposable"/> that does nothing when disposed.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.RunInSpan(System.Action,System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Calls <paramref name="action"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.RunInSpan``1(System.Func{``0},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Calls <paramref name="func"/> and returns the result.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.RunInSpanAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <summary>
+            Calls <paramref name="func"/> asynchronously and returns the result.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Does nothing.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.SetStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Does nothing.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.GetCurrentTraceId">
+            <summary>
+            Always returns null.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.NullManagedTracer.GetCurrentSpanId">
+            <summary>
+            Always returns null.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.RateLimiter">
+            <summary>
+            A simple rate limiter that will allow tracing based on a given QPS.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RateLimiter._instanceMutex">
+            <summary>A mutex to protect the rate limiter instance.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RateLimiter._instance">
+            <summary>The single rate limiter instance.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RateLimiter._fixedDelayMillis">
+            <summary>The amount of time that must be waited before allowing tracing.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RateLimiter._timer">
+            <summary>A timer to manage time between events.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.RateLimiter._lastCallMillis">
+            <summary>The last time tracing was allowed.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RateLimiter.GetInstance(System.Double)">
+            <summary>
+            Gets the instance of the <see cref="T:Google.Cloud.Diagnostics.Common.RateLimiter"/>.  The first request will set the
+            QPS of the rate limiter.  All subsequent request's QPS will not change the QPS of the rate limiter.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RateLimiter.CanTrace">
+            <summary>
+            See if tracing is allowed.  If tracing is allowed, tracing will not be allowed to occur 
+            again until the allotted time (1/qps) has passed.
+            </summary>
+            <returns>True if tracing is allowed.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RateLimiter.Reset">
+            <summary>
+            Reset the rate limiter instance to null.  This will allow a new QPS rate limit to
+            be set.  For testing use only.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.RateLimitingTraceOptionsFactory">
+            <summary>
+            A factory to generate trace options based on a rate limiter.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RateLimitingTraceOptionsFactory.Create(Google.Cloud.Diagnostics.Common.TraceOptions)">
+            <summary>
+            Create a new <see cref="T:Google.Cloud.Diagnostics.Common.RateLimitingTraceOptionsFactory"/>.
+            </summary>
+            <param name="options">Optional trace options, if unset the default will be used.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.RateLimitingTraceOptionsFactory.CreateOptions">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SimpleManagedTracer">
+            <summary>
+            A simple implementation of the <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> that handles spans in a stack.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span">
+            <summary>
+            A class that represents a trace span.
+            <code>internal</code> for testing purposes.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span.EnsureVisibleDuration">
+            <summary>
+            If the time between the start and end of a span is less then 1 ms
+            the span will not be recorded. If this is the case set the end time to
+            exactly 1ms after the start time. This is also performed if somehow the end
+            time is earlier than the start time, e.g. due to clock sync.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span.Dispose">
+            <summary> Ends the current span.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span.Disposed">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span.SetStackTrace(System.Diagnostics.StackTrace)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span.SpanId">
+            <inheritdoc />
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._consumer">
+            <summary>The trace consumer to push the trace to when completed.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._trace">
+            <summary>The current trace.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._traceId">
+            <summary>The id of the current trace.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._projectId">
+            <summary>The Google Cloud Platform project ID.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._openSpanCount">
+            <summary>The number of spans currently open on any thread.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._spanIdFactory">
+            <summary>The span id factory to generate new span ids.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._rootSpanParentId">
+            <summary>The span id of the parent span of the root span of this trace.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Create(Google.Cloud.Diagnostics.Common.IConsumer{Google.Cloud.Trace.V1.Trace},System.String,System.String,System.Nullable{System.UInt64})">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.SimpleManagedTracer"/>>
+            </summary>
+            <param name="consumer">The consumer to push finished traces to. Must not be null.</param>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null.</param>
+            <param name="traceId">The id of the current trace. Must not be null.</param>
+            <param name="rootSpanParentId">Optional, the parent span id of the root span of the passed in trace.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.StartSpan(System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.RunInSpan(System.Action,System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.RunInSpan``1(System.Func{``0},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.RunInSpanAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.String,Google.Cloud.Diagnostics.Common.StartSpanOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.AnnotateSpan(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.AnnotateSpan(Google.Cloud.Trace.V1.TraceSpan,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Annotates the specified span with the given labels. 
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.SetStackTrace(System.Diagnostics.StackTrace)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.GetCurrentTraceId">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.GetCurrentSpanId">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.GetCurrentSpanId(Google.Cloud.Diagnostics.Common.SimpleManagedTracer.ImmutableStack{Google.Cloud.Diagnostics.Common.SimpleManagedTracer.Span})">
+            <summary>
+            Gets the current span id of the specified stack or null if none exists.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.SetStackTraceAndReturnFalse(System.Exception)">
+            <summary>
+            Sets a <see cref="T:System.Diagnostics.StackTrace"/> on the current span for the given exception and
+            returns false.  This is used for exception handling to ensure no data is lost
+            in the stacktrace.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SimpleManagedTracer.CreateTraceProto">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Trace.V1.Trace"/> with the project id and trace id set.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SimpleManagedTracer._traceStack">
+            <summary>
+            The stack of trace spans for the current logical call context. Note that this is logically cloned when each async
+            block is entered and each thread is spawned, so it will contain the spans which were open previously and those spans
+            will never be removed in the context of that async block/thread. Do not rely on the stack contents to know the state
+            of things on other threads. It may contain previously closed spans.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SpanIdFactory">
+            <summary>
+            A factory to create random span ids.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SpanIdFactory._randomMutex">
+            <summary>A mutex to the instance of <see cref="T:System.Random"/>.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SpanIdFactory.Create">
+            <summary>
+            Create a new <see cref="T:Google.Cloud.Diagnostics.Common.SpanIdFactory"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.SpanIdFactory.NextId">
+            <summary>
+            Gets a random span id.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.SpanKind">
+            <summary>
+            An enum value representing span kinds.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SpanKind.Unspecified">
+            <summary>No span kind was specified.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SpanKind.RpcClient">
+            <summary>The span covers time spent on the client side.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.SpanKind.RpcServer">
+            <summary>The span covers time spent on the server side.</summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.Extensions">
+            <summary>
+            Common extensions.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.Extensions.Convert(Google.Cloud.Diagnostics.Common.SpanKind)">
+            <summary>
+            Converts a <see cref="T:Google.Cloud.Diagnostics.Common.SpanKind"/> to a <see cref="T:Google.Cloud.Trace.V1.TraceSpan.Types.SpanKind"/>.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.StartSpanOptions">
+            <summary>
+            Optional configuration to be used when starting a span.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.StartSpanOptions.SpanKind">
+            <summary>Gets the span kind.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.StartSpanOptions.Labels">
+            <summary>Gets the labels to be added to the span.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.StartSpanOptions.Create(Google.Cloud.Diagnostics.Common.SpanKind,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.StartSpanOptions"/>.
+            </summary>
+            <param name="spanKind">Optional, the span kind.  Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.SpanKind.Unspecified"/></param>
+            <param name="labels">Optional, labels to add to the span.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.StopwatchTimer">
+            <summary>
+            A <see cref="T:Google.Cloud.Diagnostics.Common.ITimer"/> based on a <see cref="T:System.Diagnostics.Stopwatch"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.StopwatchTimer.Create(System.Diagnostics.Stopwatch)">
+            <summary>
+            Creates a new <see cref="T:Google.Cloud.Diagnostics.Common.StopwatchTimer"/>.
+            </summary>
+            <param name="stopwatch">Optional stop watch to use.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.StopwatchTimer.Start">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.StopwatchTimer.GetElapsedMilliseconds">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext">
+            <summary>
+            Context from the Cloud Trace Header.
+            </summary>
+            
+            <remarks>
+            A trace can be forced by passing information along in the trace header ("X-Cloud-Trace-Context").
+            The trace id, parent span id and whether or not to trace can be set.
+            See: https://cloud.google.com/trace/docs/faq#how_do_i_force_a_request_to_be_traced
+            </remarks>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceHeaderContext.InvalidTraceHeaderContext">
+            <summary>An TraceHeaderContext representing no information or invalid information from a header.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceHeaderContext.TraceHeader">
+            <summary>The trace header.</summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceHeaderContext.TraceHeaderRegex">
+            <summary>
+            A regex to match the trace header. 
+            - ([A-Fa-f0-9]{32}): The trace id, a 32 character hex value.
+            - ([0-9]+): The span id, a 64 bit integer.
+            - (?:;o=([0-3])): The trace mask, 1-3 denote it should be traced. (The ?: makes the outer group non-capturing.)
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceHeaderContext.TraceId">
+            <summary>Gets the trace id or null if none is available.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceHeaderContext.SpanId">
+            <summary>Gets the span id or null if none is available.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceHeaderContext.ShouldTrace">
+            <summary>
+            True if the request should be traced, false if it should not be.
+            Null if the trace header does not indicate whether or not it should be traced.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceHeaderContext.Create(System.String,System.Nullable{System.UInt64},System.Nullable{System.Boolean})">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/> from a trace and span id.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceHeaderContext.FromHeader(System.String)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/> from a header. 
+            </summary>
+            <param name="header">The string value of the trace header. Can be null.
+                See: https://cloud.google.com/trace/docs/faq </param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceHeaderContext.FromHeader(System.String,System.Func{System.Nullable{System.Boolean}})">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/> from a header. 
+            </summary>
+            <param name="header">The string value of the trace header. Can be null.
+                See: https://cloud.google.com/trace/docs/faq </param>
+            <param name="traceFallbackPredicate">Optional function to override and trace requests. Can be null.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceHeaderContext.ToString">
+            <summary>
+            Gets the <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderContext"/> as a string.
+            Formatted as "[trace-id]/[span-id];o=[should-trace]"
+            where "should-trace" is 1 to trace and 0 otherwise.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TraceHeaderPropagatingHandler">
+             <summary>
+             Traces outgoing HTTP requests and propagates the trace header.
+             </summary>
+             
+             <example>
+             <code>
+             public void DoSomething(IManagedTracer tracer)
+             {
+                 var traceHeaderHandler = new TraceHeaderPropagatingHandler(() => tracer);
+                 using (var httpClient = new HttpClient(traceHeaderHandler))
+                 {
+                     ...
+                 }
+             }
+             </code>
+             </example>
+            
+             <remarks>
+             Ensures the trace header is propagated in the headers for outgoing HTTP requests and 
+             traces the total time of the outgoing HTTP request. This is only done if tracing is initialized
+             and tracing is enabled for the request current request.
+             </remarks>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceHeaderPropagatingHandler.#ctor(System.Func{Google.Cloud.Diagnostics.Common.IManagedTracer},System.Net.Http.HttpMessageHandler)">
+            <summary>
+            Constructs a new instance using the given delegate to obtain the "current" tracer
+            on each request.
+            </summary>
+            <param name="managedTracerFactory">A delegate used to obtain the "current" tracer
+            for each request. The delegate should therefore be thread-safe.</param>
+            <param name="innerHandler">The inner handler to delegate to. May be null, in which
+            case a new <see cref="T:System.Net.Http.HttpClientHandler"/> will be used.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TraceIdFactory">
+            <summary>
+            A factory to create random trace ids.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceIdFactory.Create">
+            <summary>
+            Create a new <see cref="T:Google.Cloud.Diagnostics.Common.TraceIdFactory"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceIdFactory.NextId">
+            <summary>
+            Gets a random trace id.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TraceLabels">
+            <summary>
+            A helper class to handle span labels.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceLabels.HttpRequestSize">
+            <summary>The label to denote the size of a request.</summary> 
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceLabels.HttpHost">
+            <summary>The label to denote the host.</summary> 
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceLabels.HttpMethod">
+            <summary>The label to denote the request method.</summary> 
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceLabels.HttpStatusCode">
+            <summary>The label to denote the response status code.</summary> 
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceLabels.StackTrace">
+            <summary>The label to denote a stack trace.</summary> 
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.Common.TraceLabels.Agent">
+            <summary>The label to denote an agent.</summary> 
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceLabels.FromStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Creates a a map of labels to represent a <see cref="F:Google.Cloud.Diagnostics.Common.TraceLabels.StackTrace"/> for a span.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceLabels.GetAgentLabel">
+            <summary>
+            Gets a map with the label for the agent which contains the agent's name and version.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceLabels.FromHttpRequestMessage(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Gets a map of labels for a span from an <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceLabels.FromHttpResponseMessage(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Gets a map of labels for a span from an <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceLabels.GenerateJsonStringStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Creates a string JSON representation of a stack trace or the empty string
+            if the stack trace has no frames.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TraceOptions">
+            <summary>
+            Options to be used when initializing tracing.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceOptions.QpsSampleRate">
+            <summary>Gets the number of queries traced per second.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceOptions.BufferOptions">
+            <summary>The buffer options for the tracer.</summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceOptions.RetryOptions">
+            <summary>The retry options for the tracer.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceOptions.Create(System.Double,Google.Cloud.Diagnostics.Common.BufferOptions,Google.Cloud.Diagnostics.Common.RetryOptions)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.TraceOptions"/>.
+            </summary>
+            <param name="qpsSampleRate">Optional, the number of queries traced per second.  The sample rate determines
+                how often requests are automatically traced. Defaults to <see cref="F:Google.Cloud.Diagnostics.Common.TraceOptions.DefaultQpsSampleRate"/>.
+            </param>
+            <param name="bufferOptions">Optional, the buffer options.  Defaults to a <see cref="F:Google.Cloud.Diagnostics.Common.BufferType.Timed"/>.</param>
+            <param name="retryOptions">Optional, the retry options.  Defaults to a <see cref="F:Google.Cloud.Diagnostics.Common.RetryType.None"/>.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.TraceTarget">
+            <summary>
+            Represents the location traces will be sent to.  The Trace API only supports projects.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.Common.TraceTarget.ProjectId">
+            <summary>The Google Cloud Platform project Id.</summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceTarget.ForProject(System.String)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.TraceTarget"/> instance for sending trace entries to a GCP project.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.TraceTarget.GetFullTraceName(System.String)">
+            <summary>
+            Gets the full trace name.
+            See: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+            </summary>
+            <param name="traceId">The id of the trace.</param>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.Common.UnchainedTraceHeaderPropagatingHandler">
+            <summary>
+            Class for tracing outgoing HTTP requests and propagating the trace header.
+            </summary>
+            <remarks>
+            <para>
+            Ensures the trace header is propagated in the headers for outgoing HTTP requests and 
+            traces the total time of the outgoing HTTP request. This is only done if tracing is initialized
+            and tracing is enabled for the request current request.
+            </para>
+            <para>
+            Explicitly leaves unset the InnerHandler property so that this Handler can be used with the
+            System.Net.Http.IHttpClientFactory defined in Microsoft.Extensions.Http.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.UnchainedTraceHeaderPropagatingHandler.#ctor(System.Func{Google.Cloud.Diagnostics.Common.IManagedTracer})">
+            <summary>
+            Constructs a new instance using the given delegate to obtain the "current" tracer
+            on each request.
+            </summary>
+            <param name="managedTracerFactory">A delegate used to obtain the "current" tracer
+            for each request. The delegate should therefore be thread-safe.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.Common.UnchainedTraceHeaderPropagatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Sends the given request. If tracing is initialized and enabled the outgoing request is
+            traced and the trace header is added to the request.
+            </summary>
+        </member>
+    </members>
+</doc>

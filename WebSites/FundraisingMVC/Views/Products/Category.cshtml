@@ -146,17 +146,23 @@
 
                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 products-list" ng-repeat="product in value track by $index">
                     <div class="thumbnail text-center product-thumbnail" ng-init="googleAnalyticsCtrl.ProductShowed(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products');">
-                        <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><img ng-src="/Content/external/productcategory/{{::product.Image.Url}}" alt="{{::product.Name}}" class="img-responsive" /></a>
-                        <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><h6>{{::product.Name}}</h6></a>
-                        @*<a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')">
-                                <h3 style="margin-top: 10px;" ng-show="product.Price > 0">{{::product.Price|currency}}</h3>
-                            </a>*@
-                        @*<span class="small"><span ng-show="product.ProfitPercentage > 0">Profit: {{::product.ProfitPercentage | percentage: 0}}</span><br /></span>
-                            <span class="small" ng-show="product.RetailPrice > 0">Retail Price: <strong>{{::product.RetailPrice|currency}}</strong></span>
-                            <rating class="text-danger" ng-show="product.Rating > 0" ng-model="product.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating>
-                            <span ng-show="product.Rating == 0">&nbsp;</span>*@
+                        <div ng-show="product.Url == 'fusion-drinkware-30oz-stainless-steel-tumbler-ordertaker'">
+                            <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/tumblers" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><img ng-src="/Content/external/productcategory/{{::product.Image.Url}}" alt="{{::product.Name}}" class="img-responsive" /></a>
+                            <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/tumblers" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><h6>{{::product.Name}}</h6></a>
+                        </div>
+                        <div ng-show="product.Url != 'fusion-drinkware-30oz-stainless-steel-tumbler-ordertaker'">
+                            <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><img ng-src="/Content/external/productcategory/{{::product.Image.Url}}" alt="{{::product.Name}}" class="img-responsive" /></a>
+                            <a ng-href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')"><h6>{{::product.Name}}</h6></a>
+                         </div>
+                            @*<a href="/@HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId)/{{::product.Category.Parent.Url}}/{{::product.Category.Url}}/{{::product.Url}}" ng-click="googleAnalyticsCtrl.ProductClicked(product.Id, product.Name, product.Category.Parent.Name, product.Category.Name, product.Price, $index + 1, 'All Products')">
+                <h3 style="margin-top: 10px;" ng-show="product.Price > 0">{{::product.Price|currency}}</h3>
+            </a>*@
+                            @*<span class="small"><span ng-show="product.ProfitPercentage > 0">Profit: {{::product.ProfitPercentage | percentage: 0}}</span><br /></span>
+            <span class="small" ng-show="product.RetailPrice > 0">Retail Price: <strong>{{::product.RetailPrice|currency}}</strong></span>
+            <rating class="text-danger" ng-show="product.Rating > 0" ng-model="product.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating>
+            <span ng-show="product.Rating == 0">&nbsp;</span>*@
+                        </div>
                     </div>
-                </div>
             </div>
 
 

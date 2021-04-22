@@ -755,7 +755,7 @@ angular.module("mgp.controllers", []).controller("homeController", [
               if (response.data.success) {
                  $scope.success = true;
                  $scope.responseText = response.data.responseText;
-                 $scope.registerView.IgnoreAddressHygiene = false;
+                 $scope.registerView.IgnoreAddressHygiene = true;
               } else {
                  if (response.data.proposedAddress !== null && response.data.proposedAddress !== undefined) {
                     $scope.newAddress = response.data.proposedAddress.Address1;

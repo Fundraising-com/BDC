@@ -153,12 +153,10 @@
       vm.step3 = 0;
       vm.step4 = 0;
       vm.step5 = 0;
-      vm.step6 = 0;
 
       vm.BackToStep1 = function () {
           vm.step1 = 1;
           vm.step2 = 0;
-          
           vm.ActionState = 0;         
       };
 
@@ -181,16 +179,12 @@
       };
 
       vm.SkipInterest = function () {
-          vm.step5 = 0;
-          vm.step6 = 1;
+          vm.step4 = 0;
+          vm.step5 = 1;
 
       };
 
-      vm.SkipAddress = function () {
-          vm.step3 = 0;
-          vm.step4 = 1;
-
-      };
+     
 
      
       vm.SendNew = function () {
@@ -330,59 +324,14 @@
 
       
 
+      
+
       vm.Step3 = function () {
-
-          var promises = [];
           vm.ActionState = 1;
-          
-          //var addressFactoryPromise = AddressHygieneFactory.AddressHygiene.save(vm.kit.Address).$promise;
-          //promises.push(addressFactoryPromise);
-          //var deferred = $q.defer();
-          //promises.push(deferred.promise);
-          //addressFactoryPromise.then(
-          //    function (suggestedAddress) {
-          //        //vm.progress = 30;
-          //        var modalScope = $scope.$new(true);
-          //        angular.extend(modalScope, { header: 'Verify your Address', address: suggestedAddress, showEditFields: false, states: vm.states });
-          //        //$('#kit-request-modal').toggle(); //we close the modal for the address hygiene modal     
-          //        var modal = $modal.open({
-          //            backdrop: false,
-          //            scope: modalScope,
-          //            templateUrl: "/Scripts/app/core/templates/addressHygieneModalTemplate.html",
-          //            windowTemplateUrl: "/Scripts/app/core/templates/addressHygieneWindowTemplate.html"
-          //        });
-          //        modal.result.then(
-          //            function (newAddress) {
-          //                vm.progress = 50;
-          //                vm.kit.Address = newAddress;
+          var promises = [];
 
-          //                LeadsFactory.Lead.update(vm.kit).$promise.then(
-          //                    function (lead) {
-          //                        vm.kit = lead;
-          //                        vm.step3 = 0;
-          //                        vm.step4 = 1;
-          //                        vm.ActionState = 0;
-          //                        deferred.resolve();
-          //                    }, function (error) {
-          //                        vm.ActionState = 3;
-          //                        vm.progress = 0;
-          //                        vm.error = ExceptionFactory.Handle(error.data);
-          //                    });
+          vm.kit.NumberOfMembers = vm.kit.Members;
 
-
-          //            }, function (error) {
-          //                deferred.reject();
-          //            });
-          //    }, function (error) {
-          //        vm.ActionState = 3;
-          //        vm.progress = 0;
-          //        vm.error = ExceptionFactory.Handle(error.data);
-          //    });
-
-
-          vm.kit.Address.Region.Code = vm.kit.State;
-          
-          
           LeadsFactory.Lead.update(vm.kit).$promise.then(
               function (lead) {
                   vm.kit = lead;
@@ -395,31 +344,10 @@
                   vm.error = ExceptionFactory.Handle(error.data);
               });
 
- 
       };
+
 
       vm.Step4 = function () {
-          vm.ActionState = 1;
-          var promises = [];
-
-          vm.kit.NumberOfMembers = vm.kit.Members;
-
-          LeadsFactory.Lead.update(vm.kit).$promise.then(
-              function (lead) {
-                  vm.kit = lead;
-                  vm.step4 = 0;
-                  vm.step5 = 1;
-                  vm.ActionState = 0;
-              }, function (error) {
-                  vm.ActionState = 3;
-                  vm.progress = 0;
-                  vm.error = ExceptionFactory.Handle(error.data);
-              });
-
-      };
-
-
-      vm.Step5 = function () {
 
           var promises = [];
           vm.ActionState = 1;
@@ -450,8 +378,8 @@
               function (lead) {
                   vm.kit = lead;
                   vm.ActionState = 0;
-                  vm.step5 = 0;
-                  vm.step6 = 1;
+                  vm.step4 = 0;
+                  vm.step5 = 1;
               }, function (error) {
                   vm.ActionState = 3;
                   vm.progress = 0;
@@ -461,7 +389,7 @@
       };
 
 
-      vm.Step6 = function () {
+      vm.Step5 = function () {
                   $('#kit-request-modal-New').modal('hide');
         };
 

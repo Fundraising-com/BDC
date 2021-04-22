@@ -64,12 +64,22 @@
 
                     </div>
                     <div class="col-sm-12 col-md-7">
+                       
                         <h1 style="font-weight: bold; font-size: x-large; color: black; text-transform: none;" itemprop="name" ng-cloak>{{::productsCtrl.Product.Name}}</h1>
                         <span ng-show="productsCtrl.Product.CalculatedPrice > 0" ng-cloak>
-                            <span style="font-size: large" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                Price: {{productsCtrl.Product.CountryCode | toCurrencyCode}} <span style="font-size: x-large; color: #b12704" itemprop="price" ng-bind="productsCtrl.Product.CalculatedPrice | currency" ng-cloak> @Model.Price</span> <span ng-show="productsCtrl.Product.ShippingFee == 0">& <strong>FREE Shipping</strong></span> <meta itemprop="priceCurrency" content="USD" />
+                            <span ng-show="productsCtrl.Product.Id == 9564" ng-cloak>
+                                <span style="font-size: large; color:#000000" ng-cloak>Price: USD</span>
+                                <span style="font-size: x-large; color: #b12704" ng-cloak>$45 for 2 tins</span>
+                            </span>
+                            <span ng-cloak ng-hide="productsCtrl.Product.Id == 9564" style="font-size: large" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                Price: {{productsCtrl.Product.CountryCode | toCurrencyCode}} <span style="font-size: x-large; color: #b12704" itemprop="price" ng-bind="productsCtrl.Product.CalculatedPrice | currency" ng-cloak>
+                                    @Model.Price
+                                </span>
+                                <span ng-show="productsCtrl.Product.ShippingFee == 0">& <strong>FREE Shipping</strong></span>
+                                <meta itemprop="priceCurrency" content="USD" />
                                 <span ng-show="productsCtrl.Product.Price - productsCtrl.Product.CalculatedPrice > 0"><br />You save <span style="font-size: large; color: #b12704" ng-cloak>{{productsCtrl.Product.Price - productsCtrl.Product.CalculatedPrice | currency}} ({{ 1 - (productsCtrl.Product.CalculatedPrice / productsCtrl.Product.Price) | percentage: 0}})</span></span>
                             </span>
+
                             <br />
                         </span>
                         <span ng-show="productsCtrl.Product.Rating > 0"><rating class="text-danger" ng-model="productsCtrl.Product.Rating" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" readonly="true"></rating> <a href="#reviews" class="text-info small" ng-cloak>({{productsCtrl.Product.Reviews.length}} customer reviews)</a><br /></span>
@@ -224,7 +234,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
 </div>
         <div class="modal fade" id="product-image-modal" tabindex="-1" role="dialog" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.Get(@Model.Id)";>
@@ -319,112 +328,114 @@
             </div>
             <div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.Get(@Model.Id)">
                <form role="form" ng-submit="productsCtrl.OrderBrochure()">
-                  <div class="modal-body" style="font-size:14px">
-                     <div class="form-group">
-                        <label style="text-transform:uppercase; color:#127e93; font-size:16px">Contact Information</label><br />
-                        We want to make sure we can contact you to make your fundraiser a success
-                     </div>
-                     <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" style="width:70%" class="form-control" id="name" placeholder="i.e. John Smith" ng-model="productsCtrl.OrderBrochure.Name" ng-required="true">
-                     </div>
-                     <div class="form-group">
-                        <label for="name">Group Name</label>
-                        <input type="text" style="width:70%" class="form-control" id="groupname" placeholder="i.e. Mavericks Junior Football" ng-model="productsCtrl.OrderBrochure.GroupName" ng-required="true">
-                     </div>
-                     <div class="form-group">
-                        <label for="name">Email</label>
-                        <input type="email" style="width:70%" class="form-control" id="email" placeholder="example@example.com" ng-model="productsCtrl.OrderBrochure.Email" ng-required="true">
-                     </div>
-                     <div class="form-group">
-                        <label for="name">Phone</label>
-                        <input type="tel" style="width:70%" class="form-control" pattern="^\d{3}-\d{3}-\d{4}$" id="phone" placeholder="i.e. xxx-xxx-xxxx" ng-model="productsCtrl.OrderBrochure.Phone" ng-required="true">
-                     </div>
-                     <div class="form-group">
-                        <label style="text-transform:uppercase; color:#127e93; font-size:16px">How Many Brochures Do You Need?</label><br />
-                        How many people will take orders?<br />
-                        <input type="text" class="form-control" style="width:15%" required ng-required="true" maxlength="5" pattern="\d*" id="members" ng-model="productsCtrl.OrderBrochure.Members">
-                     </div>
-                     <div class="form-group">
-                        <label style="text-transform:uppercase; color:#127e93; font-size:16px">Where Will We Send Your Order?</label><br />
-                        <input type="text" style="width:50%" class="form-control" placeholder="i.e. 33 Main St" id="address" ng-required="true" ng-model="productsCtrl.OrderBrochure.Address" maxlength="100">
-                        <br />
-                        <div class="row">
-                           <div class="col-md-4">
-                              <input type="text" style="width:100%; margin-bottom:10px" class="form-control" placeholder="City" id="city" ng-required="true" ng-model="productsCtrl.OrderBrochure.City" maxlength="50">
+                   <div class="modal-body" style="font-size:14px">
+                       <div class="form-group">
+                           <label style="text-transform:uppercase; color:#127e93; font-size:16px">Contact Information</label><br />
+                           We want to make sure we can contact you to make your fundraiser a success
+                       </div>
+                       <div class="form-group">
+                           <label for="name">Full Name</label>
+                           <input type="text" style="width:70%" class="form-control" id="name" placeholder="i.e. John Smith" ng-model="productsCtrl.OrderBrochure.Name" ng-required="true">
+                       </div>
+                       <div class="form-group">
+                           <label for="name">Group Name</label>
+                           <input type="text" style="width:70%" class="form-control" id="groupname" placeholder="i.e. Mavericks Junior Football" ng-model="productsCtrl.OrderBrochure.GroupName" ng-required="true">
+                       </div>
+                       <div class="form-group">
+                           <label for="name">Email</label>
+                           <input type="email" style="width:70%" class="form-control" id="email" placeholder="example@example.com" ng-model="productsCtrl.OrderBrochure.Email" ng-required="true">
+                       </div>
+                       <div class="form-group">
+                           <label for="name">Phone</label>
+                           <input type="tel" style="width:70%" class="form-control" pattern="^\d{3}-\d{3}-\d{4}$" id="phone" placeholder="i.e. xxx-xxx-xxxx" ng-model="productsCtrl.OrderBrochure.Phone" ng-required="true">
+                       </div>
+                       <div ng-hide="productsCtrl.Product.Id == 9610">
+                           <div class="form-group">
+                               <label style="text-transform:uppercase; color:#127e93; font-size:16px">How Many Brochures Do You Need?</label><br />
+                               How many people will take orders?<br />
+                               <input type="text" class="form-control" style="width:15%"  maxlength="5" pattern="\d*" id="members" ng-model="productsCtrl.OrderBrochure.Members">
                            </div>
-                           <div class="col-md-4">
-                              <select class="form-control" style="width:100%; margin-right:15px; margin-bottom:10px" id="state" name="State" ng-model="productsCtrl.OrderBrochure.State" ng-required="true">
-                                 <option value="" ng-selected="true">Select State</option>
-                                 <option value="AL">Alabama</option>
-                                 <option value="AR">Arkansas</option>
-                                 <option value="AZ">Arizona</option>
-                                 <option value="CA">California</option>
-                                 <option value="CO">Colorado</option>
-                                 <option value="CT">Connecticut</option>
-                                 <option value="DC">District of Columbia</option>
-                                 <option value="DE">Delaware</option>
-                                 <option value="FL">Florida</option>
-                                 <option value="GA">Georgia</option>
-                                 <option value="HI">Hawaii</option>
-                                 <option value="IA">Iowa</option>
-                                 <option value="ID">Idaho</option>
-                                 <option value="IL">Illinois</option>
-                                 <option value="IN">Indiana</option>
-                                 <option value="KS">Kansas</option>
-                                 <option value="KY">Kentucky</option>
-                                 <option value="LA">Louisiana</option>
-                                 <option value="MA">Massachusetts</option>
-                                 <option value="MD">Maryland</option>
-                                 <option value="ME">Maine</option>
-                                 <option value="MI">Michigan</option>
-                                 <option value="MN">Minnesota</option>
-                                 <option value="MO">Missouri</option>
-                                 <option value="MS">Mississippi</option>
-                                 <option value="MT">Montana</option>
-                                 <option value="NC">North Carolina</option>
-                                 <option value="ND">North Dakota</option>
-                                 <option value="NE">Nebraska</option>
-                                 <option value="NH">New Hampshire</option>
-                                 <option value="NJ">New Jersey</option>
-                                 <option value="NM">New Mexico</option>
-                                 <option value="NV">Nevada</option>
-                                 <option value="NY">New York</option>
-                                 <option value="OH">Ohio</option>
-                                 <option value="OK">Oklahoma</option>
-                                 <option value="OR">Oregon</option>
-                                 <option value="PA">Pennsylvania</option>
-                                 <option value="RI">Rhode Island</option>
-                                 <option value="SC">South Carolina</option>
-                                 <option value="SD">South Dakota</option>
-                                 <option value="TN">Tennessee</option>
-                                 <option value="TX">Texas</option>
-                                 <option value="UT">Utah</option>
-                                 <option value="VA">Virginia</option>
-                                 <option value="VI">Virgin Islands</option>
-                                 <option value="VT">Vermont</option>
-                                 <option value="WA">Washington</option>
-                                 <option value="WI">Wisconsin</option>
-                                 <option value="WV">West Virginia</option>
-                                 <option value="WY">Wyoming</option>
+                       </div>
+                           <div class="form-group">
+                               <label style="text-transform:uppercase; color:#127e93; font-size:16px">Where Will We Send Your Order?</label><br />
+                               <input type="text" style="width:50%" class="form-control" placeholder="i.e. 33 Main St" id="address" ng-required="true" ng-model="productsCtrl.OrderBrochure.Address" maxlength="100">
+                               <br />
+                               <div class="row">
+                                   <div class="col-md-4">
+                                       <input type="text" style="width:100%; margin-bottom:10px" class="form-control" placeholder="City" id="city" ng-required="true" ng-model="productsCtrl.OrderBrochure.City" maxlength="50">
+                                   </div>
+                                   <div class="col-md-4">
+                                       <select class="form-control" style="width:100%; margin-right:15px; margin-bottom:10px" id="state" name="State" ng-model="productsCtrl.OrderBrochure.State" ng-required="true">
+                                           <option value="" ng-selected="true">Select State</option>
+                                           <option value="AL">Alabama</option>
+                                           <option value="AR">Arkansas</option>
+                                           <option value="AZ">Arizona</option>
+                                           <option value="CA">California</option>
+                                           <option value="CO">Colorado</option>
+                                           <option value="CT">Connecticut</option>
+                                           <option value="DC">District of Columbia</option>
+                                           <option value="DE">Delaware</option>
+                                           <option value="FL">Florida</option>
+                                           <option value="GA">Georgia</option>
+                                           <option value="HI">Hawaii</option>
+                                           <option value="IA">Iowa</option>
+                                           <option value="ID">Idaho</option>
+                                           <option value="IL">Illinois</option>
+                                           <option value="IN">Indiana</option>
+                                           <option value="KS">Kansas</option>
+                                           <option value="KY">Kentucky</option>
+                                           <option value="LA">Louisiana</option>
+                                           <option value="MA">Massachusetts</option>
+                                           <option value="MD">Maryland</option>
+                                           <option value="ME">Maine</option>
+                                           <option value="MI">Michigan</option>
+                                           <option value="MN">Minnesota</option>
+                                           <option value="MO">Missouri</option>
+                                           <option value="MS">Mississippi</option>
+                                           <option value="MT">Montana</option>
+                                           <option value="NC">North Carolina</option>
+                                           <option value="ND">North Dakota</option>
+                                           <option value="NE">Nebraska</option>
+                                           <option value="NH">New Hampshire</option>
+                                           <option value="NJ">New Jersey</option>
+                                           <option value="NM">New Mexico</option>
+                                           <option value="NV">Nevada</option>
+                                           <option value="NY">New York</option>
+                                           <option value="OH">Ohio</option>
+                                           <option value="OK">Oklahoma</option>
+                                           <option value="OR">Oregon</option>
+                                           <option value="PA">Pennsylvania</option>
+                                           <option value="RI">Rhode Island</option>
+                                           <option value="SC">South Carolina</option>
+                                           <option value="SD">South Dakota</option>
+                                           <option value="TN">Tennessee</option>
+                                           <option value="TX">Texas</option>
+                                           <option value="UT">Utah</option>
+                                           <option value="VA">Virginia</option>
+                                           <option value="VI">Virgin Islands</option>
+                                           <option value="VT">Vermont</option>
+                                           <option value="WA">Washington</option>
+                                           <option value="WI">Wisconsin</option>
+                                           <option value="WV">West Virginia</option>
+                                           <option value="WY">Wyoming</option>
 
 
-                              </select>
+                                       </select>
+                                   </div>
+                                   <div class="col-md-3">
+                                       <input type="text" style="width:70%;" class="form-control" pattern="[0-9.]+" placeholder="Zip Code" id="zipcode" ng-required="true" ng-model="productsCtrl.OrderBrochure.Zipcode" maxlength="10">
+                                   </div>
+                               </div>
                            </div>
-                           <div class="col-md-3">
-                              <input type="text" style="width:70%;" class="form-control" pattern="[0-9.]+" placeholder="Zip Code" id="zipcode" ng-required="true" ng-model="productsCtrl.OrderBrochure.Zipcode" maxlength="10">
-                           </div>
-                        </div>
-                     </div>
 
-                  </div>
-                  <div class="modal-footer">
+                       </div>
+                       <div class="modal-footer">
 
-                     <button type="submit" value="Submit" ng-submit="vm.OrderBrochure()" class="btn btn-success pull-left" onclick="ga('send', 'event', 'orderBrochureSubmit', 'Submit Brochure button');">Let's get Started</button>
+                           <button type="submit" value="Submit" ng-submit="vm.OrderBrochure()" class="btn btn-success pull-left" onclick="ga('send', 'event', 'orderBrochureSubmit', 'Submit Brochure button');">Let's get Started</button>
 
-                  </div>
+                       </div>
 
-               </form>
+</form>
             </div>
             
             </div><!-- /.modal-content -->

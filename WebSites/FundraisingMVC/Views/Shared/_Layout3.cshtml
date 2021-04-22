@@ -30,6 +30,7 @@
 
     <link href="~/Content/styles/bootstrap/bootstrap.css" rel="stylesheet" />
     @*@<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.css" />
@@ -89,8 +90,6 @@
         }
     </script>
 
-
-
 </head>
 <body ng-controller="PartnersController as partnersCtrl" style="font-family:Poppins;">
 
@@ -141,31 +140,59 @@
                                     <span ng-cloak style="color: #087A92; background-color: white;" ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length > 0">{{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}}</span> <i class="fas fa-shopping-bag" style="color:black"></i>
                                 </a>
                             </li>
+
+                            <li class="dropdown" style="float:right ;margin-right:10px">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-search" style="color:black"></i></a>
+                                <ul class="dropdown-menu" style="left:-100px">
+                                    <div ng-controller="SearchController as searchCtrl" ng-cloak>
+                                        <form name="searchForm" role="search" ng-submit="searchForm.$submitted && searchForm.$valid && searchCtrl.Search()">
+                                            <div class="input-group add-on">
+                                                <input class="form-control" placeholder="Search" type="text" ng-model="searchCtrl.q" ng-required="true" style="border-radius:0px;">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit" style="vertical-align:top; border-radius:0px; float:left">
+                                                        <i class="fas fa-search" style="color:black"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </ul>
+                            </li>
                         </ul>
 
-                        <div id="imglogo"  ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}" ng-cloak style="background-color:white;border:none;">
+                        
+
+
+
+
+
+
+
+
+                        <div id="imglogo" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}" ng-cloak style="background-color:white;border:none;">
                             <a href="/">
                                 <img class="navbar-brand responsive-img" ng-cloak alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/{{partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" ng-show="partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
-                                <img class="navbar-brand responsive-img"  ng-cloak  alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" ng-show="!partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
+                                <img class="navbar-brand responsive-img" ng-cloak alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" ng-show="!partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
                             </a>
                         </div>
                         <div id="imglogo" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}" ng-cloak style="background-color:white;border:none;">
                             <a href="/">
-                                <img class="navbar-brand responsive-img" ng-cloak  alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" />
+                                <img class="navbar-brand responsive-img" ng-cloak alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" />
                             </a>
                         </div>
                         <!--mobile device margin-->
                         <!--<div  class="hidden-* "ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 0}}" ng-cloak style="background-color:white;border:none">
-                            <a href="/">
-                                <img class="navbar-brand responsive-img" ng-cloak style="margin-left:5%;" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/{{partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" ng-show="partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
-                                <img class="navbar-brand responsive-img" ng-cloak style="margin-left:5%;" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" ng-show="!partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
-                            </a>
-                        </div>
-                        <div class="hidden-*" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}" ng-cloak style="background-color:white;border:none">
-                            <a href="/">
-                                <img class="navbar-brand responsive-img" ng-cloak style="margin-left:5%;" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" />
-                            </a>
-                        </div>-->
+        <a href="/">
+            <img class="navbar-brand responsive-img" ng-cloak style="margin-left:5%;" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/{{partnersCtrl.Partner.Attributes.FR_partner_banner_image}}" ng-show="partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
+            <img class="navbar-brand responsive-img" ng-cloak style="margin-left:5%;" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" ng-show="!partnersCtrl.Partner.Attributes.FR_partner_banner_image" />
+        </a>
+    </div>
+    <div class="hidden-*" ng-controller="DetectCountryController as detectCountryCtrl" ng-show="{{detectCountryCtrl.country == 1}}" ng-cloak style="background-color:white;border:none">
+        <a href="/">
+            <img class="navbar-brand responsive-img" ng-cloak style="margin-left:5%;" alt="{{::partnersCtrl.Partner.Name}}" ng-src="/Content/external/partners/header/686.png" />
+        </a>
+    </div>-->
                         <!--mobile device margin-->
                     </div>
                     <!--/.navbar-header-->
@@ -194,10 +221,10 @@
                                                     <a href="/katydids-fundraising-ideas" style="font-size: 12px; color: #333333;">Katydids</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/products/lollipops" style="font-size: 12px; color: #333333;">Lollipops</a>
+                                                    <a href="/lollipop-fundraiser" style="font-size: 12px; color: #333333;">Lollipops</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/products/beef-jerky" style="font-size: 12px; color: #333333;">Jack Links Jerky</a>
+                                                    <a href="/beef-jerky-fundraiser" style="font-size: 12px; color: #333333;">Jack Links Jerky</a>
                                                 </li>
                                                 <li>
                                                     <a href="/products/pretzel-rods/all-pretzel-rods/Sweet-and-Salty-Pretzel-Rods" style="font-size: 12px; color: #333333;">Pretzel Rods</a>
@@ -234,7 +261,7 @@
                                                     <a href="/products/order-takers/all-order-takers/Snacking-Made-Simple" style="font-size: 12px; color: #333333;">Snacking Made Simple</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/products/order-takers/all-order-takers/Smoke-Haus-Slow-Cooked-Snacks" style="font-size: 12px; color: #333333;">Slow Smoked Snacks</a>
+                                                    <a href="/products/order-takers/all-order-takers/gabb-phone" style="font-size: 12px; color: #333333;">Gabb Phone</a>
                                                 </li>
                                                 <li>
                                                     <a href="/products/order-takers" style="color:#333333; text-decoration:underline; font-size:12px">VIEW ALL</a>
@@ -256,14 +283,14 @@
                                                     <a href="/nonprofit-fundraising-ideas" style="font-size: 12px; color: #333333;">Non-profit Fundraisers</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/products/ship-to-home" style="font-size: 12px; color: #333333;">Shop To Home Programs</a>
+                                                    <a href="/products/ship-to-home" style="font-size: 12px; color: #333333;">Ship To Home Programs</a>
                                                 </li>
                                                 <li>
                                                     <a href="/buy-online" style="font-size: 12px; color: #333333;">100% Online Fundraisers</a>
                                                 </li>
 
                                                 <li>
-                                                    <a href="/products" style="color:#333333; text-decoration:underline; font-size:12px">VIEW ALL</a>
+                                                    <a href="/all-fundraising-products" style="color:#333333; text-decoration:underline; font-size:12px">VIEW ALL</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -286,14 +313,14 @@
                                 <div style="color:white">placeholder</div>
 
                             </li>*@
-                            <li class="dropdown" id="shPadding" style="float:right;">
+                            <li class="dropdown hidden-xs hidden-sm hidden-md" id="shPadding" style="float:right;">
                                 <a ng-href="@Url.Action("Index", "ShoppingCarts")" title="Shopping Cart" style="text-decoration:none">
                                     <span ng-cloak style="color: #087A92; background-color: white;" ng-show="shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length > 0">{{shoppingCartCtrl.scope.$storage.ShoppingCart.Items.length}}</span> <i class="fas fa-shopping-bag" style="color:black"></i>
                                 </a>
                             </li>
-                            <li class="dropdown" style="float:right">
+                            <li class="dropdown  hidden-xs hidden-sm hidden-md" style="float:right">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-search" style="color:black"></i></a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" style="left:-70px">
                                     <div ng-controller="SearchController as searchCtrl" ng-cloak>
                                         <form name="searchForm" role="search" ng-submit="searchForm.$submitted && searchForm.$valid && searchCtrl.Search()">
                                             <div class="input-group add-on">
@@ -323,7 +350,7 @@
         <section style="margin-top:30px">
             @RenderBody()
         </section>
-        <footer class="hidden-print">
+        <footer class="hidden-print container-fluid" style="padding-left:2%;padding-right:2%">
             <hr style="height: 2px;border-width: 0;color:#dedddd;background-color:#dedddd;" />
 
             <div class="row menuBottom new-homepage-font" style="margin:0">
@@ -432,7 +459,7 @@
 
             <!-- visible for mobiles-->
             <div class="col-sm-3 new-homepage-font hidden-xs hidden-sm" style="color: black;">
-                <a href="/" style="text-decoration: none" title="fundraisings"><img src="~/Content/external/NewHP/NEWHP2021/logo_top.jpg" alt="fundraising.com home" style="width:90%" /></a>
+                <a href="/" style="text-decoration: none" title="fundraisings"><img src="~/Content/external/NewHP/NEWHP2021/logo_top.jpg" alt="fundraising.com home" style="width:65%" /></a>
                 <ul style="margin-top:15px">
                     <li>
                         <div class="row" style="margin:10px 0 0 0">
@@ -548,6 +575,10 @@
                 </ul>
             </div>
 
+            <div class="row menuBottom" style="margin:0 0 100px 0">
+                <div class="col-sm-12 visible-xs visible-sm">
+                </div>
+            </div>
 
 
             <a href="" data-toggle="modal" data-target="#representative-intro-modal" id="representative-intro-modal-shower"></a>
@@ -587,8 +618,7 @@
             </div>
         </div>
         <!-- BDC / FR Consultant ID = 3450 -->
-        @if (ViewBag.RepresentativeId != null && ViewBag.RepresentativeId != 3450)
-        {
+        
             <div ng-controller="RepresentativesController as representativeCtrl">
                 <div class="modal fade" id="representative-intro-modal" tabindex="-1" role="dialog" aria-labelledby="representative-intro-modal" aria-hidden="true" ng-if="representativeCtrl.Representative.Id > 0">
                     <div class="modal-dialog modal-lg">
@@ -614,7 +644,7 @@
                     </div><!-- /.modal-dialog -->
                 </div>
             </div>
-        }
+       
     </div>
     <div id='papPlaceholder'></div>
 

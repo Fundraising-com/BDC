@@ -30,12 +30,18 @@ using Address = GA.BDC.Web.MGP.Helpers.Address;
 using Country = GA.BDC.Shared.Entities.Country;
 using Partner = GA.BDC.Web.MGP.Models.Branding.Partner;
 using Region = GA.BDC.Shared.Entities.Region;
+using System.Net.Http.Headers;
+using System.Text;
+using Sentry;
+using Sentry.EntityFramework;
 
 namespace GA.BDC.Web.MGP.Controllers
 {
     [MGPAuthentication, RenderPartnerBranding]
     public class CampaignManagerController : BaseController
     {
+
+        private IDisposable _sentry;
         [RenderEventBranding]
         [HttpGet]
         [Route("registration/step-2")]
@@ -812,6 +818,22 @@ namespace GA.BDC.Web.MGP.Controllers
         [HttpPost, RenderEventBranding]
         public JsonResult Information(int participantId, Information model)
         {
+
+            //sentry error handling
+            SentryDatabaseLogging.UseBreadcrumbs();
+            _sentry = SentrySdk.Init(o =>
+            {
+                // We store the DSN inside Web.config; make sure to use your own DSN!
+                o.Dsn = new Dsn(ConfigurationManager.AppSettings["SentryDSN"]);
+
+                // Get Entity Framework integration
+                o.AddEntityFramework();
+                o.SendDefaultPii = true;
+
+            });
+
+
+
             var cmUser = ViewBag.User as Models.Branding.User;
             var @event = ViewBag.Event as Models.Branding.Event;
             var @partner = ViewBag.Partner as Models.Branding.Partner;
@@ -889,25 +911,25 @@ namespace GA.BDC.Web.MGP.Controllers
 
             if (cmUser.IsSponsor)
             {
-                if (!paymentToPartner && !model.IgnoreAddressHygiene)
-                {
-                    var addressHygieneHelper = new AddressHygieneHelper();
-                    var proposedAddress =
-                       addressHygieneHelper.SendAddress(new Address
-                       {
-                           City = model.City,
-                           Address1 = model.Address,
-                           Country = "US",
-                           PostCode = model.ZipCode,
-                           Region = model.State.Replace("US-", "")
-                       });
-                    proposedAddress.Region = "US-" + proposedAddress.Region;
-                    return new JsonResult
-                    {
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new { success = false, proposedAddress }
-                    };
-                }
+                //if (!paymentToPartner && !model.IgnoreAddressHygiene)
+                //{
+                //    var addressHygieneHelper = new AddressHygieneHelper();
+                //    var proposedAddress =
+                //       addressHygieneHelper.SendAddress(new Address
+                //       {
+                //           City = model.City,
+                //           Address1 = model.Address,
+                //           Country = "US",
+                //           PostCode = model.ZipCode,
+                //           Region = model.State.Replace("US-", "")
+                //       });
+                //    proposedAddress.Region = "US-" + proposedAddress.Region;
+                //    return new JsonResult
+                //    {
+                //        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                //        Data = new { success = false, proposedAddress }
+                //    };
+                //}
                 using (var dataProvider = new DataProvider())
                 {
                     using (var transactionScope = new TransactionScope())
@@ -1176,31 +1198,93 @@ namespace GA.BDC.Web.MGP.Controllers
 
                     var stateProvinceCode = (StateProvince_) Enum.Parse(typeof(StateProvince_), ga_state);
 
-                    using (StoreServiceClient storeProxy = new StoreServiceClient())
-                    {
 
-                        storeProxy.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["serviceUN"];
-                        storeProxy.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["servicePW"];
-                        
-                        var request = new AffiliateAddressGraphRequest(address1: model.Address,
-                                                                      city: model.City,
-                                                                      email: model.Email,
-                                                                      externalAffiliateIdentifier: groupId,
-                                                                      externalAffiliateName: model.CampaignName,
-                                                                      externalPartnerIdentifier: partnerId,
-                                                                      payeeName: payeeName,
-                                                                      phone: string.IsNullOrEmpty(model.Phone) ? "000000000" : model.Phone,
-                                                                      postalCode: model.ZipCode,
-                                                                      stateProvinceCode: stateProvinceCode,
-                                                                      salesRepSAPAcctNr: SAPAccountNo);
-                        var response = storeProxy.UpdateAffiliateAddress(request);
-                        var businessRuleViolation = response.businessRuleViolation;
-                        if (businessRuleViolation != null)
+                    try
+                    {
+                        var updPhone = string.IsNullOrEmpty(model.Phone) ? "000000000" : model.Phone;
+                        HttpClient client = new HttpClient();
+                        var registerUserJSON = "{"
+                                + "\"AffiliateAddressGraphRequest\":{"
+                                + "\"address1\": \"" + model.Address + "\","
+                                + "\"email\": \"" + model.Email + "\","
+                                + "\"city\": \"" + model.City + "\","
+                                + "\"externalAffiliateIdentifier\": \"" + groupId + "\","
+                                + "\"externalAffiliateName\": \"" + model.CampaignName + "\","
+                                + "\"externalPartnerIdentifier\": \"" + partnerId + "\","
+                                + "\"payeeName\": \"" + payeeName + "\","
+                                + "\"phone\": \"" + updPhone + "\","
+                                + "\"postalCode\": \"" + model.ZipCode + "\","
+                                + "\"stateProvinceCode\": \"" + stateProvinceCode + "\","
+                                + "\"salesRepSAPAcctNr\": \"" + SAPAccountNo +  "\""
+                                + "}}";
+
+                        client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UpdateURLAPI"]);
+                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                        client.DefaultRequestHeaders.Add("Client-Id", ConfigurationManager.AppSettings["Client-Id"]);
+                        client.DefaultRequestHeaders.Add("Client-Secret", ConfigurationManager.AppSettings["Client-Secret"]);
+                        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress);
+                        request.Content = new StringContent(registerUserJSON, Encoding.UTF8, "application/json");//CONTENT-TYPE header
+                        var result = client.PostAsync(client.BaseAddress.ToString(), request.Content).Result;
+
+                        if (result.IsSuccessStatusCode)
                         {
-                           var storeServiceErrorMessage = businessRuleViolation.ViolationMessage + " (Type=" + businessRuleViolation.BusinessRuleViolationTypeCode + ")";
-                           throw new Exception(storeServiceErrorMessage);
+
+                            var fixResult = result.Content.ReadAsStringAsync().Result.Replace("\\", "").Trim(new char[1] { '"' });
+                            var parseResult = JsonConvert.DeserializeObject<dynamic>(fixResult);
+                            
+                            SentrySdk.CaptureMessage("MGP User Info updates sent to  GA - " + parseResult);
+                            var businessRuleViolation = parseResult["AffiliateAddressGraph"].Value<string>("businessRuleViolation");
+                            if (businessRuleViolation != null)
+                            {
+                               SentrySdk.CaptureMessage(businessRuleViolation + " - " + "businessRuleViolation returned grp controller");
+                            }
+
                         }
+                        else
+                        {
+                            Exception ex = new Exception();
+                            ex.Data.Add("Message", "Error updating address with GA api");
+                            ex.Data.Add("Group Id", groupId);
+                            ex.Data.Add("Group Name", model.CampaignName);
+                            SentrySdk.CaptureException(ex);
+                            
+                        }
+
                     }
+                    catch (Exception ex)
+                    {
+                        ex.Data.Add("Message", "Error updating address with GA api");
+                        ex.Data.Add("Group Id", groupId);
+                        ex.Data.Add("Group Name", model.CampaignName);
+                        SentrySdk.CaptureException(ex);
+
+                    }
+                    
+                    //using (StoreServiceClient storeProxy = new StoreServiceClient())
+                    //{
+
+                    //    storeProxy.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["serviceUN"];
+                    //    storeProxy.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["servicePW"];
+                        
+                    //    var request = new AffiliateAddressGraphRequest(address1: model.Address,
+                    //                                                  city: model.City,
+                    //                                                  email: model.Email,
+                    //                                                  externalAffiliateIdentifier: groupId,
+                    //                                                  externalAffiliateName: model.CampaignName,
+                    //                                                  externalPartnerIdentifier: partnerId,
+                    //                                                  payeeName: payeeName,
+                    //                                                  phone: string.IsNullOrEmpty(model.Phone) ? "000000000" : model.Phone,
+                    //                                                  postalCode: model.ZipCode,
+                    //                                                  stateProvinceCode: stateProvinceCode,
+                    //                                                  salesRepSAPAcctNr: SAPAccountNo);
+                    //    var response = storeProxy.UpdateAffiliateAddress(request);
+                    //    var businessRuleViolation = response.businessRuleViolation;
+                    //    if (businessRuleViolation != null)
+                    //    {
+                    //       var storeServiceErrorMessage = businessRuleViolation.ViolationMessage + " (Type=" + businessRuleViolation.BusinessRuleViolationTypeCode + ")";
+                    //       throw new Exception(storeServiceErrorMessage);
+                    //    }
+                    //}
 
                 }
             }
@@ -3981,7 +4065,7 @@ namespace GA.BDC.Web.MGP.Controllers
                     var groupId = (from eg in dataProvider.event_group
                                    where eg.event_id == @event.Id
                                    select eg.group_id).Single();
-                    ViewBag.HasStatement = SAP.ZBapiGa.Client.HasSAPStatement(groupId.ToString());
+                    //ViewBag.HasStatement = SAP.ZBapiGa.Client.HasSAPStatement(groupId.ToString());
                 }
             }
             return View();

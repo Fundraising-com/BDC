@@ -16,54 +16,58 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale " content="en_US" />
 <meta property="og:site_name " content="Fundraising.com" />
-<div class="row">
-    <div class="col-sm-12" itemscope itemtype="http://schema.org/NewsArticle">
-        <h1 itemprop=" headline" style="font-size:25px;">@Model.Title</h1>        
-        <span>
-            Published: <span itemprop="datePublished">@Model.Published.ToShortDateString()</span>
-        </span>
-        <div class="col-lg-12">
-            <img class="img-responsive" ng-src="/Content/external/blog/@Model.ImageUrl" alt="@Model.Title" itemprop="image" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12" itemscope itemtype="http://schema.org/NewsArticle">
+            <h1 itemprop=" headline" style="font-size:25px;">@Model.Title</h1>
+            <span>
+                Published: <span itemprop="datePublished">@Model.Published.ToShortDateString()</span>
+            </span>
+            <div class="col-lg-12">
+                <img class="img-responsive" ng-src="/Content/external/blog/@Model.ImageUrl" alt="@Model.Title" itemprop="image" />
+                <br />
+            </div>
             <br />
         </div>
-        <br />
     </div>
-</div>
-<div class="row">
-   <div class="col-sm-12 col-md-9">
-      <p itemprop="description">@Html.Raw(@Model.Text)</p>
-      
-      @foreach (var tag in Model.Tags)
-   {
-      <span class="label label-info"><a ng-href="/blog/tag/@tag.Url" title="@tag.Name" style="color:white">@tag.Name</a></span>
-}
-      <br /><br />
-      <span><strong>SHARE</strong></span>
-      <br />
-      <span>
-         <a target="_blank" href="mailto:?subject=@shareUrl"><img src="/Content/images/public/blogShareEmail.png" style="width: 45px; height: 45px;" alt="Share it on your Email" /></a>
-         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@shareUrl"><img src="/Content/images/public/blogShareFacebook.png" style="width: 45px; height: 45px;" alt="Share it on Facebook" /></a>
-         <a target="_blank" href="http://pinterest.com/pin/create/button/?url=@shareUrl&media=https://www.fundraising.com/Content/external/blog/@Model.ImageUrl&description=@shareUrl"><img src="/Content/images/public/blogSharePinterest.png" style="width: 45px; height: 45px;" alt="Share it on Pinterest" /></a>
-         <a target="_blank" href="https://twitter.com/intent/tweet?text=@shareUrl"><img src="/Content/images/public/blogShareTwitter.png" style="width: 45px; height: 45px;" alt="Share it on Twitter" /></a>
-      </span>
-      <br /><br />
-      <strong class="hidden-xs hidden-sm">You may also like:</strong>
-      <div class="row hidden-xs hidden-sm">
-         @foreach (var randomPost in ViewBag.RandomPosts as IList<BlogPost>)
-      {
-         <div class="col-md-3 text-center">
-            <a ng-href="/blog/post/@randomPost.Url" class="thumbnail">
-               <img src="/Content/external/blog/@randomPost.ThumbnailUrl" alt="@randomPost.Title" class="img-responsive" />
-               <span>@randomPost.Title</span>
-               <br />
-               <span style="text-decoration: none; color: black">@randomPost.Summary</span>
-            </a>
-         </div>
-   }
-      </div>
-   </div>
-    <div class="hidden-xs col-sm-12 col-md-3">
-        @{ Html.RenderPartial("Blog/_lastPosts", ViewBag.LastPosts as List<BlogPost>); }
-        @{ Html.RenderPartial("Blog/_categories", ViewBag.Categories as List<BlogCategory>); }
     </div>
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-9">
+                <p itemprop="description">@Html.Raw(@Model.Text)</p>
+
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="label label-info"><a ng-href="/blog/tag/@tag.Url" title="@tag.Name" style="color:white">@tag.Name</a></span>
+                }
+                <br /><br />
+                <span><strong>SHARE</strong></span>
+                <br />
+                <span>
+                    <a target="_blank" href="mailto:?subject=@shareUrl"><img src="/Content/images/public/blogShareEmail.png" style="width: 45px; height: 45px;" alt="Share it on your Email" /></a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@shareUrl"><img src="/Content/images/public/blogShareFacebook.png" style="width: 45px; height: 45px;" alt="Share it on Facebook" /></a>
+                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url=@shareUrl&media=https://www.fundraising.com/Content/external/blog/@Model.ImageUrl&description=@shareUrl"><img src="/Content/images/public/blogSharePinterest.png" style="width: 45px; height: 45px;" alt="Share it on Pinterest" /></a>
+                    <a target="_blank" href="https://twitter.com/intent/tweet?text=@shareUrl"><img src="/Content/images/public/blogShareTwitter.png" style="width: 45px; height: 45px;" alt="Share it on Twitter" /></a>
+                </span>
+                <br /><br />
+                <strong class="hidden-xs hidden-sm">You may also like:</strong>
+                <div class="row hidden-xs hidden-sm">
+                    @foreach (var randomPost in ViewBag.RandomPosts as IList<BlogPost>)
+                    {
+                        <div class="col-md-3 text-center">
+                            <a ng-href="/blog/post/@randomPost.Url" class="thumbnail">
+                                <img src="/Content/external/blog/@randomPost.ThumbnailUrl" alt="@randomPost.Title" class="img-responsive" />
+                                <span>@randomPost.Title</span>
+                                <br />
+                                <span style="text-decoration: none; color: black">@randomPost.Summary</span>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-12 col-md-3">
+                @{ Html.RenderPartial("Blog/_lastPosts", ViewBag.LastPosts as List<BlogPost>); }
+                @{ Html.RenderPartial("Blog/_categories", ViewBag.Categories as List<BlogCategory>); }
+            </div>
+        </div>
+    </div>

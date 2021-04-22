@@ -1,0 +1,47 @@
+﻿@using GA.BDC.Web.Fundraising.MVC.Controllers
+@model IEnumerable<ProductModel>
+@{
+    ViewBag.Title = "All Fundraising Ideas - Fundraising.com";
+    ViewBag.Description = "If you need funds for your organization these are some great Fundraising Products and Ideas";
+    ViewBag.Keywords = "Ideas for non profit, school, help fundraising, chocolate Fundraising, buy online";
+    Layout = "~/Views/Shared/_layout3.cshtml";
+    ViewBag.CanonicalUrl = Url.Action("All Fundraising Products", "Home");
+
+}
+
+
+<div class="container-fluid NewSiteFontSize">
+    <div class="allproducts">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+                <br />
+                <h2>ALL PRODUCTS</h2>
+                From schools to sports teams, there are plenty of groups who need help raising money.
+                Thankfully, our enjoyable fundraising campaigns make it easy to get the money you need with products that everyone loves.
+            </div>
+
+        </div>
+    </div>
+   
+    <div class="lp">
+        <div class="row" style="text-align: center;margin-top:25px;margin-left:0;margin-right:0px">
+            @foreach (ProductModel product in Model)
+            {
+                <div class="col-md-3 col-sm-3" style="display: inline-block; float: none; text-align: left;  text-align: center; margin-bottom:20px">
+                    <a href="@product.Url" style="text-decoration:none;color:black;margin:4px" title="@product.Name" class="img-thumbnail">
+                        <img src="@product.Image" alt="@product.Name" class="img-responsive"><br />
+                        <span class="categoryFontSize">@product.Name</span>
+                    </a>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+

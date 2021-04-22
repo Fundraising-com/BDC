@@ -20,7 +20,7 @@
         vm.hideBrochure = 0;
 
 
-
+        //redirect quick hack for ship to home and order taker tumblers
         vm.ReDir1 = window.location.href;
         if (vm.ReDir1 === 'https://www.fundraising.com/products/ship-to-home/all-ship-to-home/') {
             $window.location.href = 'tel:18004435353';
@@ -31,11 +31,11 @@
         else if (vm.ReDir1 === 'https://www.fundraising.com/products/ship-to-home/all-ship-to-home/efundraising') {
             $window.location.href = "https://www.efundraising.com";
         }
+       
 
 
 
-
-        vm.FeaturedProducts = ProductsFactory.Product.query({ isFeatured: true }, { isArray: true, cache: true });
+        //vm.FeaturedProducts = ProductsFactory.Product.query({ isFeatured: true }, { isArray: true, cache: true });
         vm.Get = function (productId) {
             ProductsFactory.Product.get({ id: productId }, { isArray: false, cache: true }).$promise.then(
                 function (data) {
@@ -111,6 +111,9 @@
         };
 
         vm.OrderBrochure = function () {
+
+            if (vm.OrderBrochure.Members == null) {
+                vm.OrderBrochure.Members = 1;}
 
             var notification = {
                 Type: 22,

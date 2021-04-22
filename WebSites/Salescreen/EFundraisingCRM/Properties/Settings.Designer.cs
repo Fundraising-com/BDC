@@ -12,7 +12,7 @@ namespace efundraising.EFundraisingCRM.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,8 +26,8 @@ namespace efundraising.EFundraisingCRM.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CAEFR3K01-DEV;Initial Catalog=eFundraisingProd;Integrated Security=Tr" +
-            "ue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=34.70.73.252;Initial Catalog=eFundraisingProd;User Id=sqlserver;Passw" +
+            "ord=IvwBq5o16F9nnnOm")]
         public string eFundraisingProdConnectionString1 {
             get {
                 return ((string)(this["eFundraisingProdConnectionString1"]));
@@ -122,8 +122,8 @@ namespace efundraising.EFundraisingCRM.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=gasqlt01;Initial Catalog=eFundraisingProd;User ID=crm_user;Password=%" +
-            "J$VQg4#GRj1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=34.70.73.252;Initial Catalog=efundstore;connection timeout=100;User I" +
+            "d=sqlserver;Password=IvwBq5o16F9nnnOm\"")]
         public string eFundraisingProdConnectionString2 {
             get {
                 return ((string)(this["eFundraisingProdConnectionString2"]));

@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.Cloud.Diagnostics.AspNet</name>
+    </assembly>
+    <members>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter">
+            <summary>
+             Google Cloud Error Reporting <see cref="T:System.Web.Mvc.IExceptionFilter"/>.
+            </summary>
+            
+            <example>
+            <code>
+            public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+            {
+              // Add a catch all for the uncaught exceptions.
+              string projectId = "[Google Cloud Platform project ID]";
+              string serviceName = "[Name of service]";
+              string version = "[Version of service]";
+              // Add a catch all for the uncaught exceptions.
+              filters.Add(ErrorReportingExceptionFilter.Create(projectId, serviceName, version));
+            }
+            </code>
+            </example>
+            
+            <remarks>
+            Reports unhandled exceptions to Google Cloud Error Reporting.
+            The filter should be registered first in ASP.NET MVC versions 1 and 2 and last
+            in ASP.NET MVC versions 3 and higher. See:
+            https://msdn.microsoft.com/en-us/library/system.web.mvc.iexceptionfilter.onexception(v=vs.118).aspx
+            Docs: https://cloud.google.com/error-reporting/docs/
+            </remarks>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter.Create(System.String,System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter"/> using credentials as
+            defined by <see cref="M:Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefaultAsync"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null.</param>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter.Create(System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter"/> using credentials as
+            defined by <see cref="M:Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefaultAsync"/>.
+            <para>
+            Can be used when running on Google App Engine or Google Compute Engine.
+            The Google Cloud Platform project to report errors to will detected from the
+            current platform.
+            </para>
+            </summary>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter.OnException(System.Web.Mvc.ExceptionContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionFilter.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger">
+            <summary>
+             Google Cloud Error Reporting <see cref="T:System.Web.Http.ExceptionHandling.ExceptionLogger"/>.
+            </summary>
+            
+            <example>
+            <code>
+            public static void Register(HttpConfiguration config)
+            {
+              // Add a catch all for the uncaught exceptions.
+              string projectId = "[Google Cloud Platform project ID]";
+              string serviceName = "[Name of service]";
+              string version = "[Version of service]";
+              // Add a catch all for the uncaught exceptions.
+              config.Services.Add(typeof(IExceptionLogger),
+                  ErrorReportingExceptionLogger.Create(projectId, serviceName, version));
+            }
+            </code>
+            </example>
+            
+            <remarks>
+            Reports unhandled exceptions to Google Cloud Error Reporting.
+            Docs: https://cloud.google.com/error-reporting/docs/
+            </remarks>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger.Create(System.String,System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger"/> using credentials as
+            defined by <see cref="M:Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefaultAsync"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null.</param>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param> 
+             <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger.Create(System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger"/> using credentials as
+            defined by <see cref="M:Google.Apis.Auth.OAuth2.GoogleCredential.GetApplicationDefaultAsync"/>.
+            <para>
+            Can be used when running on Google App Engine or Google Compute Engine.
+            The Google Cloud Platform project to report errors to will detected from the
+            current platform.
+            </para>
+            </summary>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param> 
+             <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger.LogAsync(System.Web.Http.ExceptionHandling.ExceptionLoggerContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger.Log(System.Web.Http.ExceptionHandling.ExceptionLoggerContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger.ShouldLog(System.Web.Http.ExceptionHandling.ExceptionLoggerContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ErrorReportingExceptionLogger.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.ExceptionContextWrapper">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IContextWrapper"/> for an <see cref="T:System.Web.Mvc.ExceptionContext"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ExceptionContextWrapper.GetHttpMethod">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ExceptionContextWrapper.GetUri">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ExceptionContextWrapper.GetUserAgent">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.ExceptionLoggerContextWrapper">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IContextWrapper"/> for an <see cref="T:System.Web.Http.ExceptionHandling.ExceptionLoggerContext"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ExceptionLoggerContextWrapper.GetHttpMethod">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ExceptionLoggerContextWrapper.GetUri">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ExceptionLoggerContextWrapper.GetUserAgent">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger">
+             <summary>
+             Google Cloud Error Reporting Logger. Reports exceptions to Stackdriver Error Reporting API.
+             </summary>
+             
+             <example>
+             <code>
+             string projectId = "[Google Cloud Platform project ID]";
+             string serviceName = "[Name of service]";
+             string version = "[Version of service]";
+             var exceptionLogger = GoogleExceptionLogger.Create(projectId, serviceName, version);
+            
+             try
+             {
+                 string scores = File.ReadAllText(@"C:\Scores.txt");
+                 Console.WriteLine(scores);
+             }
+             catch (IOException e)
+             {
+                 exceptionLogger.Log(e);
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger.Create(System.String,System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null.</param>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger.Create(System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger"/>.
+            <para>
+            Can be used when running on Google App Engine or Google Compute Engine.
+            The Google Cloud Platform project to report errors to will detected from the
+            current platform.
+            </para>
+            </summary>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger.Log(System.Exception,System.Web.HttpContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger.LogAsync(System.Exception,System.Web.HttpContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleExceptionLogger.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger">
+             <summary>
+             Google Cloud Error Reporting Logger for Web API applications.
+             Reports exceptions to Stackdriver Error Reporting API.
+             </summary>
+             
+             <example>
+             <code>
+             string projectId = "[Google Cloud Platform project ID]";
+             string serviceName = "[Name of service]";
+             string version = "[Version of service]";
+             var exceptionLogger = GoogleWebApiExceptionLogger.Create(projectId, serviceName, version);
+            
+             try
+             {
+                 string scores = File.ReadAllText(@"C:\Scores.txt");
+                 Console.WriteLine(scores);
+             }
+             catch (IOException e)
+             {
+                 exceptionLogger.Log(e, ActionContext);
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Create(System.String,System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger"/>.
+            </summary>
+            <param name="projectId">The Google Cloud Platform project ID. Must not be null.</param>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Create(System.String,System.String,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">
+            <summary>
+            Creates an instance of <see cref="T:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger"/>.
+            <para>
+            Can be used when running on Google App Engine or Google Compute Engine.
+            The Google Cloud Platform project to report errors to will detected from the
+            current platform.
+            </para>
+            </summary>
+            <param name="serviceName">An identifier of the service, such as the name of the executable or job. May be null.</param>
+            <param name="version">Represents the source code version that the developer provided. May be null.</param>
+            <param name="options">Optional, error reporting options.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Log(System.Exception,System.Web.Http.Controllers.HttpActionContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.LogAsync(System.Exception,System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.HttpActionContextWrapper">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IContextWrapper"/> for an <see cref="T:System.Web.Http.Controllers.HttpActionContext"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.HttpActionContextWrapper.GetHttpMethod">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.HttpActionContextWrapper.GetUri">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.HttpActionContextWrapper.GetUserAgent">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.HttpContextWrapper">
+            <summary>
+            An <see cref="T:Google.Cloud.Diagnostics.Common.IContextWrapper"/> for an <see cref="T:System.Web.HttpContext"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.HttpContextWrapper.GetHttpMethod">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.HttpContextWrapper.GetUri">
+            <inheritdoc />
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.HttpContextWrapper.GetUserAgent">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.IExceptionLogger">
+            <summary>
+            A general purpose exception logger. If used from within Web API controllers
+            is possible that HTTP context information is not logged alongside error information.
+            Please use <see cref="T:Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger"/> instead.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.IExceptionLogger.Log(System.Exception,System.Web.HttpContext)">
+            <summary>
+            Logs an exception that occurred.
+            </summary>
+            <param name="exception">The exception to log. Must not be null.</param>
+            <param name="context">Optional, the current HTTP context. If unset the
+                current context will be retrieved automatically.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.IExceptionLogger.LogAsync(System.Exception,System.Web.HttpContext,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously logs an exception that occurred.
+            </summary>
+            <param name="exception">The exception to log. Must not be null.</param>
+            <param name="context">Optional, the current HTTP context. If unset the
+                current context will be retrieved automatically.</param>
+            <param name="cancellationToken">Optional, The token to monitor for cancellation requests.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger">
+            <summary>
+            An exception logger for use from withing a Web Api application.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.Log(System.Exception,System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Logs an exception that occurred.
+            </summary>
+            <param name="exception">The exception to log. Must not be null.</param>
+            <param name="context">Optional, the current HTTP action context from which to get HTTP context information.
+            If it is not set, no HTTP context information will be logged alongside exception information.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.LogAsync(System.Exception,System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously logs an exception that occurred.
+            </summary>
+            <param name="exception">The exception to log. Must not be null.</param>
+            <param name="context">Optional, the current HTTP action context from which to get HTTP context information.
+            If it is not set, no HTTP context information will be logged alongside exception information.</param>
+            <param name="cancellationToken">Optional, the token to monitor for cancellation requests.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.CloudTrace">
+            <summary>
+             Google Trace for ASP.NET Applications.
+            </summary>
+            
+            <example>
+            <code>
+             public class Global : HttpApplication
+             { 
+                  public override void Init()
+                  {
+                      base.Init();
+                      CloudTrace.Initialize(this, "some-project-id");
+                  }
+             }
+            </code>
+            </example>
+            
+            <example>
+            <code>
+            public void MakeHttpRequest()
+            {
+                var traceHeaderHandler = CloudTrace.CreateTracingHttpMessageHandler();
+                using (var httpClient = HttpClientFactory.Create(traceHeaderHandler))
+                {
+                    ...
+                }
+            }
+            </code>
+            </example>
+            
+            <example>
+            <code>
+            public void DoSomething()
+            {
+                using (CloudTrace.Tracer.StartSpan("DoSomething"))
+                {
+                    ...
+                }
+            }
+            </code>
+            </example>
+            
+            <remarks>
+            Handles tracing for ASP.NET applications and sends data to the Stackdriver Trace API Reporting.
+            
+            By default when initialized a small sampling of http requests will automatically be traced.  Additional
+            trace data can be collected manually.
+            
+            Docs: https://cloud.google.com/trace/docs/
+            </remarks>
+        </member>
+        <member name="F:Google.Cloud.Diagnostics.AspNet.CloudTrace.Tracer">
+            <summary>
+            Gets the <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> for tracing. It can be used
+            for creating spans for a trace as well as adding meta data to them.
+            This <see cref="T:Google.Cloud.Diagnostics.Common.IManagedTracer"/> is a singleton.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.CloudTrace.CreateTracingHttpMessageHandler">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.Common.TraceHeaderPropagatingHandler"/> to propagate trace headers
+            in Http requests.
+            <example>
+            <code>
+            public void DoSomething()
+            {
+                var traceHeaderHandler = CloudTrace.CreateTracingHttpMessageHandler();
+                using (var httpClient = new HttpClient(traceHeaderHandler))
+                {
+                    ...
+                }
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.CloudTrace.Initialize(System.Web.HttpApplication,System.String,Google.Cloud.Diagnostics.Common.TraceOptions,Google.Cloud.Trace.V1.TraceServiceClient,Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate)">
+            <summary>
+            Initialize tracing for this application.
+            </summary>
+            <param name="application">The Http application.</param>
+            <param name="projectId">Optional if running on Google App Engine or Google Compute Engine.
+                The Google Cloud Platform project ID. If unspecified and running on GAE or GCE the project ID will be
+                detected from the platform.</param>
+            <param name="options">Optional trace options, if unset the default will be used.</param>
+            <param name="client">Optional trace client, if unset the default will be used.</param>
+            <param name="traceFallbackPredicate">Optional function to trace requests. If the trace header is not set
+                then this function will be called to determine if a given request should be traced.  This will
+                not override trace headers.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.CloudTrace.InitializeInternal(System.Web.HttpApplication,System.String,Google.Cloud.Diagnostics.Common.TraceOptions,Google.Cloud.Trace.V1.TraceServiceClient,Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate)">
+            <summary>
+            Only used for testing.  See <see cref="M:Google.Cloud.Diagnostics.AspNet.CloudTrace.Initialize(System.Web.HttpApplication,System.String,Google.Cloud.Diagnostics.Common.TraceOptions,Google.Cloud.Trace.V1.TraceServiceClient,Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate)"/> for details.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.CloudTrace.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.ContextInstanceManager">
+            <summary>
+            Manages storage of instances of types for the current <see cref="T:System.Web.HttpContext"/>.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ContextInstanceManager.Set``1(``0)">
+            <summary>
+            Sets the current value for a type.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.ContextInstanceManager.Get``1">
+            <summary>
+            Gets the current value for a type.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.Labels">
+            <summary>
+            A helper class to handle span labels.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.AspNet.Labels.AgentLabel">
+            <summary>
+            Gets a map with the label for the agent which contains the agent's name and version.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.Labels.FromHttpRequest(System.Web.HttpRequest)">
+            <summary>
+            Gets a map of labels for a span from an <see cref="T:System.Web.HttpRequest"/>, such as request size, method, ect.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.Labels.FromHttpResponse(System.Web.HttpResponse)">
+            <summary>
+            Gets a map of labels for a span from an <see cref="T:System.Web.HttpResponse"/>, such as status code.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.Labels.FromStackTrace(System.Diagnostics.StackTrace)">
+            <summary>
+            Creates a map of labels to represent a <see cref="T:System.Diagnostics.StackTrace"/> for a span.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate">
+            <summary>
+            Used to determine if an <see cref="T:System.Web.HttpRequest"/> should be traced. This will not override
+            a decision by the trace header. 
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate.DoNothing">
+            <summary>
+            A <see cref="T:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate"/> that does not have any effect on
+            trace decisions and does not disable tracing health checks.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate.Default">
+            <summary>
+            A default <see cref="T:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate"/> that only disables tracing health checks.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate.Create(System.Func{System.Web.HttpRequest,System.Nullable{System.Boolean}},System.Boolean)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate"/>.
+            </summary>
+            <remarks>
+            Ignoring of health checks (<paramref name="ignoreHealthChecks"/>) takes precedence over the
+            predicate (<paramref name="traceDecisionPredicate"/>).  If <paramref name="ignoreHealthChecks"/>
+            is true and the request is a health check <paramref name="traceDecisionPredicate"/> will not
+            be called.
+            </remarks>
+            <param name="traceDecisionPredicate">Used to determine if a request should be traced.
+            Takes an <see cref="T:System.Web.HttpRequest"/>.  It should return true if the request should be traced,
+            false if the request should not be traced and null if the decision should be left to other
+            sampling mechanisms. Must not be null.</param>
+            <param name="ignoreHealthChecks">Optional. True if Google App Engine health check requests should
+            not be traced. Defaults to true.</param>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate.ShouldTrace(System.Web.HttpRequest)">
+            <summary>
+            Used to determine if a request should be traced.  This will not override a trace header
+            decision.
+            </summary>
+            <param name="request">The HTTP request to check.</param>
+            <returns>True if the request should be traced, false if the request should not be traced
+            and null if the decision should be left to other sampling mechanisms.</returns>
+        </member>
+        <member name="M:Google.Cloud.Diagnostics.AspNet.TraceDecisionPredicate.IsHealthCheck(System.Web.HttpRequest)">
+            <summary>Returns true if the request for a GAE health check.</summary>
+        </member>
+    </members>
+</doc>

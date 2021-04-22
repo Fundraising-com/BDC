@@ -10,6 +10,11 @@
                parameters);
           },
 
+          SalesToProcessNEW: function (parameters) {
+              return $http.post(
+                  hosts.webApiReportsBaseUrl + "/salestoprocessnew/",
+                  parameters);
+          },
           SalesToProcess: function (parameters) {
               return $http.post(
                   hosts.webApiReportsBaseUrl + "/salestoprocess/",

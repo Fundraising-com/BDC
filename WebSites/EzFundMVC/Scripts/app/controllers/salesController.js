@@ -396,9 +396,12 @@
 												var shippingFee = 0;
 												vm.progress = 70;
 												vm.progressMessage = "Taking you to the Paypal website, be sure to come back to finish the Sale!";
-												createPaypalPayment().then(
-                                       function (data) {
-                                       	$window.location.href = data.RedirectUrl;
+                                                createPaypalPayment().then(
+                                        function (data) {
+                                            NotificationFactory.Notification.save({ Type: 13, ExternalId: vm.Sale.OrderId, Email: "fake@fake.com" });
+                                            vm.progress = 90;
+                                            NotificationFactory.Notification.save({ Type: 7, ExternalId: vm.Sale.OrderId, Email: "fake@fake.com" });
+                                            $window.location.href = data.RedirectUrl;
                                        },
                                        function (error) {
                                        	vm.ActionState = 4;
@@ -553,7 +556,7 @@
         */
         function chargeCreditCard() {
             var creditCard = {
-                Number: vm.Sale.CreditCard.Number, Holder: vm.Sale.CreditCard.Holder, ExpirationDate: vm.Sale.CreditCard.ExpirationDate,
+                Email: vm.Sale.Client.Email, Number: vm.Sale.CreditCard.Number, Holder: vm.Sale.CreditCard.Holder, ExpirationDate: vm.Sale.CreditCard.ExpirationDate,
                 CVV: vm.Sale.CreditCard.CVV, InternalPaymentMethod: vm.Sale.InternalPaymentMethod, Amount: vm.Sale.TotalAmount, Reference: vm.Sale.OrderId,
                 Address: {
                     Address1: vm.Sale.Client.Addresses[0].Address1, City: vm.Sale.Client.Addresses[0].City, Region: vm.Sale.Client.Addresses[0].Region,

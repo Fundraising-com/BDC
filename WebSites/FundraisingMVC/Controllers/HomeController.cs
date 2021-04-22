@@ -11,6 +11,10 @@ using MvcSiteMapProvider;
 using Ninject;
 using Ninject.Extensions.Logging;
 using System.Net;
+using Google.Cloud.Diagnostics.AspNet;
+using System.Threading.Tasks;
+using System.Xml;
+
 
 namespace GA.BDC.Web.Fundraising.MVC.Controllers
 {
@@ -50,6 +54,40 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
         
     }
 
+    public class ProductModel
+    {
+        public int Id 
+        {
+            get;
+            set;
+        }
+        public string Name
+        {
+            get;
+            set;
+        }
+        public string Url
+        {
+            get;
+            set;
+        }
+        public string Image
+        {
+            get;
+            set;
+        }
+        public int Order
+        {
+            get;
+            set;
+        }
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+    }
+
 
 
 
@@ -65,14 +103,52 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Index()
+
+
+        public ActionResult test()
         {
+
 
             ViewBag.HideBreadcrumbs = true;
             return View();
         }
 
+        public ActionResult Index()
+        {
 
+            
+            ViewBag.HideBreadcrumbs = true;
+            return View();
+        }
+
+        [MvcSiteMapNode(Title = "All Fundraising Products", ParentKey = "Root", Protocol = "https"), Route("all-fundraising-products")]
+        public ActionResult AllFundraisingProducts()
+        {
+
+            List<ProductModel> products = new List<ProductModel>();
+            //Load the XML file in XmlDocument.
+            XmlDocument doc = new XmlDocument();
+            doc.Load(Server.MapPath("~/Mvc.AllProducts.xml"));
+
+
+
+            //Loop through the selected Nodes.
+            foreach (XmlNode node in doc.SelectNodes("/AllProducts/Product"))
+            {
+                //Fetch the Node values and assign it to Model.
+                products.Add(new ProductModel
+                {
+                    Id = int.Parse(node["Id"].InnerText),
+                    Name = node["Name"].InnerText,
+                    Url = node["Url"].InnerText,
+                    Image = node["Image"].InnerText,
+                    Order = int.Parse(node["Order"].InnerText)
+
+                });
+            }
+
+            return View(products);
+        }
 
 
         [MvcSiteMapNode(Title = "Request a Kit", ParentKey = "Root", Protocol = "https"), Route("request-a-kit")]

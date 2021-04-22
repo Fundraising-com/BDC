@@ -411,14 +411,14 @@ namespace EFundraisingCRMWeb.Sales.SalesScreen
                                     if (a.AdjustmentNo == 1)
                                     {
                                         Items1.Discount = Convert.ToDecimal(a.AdjustmentAmount);
-                                        Items1.DiscountReasonId = a.ChargeID;
+                                        Items1.DiscountReasonId = a.ReasonID;
                                         Items1.DiscountBox.Text = a.AdjustmentAmount.ToString("C");
 
                                     }
                                     else if (a.AdjustmentNo == 2)
                                     {
                                         Items1.Surcharge = Convert.ToDecimal(a.AdjustmentAmount);
-                                        Items1.SurchargeReasonId = a.ChargeID;
+                                        Items1.SurchargeReasonId = a.ReasonID;
                                         Items1.SurchargeBox.Text = a.AdjustmentAmount.ToString("C");
                                     }
                                    

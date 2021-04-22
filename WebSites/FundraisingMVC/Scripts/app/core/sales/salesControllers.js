@@ -286,7 +286,7 @@
                                     InitialPhoneNumberEntered: "true",
                                     Comments: vm.Sale.Comments,
                                     RepresentativeId: vm.scope.$storage.Representative.Id,
-                                    //ConsultantId: vm.scope.$storage.Consultant.Id,
+                                    ConsultantId: 3450,
                                     ChannelCode: 'INT'
                                 }).$promise.then(
                                     function (lead) {

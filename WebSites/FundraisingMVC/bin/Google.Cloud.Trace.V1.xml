@@ -1,0 +1,1028 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.Cloud.Trace.V1</name>
+    </assembly>
+    <members>
+        <member name="T:Google.Cloud.Trace.V1.TraceReflection">
+            <summary>Holder for reflection information generated from google/devtools/cloudtrace/v1/trace.proto</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceReflection.Descriptor">
+            <summary>File descriptor for google/devtools/cloudtrace/v1/trace.proto</summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.Trace">
+            <summary>
+            A trace describes how long it takes for an application to perform an
+            operation. It consists of a set of spans, each of which represent a single
+            timed event within the operation.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.Trace.ProjectIdFieldNumber">
+            <summary>Field number for the "project_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.Trace.ProjectId">
+            <summary>
+            Project ID of the Cloud project where the trace data is stored.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.Trace.TraceIdFieldNumber">
+            <summary>Field number for the "trace_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.Trace.TraceId">
+            <summary>
+            Globally unique identifier for the trace. This identifier is a 128-bit
+            numeric value formatted as a 32-byte hex string. For example,
+            `382d4f4c6b7bb2f4a972559d9085001d`.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.Trace.SpansFieldNumber">
+            <summary>Field number for the "spans" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.Trace.Spans">
+            <summary>
+            Collection of spans in the trace.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.Traces">
+            <summary>
+            List of new or updated traces.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.Traces.Traces_FieldNumber">
+            <summary>Field number for the "traces" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.Traces.Traces_">
+            <summary>
+            List of traces.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceSpan">
+            <summary>
+            A span represents a single timed event within a trace. Spans can be nested
+            and form a trace tree. Often, a trace contains a root span that describes the
+            end-to-end latency of an operation and, optionally, one or more subspans for
+            its suboperations. Spans do not need to be contiguous. There may be gaps
+            between spans in a trace.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.SpanIdFieldNumber">
+            <summary>Field number for the "span_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.SpanId">
+            <summary>
+            Identifier for the span. Must be a 64-bit integer other than 0 and
+            unique within a trace. For example, `2205310701640571284`.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.KindFieldNumber">
+            <summary>Field number for the "kind" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.Kind">
+            <summary>
+            Distinguishes between spans generated in a particular context. For example,
+            two spans with the same name may be distinguished using `RPC_CLIENT`
+            and `RPC_SERVER` to identify queueing latency associated with the span.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.Name">
+            <summary>
+            Name of the span. Must be less than 128 bytes. The span name is sanitized
+            and displayed in the Stackdriver Trace tool in the
+            Google Cloud Platform Console.
+            The name may be a method name or some other per-call site name.
+            For the same executable and the same call point, a best practice is
+            to use a consistent name, which makes it easier to correlate
+            cross-trace spans.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.StartTimeFieldNumber">
+            <summary>Field number for the "start_time" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.StartTime">
+            <summary>
+            Start time of the span in nanoseconds from the UNIX epoch.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.EndTimeFieldNumber">
+            <summary>Field number for the "end_time" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.EndTime">
+            <summary>
+            End time of the span in nanoseconds from the UNIX epoch.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.ParentSpanIdFieldNumber">
+            <summary>Field number for the "parent_span_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.ParentSpanId">
+            <summary>
+            Optional. ID of the parent span, if any.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.LabelsFieldNumber">
+            <summary>Field number for the "labels" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceSpan.Labels">
+             <summary>
+             Collection of labels associated with the span. Label keys must be less than
+             128 bytes. Label values must be less than 16 kilobytes (10MB for
+             `/stacktrace` values).
+            
+             Some predefined label keys exist, or you may create your own. When creating
+             your own, we recommend the following formats:
+            
+             * `/category/product/key` for agents of well-known products (e.g.
+               `/db/mongodb/read_size`).
+             * `short_host/path/key` for domain-specific keys (e.g.
+               `foo.com/myproduct/bar`)
+            
+             Predefined labels include:
+            
+             *   `/agent`
+             *   `/component`
+             *   `/error/message`
+             *   `/error/name`
+             *   `/http/client_city`
+             *   `/http/client_country`
+             *   `/http/client_protocol`
+             *   `/http/client_region`
+             *   `/http/host`
+             *   `/http/method`
+             *   `/http/path`
+             *   `/http/redirected_url`
+             *   `/http/request/size`
+             *   `/http/response/size`
+             *   `/http/route`
+             *   `/http/status_code`
+             *   `/http/url`
+             *   `/http/user_agent`
+             *   `/pid`
+             *   `/stacktrace`
+             *   `/tid`
+             </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceSpan.Types">
+            <summary>Container for nested types declared in the TraceSpan message type.</summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceSpan.Types.SpanKind">
+            <summary>
+            Type of span. Can be used to specify additional relationships between spans
+            in addition to a parent/child relationship.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.Types.SpanKind.Unspecified">
+            <summary>
+            Unspecified.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.Types.SpanKind.RpcServer">
+            <summary>
+            Indicates that the span covers server-side handling of an RPC or other
+            remote network request.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.TraceSpan.Types.SpanKind.RpcClient">
+            <summary>
+            Indicates that the span covers the client-side wrapper around an RPC or
+            other remote request.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.ListTracesRequest">
+            <summary>
+            The request message for the `ListTraces` method. All fields are required
+            unless specified.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.ProjectIdFieldNumber">
+            <summary>Field number for the "project_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.ProjectId">
+            <summary>
+            Required. ID of the Cloud project where the trace data is stored.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.ViewFieldNumber">
+            <summary>Field number for the "view" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.View">
+            <summary>
+            Optional. Type of data returned for traces in the list. Default is
+            `MINIMAL`.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.PageSizeFieldNumber">
+            <summary>Field number for the "page_size" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.PageSize">
+            <summary>
+            Optional. Maximum number of traces to return. If not specified or &lt;= 0, the
+            implementation selects a reasonable value.  The implementation may
+            return fewer traces than the requested page size.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.PageTokenFieldNumber">
+            <summary>Field number for the "page_token" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.PageToken">
+            <summary>
+            Token identifying the page of results to return. If provided, use the
+            value of the `next_page_token` field from a previous request.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.StartTimeFieldNumber">
+            <summary>Field number for the "start_time" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.StartTime">
+            <summary>
+            Start of the time interval (inclusive) during which the trace data was
+            collected from the application.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.EndTimeFieldNumber">
+            <summary>Field number for the "end_time" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.EndTime">
+            <summary>
+            End of the time interval (inclusive) during which the trace data was
+            collected from the application.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.FilterFieldNumber">
+            <summary>Field number for the "filter" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.Filter">
+             <summary>
+             Optional. A filter against labels for the request.
+            
+             By default, searches use prefix matching. To specify exact match, prepend
+             a plus symbol (`+`) to the search term.
+             Multiple terms are ANDed. Syntax:
+            
+             *   `root:NAME_PREFIX` or `NAME_PREFIX`: Return traces where any root
+                 span starts with `NAME_PREFIX`.
+             *   `+root:NAME` or `+NAME`: Return traces where any root span's name is
+                 exactly `NAME`.
+             *   `span:NAME_PREFIX`: Return traces where any span starts with
+                 `NAME_PREFIX`.
+             *   `+span:NAME`: Return traces where any span's name is exactly
+                 `NAME`.
+             *   `latency:DURATION`: Return traces whose overall latency is
+                 greater or equal to than `DURATION`. Accepted units are nanoseconds
+                 (`ns`), milliseconds (`ms`), and seconds (`s`). Default is `ms`. For
+                 example, `latency:24ms` returns traces whose overall latency
+                 is greater than or equal to 24 milliseconds.
+             *   `label:LABEL_KEY`: Return all traces containing the specified
+                 label key (exact match, case-sensitive) regardless of the key:value
+                 pair's value (including empty values).
+             *   `LABEL_KEY:VALUE_PREFIX`: Return all traces containing the specified
+                 label key (exact match, case-sensitive) whose value starts with
+                 `VALUE_PREFIX`. Both a key and a value must be specified.
+             *   `+LABEL_KEY:VALUE`: Return all traces containing a key:value pair
+                 exactly matching the specified text. Both a key and a value must be
+                 specified.
+             *   `method:VALUE`: Equivalent to `/http/method:VALUE`.
+             *   `url:VALUE`: Equivalent to `/http/url:VALUE`.
+             </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.OrderByFieldNumber">
+            <summary>Field number for the "order_by" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesRequest.OrderBy">
+             <summary>
+             Optional. Field used to sort the returned traces.
+             Can be one of the following:
+            
+             *   `trace_id`
+             *   `name` (`name` field of root span in the trace)
+             *   `duration` (difference between `end_time` and `start_time` fields of
+                  the root span)
+             *   `start` (`start_time` field of the root span)
+            
+             Descending order can be specified by appending `desc` to the sort field
+             (for example, `name desc`).
+            
+             Only one sort field is permitted.
+             </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.ListTracesRequest.Types">
+            <summary>Container for nested types declared in the ListTracesRequest message type.</summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.ListTracesRequest.Types.ViewType">
+            <summary>
+            Type of data returned for traces in the list.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.Types.ViewType.Unspecified">
+            <summary>
+            Default is `MINIMAL` if unspecified.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.Types.ViewType.Minimal">
+            <summary>
+            Minimal view of the trace record that contains only the project
+            and trace IDs.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.Types.ViewType.Rootspan">
+            <summary>
+            Root span view of the trace record that returns the root spans along
+            with the minimal trace data.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesRequest.Types.ViewType.Complete">
+            <summary>
+            Complete view of the trace record that contains the actual trace data.
+            This is equivalent to calling the REST `get` or RPC `GetTrace` method
+            using the ID of each listed trace.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.ListTracesResponse">
+            <summary>
+            The response message for the `ListTraces` method.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesResponse.TracesFieldNumber">
+            <summary>Field number for the "traces" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesResponse.Traces">
+            <summary>
+            List of trace records as specified by the view parameter.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.ListTracesResponse.NextPageTokenFieldNumber">
+            <summary>Field number for the "next_page_token" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.ListTracesResponse.NextPageToken">
+            <summary>
+            If defined, indicates that there are more traces that match the request
+            and that this value should be passed to the next request to continue
+            retrieving additional traces.
+            </summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.ListTracesResponse.GetEnumerator">
+            <summary>Returns an enumerator that iterates through the resources in this response.</summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.GetTraceRequest">
+            <summary>
+            The request message for the `GetTrace` method.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.GetTraceRequest.ProjectIdFieldNumber">
+            <summary>Field number for the "project_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.GetTraceRequest.ProjectId">
+            <summary>
+            Required. ID of the Cloud project where the trace data is stored.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.GetTraceRequest.TraceIdFieldNumber">
+            <summary>Field number for the "trace_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.GetTraceRequest.TraceId">
+            <summary>
+            Required. ID of the trace to return.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.PatchTracesRequest">
+            <summary>
+            The request message for the `PatchTraces` method.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.PatchTracesRequest.ProjectIdFieldNumber">
+            <summary>Field number for the "project_id" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.PatchTracesRequest.ProjectId">
+            <summary>
+            Required. ID of the Cloud project where the trace data is stored.
+            </summary>
+        </member>
+        <member name="F:Google.Cloud.Trace.V1.PatchTracesRequest.TracesFieldNumber">
+            <summary>Field number for the "traces" field.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.PatchTracesRequest.Traces">
+            <summary>
+            Required. The body of the message.
+            </summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceService">
+            <summary>
+            This file describes an API for collecting and viewing traces and spans
+            within a trace.  A Trace is a collection of spans corresponding to a single
+            operation or set of operations for an application. A span is an individual
+            timed event which forms a node of the trace tree. Spans for a single trace
+            may span multiple services.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceService.TraceServiceBase">
+            <summary>Base class for server-side implementations of TraceService</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceBase.ListTraces(Google.Cloud.Trace.V1.ListTracesRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceBase.GetTrace(Google.Cloud.Trace.V1.GetTraceRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceBase.PatchTraces(Google.Cloud.Trace.V1.PatchTracesRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceService.TraceServiceClient">
+            <summary>Client for TraceService</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.#ctor(Grpc.Core.Channel)">
+            <summary>Creates a new client for TraceService</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for TraceService that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.ListTraces(Google.Cloud.Trace.V1.ListTracesRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.ListTraces(Google.Cloud.Trace.V1.ListTracesRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.ListTracesAsync(Google.Cloud.Trace.V1.ListTracesRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.ListTracesAsync(Google.Cloud.Trace.V1.ListTracesRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.GetTrace(Google.Cloud.Trace.V1.GetTraceRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.GetTrace(Google.Cloud.Trace.V1.GetTraceRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.GetTraceAsync(Google.Cloud.Trace.V1.GetTraceRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.GetTraceAsync(Google.Cloud.Trace.V1.GetTraceRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.PatchTraces(Google.Cloud.Trace.V1.PatchTracesRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.PatchTraces(Google.Cloud.Trace.V1.PatchTracesRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.PatchTracesAsync(Google.Cloud.Trace.V1.PatchTracesRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.PatchTracesAsync(Google.Cloud.Trace.V1.PatchTracesRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.TraceServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.BindService(Google.Cloud.Trace.V1.TraceService.TraceServiceBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceService.BindService(Grpc.Core.ServiceBinderBase,Google.Cloud.Trace.V1.TraceService.TraceServiceBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceServiceSettings">
+            <summary>Settings for <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/> instances.</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceSettings.GetDefault">
+            <summary>Get a new instance of the default <see cref="T:Google.Cloud.Trace.V1.TraceServiceSettings"/>.</summary>
+            <returns>A new instance of the default <see cref="T:Google.Cloud.Trace.V1.TraceServiceSettings"/>.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceSettings.#ctor">
+            <summary>Constructs a new <see cref="T:Google.Cloud.Trace.V1.TraceServiceSettings"/> object with default settings.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceSettings.ListTracesSettings">
+            <summary>
+            <see cref="T:Google.Api.Gax.Grpc.CallSettings"/> for synchronous and asynchronous calls to
+            <c>TraceServiceClient.ListTraces</c> and <c>TraceServiceClient.ListTracesAsync</c>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><description>Initial retry delay: 100 milliseconds.</description></item>
+            <item><description>Retry delay multiplier: 1.2</description></item>
+            <item><description>Retry maximum delay: 1000 milliseconds.</description></item>
+            <item><description>Maximum attempts: Unlimited</description></item>
+            <item><description>Timeout: 45 seconds.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceSettings.GetTraceSettings">
+            <summary>
+            <see cref="T:Google.Api.Gax.Grpc.CallSettings"/> for synchronous and asynchronous calls to <c>TraceServiceClient.GetTrace</c>
+             and <c>TraceServiceClient.GetTraceAsync</c>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><description>Initial retry delay: 100 milliseconds.</description></item>
+            <item><description>Retry delay multiplier: 1.2</description></item>
+            <item><description>Retry maximum delay: 1000 milliseconds.</description></item>
+            <item><description>Maximum attempts: Unlimited</description></item>
+            <item><description>Timeout: 45 seconds.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceSettings.PatchTracesSettings">
+            <summary>
+            <see cref="T:Google.Api.Gax.Grpc.CallSettings"/> for synchronous and asynchronous calls to
+            <c>TraceServiceClient.PatchTraces</c> and <c>TraceServiceClient.PatchTracesAsync</c>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><description>Initial retry delay: 100 milliseconds.</description></item>
+            <item><description>Retry delay multiplier: 1.2</description></item>
+            <item><description>Retry maximum delay: 1000 milliseconds.</description></item>
+            <item><description>Maximum attempts: Unlimited</description></item>
+            <item><description>Timeout: 45 seconds.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceSettings.Clone">
+            <summary>Creates a deep clone of this object, with all the same property values.</summary>
+            <returns>A deep clone of this <see cref="T:Google.Cloud.Trace.V1.TraceServiceSettings"/> object.</returns>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceServiceClientBuilder">
+            <summary>
+            Builder class for <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/> to provide simple configuration of credentials, endpoint etc.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceClientBuilder.Settings">
+            <summary>The settings to use for RPCs, or <c>null</c> for the default settings.</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientBuilder.Build">
+            <inheritdoc/>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientBuilder.BuildAsync(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientBuilder.GetDefaultEndpoint">
+            <inheritdoc/>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientBuilder.GetDefaultScopes">
+            <inheritdoc/>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientBuilder.GetChannelPool">
+            <inheritdoc/>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceClientBuilder.DefaultGrpcAdapter">
+            <inheritdoc/>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceServiceClient">
+            <summary>TraceService client wrapper, for convenient use.</summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceClient.DefaultEndpoint">
+            <summary>
+            The default endpoint for the TraceService service, which is a host of "cloudtrace.googleapis.com" and a port
+            of 443.
+            </summary>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceClient.DefaultScopes">
+            <summary>The default TraceService scopes.</summary>
+            <remarks>
+            The default TraceService scopes are:
+            <list type="bullet">
+            <item><description>https://www.googleapis.com/auth/cloud-platform</description></item>
+            <item><description>https://www.googleapis.com/auth/trace.append</description></item>
+            <item><description>https://www.googleapis.com/auth/trace.readonly</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.CreateAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously creates a <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/> using the default credentials, endpoint and
+            settings. To specify custom credentials or other settings, use <see cref="T:Google.Cloud.Trace.V1.TraceServiceClientBuilder"/>.
+            </summary>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> to use while creating the client.
+            </param>
+            <returns>The task representing the created <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/>.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.Create">
+            <summary>
+            Synchronously creates a <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/> using the default credentials, endpoint and
+            settings. To specify custom credentials or other settings, use <see cref="T:Google.Cloud.Trace.V1.TraceServiceClientBuilder"/>.
+            </summary>
+            <returns>The created <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/>.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Trace.V1.TraceServiceSettings)">
+            <summary>
+            Creates a <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/> which uses the specified call invoker for remote operations.
+            </summary>
+            <param name="callInvoker">
+            The <see cref="T:Grpc.Core.CallInvoker"/> for remote operations. Must not be null.
+            </param>
+            <param name="settings">Optional <see cref="T:Google.Cloud.Trace.V1.TraceServiceSettings"/>.</param>
+            <returns>The created <see cref="T:Google.Cloud.Trace.V1.TraceServiceClient"/>.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.ShutdownDefaultChannelsAsync">
+            <summary>
+            Shuts down any channels automatically created by <see cref="M:Google.Cloud.Trace.V1.TraceServiceClient.Create"/> and
+            <see cref="M:Google.Cloud.Trace.V1.TraceServiceClient.CreateAsync(System.Threading.CancellationToken)"/>. Channels which weren't automatically created are not
+            affected.
+            </summary>
+            <remarks>
+            After calling this method, further calls to <see cref="M:Google.Cloud.Trace.V1.TraceServiceClient.Create"/> and
+            <see cref="M:Google.Cloud.Trace.V1.TraceServiceClient.CreateAsync(System.Threading.CancellationToken)"/> will create new channels, which could in turn be shut down
+            by another call to this method.
+            </remarks>
+            <returns>A task representing the asynchronous shutdown operation.</returns>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceClient.GrpcClient">
+            <summary>The underlying gRPC TraceService client</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.ListTraces(Google.Cloud.Trace.V1.ListTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A pageable sequence of <see cref="T:Google.Cloud.Trace.V1.Trace"/> resources.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.ListTracesAsync(Google.Cloud.Trace.V1.ListTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A pageable asynchronous sequence of <see cref="T:Google.Cloud.Trace.V1.Trace"/> resources.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.ListTraces(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="pageToken">
+            The token returned from the previous request. A value of <c>null</c> or an empty string retrieves the first
+            page.
+            </param>
+            <param name="pageSize">
+            The size of page to request. The response will not be larger than this, but may be smaller. A value of
+            <c>null</c> or <c>0</c> uses a server-defined page size.
+            </param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A pageable sequence of <see cref="T:Google.Cloud.Trace.V1.Trace"/> resources.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.ListTracesAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="pageToken">
+            The token returned from the previous request. A value of <c>null</c> or an empty string retrieves the first
+            page.
+            </param>
+            <param name="pageSize">
+            The size of page to request. The response will not be larger than this, but may be smaller. A value of
+            <c>null</c> or <c>0</c> uses a server-defined page size.
+            </param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A pageable asynchronous sequence of <see cref="T:Google.Cloud.Trace.V1.Trace"/> resources.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.GetTrace(Google.Cloud.Trace.V1.GetTraceRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>The RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.GetTraceAsync(Google.Cloud.Trace.V1.GetTraceRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.GetTraceAsync(Google.Cloud.Trace.V1.GetTraceRequest,System.Threading.CancellationToken)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> to use for this RPC.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.GetTrace(System.String,System.String,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="traceId">
+            Required. ID of the trace to return.
+            </param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>The RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.GetTraceAsync(System.String,System.String,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="traceId">
+            Required. ID of the trace to return.
+            </param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.GetTraceAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="traceId">
+            Required. ID of the trace to return.
+            </param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> to use for this RPC.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.PatchTraces(Google.Cloud.Trace.V1.PatchTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>The RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.PatchTracesAsync(Google.Cloud.Trace.V1.PatchTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.PatchTracesAsync(Google.Cloud.Trace.V1.PatchTracesRequest,System.Threading.CancellationToken)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> to use for this RPC.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.PatchTraces(System.String,Google.Cloud.Trace.V1.Traces,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="traces">
+            Required. The body of the message.
+            </param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>The RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.PatchTracesAsync(System.String,Google.Cloud.Trace.V1.Traces,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="traces">
+            Required. The body of the message.
+            </param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClient.PatchTracesAsync(System.String,Google.Cloud.Trace.V1.Traces,System.Threading.CancellationToken)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="projectId">
+            Required. ID of the Cloud project where the trace data is stored.
+            </param>
+            <param name="traces">
+            Required. The body of the message.
+            </param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> to use for this RPC.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="T:Google.Cloud.Trace.V1.TraceServiceClientImpl">
+            <summary>TraceService client wrapper implementation, for convenient use.</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.#ctor(Google.Cloud.Trace.V1.TraceService.TraceServiceClient,Google.Cloud.Trace.V1.TraceServiceSettings)">
+            <summary>
+            Constructs a client wrapper for the TraceService service, with the specified gRPC client and settings.
+            </summary>
+            <param name="grpcClient">The underlying gRPC client.</param>
+            <param name="settings">The base <see cref="T:Google.Cloud.Trace.V1.TraceServiceSettings"/> used within this client.</param>
+        </member>
+        <member name="P:Google.Cloud.Trace.V1.TraceServiceClientImpl.GrpcClient">
+            <summary>The underlying gRPC TraceService client</summary>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.ListTraces(Google.Cloud.Trace.V1.ListTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A pageable sequence of <see cref="T:Google.Cloud.Trace.V1.Trace"/> resources.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.ListTracesAsync(Google.Cloud.Trace.V1.ListTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Returns of a list of traces that match the specified filter conditions.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A pageable asynchronous sequence of <see cref="T:Google.Cloud.Trace.V1.Trace"/> resources.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.GetTrace(Google.Cloud.Trace.V1.GetTraceRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>The RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.GetTraceAsync(Google.Cloud.Trace.V1.GetTraceRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Gets a single trace by its ID.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.PatchTraces(Google.Cloud.Trace.V1.PatchTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>The RPC response.</returns>
+        </member>
+        <member name="M:Google.Cloud.Trace.V1.TraceServiceClientImpl.PatchTracesAsync(Google.Cloud.Trace.V1.PatchTracesRequest,Google.Api.Gax.Grpc.CallSettings)">
+            <summary>
+            Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+            of a trace that you send matches that of an existing trace, any fields
+            in the existing trace and its spans are overwritten by the provided values,
+            and any new fields provided are merged with the existing trace data. If the
+            ID does not match, a new trace is created.
+            </summary>
+            <param name="request">The request object containing all of the parameters for the API call.</param>
+            <param name="callSettings">If not null, applies overrides to this RPC call.</param>
+            <returns>A Task containing the RPC response.</returns>
+        </member>
+    </members>
+</doc>

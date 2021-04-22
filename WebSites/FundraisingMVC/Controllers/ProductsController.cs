@@ -5,13 +5,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Mvc;
 using GA.BDC.Shared.Entities;
+using MvcSiteMapProvider;
+
 
 namespace GA.BDC.Web.Fundraising.MVC.Controllers
 {
     [RoutePrefix("products"), AllowAnonymous]
     public class ProductsController : Controller
     {
-
+       
         /// <summary>
         /// Redirects the action to the correct method
         /// </summary>

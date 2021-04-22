@@ -24,15 +24,40 @@ using GA.Store.Shared;
 using GA.Store.Shared.Contracts;
 using RestSharp.Portable;
 using RestSharp.Portable.HttpClient;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Data;
+using Sentry;
+using Sentry.EntityFramework;
 
 namespace GA.BDC.Web.MGP.Controllers
 {
    [RenderPartnerBranding, RenderPublicEventBranding]
    public class GroupController : BaseController
    {
-      public ActionResult Index(int eventId = 0, int participantId = 0, bool isPreview = false)
+        private IDisposable _sentry;
+
+        
+
+
+        public ActionResult Index(int eventId = 0, int participantId = 0, bool isPreview = false)
       {
-         if (eventId == 0)
+
+            //sentry error handling
+            SentryDatabaseLogging.UseBreadcrumbs();
+            _sentry = SentrySdk.Init(o =>
+            {
+                // We store the DSN inside Web.config; make sure to use your own DSN!
+                o.Dsn = new Dsn(ConfigurationManager.AppSettings["SentryDSN"]);
+
+                // Get Entity Framework integration
+                o.AddEntityFramework();
+                o.SendDefaultPii = true;
+
+            });
+
+
+            if (eventId == 0)
          {
             return RedirectToActionPermanent("EventNotFound", "Home");
          }
@@ -553,15 +578,7 @@ namespace GA.BDC.Web.MGP.Controllers
             ex.Data.Add("Storefront Category Id",
                storefrontCategoryId.HasValue ? storefrontCategoryId.Value.ToString() : string.Empty);
             ex.Data.Add("Touch Id", touchId);
-                //new email notification sender Sendinblue
-                var clientBlue = new RestClient(ConfigurationManager.AppSettings["sendInBlueEmailProvider"]);
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("accept", "application/json");
-                request.AddHeader("content-type", "application/json");
-                request.AddHeader("api-key", "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");
-                var body = ex;
-                request.AddBody(body);
-                var response = clientBlue.Execute(request);
+                SentrySdk.CaptureException(ex);
                 //SWCorporate.SystemEx.InstrumentationProvider.Current.SendExceptionNotification(ex, null);
                 return new UrlHelper(Request.RequestContext).Action("Index", "Home");
          }
@@ -900,88 +917,100 @@ namespace GA.BDC.Web.MGP.Controllers
          string storeServiceErrorMessage = string.Empty;
          try
          {
-            using (var storeProxy = new StoreServiceClient())
-            {
-                    storeProxy.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["serviceUN"];
-                    storeProxy.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["servicePW"];
-                    var request = new AffiliateURLGraphRequest(email: emailAddress,
-                                                          externalAffiliateIdentifier: groupId,
-                                                          externalAffiliateName: groupName,
-                                                          externalPartnerIDentifier: eventPartnerId,
-                                                          externalSourceIdentifier: touchId,
-                                                          externalSupporterIdentifier: suppId.ToString(),
-                                                          languageCode: Language_.English,
-                                                          isRenewal: false,
-                                                          participantFirstName: participantFirstName,
-                                                          participantLastName: participantLastName,
-                                                          productEntityID: productEntityID,
-                                                          salesRepSAPAcctNr: SAPAccountNo,
-                                                          storefrontCategoryID: storefrontCategoryID);
-               var response = storeProxy.CreateAffiliateStorefrontSessionURL(request);
-               var businessRuleViolation = response.businessRuleViolation;
-               if (businessRuleViolation != null)
-                  storeServiceErrorMessage = businessRuleViolation.ViolationMessage + " (Type=" + businessRuleViolation.BusinessRuleViolationTypeCode.ToString() + ")";
-               storeUrl = response.AffiliateURL;
+                if (SAPAccountNo == null)
+                    SAPAccountNo = 0;
+                
+                var strNull = "null";
+                
+                HttpClient client = new HttpClient();
+                var registerUserJSON = "{"
+                        + "\"AffiliateURLGraphRequest\":{"
+                        + "\"Email\": \"" + emailAddress + "\","
+                        + "\"ExternalAffiliateIDentifier\": \"" + groupId + "\","
+                        + "\"ExternalAffiliateName\": \"" + groupName + "\","
+                        + "\"ExternalPartnerIdentifier\": \"" + eventPartnerId + "\","
+                        + "\"ExternalSourceIdentifier\": \"" + touchId + "\","
+                        + "\"ExternalSupporterIdentifier\": \"" + suppId.ToString() + "\","
+                        + "\"Language\": \"" + Language_.English + "\","
+                        + "\"IsRenewal\": \"" + "false" + "\","
+                        + "\"ParticipantFirstName\": \"" + participantFirstName + "\","
+                        + "\"ParticipantLastName\": \"" + participantLastName + "\","
+                        + "\"ProductEntityID\":"  + strNull + ","
+                        + "\"SalesRepSAPAcctNr\": \"" + SAPAccountNo + "\","
+                        + "\"StorefrontCategoryID\": \"" + storefrontCategoryID + "\""
+                        + "}}";
+
+
+                client.BaseAddress = new Uri(ConfigurationManager.AppSettings["StoreURLAPI"]);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                client.DefaultRequestHeaders.Add("Client-Id", ConfigurationManager.AppSettings["Client-Id"]);
+                client.DefaultRequestHeaders.Add("Client-Secret", ConfigurationManager.AppSettings["Client-Secret"]);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress);
+                request.Content = new StringContent(registerUserJSON,Encoding.UTF8,"application/json");//CONTENT-TYPE header
+                var result = client.PostAsync(client.BaseAddress.ToString(), request.Content).Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    
+                    //result returned example- {"AffiliateURLGraph":{"AffiliateURL":"http:\/\/test.mystore.fundraising.com\/storev2\/store\/product\/904\/0?t=bfef055e-000e-49a7-8af9-0aac002a9505","businessRuleViolation":null}}
+                    var fixResult = result.Content.ReadAsStringAsync().Result.Replace("\\", "").Trim(new char[1] { '"' });
+                    var parseResult = JsonConvert.DeserializeObject<dynamic>(fixResult);
+                    storeUrl = parseResult["AffiliateURLGraph"].Value<string>("AffiliateURL"); // get clean url
+                    SentrySdk.CaptureMessage("MGP store url create - " + parseResult);
+                    var businessRuleViolation = parseResult["AffiliateURLGraph"].Value<string>("businessRuleViolation");
+                    if (businessRuleViolation != null)
+                    {
+                        storeServiceErrorMessage = businessRuleViolation.ViolationMessage + " (Type=" + businessRuleViolation.BusinessRuleViolationTypeCode.ToString() + ")";
+                        SentrySdk.CaptureMessage(storeServiceErrorMessage + " " + "businessRuleViolation returned null grp controller");
+                    }
+
+                }
+                else
+                {
+                    Exception ex = new Exception();
+                    ex.Data.Add("Message", "Error getting store url from GA api");
+                    ex.Data.Add("Email Address", emailAddress);
+                    ex.Data.Add("Group Id", groupId);
+                    ex.Data.Add("Group Name", groupName);
+                    ex.Data.Add("Partner Id", eventPartnerId);
+                    ex.Data.Add("Touch Id", touchId);
+                    ex.Data.Add("Supporter Id", suppId);
+                    ex.Data.Add("Language", Language_.English);
+                    ex.Data.Add("Entity Id", productEntityID);
+                    ex.Data.Add("SAP Account Number", SAPAccountNo);
+                    ex.Data.Add("Storefront Category Id", storefrontCategoryID);
+                    ex.Data.Add("Participant First Name", participantFirstName);
+                    ex.Data.Add("Participant Last Name", participantLastName);
+                    SentrySdk.CaptureException(ex);
+                    success = false;
+                    return new UrlHelper(Request.RequestContext).Action("Index", "Home");
+
+
+                }
+
+
             }
-         }
          catch (Exception ex)
          {
-            ex.Data.Add("Store Service Error Message", storeServiceErrorMessage);
-            ex.Data.Add("Email Address", emailAddress);
-            ex.Data.Add("Group Id", groupId);
-            ex.Data.Add("Group Name", groupName);
-            ex.Data.Add("Partner Id", eventPartnerId);
-            ex.Data.Add("Touch Id", touchId);
-            ex.Data.Add("Supporter Id", suppId);
-            ex.Data.Add("Language", Language_.English);
-            ex.Data.Add("Entity Id", productEntityID);
-            ex.Data.Add("SAP Account Number", SAPAccountNo);
-            ex.Data.Add("Storefront Category Id", storefrontCategoryID);
-            ex.Data.Add("Participant First Name", participantFirstName);
-            ex.Data.Add("Participant Last Name", participantLastName);
-                //new email notification sender Sendinblue
-                var clientBlue = new RestClient(ConfigurationManager.AppSettings["sendInBlueEmailProvider"]);
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("accept", "application/json");
-                request.AddHeader("content-type", "application/json");
-                request.AddHeader("api-key", "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");
-                var body = ex;
-                request.AddBody(body);
-                var response = clientBlue.Execute(request);
-                //SWCorporate.SystemEx.InstrumentationProvider.Current.SendExceptionNotification(ex, null);
+                ex.Data.Add("Store Service Error Message", storeServiceErrorMessage);
+                ex.Data.Add("Email Address", emailAddress);
+                ex.Data.Add("Group Id", groupId);
+                ex.Data.Add("Group Name", groupName);
+                ex.Data.Add("Partner Id", eventPartnerId);
+                ex.Data.Add("Touch Id", touchId);
+                ex.Data.Add("Supporter Id", suppId);
+                ex.Data.Add("Language", Language_.English);
+                ex.Data.Add("Entity Id", productEntityID);
+                ex.Data.Add("SAP Account Number", SAPAccountNo);
+                ex.Data.Add("Storefront Category Id", storefrontCategoryID);
+                ex.Data.Add("Participant First Name", participantFirstName);
+                ex.Data.Add("Participant Last Name", participantLastName);
+                SentrySdk.CaptureException(ex);
                 success = false;
-            return new UrlHelper(Request.RequestContext).Action("Index", "Home");
-         }
-         if (string.IsNullOrEmpty(storeServiceErrorMessage) && string.IsNullOrEmpty(storeUrl))
-         {
-            var ex = new Exception("Store Service Client returned an empty Storefront URL");
-            ex.Data.Add("Store Service Error Message", storeServiceErrorMessage);
-            ex.Data.Add("Email Address", emailAddress);
-            ex.Data.Add("Group Id", groupId);
-            ex.Data.Add("Group Name", groupName);
-            ex.Data.Add("Partner Id", eventPartnerId);
-            ex.Data.Add("Touch Id", touchId);
-            ex.Data.Add("Supporter Id", suppId);
-            ex.Data.Add("Language", Language_.English);
-            ex.Data.Add("Entity Id", productEntityID);
-            ex.Data.Add("SAP Account Number", SAPAccountNo);
-            ex.Data.Add("Storefront Category Id", storefrontCategoryID);
-            ex.Data.Add("Participant First Name", participantFirstName);
-            ex.Data.Add("Participant Last Name", participantLastName);
-                //new email notification sender Sendinblue
-                var clientBlue = new RestClient(ConfigurationManager.AppSettings["sendInBlueEmailProvider"]);
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("accept", "application/json");
-                request.AddHeader("content-type", "application/json");
-                request.AddHeader("api-key", "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");
-                var body = ex;
-                request.AddBody(body);
-                var response = clientBlue.Execute(request);
-                //SWCorporate.SystemEx.InstrumentationProvider.Current.SendExceptionNotification(ex, null);
-            success = false;
-            return new UrlHelper(Request.RequestContext).Action("Index", "Home");
-         }
-         return storeUrl;
+                return new UrlHelper(Request.RequestContext).Action("Index", "Home");
+            }
+           
+            return storeUrl;
       }
 
       private IList<PopularItem> CreatePopularItems(int eventId, int participantId)

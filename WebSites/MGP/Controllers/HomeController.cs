@@ -686,7 +686,7 @@ namespace GA.BDC.Web.MGP.Controllers
             ViewBag.ReturnUrl = returnUrl;
             if (ControllerContext.Controller.ValueProvider.GetValue(Constants.QUERY_PARAMETER_PARTICIPANT_ID) != null)
             {
-               int participantId;
+               int participantId; //
                if (int.TryParse(ControllerContext.Controller.ValueProvider.GetValue(Constants.QUERY_PARAMETER_PARTICIPANT_ID).AttemptedValue, out participantId))
                {
                   using (var dataProvider = new DataProvider())

@@ -25,6 +25,11 @@ namespace GA.BDC.Web.Lisa.Areas.Reports.Controllers
         return View();
     }
 
+        public ActionResult SalesToProcessNEW()
+        {
+            return View();
+        }
+
         public ActionResult ProductList()
         {
             return View();
