@@ -1,10 +1,11 @@
 ﻿using System.Web.Http;
-using GA.BDC.Data.Fundraising.Helpers;
+//using GA.BDC.Data.Fundraising.Helpers;
 using GA.BDC.Shared.Data;
 using GA.BDC.Shared.Data.Repositories;
 using GA.BDC.Shared.Entities;
+using GA.BDC.Data.EzFund.Helpers;
 
-namespace GA.BDC.WebApi.Fundraising.Core.Controllers
+namespace GA.BDC.WebApi.EzFund.Controllers
 {
     public class PaymentsController : ApiController
     {
@@ -15,15 +16,15 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
       }
 
       [HttpPost]
-        public IHttpActionResult Post(Payment payment)
+        public IHttpActionResult Post(ArTrnsTbl payment)
         {
-           using (var efundraisingProdUnitOfWOrk = new UnitOfWork(Database.EFundraisingProd))
+           using (var EZMainUnitOfWork = new UnitOfWork(Database.EZMain))
            {
-              var paymentsRepository = efundraisingProdUnitOfWOrk.CreateRepository<IPaymentsRepository>();
-              var saleId = paymentsRepository.Save(payment);
-              efundraisingProdUnitOfWOrk.Commit();
-              return Ok(saleId);  
-           }
+              var paymentsRepository = EZMainUnitOfWork.CreateRepository<IArTrnsTblRepository>();
+              paymentsRepository.InsertPayment(payment);
+                EZMainUnitOfWork.Commit();
+                return Ok();
+            }
         }
     }
 }

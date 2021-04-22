@@ -4,8 +4,8 @@ using System.Web.Http;
 using GA.BDC.Data.Fundraising.Helpers;
 using GA.BDC.Shared.Data;
 using GA.BDC.Shared.Data.Repositories;
-using SWCorporate.SystemEx;
-using SWCorporate.SystemEx.Web;
+//using SWCorporate.SystemEx;
+//using SWCorporate.SystemEx.Web;
 
 namespace GA.BDC.WebApi.Fundraising.Controllers
 {
@@ -30,7 +30,7 @@ namespace GA.BDC.WebApi.Fundraising.Controllers
             }
             catch (Exception exception)
             {
-               new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, exception);
+               //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, exception);
                return string.Empty;
             }
          }

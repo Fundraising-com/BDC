@@ -119,7 +119,7 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("accept", "application/json");
                 request.AddHeader("content-type", "application/json");
-                request.AddHeader("api-key", "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");
+                request.AddHeader("api-key", "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");
 
                 //request.AddParameter("application/json",
                 //    "{\"sender\":{\"name\":\"jason farrell\",\"email\":\"jason.farrell@fundraising.com\"}," +
@@ -140,7 +140,7 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                 //var request = new RestRequest(Method.POST);
                 //request.AddHeader("accept", "application/json");
                 //request.AddHeader("content-type", "application/json");
-                //request.AddHeader("api-key", "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");
+                //request.AddHeader("api-key", "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");
                 //request.AddParameter("application/json", "{\"sender\":{\"name\":\"JWORK\",\"email\":\"jason.farrell@fundraising.com\"},\"to\":[{\"email\":\"touchedbymusic@gmail.com\",\"name\":\"JHOME\"}],\"replyTo\":{\"email\":\"jason.farrell@fundraising.com\",\"name\":\"JWORK\"},\"templateId\":1}", ParameterType.RequestBody);
                 //IRestResponse response = client.Execute(request);
 
@@ -177,9 +177,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "Marc.Alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleOrderTakerTemplate.TransformText(), subject = "Fundraising.com Order-Taker Request " };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "Marc.Alcindor@fundraising.com", name = "Marc" }, new { email = "sadday.zivec@fundraising.com", name = "Saddaycita" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleOrderTakerTemplate.TransformText(), subject = "Fundraising.com Order-Taker Request " };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -464,9 +464,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("accept", "application/json");
                     request.AddHeader("content-type", "application/json");
-                    request.AddHeader("api-key", "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");
+                    request.AddHeader("api-key", "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");
 
-                    var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marketing@fundraising.com", name = "Marketing" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Product's Review Submitted" };
+                    var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marketing@fundraising.com", name = "Marketing" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Product's Review Submitted" };
                     request.AddBody(body);
                     var response = clientBlue.Execute(request);
 
@@ -545,9 +545,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Paid" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Paid" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -631,9 +631,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "Fundraising.com Sales Creation Failed" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "Fundraising.com Sales Creation Failed" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -715,9 +715,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Paypal Sales Payment Started" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Paypal Sales Payment Started" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -799,9 +799,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Process Failed" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Process Failed" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -881,9 +881,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Credit Card Charge Failed" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Credit Card Charge Failed" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -965,9 +965,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Created" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Fundraising.com Sales Created" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -1285,9 +1285,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = client.Email, name = client.FirstName + " " + client.LastName } }, bcc = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = orderCreatedEmailTemplate.TransformText(), subject = "Fundraising.com Order Created" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = client.Email, name = client.FirstName + " " + client.LastName } }, bcc = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = orderCreatedEmailTemplate.TransformText(), subject = "Fundraising.com Order Created" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -1498,9 +1498,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "A Duplicated Lead Form Attempt" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "A Duplicated Lead Form Attempt" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -1584,9 +1584,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "A POTENTIAL Duplicated Lead Form Attempt" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "A POTENTIAL Duplicated Lead Form Attempt" };
                         request.AddBody(body);
                         var response = clientBlue.Execute(request);
 
@@ -1671,9 +1671,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = emailbody.ToString(), subject = "A new lead has been added" };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" } }, replyTo = new { email = "online@fundraising.com", name = "Fundraising.com" }, htmlContent = emailbody.ToString(), subject = "A new lead has been added" };
                         request.AddBody(body);
                         var response = client.Execute(request);
 
@@ -1737,7 +1737,7 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
                         var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = lead.Email, name = lead.FirstName } }, replyTo = new { email = "online@fundraising.com", name = "fundraising.com" }, htmlContent = emailbody.ToString(), subject = "The Guide to Reach your Goals" };
                         request.AddBody(body);
@@ -1799,9 +1799,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.Controllers
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("accept", "application/json");
                         request.AddHeader("content-type", "application/json");
-                        request.AddHeader("api-key", "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");
+                        request.AddHeader("api-key", "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");
 
-                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = notification.Email, name = "FR Rep" } }, replyTo = new { email = "online@fundraising.com", name = "fundraising.com" }, htmlContent = leadEmailTemplate.TransformText(), subject = "You have received a request for information from your GA Rep Portal! See details below." };
+                        var body = new { sender = new { name = "Fundraising.com", email = "online@fundraising.com" }, to = new[] { new { email = "marc.alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = notification.Email, name = "FR Rep" } }, replyTo = new { email = "online@fundraising.com", name = "fundraising.com" }, htmlContent = leadEmailTemplate.TransformText(), subject = "You have received a request for information from your GA Rep Portal! See details below." };
                         request.AddBody(body);
                         var response = client.Execute(request);
 

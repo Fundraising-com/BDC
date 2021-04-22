@@ -6,7 +6,8 @@ using Ninject.Web.Common.WebHost;
 namespace GA.BDC.WebApi.EzFund.App_Start
 {
     using System;
-    using System.Web;
+   using System.Net;
+   using System.Web;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -22,7 +23,8 @@ namespace GA.BDC.WebApi.EzFund.App_Start
         /// </summary>
         public static void Start() 
         {
-            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+         ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+         DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }

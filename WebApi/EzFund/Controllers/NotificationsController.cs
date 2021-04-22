@@ -88,9 +88,9 @@ namespace GA.BDC.WebApi.EzFund.Controllers
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("accept", "application/json");
                     request.AddHeader("content-type", "application/json");
-                    request.AddHeader("api-key", "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");
+                    request.AddHeader("api-key", "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");
 
-                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Ezfund Sales Credit Card Charge FAILED! Please follow up (INTERNAL)." };
+                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = "angelat@ezfund.com", name = "Angela" }, new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "Ezfund Sales Credit Card Charge FAILED! Please follow up (INTERNAL)." };
                     request.AddBody(body);
                     var response = clientBlue.Execute(request);
 
@@ -159,9 +159,9 @@ namespace GA.BDC.WebApi.EzFund.Controllers
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("accept", "application/json");
                     request.AddHeader("content-type", "application/json");
-                    request.AddHeader("api-key", "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");
+                    request.AddHeader("api-key", "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");
 
-                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "EZfund.com Sales Created (INTERNAL)" };
+                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = "angelat@ezfund.com", name = "Angela" },  new { email = "Marc.Alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" }, new { email = "angelat@ezfund.com", name = "Angela" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = saleEmailTemplate.TransformText(), subject = "EZfund.com Sales Created (INTERNAL)" };
                     request.AddBody(body);
                     var response = clientBlue.Execute(request);
 
@@ -219,9 +219,9 @@ namespace GA.BDC.WebApi.EzFund.Controllers
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("accept", "application/json");
                     request.AddHeader("content-type", "application/json");
-                    request.AddHeader("api-key", "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");
+                    request.AddHeader("api-key", "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");
 
-                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = sales.Client.Email, name = sales.Client.FirstName + " " + sales.Client.LastName } }, bcc = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = orderCreatedEmailTemplate.TransformText(), subject = "EzFund.com Order Created" };
+                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = sales.Client.Email, name = sales.Client.FirstName + " " + sales.Client.LastName } }, bcc = new[] { new {  email = "Marc.Alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" }, new { email = "angelat@ezfund.com", name = "Angela" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = orderCreatedEmailTemplate.TransformText(), subject = "EzFund.com Order Created" };
                     request.AddBody(body);
                     var response = clientBlue.Execute(request);
 
@@ -270,9 +270,9 @@ namespace GA.BDC.WebApi.EzFund.Controllers
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("accept", "application/json");
                     request.AddHeader("content-type", "application/json");
-                    request.AddHeader("api-key", "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");
+                    request.AddHeader("api-key", "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");
 
-                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = "malcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "SalesSupport.EFR@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "A EZFUND new lead has been added" };
+                    var body = new { sender = new { name = "EzFund.com", email = "online@ezfund.com" }, to = new[] { new { email = "Marc.Alcindor@fundraising.com", name = "Marc" }, new { email = "jason.farrell@fundraising.com", name = "Jay" }, new { email = "support@fundraising.com", name = "Sales Support" } }, replyTo = new { email = "online@ezfund.com", name = "EzFund.com" }, htmlContent = leadReceivedEmailTemplate.TransformText(), subject = "A EZFUND new lead has been added" };
                     request.AddBody(body);
                     var response = clientBlue.Execute(request);
 

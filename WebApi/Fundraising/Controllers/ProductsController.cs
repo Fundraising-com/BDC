@@ -6,6 +6,8 @@ using GA.BDC.Data.Fundraising.Helpers;
 using GA.BDC.Shared.Data;
 using GA.BDC.Shared.Data.Repositories;
 using GA.BDC.Shared.Entities;
+using System.Runtime.Caching;
+
 
 namespace GA.BDC.WebApi.Fundraising.Controllers
 {
@@ -171,6 +173,10 @@ namespace GA.BDC.WebApi.Fundraising.Controllers
       {
          using (var efundStoreUnitOfWork = new UnitOfWork(Database.EFundStore))
          {
+            
+            var expiration = DateTimeOffset.UtcNow.AddHours(6);
+            var memoryFilteredProducts = MemoryCache.Default; 
+            //var memorySCFilteredProducts = MemoryCache.Default;   
             var productRepository = efundStoreUnitOfWork.CreateRepository<IProductRepository>();
             var categoriesRepository = efundStoreUnitOfWork.CreateRepository<ICategoriesRepository>();
             var result = new List<Product>();
@@ -182,14 +188,59 @@ namespace GA.BDC.WebApi.Fundraising.Controllers
                   types.Add(int.Parse(t));
                }
             }
-            var products = productRepository.GetFiltered(price, profit, types.ToArray()).ToList();
-            foreach (var product in products)
-            {
-               product.Category = categoriesRepository.GetById(product.CategoryId);
-               product.Category.Parent = categoriesRepository.GetById(product.Category.ParentId);
-            }
-            result.AddRange(products);
-            return result.OrderBy(p => p.DisplayOrder);
+                //var typeCatID = types[0];
+                //var scproductTypesID = 787;
+                ////var match = types.Contains(scproductTypesID);
+
+
+                //if (scproductTypesID == typeCatID)
+                //{
+
+                //    if (!memorySCFilteredProducts.Contains("SCFilteredResults"))
+                //    {
+                //        var products = productRepository.GetFiltered(price, profit, types.ToArray()).ToList();
+                //        foreach (var product in products)
+                //        {
+                //            product.Category = categoriesRepository.GetById(product.CategoryId);
+                //            product.Category.Parent = categoriesRepository.GetById(product.Category.ParentId);
+                //            result.AddRange(products);
+                //            result.OrderBy(p => p.DisplayOrder);
+                //            memorySCFilteredProducts.Add("SCFilteredResults", result, expiration);
+                //            return (IEnumerable<Product>)memorySCFilteredProducts.Get("SCFilteredResults", null);
+                //        }
+                //    }
+                //    else
+                //    {
+                //        return (IEnumerable<Product>)memorySCFilteredProducts.Get("SCFilteredResults", null);
+                //    }
+
+
+                //}
+
+
+                if (!memoryFilteredProducts.Contains("FilteredResults"))
+                {
+                    var products = productRepository.GetFiltered(price, profit, types.ToArray()).ToList();
+                    foreach (var product in products)
+                    {
+                        product.Category = categoriesRepository.GetById(product.CategoryId);
+                        product.Category.Parent = categoriesRepository.GetById(product.Category.ParentId);
+                    }
+                    result.AddRange(products);
+                    result.OrderBy(p => p.DisplayOrder);
+                    memoryFilteredProducts.Add("FilteredResults", result, expiration);
+                }
+                //    var products = productRepository.GetFiltered(price, profit, types.ToArray()).ToList();
+                //    foreach (var product in products)
+                //    {
+                //        product.Category = categoriesRepository.GetById(product.CategoryId);
+                //        product.Category.Parent = categoriesRepository.GetById(product.Category.ParentId);
+                //    }
+                //result.AddRange(products);
+
+
+                //return result.OrderBy(p => p.DisplayOrder);
+                return (IEnumerable<Product>)memoryFilteredProducts.Get("FilteredResults", null);
          }
       }
 
@@ -198,10 +249,17 @@ namespace GA.BDC.WebApi.Fundraising.Controllers
       {
          using (var efundStoreUnitOfWork = new UnitOfWork(Database.EFundStore))
          {
-            IList<Product> result = new List<Product>();
+
+
             var productRepository = efundStoreUnitOfWork.CreateRepository<IProductRepository>();
             var categoriesRepository = efundStoreUnitOfWork.CreateRepository<ICategoriesRepository>();
             var categories = categoriesRepository.GetByParent(rootCategoryId);
+
+            var expiration = DateTimeOffset.UtcNow.AddHours(6);
+            var memoryCacheCA = MemoryCache.Default;
+            var memoryCache = MemoryCache.Default;                
+            IList<Product> result = new List<Product>();
+            
             foreach (var category in categories)
             {
                var subCategories = categoriesRepository.GetByParent(category.Id);

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Http.Filters;
-using SWCorporate.SystemEx;
-using SWCorporate.SystemEx.Web;
+
 
 namespace GA.BDC.WebApi.Fundraising.Filters
 {
@@ -12,7 +11,7 @@ namespace GA.BDC.WebApi.Fundraising.Filters
         {
            if (actionExecutedContext.Exception != null && !(actionExecutedContext.Exception is OperationCanceledException))
             {
-            new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, actionExecutedContext.Exception);
+            //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, actionExecutedContext.Exception);
          }
             base.OnException(actionExecutedContext);
         }

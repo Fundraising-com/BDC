@@ -95,6 +95,9 @@ namespace GA.BDC.WebApi.Fundraising.Core.GAPayNETTCP {
         
         /// <remarks/>
         DISCOVER,
+
+        /// <remarks/>
+        DINERSCLUB,
     }
     
     /// <remarks/>

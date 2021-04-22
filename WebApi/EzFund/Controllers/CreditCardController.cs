@@ -12,6 +12,7 @@ using GA.BDC.Shared.Data.Repositories;
 using Moneris;
 using Sentry;
 using Sentry.EntityFramework;
+using Stripe;
 
 namespace GA.BDC.WebApi.EzFund.Controllers
 {
@@ -41,111 +42,152 @@ namespace GA.BDC.WebApi.EzFund.Controllers
 
             });
 
+            //Documentation:
+            //https://stackoverflow.com/questions/62749790/how-to-integrate-stripe-payment-gateway-to-asp-net-mvc
+            //https://www.c-sharpcorner.com/blogs/implement-stripe-payment-gateway-in-asp-net-mvc
+            //https://www.nuget.org/packages/Stripe.net/
 
-            bool IsMonerisPaymentServiceUsed = false;
-            bool.TryParse(ConfigurationManager.AppSettings["IsMonerisPaymentServiceUsed"], out IsMonerisPaymentServiceUsed);
-            if (IsMonerisPaymentServiceUsed)
-            {
-                return monerisClient(model);
-            }
-            else
-            {
-                return paymentProcessingService(model);
-            }
-        }
+            //reading credentials from configuration
+            string stripePublishableKey = ConfigurationManager.AppSettings["StripePublishableKey"];
+            string stripePrivateKey = ConfigurationManager.AppSettings["StripePrivateKey"];
 
-            private IHttpActionResult paymentProcessingService(CreditCard model)
-            {
+                //Setting temporary variables
+                long expiryMonth;
+                long.TryParse(model.ExpirationDate.Substring(0, 2), out expiryMonth);
+                long expiryYear;
+                long.TryParse(model.ExpirationDate.Substring(2, 2), out expiryYear);
 
+                //Set API key with below function,
+                //Stripe.StripeConfiguration.SetApiKey(“pk_test_FyPZYPyqf8jU6IdG2DONgudS”); taken c-sharpcorner.com example
+                //SetApiKey is depreciated. Using StripeConfiguration.ApiKey
+                StripeConfiguration.ApiKey = stripePrivateKey;
+          
+            
+
+                var tokenOptions = new TokenCreateOptions
+                {
+                    Card = new TokenCardOptions
+                    {
+                        Number = model.Number,
+                        ExpMonth = expiryMonth,
+                        ExpYear = expiryYear,
+                        Cvc = model.CVV,
+                        AddressLine1 = model.Address.Address1,
+                        AddressLine2 = model.Address.Address2,
+                        AddressCity = model.Address.City,
+                        AddressState = model.Address.Region.Code,
+                        AddressZip = model.Address.PostCode,
+                        AddressCountry = model.Address.Country.Code
+                    }
+                };
+
+            var tokenService = new TokenService();
+            Token stripeToken = tokenService.Create(tokenOptions);
+
+            Stripe.CustomerCreateOptions myCustomer = new Stripe.CustomerCreateOptions();
+            myCustomer.Name = model.Holder;
+            myCustomer.Email = model.Email;
+            myCustomer.Source = stripeToken.Id;
+            //myCustomer.Shipping = new ShippingOptions()
+            //{
+            //    Name = model.Holder,
+            //    Address = new AddressOptions()
+            //    {
+            //        Line1 = model.Address.Address1,
+            //        PostalCode = model.Address.PostCode,
+            //        State = model.Address.Region.Code,
+            //        City = model.Address.City,
+            //        Country = model.Address.Country.Code
+            //    }
+            //};
+
+            var customerService = new Stripe.CustomerService();
+            Stripe.Customer stripeCustomer = customerService.Create(myCustomer);
+
+
+
+            var chargeOptions = new ChargeCreateOptions
+                {
+                    Amount = Convert.ToInt64(model.Amount * 100), //amount should be in cents
+                    Currency = getPaymentCurrency(model.Address.Country.Code).ToString(),
+                    Description = $"Invoice:{model.Reference}",
+                    Customer = stripeCustomer.Id,
+                    ReceiptEmail = model.Email
+                    //Source = stripeToken.Id
+                };
+
+                var paymentService = new ChargeService();
+                var responseDescription = string.Empty;
                 try
                 {
-                    var client = new PaymentProcessingServiceClient(ConfigurationManager.AppSettings["GAPay.BindingName"]);
+                    Charge charge = paymentService.Create(chargeOptions);
 
-                    var amount = ((int)(model.Amount * 100)).ToString(CultureInfo.InvariantCulture);// we multiply * 100 because they are cents
-                    var creditCardPaymentResult =
-                        client.ProcessPaymentTransaction(
-                            TranRequestType: PaymentRequestType.AUTHDEP,
-                            PresenterId: "EzFund Store",
-                            ClientId: PaymentClient.EZFUND,
-                            RefId: model.Reference,
-                            ReferenceSourceId: "",
-                            ReferenceAuthNumber: "",
-                            FirstName: model.Holder, //it has the full name
-                            LastName: "",
-                            Address1: model.Address.Address1,
-                            Address2: "",
-                            City: model.Address.City,
-                            State: model.Address.Region.Code,
-                            PostalCode: model.Address.PostCode,
-                            Plus4Zip: "",
-                            CountryCode: getPaymentCountry(model.Address.Country.Code),
-                            EpvType: getCreditCardType(model.InternalPaymentMethod),
-                            AccountNumber: model.Number,
-                            CcExp: model.ExpirationDate,
-                            CcSecurityCode: model.CVV,
-                            BankRoutingNumber: "",
-                            BankAccountType: "",
-                            CurrencyCode: getPaymentCurrency(model.Address.Country.Code),
-                            TranAmount: amount,
-                            SalesTax: "0",
-                            Descriptor: "",
-                            DescriptorCityPhone: "",
-                            ClientPassThrough: "",
-                            ClientTranId: model.Reference,
-                            RvrslTCSTranId: "",
-                            RvrslTranDate: "",
-                            RvrslAuthCode: "",
-                            EncryptionFlag: "");
+                    responseDescription = getStripeErrorDescription(charge); //get a charge response full description
 
-                    switch (creditCardPaymentResult.TranResponseType)
+                    if (charge.Paid)
                     {
-                        case PaymentResponseType.A: // Approved
-                                                    /*Add the AuthNumber to the Order*/
-                            using (var eZFundProdUnitOfWork = new UnitOfWork(Database.EZMain))
-                            {
-                                /* 
-                                   * Adding AuthNumber to Order
-                                   * 
-                                   */
-                                var saleRepository = eZFundProdUnitOfWork.CreateRepository<ISalesRepository>();
-                                int orderId;
-                                if (Int32.TryParse(model.Reference, out orderId))
-                                {
-                                    var status = saleRepository.UpdateFundPaymentReferenceByOrderId(orderId, creditCardPaymentResult.AuthNumber);
-                                }
-                            }
-                            return Ok(new { creditCardPaymentResult.AuthNumber });
-
-                        case PaymentResponseType.H: // Hard decline
-                        case PaymentResponseType.S: // Soft decline
-                        var ccError = new CreditCardDeclinedException(model.InternalPaymentMethod.ToString(), model.Amount, creditCardPaymentResult.ResponseCode, creditCardPaymentResult.ResponseRaw, null);
-                        SentrySdk.CaptureException(ccError);
-                        //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, new CreditCardDeclinedException(model.InternalPaymentMethod.ToString(), model.Amount, creditCardPaymentResult.ResponseCode, creditCardPaymentResult.ResponseRaw, null));
-                        return BadRequest($"{creditCardPaymentResult.ResponseMessage}. No Credit Card charge was done.");
-
-                    case PaymentResponseType.D: // Duplicate Transaction
-                        case PaymentResponseType.E: // Communication Error
-                        var ccError2 = new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, "Error while processing Credit Card. No Credit Card charge was done.", string.Empty, string.Empty, null);
-                        SentrySdk.CaptureException(ccError2);
-                        return BadRequest("Error while processing Credit Card. No Credit Card charge was done.");
-
-                        default:
-                        var ccErrorSysErr = new ArgumentOutOfRangeException(nameof(creditCardPaymentResult.TranResponseType), (int)creditCardPaymentResult.TranResponseType,$"Unhandled {nameof(creditCardPaymentResult.TranResponseType)} '{creditCardPaymentResult.TranResponseType}");
-                        SentrySdk.CaptureException(ccErrorSysErr);
-                        throw new ArgumentOutOfRangeException(
-                               nameof(creditCardPaymentResult.TranResponseType), (int)creditCardPaymentResult.TranResponseType,
-                               $"Unhandled {nameof(creditCardPaymentResult.TranResponseType)} '{creditCardPaymentResult.TranResponseType}");
+                        SentrySdk.CaptureMessage(responseDescription, Sentry.Protocol.SentryLevel.Info);
+                        return Ok(new { charge.AuthorizationCode });
                     }
+                    else
+                    {
+                        SentrySdk.CaptureMessage(responseDescription, Sentry.Protocol.SentryLevel.Info);
+                        throw new ArgumentOutOfRangeException(
+                           nameof(charge), responseDescription,
+                           $"Unhandled {nameof(charge)} '{responseDescription}'");
+                    }
+
+
                 }
                 catch (Exception exception)
                 {
-                        var ccError = new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, "Error while processing Credit Card. No Credit Card charge was done.", string.Empty, string.Empty, exception);
-                        SentrySdk.CaptureException(ccError);
-                        SentrySdk.CaptureException(exception);
-                        //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, string.Empty, exception));
-                        return InternalServerError(new Exception("Error while processing Credit Card. No Credit Card charge was done.", exception));
-                 }
-            }
+                    SentrySdk.CaptureMessage(responseDescription, Sentry.Protocol.SentryLevel.Info);
+                    return InternalServerError(new Exception("Error while processing Credit Card. No Credit Card charge was done.", exception));
+                }
+           
+
+
+
+        }
+
+        private string getStripeErrorDescription(Charge charge)
+        {
+            return string.Join(Environment.NewLine,
+               $"Amount: {charge.Amount / 100.00}",
+               $"AmountCaptured: {charge.AmountCaptured / 100.00}",
+               $"ApplicationFeeAmount: {charge.ApplicationFeeAmount}",
+               $"ApplicationFeeId: {charge.ApplicationFeeId}",
+               $"AuthorizationCode: {charge.AuthorizationCode}",
+               $"BalanceTransactionId: {charge.BalanceTransactionId}",
+               $"BillingDetails.StripeResponse.Content: {charge.BillingDetails?.StripeResponse?.Content}",
+               $"Currency: {charge.Currency}",
+               $"Description: {charge.Description}",
+               $"DisputeId: {charge.DisputeId}",
+               $"FailureCode: {charge.FailureCode}",
+               $"FailureMessage: {charge.FailureMessage}",
+               $"FraudDetails.StripeReport: {charge.FraudDetails?.StripeReport}",
+               $"FraudDetails.StripeResponse: {charge.FraudDetails?.StripeResponse}",
+               $"FraudDetails.UserReport: {charge.FraudDetails?.UserReport}",
+               $"Id: {charge.Id}",
+               $"InvoiceId: {charge.InvoiceId}",
+               $"Level3.StripeResponse: {charge.Level3?.StripeResponse}",
+               $"LiveMode: {charge.Livemode}",
+               $"Object: {charge.Object}",
+               $"OrderId: {charge.OrderId}",
+               $"Outcome.SellerMessage: {charge.Outcome?.SellerMessage}",
+               $"Paid: {charge.Paid}",
+               $"PaymentIntentId: {charge.PaymentIntentId}",
+               $"PaymentMethod: {charge.PaymentMethod}",
+               $"ReceiptNumber: {charge.ReceiptNumber}",
+               $"ReviewId: {charge.ReviewId}",
+               $"Status: {charge.Status}",
+               $"StripeResponse: {charge.StripeResponse}",
+               $": {charge.TransferId}"
+               );
+
+        }
+
+        
         
         private PaymentCountry getPaymentCountry(string countryCode)
         {
@@ -185,172 +227,15 @@ namespace GA.BDC.WebApi.EzFund.Controllers
                     return PaymentCardType.AMEX;
                 case InternalPaymentMethod.DISCOVER:
                     return PaymentCardType.DISCOVER;
+                case InternalPaymentMethod.DinersClub:
+                    return PaymentCardType.DINERS;
                 default:
                     throw new ArgumentOutOfRangeException("internalPaymentMethod");
             }
         }
 
 
-        private IHttpActionResult monerisClient(CreditCard model)
-        {
-            //reading credentials from configuration depending on card address.
-            string storeId = ConfigurationManager.AppSettings[$"Moneris{model.Address.Country.Code}StoreID"];
-            string apiToken = ConfigurationManager.AppSettings[$"Moneris{model.Address.Country.Code}APIToken"];
-            string hostName = ConfigurationManager.AppSettings[$"MonerisHostURL"];
-
-            string order_id = model.Reference;
-            string amount = model.Amount.ToString("#.00");
-            string pan = model.Number; ; // "4242424242424242" for testing
-            string expiryDate = model.ExpirationDate.Substring(2, 2) + model.ExpirationDate.Substring(0, 2); // from MMYY to YYMM format
-            string crypt = "7";
-            bool IsMonerisTestMode = false;
-            bool.TryParse(ConfigurationManager.AppSettings["IsMonerisTestMode"], out IsMonerisTestMode);
-
-            var s = model.Address.Address1;
-            var firstSpaceIndex = s.IndexOf(" ");
-            var streetNumber = s.Substring(0, firstSpaceIndex);
-            var streetName = s.Substring(firstSpaceIndex + 1);
-
-            bool status_check = false;
-
-            AvsInfo avsCheck = new AvsInfo();
-            avsCheck.SetAvsStreetNumber(streetNumber);
-            avsCheck.SetAvsStreetName(streetName);
-            avsCheck.SetAvsZipCode(model.Address.PostCode);
-            avsCheck.SetAvsHostname(hostName);
-
-            //avsCheck.SetAvsEmail("test@host.com");
-            //avsCheck.SetAvsBrowser("Mozilla");
-            //avsCheck.SetAvsShipToCountry(model.Address.Country.Name);
-            //avsCheck.SetAvsShipMethod("G");
-            //avsCheck.SetAvsMerchProdSku("123456");
-            //avsCheck.SetAvsCustIp("192.168.0.1");
-            //avsCheck.SetAvsCustPhone("5556667777");
-
-            CvdInfo cvdCheck = new CvdInfo();
-            cvdCheck.SetCvdIndicator("1");
-            cvdCheck.SetCvdValue(model.CVV);
-
-            Purchase purchase = new Purchase();
-            purchase.SetOrderId(order_id);
-            purchase.SetAmount(amount);
-            purchase.SetPan(pan);
-            purchase.SetExpDate(expiryDate);
-            purchase.SetCryptType(crypt);
-            purchase.SetAvsInfo(avsCheck);
-            purchase.SetCvdInfo(cvdCheck);
-
-            HttpsPostRequest mpgReq = new HttpsPostRequest();
-            mpgReq.SetProcCountryCode("CA");
-            mpgReq.SetTestMode(IsMonerisTestMode); //false or comment out this line for production transactions
-            mpgReq.SetStoreId(storeId);
-            mpgReq.SetApiToken(apiToken);
-            mpgReq.SetTransaction(purchase);
-            mpgReq.SetStatusCheck(status_check);
-            mpgReq.Send();
-
-            try
-            {
-                //To debug the response:
-                //https://developer.moneris.com/Documentation/NA/E-Commerce%20Solutions/API/Purchase?lang=dotnet
-                //https://developer.moneris.com/en/More/Testing/Testing%20a%20Solution
-                //https://developer.moneris.com/More/Testing/Response%20Codes
-                //https://developer.moneris.com/Documentation/NA/E-Commerce%20Solutions/API/Response%20Fields
-                //https://developer.moneris.com/Documentation/NA/E-Commerce%20Solutions/API/Response%20Fields?lang=dotnet
-                //https://developer.moneris.com/More/Testing/Penny%20Value%20Simulator
-                //https://developer.moneris.com/en/More/Testing/AVS%20Result%20Codes
-                Receipt receipt = mpgReq.GetReceipt();
-
-                #region Completed and timedout
-                bool completed = false;
-                bool.TryParse(receipt.GetComplete(), out completed);
-                string timedoutInString = receipt.GetTimedOut();
-                bool? timedout = null;
-                if (!(string.IsNullOrWhiteSpace(timedoutInString)) && timedoutInString != "null")
-                {
-                    bool timedoutInBool = false;
-                    bool.TryParse(timedoutInString, out timedoutInBool);
-                    timedout = timedoutInBool;
-                }
-                #endregion
-
-                #region returned response, and message
-                int tempInt = -1;
-                int? responseCode = int.TryParse(receipt.GetResponseCode(), out tempInt) ? (int?)tempInt : null;
-                string message = receipt.GetMessage();
-                #endregion
-
-                #region result codes
-                string authorizationCode = receipt.GetAuthCode();
-                string avsResultCode = receipt.GetAvsResultCode();
-                string cvdResultCode = receipt.GetCvdResultCode();
-                #endregion
-
-                string t = getErrorDescription(receipt);
-
-                if (completed && !(timedout ?? true) && responseCode.HasValue)
-                {
-                    if (responseCode < 50) //Approved
-                    {
-                        string goodDescription = getErrorDescription(receipt);
-                        //SentrySdk.CaptureException(ccErrorExcept);
-                        SentrySdk.CaptureMessage(goodDescription, Sentry.Protocol.SentryLevel.Info);
-                        return Ok(new { authorizationCode });
-                    }
-                    else if (responseCode == 78 || responseCode == 84) // Duplicate Transaction
-                    {
-                        string errorDescription = getErrorDescription(receipt);
-                        var ccErrorExcept = new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, errorDescription, null);
-                        SentrySdk.CaptureException(ccErrorExcept);
-                        //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, errorDescription, null));
-                        return BadRequest("Error while processing Credit Card. No Credit Card charge was done.");
-                    }
-                    else if ((responseCode >= 50 && responseCode < 149) || (responseCode >= 400 && responseCode < 499) || (responseCode >= 800 && responseCode < 1000)) //Declined / Referral / 
-                    {
-                        string errorDescription = getErrorDescription(receipt);
-                        var ccErrorDecline = new CreditCardDeclinedException(model.InternalPaymentMethod.ToString(), model.Amount, responseCode.ToString(), errorDescription, null);
-                        SentrySdk.CaptureException(ccErrorDecline);
-                        //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, new CreditCardDeclinedException(model.InternalPaymentMethod.ToString(), model.Amount, responseCode.ToString(), errorDescription, null));
-                        return BadRequest($"{message}. No Credit Card charge was done.");
-                    }
-                    else if (responseCode >= 150 && responseCode < 299) // System Error
-                    {
-                        string errorDescription = getErrorDescription(receipt);
-                        var ccErrorSysErr = new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, errorDescription, null);
-                        SentrySdk.CaptureException(ccErrorSysErr);
-                        //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, errorDescription, null));
-                        return BadRequest("Error while processing Credit Card. No Credit Card charge was done.");
-                    }
-                    else
-                    {
-                        string errorDescription = getErrorDescription(receipt);
-                        var ccErrorSysErr = new ArgumentOutOfRangeException(nameof(receipt), errorDescription, $"Unhandled {nameof(receipt)} '{errorDescription}'");
-                        SentrySdk.CaptureException(ccErrorSysErr);
-                        throw new ArgumentOutOfRangeException(
-                           nameof(receipt), errorDescription,
-                           $"Unhandled {nameof(receipt)} '{errorDescription}'");
-                    }
-                }
-                else
-                {
-                    string errorDescription = getErrorDescription(receipt);
-                    var ccErrorSysErr = new ArgumentOutOfRangeException(nameof(receipt), errorDescription, $"Unhandled {nameof(receipt)} '{errorDescription}'");
-                    SentrySdk.CaptureException(ccErrorSysErr);
-                    throw new ArgumentOutOfRangeException(
-                  nameof(receipt), errorDescription,
-                  $"Unhandled {nameof(receipt)} '{errorDescription}");
-
-                }
-            }
-            catch (Exception exception)
-            {
-                //new HttpContextWrapper(HttpContext.Current).SendExceptionNotification(InstrumentationProvider.Current, new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, string.Empty, exception));
-                var ccErrorSysErr = new CreditCardChargeException(model.InternalPaymentMethod.ToString(), model.Amount, string.Empty, string.Empty, string.Empty, exception);
-                SentrySdk.CaptureException(ccErrorSysErr);
-                return InternalServerError(new Exception("Error while processing Credit Card. No Credit Card charge was done.", exception));
-            }
-        }
-
+        
         private string getErrorDescription(Receipt receipt)
         {
             string errorDescription = string.Empty;

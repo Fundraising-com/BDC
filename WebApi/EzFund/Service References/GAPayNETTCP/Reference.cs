@@ -95,6 +95,8 @@ namespace GA.BDC.WebApi.EzFund.GAPayNETTCP {
         
         /// <remarks/>
         DISCOVER,
+        /// <remarks/>
+        DINERS,
     }
     
     /// <remarks/>
