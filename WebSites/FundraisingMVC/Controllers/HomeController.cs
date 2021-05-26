@@ -193,18 +193,18 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
             // if (System.IO.File.Exists(Server.MapPath("/Content/external/rep/SmallRepImage/" + representativeImage)))
             if (c == "CA")
             {
-                ViewBag.partnerkit = "../Content/external/partners/pdf/partnerkit/kitCan.pdf";
+                ViewBag.partnerkit = "/Content/external/partners/pdf/partnerkit/kitCan.pdf";
             }
             else
             {
 
                 if (System.IO.File.Exists(Server.MapPath("/Content/external/partners/pdf/partnerkit/" + partnerId + ".pdf")))
                 {
-                    ViewBag.partnerkit = "../Content/external/partners/pdf/partnerkit/" + partnerId + ".pdf";
+                    ViewBag.partnerkit = "/Content/external/partners/pdf/partnerkit/" + partnerId + ".pdf";
                 }
                 else
                 {
-                    ViewBag.partnerkit = "../Content/external/partners/pdf/partnerkit/686.pdf";
+                    ViewBag.partnerkit = "/Content/external/partners/pdf/partnerkit/686.pdf";
                 }
             }
             return View();
@@ -229,18 +229,18 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
             // if (System.IO.File.Exists(Server.MapPath("/Content/external/rep/SmallRepImage/" + representativeImage)))
             if (c == "CA")
             {
-                ViewBag.partnerkit = "../Content/external/partners/pdf/partnerkit/kitCan.pdf";
+                ViewBag.partnerkit = "/Content/external/partners/pdf/partnerkit/kitCan.pdf";
             }
             else
             {
 
                 if (System.IO.File.Exists(Server.MapPath("/Content/external/partners/pdf/partnerkit/" + partnerId + ".pdf")))
                 {
-                    ViewBag.partnerkit = "../Content/external/partners/pdf/partnerkit/" + partnerId + ".pdf";
+                    ViewBag.partnerkit = "/Content/external/partners/pdf/partnerkit/" + partnerId + ".pdf";
                 }
                 else
                 {
-                    ViewBag.partnerkit = "../Content/external/partners/pdf/partnerkit/686.pdf";
+                    ViewBag.partnerkit = "/Content/external/partners/pdf/partnerkit/686.pdf";
                 }
             }
             return View();

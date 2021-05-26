@@ -6,7 +6,7 @@
     ViewBag.Title = ViewBag.CountryId == 1 ? "Products | Canada | Fundraising.com": "Products - Fundraising.com";
     //ViewBag.Title = "Products - Fundraising.com";
     Layout = "~/Views/Shared/_layout3.cshtml";
-    ViewBag.Description = "High Profit Fundraising Products for Sports teams, schools, churches and all types of groups, Fundraising.com offers all kind of fundraising ideas to help you reach your goals.";
+    ViewBag.Description = ViewBag.CountryId == 1 ? "Canadian High Profit Fundraising Products for and all types of groups to help you reach your goals." : "High Profit Fundraising Products all types of groups to help you reach your goals.";
     ViewBag.Keywords = "Fundraising Products, Sports Teams, Schools, Fundraising Ideas";
     ViewBag.CanonicalUrl = string.Format("/{0}", HTMLHelpers.CategoryUrlByCountry(ViewBag.CountryId));
 
