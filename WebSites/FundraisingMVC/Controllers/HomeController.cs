@@ -287,6 +287,12 @@ namespace GA.BDC.Web.Fundraising.MVC.Controllers
             return View();
         }
 
+        [MvcSiteMapNode(Title = "3-19 Coffee fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("coffee-fundraising-ideas")]
+        public ActionResult coffeefundraisingideas()
+        {
+            return View();
+        }
+
         [MvcSiteMapNode(Title = "Best Sellers fundraising ideas", ParentKey = "Home", Protocol = "https"), Route("best-sellers-fundraising-ideas")]
         public ActionResult bestsellersfundraisingideas()
         {
